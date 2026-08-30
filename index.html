@@ -1,0 +1,1828 @@
+<title>Eduardo's Field Manual</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#E7E9ED; --surface:#F3F5F8; --card:#FCFDFE;
+    --ink:#161B22; --ink-soft:#48535F; --ink-faint:#7C8792;
+    --line:#D4DAE1; --line-strong:#BBC4CD;
+    --teal:#0E7A72; --teal-ink:#0B615A; --teal-wash:#D7E7E4; --on-teal:#FFFFFF;
+    --clay:#B0562A; --clay-ink:#8F4420; --clay-wash:#F0E1D6;
+    --good:#2F7D4F; --good-ink:#256540; --good-wash:#DCEBE1;
+    --warn:#9A5B12; --warn-wash:#F0E4D2;
+    --code-bg:#141B24; --code-ink:#D5DEEA;
+    --radius:7px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E141C; --surface:#141C26; --card:#18222E;
+      --ink:#E9EDF2; --ink-soft:#A6B3C0; --ink-faint:#6B7885;
+      --line:#25313D; --line-strong:#374857;
+      --teal:#42C3B5; --teal-ink:#5FD6C9; --teal-wash:#103029; --on-teal:#08201E;
+      --clay:#D57F4F; --clay-ink:#E4926A; --clay-wash:#2E2016;
+      --good:#63C088; --good-ink:#7BD09E; --good-wash:#16281F;
+      --warn:#D69A56; --warn-wash:#2E2312;
+      --code-bg:#0A0F16; --code-ink:#C4D0DE;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E141C; --surface:#141C26; --card:#18222E;
+    --ink:#E9EDF2; --ink-soft:#A6B3C0; --ink-faint:#6B7885;
+    --line:#25313D; --line-strong:#374857;
+    --teal:#42C3B5; --teal-ink:#5FD6C9; --teal-wash:#103029;
+    --clay:#D57F4F; --clay-ink:#E4926A; --clay-wash:#2E2016;
+    --good:#63C088; --good-ink:#7BD09E; --good-wash:#16281F;
+    --warn:#D69A56; --warn-wash:#2E2312;
+    --code-bg:#0A0F16; --code-ink:#C4D0DE;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-soft);
+    font-family:"Spectral",Georgia,serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--teal-wash);color:var(--teal-ink)}
+  h1,h2,h3,h4{font-family:"Archivo",system-ui,sans-serif;color:var(--ink);margin:0;line-height:1.1;font-weight:800;text-wrap:balance}
+  b,strong{color:var(--ink);font-weight:600}
+  em{font-style:italic}
+  code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em}
+  a{color:var(--teal-ink)}
+  .label{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.15em;font-size:11px;color:var(--ink-faint);font-weight:500}
+
+  /* ---------- top nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 92%,transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .in{max-width:1000px;margin:0 auto;padding:11px clamp(16px,4vw,32px);display:flex;align-items:center;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;background:none;border:0;cursor:pointer;padding:0;font-family:"Archivo",sans-serif;font-weight:900;font-size:16px;color:var(--ink);letter-spacing:-.01em}
+  .brand span{color:var(--teal-ink)}
+  .nav .links{margin-left:auto;display:flex;gap:2px}
+  .nav .links button{font-family:"Archivo",sans-serif;font-weight:600;font-size:14px;color:var(--ink-soft);background:none;border:0;cursor:pointer;
+    padding:7px 13px;border-radius:6px;transition:color .15s,background .15s}
+  .nav .links button:hover{color:var(--ink);background:var(--bg)}
+  .nav .links button.on{color:var(--teal-ink);background:var(--teal-wash)}
+  .menu-btn{display:none;margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--card);border:1px solid var(--line-strong);color:var(--ink);padding:9px 13px;border-radius:6px;cursor:pointer}
+  @media(max-width:720px){
+    .nav .links{position:absolute;top:100%;left:0;right:0;margin:0;flex-direction:column;gap:0;background:var(--surface);
+      border-bottom:1px solid var(--line);padding:6px clamp(16px,4vw,32px) 12px;display:none}
+    .nav .links.open{display:flex}
+    .nav .links button{text-align:left;padding:11px 12px;border-radius:6px;font-size:15px}
+    .menu-btn{display:inline-block}
+  }
+
+  .wrap{max-width:860px;margin:0 auto;padding:0 clamp(18px,4vw,40px) 100px}
+
+  /* ---------- page routing ---------- */
+  .page{display:none}
+  .page.active{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ---------- home ---------- */
+  .hero{padding:clamp(44px,7vw,84px) 0 0}
+  .hero .kick{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay-ink)}
+  .hero h1{font-weight:900;font-size:clamp(38px,7.5vw,72px);letter-spacing:-.03em;line-height:.98;margin:16px 0 0}
+  .hero h1 .t{color:var(--teal-ink)}
+  .hero .dek{margin:22px 0 0;max-width:33em;font-size:clamp(18px,2.2vw,21px);color:var(--ink-soft);line-height:1.55}
+  .hero .dek b{color:var(--ink)}
+
+  .cards{margin:40px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:620px){.cards{grid-template-columns:1fr}}
+  .tcard{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 22px 24px;cursor:pointer;
+    font-family:inherit;transition:border-color .16s,transform .16s;display:flex;flex-direction:column;gap:0}
+  .tcard:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .tcard .pn{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay-ink);font-weight:700}
+  .tcard h3{font-family:"Archivo",sans-serif;font-weight:800;color:var(--ink);font-size:22px;margin:10px 0 6px;letter-spacing:-.015em}
+  .tcard p{margin:0;font-size:15.5px;color:var(--ink-soft);line-height:1.45}
+  .tcard .go{margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.05em;color:var(--teal-ink);font-weight:700}
+  .tcard.soon{cursor:default;opacity:.72;border-style:dashed}
+  .tcard.soon:hover{border-color:var(--line);transform:none}
+  .tcard.soon .pn{color:var(--ink-faint)}
+
+  .homenote{margin:34px 0 0;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);font-size:15.5px}
+  .homenote b{color:var(--ink)}
+  .homenote .label{color:var(--clay-ink);display:block;margin-bottom:6px}
+
+  /* ---------- page header ---------- */
+  .phead{padding:clamp(30px,5vw,52px) 0 0}
+  .phead .back{background:none;border:0;cursor:pointer;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.05em;
+    color:var(--ink-faint);padding:0;text-transform:uppercase}
+  .phead .back:hover{color:var(--teal-ink)}
+  .phead .pn{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay-ink);font-weight:700;margin-top:18px}
+  .phead h2{font-weight:900;font-size:clamp(30px,5.6vw,52px);letter-spacing:-.02em;margin:10px 0 12px}
+  .phead .pd{font-family:"Spectral",serif;font-style:italic;font-size:19px;color:var(--ink-soft);max-width:36em;margin:0}
+
+  .subnav{margin:22px 0 0;display:flex;gap:6px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .subnav a{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);
+    border-radius:99px;padding:5px 12px;background:var(--card);transition:border-color .15s,color .15s}
+  .subnav a:hover{border-color:var(--teal);color:var(--teal-ink)}
+
+  /* ---------- section ---------- */
+  section.sec{padding:clamp(34px,5vw,52px) 0 0;scroll-margin-top:76px}
+  .sec>.eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-ink);font-weight:500}
+  .sec h3{font-size:clamp(23px,3.2vw,31px);font-weight:800;letter-spacing:-.015em;margin:8px 0 0;line-height:1.08}
+  .sec>p{margin:14px 0 0;max-width:40em}
+  .sec .lead{font-family:"Archivo",sans-serif;font-weight:600;color:var(--ink);font-size:19px;line-height:1.35;margin-top:8px}
+
+  /* progress */
+  .progcard{margin:20px 0 0;padding:15px 18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+  .progcard .pt{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);margin-bottom:9px}
+  .progcard .pt b{color:var(--teal-ink);font-weight:700}
+  .progcard .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+  .progcard .bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .4s ease}
+
+  .steps{margin:20px 0 0;display:flex;flex-direction:column;gap:1px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .steps .st{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:14px 18px;background:var(--card);border-bottom:1px solid var(--line)}
+  .steps .st:last-child{border-bottom:0}
+  .steps .st .n{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-weight:700;font-size:14px}
+  .steps .st .c b{color:var(--ink)} .steps .st .c{font-size:16px}
+
+  .grid2{margin:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.grid2{grid-template-columns:1fr}}
+  .cbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+  .cbox .k{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--clay-ink);font-weight:700;letter-spacing:.06em}
+  .cbox h4{font-family:"Archivo",sans-serif;font-size:16px;font-weight:700;color:var(--ink);margin:5px 0 4px}
+  .cbox p{margin:0;font-size:15px;line-height:1.45}
+
+  .stage{margin:16px 0 0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .stage .sh{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .stage .sh .sn{flex:none;width:30px;height:30px;border-radius:7px;background:var(--teal-wash);color:var(--teal-ink);
+    font-family:"Archivo",sans-serif;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .stage .sh .st{font-family:"Archivo",sans-serif;font-weight:800;color:var(--ink);font-size:17px;letter-spacing:-.01em}
+  .stage .sh .lv{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:99px;padding:2px 8px}
+  .stage .sh .cnt{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--teal-ink);font-weight:700;font-variant-numeric:tabular-nums}
+  .skills{list-style:none;margin:0;padding:8px 8px}
+  .skills label{display:flex;gap:11px;align-items:flex-start;padding:9px 11px;border-radius:6px;cursor:pointer;transition:background .12s}
+  .skills label:hover{background:var(--bg)}
+  .skills input{appearance:none;-webkit-appearance:none;flex:none;width:19px;height:19px;margin-top:2px;border:1.5px solid var(--line-strong);
+    border-radius:5px;background:var(--surface);cursor:pointer;position:relative;transition:background .12s,border-color .12s}
+  .skills input:checked{background:var(--teal);border-color:var(--teal)}
+  .skills input:checked::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .skills input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .skills .sk{display:flex;flex-direction:column;gap:3px;min-width:0;font-size:15.5px;line-height:1.4}
+  .skills .skt{font-size:15.5px}
+  .skills .sub{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint);line-height:1.55}
+  .skills input:checked + .sk .skt{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--line-strong)}
+  .stage .do{padding:12px 18px 16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;font-size:15px}
+  .stage .do .row{display:flex;gap:10px}
+  .stage .do .tag{flex:none;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:5px;height:fit-content;margin-top:2px}
+  .stage .do .tag.a{background:var(--good-wash);color:var(--good-ink)}
+  .stage .do .tag.b{background:var(--clay-wash);color:var(--clay-ink)}
+  .stage .do b{color:var(--ink)}
+
+  .verdict{margin:20px 0 0;padding:20px 24px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:var(--radius)}
+  .verdict .label{color:var(--teal-ink)}
+  .verdict .vl{font-family:"Archivo",sans-serif;font-weight:800;color:var(--ink);font-size:clamp(19px,2.6vw,24px);line-height:1.22;margin:8px 0 0;letter-spacing:-.01em}
+  .verdict p{margin:12px 0 0;font-size:16px}
+
+  .stats{margin:18px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:620px){.stats{grid-template-columns:1fr}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px}
+  .stat .v{font-family:"Archivo",sans-serif;font-weight:900;color:var(--teal-ink);font-size:22px;letter-spacing:-.01em}
+  .stat .d{font-size:14px;color:var(--ink-soft);line-height:1.4;margin-top:3px}
+
+  .rows{margin:18px 0 0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+  .rows .r{display:grid;grid-template-columns:1fr auto;gap:6px 16px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .rows .r:last-child{border-bottom:0}
+  .rows .r .h{font-family:"Archivo",sans-serif;font-weight:700;color:var(--ink);font-size:16px}
+  .rows .r .m{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);white-space:nowrap;text-align:right}
+  .rows .r .d{grid-column:1 / -1;font-size:15px;color:var(--ink-soft);line-height:1.45;margin-top:2px}
+  .rows .r .d .fit{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:4px;margin-left:2px}
+  .fit.hi{background:var(--good-wash);color:var(--good-ink)}
+  .fit.mid{background:var(--teal-wash);color:var(--teal-ink)}
+  .fit.lo{background:var(--warn-wash);color:var(--warn)}
+
+  .offer{margin:20px 0 0;padding:20px 24px;background:var(--teal-wash);border:1px solid color-mix(in srgb,var(--teal) 40%,transparent);border-radius:var(--radius)}
+  .offer .label{color:var(--teal-ink)}
+  .offer .q{font-family:"Spectral",serif;font-style:italic;font-size:19px;color:var(--ink);line-height:1.4;margin:8px 0 0}
+  .offer p{margin:12px 0 0;font-size:15.5px}
+
+  .crosslink{margin:20px 0 0;padding:20px 22px;background:var(--clay-wash);border:1px solid color-mix(in srgb,var(--clay) 40%,transparent);border-radius:var(--radius)}
+  .crosslink .label{color:var(--clay-ink)}
+  .crosslink p{margin:8px 0 0;font-size:15.5px}
+  .crosslink b{color:var(--ink)}
+  .btn{margin-top:15px;display:inline-flex;align-items:center;gap:8px;font-family:"Archivo",sans-serif;font-weight:700;font-size:14px;
+    background:var(--teal);color:var(--on-teal);border:0;border-radius:7px;padding:11px 17px;cursor:pointer;transition:filter .15s}
+  .btn:hover{filter:brightness(1.07)}
+  .btn:focus-visible{outline:2px solid var(--teal-ink);outline-offset:2px}
+  .linklike{background:none;border:0;padding:0;font:inherit;color:var(--teal-ink);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+  .linklike:hover{filter:brightness(1.1)}
+
+  .mnote{margin:16px 0 0;font-style:italic;font-size:16px;line-height:1.5;color:var(--warn);padding-left:14px;border-left:2px solid var(--warn)}
+  .mnote .label{color:var(--warn);display:block;margin-bottom:2px;font-style:normal}
+
+  pre{margin:16px 0 0;background:var(--code-bg);color:var(--code-ink);border-radius:var(--radius);padding:15px 17px;overflow-x:auto;
+    font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.6;border:1px solid var(--line-strong)}
+  pre .c{color:var(--ink-faint)} pre .k{color:var(--teal-ink);font-weight:500}
+
+  .laws{margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
+  .law{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:grid;grid-template-columns:38px 1fr;gap:16px}
+  .law .ln{font-family:"Archivo",sans-serif;font-weight:900;font-size:22px;color:var(--line-strong);line-height:1;font-variant-numeric:tabular-nums}
+  .law h4{font-family:"Archivo",sans-serif;font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .law .one{font-family:"Spectral",serif;font-style:italic;color:var(--teal-ink);font-size:15.5px;margin:2px 0 6px}
+  .law p{margin:0;font-size:15.5px;line-height:1.5}
+
+  .work{margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
+  .wk{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px}
+  .wk .wt{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .wk .wt h4{font-family:"Archivo",sans-serif;font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .wk .wt .badge{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.08em;padding:2px 7px;border-radius:4px;background:var(--clay-wash);color:var(--clay-ink)}
+  .wk .flow{margin:9px 0 0;font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-soft);line-height:1.75}
+  .wk .flow .ar{color:var(--teal-ink);padding:0 2px}
+  .wk .chips{margin:10px 0 0;display:flex;gap:6px;flex-wrap:wrap}
+  .wk .chips span{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint);border:1px solid var(--line);border-radius:99px;padding:2px 9px}
+  .wk .out{margin:10px 0 0;font-size:15px;color:var(--ink-soft)}
+  .wk .out b{color:var(--teal-ink)}
+
+  .res{margin:18px 0 0;display:flex;flex-direction:column;gap:16px}
+  .res .gh{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay-ink);font-weight:700;margin-bottom:7px}
+  .res a.rl{display:flex;justify-content:space-between;gap:12px;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:11px 14px;margin-bottom:6px;transition:border-color .15s}
+  .res a.rl:hover{border-color:var(--teal)}
+  .res a.rl .rn{font-family:"Archivo",sans-serif;font-weight:600;color:var(--ink);font-size:15px;display:block}
+  .res a.rl .rd{font-size:13.5px;color:var(--ink-soft);margin-top:1px;display:block}
+  .res a.rl .rt{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-faint);white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;padding-top:3px;flex:none}
+
+  /* concept accordion */
+  .acc{margin:20px 0 0;display:flex;flex-direction:column;gap:8px}
+  .acc details{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .acc summary{list-style:none;cursor:pointer;padding:14px 18px;font-family:"Archivo",sans-serif;font-weight:700;color:var(--ink);font-size:16px;display:flex;align-items:center;gap:10px;transition:background .12s}
+  .acc summary::-webkit-details-marker{display:none}
+  .acc summary::before{content:"+";font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-weight:700;font-size:17px;flex:none;width:14px;text-align:center}
+  .acc details[open] summary::before{content:"–"}
+  .acc summary:hover{background:var(--bg)}
+  .acc summary:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+  .acc .body{padding:2px 18px 16px 42px;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
+  .acc .body p{margin:0}
+  .acc .body p+p{margin-top:9px}
+  .acc .body b{color:var(--ink)}
+  .acc .body code{color:var(--teal-ink)}
+
+  /* ---- dashboard ---- */
+  .dash{margin:26px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.dash{grid-template-columns:1fr}}
+  .dcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:17px 19px}
+  .dcard.wide{grid-column:1 / -1}
+  .dhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+  .dhead h3{font-family:"JetBrains Mono",monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);font-weight:500;margin:0}
+  .dhead .more{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--teal-ink);background:none;border:0;cursor:pointer;padding:0}
+  .dhead .more:hover{text-decoration:underline}
+  .kpis{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:80px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 13px;cursor:pointer;text-align:left;font-family:inherit}
+  .kpi .v{font-family:"Archivo",sans-serif;font-weight:900;font-size:24px;color:var(--teal-ink);line-height:1}
+  .kpi .l{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+  .rmlist{display:flex;flex-direction:column;gap:12px}
+  .rmrow{display:grid;grid-template-columns:1fr auto;gap:5px 10px;cursor:pointer}
+  .rmrow .rl{font-size:14.5px;color:var(--ink);font-weight:500}
+  .rmrow .rp{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--teal-ink);font-weight:700;font-variant-numeric:tabular-nums}
+  .rmrow .rbar{grid-column:1 / -1;height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+  .rmrow .rbar i{display:block;height:100%;background:var(--teal);border-radius:99px}
+  .dlist{display:flex;flex-direction:column;gap:10px}
+  .dli{font-size:15px;line-height:1.4;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .dli:last-child{border-bottom:0;padding-bottom:0}
+  .dli .m{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
+  .focuslist{display:flex;flex-direction:column;gap:9px}
+  .focusrow{display:flex;gap:11px;align-items:baseline;font-size:15px}
+  .focusrow .fn{font-family:"JetBrains Mono",monospace;color:var(--clay-ink);font-weight:700;font-size:12px;flex:none;width:16px}
+  .focusrow b{color:var(--ink)}
+
+  /* ---- trackers ---- */
+  .tform{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;gap:10px;margin:22px 0 0}
+  .tform .flabel{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  .frow{display:flex;gap:10px;flex-wrap:wrap}
+  .finput,.fselect,.ftext{font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:6px;padding:9px 11px;min-height:40px}
+  .finput,.fselect{flex:1;min-width:130px}
+  .ftext{width:100%;min-height:64px;resize:vertical;line-height:1.5}
+  .finput::placeholder,.ftext::placeholder{color:var(--ink-faint)}
+  .finput:focus,.fselect:focus,.ftext:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
+  .fbtn{align-self:flex-start;font-family:"Archivo",sans-serif;font-weight:700;font-size:14px;background:var(--teal);color:var(--on-teal);border:0;border-radius:6px;padding:10px 18px;cursor:pointer}
+  .fbtn:hover{filter:brightness(1.06)}
+  .fbtn:focus-visible{outline:2px solid var(--teal-ink);outline-offset:2px}
+  .tfilter{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 0;align-items:center}
+  .tfilter .finput,.tfilter .fselect{min-width:150px}
+  .tcount{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);margin-left:auto}
+  .tlist{margin:14px 0 0;display:flex;flex-direction:column;gap:10px}
+  .titem{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+  .titem .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .titem .ttitle{font-family:"Archivo",sans-serif;font-weight:700;color:var(--ink);font-size:16px;line-height:1.25}
+  .titem .tbody{margin:7px 0 0;font-size:15px;line-height:1.5}
+  .titem .tbody a{color:var(--teal-ink);word-break:break-word}
+  .titem .meta{margin:9px 0 0;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.02em;padding:2px 9px;border-radius:99px;background:var(--teal-wash);color:var(--teal-ink);white-space:nowrap}
+  .chip.clay{background:var(--clay-wash);color:var(--clay-ink)}
+  .chip.warn{background:var(--warn-wash);color:var(--warn)}
+  .chip.good{background:var(--good-wash);color:var(--good-ink)}
+  .chip.mut{background:var(--surface);color:var(--ink-faint);border:1px solid var(--line)}
+  .tdate{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint)}
+  .del{background:none;border:0;color:var(--ink-faint);cursor:pointer;font-family:"JetBrains Mono",monospace;font-size:16px;line-height:1;padding:2px 7px;border-radius:5px;flex:none}
+  .del:hover{color:var(--warn);background:var(--warn-wash)}
+  .empty{color:var(--ink-faint);font-style:italic;padding:22px;text-align:center;border:1px dashed var(--line-strong);border-radius:var(--radius);margin-top:14px}
+  .cprog{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
+  .cprog i{display:block;height:100%;background:var(--teal);border-radius:99px}
+  .savenote{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin:8px 0 0;line-height:1.6}
+
+  .pfoot{margin-top:clamp(44px,6vw,68px);border-top:2px solid var(--ink);padding-top:22px;font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-faint);line-height:1.85}
+  .pfoot b{color:var(--ink-soft);font-weight:500}
+
+  @media(prefers-reduced-motion:reduce){.page.active{animation:none} .progcard .bar i{transition:none} *{scroll-behavior:auto!important}}
+</style>
+
+<!-- ===================== NAV ===================== -->
+<div class="nav">
+  <div class="in">
+    <button class="brand" data-goto="home">FIELD<span>/</span>MANUAL</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
+    <div class="links" id="links">
+      <button data-goto="home">Dashboard</button>
+      <button data-goto="roadmaps">Roadmaps</button>
+      <button data-goto="thoughts">Thoughts</button>
+      <button data-goto="learnings">Learnings</button>
+      <button data-goto="wishlist">Wishlist</button>
+      <button data-goto="certs">Certs</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ===================== HOME ===================== -->
+  <div class="page" id="page-home">
+    <header class="hero">
+      <div class="kick">Personal learning OS · Eduardo · Santa Cruz</div>
+      <h1>Build skill, <span class="t">make money</span>, keep score.</h1>
+      <p class="dek">Two tracks at once: <b>land a tech job now</b> for steady income, and <b>build your own company and services</b> on top of it. Master technology and business together, go from $0 to $100K+, and track all of it here, roadmaps, thoughts, learnings, a wishlist, and certs, in one place.</p>
+    </header>
+
+    <div class="dash">
+      <div class="dcard wide">
+        <div class="dhead"><h3>The two-track plan</h3><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-faint)">Job funds the runway · company is the leverage</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--surface)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay-ink);font-weight:700">Track A · Now</div>
+            <h4 style="margin:7px 0 6px;font-size:16px;color:var(--ink)">A tech job for income</h4>
+            <p style="margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.5">Get hired in an automation, backend, or data role, or take paid freelance gigs, using the skills you already hold. It covers your costs, buys runway, and pays you to keep leveling up. <b>Target: steady monthly income in 60–90 days.</b></p>
+          </div>
+          <div style="border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--surface)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-ink);font-weight:700">Track B · Next</div>
+            <h4 style="margin:7px 0 6px;font-size:16px;color:var(--ink)">Your company &amp; tech services</h4>
+            <p style="margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.5">Build the high-ticket services company on nights and weekends with the roadmaps in this manual, automation and agents first, security and cloud as premium layers. <b>This is the ceiling: recurring revenue and leverage.</b></p>
+          </div>
+        </div>
+        <div class="mnote" style="margin-top:15px"><span class="label">The rule</span>The job is the floor, the company is the ceiling. Do not quit the job until the company's recurring revenue can replace it. Two income lines beat one, and a paycheck removes the desperation that makes you underprice clients.</div>
+      </div>
+
+      <div class="dcard wide">
+        <div class="dhead"><h3>Current focus</h3><button class="more" data-goto="roadmaps">All roadmaps →</button></div>
+        <div class="focuslist">
+          <div class="focusrow"><span class="fn">01</span><span><b>Automation engineering</b>, the spine. Python, APIs, n8n, Docker, self-hosting.</span></div>
+          <div class="focusrow"><span class="fn">02</span><span><b>Generative AI &amp; agents</b>, the premium layer you upsell inside automations.</span></div>
+          <div class="focusrow"><span class="fn">03</span><span><b>Secure the software you build</b>, secure coding and DevSecOps, not a cyber career.</span></div>
+          <div class="focusrow"><span class="fn">04</span><span><b>Cloud &amp; data</b>, deploy at scale, and turn data into decisions clients pay for.</span></div>
+        </div>
+      </div>
+
+      <div class="dcard">
+        <div class="dhead"><h3>Roadmap progress</h3><button class="more" data-goto="roadmaps">Open →</button></div>
+        <div class="rmlist" id="dash-roadmaps"></div>
+      </div>
+
+      <div class="dcard">
+        <div class="dhead"><h3>By the numbers</h3></div>
+        <div class="kpis">
+          <button class="kpi" data-goto="thoughts"><div class="v" id="kpi-thoughts">0</div><div class="l">Thoughts</div></button>
+          <button class="kpi" data-goto="learnings"><div class="v" id="kpi-learnings">0</div><div class="l">Learnings</div></button>
+          <button class="kpi" data-goto="wishlist"><div class="v" id="kpi-wishlist">0</div><div class="l">To learn</div></button>
+          <button class="kpi" data-goto="certs"><div class="v" id="kpi-certs">0</div><div class="l">Certs</div></button>
+        </div>
+        <div class="savenote">Everything you add saves in this browser on this device.</div>
+      </div>
+
+      <div class="dcard">
+        <div class="dhead"><h3>Recent thoughts</h3><button class="more" data-goto="thoughts">All →</button></div>
+        <div class="dlist" id="dash-thoughts"></div>
+      </div>
+
+      <div class="dcard">
+        <div class="dhead"><h3>Next actions</h3><button class="more" data-goto="wishlist">Wishlist →</button></div>
+        <div class="dlist" id="dash-actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== AUTOMATION ===================== -->
+  <div class="page" id="page-automation">
+    <div class="phead">
+      <button class="back" data-goto="home">← All pages</button>
+      <div class="pn">Page 01 · The Path</div>
+      <h2>Automation Engineering</h2>
+      <p class="pd">The spine. It pays on its own, and everything else in this manual is built on top of it.</p>
+      <div class="subnav">
+        <a href="#p1-role" class="jump">The role</a>
+        <a href="#p1-road" class="jump">Roadmap</a>
+        <a href="#p1-skills" class="jump">Skill map</a>
+        <a href="#p1-work" class="jump">What you build</a>
+        <a href="#p1-resources" class="jump">Resources</a>
+        <a href="#p1-deep" class="jump">Go deeper: agents</a>
+        <a href="#p1-paid" class="jump">Getting paid</a>
+      </div>
+    </div>
+
+    <section class="sec" id="p1-role">
+      <div class="eyebrow">01 · The role</div>
+      <h3>What an automation engineer actually does</h3>
+      <p>Not a job title you apply for so much as a capability you sell. You find work that humans repeat, replace it with a system that runs itself, keep it alive, and prove it saved money. Five moves:</p>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>Map the work.</b> Sit with a process, find the repetitive rule-based steps that eat hours, and decide what is worth automating.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Wire the systems together.</b> Connect apps and APIs so data flows without a human copy-pasting: forms, CRMs, databases, spreadsheets, email, Slack.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Add judgment with AI.</b> Where a step needs reading, deciding, or drafting, call an LLM or an agent instead of a person. The premium tier today.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>Make it reliable.</b> Handle errors, retries, and edge cases. Monitor it. Get alerted when it breaks. This separates a $500 toy from a $2K per month system.</span></div>
+        <div class="st"><span class="n">05</span><span class="c"><b>Prove the value.</b> Document it, hand it off, and quantify hours and cost saved. That number gets you paid and renewed.</span></div>
+      </div>
+
+      <p class="lead" style="margin-top:26px">Six things you need to know</p>
+      <div class="grid2">
+        <div class="cbox"><div class="k">A · PROGRAMMING</div><h4>The logic no tool can do</h4><p>Python, Git, the command line, HTTP. The base everything sits on.</p></div>
+        <div class="cbox"><div class="k">B · APIs &amp; DATA</div><h4>The plumbing</h4><p>REST, auth, webhooks, and a database. What everything flows through.</p></div>
+        <div class="cbox"><div class="k">C · ORCHESTRATION</div><h4>What you build and bill with</h4><p>n8n, Zapier, Make. The tools that turn a skill into invoices fastest.</p></div>
+        <div class="cbox"><div class="k">D · AI &amp; AGENTS</div><h4>Where the money is moving</h4><p>LLM calls, tool use, RAG, agent frameworks. The premium tier.</p></div>
+        <div class="cbox"><div class="k">E · RELIABILITY</div><h4>Production, not a demo</h4><p>Docker, hosting, retries, monitoring. What makes it hold up.</p></div>
+        <div class="cbox"><div class="k">F · BUSINESS</div><h4>What turns skill into income</h4><p>Scoping, pricing, ROI, handoff. The half most engineers skip.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p1-road">
+      <div class="eyebrow">02 · The roadmap</div>
+      <h3>The path, in order</h3>
+      <p>Six stages, roughly beginner to advanced. Do them in order, each leans on the last. Check off skills as you learn them. Your progress saves in this browser.</p>
+
+      <div class="progcard" data-scope="rm-automation">
+        <div class="pt"><span>ROADMAP PROGRESS</span><b><span class="ppct">0</span>%</b></div>
+        <div class="bar"><i class="pbar"></i></div>
+      </div>
+
+      <div id="rm-automation">
+      <div class="stage" data-stage="1">
+        <div class="sh"><span class="sn">1</span><span class="st">Programming foundations</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/4</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="s1a"><span class="sk"><span class="skt">Python basics: scripting, data structures, loops, error handling</span><span class="sub">→ variables, lists &amp; dicts, comprehensions, functions, try / except, venv &amp; pip</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s1b"><span class="sk"><span class="skt">Git &amp; GitHub: branches, commits, pull requests</span><span class="sub">→ clone, add / commit, push / pull, branch &amp; merge, resolve conflicts, .gitignore</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s1c"><span class="sk"><span class="skt">Command line: navigate, run scripts, pipe output</span><span class="sub">→ cd / ls, run a script, pipes &amp; redirection (| &gt; &gt;&gt;), env vars, chmod, ssh</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s1d"><span class="sk"><span class="skt">HTTP &amp; JSON: methods, status codes, request and response</span><span class="sub">→ GET / POST / PUT / DELETE, headers, 2xx / 4xx / 5xx, query vs body, parse JSON</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Automate one boring task end to end as a Python script: rename a folder of files, scrape a page into a spreadsheet, or email yourself a daily summary.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span><b>Automate the Boring Stuff with Python</b>, free online, the classic starting point.</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="2">
+        <div class="sh"><span class="sn">2</span><span class="st">APIs &amp; data</span><span class="lv">Beginner → Intermediate</span><span class="cnt" data-cnt>0/5</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="s2a"><span class="sk"><span class="skt">REST APIs: keys &amp; OAuth2, pagination, rate limits</span><span class="sub">→ API keys, OAuth2 flow, bearer tokens, pagination, rate limits &amp; backoff, idempotency</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s2b"><span class="sk"><span class="skt">Webhooks: receive real-time events from other apps</span><span class="sub">→ endpoint URL, payloads, signature verification, retries, replay protection</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s2c"><span class="sk"><span class="skt">SQL &amp; Postgres: CRUD, joins, indexes</span><span class="sub">→ SELECT / INSERT / UPDATE / DELETE, INNER &amp; LEFT JOIN, GROUP BY, indexes, keys</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s2d"><span class="sk"><span class="skt">Files &amp; formats: CSV, JSON, Sheets and Excel</span><span class="sub">→ CSV parsing, JSON, Excel / Sheets, UTF-8 encoding, schemas &amp; validation</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s2e"><span class="sk"><span class="skt">Postman: test and explore APIs before you wire them</span><span class="sub">→ collections, environments, variables, auth setup, saving requests, tests tab</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>On a schedule, pull data from a public API (weather, exchange rates, a CRM sandbox), clean it, and store rows in Postgres.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span><b>Postman Learning Center</b> and <b>SQLBolt</b> (interactive SQL, free).</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="3">
+        <div class="sh"><span class="sn">3</span><span class="st">Orchestration tools</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/4</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="s3a"><span class="sk"><span class="skt">n8n: nodes, expressions, error workflows (self-hosted, best margins)</span><span class="sub">→ triggers, nodes, expressions {{ }}, IF / Switch, error workflow, sub-workflows</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s3b"><span class="sk"><span class="skt">Zapier &amp; Make: fast client-facing wins; most clients already use one</span><span class="sub">→ triggers vs actions, multi-step Zaps, filters, formatters, Make scenarios</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s3c"><span class="sk"><span class="skt">Schedulers &amp; cron: run work on a timetable</span><span class="sub">→ cron syntax, intervals, timezones, catch-up / missed runs</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s3d"><span class="sk"><span class="skt">Airtable / Sheets as a backend: the glue in most SMB automations</span><span class="sub">→ tables &amp; fields, formulas, API access, linked records, views</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Rebuild three tasks you now do by hand as n8n workflows, each with real error handling and a notification when it fails.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span><b>n8n Level-1 course</b> (official), then Class Central's roundup of n8n courses.</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="4">
+        <div class="sh"><span class="sn">4</span><span class="st">AI &amp; agents</span><span class="lv">Intermediate → Advanced</span><span class="cnt" data-cnt>0/6</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="s4a"><span class="sk"><span class="skt">LLM APIs: call Claude or OpenAI, get reliable structured JSON out</span><span class="sub">→ system vs user prompt, temperature, tokens, JSON mode, structured output</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s4b"><span class="sk"><span class="skt">Tool / function calling: let a model trigger real actions</span><span class="sub">→ tool schema, arguments, execute the call, feed the result back to the model</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s4c"><span class="sk"><span class="skt">RAG: embeddings plus a vector DB so the model uses your data</span><span class="sub">→ embeddings, chunking, vector DB (pgvector / Pinecone), top-k search, re-ranking</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s4d"><span class="sk"><span class="skt">Agent frameworks: LangGraph, CrewAI, smolagents, n8n AI nodes</span><span class="sub">→ LangGraph state graph, CrewAI roles, smolagents, n8n AI Agent node</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s4e"><span class="sk"><span class="skt">Memory &amp; state: context that survives across steps</span><span class="sub">→ conversation history, short vs long-term memory, context window limits</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s4f"><span class="sk"><span class="skt">Evals &amp; guardrails: measure quality; keep agents from misbehaving</span><span class="sub">→ test set, LLM-as-judge, output validation, input / output filters</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Build one real agent: it reads a document, decides something, and acts across two tools (classify an email, then draft a reply and file it). Add one eval that scores its output.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span><b>Hugging Face AI Agents Course</b> (free, certified), then DeepLearning.AI's <b>AI Agents in LangGraph</b>.</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="5">
+        <div class="sh"><span class="sn">5</span><span class="st">Reliability &amp; infrastructure</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/5</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="s5a"><span class="sk"><span class="skt">Docker: self-host n8n and your tools cheaply</span><span class="sub">→ images, containers, Dockerfile, docker-compose, volumes, ports</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s5b"><span class="sk"><span class="skt">VPS / cloud basics: deploy on a $5 to $20 per month server</span><span class="sub">→ SSH, Nginx reverse proxy, domains &amp; DNS, HTTPS via Let's Encrypt</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s5c"><span class="sk"><span class="skt">Retries &amp; idempotency: dead-letter queues, safe re-runs</span><span class="sub">→ exponential backoff, dead-letter queue, idempotency keys, at-least-once</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s5d"><span class="sk"><span class="skt">Monitoring &amp; alerting: know it broke before the client does</span><span class="sub">→ health checks, uptime monitor, logs, alerts to phone / Slack</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s5e"><span class="sk"><span class="skt">Secrets management: where security and automation meet</span><span class="sub">→ env vars, .env files, secret store, key rotation, never in the frontend</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Move your best n8n workflow off your laptop: self-host it on a VPS with Docker, add backups, and wire a failure alert to your phone.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span><b>Docker: Get Started</b> and the <b>n8n self-hosting docs</b>. You already do most of this at work.</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="6">
+        <div class="sh"><span class="sn">6</span><span class="st">The business layer</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/5</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="s6a"><span class="sk"><span class="skt">Process discovery: interview a team, find what's worth automating</span><span class="sub">→ shadow the work, process mapping, time-per-task, pick ROI candidates</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s6b"><span class="sk"><span class="skt">Scoping &amp; pricing: fixed fee vs. retainer, and when</span><span class="sub">→ deliverables, statement of work, fixed fee vs retainer, change requests</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s6c"><span class="sk"><span class="skt">ROI framing: hours saved times hourly cost, always quantified</span><span class="sub">→ hours saved × hourly cost, payback period, before / after numbers</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s6d"><span class="sk"><span class="skt">SOPs &amp; handoff: docs that make a client renew, not ghost</span><span class="sub">→ written SOPs, Loom walkthroughs, training, access transfer</span></span></label></li>
+          <li><label><input type="checkbox" data-id="s6e"><span class="sk"><span class="skt">Maintenance retainers: recurring revenue from keeping flows alive</span><span class="sub">→ SLAs, monitoring, monthly report, priority support, upsells</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Map one real process for someone you know, end to end, and quote it with a concrete hours-saved-per-month number attached.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span>Model your first offers on real workflow automation examples, then bring one to <code>/operator</code> to price it.</span></div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="sec" id="p1-skills">
+      <div class="eyebrow">03 · Skill map</div>
+      <h3>How the six areas connect</h3>
+      <p>Read the roadmap as a stack, not a checklist. Programming and APIs are the <b>foundation</b>. Orchestration is the <b>delivery vehicle</b> you bill with. AI and agents are the <b>premium multiplier</b> on top. Reliability turns a demo into something a business trusts, and Business turns all of it into income. Skip Business and you stay an engineer who is underpaid.</p>
+      <div class="mnote"><span class="label">Your unfair advantage</span>You already hold most of stages 1, 2, and 5 from your day job. Your real gap is not the tech. It is stage 6, packaging and pricing, and the agent depth in stage 4. Spend your time there.</div>
+
+      <p class="lead" style="margin-top:24px">The one thing to master in each</p>
+      <div class="rows">
+        <div class="r"><span class="h">A · Programming</span><span class="m">Python + API docs</span><span class="d">The 20 lines of Python a workflow calls when it hits something no-code cannot do.</span></div>
+        <div class="r"><span class="h">B · APIs &amp; data</span><span class="m">REST auth + one SQL DB</span><span class="d">Auth, pagination, and rate limits are where beginners stall. A database is where the data lands.</span></div>
+        <div class="r"><span class="h">C · Orchestration</span><span class="m">n8n, deeply</span><span class="d">The self-hostable one with the best margins. Zapier and Make win on speed and client familiarity.</span></div>
+        <div class="r"><span class="h">D · AI &amp; agents</span><span class="m">structured output, then a framework</span><span class="d">Single reliable LLM calls, then tool-calling, then multi-step agents with memory and evals.</span></div>
+        <div class="r"><span class="h">E · Reliability</span><span class="m">Docker + error handling</span><span class="d">Anyone builds a flow that works once. Getting paid means it works at 3am and tells you when it cannot.</span></div>
+        <div class="r"><span class="h">F · Business</span><span class="m">ROI framing + scoping</span><span class="d">The skill engineers skip and agencies live on. Worth more than any single tool.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p1-work">
+      <div class="eyebrow">04 · The work, concretely</div>
+      <h3>What you actually build</h3>
+      <p>Real automations engineers ship. Each one below is a sellable offer: a trigger, a few steps, the tools, and the outcome you get paid for.</p>
+      <div class="work">
+        <div class="wk">
+          <div class="wt"><h4>Employee onboarding</h4></div>
+          <div class="flow">HR marks a candidate hired <span class="ar">→</span> generate offer letter for e-sign <span class="ar">→</span> open an IT ticket for accounts <span class="ar">→</span> add to payroll &amp; schedule a day-1 check-in</div>
+          <div class="chips"><span>form</span><span>DocuSign</span><span>Jira</span><span>Slack</span><span>n8n</span></div>
+          <div class="out">Hours become <b>minutes</b>, and nothing gets dropped on a new hire's first day.</div>
+        </div>
+        <div class="wk">
+          <div class="wt"><h4>Scheduled reporting</h4></div>
+          <div class="flow">every Monday 08:00 <span class="ar">→</span> pull sales from CRM + database <span class="ar">→</span> format, chart, summarize <span class="ar">→</span> post to Slack &amp; email the team</div>
+          <div class="chips"><span>Postgres</span><span>n8n</span><span>Slack</span></div>
+          <div class="out">Saves hours every month and the report <b>never gets forgotten</b>.</div>
+        </div>
+        <div class="wk">
+          <div class="wt"><h4>Lead capture &amp; enrichment</h4></div>
+          <div class="flow">website form submit (webhook) <span class="ar">→</span> enrich company data via API <span class="ar">→</span> dedupe &amp; create CRM record <span class="ar">→</span> alert the right rep</div>
+          <div class="chips"><span>webhook</span><span>enrichment API</span><span>HubSpot</span><span>Slack</span></div>
+          <div class="out">Leads answered in <b>minutes</b>, not the next business day.</div>
+        </div>
+        <div class="wk">
+          <div class="wt"><h4>Content repurposing</h4><span class="badge">AI</span></div>
+          <div class="flow">new blog post (RSS) <span class="ar">→</span> store in Airtable <span class="ar">→</span> LLM drafts a LinkedIn post + tweet thread <span class="ar">→</span> queue for human review</div>
+          <div class="chips"><span>RSS</span><span>Airtable</span><span>Claude</span><span>n8n</span></div>
+          <div class="out">One post becomes <b>five</b>, with a person only approving.</div>
+        </div>
+        <div class="wk">
+          <div class="wt"><h4>Invoice &amp; expense intake</h4><span class="badge">AI</span></div>
+          <div class="flow">invoice email attachment <span class="ar">→</span> LLM extracts vendor, amount, dates <span class="ar">→</span> validate against rules <span class="ar">→</span> push to accounting, flag exceptions</div>
+          <div class="chips"><span>Gmail</span><span>LLM</span><span>QuickBooks</span></div>
+          <div class="out">No more manual data entry. Humans <b>only touch the odd ones</b>.</div>
+        </div>
+        <div class="wk">
+          <div class="wt"><h4>Support triage</h4><span class="badge">AGENT</span></div>
+          <div class="flow">new support ticket <span class="ar">→</span> agent classifies &amp; sets priority <span class="ar">→</span> drafts a reply using RAG over your docs <span class="ar">→</span> auto-answers simple ones, routes the rest</div>
+          <div class="chips"><span>Zendesk</span><span>vector DB</span><span>LangGraph</span></div>
+          <div class="out">Faster first response, and <b>agents focus on the hard tickets</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="p1-resources">
+      <div class="eyebrow">05 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <p>Curated, current, mostly free. Open one per stage and actually work through it. Do not collect them.</p>
+      <div class="res">
+        <div class="grp">
+          <div class="gh">Foundations</div>
+          <a class="rl" href="https://automatetheboringstuff.com" target="_blank" rel="noopener"><span><span class="rn">Automate the Boring Stuff with Python</span><span class="rd">The canonical way to learn practical Python. Full 3rd edition online.</span></span><span class="rt">Free · book</span></a>
+          <a class="rl" href="https://roadmap.sh" target="_blank" rel="noopener"><span><span class="rn">roadmap.sh</span><span class="rd">Visual skill roadmaps (Backend, DevOps, SQL) to fill gaps in order.</span></span><span class="rt">Free · maps</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">APIs &amp; data</div>
+          <a class="rl" href="https://learning.postman.com" target="_blank" rel="noopener"><span><span class="rn">Postman Learning Center</span><span class="rd">Call, test, and debug APIs before wiring them into a workflow.</span></span><span class="rt">Free · hands-on</span></a>
+          <a class="rl" href="https://sqlbolt.com" target="_blank" rel="noopener"><span><span class="rn">SQLBolt</span><span class="rd">Learn SQL in the browser, one short exercise at a time.</span></span><span class="rt">Free · interactive</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">Orchestration · n8n</div>
+          <a class="rl" href="https://docs.n8n.io/courses/" target="_blank" rel="noopener"><span><span class="rn">n8n Level-1 course</span><span class="rd">The official hands-on course. Fastest path to billable workflows.</span></span><span class="rt">Free · official</span></a>
+          <a class="rl" href="https://docs.n8n.io" target="_blank" rel="noopener"><span><span class="rn">n8n documentation</span><span class="rd">Nodes, expressions, hosting. The reference you keep open daily.</span></span><span class="rt">Free · reference</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">AI &amp; agents</div>
+          <a class="rl" href="https://huggingface.co/learn/agents-course" target="_blank" rel="noopener"><span><span class="rn">Hugging Face AI Agents Course</span><span class="rd">Fundamentals through frameworks (LangGraph, smolagents), with certificates.</span></span><span class="rt">Free · certified</span></a>
+          <a class="rl" href="https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/" target="_blank" rel="noopener"><span><span class="rn">AI Agents in LangGraph</span><span class="rd">Go deep on explicit agent state and control flow.</span></span><span class="rt">Free audit · course</span></a>
+          <a class="rl" href="https://docs.anthropic.com" target="_blank" rel="noopener"><span><span class="rn">Anthropic prompt engineering docs</span><span class="rd">Reliable structured output and tool use from an LLM.</span></span><span class="rt">Free · reference</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="p1-deep">
+      <div class="eyebrow">06 · Go deeper: AI agents</div>
+      <h3>From workflows to agents, the frontier of stage 4</h3>
+      <p class="lead">An agent is just an LLM in a loop: it thinks, calls a tool, looks at the result, and repeats until the job is done.</p>
+      <p>This is where the money and the moat are, and it is the exact skill the <button class="linklike" data-goto="shift">Careers page</button> data points to. Below is the mental model, a deeper hands-on path with its own progress, and every resource worth your time. Anthropic's core rule sits over all of it: <b>start simple, and add complexity only when it earns its place.</b></p>
+
+      <h4 style="margin-top:26px;font-size:18px">The mental model</h4>
+      <p style="margin-top:6px;max-width:40em">Tap any idea to expand it. These seven concepts are the whole game.</p>
+      <div class="acc">
+        <details>
+          <summary>The augmented LLM, the building block</summary>
+          <div class="body"><p>The unit an agent is built from is a normal LLM given three extra powers: it can <b>call tools</b>, <b>retrieve information</b>, and <b>keep memory</b>. Everything else is orchestration around that. Get one augmented LLM call reliable before you build anything bigger.</p></div>
+        </details>
+        <details>
+          <summary>The agent loop: Thought, Action, Observation</summary>
+          <div class="body"><p>An agent runs a cycle: <b>Thought</b> (decide the next step), <b>Action</b> (call a tool), <b>Observation</b> (read the result), then loops with that new information until it decides it is finished. This is the single idea the whole field is built on. The Hugging Face course drills it directly.</p></div>
+        </details>
+        <details>
+          <summary>Workflows vs agents, and why it matters for your bill</summary>
+          <div class="body"><p>Anthropic draws a sharp line. A <b>workflow</b> follows a fixed path you coded. An <b>agent</b> lets the model decide the steps at runtime. Workflows are cheaper, faster, and more predictable, so use them whenever the steps are known. Reach for a true agent only when the steps genuinely cannot be predicted. Most "agents" clients need are actually workflows.</p></div>
+        </details>
+        <details>
+          <summary>The five patterns that cover almost everything</summary>
+          <div class="body"><p>Anthropic's guide names five reusable patterns: <b>Prompt chaining</b> (steps in sequence), <b>Routing</b> (send each input to a specialist), <b>Parallelization</b> (run independent subtasks at once), <b>Orchestrator-workers</b> (a lead model splits a task and delegates), and <b>Evaluator-optimizer</b> (one model drafts, another critiques and improves). Learn these five and you can design most systems.</p></div>
+        </details>
+        <details>
+          <summary>Tools and MCP, how an agent acts on the world</summary>
+          <div class="body"><p>Tools are functions the model can call: search, send an email, query a database. <b>MCP (Model Context Protocol)</b> is the open standard, from Anthropic, for exposing tools, data, and prompts to any model in a consistent way. Learn MCP and your tools work across Claude, n8n, and other clients instead of being wired one at a time.</p></div>
+        </details>
+        <details>
+          <summary>RAG and memory, giving the model real, current data</summary>
+          <div class="body"><p><b>RAG</b> (retrieval-augmented generation) puts your documents into a vector database, retrieves the relevant pieces at question time, and feeds them to the model, so it answers from your data instead of guessing. <b>Memory</b> is state that survives across steps of the loop. Together they turn a clever demo into something that knows a specific business.</p></div>
+        </details>
+        <details>
+          <summary>Evals and guardrails, the line between demo and production</summary>
+          <div class="body"><p>An <b>eval</b> is an automated test that scores an agent's output so you know if a change made it better or worse. <b>Guardrails</b> stop it from doing something unsafe or off-task. This is the unglamorous half almost no one does well, which is exactly why clients pay a premium for someone who does.</p></div>
+        </details>
+      </div>
+
+      <h4 style="margin-top:32px;font-size:18px">The deep path, hands-on</h4>
+      <p style="margin-top:6px;max-width:40em">Four stages beyond roadmap stage 4. Check them off as you go; this path tracks its own progress.</p>
+      <div class="progcard" data-scope="rm-agents">
+        <div class="pt"><span>AGENT PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div>
+        <div class="bar"><i class="pbar"></i></div>
+      </div>
+      <div id="rm-agents">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">Reliable single calls</span><span class="lv">Start here</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ag1a"><span class="sk"><span class="skt">Get structured JSON out of an LLM every time, with a schema</span><span class="sub">→ JSON schema, response format, validation, retry on malformed output</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag1b"><span class="sk"><span class="skt">Make one clean tool / function call and handle the result</span><span class="sub">→ tool definition, arguments, execute, feed result back, error handling</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag1c"><span class="sk"><span class="skt">Understand the Thought → Action → Observation loop cold</span><span class="sub">→ the loop, stop conditions, max iterations, when to end</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Take a task you already automate in n8n and replace one rule-based step with a single, schema-validated LLM call.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>Anthropic, Building Effective AI Agents, and the Hugging Face Agents Course, unit 1.</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">Tools, MCP &amp; RAG</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ag2a"><span class="sk"><span class="skt">Give a model several tools and let it choose between them</span><span class="sub">→ tool selection, clear descriptions, disambiguation, error handling</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag2b"><span class="sk"><span class="skt">Build a basic MCP server exposing one tool (tools, resources, prompts)</span><span class="sub">→ tools, resources, prompts, stdio / HTTP transport, Python SDK</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag2c"><span class="sk"><span class="skt">Stand up a small RAG pipeline: embed docs, retrieve, answer from them</span><span class="sub">→ embeddings, chunking, vector store, retrieve top-k, cite sources</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Build a RAG bot over your own notes, then expose one action as an MCP tool so Claude can call it.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>Anthropic's Intro to MCP course, the MCP docs, and a LangChain RAG tutorial.</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">Real multi-step agents</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ag3a"><span class="sk"><span class="skt">Build a multi-step agent with LangGraph or CrewAI</span><span class="sub">→ nodes &amp; edges, state graph, agent roles, handoffs between agents</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag3b"><span class="sk"><span class="skt">Add memory and state that survive across the loop</span><span class="sub">→ persistent state, checkpoints, conversation memory, resume runs</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag3c"><span class="sk"><span class="skt">Apply the five patterns: chaining, routing, parallelization, orchestrator, evaluator</span><span class="sub">→ prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Build an agent that reads a document, decides, and acts across two tools, using an orchestrator-workers or evaluator-optimizer pattern.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>DeepLearning.AI's AI Agents in LangGraph, and Multi-AI-Agent Systems with crewAI.</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">Production &amp; trust</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ag4a"><span class="sk"><span class="skt">Write evals that score agent output so you can improve it safely</span><span class="sub">→ golden set, scoring, regression tests, LLM-as-judge</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag4b"><span class="sk"><span class="skt">Add guardrails: keep the agent on-task and safe</span><span class="sub">→ allow / deny lists, output filters, human-in-the-loop approval</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag4c"><span class="sk"><span class="skt">Monitoring, logging, and cost control on every run</span><span class="sub">→ traces, token &amp; cost tracking, spend caps, latency</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ag4d"><span class="sk"><span class="skt">Deploy it, self-hosted in n8n or as its own service</span><span class="sub">→ containerize, host, webhook / endpoint, versioning &amp; rollback</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Wrap your stage-3 agent with an eval set and a spend cap, then deploy it where a real user can hit it.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>n8n Advanced AI docs for deployment, and Anthropic's Writing tools for agents.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-top:32px;font-size:18px">Every resource, in order</h4>
+      <div class="res" style="margin-top:14px">
+        <div class="grp">
+          <div class="gh">Concepts &amp; patterns · read first</div>
+          <a class="rl" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"><span><span class="rn">Anthropic, Building Effective AI Agents</span><span class="rd">The reference. Workflows vs agents and the five patterns. Read it twice.</span></span><span class="rt">Free · guide</span></a>
+          <a class="rl" href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener"><span><span class="rn">Anthropic, Writing tools for agents</span><span class="rd">How to design tools an agent can actually use well.</span></span><span class="rt">Free · guide</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">Courses · build the skill</div>
+          <a class="rl" href="https://huggingface.co/learn/agents-course" target="_blank" rel="noopener"><span><span class="rn">Hugging Face AI Agents Course</span><span class="rd">Fundamentals through smolagents, LlamaIndex, and LangGraph. Two free certificates.</span></span><span class="rt">Free · certified</span></a>
+          <a class="rl" href="https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/" target="_blank" rel="noopener"><span><span class="rn">DeepLearning.AI, AI Agents in LangGraph</span><span class="rd">Explicit agent state and control flow, hands-on.</span></span><span class="rt">Free audit</span></a>
+          <a class="rl" href="https://www.deeplearning.ai/short-courses/multi-ai-agent-systems-with-crewai/" target="_blank" rel="noopener"><span><span class="rn">DeepLearning.AI, Multi-AI-Agent Systems with crewAI</span><span class="rd">Multiple agents cooperating on a task.</span></span><span class="rt">Free audit</span></a>
+          <a class="rl" href="https://academy.langchain.com/" target="_blank" rel="noopener"><span><span class="rn">LangChain Academy</span><span class="rd">Official free LangGraph courses from the framework's makers.</span></span><span class="rt">Free · official</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">In n8n · your delivery tool</div>
+          <a class="rl" href="https://docs.n8n.io/advanced-ai/" target="_blank" rel="noopener"><span><span class="rn">n8n Advanced AI documentation</span><span class="rd">AI agent nodes, cluster nodes, and how to wire them. Your daily reference.</span></span><span class="rt">Free · reference</span></a>
+          <a class="rl" href="https://docs.n8n.io/advanced-ai/intro-tutorial/" target="_blank" rel="noopener"><span><span class="rn">n8n, Build an AI workflow (tutorial)</span><span class="rd">The official walkthrough that builds a working AI chat agent.</span></span><span class="rt">Free · tutorial</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">MCP · give models your tools</div>
+          <a class="rl" href="https://anthropic.skilljar.com/introduction-to-model-context-protocol" target="_blank" rel="noopener"><span><span class="rn">Anthropic, Introduction to MCP</span><span class="rd">Build MCP servers and clients with the Python SDK: tools, resources, prompts.</span></span><span class="rt">Free · course</span></a>
+          <a class="rl" href="https://modelcontextprotocol.io" target="_blank" rel="noopener"><span><span class="rn">Model Context Protocol, official docs</span><span class="rd">The spec and quickstarts. Build your first server.</span></span><span class="rt">Free · docs</span></a>
+          <a class="rl" href="https://github.com/microsoft/mcp-for-beginners" target="_blank" rel="noopener"><span><span class="rn">Microsoft, MCP for Beginners</span><span class="rd">Open curriculum with runnable examples across several languages.</span></span><span class="rt">Free · course</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">RAG · answer from real data</div>
+          <a class="rl" href="https://python.langchain.com/docs/tutorials/rag/" target="_blank" rel="noopener"><span><span class="rn">LangChain, RAG tutorial</span><span class="rd">Embed, retrieve, and answer from your own documents, step by step.</span></span><span class="rt">Free · tutorial</span></a>
+        </div>
+      </div>
+
+      <div class="crosslink" style="margin-top:26px">
+        <span class="label">The one build</span>
+        <p><b>Do not read all of this before you start.</b> Read the Anthropic guide once, then build the stage-1 task in your own n8n. You learn agents by shipping one, then hardening it, not by finishing courses. Everything above is there for when you get stuck, not before.</p>
+        <button class="btn" data-goto="cybersecurity">See how this becomes a paid offer →</button>
+      </div>
+    </section>
+
+    <section class="sec" id="p1-paid">
+      <div class="eyebrow">07 · Getting paid</div>
+      <h3>What the work is worth</h3>
+      <div class="stats">
+        <div class="stat"><div class="v">$500 – $25K</div><div class="d">n8n project range, from a single build to an agency retainer.</div></div>
+        <div class="stat"><div class="v">$35B → $247B</div><div class="d">Automation market, 2026 to 2035. Roughly 24% CAGR.</div></div>
+        <div class="stat"><div class="v">#1</div><div class="d">"AI engineer", fastest-growing title for young workers in 2026.</div></div>
+      </div>
+      <p>The jump in pay is not more hours, it is moving up the stack. A wiring job that saves a team ten hours a week is worth a retainer, not an hourly rate. An agent that replaces a judgment step is worth more again, because almost no one can deliver one that holds up in production. <b>Price the outcome, never your time.</b></p>
+    </section>
+
+    <div class="pfoot"><b>Next move:</b> self-host n8n on a cheap VPS and rebuild three of your manual tasks as monitored workflows. That is stages 1, 2, 3, and 5 in one weekend, and your first portfolio piece.</div>
+  </div>
+
+  <!-- ===================== CYBERSECURITY ===================== -->
+  <div class="page" id="page-cybersecurity">
+    <div class="phead">
+      <button class="back" data-goto="home">← All pages</button>
+      <div class="pn">Page 02 · The Edge</div>
+      <h2>Cybersecurity</h2>
+      <p class="pd">Is cybersecurity worth learning, for you specifically? Yes. But not the way the internet means it.</p>
+      <div class="subnav">
+        <a href="#p2-verdict" class="jump">The verdict</a>
+        <a href="#p2-jobs" class="jump">Six jobs</a>
+        <a href="#p2-lanes" class="jump">Two lanes</a>
+        <a href="#p2-offer" class="jump">The offer</a>
+        <a href="#p2-roadmap" class="jump">Roadmap</a>
+        <a href="#p2-resources" class="jump">Resources</a>
+        <a href="#p2-trap" class="jump">The trap</a>
+      </div>
+    </div>
+
+    <section class="sec" id="p2-verdict">
+      <div class="eyebrow">01 · The verdict</div>
+      <h3>Conditional go</h3>
+      <p>You already write software, automate workflows, and know APIs. So the question is not whether cybersecurity is worth learning in the abstract. It is whether it wins you high-ticket clients faster than automation already can. That flips the answer.</p>
+      <div class="verdict">
+        <span class="label">The verdict, in one line</span>
+        <div class="vl">Security is a paid layer on top of your automation skills. Not a career change, not a fresh start.</div>
+        <p>"Become a cybersecurity analyst" is low-ROI for you. <b>"The automation engineer who makes security and compliance provable"</b> is high-ticket and hard to copy.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="v">514K+</div><div class="d">Open U.S. security roles, up 12%. Real demand.</div></div>
+        <div class="stat"><div class="v">#2</div><div class="d">Fastest-growing skill category, behind only AI.</div></div>
+        <div class="stat"><div class="v">34% / 30%</div><div class="d">Skills gap in AI and cloud security. The real shortage.</div></div>
+      </div>
+      <div class="mnote"><span class="label">The catch</span>That gap is senior, cloud, and AI-adjacent. Entry-level "get Security+ then apply" is flooded. Your edge is that you can skip the junior job and sell the automation the market is actually short on.</div>
+
+      <div class="crosslink">
+        <span class="label">Start here first</span>
+        <p><b>Go deeper on Automation Engineering before you lean into security.</b> Automation is the engine; security is the wrapper you bolt on top. Why it is better this way: going deeper on automation and AI agents first wins high-ticket clients faster and is harder to copy, and security consulting sells on trust and referral, so you want automation wins and warm intros already in hand. Lead with automation, and add security as the specialization, not an identity you restart from zero.</p>
+        <button class="btn" data-goto="automation">Go deeper on Automation Engineering →</button>
+      </div>
+    </section>
+
+    <section class="sec" id="p2-jobs">
+      <div class="eyebrow">02 · Six jobs, one word</div>
+      <h3>Most content pushes you toward the worst-fitting one</h3>
+      <div class="rows">
+        <div class="r"><span class="h">GRC / Compliance Consultant</span><span class="m">$125–250 / hr</span><span class="d">Takes companies through SOC 2, ISO 27001, HIPAA. Process plus evidence collection. Your scripts already do this. <span class="fit hi">Highest fit</span></span></div>
+        <div class="r"><span class="h">Security Automation / Tooling</span><span class="m">product economics</span><span class="d">Builds the scripts and platforms that do the work. Vanta turned this into a $4.15B company. <span class="fit hi">Highest leverage</span></span></div>
+        <div class="r"><span class="h">Penetration Tester / Red Team</span><span class="m">$100–300 / hr</span><span class="d">Break web apps and APIs before criminals do. $3K to $20K per engagement. <span class="fit mid">High fit</span></span></div>
+        <div class="r"><span class="h">Fractional vCISO</span><span class="m">$5K–20K / mo</span><span class="d">Retained security lead for small companies. Needs 3 to 5 years of credibility first. <span class="fit mid">Future fit</span></span></div>
+        <div class="r"><span class="h">SOC Analyst / Blue Team</span><span class="m">salaried, capped</span><span class="d">Watches alerts in someone else's SOC. Capped pay, wastes your edge. <span class="fit lo">Low fit</span></span></div>
+        <div class="r"><span class="h">Bug Bounty Hunter</span><span class="m">power-law lottery</span><span class="d">A few earn six figures, most earn nothing. Side-quest, not a business. <span class="fit lo">Not a model</span></span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p2-lanes">
+      <div class="eyebrow">03 · Two lanes, one bet</div>
+      <h3>Run both lanes, weight the first</h3>
+      <div class="rows">
+        <div class="r"><span class="h">Compliance automation for SaaS / SMB</span><span class="m">4–8 wks to $1</span><span class="d">SOC 2 and ISO 27001 evidence via scripts. Retainer, then SaaS. Sits right on top of automation and APIs. <span class="fit hi">Do this</span></span></div>
+        <div class="r"><span class="h">API / web-app penetration testing</span><span class="m">6–12 wks to $1</span><span class="d">$3K to $20K per job. You build APIs, so you know where they break. <span class="fit hi">Do this</span></span></div>
+        <div class="r"><span class="h">Fractional vCISO retainer</span><span class="m">1–2 yrs</span><span class="d">$5K to $20K per month, but it needs a track record first. <span class="fit mid">Later</span></span></div>
+        <div class="r"><span class="h">SOC analyst employee role</span><span class="m">3–6 mo search</span><span class="d">Salary-capped and it wastes your edge. <span class="fit lo">Skip</span></span></div>
+        <div class="r"><span class="h">Bug bounty as primary income</span><span class="m">unpredictable</span><span class="d">A lottery. Hobby, not a plan. <span class="fit lo">Skip</span></span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p2-offer">
+      <div class="eyebrow">04 · The offer to build</div>
+      <h3>Package it, do not describe it</h3>
+      <div class="offer">
+        <span class="label">The offer</span>
+        <p class="q">"I automate your SOC 2 / ISO 27001 readiness, so you don't pay $20K to a consultant or wait months for an audit firm."</p>
+        <p>Consultants charge $10K to $30K for a SOC 2 Type I doing evidence-gathering by hand. Your scripts automate it against AWS, GCP, GitHub, and Okta APIs. Package it as a <b>$3K to $8K engagement</b> or a <b>$2K to $5K per month retainer</b>. Undercut them on price, beat them on turnaround.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="p2-roadmap">
+      <div class="eyebrow">05 · The roadmap</div>
+      <h3>Six months to your first paid engagement</h3>
+      <p class="lead">Pick one lane. Doing both finishes neither.</p>
+      <p>Certs buy vocabulary, not clients. This is the order that gets you to a paid engagement: hands-on, mostly free. Check off steps as you go. Your progress saves in this browser.</p>
+      <div class="progcard" data-scope="rm-security">
+        <div class="pt"><span>SECURITY PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div>
+        <div class="bar"><i class="pbar"></i></div>
+      </div>
+
+      <div id="rm-security">
+      <div class="stage" data-stage="1">
+        <div class="sh"><span class="sn">1</span><span class="st">Foundation</span><span class="lv">Month 1–2</span><span class="cnt" data-cnt>0/3</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="c1a"><span class="sk"><span class="skt">Work through Professor Messer's free Security+ (SY0-701) series</span><span class="sub">→ CIA triad, threats / vulnerabilities / risk, controls, common attacks</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c1b"><span class="sk"><span class="skt">Get fluent in frameworks, controls, and risk, enough to earn a founder's trust</span><span class="sub">→ SOC 2 vs ISO 27001 vs HIPAA, GRC vocabulary, audits &amp; evidence</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c1c"><span class="sk"><span class="skt">Sit the Security+ exam later, only if a client asks for it</span><span class="sub">→ SY0-701 objectives, practice exams, only when it unlocks a deal</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Finish the series and be able to explain SOC 2 vs ISO 27001 in plain words.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span><b>Professor Messer, Security+ SY0-701</b>, free, the complete video series.</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="2">
+        <div class="sh"><span class="sn">2</span><span class="st">Pick your lane</span><span class="lv">Month 2–4</span><span class="cnt" data-cnt>0/4</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="c2a"><span class="sk"><span class="skt">Choose ONE lane: compliance automation, or API / web pentesting</span><span class="sub">→ compliance = your strongest wedge; API / web = rides skills you already have</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c2b"><span class="sk"><span class="skt">Compliance: learn the real SOC 2 / ISO 27001 control lists</span><span class="sub">→ SOC 2 Trust Services Criteria, ISO 27001 Annex A controls, evidence</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c2c"><span class="sk"><span class="skt">Compliance: rebuild what Vanta automates via cloud APIs</span><span class="sub">→ MFA checks, IAM least-privilege, S3 public-access, evidence collection scripts</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c2d"><span class="sk"><span class="skt">API / web: work through APIsec University plus PortSwigger labs</span><span class="sub">→ OWASP API Top 10, Burp Suite, auth flaws, injection, broken access control</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Build one script that checks a real control against a live cloud API. That script is the seed of the whole offer.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span>Vanta's automation playbook (Lane A) or APIsec University (Lane B).</span></div>
+        </div>
+      </div>
+
+      <div class="stage" data-stage="3">
+        <div class="sh"><span class="sn">3</span><span class="st">First clients</span><span class="lv">Month 4–6</span><span class="cnt" data-cnt>0/3</span></div>
+        <ul class="skills">
+          <li><label><input type="checkbox" data-id="c3a"><span class="sk"><span class="skt">Run 2–3 free reviews for people in your network</span><span class="sub">→ scope the review, run the checks, write a findings report, advise fixes</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c3b"><span class="sk"><span class="skt">Turn each into a written case study with before and after</span><span class="sub">→ problem, what you did, measurable result, a quote from the client</span></span></label></li>
+          <li><label><input type="checkbox" data-id="c3c"><span class="sk"><span class="skt">Convert the third and fourth into paid $2K–5K engagements</span><span class="sub">→ proposal, fixed price, then a monthly monitoring retainer</span></span></label></li>
+        </ul>
+        <div class="do">
+          <div class="row"><span class="tag a">Do this</span><span>Quote three real prospects at these numbers before you build one more thing.</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span>Security consulting sells on trust and referral. Your fastest first client is a warm intro.</span></div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="sec" id="p2-resources">
+      <div class="eyebrow">06 · Where to learn it</div>
+      <h3>Best resources, mostly free</h3>
+      <p>Pick your lane, then work one resource at a time. Do not collect them.</p>
+      <div class="res">
+        <div class="grp">
+          <div class="gh">Foundation · light, part-time</div>
+          <a class="rl" href="https://www.professormesser.com/security-plus/sy0-701/sy0-701-training-course/" target="_blank" rel="noopener"><span><span class="rn">Professor Messer, Security+ SY0-701</span><span class="rd">The free, complete video series. The vocabulary of security. Add the exam only if a client asks.</span></span><span class="rt">Free · 6–8 wks</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">Lane A · Compliance automation (your strongest wedge)</div>
+          <a class="rl" href="https://www.vanta.com" target="_blank" rel="noopener"><span><span class="rn">Vanta: automate SOC 2 &amp; ISO 27001</span><span class="rd">See exactly what you will automate, then undercut it. The market leader's playbook, free.</span></span><span class="rt">Free · intro</span></a>
+          <a class="rl" href="https://secureframe.com/hub/soc-2/trust-services-criteria" target="_blank" rel="noopener"><span><span class="rn">SOC 2 Trust Services Criteria + ISO 27001 Annex A</span><span class="rd">The actual control lists you turn into scripts. This is the checklist.</span></span><span class="rt">Free · core</span></a>
+          <a class="rl" href="http://flaws2.cloud" target="_blank" rel="noopener"><span><span class="rn">flaws2.cloud + CloudGoat</span><span class="rd">Hands-on AWS security labs. Where compliance evidence lives: IAM, MFA, S3, access.</span></span><span class="rt">Free · weekends</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">Lane B · API &amp; web security (rides skills you have)</div>
+          <a class="rl" href="https://university.apisec.ai/" target="_blank" rel="noopener"><span><span class="rn">APIsec University, API Penetration Testing</span><span class="rd">Free course and cert, built for your background. The best free on-ramp.</span></span><span class="rt">Free · beginner</span></a>
+          <a class="rl" href="https://portswigger.net/web-security" target="_blank" rel="noopener"><span><span class="rn">PortSwigger Web Security Academy</span><span class="rd">The gold standard for web AppSec, from the makers of Burp Suite. Free forever.</span></span><span class="rt">Free · all levels</span></a>
+          <a class="rl" href="https://www.offsec.com/courses/pen-200/" target="_blank" rel="noopener"><span><span class="rn">Certs: eJPT, then OSCP</span><span class="rd">eJPT (~$200) as a cheap proof point. OSCP (~$1,700) only once you know you will use it.</span></span><span class="rt">Paid · later</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="p2-trap">
+      <div class="eyebrow">07 · The trap</div>
+      <h3>The advice that would waste a year</h3>
+      <p class="lead">The generic path is "get Security+, become a SOC analyst, work up." For you that is a downgrade.</p>
+      <p>It drops you into the one part of the market that is flooded, caps your income on a salary, and throws away the automation edge that makes you rare. The whole point is that you do not need the junior job. You sell the senior, cloud, and AI-adjacent work the market is short on, wrapped around skills you already have. <b>Security is the wrapper. Automation is the leverage.</b> Agents are the tier clients pay 30 to 50 percent more for. Build the spine on the Automation page, then bolt security on as a premium layer, not a reset button.</p>
+    </section>
+
+    <div class="pfoot"><b>Next move:</b> pick the first lane, compliance automation, and build one script that pulls evidence from a cloud API (start with GitHub or AWS). That single script is the seed of the whole offer.</div>
+  </div>
+
+  <!-- ===================== DATABASES ===================== -->
+  <div class="page" id="page-databases">
+    <div class="phead">
+      <button class="back" data-goto="home">← All pages</button>
+      <div class="pn">Page 03 · The Craft</div>
+      <h2>Databases</h2>
+      <p class="pd">You already know the mechanics. This is the judgment layer: the eight decisions that keep a database from losing trust, money, or a client at the worst moment.</p>
+      <div class="subnav">
+        <a href="#p3-laws" class="jump">The eight laws</a>
+        <a href="#p3-remember" class="jump">Short version</a>
+        <a href="#p3-roadmap" class="jump">Roadmap</a>
+        <a href="#p3-resources" class="jump">Resources</a>
+      </div>
+    </div>
+
+    <section class="sec" id="p3-laws">
+      <div class="eyebrow">01 · The eight laws</div>
+      <h3>What actually matters about databases</h3>
+      <p>Your apps are ledgers: a fiado balance, a client's revenue, a payment record. The database is the product's promise. Get it right and "your data is safe and correct" becomes a real selling point for high-ticket work.</p>
+      <div class="laws">
+        <div class="law"><span class="ln">1</span><div><h4>Choose the boring database</h4><div class="one">Default to Postgres. Reach for anything else only when a real constraint forces you.</div><p>It does relational, JSON, full text, geospatial, and vector in one engine you already know, and Supabase gives it to you managed. Snowflake and BigQuery are for analytics, never the live app. Redis is a layer, not a home. A second database type triples your failure modes, so earn that cost.</p></div></div>
+        <div class="law"><span class="ln">2</span><div><h4>Model for how you read</h4><div class="one">Normalize until it hurts, then denormalize until it works.</div><p>Start normalized so writes stay correct, then denormalize only a proven hot path. Use stable surrogate keys, and put real foreign keys and constraints in the schema. And never store money as <code>float</code>: use <code>numeric</code> or integer cents, or rounding will bite a fiado balance.</p></div></div>
+        <div class="law"><span class="ln">3</span><div><h4>Indexes are the line between fast and dead</h4><div class="one">Index what you filter, join, and sort by. Nothing else.</div><p>A missing index is why an app that felt instant at 100 rows crawls at 100,000. But every index slows writes, so do not index everything. Read the plan instead of guessing.</p>
+          <pre><span class="k">EXPLAIN ANALYZE</span> <span class="k">SELECT</span> * <span class="k">FROM</span> ledger_entries
+<span class="k">WHERE</span> vendor_id = 42 <span class="k">AND</span> created_at &gt; now() - interval '30 days';
+<span class="c">-- Seq Scan under a filter = your signal to add an index.</span></pre></div></div>
+        <div class="law"><span class="ln">4</span><div><h4>Transactions are how you keep promises</h4><div class="one">If two facts must both be true or both false, they belong in one transaction.</div><p>Recording a payment and lowering a balance are one atomic act, never two hopeful writes. Then know your isolation level: the default lets two requests read a balance and clobber each other. Under real concurrency, raise isolation or take <code>SELECT ... FOR UPDATE</code>. Keep transactions short, and never hold one open across an external API call.</p></div></div>
+        <div class="law"><span class="ln">5</span><div><h4>Migrate without downtime</h4><div class="one">Every schema change is a migration in version control, run by a tool.</div><p>On a live table, expand then contract: add the new column, backfill in batches, ship code that writes both and reads the new, then drop the old later. Never rename or drop in the deploy that stops using it. A dropped column is gone except from backup.</p></div></div>
+        <div class="law"><span class="ln">6</span><div><h4>Assume the client is hostile</h4><div class="one">The database enforces who sees what. The frontend is a suggestion.</div><p>On Supabase this is the lesson: the moment a database is reachable from a browser, Row-Level Security is the wall. Add least privilege, keep secrets out of the bundle, parameterize every query, and use TLS.</p>
+          <pre><span class="k">ALTER TABLE</span> ledger_entries <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+<span class="k">CREATE POLICY</span> "owner reads own rows" <span class="k">ON</span> ledger_entries
+  <span class="k">FOR SELECT USING</span> (vendor_id = auth.uid());</pre></div></div>
+        <div class="law"><span class="ln">7</span><div><h4>Scale in the right order</h4><div class="one">Most scaling problems are a missing index wearing a costume.</div><p>Walk the ladder and stop when the pain stops: fix the index and query, add connection pooling, then a cache, then read replicas, and only at real scale, partition or shard. On scan-priced warehouses, partition and select columns explicitly, because <code>SELECT *</code> over a wide table is a literal invoice.</p></div></div>
+        <div class="law"><span class="ln">8</span><div><h4>A backup you have never restored is a rumor</h4><div class="one">You do not have backups until you have restored one and watched it work.</div><p>Turn on point-in-time recovery, then actually restore into a scratch environment. Monitor slow queries, connections, replication lag, and disk, and alert before disk fills, because a Postgres that cannot write is an outage.</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p3-remember">
+      <div class="eyebrow">02 · The short version</div>
+      <h3>If you remember nothing else</h3>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>Default to Postgres.</b> Add another engine only when a real constraint forces it.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Let the database enforce your rules.</b> Constraints, foreign keys, and RLS beat every app-layer check.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Read <code>EXPLAIN ANALYZE</code> before optimizing.</b> Most slowness is one missing index.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>Money and correctness live in transactions.</b> Know your isolation level before load finds it.</span></div>
+        <div class="st"><span class="n">05</span><span class="c"><b>Migrate expand-then-contract.</b> Never drop in the deploy that stops using it.</span></div>
+        <div class="st"><span class="n">06</span><span class="c"><b>Test a restore.</b> Untested backups are not backups.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p3-roadmap">
+      <div class="eyebrow">03 · The roadmap</div>
+      <h3>Learn it in order, hands-on</h3>
+      <p class="lead">The eight laws are the what. This is the how: five stages that take you from writing SQL to running a database you can trust with money.</p>
+      <p>Every "Do this" uses Sycosmart, so you learn on your real app. Check steps off as you go; this path saves its own progress in your browser.</p>
+      <div class="progcard" data-scope="rm-databases">
+        <div class="pt"><span>DATABASE PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div>
+        <div class="bar"><i class="pbar"></i></div>
+      </div>
+      <div id="rm-databases">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">SQL &amp; modeling</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="db1a"><span class="sk"><span class="skt">SQL core: read and write data</span><span class="sub">→ SELECT / INSERT / UPDATE / DELETE, WHERE, ORDER BY, LIMIT</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db1b"><span class="sk"><span class="skt">Joins &amp; aggregation</span><span class="sub">→ INNER / LEFT JOIN, GROUP BY, HAVING, subqueries, CTEs</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db1c"><span class="sk"><span class="skt">Schema &amp; keys</span><span class="sub">→ data types, primary &amp; foreign keys, NOT NULL / UNIQUE, defaults</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db1d"><span class="sk"><span class="skt">Normalization</span><span class="sub">→ 1NF / 2NF / 3NF, and when to denormalize on purpose</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Model Sycosmart's fiado schema with real foreign keys and constraints, not just loose tables.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>SQLBolt (interactive), then the PostgreSQL Tutorial.</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">Performance &amp; indexing</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="db2a"><span class="sk"><span class="skt">Indexes: the line between fast and dead</span><span class="sub">→ B-tree, composite, covering, selectivity, when NOT to index</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db2b"><span class="sk"><span class="skt">Read the query plan</span><span class="sub">→ EXPLAIN ANALYZE, Seq Scan vs Index Scan, row estimates</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db2c"><span class="sk"><span class="skt">Query tuning</span><span class="sub">→ fix N+1, select only needed columns, keyset pagination</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Run <code>EXPLAIN ANALYZE</code> on your three slowest Sycosmart queries and add one composite index.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>Use The Index, Luke (the definitive free guide to indexing).</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">Transactions &amp; integrity</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="db3a"><span class="sk"><span class="skt">Transactions</span><span class="sub">→ BEGIN / COMMIT / ROLLBACK, ACID, atomic writes</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db3b"><span class="sk"><span class="skt">Isolation &amp; locks</span><span class="sub">→ READ COMMITTED, SELECT ... FOR UPDATE, race conditions</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db3c"><span class="sk"><span class="skt">Money &amp; types</span><span class="sub">→ numeric vs float, integer cents, CHECK constraints as rules</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Wrap a payment insert and the balance update in one transaction, so a crash can never split them.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>PostgreSQL docs on transactions and MVCC.</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">Security on Supabase</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="db4a"><span class="sk"><span class="skt">Row-Level Security</span><span class="sub">→ ENABLE RLS, policies, auth.uid(), per-tenant isolation</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db4b"><span class="sk"><span class="skt">Least privilege</span><span class="sub">→ roles &amp; grants, anon vs service key, no secrets in the frontend</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db4c"><span class="sk"><span class="skt">Safe queries</span><span class="sub">→ parameterized queries, input validation, TLS in transit</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Enable RLS on every Sycosmart table, then confirm a logged-in user cannot read another user's rows.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>Supabase Row-Level Security docs, and the OWASP Top 10.</span></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="5">
+          <div class="sh"><span class="sn">5</span><span class="st">Migrations, scale &amp; backups</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="db5a"><span class="sk"><span class="skt">Migrations without downtime</span><span class="sub">→ version-controlled, expand-then-contract, lock-aware ALTERs</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db5b"><span class="sk"><span class="skt">Scaling in order</span><span class="sub">→ connection pooling, caching, read replicas, partitioning</span></span></label></li>
+            <li><label><input type="checkbox" data-id="db5c"><span class="sk"><span class="skt">Backups &amp; monitoring</span><span class="sub">→ point-in-time recovery, tested restores, disk &amp; slow-query alerts</span></span></label></li>
+          </ul>
+          <div class="do">
+            <div class="row"><span class="tag a">Do this</span><span>Run a real restore into a scratch database and confirm the data comes back whole. Now you have backups.</span></div>
+            <div class="row"><span class="tag b">Go deep</span><span>Supabase backups, and the PostgreSQL high-availability docs.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="p3-resources">
+      <div class="eyebrow">04 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <p>Mostly free, and enough on their own. Work one per stage.</p>
+      <div class="res">
+        <div class="grp">
+          <div class="gh">SQL &amp; modeling</div>
+          <a class="rl" href="https://sqlbolt.com" target="_blank" rel="noopener"><span><span class="rn">SQLBolt</span><span class="rd">Learn SQL in the browser, one short interactive exercise at a time.</span></span><span class="rt">Free · interactive</span></a>
+          <a class="rl" href="https://www.postgresqltutorial.com" target="_blank" rel="noopener"><span><span class="rn">PostgreSQL Tutorial</span><span class="rd">Practical, example-driven Postgres from basics to advanced.</span></span><span class="rt">Free · tutorial</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">Performance</div>
+          <a class="rl" href="https://use-the-index-luke.com" target="_blank" rel="noopener"><span><span class="rn">Use The Index, Luke</span><span class="rd">The definitive free guide to database indexing and query performance.</span></span><span class="rt">Free · book</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">Security &amp; platform</div>
+          <a class="rl" href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener"><span><span class="rn">Supabase, Row-Level Security</span><span class="rd">The exact wall your app needs. Policies, auth.uid(), examples.</span></span><span class="rt">Free · docs</span></a>
+          <a class="rl" href="https://www.postgresql.org/docs/" target="_blank" rel="noopener"><span><span class="rn">PostgreSQL official documentation</span><span class="rd">The source of truth for transactions, indexing, and everything else.</span></span><span class="rt">Free · reference</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="pfoot"><b>Next move:</b> run <code>EXPLAIN ANALYZE</code> on Sycosmart's three heaviest queries and turn on RLS. One hour, real payoff.</div>
+  </div>
+
+  <!-- ===================== ROADMAPS HUB ===================== -->
+  <div class="page" id="page-roadmaps">
+    <div class="phead">
+      <button class="back" data-goto="home">← Dashboard</button>
+      <div class="pn">Learning roadmaps</div>
+      <h2>Pick a domain</h2>
+      <p class="pd">Phase-based paths in learning order, each with sub-concepts, resources, and checkable progress. Your focus domains, plus the craft and career pages.</p>
+    </div>
+    <div class="cards" style="margin-top:24px">
+      <button class="tcard" data-goto="automation"><div class="pn">Domain</div><h3>Automation Engineering</h3><p>The spine: Python, APIs, n8n, Docker, plus a deep-dive into AI agents.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="genai"><div class="pn">Domain</div><h3>Generative AI</h3><p>LLMs, prompt engineering, LangChain, RAG, and agents. The premium upsell.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="cloud"><div class="pn">Domain</div><h3>Cloud Engineering</h3><p>What cloud is, deploy at scale, AWS certs. The step up from your VPS.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="cybersecurity"><div class="pn">Domain</div><h3>Security &amp; Secure Coding</h3><p>Secure the software you build, plus the optional high-ticket service.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="data"><div class="pn">Domain</div><h3>Data Analytics</h3><p>SQL, Python, dashboards, and stats. Turn data into decisions.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="databases"><div class="pn">Craft</div><h3>Databases</h3><p>The eight laws plus a five-stage path from SQL to trusted-with-money.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="shift"><div class="pn">Essay</div><h3>AI &amp; Your Career</h3><p>Has AI killed coding? What to focus on, and which engineer to be.</p><div class="go">Open →</div></button>
+    </div>
+  </div>
+
+  <!-- ===================== CLOUD ===================== -->
+  <div class="page" id="page-cloud">
+    <div class="phead">
+      <button class="back" data-goto="roadmaps">← Roadmaps</button>
+      <div class="pn">Domain · Cloud</div>
+      <h2>Cloud Engineering</h2>
+      <p class="pd">The step up from your VPS: run systems at client scale, with certs that pay.</p>
+      <div class="subnav">
+        <a href="#cl-what" class="jump">What it is</a>
+        <a href="#cl-road" class="jump">Roadmap</a>
+        <a href="#cl-res" class="jump">Resources</a>
+      </div>
+    </div>
+
+    <section class="sec" id="cl-what">
+      <div class="eyebrow">01 · First, what is it</div>
+      <h3>Cloud computing vs cloud engineering</h3>
+      <p class="lead">Cloud computing is renting computers, storage, and databases over the internet instead of owning them. Cloud engineering is the job of designing and running systems on it.</p>
+      <p>You already self-host on a VPS with Docker, so this is not a new world, it is the next step up: the same instincts at client scale, with managed services that do the hard parts and certificates that raise your rate. <b>Should you learn it? Yes, the fundamentals.</b> You do not need to become a full-time cloud engineer. You need enough to deploy, scale, and secure what you build, and one cert to prove it.</p>
+      <div class="mnote"><span class="label">Why it pays</span>AWS-certified engineers earn noticeably more than uncertified peers, and there are tens of thousands of open cloud roles at any time. For you it is leverage: host client systems reliably instead of on a single fragile server.</div>
+    </section>
+
+    <section class="sec" id="cl-road">
+      <div class="eyebrow">02 · The roadmap</div>
+      <h3>Learn it in order</h3>
+      <p>Pick one provider (AWS is the safe default) and go deep. Check off as you go; this path saves its own progress.</p>
+      <div class="progcard" data-scope="rm-cloud"><div class="pt"><span>CLOUD PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
+      <div id="rm-cloud">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">Cloud fundamentals</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="cl1a"><span class="sk"><span class="skt">What cloud actually is</span><span class="sub">→ IaaS / PaaS / SaaS, on-demand, pay-as-you-go, shared responsibility model</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl1b"><span class="sk"><span class="skt">The big three &amp; how they're laid out</span><span class="sub">→ AWS / Azure / Google Cloud, regions &amp; availability zones</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl1c"><span class="sk"><span class="skt">Accounts &amp; billing (do not skip)</span><span class="sub">→ free tier, budgets &amp; alerts, the cost of leaving things running</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open an AWS free-tier account, set a billing alert, then launch and stop one server.</span></div><div class="row"><span class="tag b">Go deep</span><span>AWS Cloud Practitioner Essentials (free).</span></div></div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">Core building blocks</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="cl2a"><span class="sk"><span class="skt">Compute</span><span class="sub">→ EC2 / virtual machines, instance types, containers, serverless (Lambda)</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl2b"><span class="sk"><span class="skt">Storage</span><span class="sub">→ S3 / object storage, block vs object, buckets &amp; access control</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl2c"><span class="sk"><span class="skt">Networking</span><span class="sub">→ VPC, subnets, security groups, DNS, load balancer</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl2d"><span class="sk"><span class="skt">Identity (IAM)</span><span class="sub">→ users / roles / policies, least privilege, access keys</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Host a static site on S3 and put a small API on a Lambda function.</span></div><div class="row"><span class="tag b">Go deep</span><span>AWS Skill Builder, and freeCodeCamp's AWS course.</span></div></div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">Deploy &amp; operate</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="cl3a"><span class="sk"><span class="skt">Containers in the cloud</span><span class="sub">→ push an image, run it on ECS / Cloud Run</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl3b"><span class="sk"><span class="skt">CI/CD</span><span class="sub">→ build &amp; deploy pipeline with GitHub Actions</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl3c"><span class="sk"><span class="skt">Config &amp; secrets</span><span class="sub">→ env vars, Secrets Manager / Parameter Store</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl3d"><span class="sk"><span class="skt">Monitoring</span><span class="sub">→ CloudWatch, logs, alarms to your phone</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Deploy your n8n stack to a cloud VM or container service, with failure alerts.</span></div><div class="row"><span class="tag b">Go deep</span><span>Docker plus cloud deployment guides.</span></div></div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">Scale, cost &amp; security</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="cl4a"><span class="sk"><span class="skt">Scale</span><span class="sub">→ autoscaling, load balancing, managed databases (RDS)</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl4b"><span class="sk"><span class="skt">Reliability</span><span class="sub">→ backups, multi-AZ, health checks</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl4c"><span class="sk"><span class="skt">Cost control</span><span class="sub">→ right-sizing, budgets, turning off idle resources</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl4d"><span class="sk"><span class="skt">Security</span><span class="sub">→ security groups, encryption, least privilege, no public buckets</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Put a load balancer and autoscaling in front of one app, and set a hard monthly budget.</span></div><div class="row"><span class="tag b">Go deep</span><span>AWS Well-Architected basics.</span></div></div>
+        </div>
+        <div class="stage" data-stage="5">
+          <div class="sh"><span class="sn">5</span><span class="st">Certify</span><span class="lv">Proof</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="cl5a"><span class="sk"><span class="skt">AWS Certified Cloud Practitioner</span><span class="sub">→ foundational, about $100, start here</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl5b"><span class="sk"><span class="skt">AWS Solutions Architect Associate</span><span class="sub">→ about $150, the resume-mover</span></span></label></li>
+            <li><label><input type="checkbox" data-id="cl5c"><span class="sk"><span class="skt">Log it in your Certs tracker</span><span class="sub">→ cost, exam date, study progress</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Book the Cloud Practitioner exam once you can explain stages 1 to 4 in plain words.</span></div><div class="row"><span class="tag b">Go deep</span><span>AWS official exam guides.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="cl-res">
+      <div class="eyebrow">03 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">Start free · AWS</div>
+          <a class="rl" href="https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/" target="_blank" rel="noopener"><span><span class="rn">AWS Cloud Practitioner Essentials</span><span class="rd">The official free foundations course. Your on-ramp and cert prep.</span></span><span class="rt">Free · official</span></a>
+          <a class="rl" href="https://skillbuilder.aws" target="_blank" rel="noopener"><span><span class="rn">AWS Skill Builder</span><span class="rd">Official hands-on labs and learning plans for every service.</span></span><span class="rt">Free · official</span></a>
+          <a class="rl" href="https://roadmap.sh/aws" target="_blank" rel="noopener"><span><span class="rn">roadmap.sh, AWS</span><span class="rd">A visual, ordered map of what to learn on AWS.</span></span><span class="rt">Free · map</span></a>
+        </div>
+        <div class="grp"><div class="gh">Other providers</div>
+          <a class="rl" href="https://www.cloudskillsboost.google" target="_blank" rel="noopener"><span><span class="rn">Google Cloud Skills Boost</span><span class="rd">Official Google Cloud labs and paths.</span></span><span class="rt">Free · official</span></a>
+          <a class="rl" href="https://learn.microsoft.com/training/azure/" target="_blank" rel="noopener"><span><span class="rn">Microsoft Learn, Azure</span><span class="rd">Official Azure training, including AZ-900 fundamentals.</span></span><span class="rt">Free · official</span></a>
+        </div>
+      </div>
+    </section>
+    <div class="pfoot"><b>Next move:</b> open a free-tier AWS account today, set a billing alert, and move one small project off your VPS. That single step is 60% of the Cloud Practitioner exam.</div>
+  </div>
+
+  <!-- ===================== GENERATIVE AI ===================== -->
+  <div class="page" id="page-genai">
+    <div class="phead">
+      <button class="back" data-goto="roadmaps">← Roadmaps</button>
+      <div class="pn">Domain · Generative AI</div>
+      <h2>Generative AI</h2>
+      <p class="pd">The premium layer you upsell inside automations. LLMs, prompting, RAG, and agents.</p>
+      <div class="subnav">
+        <a href="#ai-road" class="jump">Roadmap</a>
+        <a href="#ai-res" class="jump">Resources</a>
+      </div>
+    </div>
+    <section class="sec" id="ai-road">
+      <div class="eyebrow">01 · The roadmap</div>
+      <h3>From LLM calls to agents that earn</h3>
+      <p class="lead">Learn to make a model do reliable, useful work, then wrap it in an automation a client pays for.</p>
+      <p>Stage 4 links to the Automation page's deep-dive, where the agent build lives. Check off as you go; this path saves its own progress.</p>
+      <div class="progcard" data-scope="rm-genai"><div class="pt"><span>GENERATIVE AI PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
+      <div id="rm-genai">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">LLM foundations</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ai1a"><span class="sk"><span class="skt">What an LLM is, and its limits</span><span class="sub">→ tokens, context window, temperature, why it hallucinates</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai1b"><span class="sk"><span class="skt">Choosing a model</span><span class="sub">→ Claude / GPT / Gemini, cost vs quality, open vs closed</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai1c"><span class="sk"><span class="skt">Calling the API</span><span class="sub">→ messages, system vs user, JSON / structured output</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Call the Claude API and get clean, schema-valid JSON back from a real prompt.</span></div><div class="row"><span class="tag b">Go deep</span><span>Anthropic docs, and DeepLearning.AI's Prompt Engineering course.</span></div></div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">Prompt engineering</span><span class="lv">Core</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ai2a"><span class="sk"><span class="skt">Prompt structure</span><span class="sub">→ system prompt, few-shot examples, chain-of-thought</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai2b"><span class="sk"><span class="skt">Reliability</span><span class="sub">→ output schemas, guardrails, simple evals</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai2c"><span class="sk"><span class="skt">Reusable templates</span><span class="sub">→ variables, versioning, testing prompts</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build one prompt template that classifies or extracts, and test it on 10 real inputs.</span></div><div class="row"><span class="tag b">Go deep</span><span>Anthropic's prompt engineering guide.</span></div></div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">LangChain &amp; RAG</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ai3a"><span class="sk"><span class="skt">LangChain basics</span><span class="sub">→ chains, prompts, models, output parsers</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai3b"><span class="sk"><span class="skt">Embeddings &amp; vector DB</span><span class="sub">→ chunking, pgvector / Pinecone, similarity search</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai3c"><span class="sk"><span class="skt">RAG</span><span class="sub">→ retrieve, ground the answer in your data, cite sources</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a RAG bot over your own notes so it answers from your data, not guesses.</span></div><div class="row"><span class="tag b">Go deep</span><span>LangChain RAG tutorial, DeepLearning.AI LangChain course.</span></div></div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">AI agents in workflows</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ai4a"><span class="sk"><span class="skt">Tool calling &amp; agents</span><span class="sub">→ let the model act across tools; the Thought-Action-Observation loop</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai4b"><span class="sk"><span class="skt">Agents inside n8n</span><span class="sub">→ the AI Agent node, the premium upsell on an automation</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai4c"><span class="sk"><span class="skt">Production</span><span class="sub">→ memory, evals, guardrails, cost control</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Add an AI agent step to a real n8n automation. The full build lives on the Automation page.</span></div><div class="row"><span class="tag b">Go deep</span><span><button class="linklike" data-goto="automation">Automation → Go deeper: AI agents</button>.</span></div></div>
+        </div>
+        <div class="stage" data-stage="5">
+          <div class="sh"><span class="sn">5</span><span class="st">Certify</span><span class="lv">Proof</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="ai5a"><span class="sk"><span class="skt">Google Cloud Generative AI Leader</span><span class="sub">→ foundational GenAI cert, launched 2025</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai5b"><span class="sk"><span class="skt">AWS AI Practitioner / GenAI Developer</span><span class="sub">→ validates building with foundation models, RAG, vector DBs</span></span></label></li>
+            <li><label><input type="checkbox" data-id="ai5c"><span class="sk"><span class="skt">Log it in your Certs tracker</span><span class="sub">→ pick one, schedule it, track progress</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Pick one cert and put a date on it in the Certs tracker.</span></div><div class="row"><span class="tag b">Go deep</span><span>Google Cloud GenAI training, AWS AI certifications.</span></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="sec" id="ai-res">
+      <div class="eyebrow">02 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">Fundamentals &amp; prompting</div>
+          <a class="rl" href="https://docs.anthropic.com" target="_blank" rel="noopener"><span><span class="rn">Anthropic documentation</span><span class="rd">Structured output, tool use, and the prompt engineering guide.</span></span><span class="rt">Free · docs</span></a>
+          <a class="rl" href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank" rel="noopener"><span><span class="rn">DeepLearning.AI, Prompt Engineering for Developers</span><span class="rd">The classic first course, taught by Andrew Ng.</span></span><span class="rt">Free · course</span></a>
+        </div>
+        <div class="grp"><div class="gh">LangChain, RAG &amp; agents</div>
+          <a class="rl" href="https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/" target="_blank" rel="noopener"><span><span class="rn">DeepLearning.AI, LangChain for LLM App Dev</span><span class="rd">Build real LLM apps with chains and memory.</span></span><span class="rt">Free · course</span></a>
+          <a class="rl" href="https://python.langchain.com/docs/tutorials/rag/" target="_blank" rel="noopener"><span><span class="rn">LangChain, RAG tutorial</span><span class="rd">Embed, retrieve, and answer from your own documents.</span></span><span class="rt">Free · tutorial</span></a>
+          <a class="rl" href="https://huggingface.co/learn/agents-course" target="_blank" rel="noopener"><span><span class="rn">Hugging Face AI Agents Course</span><span class="rd">Fundamentals through frameworks, with free certificates.</span></span><span class="rt">Free · certified</span></a>
+        </div>
+        <div class="grp"><div class="gh">Certifications</div>
+          <a class="rl" href="https://cloud.google.com/learn/certification/generative-ai-leader" target="_blank" rel="noopener"><span><span class="rn">Google Cloud, Generative AI Leader</span><span class="rd">The official foundational GenAI certification.</span></span><span class="rt">Cert · official</span></a>
+        </div>
+      </div>
+    </section>
+    <div class="pfoot"><b>Next move:</b> get one clean JSON response out of the Claude API today, then wire it into an existing n8n workflow. That is the whole premium upsell in miniature.</div>
+  </div>
+
+  <!-- ===================== DATA ANALYTICS ===================== -->
+  <div class="page" id="page-data">
+    <div class="phead">
+      <button class="back" data-goto="roadmaps">← Roadmaps</button>
+      <div class="pn">Domain · Data</div>
+      <h2>Data Analytics</h2>
+      <p class="pd">Turn raw data into decisions clients pay for. You are already a data engineer; this is the analyst layer on top.</p>
+      <div class="subnav">
+        <a href="#da-road" class="jump">Roadmap</a>
+        <a href="#da-res" class="jump">Resources</a>
+      </div>
+    </div>
+    <section class="sec" id="da-road">
+      <div class="eyebrow">01 · The roadmap</div>
+      <h3>From clean data to decisions</h3>
+      <p class="lead">Analytics is asking the right question, answering it with data, and telling the story so someone acts.</p>
+      <p>Every "Do this" uses Sycosmart. Check off as you go; this path saves its own progress.</p>
+      <div class="progcard" data-scope="rm-data"><div class="pt"><span>DATA ANALYTICS PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
+      <div id="rm-data">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">Spreadsheets &amp; data thinking</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="da1a"><span class="sk"><span class="skt">Clean data</span><span class="sub">→ dedupe, fix types, handle missing values, consistent formats</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da1b"><span class="sk"><span class="skt">Spreadsheets</span><span class="sub">→ formulas, pivot tables, VLOOKUP / XLOOKUP</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da1c"><span class="sk"><span class="skt">Ask the right question</span><span class="sub">→ define the metric, know what decision it drives</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Turn a messy Sycosmart export into one clean pivot table with a real insight.</span></div><div class="row"><span class="tag b">Go deep</span><span>Google Data Analytics Certificate, courses 1 to 2.</span></div></div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">SQL for analysis</span><span class="lv">Core</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="da2a"><span class="sk"><span class="skt">Query</span><span class="sub">→ SELECT, WHERE, ORDER BY, GROUP BY, HAVING</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da2b"><span class="sk"><span class="skt">Joins &amp; subqueries</span><span class="sub">→ combine tables, CTEs</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da2c"><span class="sk"><span class="skt">Analytics SQL</span><span class="sub">→ window functions, cohorts, running totals</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Answer three real business questions about Sycosmart in SQL.</span></div><div class="row"><span class="tag b">Go deep</span><span>SQLBolt, then the Mode SQL tutorial.</span></div></div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">Python for data</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="da3a"><span class="sk"><span class="skt">Pandas</span><span class="sub">→ dataframes, cleaning, groupby, merge</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da3b"><span class="sk"><span class="skt">Exploratory analysis</span><span class="sub">→ distributions, correlations, outliers</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da3c"><span class="sk"><span class="skt">Plotting</span><span class="sub">→ matplotlib / plotly basics</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Load a dataset in Pandas, clean it, and chart one clear finding.</span></div><div class="row"><span class="tag b">Go deep</span><span>Kaggle Learn, Pandas and Data Cleaning micro-courses.</span></div></div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">Visualization &amp; BI</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="da4a"><span class="sk"><span class="skt">BI tools</span><span class="sub">→ Tableau or Power BI, connect data, build a dashboard</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da4b"><span class="sk"><span class="skt">Storytelling</span><span class="sub">→ the one chart that makes the point, clear labels, no clutter</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da4c"><span class="sk"><span class="skt">Share it</span><span class="sub">→ publish a dashboard stakeholders actually use</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a Tableau or Power BI dashboard for one real Sycosmart metric and share the link.</span></div><div class="row"><span class="tag b">Go deep</span><span>Tableau Public, and the Google cert's Tableau course.</span></div></div>
+        </div>
+        <div class="stage" data-stage="5">
+          <div class="sh"><span class="sn">5</span><span class="st">Stats &amp; decisions</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="da5a"><span class="sk"><span class="skt">Descriptive stats</span><span class="sub">→ mean / median, variance, percentiles</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da5b"><span class="sk"><span class="skt">Testing</span><span class="sub">→ A/B basics, significance, sample size</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da5c"><span class="sk"><span class="skt">KPIs</span><span class="sub">→ define them, track them, act on them</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Define three KPIs for a business and exactly how you would measure each.</span></div><div class="row"><span class="tag b">Go deep</span><span>Google Advanced Data Analytics Certificate.</span></div></div>
+        </div>
+        <div class="stage" data-stage="6">
+          <div class="sh"><span class="sn">6</span><span class="st">Certify</span><span class="lv">Proof</span><span class="cnt" data-cnt>0/2</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="da6a"><span class="sk"><span class="skt">Google Data Analytics Professional Certificate</span><span class="sub">→ the standard entry cert, ~180 hours, on Coursera</span></span></label></li>
+            <li><label><input type="checkbox" data-id="da6b"><span class="sk"><span class="skt">Log it in your Certs tracker</span><span class="sub">→ cost, status, target date</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Enroll (free trial) and finish course 1 this month.</span></div><div class="row"><span class="tag b">Go deep</span><span>Coursera, Google Data Analytics.</span></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="sec" id="da-res">
+      <div class="eyebrow">02 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">The core cert</div>
+          <a class="rl" href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener"><span><span class="rn">Google Data Analytics Professional Certificate</span><span class="rd">Spreadsheets, SQL, Tableau, and R, from zero. The standard starting point.</span></span><span class="rt">Cert · Coursera</span></a>
+        </div>
+        <div class="grp"><div class="gh">SQL &amp; Python</div>
+          <a class="rl" href="https://sqlbolt.com" target="_blank" rel="noopener"><span><span class="rn">SQLBolt</span><span class="rd">Interactive SQL in the browser.</span></span><span class="rt">Free · interactive</span></a>
+          <a class="rl" href="https://mode.com/sql-tutorial/" target="_blank" rel="noopener"><span><span class="rn">Mode SQL Tutorial</span><span class="rd">SQL for analysis, from basic to advanced, with a real warehouse feel.</span></span><span class="rt">Free · tutorial</span></a>
+          <a class="rl" href="https://www.kaggle.com/learn" target="_blank" rel="noopener"><span><span class="rn">Kaggle Learn</span><span class="rd">Short, hands-on Pandas, data cleaning, and visualization courses.</span></span><span class="rt">Free · hands-on</span></a>
+        </div>
+        <div class="grp"><div class="gh">Visualization</div>
+          <a class="rl" href="https://public.tableau.com" target="_blank" rel="noopener"><span><span class="rn">Tableau Public</span><span class="rd">Free Tableau, plus thousands of dashboards to learn from.</span></span><span class="rt">Free · tool</span></a>
+        </div>
+      </div>
+    </section>
+    <div class="pfoot"><b>Next move:</b> answer one real Sycosmart question in SQL and turn it into a single clear chart. That is the whole job in one rep.</div>
+  </div>
+
+  <!-- ===================== THE SHIFT / CAREERS ===================== -->
+  <div class="page" id="page-shift">
+    <div class="phead">
+      <button class="back" data-goto="home">← All pages</button>
+      <div class="pn">Page 04 · The Shift</div>
+      <h2>Coding, AI, and what to become</h2>
+      <p class="pd">Has AI made coding obsolete? What the real data says, what to focus on now, and which kind of engineer to be.</p>
+      <div class="subnav">
+        <a href="#p4-truth" class="jump">Is it true?</a>
+        <a href="#p4-shift" class="jump">The real shift</a>
+        <a href="#p4-focus" class="jump">What to focus on</a>
+        <a href="#p4-identity" class="jump">Which engineer</a>
+        <a href="#p4-do" class="jump">What to do</a>
+        <a href="#p4-sources" class="jump">Sources</a>
+      </div>
+    </div>
+
+    <section class="sec" id="p4-truth">
+      <div class="eyebrow">01 · The claim</div>
+      <h3>Is it true that we won't code much anymore?</h3>
+      <p class="lead">Half true. The typing is being automated. The engineering is not, and demand for it is going up, not down.</p>
+      <p>AI now writes a lot of the boilerplate, so you spend less time on raw syntax. But you do not stop being an engineer. Every official source points the same way: more demand for people who build software, and it moves higher up the stack.</p>
+      <div class="stats">
+        <div class="stat"><div class="v">+15.8%</div><div class="d">U.S. software developer jobs, 2024 to 2034, "much faster than average." (BLS)</div></div>
+        <div class="stat"><div class="v">+57%</div><div class="d">Software &amp; app developers, among the fastest-growing roles to 2030. (WEF)</div></div>
+        <div class="stat"><div class="v">+143%</div><div class="d">AI engineer job postings year over year, the #1 fastest-growing role. (LinkedIn)</div></div>
+      </div>
+      <div class="mnote"><span class="label">The nuance that matters</span>The BLS is explicit: AI grows roles focused on software <b>design</b>, and squeezes roles focused on routine <b>production</b>. Translation: the person who only types code to spec loses ground. The person who decides what to build and checks that it is right pulls ahead.</div>
+    </section>
+
+    <section class="sec" id="p4-shift">
+      <div class="eyebrow">02 · The real shift</div>
+      <h3>From writing code to directing and verifying it</h3>
+      <p>What changed is where your value sits. AI drafts; you judge. The 2025 Stack Overflow survey of tens of thousands of developers makes it concrete:</p>
+      <div class="rows">
+        <div class="r"><span class="h">Developers using AI tools</span><span class="m">84%</span><span class="d">Up from 76% the year before. Nearly universal now.</span></div>
+        <div class="r"><span class="h">Who trust AI's accuracy</span><span class="m">29%</span><span class="d">Down from 40%. Adoption rose, trust fell.</span></div>
+        <div class="r"><span class="h">Frustrated by "almost right" code</span><span class="m">66%</span><span class="d">The single biggest complaint in the survey.</span></div>
+        <div class="r"><span class="h">Say debugging AI code takes longer</span><span class="m">45%</span><span class="d">AI moved the work, it did not remove it.</span></div>
+      </div>
+      <p>Read that carefully. AI writing code did not delete the work, it relocated it. The scarce, paid skill is now catching the "almost right", understanding the whole system, and being accountable for correctness and security. In the same survey, <b>61% of developers said they want to fully understand their code</b>, and they are right to.</p>
+    </section>
+
+    <section class="sec" id="p4-focus">
+      <div class="eyebrow">03 · What to focus on</div>
+      <h3>The skills that go up in value</h3>
+      <p>If AI does more of the typing, invest where it cannot be trusted to act alone. In rough priority for you:</p>
+      <div class="rows">
+        <div class="r"><span class="h">1 · System &amp; architecture design</span><span class="m">what to build</span><span class="d">Structure, tradeoffs, data flow. BLS says design-focused work is exactly what AI grows.</span></div>
+        <div class="r"><span class="h">2 · Reading, reviewing &amp; verifying code</span><span class="m">own correctness</span><span class="d">The scarce skill in an AI world. You are accountable for the "almost right" output.</span></div>
+        <div class="r"><span class="h">3 · Debugging &amp; testing</span><span class="m">prove it works</span><span class="d">Where AI-generated code fails, and the human still owns the fix.</span></div>
+        <div class="r"><span class="h">4 · AI &amp; agent engineering</span><span class="m">the frontier</span><span class="d">LLM APIs, tool-calling, RAG, agents. The fastest-growing role and skill set there is.</span></div>
+        <div class="r"><span class="h">5 · Security</span><span class="m">trust is the product</span><span class="d">A top-3 fastest-growing skill (WEF). Ties straight to your Cybersecurity page.</span></div>
+        <div class="r"><span class="h">6 · Data &amp; context</span><span class="m">feed models truth</span><span class="d">Pipelines, retrieval, clean data. This is already your edge as a data engineer.</span></div>
+        <div class="r"><span class="h">7 · Problem framing &amp; product</span><span class="m">the right problem</span><span class="d">AI cannot decide what matters. Judgment and domain knowledge stay human.</span></div>
+        <div class="r"><span class="h">8 · Communication &amp; business</span><span class="m">skill into income</span><span class="d">Scoping, pricing, explaining. The half most engineers skip, and AI cannot do for you.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="p4-identity">
+      <div class="eyebrow">04 · The identity question</div>
+      <h3>Software, automation, or AI engineer?</h3>
+      <p class="lead">All three, as one person. That composite is exactly where the market is moving, and you are already most of the way there.</p>
+      <p>You wanted to be a software engineer. Keep that. Software engineering is the foundation that makes everything else trustworthy: without it you cannot review what AI writes or design a system that holds together. But do not stop there, because "produce code to spec" is the part AI compresses. Layer up:</p>
+      <div class="steps">
+        <div class="st"><span class="n">↑</span><span class="c"><b>AI &amp; agent engineering, the frontier.</b> LLMs and agents that decide and act. The premium tier and the fastest-growing role in the market.</span></div>
+        <div class="st"><span class="n">·</span><span class="c"><b>Automation engineering, the delivery.</b> Wiring systems and workflows into things a business pays for. This is your job today.</span></div>
+        <div class="st"><span class="n">·</span><span class="c"><b>Software engineering, the foundation.</b> Fundamentals, systems, review, security. What makes you accountable for AI's output.</span></div>
+      </div>
+      <div class="verdict">
+        <span class="label">The call</span>
+        <div class="vl">Aim to be the Software + Automation + AI engineer: fundamentals deep enough to be accountable, automation to ship, agents to command the premium.</div>
+        <p>That is a rarer and more valuable profile than any one of the three alone, and it is a straight extension of the Data &amp; Automation Engineer you already are.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="p4-do">
+      <div class="eyebrow">05 · What to do</div>
+      <h3>Concretely, for you</h3>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>Do not skip fundamentals.</b> Keep sharpening software engineering, especially reading and reviewing code. AI makes this more valuable, not less.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Use AI, and verify everything.</b> Treat its output as a fast draft you are accountable for. The 66% who get burned are the ones who trust it blindly.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Go deep on agents.</b> The fastest-growing role in the market, sitting right on top of your automation work. Follow the Automation page roadmap, stage 4.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>Keep security in view.</b> A top-3 growing skill and a high-ticket wedge for you. See the Cybersecurity page.</span></div>
+        <div class="st"><span class="n">05</span><span class="c"><b>Sell outcomes, not code.</b> The market pays for judgment and results, which AI cannot supply. That is your business layer.</span></div>
+      </div>
+      <div class="crosslink">
+        <span class="label">The one move</span>
+        <p>Everything above converges on the same next step: <b>build one real AI agent.</b> It is the frontier skill, it rides your automation strength, and it is the profile every source on this page is pointing at.</p>
+        <button class="btn" data-goto="automation">Build the agent roadmap on the Automation page →</button>
+      </div>
+    </section>
+
+    <section class="sec" id="p4-sources">
+      <div class="eyebrow">06 · Sources</div>
+      <h3>Where this comes from</h3>
+      <p>Official and primary sources, so you can check every number yourself.</p>
+      <div class="res">
+        <div class="grp">
+          <div class="gh">Demand &amp; job growth</div>
+          <a class="rl" href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener"><span><span class="rn">WEF, Future of Jobs Report 2025</span><span class="rd">Fastest-growing roles and the top-3 fastest-growing skills (AI, cybersecurity, tech literacy).</span></span><span class="rt">Report</span></a>
+          <a class="rl" href="https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm" target="_blank" rel="noopener"><span><span class="rn">U.S. BLS, Software Developers outlook</span><span class="rd">+15.8% projected growth 2024–34, "much faster than average."</span></span><span class="rt">Gov · official</span></a>
+          <a class="rl" href="https://www.bls.gov/opub/ted/2026/artificial-intelligence-information-technology-and-employment-2024-34.htm" target="_blank" rel="noopener"><span><span class="rn">U.S. BLS, AI, IT &amp; employment 2024–34</span><span class="rd">Why AI grows design-focused roles and squeezes routine production.</span></span><span class="rt">Gov · official</span></a>
+        </div>
+        <div class="grp">
+          <div class="gh">How the work is changing</div>
+          <a class="rl" href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener"><span><span class="rn">Stack Overflow 2025 Developer Survey, AI</span><span class="rd">84% use AI, trust at 29%, "almost right" and debugging as the top frustrations.</span></span><span class="rt">Primary · survey</span></a>
+          <a class="rl" href="https://www.ciodive.com/news/linkedin-top-skills-AI-engineering/813595/" target="_blank" rel="noopener"><span><span class="rn">LinkedIn 2026 Skills / Jobs on the Rise</span><span class="rd">AI engineer the #1 fastest-growing role; AI engineering, prompting, and tuning the top skills.</span></span><span class="rt">Report</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="pfoot"><b>Next move:</b> pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.</div>
+  </div>
+
+  <!-- ===================== THOUGHTS ===================== -->
+  <div class="page" id="page-thoughts">
+    <div class="phead">
+      <button class="back" data-goto="home">← Dashboard</button>
+      <div class="pn">Capture</div>
+      <h2>My Thoughts</h2>
+      <p class="pd">Business ideas, reflections, notes. Tagged by category and dated, searchable.</p>
+    </div>
+    <form class="tform" id="form-thoughts" autocomplete="off">
+      <span class="flabel">New thought</span>
+      <div class="frow"><select class="fselect" id="th-cat"><option>Business idea</option><option>Reflection</option><option>Note</option><option>Task</option></select></div>
+      <textarea class="ftext" id="th-text" placeholder="What's on your mind? A business idea, a reflection, a note..."></textarea>
+      <button class="fbtn" type="submit">Add thought</button>
+    </form>
+    <div class="tfilter">
+      <input class="finput" id="th-search" placeholder="Search thoughts...">
+      <select class="fselect" id="th-fcat"><option value="">All categories</option><option>Business idea</option><option>Reflection</option><option>Note</option><option>Task</option></select>
+      <span class="tcount" id="th-count"></span>
+    </div>
+    <div class="tlist" id="list-thoughts"></div>
+  </div>
+
+  <!-- ===================== LEARNINGS ===================== -->
+  <div class="page" id="page-learnings">
+    <div class="phead">
+      <button class="back" data-goto="home">← Dashboard</button>
+      <div class="pn">Log</div>
+      <h2>My Learnings</h2>
+      <p class="pd">Things you've learned, tagged by domain, with the source and what you can now do with it.</p>
+    </div>
+    <form class="tform" id="form-learnings" autocomplete="off">
+      <span class="flabel">New learning</span>
+      <div class="frow">
+        <select class="fselect" id="le-domain"><option>Cybersecurity</option><option>Automation</option><option>Cloud</option><option>AI</option><option>Data</option><option>Business</option></select>
+        <input class="finput" id="le-title" placeholder="What did you learn?">
+        <input class="finput" id="le-source" placeholder="Source (course, doc, video)">
+      </div>
+      <textarea class="ftext" id="le-cando" placeholder="What can you now DO with this?"></textarea>
+      <button class="fbtn" type="submit">Add learning</button>
+    </form>
+    <div class="tfilter">
+      <input class="finput" id="le-search" placeholder="Search learnings...">
+      <select class="fselect" id="le-fdom"><option value="">All domains</option><option>Cybersecurity</option><option>Automation</option><option>Cloud</option><option>AI</option><option>Data</option><option>Business</option></select>
+      <span class="tcount" id="le-count"></span>
+    </div>
+    <div class="tlist" id="list-learnings"></div>
+  </div>
+
+  <!-- ===================== WISHLIST ===================== -->
+  <div class="page" id="page-wishlist">
+    <div class="phead">
+      <button class="back" data-goto="home">← Dashboard</button>
+      <div class="pn">Backlog</div>
+      <h2>Things I Want to Learn</h2>
+      <p class="pd">A prioritized wishlist with status and resource links. Tap a status chip to move it forward.</p>
+    </div>
+    <form class="tform" id="form-wishlist" autocomplete="off">
+      <span class="flabel">New topic to learn</span>
+      <div class="frow">
+        <input class="finput" id="wl-topic" placeholder="Topic or skill">
+        <select class="fselect" id="wl-domain"><option>Cybersecurity</option><option>Automation</option><option>Cloud</option><option>AI</option><option>Data</option><option>Business</option></select>
+      </div>
+      <div class="frow">
+        <select class="fselect" id="wl-priority"><option>High</option><option>Medium</option><option>Low</option></select>
+        <select class="fselect" id="wl-status"><option>Not started</option><option>In progress</option><option>Done</option></select>
+        <input class="finput" id="wl-link" placeholder="Resource link (optional)">
+      </div>
+      <button class="fbtn" type="submit">Add to wishlist</button>
+    </form>
+    <div class="tfilter">
+      <input class="finput" id="wl-search" placeholder="Search wishlist...">
+      <select class="fselect" id="wl-fstatus"><option value="">All statuses</option><option>Not started</option><option>In progress</option><option>Done</option></select>
+      <span class="tcount" id="wl-count"></span>
+    </div>
+    <div class="tlist" id="list-wishlist"></div>
+  </div>
+
+  <!-- ===================== CERTIFICATIONS ===================== -->
+  <div class="page" id="page-certs">
+    <div class="phead">
+      <button class="back" data-goto="home">← Dashboard</button>
+      <div class="pn">Prove it</div>
+      <h2>Certifications</h2>
+      <p class="pd">The certs you're pursuing: provider, cost, status, exam date, and study progress.</p>
+    </div>
+
+    <div class="mnote" style="margin-top:20px"><span class="label">Recommended for your domains</span>Cloud: <b>AWS Cloud Practitioner</b> (~$100) then <b>Solutions Architect Associate</b> (~$150). Data: <b>Google Data Analytics Professional Certificate</b>. GenAI: <b>Google Cloud Generative AI Leader</b> or <b>AWS AI Practitioner</b>. Agents: the <b>Hugging Face Agents</b> certificate (free). Security: <b>Security+</b> only if you sell compliance, otherwise skip the exam.</div>
+
+    <form class="tform" id="form-certs" autocomplete="off">
+      <span class="flabel">New certification</span>
+      <div class="frow">
+        <input class="finput" id="ce-name" placeholder="Certification name">
+        <input class="finput" id="ce-provider" placeholder="Provider (AWS, Google...)">
+        <input class="finput" id="ce-cost" placeholder="Cost (e.g. $100)">
+      </div>
+      <div class="frow">
+        <select class="fselect" id="ce-status"><option>Planned</option><option>Studying</option><option>Scheduled</option><option>Passed</option></select>
+        <input class="finput" id="ce-date" type="date" aria-label="Exam date">
+        <input class="finput" id="ce-progress" type="number" min="0" max="100" placeholder="Progress %">
+      </div>
+      <button class="fbtn" type="submit">Add certification</button>
+    </form>
+    <div class="tfilter">
+      <select class="fselect" id="ce-fstatus"><option value="">All statuses</option><option>Planned</option><option>Studying</option><option>Scheduled</option><option>Passed</option></select>
+      <span class="tcount" id="ce-count"></span>
+    </div>
+    <div class="tlist" id="list-certs"></div>
+  </div>
+
+</div>
+
+<script>
+  (function(){
+    var pages=['home','roadmaps','automation','cybersecurity','databases','cloud','genai','data','shift','thoughts','learnings','wishlist','certs'];
+    var links=document.getElementById('links');
+    var menuBtn=document.getElementById('menuBtn');
+
+    function showPage(name){
+      if(pages.indexOf(name)<0)name='home';
+      pages.forEach(function(p){
+        var el=document.getElementById('page-'+p);
+        if(el)el.classList.toggle('active',p===name);
+      });
+      var roadmapPages=['roadmaps','automation','cybersecurity','databases','cloud','genai','data','shift'];
+      var navName=roadmapPages.indexOf(name)>=0?'roadmaps':name;
+      document.querySelectorAll('.nav .links button[data-goto]').forEach(function(b){
+        b.classList.toggle('on',b.getAttribute('data-goto')===navName);
+      });
+      try{history.replaceState(null,'','#'+name);}catch(e){}
+      window.scrollTo(0,0);
+      if(links)links.classList.remove('open');
+      renderFor(name);
+    }
+
+    /* navigation buttons + home cards */
+    document.querySelectorAll('[data-goto]').forEach(function(b){
+      b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});
+    });
+
+    /* in-page section jumps (do not change the route) */
+    document.querySelectorAll('a.jump').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var t=document.querySelector(a.getAttribute('href'));
+        if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+
+    /* mobile menu */
+    if(menuBtn)menuBtn.addEventListener('click',function(){links.classList.toggle('open');});
+
+    /* initial route from hash */
+    var start=(location.hash||'').replace('#','');
+    showPage(start);
+
+    /* ---- roadmap progress (localStorage) ---- */
+    var KEY='fieldmanual.progress.v1';
+    var boxes=[].slice.call(document.querySelectorAll('.skills input[type=checkbox]'));
+    var saved={};
+    try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+    function persist(){try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}}
+    function refresh(){
+      document.querySelectorAll('.stage').forEach(function(st){
+        var ins=st.querySelectorAll('input[type=checkbox]');
+        var done=0;ins.forEach(function(i){if(i.checked)done++;});
+        var cnt=st.querySelector('[data-cnt]');
+        if(cnt)cnt.textContent=done+'/'+ins.length;
+      });
+      document.querySelectorAll('.progcard').forEach(function(pc){
+        var scope=document.getElementById(pc.getAttribute('data-scope'))||document;
+        var ins=scope.querySelectorAll('.skills input[type=checkbox]');
+        var total=ins.length,done=0;ins.forEach(function(i){if(i.checked)done++;});
+        var pct=total?Math.round(done/total*100):0;
+        var bar=pc.querySelector('.pbar'),lab=pc.querySelector('.ppct');
+        if(bar)bar.style.width=pct+'%';
+        if(lab)lab.textContent=pct;
+      });
+    }
+    boxes.forEach(function(b){
+      var id=b.getAttribute('data-id');
+      if(saved[id])b.checked=true;
+      b.addEventListener('change',function(){saved[id]=b.checked;persist();refresh();});
+    });
+    refresh();
+
+    /* =========================================================
+       Personal data: thoughts, learnings, wishlist, certs
+       Saved locally in this browser (private to this device).
+    ========================================================= */
+    var DKEY='fm.data.v1';
+    var data={thoughts:[],learnings:[],wishlist:[],certs:[]};
+    try{var raw=JSON.parse(localStorage.getItem(DKEY));if(raw&&typeof raw==='object'){data.thoughts=raw.thoughts||[];data.learnings=raw.learnings||[];data.wishlist=raw.wishlist||[];data.certs=raw.certs||[];}}catch(e){}
+    function saveData(){try{localStorage.setItem(DKEY,JSON.stringify(data));}catch(e){}}
+    function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+    function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});}
+    function trunc(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s;}
+    function fmtDate(ts){try{return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}catch(e){return'';}}
+    function linkify(s){return esc(s).replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" rel="noopener">$1<\/a>');}
+    function val(id){var el=document.getElementById(id);return el?el.value:'';}
+    function setv(id,v){var el=document.getElementById(id);if(el)el.value=v;}
+    function domCls(d){return({Cybersecurity:'warn',Automation:'',Cloud:'clay',AI:'good',Data:'mut',Business:'clay'})[d]||'mut';}
+
+    function renderThoughts(){
+      if(!data)return;var list=document.getElementById('list-thoughts');if(!list)return;
+      var q=val('th-search').toLowerCase(),cat=val('th-fcat');
+      var items=data.thoughts.filter(function(t){
+        if(cat&&t.cat!==cat)return false;
+        if(q&&((''+t.text+' '+t.cat).toLowerCase().indexOf(q)<0))return false;
+        return true;
+      });
+      var c=document.getElementById('th-count');if(c)c.textContent=items.length+' / '+data.thoughts.length;
+      list.innerHTML=items.length?items.map(function(t){
+        return '<div class="titem"><div class="top"><div class="tbody">'+linkify(t.text)+'</div><button class="del" data-del="thoughts" data-id="'+t.id+'" aria-label="Delete">×</button></div><div class="meta"><span class="chip mut">'+esc(t.cat)+'</span><span class="tdate">'+fmtDate(t.ts)+'</span></div></div>';
+      }).join(''):'<div class="empty">'+(data.thoughts.length?'No matches.':'No thoughts yet. Capture your first above.')+'</div>';
+    }
+    function renderLearnings(){
+      if(!data)return;var list=document.getElementById('list-learnings');if(!list)return;
+      var q=val('le-search').toLowerCase(),dom=val('le-fdom');
+      var items=data.learnings.filter(function(l){
+        if(dom&&l.domain!==dom)return false;
+        if(q&&((''+l.title+' '+l.cando+' '+l.source).toLowerCase().indexOf(q)<0))return false;
+        return true;
+      });
+      var c=document.getElementById('le-count');if(c)c.textContent=items.length+' / '+data.learnings.length;
+      list.innerHTML=items.length?items.map(function(l){
+        return '<div class="titem"><div class="top"><div class="ttitle">'+esc(l.title)+'</div><button class="del" data-del="learnings" data-id="'+l.id+'" aria-label="Delete">×</button></div>'+(l.cando?'<div class="tbody">'+esc(l.cando)+'</div>':'')+'<div class="meta"><span class="chip '+domCls(l.domain)+'">'+esc(l.domain)+'</span>'+(l.source?'<span class="chip mut">'+esc(l.source)+'</span>':'')+'<span class="tdate">'+fmtDate(l.ts)+'</span></div></div>';
+      }).join(''):'<div class="empty">'+(data.learnings.length?'No matches.':'No learnings logged yet.')+'</div>';
+    }
+    function statusCls(s){return s==='Done'?'good':s==='In progress'?'clay':'mut';}
+    function prioCls(p){return p==='High'?'warn':p==='Medium'?'clay':'mut';}
+    function renderWishlist(){
+      if(!data)return;var list=document.getElementById('list-wishlist');if(!list)return;
+      var q=val('wl-search').toLowerCase(),st=val('wl-fstatus');
+      var items=data.wishlist.filter(function(w){
+        if(st&&w.status!==st)return false;
+        if(q&&((''+w.topic+' '+w.domain).toLowerCase().indexOf(q)<0))return false;
+        return true;
+      });
+      var c=document.getElementById('wl-count');if(c)c.textContent=items.length+' / '+data.wishlist.length;
+      list.innerHTML=items.length?items.map(function(w){
+        return '<div class="titem"><div class="top"><div class="ttitle">'+esc(w.topic)+'</div><button class="del" data-del="wishlist" data-id="'+w.id+'" aria-label="Delete">×</button></div>'+(w.link?'<div class="tbody"><a href="'+esc(w.link)+'" target="_blank" rel="noopener">'+esc(trunc(w.link,60))+'</a></div>':'')+'<div class="meta"><button class="chip '+statusCls(w.status)+'" data-cycle="'+w.id+'" title="Tap to advance">'+esc(w.status)+'</button><span class="chip '+prioCls(w.priority)+'">'+esc(w.priority)+' priority</span><span class="chip '+domCls(w.domain)+'">'+esc(w.domain)+'</span></div></div>';
+      }).join(''):'<div class="empty">'+(data.wishlist.length?'No matches.':'Nothing on the wishlist yet. Add a topic above.')+'</div>';
+    }
+    function certCls(s){return s==='Passed'?'good':s==='Scheduled'?'warn':s==='Studying'?'clay':'mut';}
+    function renderCerts(){
+      if(!data)return;var list=document.getElementById('list-certs');if(!list)return;
+      var st=val('ce-fstatus');
+      var items=data.certs.filter(function(c){return !st||c.status===st;});
+      var cc=document.getElementById('ce-count');if(cc)cc.textContent=items.length+' / '+data.certs.length;
+      list.innerHTML=items.length?items.map(function(c){
+        var pr=(c.progress!==''&&c.progress!=null&&!isNaN(+c.progress))?Math.max(0,Math.min(100,+c.progress)):null;
+        return '<div class="titem"><div class="top"><div class="ttitle">'+esc(c.name)+'</div><button class="del" data-del="certs" data-id="'+c.id+'" aria-label="Delete">×</button></div><div class="meta">'+(c.provider?'<span class="chip mut">'+esc(c.provider)+'</span>':'')+'<span class="chip '+certCls(c.status)+'">'+esc(c.status)+'</span>'+(c.cost?'<span class="chip clay">'+esc(c.cost)+'</span>':'')+(c.date?'<span class="tdate">exam '+esc(c.date)+'</span>':'')+'</div>'+(pr!=null?'<div class="cprog"><i style="width:'+pr+'%"></i></div>':'')+'</div>';
+      }).join(''):'<div class="empty">'+(data.certs.length?'No matches.':'No certifications tracked yet.')+'</div>';
+    }
+    function renderColl(coll){if(coll==='thoughts')renderThoughts();else if(coll==='learnings')renderLearnings();else if(coll==='wishlist')renderWishlist();else if(coll==='certs')renderCerts();}
+
+    var RM=[['rm-automation','Automation','automation'],['rm-agents','AI Agents','automation'],['rm-genai','Generative AI','genai'],['rm-cloud','Cloud','cloud'],['rm-security','Security','cybersecurity'],['rm-data','Data Analytics','data'],['rm-databases','Databases','databases']];
+    function renderDashRoadmaps(){
+      var el=document.getElementById('dash-roadmaps');if(!el)return;
+      el.innerHTML=RM.map(function(m){
+        var w=document.getElementById(m[0]);if(!w)return'';
+        var ins=w.querySelectorAll('.skills input[type=checkbox]');var tot=ins.length,dn=0;ins.forEach(function(i){if(i.checked)dn++;});
+        var pct=tot?Math.round(dn/tot*100):0;
+        return '<div class="rmrow" data-goto="'+m[2]+'"><span class="rl">'+m[1]+'</span><span class="rp">'+pct+'%</span><span class="rbar"><i style="width:'+pct+'%"></i></span></div>';
+      }).join('');
+    }
+    function renderDashboard(){
+      if(!data)return;
+      var kmap={thoughts:'kpi-thoughts',learnings:'kpi-learnings',wishlist:'kpi-wishlist',certs:'kpi-certs'};
+      Object.keys(kmap).forEach(function(k){var el=document.getElementById(kmap[k]);if(el)el.textContent=data[k].length;});
+      var dt=document.getElementById('dash-thoughts');
+      if(dt){var r=data.thoughts.slice(0,3);dt.innerHTML=r.length?r.map(function(x){return '<div class="dli">'+esc(trunc(x.text,90))+'<div class="m">'+esc(x.cat)+' · '+fmtDate(x.ts)+'</div></div>';}).join(''):'<div class="dli" style="color:var(--ink-faint)">No thoughts yet. Add one on the Thoughts page.</div>';}
+      var acts=[];
+      data.certs.forEach(function(c){if(c.status==='Studying'||c.status==='Scheduled')acts.push('Cert: '+c.name+(c.date?' (exam '+c.date+')':''));});
+      data.wishlist.forEach(function(w){if(w.status==='In progress')acts.push('Learning: '+w.topic);});
+      data.wishlist.forEach(function(w){if(w.status==='Not started'&&acts.length<5)acts.push('Start: '+w.topic);});
+      if(!acts.length)acts=['Add a topic to your Wishlist and set it In progress.','Pick one cert on the Certs page and give it a date.','Check off your first roadmap step.'];
+      var da=document.getElementById('dash-actions');if(da)da.innerHTML=acts.slice(0,5).map(function(a){return '<div class="dli">'+esc(a)+'</div>';}).join('');
+      renderDashRoadmaps();
+    }
+    function renderFor(name){
+      if(name==='home')renderDashboard();
+      else if(name==='thoughts')renderThoughts();
+      else if(name==='learnings')renderLearnings();
+      else if(name==='wishlist')renderWishlist();
+      else if(name==='certs')renderCerts();
+    }
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();}
+
+    function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
+    on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();});
+    on('form-learnings','submit',function(e){e.preventDefault();var t=val('le-title').trim();if(!t)return;data.learnings.unshift({id:uid(),ts:Date.now(),domain:val('le-domain'),title:t,source:val('le-source').trim(),cando:val('le-cando').trim()});saveData();setv('le-title','');setv('le-source','');setv('le-cando','');renderLearnings();renderDashboard();});
+    on('form-wishlist','submit',function(e){e.preventDefault();var t=val('wl-topic').trim();if(!t)return;data.wishlist.unshift({id:uid(),topic:t,domain:val('wl-domain'),priority:val('wl-priority'),status:val('wl-status'),link:val('wl-link').trim()});saveData();setv('wl-topic','');setv('wl-link','');renderWishlist();renderDashboard();});
+    on('form-certs','submit',function(e){e.preventDefault();var t=val('ce-name').trim();if(!t)return;data.certs.unshift({id:uid(),name:t,provider:val('ce-provider').trim(),cost:val('ce-cost').trim(),status:val('ce-status'),date:val('ce-date'),progress:val('ce-progress')});saveData();setv('ce-name','');setv('ce-provider','');setv('ce-cost','');setv('ce-date','');setv('ce-progress','');renderCerts();renderDashboard();});
+
+    ['th-search','th-fcat'].forEach(function(id){on(id,'input',renderThoughts);on(id,'change',renderThoughts);});
+    ['le-search','le-fdom'].forEach(function(id){on(id,'input',renderLearnings);on(id,'change',renderLearnings);});
+    ['wl-search','wl-fstatus'].forEach(function(id){on(id,'input',renderWishlist);on(id,'change',renderWishlist);});
+    on('ce-fstatus','change',renderCerts);
+
+    document.addEventListener('click',function(e){
+      var del=e.target.closest&&e.target.closest('[data-del]');
+      if(del){var coll=del.getAttribute('data-del'),id=del.getAttribute('data-id');data[coll]=data[coll].filter(function(x){return x.id!==id;});saveData();renderColl(coll);renderDashboard();return;}
+      var cyc=e.target.closest&&e.target.closest('[data-cycle]');
+      if(cyc){var id2=cyc.getAttribute('data-cycle'),order=['Not started','In progress','Done'],i;for(i=0;i<data.wishlist.length;i++){if(data.wishlist[i].id===id2){data.wishlist[i].status=order[(order.indexOf(data.wishlist[i].status)+1)%3];break;}}saveData();renderWishlist();renderDashboard();return;}
+      var row=e.target.closest&&e.target.closest('.rmrow[data-goto]');
+      if(row){showPage(row.getAttribute('data-goto'));return;}
+    });
+
+    renderAll();
+  })();
+</script>

@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Automation Engineer Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#FCFCFB;
+    --surface:#FFFFFF;
+    --raise:#F6F6F4;
+    --ink:#17171A;
+    --ink-2:#3D3D42;
+    --muted:#6C6C74;
+    --faint:#9C9CA4;
+    --line:#E7E6E1;
+    --line-2:#DAD9D2;
+    --accent:#1F4FE0;
+    --accent-ink:#1A40BE;
+    --accent-wash:#EAEEFC;
+    --ok:#2C7A4B;
+    --warn:#B0402E;
+    --r:8px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E0E11; --surface:#161619; --raise:#1B1B1F;
+      --ink:#ECECEE; --ink-2:#C6C6CB; --muted:#9A9AA2; --faint:#6C6C74;
+      --line:#26262B; --line-2:#33333A;
+      --accent:#7C93FF; --accent-ink:#93A6FF; --accent-wash:#191E33;
+      --ok:#5FB07E; --warn:#E08163;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E0E11; --surface:#161619; --raise:#1B1B1F;
+    --ink:#ECECEE; --ink-2:#C6C6CB; --muted:#9A9AA2; --faint:#6C6C74;
+    --line:#26262B; --line-2:#33333A;
+    --accent:#7C93FF; --accent-ink:#93A6FF; --accent-wash:#191E33;
+    --ok:#5FB07E; --warn:#E08163;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink-2);
+    font-family:"Hanken Grotesk",system-ui,-apple-system,Segoe UI,sans-serif;
+    font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Hanken Grotesk",sans-serif;color:var(--ink);margin:0;line-height:1.14;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+  a{color:var(--accent-ink);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:2px}
+  b,strong{color:var(--ink);font-weight:600}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:500}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,40px);
+    display:grid;grid-template-columns:236px minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start}
+  @media(max-width:900px){.layout{grid-template-columns:1fr;gap:0}}
+
+  /* ---------------- sidebar ---------------- */
+  .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:34px 0 24px;gap:22px}
+  @media(max-width:900px){.side{position:static;height:auto;padding:26px 0 8px;border-bottom:1px solid var(--line)}}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .mk{width:26px;height:26px;border-radius:6px;background:var(--ink);position:relative;flex:none}
+  .brand .mk::before,.brand .mk::after{content:"";position:absolute;background:var(--bg)}
+  .brand .mk::before{width:2px;height:12px;left:11px;top:7px}
+  .brand .mk::after{width:12px;height:2px;left:7px;top:12px}
+  .brand .nm{font-weight:700;color:var(--ink);font-size:15px;letter-spacing:-.01em;line-height:1.1}
+  .brand .nm small{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:400;margin-top:2px}
+
+  .prog{border:1px solid var(--line);border-radius:var(--r);padding:14px 15px;background:var(--surface)}
+  .prog .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .prog .pct{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .prog .lab{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .bar{height:5px;border-radius:99px;background:var(--line-2);margin-top:9px;overflow:hidden}
+  .bar>span{display:block;height:100%;width:0;background:var(--accent);transition:width .25s ease}
+  .prog .cnt{font-size:12.5px;color:var(--muted);margin-top:8px}
+  .prog .cnt b{color:var(--ink)}
+  .reset{margin-top:10px;background:none;border:0;padding:0;font:inherit;font-size:12px;color:var(--faint);cursor:pointer;font-family:"JetBrains Mono",monospace}
+  .reset:hover{color:var(--accent-ink);text-decoration:underline}
+
+  .snav{display:flex;flex-direction:column;gap:1px}
+  .snav a{font-size:14px;color:var(--muted);padding:6px 10px;border-radius:6px;display:flex;justify-content:space-between;gap:8px;transition:background .14s,color .14s}
+  .snav a:hover{background:var(--raise);color:var(--ink);text-decoration:none}
+  .snav a.active{color:var(--accent-ink);background:var(--accent-wash)}
+  .snav a .n{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint)}
+  .snav a.active .n{color:var(--accent-ink)}
+  @media(max-width:900px){.side .snav{flex-direction:row;flex-wrap:wrap;gap:4px}.snav a{padding:5px 9px}.snav a .n{display:none}}
+
+  .theme{margin-top:auto;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint)}
+  @media(max-width:900px){.theme{display:none}}
+
+  /* ---------------- main ---------------- */
+  main{padding:40px 0 90px;min-width:0}
+  @media(max-width:900px){main{padding:26px 0 70px}}
+  .reading{max-width:none}
+
+  .hero{padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:36px}
+  .hero h1{font-size:clamp(34px,6vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin-top:14px}
+  .hero .sub{font-size:clamp(17px,2vw,20px);color:var(--muted);margin-top:16px;max-width:56ch}
+  .hero .sub b{color:var(--ink)}
+
+  /* controls */
+  .controls{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0;margin-bottom:8px;border-bottom:1px solid var(--line)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.02em;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line-2);padding:5px 11px;border-radius:99px;cursor:pointer;transition:.14s}
+  .chip:hover{border-color:var(--faint);color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .controls .flabel{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .toggle-all{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent-ink);background:none;border:0;cursor:pointer;padding:5px 4px}
+  .toggle-all:hover{text-decoration:underline}
+
+  section.blk{padding:44px 0;border-bottom:1px solid var(--line);scroll-margin-top:70px}
+  section.blk:last-of-type{border-bottom:0}
+  .blk>.eyebrow{display:block;margin-bottom:12px}
+  .blk h2{font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:-.02em}
+  .blk .intro{color:var(--muted);font-size:17px;margin:12px 0 0;max-width:64ch}
+  .blk .intro b{color:var(--ink)}
+
+  /* "should know" pillars */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:26px}
+  @media(max-width:680px){.pillars{grid-template-columns:1fr}}
+  .pillar{background:var(--surface);padding:16px 18px}
+  .pillar .pn{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent-ink);letter-spacing:.08em}
+  .pillar h4{font-size:15.5px;margin:6px 0 4px;font-weight:600}
+  .pillar p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.5}
+
+  .does{margin-top:26px;display:flex;flex-direction:column;gap:0}
+  .does .row{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
+  .does .row:last-child{border-bottom:1px solid var(--line)}
+  .does .row .k{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--faint);padding-top:3px}
+  .does .row p{margin:0;font-size:15.5px}
+  .does .row p b{color:var(--ink)}
+
+  /* ---------------- roadmap stages ---------------- */
+  .stage{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-top:14px;overflow:hidden}
+  .stage[open]{border-color:var(--line-2)}
+  .stage>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:15px 18px}
+  .stage>summary::-webkit-details-marker{display:none}
+  .stage>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .stage .sno{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:14px;color:var(--accent-ink);
+    width:30px;height:30px;border:1px solid var(--line-2);border-radius:7px;display:flex;align-items:center;justify-content:center}
+  .stage .sh{min-width:0;display:flex;flex-direction:column}
+  .stage .sh .st{font-weight:700;color:var(--ink);font-size:17px;letter-spacing:-.01em}
+  .stage .sh .sm{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .stage .sh .sm .lvl{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+  .stage .sright{display:flex;align-items:center;gap:12px}
+  .stage .scount{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .stage .chev{width:9px;height:9px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);transition:transform .2s;margin:-3px 2px 0 0}
+  .stage[open] .chev{transform:rotate(-135deg);margin-top:2px}
+  .stage .sbody{padding:2px 18px 18px;border-top:1px solid var(--line)}
+
+  .skills{margin:14px 0 0;display:flex;flex-direction:column;gap:2px}
+  .skill{display:flex;align-items:flex-start;gap:11px;padding:8px 0;border-bottom:1px solid var(--line)}
+  .skill:last-child{border-bottom:0}
+  .skill input{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:1.5px solid var(--line-2);border-radius:5px;
+    flex:none;margin-top:2px;cursor:pointer;position:relative;background:var(--surface);transition:.14s}
+  .skill input:hover{border-color:var(--faint)}
+  .skill input:checked{background:var(--accent);border-color:var(--accent)}
+  .skill input:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .skill input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .skill .sk-t{font-size:15px;color:var(--ink);cursor:pointer}
+  .skill .sk-t .d{color:var(--muted);font-weight:400}
+  .skill .tag{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);
+    border:1px solid var(--line-2);border-radius:4px;padding:1px 5px;margin-left:2px;white-space:nowrap;position:relative;top:-1px}
+  .skill input:checked ~ .sk-t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line-2)}
+
+  .do,.deep{display:grid;grid-template-columns:auto 1fr;gap:12px;margin-top:14px;font-size:14.5px}
+  .do .kk,.deep .kk{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:3px}
+  .do .kk{color:var(--accent-ink)} .deep .kk{color:var(--faint)}
+  .do p,.deep p{margin:0;color:var(--ink-2)}
+  .do p b{color:var(--ink)}
+  .deep{margin-top:9px}
+
+  /* filter behavior */
+  [data-filter="beg"] .skill:not([data-lv="beg"]),
+  [data-filter="int"] .skill:not([data-lv="int"]),
+  [data-filter="adv"] .skill:not([data-lv="adv"]){display:none}
+
+  /* ---------------- skill map ---------------- */
+  .map{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+  @media(max-width:680px){.map{grid-template-columns:1fr}}
+  .area{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+  .area>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:15px 16px}
+  .area>summary::-webkit-details-marker{display:none}
+  .area>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .area .an{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent-ink);width:24px;flex:none}
+  .area .at{font-weight:600;color:var(--ink);font-size:15.5px;flex:1}
+  .area .plus{position:relative;width:12px;height:12px;flex:none}
+  .area .plus::before,.area .plus::after{content:"";position:absolute;background:var(--faint)}
+  .area .plus::before{left:5px;top:0;width:2px;height:12px;transition:transform .2s}
+  .area .plus::after{left:0;top:5px;width:12px;height:2px}
+  .area[open] .plus::before{transform:scaleY(0)}
+  .area .abody{padding:0 16px 16px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .area .abody p{margin:12px 0 0}
+  .area .abody b{color:var(--ink)}
+  .area .abody .one{color:var(--accent-ink);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;margin-top:12px;display:block}
+
+  /* ---------------- at-work examples ---------------- */
+  .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+  @media(max-width:720px){.cases{grid-template-columns:1fr}}
+  .case{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:16px 17px}
+  .case .ct{font-weight:700;color:var(--ink);font-size:16px;letter-spacing:-.01em}
+  .case .flow{font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.7;color:var(--ink-2);
+    background:var(--raise);border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:11px 0 0;overflow-x:auto}
+  .case .flow .ar{color:var(--accent-ink)}
+  .case .flow .tr{color:var(--faint)}
+  .case .out{font-size:13.5px;color:var(--muted);margin:11px 0 0}
+  .case .out b{color:var(--ok)}
+  .case .stk{margin-top:9px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint)}
+
+  /* ---------------- resources ---------------- */
+  .rgroup{margin-top:22px}
+  .rgroup h3{font-size:14px;font-family:"JetBrains Mono",monospace;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);margin-bottom:4px}
+  .res{border-top:1px solid var(--line)}
+  .res a.r{display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);color:inherit}
+  .res a.r:hover{text-decoration:none}
+  .res a.r:hover .rn{color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+  .res .rn{font-weight:600;color:var(--ink);font-size:15.5px}
+  .res .rd{grid-column:1;color:var(--muted);font-size:13.5px;margin-top:1px}
+  .res .rt{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint);white-space:nowrap;text-align:right}
+  .res .rt .free{color:var(--ok)}
+
+  .foot{margin-top:52px;color:var(--faint);font-size:13px;font-family:"JetBrains Mono",monospace;line-height:1.7}
+  .foot a{color:var(--faint);text-decoration:underline}
+
+  /* ---------------- cybersecurity add-on ---------------- */
+  .subh{font-size:14px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin:30px 0 0}
+  .verdict{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r);padding:15px 18px;background:var(--surface);margin-top:22px}
+  .verdict .vk{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+  .verdict p{margin:8px 0 0;font-size:15.5px;color:var(--ink-2)}
+  .verdict p b{color:var(--ink)}
+  .fitlist{margin-top:14px;border-top:1px solid var(--line-2)}
+  .fitlist .fr{display:grid;grid-template-columns:1fr auto;gap:3px 14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .fitlist .fn{color:var(--ink);font-weight:600;font-size:15px}
+  .fitlist .fd{grid-column:1;color:var(--muted);font-size:13px}
+  .fitlist .fv{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+  .fitlist .fv.do{color:var(--ok)} .fitlist .fv.later{color:var(--muted)} .fitlist .fv.skip{color:var(--warn)}
+  .note-warn{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:var(--r);padding:15px 18px;background:var(--surface);margin-top:20px}
+  .note-warn .wk{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--warn)}
+  .note-warn p{margin:8px 0 0;font-size:15px;color:var(--ink-2)}
+  .note-warn p b{color:var(--ink)}
+  .cta{display:inline-flex;align-items:center;gap:9px;margin-top:20px;background:var(--ink);color:var(--bg);font-weight:600;font-size:15px;padding:12px 18px;border-radius:8px;text-decoration:none;transition:background .15s}
+  .cta:hover{background:var(--accent);color:#fff;text-decoration:none}
+  .cta .arw{font-family:"JetBrains Mono",monospace}
+
+  a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
+</style>
+</head>
+<body data-filter="all">
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="brand">
+      <span class="mk"></span>
+      <span class="nm">Automation Engineer<small>Field guide</small></span>
+    </div>
+
+    <div class="prog">
+      <div class="top"><span class="pct" id="pct">0%</span><span class="lab">Complete</span></div>
+      <div class="bar"><span id="bar"></span></div>
+      <div class="cnt"><b id="done">0</b> of <b id="total">0</b> skills checked</div>
+      <button class="reset" id="reset" type="button">reset progress</button>
+    </div>
+
+    <nav class="snav" id="snav">
+      <a href="#job"><span>What the job is</span><span class="n">01</span></a>
+      <a href="#roadmap"><span>The roadmap</span><span class="n">02</span></a>
+      <a href="#map"><span>Skill map</span><span class="n">03</span></a>
+      <a href="#work"><span>At work</span><span class="n">04</span></a>
+      <a href="#resources"><span>Resources</span><span class="n">05</span></a>
+      <a href="cybersecurity.html"><span>Cybersecurity?</span><span class="n">&rarr;</span></a>
+    </nav>
+
+    <div class="theme">progress saved in this browser</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <div class="reading">
+
+      <header class="hero">
+        <span class="eyebrow">Learn &middot; build &middot; get paid</span>
+        <h1>Become an automation engineer.</h1>
+        <p class="sub">The job: turn repetitive, multi-system work into <b>reliable automated systems</b>, and increasingly, wire in AI agents to handle the judgment steps. This is the path, what to learn, what the work actually looks like, and where to learn it.</p>
+      </header>
+
+      <div class="controls" id="controls">
+        <span class="flabel">Level</span>
+        <div class="chips" role="group" aria-label="Filter roadmap by level">
+          <button class="chip" data-f="all" aria-pressed="true" type="button">All</button>
+          <button class="chip" data-f="beg" aria-pressed="false" type="button">Beginner</button>
+          <button class="chip" data-f="int" aria-pressed="false" type="button">Intermediate</button>
+          <button class="chip" data-f="adv" aria-pressed="false" type="button">Advanced</button>
+        </div>
+        <button class="toggle-all" id="toggleAll" type="button" data-open="false">Expand all</button>
+      </div>
+
+      <!-- 01 WHAT THE JOB IS -->
+      <section class="blk" id="job">
+        <span class="eyebrow">01 &middot; The role</span>
+        <h2>What an automation engineer actually does</h2>
+        <p class="intro">Not a job title you apply for so much as a capability you sell. You find work that humans repeat, and you replace it with a system that runs itself, then you keep it alive and prove it saved money.</p>
+
+        <div class="does">
+          <div class="row"><span class="k mono">01</span><p><b>Map the work.</b> Sit with a process, find the repetitive, rule-based steps that eat hours, and decide what is worth automating.</p></div>
+          <div class="row"><span class="k mono">02</span><p><b>Wire the systems together.</b> Connect apps and APIs so data flows without a human copy-pasting: forms, CRMs, databases, spreadsheets, email, Slack.</p></div>
+          <div class="row"><span class="k mono">03</span><p><b>Add judgment with AI.</b> Where a step needs reading, deciding, or drafting, call an LLM or an agent instead of a person, the premium tier of the work today.</p></div>
+          <div class="row"><span class="k mono">04</span><p><b>Make it reliable.</b> Handle errors, retries and edge cases; monitor it; get alerted when it breaks. This is what separates a $500 toy from a $2K/mo system.</p></div>
+          <div class="row"><span class="k mono">05</span><p><b>Prove the value.</b> Document it, hand it off, and quantify hours saved &times; cost. That number is what gets you paid and renewed.</p></div>
+        </div>
+
+        <h3 style="font-size:15px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em;margin:34px 0 0">Six things you need to know</h3>
+        <div class="pillars">
+          <div class="pillar"><span class="pn">A</span><h4>Programming</h4><p>Python for the logic no tool can do. Git, the command line, HTTP.</p></div>
+          <div class="pillar"><span class="pn">B</span><h4>APIs &amp; data</h4><p>REST, auth, webhooks, and a database. The plumbing everything flows through.</p></div>
+          <div class="pillar"><span class="pn">C</span><h4>Orchestration</h4><p>n8n, Zapier, Make. The tools you build and bill with fastest.</p></div>
+          <div class="pillar"><span class="pn">D</span><h4>AI &amp; agents</h4><p>LLM calls, tool use, RAG, agent frameworks. Where the money is moving.</p></div>
+          <div class="pillar"><span class="pn">E</span><h4>Reliability</h4><p>Docker, hosting, retries, monitoring. What makes it production, not a demo.</p></div>
+          <div class="pillar"><span class="pn">F</span><h4>Business</h4><p>Scoping, pricing, ROI, handoff. What turns a skill into income.</p></div>
+        </div>
+      </section>
+
+      <!-- 02 ROADMAP -->
+      <section class="blk" id="roadmap">
+        <span class="eyebrow">02 &middot; The path, in order</span>
+        <h2>The roadmap</h2>
+        <p class="intro">Six stages, roughly beginner to advanced. Do them in order, each one leans on the last. <b>Check off skills as you learn them</b>; your progress saves in this browser. Use the level filter above to see only what fits you now.</p>
+
+        <!-- Stage 1 -->
+        <details class="stage" data-stage="1" open>
+          <summary>
+            <span class="sno">1</span>
+            <span class="sh"><span class="st">Programming foundations</span><span class="sm"><span class="lvl">Beginner</span> &middot; the base everything sits on</span></span>
+            <span class="sright"><span class="scount" data-count>0/4</span><span class="chev"></span></span>
+          </summary>
+          <div class="sbody">
+            <div class="skills">
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s1a"><span class="sk-t">Python basics: <span class="d">scripting, data structures, loops, error handling</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s1b"><span class="sk-t">Git &amp; GitHub: <span class="d">branches, commits, pull requests</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s1c"><span class="sk-t">Command line: <span class="d">navigate, run scripts, pipe output</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s1d"><span class="sk-t">HTTP &amp; JSON: <span class="d">methods, status codes, request/response</span></span></label>
+            </div>
+            <div class="do"><span class="kk">Do this</span><p>Automate one boring task end to end: rename a folder of files, scrape a page into a spreadsheet, or email yourself a daily summary, as a Python script.</p></div>
+            <div class="deep"><span class="kk">Go deep</span><p><a href="https://automatetheboringstuff.com/" target="_blank" rel="noopener">Automate the Boring Stuff with Python</a> (free online, the classic starting point).</p></div>
+          </div>
+        </details>
+
+        <!-- Stage 2 -->
+        <details class="stage" data-stage="2">
+          <summary>
+            <span class="sno">2</span>
+            <span class="sh"><span class="st">APIs &amp; data</span><span class="sm"><span class="lvl">Beginner &rarr; Intermediate</span> &middot; the plumbing</span></span>
+            <span class="sright"><span class="scount" data-count>0/5</span><span class="chev"></span></span>
+          </summary>
+          <div class="sbody">
+            <div class="skills">
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s2a"><span class="sk-t">REST APIs: <span class="d">keys &amp; OAuth2, pagination, rate limits</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s2b"><span class="sk-t">Webhooks: <span class="d">receive real-time events from other apps</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s2c"><span class="sk-t">SQL &amp; Postgres: <span class="d">CRUD, joins, indexes</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s2d"><span class="sk-t">Files &amp; formats: <span class="d">CSV, JSON, Sheets/Excel</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s2e"><span class="sk-t">Postman: <span class="d">test and explore APIs before you wire them</span></span></label>
+            </div>
+            <div class="do"><span class="kk">Do this</span><p>On a schedule, pull data from a public API (weather, exchange rates, a CRM sandbox), clean it, and store rows in Postgres.</p></div>
+            <div class="deep"><span class="kk">Go deep</span><p><a href="https://learning.postman.com/" target="_blank" rel="noopener">Postman Learning Center</a> &middot; <a href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt</a> (interactive SQL, free).</p></div>
+          </div>
+        </details>
+
+        <!-- Stage 3 -->
+        <details class="stage" data-stage="3">
+          <summary>
+            <span class="sno">3</span>
+            <span class="sh"><span class="st">Orchestration tools</span><span class="sm"><span class="lvl">Intermediate</span> &middot; what you build &amp; bill with</span></span>
+            <span class="sright"><span class="scount" data-count>0/4</span><span class="chev"></span></span>
+          </summary>
+          <div class="sbody">
+            <div class="skills">
+              <label class="skill" data-lv="int"><input type="checkbox" id="s3a"><span class="sk-t">n8n: <span class="d">nodes, expressions, error workflows (self-hosted, best margins)</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s3b"><span class="sk-t">Zapier &amp; Make: <span class="d">fast client-facing wins; most clients already use one</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s3c"><span class="sk-t">Schedulers &amp; cron: <span class="d">run work on a timetable</span></span></label>
+              <label class="skill" data-lv="beg"><input type="checkbox" id="s3d"><span class="sk-t">Airtable / Sheets as a backend: <span class="d">the glue in most SMB automations</span></span></label>
+            </div>
+            <div class="do"><span class="kk">Do this</span><p>Rebuild three tasks you now do by hand as n8n workflows, each with real error handling and a notification when it fails.</p></div>
+            <div class="deep"><span class="kk">Go deep</span><p><a href="https://docs.n8n.io/courses/level-one/" target="_blank" rel="noopener">n8n Level-1 course</a> (official) &middot; <a href="https://www.classcentral.com/report/best-n8n-courses/" target="_blank" rel="noopener">Class Central: 10 best n8n courses</a>.</p></div>
+          </div>
+        </details>
+
+        <!-- Stage 4 -->
+        <details class="stage" data-stage="4">
+          <summary>
+            <span class="sno">4</span>
+            <span class="sh"><span class="st">AI &amp; agents</span><span class="sm"><span class="lvl">Intermediate &rarr; Advanced</span> &middot; the premium tier</span></span>
+            <span class="sright"><span class="scount" data-count>0/6</span><span class="chev"></span></span>
+          </summary>
+          <div class="sbody">
+            <div class="skills">
+              <label class="skill" data-lv="int"><input type="checkbox" id="s4a"><span class="sk-t">LLM APIs: <span class="d">call Claude/OpenAI, get reliable structured JSON out</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s4b"><span class="sk-t">Tool / function calling: <span class="d">let a model trigger real actions</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s4c"><span class="sk-t">RAG: <span class="d">embeddings + a vector DB so the model uses your data</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s4d"><span class="sk-t">Agent frameworks: <span class="d">LangGraph, CrewAI, smolagents, n8n AI nodes</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s4e"><span class="sk-t">Memory &amp; state: <span class="d">context that survives across steps</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s4f"><span class="sk-t">Evals &amp; guardrails: <span class="d">measure quality; keep agents from misbehaving</span></span></label>
+            </div>
+            <div class="do"><span class="kk">Do this</span><p>Build one real agent: it reads a document, decides something, and acts across two tools (e.g. classify an email, then draft a reply and file it). Add one eval that scores its output.</p></div>
+            <div class="deep"><span class="kk">Go deep</span><p><a href="https://huggingface.co/learn/agents-course" target="_blank" rel="noopener">Hugging Face AI Agents Course</a> (free, certified) &middot; <a href="https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/" target="_blank" rel="noopener">DeepLearning.AI: AI Agents in LangGraph</a>.</p></div>
+          </div>
+        </details>
+
+        <!-- Stage 5 -->
+        <details class="stage" data-stage="5">
+          <summary>
+            <span class="sno">5</span>
+            <span class="sh"><span class="st">Reliability &amp; infrastructure</span><span class="sm"><span class="lvl">Advanced</span> &middot; demo &rarr; production</span></span>
+            <span class="sright"><span class="scount" data-count>0/5</span><span class="chev"></span></span>
+          </summary>
+          <div class="sbody">
+            <div class="skills">
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s5a"><span class="sk-t">Docker: <span class="d">self-host n8n and your tools cheaply</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s5b"><span class="sk-t">A VPS / cloud basics: <span class="d">deploy on a $5-20/mo server</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s5c"><span class="sk-t">Retries &amp; idempotency: <span class="d">dead-letter queues, safe re-runs</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s5d"><span class="sk-t">Monitoring &amp; alerting: <span class="d">know it broke before the client does</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s5e"><span class="sk-t">Secrets management: <span class="d">where security and automation meet</span></span></label>
+            </div>
+            <div class="do"><span class="kk">Do this</span><p>Move your best n8n workflow off your laptop: self-host it on a VPS with Docker, add backups, and wire a failure alert to your phone.</p></div>
+            <div class="deep"><span class="kk">Go deep</span><p><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">Docker: Get started</a> &middot; <a href="https://docs.n8n.io/hosting/" target="_blank" rel="noopener">n8n self-hosting docs</a>.</p></div>
+          </div>
+        </details>
+
+        <!-- Stage 6 -->
+        <details class="stage" data-stage="6">
+          <summary>
+            <span class="sno">6</span>
+            <span class="sh"><span class="st">The business layer</span><span class="sm"><span class="lvl">Advanced</span> &middot; turns the skill into income</span></span>
+            <span class="sright"><span class="scount" data-count>0/5</span><span class="chev"></span></span>
+          </summary>
+          <div class="sbody">
+            <div class="skills">
+              <label class="skill" data-lv="int"><input type="checkbox" id="s6a"><span class="sk-t">Process discovery: <span class="d">interview a team, find what's worth automating</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s6b"><span class="sk-t">Scoping &amp; pricing: <span class="d">fixed fee vs. retainer, and when</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s6c"><span class="sk-t">ROI framing: <span class="d">hours saved &times; hourly cost, always quantified</span></span></label>
+              <label class="skill" data-lv="int"><input type="checkbox" id="s6d"><span class="sk-t">SOPs &amp; handoff: <span class="d">docs that make a client renew, not ghost</span></span></label>
+              <label class="skill" data-lv="adv"><input type="checkbox" id="s6e"><span class="sk-t">Maintenance retainers: <span class="d">recurring revenue from keeping flows alive</span></span></label>
+            </div>
+            <div class="do"><span class="kk">Do this</span><p>Map one real process for someone you know, end to end, and quote it with a concrete hours-saved-per-month number attached.</p></div>
+            <div class="deep"><span class="kk">Go deep</span><p><a href="https://www.activepieces.com/blog/workflow-automation-examples" target="_blank" rel="noopener">Real workflow automation examples</a> to model your first offers on.</p></div>
+          </div>
+        </details>
+      </section>
+
+      <!-- 03 SKILL MAP -->
+      <section class="blk" id="map">
+        <span class="eyebrow">03 &middot; Reference</span>
+        <h2>Skill map</h2>
+        <p class="intro">The roadmap is the order. This is the map by capability, the six areas and the <b>one thing to actually master</b> in each. Click any card to open it.</p>
+        <div class="map">
+          <details class="area"><summary><span class="an mono">A</span><span class="at">Programming</span><span class="plus"></span></summary>
+            <div class="abody"><p>The escape hatch for anything a no-code tool can't do. You won't write huge apps, you'll write the 20 lines of Python that a workflow calls when it hits something custom.</p><span class="one">Master: Python + reading API docs</span></div></details>
+          <details class="area"><summary><span class="an mono">B</span><span class="at">APIs &amp; data</span><span class="plus"></span></summary>
+            <div class="abody"><p>Every automation is really moving data between systems. Auth, pagination and rate limits are where beginners get stuck; a database is where the data lands.</p><span class="one">Master: REST auth + one SQL database</span></div></details>
+          <details class="area"><summary><span class="an mono">C</span><span class="at">Orchestration</span><span class="plus"></span></summary>
+            <div class="abody"><p>The workflow tools that let you ship in hours, not weeks. n8n is the technical, self-hostable one with the best margins; Zapier/Make win on speed and client familiarity.</p><span class="one">Master: n8n, deeply</span></div></details>
+          <details class="area"><summary><span class="an mono">D</span><span class="at">AI &amp; agents</span><span class="plus"></span></summary>
+            <div class="abody"><p>The difference between "moves data" and "decides and acts." Start with single reliable LLM calls, then tool-calling, then multi-step agents with memory and evals.</p><span class="one">Master: reliable structured output, then one agent framework</span></div></details>
+          <details class="area"><summary><span class="an mono">E</span><span class="at">Reliability</span><span class="plus"></span></summary>
+            <div class="abody"><p>Anyone can build a flow that works once. Getting paid means it works at 3am, recovers from a failed API, and tells you when it can't.</p><span class="one">Master: Docker hosting + error handling</span></div></details>
+          <details class="area"><summary><span class="an mono">F</span><span class="at">Business</span><span class="plus"></span></summary>
+            <div class="abody"><p>The skill most engineers skip and most agencies live on. Finding the right process, pricing it, and proving the ROI is worth more than any single tool.</p><span class="one">Master: ROI framing + scoping</span></div></details>
+        </div>
+      </section>
+
+      <!-- 04 AT WORK -->
+      <section class="blk" id="work">
+        <span class="eyebrow">04 &middot; The work, concretely</span>
+        <h2>What you actually build at work</h2>
+        <p class="intro">Real automations engineers ship, in the trigger &rarr; steps &rarr; tools shape you'll use for every job. Each one below is a sellable offer.</p>
+        <div class="cases">
+
+          <div class="case">
+            <div class="ct">Employee onboarding</div>
+            <div class="flow"><span class="tr">on</span> HR marks a candidate hired<br><span class="ar">&rarr;</span> generate offer letter for e-sign<br><span class="ar">&rarr;</span> open an IT ticket to create accounts<br><span class="ar">&rarr;</span> add to payroll &amp; schedule day-1 check-in</div>
+            <p class="stk">form &middot; DocuSign &middot; Jira &middot; Slack &middot; n8n</p>
+            <p class="out"><b>Hours &rarr; minutes</b>, and nothing gets dropped on a new hire's first day.</p>
+          </div>
+
+          <div class="case">
+            <div class="ct">Scheduled reporting</div>
+            <div class="flow"><span class="tr">every</span> Monday 08:00<br><span class="ar">&rarr;</span> pull sales from CRM + database<br><span class="ar">&rarr;</span> format, chart, summarize<br><span class="ar">&rarr;</span> post to Slack &amp; email the team</div>
+            <p class="stk">Postgres &middot; n8n &middot; Slack</p>
+            <p class="out"><b>Saves hours every month</b> and the report never gets forgotten.</p>
+          </div>
+
+          <div class="case">
+            <div class="ct">Lead capture &amp; enrichment</div>
+            <div class="flow"><span class="tr">on</span> website form submit (webhook)<br><span class="ar">&rarr;</span> enrich company data via API<br><span class="ar">&rarr;</span> dedupe &amp; create CRM record<br><span class="ar">&rarr;</span> alert the right rep in Slack</div>
+            <p class="stk">webhook &middot; enrichment API &middot; HubSpot &middot; Slack</p>
+            <p class="out"><b>Leads answered in minutes</b>, not the next business day.</p>
+          </div>
+
+          <div class="case">
+            <div class="ct">Content repurposing <span class="mono" style="font-size:11px;color:var(--accent-ink)">AI</span></div>
+            <div class="flow"><span class="tr">on</span> new blog post (RSS)<br><span class="ar">&rarr;</span> store in Airtable<br><span class="ar">&rarr;</span> LLM drafts a LinkedIn post + tweet thread<br><span class="ar">&rarr;</span> queue drafts for human review</div>
+            <p class="stk">RSS &middot; Airtable &middot; Claude &middot; n8n</p>
+            <p class="out"><b>One post becomes five</b>, with a person only approving.</p>
+          </div>
+
+          <div class="case">
+            <div class="ct">Invoice &amp; expense intake <span class="mono" style="font-size:11px;color:var(--accent-ink)">AI</span></div>
+            <div class="flow"><span class="tr">on</span> invoice email attachment<br><span class="ar">&rarr;</span> LLM extracts vendor, amount, dates<br><span class="ar">&rarr;</span> validate against rules<br><span class="ar">&rarr;</span> push to accounting, flag exceptions</div>
+            <p class="stk">Gmail &middot; LLM &middot; QuickBooks</p>
+            <p class="out"><b>No more manual data entry</b>; humans only touch the odd ones.</p>
+          </div>
+
+          <div class="case">
+            <div class="ct">Support triage agent <span class="mono" style="font-size:11px;color:var(--accent-ink)">AGENT</span></div>
+            <div class="flow"><span class="tr">on</span> new support ticket<br><span class="ar">&rarr;</span> agent classifies &amp; sets priority<br><span class="ar">&rarr;</span> drafts a reply using RAG over your docs<br><span class="ar">&rarr;</span> auto-answers simple ones, routes the rest</div>
+            <p class="stk">Zendesk &middot; vector DB &middot; LangGraph</p>
+            <p class="out"><b>Faster first response</b> and agents focus on hard tickets.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 05 RESOURCES -->
+      <section class="blk" id="resources">
+        <span class="eyebrow">05 &middot; Where to learn it</span>
+        <h2>Best resources</h2>
+        <p class="intro">Curated, current, mostly free. Open one per stage and actually work through it, don't collect them.</p>
+
+        <div class="rgroup">
+          <h3>Foundations</h3>
+          <div class="res">
+            <a class="r" href="https://automatetheboringstuff.com/" target="_blank" rel="noopener"><span class="rn">Automate the Boring Stuff with Python</span><span class="rt"><span class="free">Free</span> · book</span><span class="rd">Read the full 3rd edition online. The canonical way to learn practical Python.</span></a>
+            <a class="r" href="https://roadmap.sh/" target="_blank" rel="noopener"><span class="rn">roadmap.sh</span><span class="rt"><span class="free">Free</span> · maps</span><span class="rd">Visual skill roadmaps (Backend, DevOps, SQL) to fill programming gaps in order.</span></a>
+          </div>
+        </div>
+
+        <div class="rgroup">
+          <h3>APIs &amp; data</h3>
+          <div class="res">
+            <a class="r" href="https://learning.postman.com/" target="_blank" rel="noopener"><span class="rn">Postman Learning Center</span><span class="rt"><span class="free">Free</span> · hands-on</span><span class="rd">Learn to call, test and debug APIs before wiring them into a workflow.</span></a>
+            <a class="r" href="https://sqlbolt.com/" target="_blank" rel="noopener"><span class="rn">SQLBolt</span><span class="rt"><span class="free">Free</span> · interactive</span><span class="rd">Learn SQL in the browser, one short exercise at a time.</span></a>
+          </div>
+        </div>
+
+        <div class="rgroup">
+          <h3>Orchestration &middot; n8n</h3>
+          <div class="res">
+            <a class="r" href="https://docs.n8n.io/courses/level-one/" target="_blank" rel="noopener"><span class="rn">n8n Level-1 course</span><span class="rt"><span class="free">Free</span> · official</span><span class="rd">The official hands-on course. The fastest path to billable workflows.</span></a>
+            <a class="r" href="https://www.classcentral.com/report/best-n8n-courses/" target="_blank" rel="noopener"><span class="rn">Class Central: 10 best n8n courses</span><span class="rt"><span class="free">Free</span> · index</span><span class="rd">A ranked index of free and paid n8n courses. Skip the search.</span></a>
+            <a class="r" href="https://docs.n8n.io/" target="_blank" rel="noopener"><span class="rn">n8n documentation</span><span class="rt"><span class="free">Free</span> · reference</span><span class="rd">Nodes, expressions, hosting. The reference you'll keep open daily.</span></a>
+          </div>
+        </div>
+
+        <div class="rgroup">
+          <h3>AI &amp; agents</h3>
+          <div class="res">
+            <a class="r" href="https://huggingface.co/learn/agents-course" target="_blank" rel="noopener"><span class="rn">Hugging Face AI Agents Course</span><span class="rt"><span class="free">Free</span> · certified</span><span class="rd">The best single starting point: fundamentals through frameworks (LangGraph, smolagents), with certificates.</span></a>
+            <a class="r" href="https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/" target="_blank" rel="noopener"><span class="rn">DeepLearning.AI: AI Agents in LangGraph</span><span class="rt"><span class="free">Free audit</span> · course</span><span class="rd">Go deep on explicit agent state and control flow with LangGraph.</span></a>
+            <a class="r" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span class="rn">Anthropic prompt engineering docs</span><span class="rt"><span class="free">Free</span> · reference</span><span class="rd">How to get reliable, structured output and tool use from an LLM.</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CYBERSECURITY CTA -->
+      <section class="blk" id="cyber">
+        <span class="eyebrow">The add-on</span>
+        <h2>Is cybersecurity worth adding on top?</h2>
+        <p class="intro">Short version: yes, but as a paid layer on top of automation, not a career change. The full brief is its own page: the six security jobs ranked by fit, the market read, your two-lane plan, a six-month learning path, and the trap to avoid.</p>
+        <a class="cta" href="cybersecurity.html">Read the cybersecurity brief <span class="arw">&rarr;</span></a>
+      </section>
+
+      <p class="foot">
+        AUTOMATION ENGINEER FIELD GUIDE &middot; built for Eduardo / Sycosmart.<br>
+        Progress is stored only in this browser. Resources verified August 2026.
+      </p>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var KEY = 'ae-progress-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.skill input[type=checkbox]'));
+  var root = document.body;
+
+  // ---- restore ----
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){}
+  boxes.forEach(function(b){ if(saved[b.id]) b.checked = true; });
+
+  function save(){
+    var o = {};
+    boxes.forEach(function(b){ if(b.checked) o[b.id] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e){}
+  }
+
+  function refresh(){
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    var total = boxes.length;
+    var pct = total ? Math.round(done/total*100) : 0;
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('done').textContent = done;
+    document.getElementById('total').textContent = total;
+    // per-stage counts
+    document.querySelectorAll('.stage').forEach(function(st){
+      var ins = st.querySelectorAll('.skill input');
+      var d = Array.prototype.filter.call(ins, function(b){ return b.checked; }).length;
+      var el = st.querySelector('[data-count]');
+      if(el) el.textContent = d + '/' + ins.length;
+    });
+  }
+
+  boxes.forEach(function(b){ b.addEventListener('change', function(){ save(); refresh(); }); });
+
+  // ---- reset ----
+  document.getElementById('reset').addEventListener('click', function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    try { localStorage.removeItem(KEY); } catch(e){}
+    refresh();
+  });
+
+  // ---- level filter ----
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      c.setAttribute('aria-pressed','true');
+      root.setAttribute('data-filter', c.getAttribute('data-f'));
+    });
+  });
+
+  // ---- expand / collapse all ----
+  var tgl = document.getElementById('toggleAll');
+  tgl.addEventListener('click', function(){
+    var open = tgl.getAttribute('data-open') === 'true';
+    open = !open;
+    document.querySelectorAll('.stage').forEach(function(s){ s.open = open; });
+    tgl.setAttribute('data-open', String(open));
+    tgl.textContent = open ? 'Collapse all' : 'Expand all';
+  });
+
+  // ---- scroll-spy on sidebar ----
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.snav a'));
+  var secs = navLinks.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+  function spy(){
+    var pos = window.pageYOffset + 90, idx = 0;
+    secs.forEach(function(s,i){ if(s && s.offsetTop <= pos) idx = i; });
+    navLinks.forEach(function(a,i){ a.classList.toggle('active', i===idx); });
+  }
+  var t=false;
+  window.addEventListener('scroll', function(){ if(t) return; t=true; requestAnimationFrame(function(){ spy(); t=false; }); }, {passive:true});
+  window.addEventListener('resize', spy, {passive:true});
+
+  refresh(); spy();
+})();
+</script>
+</body>
+</html>

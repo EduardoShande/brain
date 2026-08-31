@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Memo: Is Cybersecurity Worth It?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap">
+<style>
+  :root{
+    --paper:#F3EAD9;
+    --paper-2:#F7F0E2;
+    --card:#FCF7EC;
+    --ink:#2A2420;
+    --ink-soft:#574E44;
+    --ink-faint:#8B7F6D;
+    --line:#E1D5BF;
+    --line-strong:#CDBEA2;
+    --accent:#AE3B2A;      /* red pen */
+    --accent-ink:#8C2C1E;  /* darker red for small text */
+    --accent-wash:#F1DFD3;
+    --good:#4E6A34;
+    --good-ink:#3C5427;
+    --good-wash:#E3E7D2;
+    --radius:4px;
+  }
+  :root[data-theme="dark"],
+  :root:not([data-theme="light"]) [data-nope]{}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#1E1913; --paper-2:#241E16; --card:#2A2318;
+      --ink:#EEE4D1; --ink-soft:#C3B7A2; --ink-faint:#8C8069;
+      --line:#3A3125; --line-strong:#4E4132;
+      --accent:#D9694F; --accent-ink:#E7846C; --accent-wash:#33231C;
+      --good:#9BB56E; --good-ink:#AEC384; --good-wash:#242A18;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1E1913; --paper-2:#241E16; --card:#2A2318;
+    --ink:#EEE4D1; --ink-soft:#C3B7A2; --ink-faint:#8C8069;
+    --line:#3A3125; --line-strong:#4E4132;
+    --accent:#D9694F; --accent-ink:#E7846C; --accent-wash:#33231C;
+    --good:#9BB56E; --good-ink:#AEC384; --good-wash:#242A18;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink-soft);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:19px;line-height:1.66;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 1px 1px, rgba(120,100,70,.05) 1px, transparent 0);
+    background-size:22px 22px;
+  }
+  ::selection{background:var(--accent-wash);color:var(--accent-ink)}
+
+  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;color:var(--ink);margin:0;line-height:1.12;font-weight:600;text-wrap:balance}
+  b,strong{color:var(--ink);font-weight:600}
+  em{font-style:italic}
+  a{color:var(--accent-ink);text-underline-offset:3px;text-decoration-thickness:1px}
+
+  .label{font-family:"Newsreader",serif;font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--ink-faint)}
+
+  .sheet{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,44px) 90px}
+
+  /* ---------------- running contents bar ---------------- */
+  .rail{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 90%,transparent);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);margin:0 calc(-1*clamp(20px,5vw,44px));
+    padding:9px clamp(20px,5vw,44px);display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .rail .re{font-family:"Fraunces",serif;font-weight:500;font-style:italic;font-size:14.5px;color:var(--ink);white-space:nowrap}
+  .rail nav{display:flex;gap:2px;flex-wrap:wrap}
+  .rail nav a{font-family:"Newsreader",serif;font-size:14px;color:var(--ink-faint);text-decoration:none;
+    padding:3px 9px;border-radius:3px;white-space:nowrap;transition:color .15s,background .15s}
+  .rail nav a:hover{color:var(--ink);background:var(--paper-2)}
+  .rail nav a.active{color:var(--accent-ink)}
+  .rail nav a.active::after{content:"";display:block;height:1.5px;background:var(--accent);margin:1px 9px 0}
+  .rail nav a b{font-family:inherit;color:inherit;font-weight:600;font-variant-numeric:oldstyle-nums}
+  @media(max-width:680px){.rail .re{display:none}.rail{justify-content:center}}
+
+  /* ---------------- masthead / letterhead ---------------- */
+  .letterhead{padding:clamp(40px,7vw,72px) 0 0}
+  .mtop{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-bottom:2px solid var(--ink);padding-bottom:12px}
+  .mtop .word{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(20px,3vw,26px);letter-spacing:.02em;color:var(--ink)}
+  .mtop .conf{font-size:12px}
+  .meta{margin-top:16px;display:grid;grid-template-columns:auto 1fr;gap:5px 22px;font-size:16px}
+  .meta dt{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+    font-weight:500;padding-top:5px;font-family:"Newsreader",serif}
+  .meta dd{margin:0;color:var(--ink)}
+  .meta dd.re{font-family:"Fraunces",serif;font-weight:500;font-size:19px}
+  .meta dd .q{color:var(--ink-faint)}
+
+  /* ---------------- opening / verdict ---------------- */
+  .open{margin:44px 0 0;max-width:34em}
+  .open .kicker{color:var(--accent-ink);font-style:italic;font-family:"Fraunces",serif;font-size:19px;margin:0 0 10px}
+  .open h1{font-weight:900;font-size:clamp(34px,6.6vw,64px);letter-spacing:-.018em;line-height:1.02}
+  .open h1 .u{background:linear-gradient(transparent 62%,var(--accent-wash) 62%);padding:0 .04em}
+  .open .lede{margin:22px 0 0;font-size:clamp(19px,2.3vw,22px);color:var(--ink-soft);line-height:1.6}
+  .open .lede::first-letter{initial-letter:2;-webkit-initial-letter:2;font-family:"Fraunces",serif;
+    font-weight:900;color:var(--accent);margin-right:.09em;font-size:1em}
+  @supports not (initial-letter:2){.open .lede::first-letter{font-size:3.1em;line-height:.8;float:left;
+    font-family:"Fraunces",serif;font-weight:900;color:var(--accent);margin:.05em .09em -.1em 0}}
+  .open .lede b{color:var(--ink)}
+
+  .verdict{margin:34px 0 0;padding:22px 26px;background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--accent);border-radius:var(--radius);max-width:none}
+  .verdict .vlab{color:var(--accent-ink);font-weight:500}
+  .verdict .vline{font-family:"Fraunces",serif;font-weight:600;color:var(--ink);font-size:clamp(20px,2.6vw,25px);
+    line-height:1.25;margin:9px 0 0;letter-spacing:-.01em}
+  .verdict .vsub{margin:12px 0 0;font-size:16.5px;color:var(--ink-soft)}
+  .verdict .vsub b{color:var(--ink)}
+
+  /* ---------------- marginalia band layout ---------------- */
+  .band{display:grid;grid-template-columns:180px minmax(0,1fr);gap:clamp(28px,4vw,52px);
+    padding:clamp(46px,6vw,70px) 0 0;align-items:start}
+  .band>.gutter{position:sticky;top:64px}
+  .band>.body{min-width:0;max-width:42em}
+  .band>.body>*+*{margin-top:18px}
+  @media(max-width:820px){
+    .band{grid-template-columns:1fr;gap:14px}
+    .band>.gutter{position:static;top:auto}
+  }
+
+  .secno{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(40px,5vw,58px);color:var(--line-strong);
+    line-height:.85;font-variant-numeric:oldstyle-nums}
+  .gtitle{font-family:"Fraunces",serif;font-weight:600;font-size:20px;color:var(--ink);margin-top:8px;line-height:1.15}
+  .note{margin-top:16px;font-family:"Newsreader",serif;font-style:italic;font-size:16px;line-height:1.5;
+    color:var(--accent-ink);padding-left:14px;border-left:1.5px solid var(--accent);position:relative}
+  .note.plain{color:var(--ink-faint);border-left-color:var(--line-strong)}
+  @media(max-width:820px){
+    .gutter{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px}
+    .secno{font-size:34px}.gtitle{margin-top:0}
+    .note{flex-basis:100%;margin-top:4px}
+  }
+
+  .band h2{font-size:clamp(23px,3vw,31px);font-weight:600;letter-spacing:-.012em}
+  .band .sub{color:var(--ink-soft);font-size:17.5px;font-style:italic;margin-top:6px}
+  .band p{margin:0}
+  .band p b{color:var(--ink)}
+
+  /* editorial rule between blocks */
+  hr.rule{border:0;height:1px;background:var(--line);margin:26px 0}
+
+  /* ---------------- roles as a ledger ---------------- */
+  .ledger{margin-top:6px;border-top:1px solid var(--line-strong)}
+  .lrow{display:grid;grid-template-columns:1fr auto;gap:8px 20px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .lrow .lname{font-family:"Fraunces",serif;font-weight:600;color:var(--ink);font-size:18px}
+  .lrow .lpay{font-size:14.5px;color:var(--ink-faint);font-style:italic;white-space:nowrap}
+  .lrow .ldesc{grid-column:1/-1;font-size:16px;color:var(--ink-soft);margin:0;max-width:52em}
+  .fit{font-family:"Newsreader",serif;font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:11.5px;white-space:nowrap}
+  .fit.top{color:var(--good-ink)} .fit.high{color:var(--good)} .fit.low,.fit.skip{color:var(--accent-ink)} .fit.future{color:var(--ink-faint)}
+  .fit::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:currentColor}
+
+  /* ---------------- figures inline ---------------- */
+  .figs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
+  @media(max-width:620px){.figs{grid-template-columns:1fr;gap:16px}}
+  .fig .n{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(28px,4vw,38px);color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .fig .d{font-size:15px;color:var(--ink-soft);margin-top:7px;line-height:1.45}
+  .fig{border-top:2px solid var(--line-strong);padding-top:12px}
+
+  /* pull quote */
+  .pull{font-family:"Fraunces",serif;font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(21px,2.7vw,27px);line-height:1.32;margin:26px 0;padding-left:22px;border-left:3px solid var(--accent)}
+  .pull b{font-style:normal;font-weight:600}
+
+  /* ---------------- plan table ---------------- */
+  .tbl{overflow-x:auto;margin-top:8px}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:16px}
+  thead th{font-family:"Newsreader",serif;font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:11.5px;
+    color:var(--ink-faint);text-align:left;padding:0 16px 10px 0;border-bottom:2px solid var(--ink);white-space:nowrap}
+  tbody td{padding:14px 16px 14px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+  tbody td:first-child{color:var(--ink);max-width:24em}
+  tbody tr:last-child td{border-bottom:0}
+  .verd{font-family:"Newsreader",serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:12px;white-space:nowrap}
+  .verd.do{color:var(--good-ink)} .verd.later{color:var(--ink-soft)} .verd.skip{color:var(--accent-ink)}
+
+  .offer{margin-top:26px;padding:22px 26px;background:var(--accent-wash);border-radius:var(--radius)}
+  .offer .k{color:var(--accent-ink);font-weight:500}
+  .offer h3{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:clamp(19px,2.3vw,23px);
+    line-height:1.3;margin:10px 0 12px;color:var(--ink)}
+  .offer p{font-size:16px;color:var(--ink-soft)}
+
+  /* ---------------- tl;dr trio ---------------- */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
+  @media(max-width:720px){.trio{grid-template-columns:1fr;gap:20px}}
+  .tstep .tn{font-family:"Fraunces",serif;font-weight:900;font-size:20px;color:var(--accent);
+    width:34px;height:34px;border:1.5px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-variant-numeric:oldstyle-nums}
+  .tstep h4{font-family:"Fraunces",serif;font-weight:600;font-size:18px;margin:12px 0 5px}
+  .tstep p{font-size:15.5px;color:var(--ink-soft);margin:0}
+
+  /* ---------------- roadmap spine ---------------- */
+  .road{margin-top:12px;padding-left:26px;position:relative;counter-reset:mile}
+  .road::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1.5px;background:var(--line-strong)}
+  .mile{position:relative;padding:0 0 26px}
+  .mile:last-child{padding-bottom:0}
+  .mile::before{counter-increment:mile;content:counter(mile);position:absolute;left:-26px;top:-1px;
+    width:22px;height:22px;border-radius:50%;background:var(--paper);border:1.5px solid var(--accent);color:var(--accent-ink);
+    font-family:"Fraunces",serif;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .mile .when{color:var(--accent-ink);font-style:italic;font-size:14.5px}
+  .mile h4{font-family:"Fraunces",serif;font-weight:600;font-size:18.5px;margin:2px 0 5px}
+  .mile p{font-size:16px;color:var(--ink-soft);margin:0}
+
+  /* ---------------- resource lists ---------------- */
+  .reslist{margin-top:10px}
+  .rgroup{margin-top:26px}
+  .rgroup:first-child{margin-top:6px}
+  .rgroup>.ghead{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line-strong);padding-bottom:7px}
+  .rgroup>.ghead .gt{font-family:"Fraunces",serif;font-weight:600;font-size:19px;color:var(--ink)}
+  .rgroup>.ghead .gp{font-size:13px;font-style:italic;color:var(--ink-faint);margin-left:auto}
+  .rgroup.a>.ghead{border-bottom-color:var(--good)} .rgroup.b>.ghead{border-bottom-color:var(--accent)}
+  .item{padding:15px 0;border-bottom:1px solid var(--line)}
+  .item:last-child{border-bottom:0}
+  .item .ihead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .item .iname{font-family:"Fraunces",serif;font-weight:600;font-size:17px;color:var(--ink)}
+  .item .start{font-family:"Newsreader",serif;font-weight:600;text-transform:uppercase;letter-spacing:.12em;
+    font-size:10.5px;color:var(--accent-ink)}
+  .item .start::before{content:"▸ "}
+  .item .idesc{font-size:15.5px;color:var(--ink-soft);margin:4px 0 0;max-width:56em}
+  .item .tags{font-size:13px;color:var(--ink-faint);font-style:italic;margin-top:5px}
+
+  /* ---------------- skill groups ---------------- */
+  .cols{columns:2;column-gap:44px;margin-top:8px}
+  @media(max-width:640px){.cols{columns:1}}
+  .grp{break-inside:avoid;margin-bottom:22px}
+  .grp h4{font-family:"Fraunces",serif;font-weight:600;font-size:16.5px;margin-bottom:8px;color:var(--ink)}
+  .grp h4 .warn{color:var(--accent-ink);font-style:italic;font-weight:400;font-size:14px}
+  .grp ul{list-style:none;margin:0;padding:0}
+  .grp li{font-size:15.5px;color:var(--ink-soft);line-height:1.42;padding:4px 0 4px 15px;position:relative}
+  .grp li::before{content:"\00B7";position:absolute;left:0;color:var(--accent);font-weight:700;font-size:1.3em;line-height:1}
+  .grp li b{color:var(--ink)}
+
+  /* ---------------- 90 day rows ---------------- */
+  .phase{display:grid;grid-template-columns:130px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:first-of-type{border-top:1px solid var(--line-strong)}
+  @media(max-width:620px){.phase{grid-template-columns:1fr;gap:5px}}
+  .phase .pw{font-style:italic;color:var(--accent-ink);font-size:15px;padding-top:2px}
+  .phase h4{font-family:"Fraunces",serif;font-weight:600;font-size:17.5px;margin:0 0 5px}
+  .phase p{font-size:15.5px;color:var(--ink-soft);margin:0}
+
+  /* ---------------- asides / trap ---------------- */
+  .aside{padding:20px 24px;border-radius:var(--radius);margin-top:8px}
+  .aside.warn{background:var(--accent-wash)}
+  .aside.tip{background:var(--good-wash);margin-top:20px}
+  .aside .k{font-weight:500}
+  .aside.warn .k{color:var(--accent-ink)}
+  .aside.tip .k{color:var(--good-ink)}
+  .aside p{margin:9px 0 0;font-size:16.5px;color:var(--ink-soft)}
+  .aside p b{color:var(--ink)}
+
+  /* ---------------- signoff ---------------- */
+  .signoff{margin-top:70px;padding-top:24px;border-top:2px solid var(--ink)}
+  .signoff .slab{color:var(--ink-faint)}
+  .signoff p{margin:12px 0 0;font-size:16.5px;color:var(--ink-soft);max-width:52em}
+  .signoff p b{color:var(--ink)}
+  .signoff .sig{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:22px;color:var(--ink);margin-top:20px}
+  .signoff .fine{margin-top:16px;font-size:13.5px;color:var(--ink-faint);font-style:italic}
+
+  .toplink{display:inline-block;margin-top:22px;font-size:14px;font-style:italic;color:var(--ink-faint);text-decoration:none}
+  .toplink:hover{color:var(--accent-ink)}
+
+  a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="rail">
+    <span class="re">Re: Is cybersecurity worth it?</span>
+    <nav>
+      <a href="#verdict">Verdict</a>
+      <a href="#roles"><b>1</b> The jobs</a>
+      <a href="#plan"><b>2</b> Your plan</a>
+      <a href="#automation"><b>3</b> Automation</a>
+      <a href="#roadmap"><b>4</b> Security path</a>
+      <a href="#trap"><b>5</b> The trap</a>
+    </nav>
+  </div>
+
+  <!-- LETTERHEAD -->
+  <header class="letterhead">
+    <div class="mtop">
+      <span class="word">Memorandum</span>
+      <span class="label conf">Private &middot; Sycosmart</span>
+    </div>
+    <dl class="meta">
+      <dt>To</dt><dd>Eduardo, automation &amp; data engineer, Santa Cruz</dd>
+      <dt>From</dt><dd>Your strategist</dd>
+      <dt>Date</dt><dd>August 2026</dd>
+      <dt>Re</dt><dd class="re">Is cybersecurity worth learning, <span class="q">for you specifically?</span></dd>
+    </dl>
+  </header>
+
+  <!-- OPENING / VERDICT -->
+  <section class="open" id="verdict">
+    <h1>Yes. But not the way<br>the internet <span class="u">means it.</span></h1>
+    <p class="lede">You already write software, automate workflows, and know APIs. So the question isn't whether cybersecurity is worth learning in the abstract. It's whether it wins you <b>high-ticket clients faster than automation already can</b>. That flips the answer.</p>
+
+    <div class="verdict">
+      <span class="label vlab">The verdict, in one line</span>
+      <p class="vline">Conditional go. Security is a paid layer on top of your automation skills. Not a career change, not a fresh start.</p>
+      <p class="vsub">"Become a cybersecurity analyst" is low-ROI for you. <b>"The automation engineer who makes security and compliance provable"</b> is high-ticket and hard to copy.</p>
+    </div>
+
+    <div class="figs" style="margin-top:34px">
+      <div class="fig"><div class="n">514K+</div><div class="d">open U.S. security roles, up 12%. Real demand.</div></div>
+      <div class="fig"><div class="n">#2</div><div class="d">fastest-growing skill category, behind only AI.</div></div>
+      <div class="fig"><div class="n">34% / 30%</div><div class="d">skills gap in AI and cloud security. The real shortage.</div></div>
+    </div>
+    <p style="margin-top:20px;max-width:42em"><b>The catch:</b> that gap is senior, cloud and AI-adjacent. Entry-level "Security+ then apply" is flooded. Your edge is that you can skip the junior job and sell the automation the market is short on.</p>
+  </section>
+
+  <!-- 01 THE JOBS -->
+  <section class="band" id="roles">
+    <div class="gutter">
+      <div class="secno">1</div>
+      <p class="note">Most content pushes you toward the worst-fitting one.</p>
+    </div>
+    <div class="body">
+      <h2>Six jobs hiding inside one word</h2>
+      <div class="ledger">
+        <div class="lrow">
+          <span class="lname">GRC / Compliance Consultant</span><span class="lpay">$125-250 / hr</span>
+          <p class="ldesc">Takes companies through SOC 2, ISO 27001, HIPAA. Process plus evidence collection. Your scripts already do this. <span class="fit top">Highest fit</span></p>
+        </div>
+        <div class="lrow">
+          <span class="lname">Security Automation / Tooling</span><span class="lpay">Product economics</span>
+          <p class="ldesc">Builds the scripts and platforms that do the work. Vanta turned this into a $4.15B company. <span class="fit top">Highest leverage</span></p>
+        </div>
+        <div class="lrow">
+          <span class="lname">Penetration Tester / Red Team</span><span class="lpay">$100-300 / hr</span>
+          <p class="ldesc">Break web apps and APIs before criminals do. $3K-20K per engagement. <span class="fit high">High fit</span></p>
+        </div>
+        <div class="lrow">
+          <span class="lname">Fractional vCISO</span><span class="lpay">$5K-20K / mo</span>
+          <p class="ldesc">Retained security lead for small companies. Needs 3-5 years of credibility first. <span class="fit future">Future fit</span></p>
+        </div>
+        <div class="lrow">
+          <span class="lname">SOC Analyst / Blue Team</span><span class="lpay">Salaried, capped</span>
+          <p class="ldesc">Watches alerts in someone else's SOC. Capped pay, wastes your edge. <span class="fit low">Low fit</span></p>
+        </div>
+        <div class="lrow">
+          <span class="lname">Bug Bounty Hunter</span><span class="lpay">Power-law lottery</span>
+          <p class="ldesc">A few earn six figures, most earn nothing. Side-quest, not a business. <span class="fit skip">Not a model</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PLAN -->
+  <section class="band" id="plan">
+    <div class="gutter">
+      <div class="secno">2</div>
+      <p class="note">Run both lanes. Weight the first.</p>
+    </div>
+    <div class="body">
+      <h2>Two lanes, one bet</h2>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Path</th><th>Time to $1</th><th>Ceiling</th><th>Fit</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr><td>Compliance automation for SaaS/SMB (SOC 2, ISO 27001 evidence via scripts)</td><td>4-8 wks</td><td>Retainer, then SaaS</td><td>Automation + APIs</td><td><span class="verd do">Do this</span></td></tr>
+            <tr><td>API / web-app penetration testing for SaaS</td><td>6-12 wks</td><td>$3K-20K / job</td><td>You build APIs</td><td><span class="verd do">Do this</span></td></tr>
+            <tr><td>Fractional vCISO retainer</td><td>1-2 yrs</td><td>$5K-20K / mo</td><td>Needs a record</td><td><span class="verd later">Later</span></td></tr>
+            <tr><td>SOC analyst / employee cybersecurity job</td><td>3-6 mo search</td><td>Salary-capped</td><td>Wastes your edge</td><td><span class="verd skip">Skip</span></td></tr>
+            <tr><td>Bug bounty as primary income</td><td>Unpredictable</td><td>Lottery</td><td>Hobby, not a plan</td><td><span class="verd skip">Skip</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="offer">
+        <span class="label k">The offer to build</span>
+        <h3>"I automate your SOC 2 / ISO 27001 readiness, so you don't pay $20K to a consultant or wait months for an audit firm."</h3>
+        <p>Consultants charge $10K-30K for a SOC 2 Type I doing evidence-gathering by hand. Your scripts automate it against AWS, GCP, GitHub and Okta APIs. Package it as a <b>$3K-8K engagement or a $2K-5K/mo retainer</b>: undercut them, beat them on turnaround.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 AUTOMATION + AI AGENTS -->
+  <section class="band" id="automation">
+    <div class="gutter">
+      <div class="secno">3</div>
+      <p class="note">The spine. It pays whether or not security sticks.</p>
+    </div>
+    <div class="body">
+      <h2>Automation and AI agents: your real edge</h2>
+      <p class="sub">Security is the wrapper. Automation is the leverage, and agents are the tier clients pay 30-50% more for.</p>
+      <div class="figs" style="margin-top:18px">
+        <div class="fig"><div class="n">$35B&nbsp;&rarr;&nbsp;$247B</div><div class="d">automation market, 2026 to 2035. 24% CAGR.</div></div>
+        <div class="fig"><div class="n">#1</div><div class="d">"AI engineer", fastest-growing title for young workers, 2026.</div></div>
+        <div class="fig"><div class="n">$500-$25K</div><div class="d">n8n project range: single build to agency retainer.</div></div>
+      </div>
+
+      <hr class="rule">
+      <h3 style="font-size:19px;margin-bottom:4px">The roadmap, stage by stage</h3>
+      <div class="road">
+        <div class="mile"><span class="when">Weeks 1-4 · Foundations</span><h4>Rebuild your manual work in n8n</h4><p>Self-host n8n on a $5-20/mo VPS. Turn 3 tasks you do by hand into documented, error-handled workflows. Sharpen Python, REST APIs and webhooks as you go. That's your first portfolio.</p></div>
+        <div class="mile"><span class="when">Weeks 4-8 · Add AI</span><h4>Wire an LLM into a workflow</h4><p>Add a Claude or OpenAI call: summarize, classify, extract, draft. Get reliable structured JSON out every time. This single step lifts your rate into the premium tier.</p></div>
+        <div class="mile"><span class="when">Weeks 8-12 · Build agents</span><h4>From single calls to agents that act</h4><p>Move to tool-calling agents that work in steps. Add memory and RAG so they use real data. Use LangGraph or CrewAI for control. Add guardrails and evals so they don't break in production. This is the skill few can actually deliver.</p></div>
+        <div class="mile"><span class="when">Month 4+ · Productize</span><h4>Package it and charge for outcomes</h4><p>Turn repeatable builds into retainers or a micro-SaaS. Add monitoring, logging and clean deployment. Price on hours saved, not hours worked.</p></div>
+      </div>
+
+      <hr class="rule">
+      <h3 style="font-size:19px;margin-bottom:4px">Go deep on these</h3>
+      <div class="cols" style="margin-top:6px">
+        <div class="grp"><h4>Core engineering</h4><ul>
+          <li><b>Python</b>, for anything off-the-shelf tools can't do</li>
+          <li><b>JS / Node.js</b>, custom n8n functions and webhooks</li>
+          <li><b>Git / GitHub</b>, non-negotiable past project 1</li>
+          <li><b>SQL + Postgres</b>, every serious automation uses a DB</li>
+        </ul></div>
+        <div class="grp"><h4>AI &amp; agents <span class="warn">(the premium tier)</span></h4><ul>
+          <li><b>LLM APIs</b>, Claude and OpenAI from inside a workflow</li>
+          <li><b>Structured outputs</b>, reliable JSON and tool/function calling</li>
+          <li><b>Agent frameworks</b>, LangGraph, CrewAI, n8n AI nodes</li>
+          <li><b>RAG</b>, embeddings and a vector DB for real data</li>
+          <li><b>Memory</b>, state that survives across steps</li>
+          <li><b>Evals &amp; guardrails</b>, so agents don't break loose</li>
+        </ul></div>
+        <div class="grp"><h4>Integration layer</h4><ul>
+          <li><b>REST APIs</b>, auth, rate limits, pagination</li>
+          <li><b>Webhooks</b>, real-time triggers from events</li>
+          <li><b>Queues &amp; retries</b>, idempotency, dead-letter handling</li>
+        </ul></div>
+        <div class="grp"><h4>Orchestration</h4><ul>
+          <li><b>n8n</b>, self-hosted, best margins for a builder</li>
+          <li><b>Zapier &amp; Make</b>, clients already use one</li>
+          <li><b>Airtable / Sheets</b>, the glue in most SMB automations</li>
+        </ul></div>
+        <div class="grp"><h4>Infra &amp; trust</h4><ul>
+          <li><b>Docker</b>, self-host n8n and tools cheaply</li>
+          <li><b>A cheap VPS</b>, $5-20/mo to start</li>
+          <li><b>Monitoring &amp; logging</b>, catch a broken flow first</li>
+          <li><b>Secrets handling</b>, where security and automation meet</li>
+        </ul></div>
+        <div class="grp"><h4>Business <span class="warn">(most skip this)</span></h4><ul>
+          <li><b>Process mapping</b>, find what's worth automating</li>
+          <li><b>Scoping &amp; pricing</b>, fixed fee vs. retainer</li>
+          <li><b>SOPs &amp; handoff</b>, what makes a client renew</li>
+          <li><b>ROI framing</b>, hours saved times hourly cost</li>
+        </ul></div>
+      </div>
+
+      <hr class="rule">
+      <h3 style="font-size:19px;margin-bottom:4px">Where to learn it</h3>
+      <div class="reslist">
+        <div class="item">
+          <div class="ihead"><span class="iname">n8n Academy, Level 1 (official)</span><span class="start">start here</span></div>
+          <p class="idesc">Free course and badge. Short theory, build-it-now exercises. The tool you'll bill with.</p>
+          <p class="tags">Free · ~1 day · Beginner</p>
+        </div>
+        <div class="item">
+          <div class="ihead"><span class="iname">Anthropic docs + prompt engineering guide</span></div>
+          <p class="idesc">How to get reliable structured output and tool use from Claude. The reference you'll keep open.</p>
+          <p class="tags">Free · reference · All levels</p>
+        </div>
+        <div class="item">
+          <div class="ihead"><span class="iname">DeepLearning.AI, short courses on AI agents</span></div>
+          <p class="idesc">Free, hands-on, an hour each. Function calling, RAG, and multi-agent patterns explained simply.</p>
+          <p class="tags">Free · ~1 hr each · Beginner to Int</p>
+        </div>
+        <div class="item">
+          <div class="ihead"><span class="iname">LangChain &amp; LangGraph docs</span></div>
+          <p class="idesc">The framework for real agents: state, tools, control flow. Learn LangGraph for anything multi-step.</p>
+          <p class="tags">Free · reference · Intermediate</p>
+        </div>
+      </div>
+
+      <p style="margin-top:22px;max-width:42em"><b>Rate card:</b> $500-1,500 for a single build, $1,500-5,000 for multi-step systems, $500-2,000/mo for retainers. Don't build one more thing until you've quoted 3 real prospects at these numbers.</p>
+    </div>
+  </section>
+
+  <!-- 05 SECURITY ROADMAP -->
+  <section class="band" id="roadmap">
+    <div class="gutter">
+      <div class="secno">4</div>
+      <p class="note">Certs buy vocabulary, not clients.</p>
+    </div>
+    <div class="body">
+      <h2>Six months to your first paid engagement</h2>
+      <p class="sub">Pick <em>one</em> lane. Doing both finishes neither.</p>
+
+      <div class="road" style="margin-top:16px">
+        <div class="mile"><span class="when">Month 1-2 · Foundation</span><h4>Speak the client's language</h4><p>Work through <b>Professor Messer's free Security+ course</b>. The goal is fluency in frameworks, controls and risk, so a founder trusts you in the room. Sit the exam later, only if a client wants it.</p></div>
+        <div class="mile"><span class="when">Month 2-4 · Pick your lane</span><h4>Go deep on ONE lane, hands-on</h4><p><b>Compliance:</b> learn the real SOC 2 / ISO 27001 control lists, then rebuild what Vanta automates: scripts checking MFA, IAM sprawl, S3 exposure via cloud APIs. <b>API/web:</b> APIsec University plus PortSwigger labs.</p></div>
+        <div class="mile"><span class="when">Month 4-6 · First clients</span><h4>2-3 free audits, then paid work</h4><p>Run 2-3 free reviews for people in your network. You need <b>case studies more than cash</b> now. Convert the third and fourth into paid $2K-5K engagements.</p></div>
+      </div>
+
+      <hr class="rule">
+      <h3 style="font-size:19px;margin-bottom:10px">Best resources, mostly free</h3>
+      <div class="reslist">
+        <div class="rgroup">
+          <div class="ghead"><span class="gt">Foundation, everyone</span><span class="gp">light, part-time</span></div>
+          <div class="item">
+            <div class="ihead"><span class="iname">Professor Messer, Security+ SY0-701</span><span class="start">start here</span></div>
+            <p class="idesc">The free, complete video series. Gives you the vocabulary of security. Add the exam only if a client asks.</p>
+            <p class="tags">Free · ~6-8 weeks · Beginner</p>
+          </div>
+        </div>
+
+        <div class="rgroup a">
+          <div class="ghead"><span class="gt">Lane A, Compliance automation</span><span class="gp">your strongest wedge</span></div>
+          <div class="item">
+            <div class="ihead"><span class="iname">Vanta, "How to automate SOC 2 &amp; ISO 27001"</span><span class="start">start here</span></div>
+            <p class="idesc">See exactly what you'll automate and undercut. The market leader's playbook, free.</p>
+            <p class="tags">Free · 1-2 hrs · Intro</p>
+          </div>
+          <div class="item">
+            <div class="ihead"><span class="iname">SOC 2 Trust Services Criteria + ISO 27001 Annex A</span></div>
+            <p class="idesc">The actual control lists you'll turn into scripts. This <em>is</em> the checklist.</p>
+            <p class="tags">Free · ongoing · Core</p>
+          </div>
+          <div class="item">
+            <div class="ihead"><span class="iname">flaws2.cloud + CloudGoat</span></div>
+            <p class="idesc">Hands-on AWS security labs. Where compliance evidence actually lives: IAM, MFA, S3, access.</p>
+            <p class="tags">Free · weekends · Intermediate</p>
+          </div>
+        </div>
+
+        <div class="rgroup b">
+          <div class="ghead"><span class="gt">Lane B, API &amp; web security</span><span class="gp">rides skills you have</span></div>
+          <div class="item">
+            <div class="ihead"><span class="iname">APIsec University, API Penetration Testing</span><span class="start">start here</span></div>
+            <p class="idesc">Free course and cert, built for your background. 135K+ students. The best free on-ramp.</p>
+            <p class="tags">Free · ~6-8 hrs · Beginner to Int</p>
+          </div>
+          <div class="item">
+            <div class="ihead"><span class="iname">PortSwigger Web Security Academy</span></div>
+            <p class="idesc">The gold standard for web AppSec, from the makers of Burp Suite. Free forever.</p>
+            <p class="tags">Free · ongoing · All levels</p>
+          </div>
+          <div class="item">
+            <div class="ihead"><span class="iname">Certs: eJPT, then OSCP</span></div>
+            <p class="idesc">eJPT (~$200) as a cheap proof point. OSCP (~$1,700) only once you know you'll use it.</p>
+            <p class="tags">Paid · later · Proof</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 TRAP -->
+  <section class="band" id="trap">
+    <div class="gutter">
+      <div class="secno">5</div>
+    </div>
+    <div class="body">
+      <h2>The trap that costs a year</h2>
+      <div class="aside warn">
+        <span class="label k">Demand stats aren't easy hiring</span>
+        <p>The 514K headline sells bootcamps. The real shortage is senior <b>AI, cloud and zero-trust</b> security. Entry-level "I have Security+, I want a SOC job" is one of the most saturated lanes in tech. "Get certified, apply" means competing on price.</p>
+      </div>
+      <div class="aside tip">
+        <span class="label k">The part most people miss</span>
+        <p>Security consulting is <b>trust and referral, not cold outreach.</b> Your fastest first client is a warm intro from a founder or agency owner you know. Lead with automation, and add security as the <b>specialization, not the identity you start from scratch.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNOFF -->
+  <div class="signoff">
+    <span class="label slab">Bottom line</span>
+    <p><b>Conditional go.</b> Go deeper on automation and AI agents first; that's the engine. Bolt security and compliance on top and sell it as a service. <b>Do:</b> compliance automation + API pentesting for SaaS/SMB. <b>Later:</b> the vCISO retainer. <b>Skip:</b> the SOC job, bug bounty as income, and the cert-then-apply trap.</p>
+    <p class="sig">Your strategist</p>
+    <p class="fine">Prepared for Eduardo · Sycosmart. Not financial or career advice, just an honest read.</p>
+    <a href="#verdict" class="toplink">↑ Back to the top</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // smooth-scroll for contents links, with sticky-rail offset (works even where native anchors don't)
+  var rail = document.querySelector('.rail');
+  function offset(){ return (rail ? rail.offsetHeight : 0) + 12; }
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail nav a[href^="#"], a.toplink[href^="#"]'));
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if(!el) return;
+      e.preventDefault();
+      var y = el.getBoundingClientRect().top + window.pageYOffset - offset();
+      var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      window.scrollTo({top:y, behavior:reduce?'auto':'smooth'});
+      history.replaceState(null,'','#'+el.id);
+    });
+  });
+
+  // scroll-spy: underline the current section in the contents bar
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.rail nav a[href^="#"]'));
+  var sections = navLinks.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+  function spy(){
+    var pos = window.pageYOffset + offset() + 8;
+    var idx = 0;
+    sections.forEach(function(s,i){ if(s && s.offsetTop <= pos) idx = i; });
+    navLinks.forEach(function(a,i){ a.classList.toggle('active', i===idx); });
+  }
+  var t=false;
+  window.addEventListener('scroll', function(){ if(t) return; t=true; requestAnimationFrame(function(){ spy(); t=false; }); }, {passive:true});
+  window.addEventListener('resize', spy, {passive:true});
+  spy();
+})();
+</script>
+</body>
+</html>

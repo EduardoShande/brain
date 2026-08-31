@@ -1,0 +1,363 @@
+<title>The Database Field Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#E9ECF1;
+    --paper-2:#EFF2F6;
+    --card:#FBFCFE;
+    --ink:#141C28;
+    --ink-soft:#43546A;
+    --ink-faint:#7A8BA0;
+    --line:#D2D9E2;
+    --line-strong:#BAC4D0;
+    --teal:#0E7A72;
+    --teal-ink:#0B615A;
+    --teal-wash:#D7E7E4;
+    --amber:#9A5B12;
+    --amber-wash:#F0E4D2;
+    --code-bg:#141C28;
+    --code-ink:#D5DEEA;
+    --radius:6px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E141D;
+      --paper-2:#131B25;
+      --card:#172230;
+      --ink:#E7ECF3;
+      --ink-soft:#A7B5C6;
+      --ink-faint:#6C7E92;
+      --line:#26333F;
+      --line-strong:#37485A;
+      --teal:#3FBFB2;
+      --teal-ink:#5BD3C6;
+      --teal-wash:#12312D;
+      --amber:#D69A56;
+      --amber-wash:#2E2312;
+      --code-bg:#0A0F16;
+      --code-ink:#C4D0DE;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E141D;
+    --paper-2:#131B25;
+    --card:#172230;
+    --ink:#E7ECF3;
+    --ink-soft:#A7B5C6;
+    --ink-faint:#6C7E92;
+    --line:#26333F;
+    --line-strong:#37485A;
+    --teal:#3FBFB2;
+    --teal-ink:#5BD3C6;
+    --teal-wash:#12312D;
+    --amber:#D69A56;
+    --amber-wash:#2E2312;
+    --code-bg:#0A0F16;
+    --code-ink:#C4D0DE;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink-soft);
+    font-family:"Spectral",Georgia,serif;font-size:18.5px;line-height:1.62;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--teal-wash);color:var(--teal-ink)}
+  h1,h2,h3,h4{font-family:"Archivo",system-ui,sans-serif;color:var(--ink);margin:0;line-height:1.08;font-weight:800;text-wrap:balance}
+  b,strong{color:var(--ink);font-weight:600}
+  em{font-style:italic}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+  .sheet{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,48px) 96px}
+
+  /* label */
+  .label{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.16em;
+    font-size:11.5px;color:var(--ink-faint);font-weight:500}
+
+  /* running rail */
+  .rail{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    margin:0 calc(-1*clamp(20px,5vw,48px));padding:10px clamp(20px,5vw,48px);
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .rail .brand{font-family:"Archivo",sans-serif;font-weight:800;font-size:14px;color:var(--ink);letter-spacing:.01em;white-space:nowrap}
+  .rail .brand span{color:var(--teal-ink)}
+  .rail nav{display:flex;gap:1px;flex-wrap:wrap}
+  .rail nav a{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);text-decoration:none;
+    padding:4px 8px;border-radius:4px;transition:color .15s,background .15s}
+  .rail nav a:hover{color:var(--ink);background:var(--paper-2)}
+  .rail nav a.active{color:var(--teal-ink)}
+  @media(max-width:720px){.rail nav{display:none}}
+
+  /* masthead */
+  .masthead{padding:clamp(44px,7vw,80px) 0 0}
+  .mrow{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-bottom:2px solid var(--ink);padding-bottom:14px}
+  .mrow .wm{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(15px,2.4vw,19px);letter-spacing:.02em;color:var(--ink)}
+  h1{font-weight:900;font-size:clamp(38px,8vw,82px);letter-spacing:-.03em;line-height:.96;margin:30px 0 0;color:var(--ink)}
+  h1 .t{color:var(--teal-ink)}
+  .dek{margin:22px 0 0;max-width:33em;font-size:clamp(19px,2.3vw,22px);color:var(--ink-soft);line-height:1.55}
+  .dek b{color:var(--ink)}
+  .dek::first-letter{initial-letter:2;-webkit-initial-letter:2;font-family:"Archivo",sans-serif;
+    font-weight:900;color:var(--teal);margin-right:.08em}
+  @supports not (initial-letter:2){.dek::first-letter{font-size:3em;line-height:.82;float:left;
+    font-family:"Archivo",sans-serif;font-weight:900;color:var(--teal);margin:.06em .08em -.08em 0}}
+
+  .callout{margin:30px 0 0;padding:20px 24px;background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--teal);border-radius:var(--radius)}
+  .callout .label{color:var(--teal-ink)}
+  .callout p{margin:8px 0 0;font-size:17px}
+  .callout b{color:var(--ink)}
+
+  /* band = section */
+  .band{display:grid;grid-template-columns:150px minmax(0,1fr);gap:clamp(26px,4vw,54px);
+    padding:clamp(48px,6vw,72px) 0 0;align-items:start}
+  .band>.gutter{position:sticky;top:60px}
+  .band>.body{min-width:0;max-width:41em}
+  .band>.body>*+*{margin-top:16px}
+  @media(max-width:840px){
+    .band{grid-template-columns:1fr;gap:12px}
+    .band>.gutter{position:static;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+      border-bottom:1px solid var(--line);padding-bottom:10px}
+  }
+  .secno{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(38px,4.6vw,52px);
+    color:var(--line-strong);line-height:.82;font-variant-numeric:tabular-nums}
+  .gtitle{font-family:"JetBrains Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--teal-ink);margin-top:12px}
+  @media(max-width:840px){.secno{font-size:32px}.gtitle{margin-top:0}}
+
+  .band h2{font-size:clamp(24px,3.2vw,33px);font-weight:800;letter-spacing:-.015em;line-height:1.06}
+  .lede-line{font-family:"Archivo",sans-serif;font-weight:600;color:var(--ink);font-size:19px;line-height:1.35;margin-top:6px}
+  .band p{margin:0}
+  .band a{color:var(--teal-ink)}
+
+  /* margin note */
+  .mnote{margin-top:14px;font-style:italic;font-size:16px;line-height:1.5;color:var(--amber);
+    padding-left:14px;border-left:2px solid var(--amber)}
+  .mnote .label{color:var(--amber);display:block;margin-bottom:2px;font-style:normal}
+
+  /* code */
+  pre{margin:14px 0 0;background:var(--code-bg);color:var(--code-ink);border-radius:var(--radius);
+    padding:16px 18px;overflow-x:auto;font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.6;
+    border:1px solid var(--line-strong)}
+  pre .c{color:var(--ink-faint)}
+  pre .k{color:var(--teal-ink);font-weight:500}
+  pre .bad{color:var(--amber)}
+
+  /* quick pick table */
+  .picks{margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+  .picks .r{display:grid;grid-template-columns:1fr 1.5fr;gap:16px;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .picks .r:last-child{border-bottom:0}
+  .picks .r .w{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--teal-ink);font-weight:500}
+  .picks .r .d{font-size:16px}
+  .picks .r .d b{color:var(--ink)}
+  @media(max-width:520px){.picks .r{grid-template-columns:1fr;gap:3px}}
+
+  /* closing */
+  .close{margin-top:clamp(56px,7vw,84px);border-top:2px solid var(--ink);padding-top:26px}
+  .close h2{font-family:"Archivo",sans-serif;font-size:clamp(22px,3vw,28px);font-weight:900;letter-spacing:-.01em}
+  .cliff{margin-top:18px;display:grid;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .cliff .row{display:grid;grid-template-columns:30px 1fr;gap:14px;padding:14px 18px;background:var(--card);border-bottom:1px solid var(--line)}
+  .cliff .row:last-child{border-bottom:0}
+  .cliff .n{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-weight:700;font-size:14px}
+  .cliff .row p{margin:0;font-size:16.5px}
+  .cliff .row b{color:var(--ink)}
+
+  .foot{margin-top:44px;font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-faint);line-height:1.8}
+  .foot b{color:var(--ink-soft);font-weight:500}
+
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="sheet">
+
+  <div class="rail">
+    <span class="brand">DB<span>/</span>FIELD GUIDE</span>
+    <nav>
+      <a href="#s1">01 Choose</a>
+      <a href="#s2">02 Model</a>
+      <a href="#s3">03 Index</a>
+      <a href="#s4">04 Transactions</a>
+      <a href="#s5">05 Migrate</a>
+      <a href="#s6">06 Secure</a>
+      <a href="#s7">07 Scale</a>
+      <a href="#s8">08 Survive</a>
+    </nav>
+  </div>
+
+  <header class="masthead">
+    <div class="mrow">
+      <span class="wm">FOR EDUARDO · DATA &amp; AUTOMATION ENGINEER</span>
+      <span class="label">Senior reference</span>
+    </div>
+    <h1>What actually matters about <span class="t">databases</span></h1>
+    <p class="dek">You already know the mechanics: ETL, star schemas, Postgres, Snowflake, BigQuery, dbt. So this is not a tutorial. It is the <b>judgment layer</b>: the eight decisions that separate a database that quietly holds a business together from one that loses trust, money, or a client at the worst possible moment.</p>
+
+    <div class="callout">
+      <span class="label">Why this is worth your time</span>
+      <p>Your apps are ledgers. A fiado balance, a client's revenue data, a payment record. <b>The database is the product's promise.</b> Get it right and "your data is safe and correct" becomes a real selling point for high-ticket work. Get it wrong once and the trust never comes back.</p>
+    </div>
+  </header>
+
+  <!-- 01 -->
+  <section class="band" id="s1">
+    <div class="gutter"><div class="secno">01</div><div class="gtitle">Choose</div></div>
+    <div class="body">
+      <h2>Pick the boring database on purpose</h2>
+      <p class="lede-line">Default to Postgres. Reach for anything else only when a real constraint forces you.</p>
+      <p>Most "we need a special database" instincts are premature. Postgres does relational, JSON, full text search, geospatial, and now vector search in one engine you already know. It carries a product from first user to millions. The exotic options solve problems you probably do not have yet, and each one adds an operational tax you pay forever.</p>
+      <div class="picks">
+        <div class="r"><span class="w">Postgres</span><span class="d"><b>The default.</b> Transactional apps, mixed workloads, anything with money or relationships. Supabase gives you it managed.</span></div>
+        <div class="r"><span class="w">SQLite</span><span class="d"><b>Underrated.</b> Local-first, edge, single-tenant tools. Your PWA prototypes can start here before a server exists.</span></div>
+        <div class="r"><span class="w">Snowflake / BigQuery</span><span class="d"><b>Analytics, not the app.</b> Scan-heavy reporting over history. Never the live transactional store.</span></div>
+        <div class="r"><span class="w">Redis</span><span class="d"><b>A layer, not a home.</b> Cache, queues, rate limits, sessions. Not your source of truth.</span></div>
+        <div class="r"><span class="w">Mongo / document</span><span class="d"><b>Only for genuinely schemaless data.</b> Most "flexible" schemas are relational schemas you have not modeled yet.</span></div>
+      </div>
+      <div class="mnote"><span class="label">Gotcha</span>Splitting into a second database type triples your failure modes: two backup stories, two consistency models, two things to monitor. Earn that cost, do not assume it.</div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="band" id="s2">
+    <div class="gutter"><div class="secno">02</div><div class="gtitle">Model</div></div>
+    <div class="body">
+      <h2>Model for how you read, not just how you store</h2>
+      <p class="lede-line">Normalize until it hurts, then denormalize until it works.</p>
+      <p>Your data-warehouse instinct is dimensional. For an application store, invert the priority. Start normalized so writes stay correct and there is one source of truth for every fact. Then, only where a hot read path proves it needs it, denormalize deliberately: a cached balance, a counter, a materialized view. The mistake is denormalizing early for a read that never becomes hot.</p>
+      <p>Choose keys with intent. Prefer a stable surrogate key (a <code>bigint</code> identity or a UUID) over anything a human might want to change later. Put real foreign keys and constraints in the schema. The database enforcing your rules is worth more than every application-layer check, because the database is the one thing every path goes through.</p>
+      <div class="mnote"><span class="label">For a money app</span>Never store money as <code>float</code>. Use <code>numeric</code> / <code>decimal</code>, or integer cents. Floating point rounding on a fiado balance is a bug you will not see until a vendor does.</div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="band" id="s3">
+    <div class="gutter"><div class="secno">03</div><div class="gtitle">Index</div></div>
+    <div class="body">
+      <h2>Indexes are the line between fast and dead</h2>
+      <p class="lede-line">Index what you filter, join, and sort by. Nothing else.</p>
+      <p>A missing index is the single most common reason an app that felt instant at 100 rows crawls at 100,000. But an index is not free: every one slows writes and costs storage, so indexing every column is its own bug. The skill is reading the plan, not guessing.</p>
+      <pre><span class="c">-- Stop guessing. Ask the planner what it actually does.</span>
+<span class="k">EXPLAIN ANALYZE</span> <span class="k">SELECT</span> * <span class="k">FROM</span> ledger_entries
+<span class="k">WHERE</span> vendor_id = 42 <span class="k">AND</span> created_at &gt; now() - interval '30 days';
+
+<span class="c">-- Seq Scan on a big table under a filter = your signal to index.</span>
+<span class="k">CREATE INDEX</span> idx_ledger_vendor_recent
+  <span class="k">ON</span> ledger_entries (vendor_id, created_at <span class="k">DESC</span>);</pre>
+      <p>Learn to spot <code>Seq Scan</code> where you expected a lookup, watch the row estimates diverge from reality, and put the most selective column first in a composite index. This one habit, reading <code>EXPLAIN ANALYZE</code>, resolves the majority of "the app is slow" tickets you will ever get.</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="band" id="s4">
+    <div class="gutter"><div class="secno">04</div><div class="gtitle">Transactions</div></div>
+    <div class="body">
+      <h2>Transactions are how you keep promises</h2>
+      <p class="lede-line">If two facts must both be true or both be false, they belong in one transaction.</p>
+      <p>ACID is not academic once real money moves. Recording a payment and lowering a balance are one atomic act, never two hopeful writes. Wrap them so a crash between them can never leave the ledger half updated.</p>
+      <pre><span class="k">BEGIN</span>;
+  <span class="k">UPDATE</span> accounts <span class="k">SET</span> balance = balance - 50 <span class="k">WHERE</span> id = 1;
+  <span class="k">INSERT INTO</span> payments (account_id, amount) <span class="k">VALUES</span> (1, 50);
+<span class="k">COMMIT</span>;  <span class="c">-- both land, or neither does</span></pre>
+      <p>Then know your isolation level. The default (<code>READ COMMITTED</code>) allows two concurrent requests to both read a balance, both act on it, and clobber each other. For anything where correctness under concurrency matters, either raise isolation or take an explicit row lock with <code>SELECT ... FOR UPDATE</code>. This is the class of bug that only appears under load, in production, with real users, which is the worst time to learn it exists.</p>
+      <div class="mnote"><span class="label">Rule of thumb</span>Keep transactions short. A transaction held open while you call an external API locks rows and starves everyone else. Do the slow work outside the lock.</div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="band" id="s5">
+    <div class="gutter"><div class="secno">05</div><div class="gtitle">Migrate</div></div>
+    <div class="body">
+      <h2>Schema changes without downtime</h2>
+      <p class="lede-line">Every schema change is a migration in version control, run by a tool, never by hand.</p>
+      <p>The schema will change forever. Treat migrations like code: small, reviewed, reversible, and applied the same way in every environment. Ad hoc <code>ALTER TABLE</code> on production by hand is how a Friday becomes a weekend.</p>
+      <p>On a live table, the pattern that avoids downtime is <b>expand then contract</b>. Add the new column or table, backfill it in batches, ship code that writes to both and reads the new, then remove the old once nothing depends on it. Never rename or drop in the same deploy that stops using it. A dropped column is unrecoverable except from backup, so the slow, boring, multi-step path is the professional one.</p>
+      <div class="mnote"><span class="label">Watch</span>On big Postgres tables, an unguarded <code>ALTER</code> can take a lock that blocks all reads and writes. Know which operations lock before you run them at 2pm.</div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="band" id="s6">
+    <div class="gutter"><div class="secno">06</div><div class="gtitle">Secure</div></div>
+    <div class="body">
+      <h2>Assume the client is hostile</h2>
+      <p class="lede-line">The database enforces who sees what. The frontend is a suggestion.</p>
+      <p>Since you build on Supabase, this is the most direct lesson: the moment a database is reachable from a browser, Row-Level Security is not optional, it is the wall. Without it, anyone who reads your JavaScript can query every row. With it, the rule that a user only ever touches their own data lives in the database, where no client can route around it.</p>
+      <pre><span class="k">ALTER TABLE</span> ledger_entries <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+
+<span class="k">CREATE POLICY</span> "owner reads own rows"
+  <span class="k">ON</span> ledger_entries <span class="k">FOR SELECT</span>
+  <span class="k">USING</span> (vendor_id = auth.uid());</pre>
+      <p>The rest is old discipline you already have: least privilege on every database role, secrets and connection strings never in the frontend bundle, always parameterized queries so user input can never become SQL, and TLS on the wire. Encrypt the genuinely sensitive columns at rest. None of this is exotic. All of it is the difference between a breach and a non-event.</p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="band" id="s7">
+    <div class="gutter"><div class="secno">07</div><div class="gtitle">Scale</div></div>
+    <div class="body">
+      <h2>Scale in the right order, and not before you must</h2>
+      <p class="lede-line">Most scaling problems are a missing index wearing a costume.</p>
+      <p>Founders reach for sharding and microservices when the real fix was one index and a rewritten query. Walk the ladder in order, and stop as soon as the pain stops:</p>
+      <div class="picks">
+        <div class="r"><span class="w">1 · Index + query</span><span class="d">Read the plan, fix the N+1, add the index. Solves the overwhelming majority of slowness.</span></div>
+        <div class="r"><span class="w">2 · Connection pooling</span><span class="d">Postgres hates thousands of raw connections. Put a pooler (PgBouncer, Supabase's) in front.</span></div>
+        <div class="r"><span class="w">3 · Cache</span><span class="d">Redis or a materialized view for expensive, rarely-changing reads. Now you inherit invalidation, so cache on purpose.</span></div>
+        <div class="r"><span class="w">4 · Read replicas</span><span class="d">Send heavy reads to replicas. Accept replication lag: a replica can be a moment behind.</span></div>
+        <div class="r"><span class="w">5 · Partition / shard</span><span class="d">Last, and only at real scale. It buys throughput and costs you a great deal of simplicity.</span></div>
+      </div>
+      <div class="mnote"><span class="label">Cost, your BigQuery world</span>On scan-priced warehouses you pay per byte read. Partition and cluster on the columns you filter by, and select columns explicitly. <code>SELECT *</code> over a wide table is a literal invoice.</div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="band" id="s8">
+    <div class="gutter"><div class="secno">08</div><div class="gtitle">Survive</div></div>
+    <div class="body">
+      <h2>A backup you have never restored is a rumor</h2>
+      <p class="lede-line">You do not have backups until you have restored one and watched it work.</p>
+      <p>This is the unglamorous section that saves the business. Turn on automated backups and point-in-time recovery, then actually run a restore into a scratch environment and confirm the data comes back whole. The day you need it is not the day to discover the backups were empty.</p>
+      <p>Around that, build the senses to know something is wrong before a client tells you: monitor slow queries, connection counts, replication lag, and disk. Set an alert before disk hits full, because a Postgres that runs out of disk stops accepting writes, and a store that cannot write is an outage. Boring, automated, and tested beats clever every time here.</p>
+      <div class="mnote"><span class="label">The trust angle</span>"We take nightly backups, we have tested restores, and your data is isolated per tenant" is a sentence that closes cautious high-ticket clients. Most of your competition cannot say it truthfully.</div>
+    </div>
+  </section>
+
+  <!-- close -->
+  <section class="close">
+    <h2>If you remember nothing else</h2>
+    <div class="cliff">
+      <div class="row"><span class="n">01</span><p><b>Default to Postgres.</b> Add another engine only when a real constraint forces it.</p></div>
+      <div class="row"><span class="n">02</span><p><b>Let the database enforce your rules.</b> Constraints, foreign keys, and RLS beat every app-layer check.</p></div>
+      <div class="row"><span class="n">03</span><p><b>Read <code>EXPLAIN ANALYZE</code> before you optimize.</b> Most slowness is one missing index.</p></div>
+      <div class="row"><span class="n">04</span><p><b>Money and correctness live in transactions.</b> Know your isolation level before load finds it for you.</p></div>
+      <div class="row"><span class="n">05</span><p><b>Migrate expand-then-contract.</b> Never drop or rename in the deploy that stops using it.</p></div>
+      <div class="row"><span class="n">06</span><p><b>Test a restore.</b> Untested backups are not backups.</p></div>
+    </div>
+    <p class="foot">
+      SCOPE — application databases for a builder, biased toward Postgres / Supabase, your live stack.<br>
+      NOT COVERED — the deep warehouse and pipeline craft you already do for a living.<br>
+      <b>Next move:</b> run <code>EXPLAIN ANALYZE</code> on Sycosmart's three heaviest queries and turn on RLS. One hour, real payoff.
+    </p>
+  </section>
+
+</div>
+
+<script>
+  (function(){
+    var links=[].slice.call(document.querySelectorAll('.rail nav a'));
+    var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+    if(!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          var i=secs.indexOf(e.target);
+          links.forEach(function(l){l.classList.remove('active');});
+          if(i>-1)links[i].classList.add('active');
+        }
+      });
+    },{rootMargin:"-45% 0px -50% 0px"});
+    secs.forEach(function(s){if(s)io.observe(s);});
+  })();
+</script>

@@ -1,35 +1,65 @@
-# Brain — Field Manual
+# Brain
 
-A personal learning operating system: one page that tracks everything I'm learning and building, from skill roadmaps to the certs I'm chasing.
+A personal learning operating system, evolving into a multi-user product. It tracks
+everything you're learning and building: skill roadmaps, thoughts, learnings, a
+wishlist, and the certifications you're chasing.
 
-**Live:** open `index.html` in any browser, or enable GitHub Pages to serve it at a URL.
-
-## What's inside
-
-- **Dashboard** — current focus, live progress across every roadmap, quick counts, recent thoughts, and next actions.
-- **Roadmaps** — phase-based, checkable learning paths for Automation Engineering, Generative AI, Cloud, Security & Secure Coding, Data Analytics, and Databases. Each stage lists sub-concepts, resources, and a "do this" action.
-- **Thoughts** — capture ideas and reflections, tagged by category and dated, searchable.
-- **Learnings** — log what I've learned, tagged by domain, with the source and what I can now do with it.
-- **Wishlist** — a prioritized backlog of what to learn next, with status.
-- **Certifications** — track certs, cost, status, exam date, and study progress.
-
-## How it works
-
-- **Single self-contained file.** Everything (HTML, CSS, JS) lives in `index.html`. No build step, no dependencies, no server. It runs by opening the file, and the same file publishes cleanly as a shareable web page.
-- **Vanilla JavaScript.** A small client-side router switches pages; no framework.
-- **Local-first data.** Thoughts, learnings, wishlist, certs, and roadmap progress are saved in the browser's `localStorage`. Data stays on the device and is never uploaded, so nothing personal is committed to this repo.
-- **Light and dark themes**, following the system preference.
-- **Fonts** load from Google Fonts (Poppins, DM Sans, JetBrains Mono).
-
-## Structure
+The project is a **monorepo**:
 
 ```
 .
-├── index.html      # the entire app
-├── archive/        # earlier standalone pages, kept for reference
-└── README.md
+├── frontend/           # the web app (single self-contained index.html for now)
+│   ├── index.html
+│   └── archive/        # earlier standalone pages, kept for reference
+├── backend/            # FastAPI + PostgreSQL API (multi-user, in progress)
+│   ├── app/
+│   │   ├── main.py         # FastAPI entrypoint
+│   │   ├── core/config.py  # settings from environment
+│   │   ├── db/             # engine, session, declarative base
+│   │   ├── models/         # SQLAlchemy models (users, thoughts, ...)
+│   │   ├── schemas/        # Pydantic request/response models
+│   │   └── api/routes/     # endpoints (health, auth, ...)
+│   ├── requirements.txt
+│   └── Dockerfile
+├── docker-compose.yml  # Postgres + API for local development
+└── .env.example        # copy to .env and fill in
 ```
 
-## Notes
+## Why a custom backend (not a BaaS)
 
-Because the data is local to each browser, opening the page on a new device or after clearing site data starts empty. A future version could add optional cloud sync.
+This is deliberately built from scratch, FastAPI, PostgreSQL, SQLAlchemy, and JWT
+auth, to learn backend, APIs, and databases end to end. A managed service would be
+faster to ship, but the point here is the skills and full control.
+
+## Run the backend (development)
+
+Prerequisites: Docker Desktop.
+
+```bash
+cp .env.example .env      # then edit JWT_SECRET
+docker compose up --build
+```
+
+Then:
+
+- API root: http://localhost:8000/
+- Interactive docs (Swagger): http://localhost:8000/docs
+- Health: http://localhost:8000/health
+- DB health: http://localhost:8000/health/db
+
+Postgres is exposed on `localhost:5432` (user/password/db default to `brain`).
+
+## The frontend
+
+Open `frontend/index.html` in a browser. Today it stores data in the browser's
+`localStorage` (per device). As the backend comes online it will move to accounts
+so data syncs across devices.
+
+## Roadmap
+
+- [x] **Phase 1** — Backend skeleton: FastAPI app, Postgres, Docker, health checks.
+- [ ] **Phase 2** — Auth: users, signup/login, password hashing, JWT, migrations.
+- [ ] **Phase 3** — Data API: per-user CRUD for thoughts, learnings, wishlist, certs, progress.
+- [ ] **Phase 4** — Frontend wiring: login/signup UI, replace localStorage with the API.
+- [ ] **Phase 5** — Deploy: Docker on a VPS, HTTPS, domain, backups.
+- [ ] **Phase 6** — Harden: validation, rate limiting, CORS lockdown, security headers, tests.

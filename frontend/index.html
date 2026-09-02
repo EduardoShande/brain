@@ -449,6 +449,41 @@
 
   /* ===== data backup card ===== */
   .datacard{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 8px 24px rgba(124,58,237,.07)}
+
+  /* ===== auth gate (login / register) ===== */
+  #gate{position:fixed;inset:0;z-index:150;display:none;overflow:auto}
+  body.locked #gate{display:block}
+  body.locked .nav,body.locked .wrap{display:none!important}
+  .gate-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,#241448 0%,#5B2AC4 55%,#3A1D82 100%)}
+  .gate-bg::before{content:"";position:absolute;top:-12%;left:-8%;width:46vw;height:46vw;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.55),transparent 62%);filter:blur(8px)}
+  .gate-bg::after{content:"";position:absolute;bottom:-16%;right:-10%;width:52vw;height:52vw;border-radius:50%;background:radial-gradient(circle,rgba(214,58,166,.40),transparent 62%);filter:blur(8px)}
+  .gate-nav{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,5vw,48px)}
+  .gate-logo{font-family:"Poppins",sans-serif;font-weight:900;font-size:22px;color:#fff;letter-spacing:-.01em}
+  .gate-logo span{opacity:.72;font-weight:600;margin-left:7px}
+  .gate-tagline{color:rgba(255,255,255,.8);font-size:13.5px;font-family:"JetBrains Mono",monospace;letter-spacing:.04em}
+  @media(max-width:560px){.gate-tagline{display:none}}
+  .gate-wrap{position:relative;z-index:2;min-height:calc(100vh - 88px);display:flex;align-items:center;justify-content:center;padding:20px}
+  .gate-card{width:min(420px,94vw);background:rgba(255,255,255,.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.28);border-radius:22px;padding:clamp(26px,4vw,36px) clamp(22px,4vw,32px);box-shadow:0 30px 70px rgba(0,0,0,.38)}
+  .gate-card h2{font-family:"Poppins",sans-serif;font-weight:800;color:#fff;text-align:center;font-size:30px;margin-bottom:6px}
+  .gate-card .gsub{text-align:center;color:rgba(255,255,255,.78);font-size:13.5px;margin-bottom:24px}
+  .gfield{position:relative;margin-bottom:22px}
+  .gfield input{width:100%;background:none;border:0;border-bottom:1.5px solid rgba(255,255,255,.5);color:#fff;font-size:15px;padding:9px 30px 9px 2px;outline:none}
+  .gfield input::placeholder{color:rgba(255,255,255,.72)}
+  .gfield input:focus{border-bottom-color:#fff}
+  .gfield .gicon{position:absolute;right:2px;top:9px;color:rgba(255,255,255,.82)}
+  .grow{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:13.5px;margin-bottom:20px;gap:10px;flex-wrap:wrap}
+  .gremember{display:flex;align-items:center;gap:8px;cursor:pointer}
+  .gremember input{accent-color:#fff;width:16px;height:16px}
+  .glink{background:none;border:0;color:#fff;cursor:pointer;font-size:13.5px;font-family:inherit;padding:0}
+  .glink:hover{text-decoration:underline}
+  .glink.strong{font-weight:700}
+  .gbtn{width:100%;background:#1a1033;color:#fff;border:0;border-radius:11px;padding:14px;font-family:"Poppins",sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:filter .15s,transform .1s}
+  .gbtn:hover{filter:brightness(1.4)}
+  .gbtn:active{transform:translateY(1px)}
+  .gbtn:disabled{opacity:.7;cursor:default}
+  .gmsg{color:#ffe1ec;text-align:center;min-height:18px;margin-top:14px;font-size:13.5px;line-height:1.4}
+  .gtoggle{text-align:center;color:rgba(255,255,255,.85);font-size:13.5px;margin-top:18px}
+  .gnote{text-align:center;color:rgba(255,255,255,.55);font-size:11.5px;font-family:"JetBrains Mono",monospace;margin-top:16px;line-height:1.5}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -457,14 +492,14 @@
     <button class="brand" data-goto="home">FIELD<span>/</span>MANUAL</button>
     <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
     <div class="links" id="links">
-      <button data-goto="home">Dashboard</button>
       <button data-goto="academy">Academy</button>
+      <button data-goto="home">Dashboard</button>
       <button data-goto="roadmaps">Roadmaps</button>
+      <button data-goto="quizzes">Quizzes</button>
       <button data-goto="thoughts">Thoughts</button>
       <button data-goto="learnings">Learnings</button>
       <button data-goto="wishlist">Wishlist</button>
       <button data-goto="certs">Certs</button>
-      <button data-goto="quizzes">Quizzes</button>
       <button data-goto="account" id="nav-account">Account</button>
     </div>
   </div>
@@ -1949,6 +1984,42 @@
 
 </div>
 
+<div id="gate">
+  <div class="gate-bg"></div>
+  <header class="gate-nav">
+    <div class="gate-logo">Brain<span>Academy</span></div>
+    <div class="gate-tagline">learn · build · get paid</div>
+  </header>
+  <div class="gate-wrap">
+    <div class="gate-card">
+      <h2 id="gate-title">Login</h2>
+      <div class="gsub" id="gate-sub">Welcome back. Sign in to continue.</div>
+      <form id="gate-form" autocomplete="on" novalidate>
+        <div class="gfield" id="g-name-field" hidden>
+          <input id="g-name" type="text" placeholder="Full name" autocomplete="name">
+          <span class="gicon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        </div>
+        <div class="gfield">
+          <input id="g-email" type="email" placeholder="Email" autocomplete="email" required>
+          <span class="gicon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        </div>
+        <div class="gfield">
+          <input id="g-pass" type="password" placeholder="Password" autocomplete="current-password" required>
+          <span class="gicon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        </div>
+        <div class="grow">
+          <label class="gremember"><input type="checkbox" id="g-remember" checked> Remember me</label>
+          <button type="button" class="glink" id="g-forgot">Forgot Password?</button>
+        </div>
+        <button class="gbtn" type="submit" id="g-submit">Login</button>
+        <div class="gmsg" id="g-msg" aria-live="polite"></div>
+        <div class="gtoggle"><span id="g-toggle-text">Don't have an account? </span><button type="button" class="glink strong" id="g-switch">Register</button></div>
+        <div class="gnote">Accounts are stored on this device for now. A secure server login arrives when the backend is deployed.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div id="toasts" aria-live="polite" aria-atomic="false"></div>
 
 <script>
@@ -2235,12 +2306,17 @@
        Auth: talks to the FastAPI backend (signup/login/profile)
     ========================================================= */
     function apiBase(){try{return localStorage.getItem('fm.apiBase')||'http://localhost:8000';}catch(e){return 'http://localhost:8000';}}
-    function getAuth(){try{return JSON.parse(localStorage.getItem('fm.auth'));}catch(e){return null;}}
-    function setAuth(a){try{if(a)localStorage.setItem('fm.auth',JSON.stringify(a));else localStorage.removeItem('fm.auth');}catch(e){}}
+    var memAuth=null;
+    function getAuth(){if(memAuth)return memAuth;try{return JSON.parse(localStorage.getItem('fm.auth'));}catch(e){return null;}}
+    function setAuth(a){memAuth=a||null;try{if(a)localStorage.setItem('fm.auth',JSON.stringify(a));else localStorage.removeItem('fm.auth');}catch(e){}}
     async function apiFetch(path,opts){
       opts=opts||{};var headers={'Content-Type':'application/json'};
       var auth=getAuth();if(opts.auth&&auth&&auth.access)headers['Authorization']='Bearer '+auth.access;
-      var res=await fetch(apiBase()+path,{method:opts.method||'GET',headers:headers,body:opts.body?JSON.stringify(opts.body):undefined});
+      var ctrl=(typeof AbortController!=='undefined')?new AbortController():null;
+      var timer=ctrl?setTimeout(function(){ctrl.abort();},7000):null;
+      var res;
+      try{res=await fetch(apiBase()+path,{method:opts.method||'GET',headers:headers,body:opts.body?JSON.stringify(opts.body):undefined,signal:ctrl?ctrl.signal:undefined});}
+      finally{if(timer)clearTimeout(timer);}
       var payload=null;try{payload=await res.json();}catch(e){}
       if(!res.ok)throw {status:res.status,detail:(payload&&payload.detail)||('Request failed ('+res.status+')')};
       return payload;
@@ -2253,7 +2329,7 @@
     async function doLogin(email,pass){
       var tok=await apiFetch('/auth/login',{method:'POST',body:{email:email,password:pass}});
       var auth={access:tok.access_token,refresh:tok.refresh_token};setAuth(auth);
-      var me=await apiFetch('/me',{auth:true});auth.user=me;setAuth(auth);updateAuthChip();renderAccount();toast('Signed in.');
+      var me=await apiFetch('/me',{auth:true});auth.user=me;setAuth(auth);onAuthed();
     }
     function renderAccount(){
       var area=document.getElementById('account-area');if(!area)return;
@@ -2267,7 +2343,7 @@
           +'<div class="savenote" id="pf-msg">Member since '+esc((a.user.created_at||'').slice(0,10))+'.</div></form>'
           +'<button class="fbtn" id="logout-btn" style="background:none;color:var(--teal-ink);box-shadow:none;border:1px solid var(--line-strong);margin-top:14px">Log out</button>';
         document.getElementById('profile-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('pf-msg');msg.textContent='Saving...';try{var u=await apiFetch('/me',{method:'PATCH',auth:true,body:{full_name:(document.getElementById('pf-name').value.trim()||null)}});a.user=u;setAuth(a);updateAuthChip();msg.textContent='Saved.';toast('Profile saved.');}catch(err){msg.textContent=authErr(err);}});
-        document.getElementById('logout-btn').addEventListener('click',function(){setAuth(null);updateAuthChip();renderAccount();toast('Signed out.');});
+        document.getElementById('logout-btn').addEventListener('click',function(){setAuth(null);updateAuthChip();applyGate();setGateMode('login');toast('Signed out.');});
       }else{
         area.innerHTML=''
           +'<div class="authgrid">'
@@ -2449,6 +2525,69 @@
       var save=document.getElementById('cert-name-save');if(save)save.addEventListener('click',function(){try{localStorage.setItem('fm.certName',document.getElementById('cert-name-input').value.trim());}catch(e){}renderCertificate();});
     }
 
+    /* =========================================================
+       Auth gate: nothing is visible until you sign in.
+       Uses the backend if reachable, otherwise a local account.
+    ========================================================= */
+    function isAuthed(){var a=getAuth();return !!(a&&a.user);}
+    function applyGate(){document.body.classList.toggle('locked',!isAuthed());}
+    function onAuthed(){updateAuthChip();applyGate();renderAll();showPage('home');}
+    function localUsers(){try{return JSON.parse(localStorage.getItem('fm.localUsers'))||{};}catch(e){return {};}}
+    function saveLocalUsers(u){try{localStorage.setItem('fm.localUsers',JSON.stringify(u));}catch(e){}}
+    function localSignup(email,pass,name){
+      email=(email||'').toLowerCase();
+      if(!email||!/.+@.+\..+/.test(email))throw{msg:'Enter a valid email.'};
+      if((pass||'').length<6)throw{msg:'Password must be at least 6 characters.'};
+      var u=localUsers();if(u[email])throw{msg:'An account with that email already exists. Try logging in.'};
+      u[email]={name:name||'',pwd:btoa(pass)};saveLocalUsers(u);
+      setAuth({user:{email:email,full_name:name||'',created_at:new Date().toISOString()},local:true});
+    }
+    function localLogin(email,pass){
+      email=(email||'').toLowerCase();var rec=localUsers()[email];
+      if(!rec||rec.pwd!==btoa(pass||''))throw{msg:'Incorrect email or password.'};
+      setAuth({user:{email:email,full_name:rec.name||'',created_at:new Date().toISOString()},local:true});
+    }
+    function backendConfigured(){try{return !!localStorage.getItem('fm.apiBase');}catch(e){return false;}}
+    async function gateSubmit(mode,email,pass,name){
+      var useBackend=backendConfigured();
+      if(mode==='register'){
+        if(useBackend){try{await apiFetch('/auth/signup',{method:'POST',body:{email:email,password:pass,full_name:name||null}});await doLogin(email,pass);return;}catch(err){if(err&&err.status)throw err;}}
+        localSignup(email,pass,name);onAuthed();toast('Account created. Welcome!');
+      }else{
+        if(useBackend){try{await doLogin(email,pass);return;}catch(err){if(err&&err.status)throw err;}}
+        localLogin(email,pass);onAuthed();toast('Signed in.');
+      }
+    }
+    var gateMode='login';
+    function setGateMode(m){
+      gateMode=m;var reg=m==='register';
+      document.getElementById('gate-title').textContent=reg?'Create account':'Login';
+      document.getElementById('gate-sub').textContent=reg?'Start your account to open the academy.':'Welcome back. Sign in to continue.';
+      document.getElementById('g-submit').textContent=reg?'Register':'Login';
+      document.getElementById('g-name-field').hidden=!reg;
+      document.getElementById('g-pass').setAttribute('autocomplete',reg?'new-password':'current-password');
+      document.getElementById('g-switch').textContent=reg?'Login':'Register';
+      document.getElementById('g-toggle-text').textContent=reg?'Already have an account? ':"Don't have an account? ";
+      document.getElementById('g-msg').textContent='';
+    }
+    (function setupGate(){
+      var form=document.getElementById('gate-form');if(!form)return;
+      document.getElementById('g-switch').addEventListener('click',function(){setGateMode(gateMode==='login'?'register':'login');});
+      document.getElementById('g-forgot').addEventListener('click',function(){toast('Password reset arrives with the deployed backend. For now, create a new account.');});
+      form.addEventListener('submit',async function(e){
+        e.preventDefault();
+        var email=document.getElementById('g-email').value.trim();
+        var pass=document.getElementById('g-pass').value;
+        var nameEl=document.getElementById('g-name');var name=nameEl?nameEl.value.trim():'';
+        var msg=document.getElementById('g-msg');var btn=document.getElementById('g-submit');
+        if(!email||!pass){msg.textContent='Enter your email and password.';return;}
+        btn.disabled=true;msg.textContent=gateMode==='register'?'Creating account...':'Signing in...';
+        try{await gateSubmit(gateMode,email,pass,name);}
+        catch(err){msg.textContent=(err&&(err.detail||err.msg))||authErr(err);}
+        finally{btn.disabled=false;}
+      });
+    })();
+
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
@@ -2479,5 +2618,6 @@
     });
 
     renderAll();
+    applyGate();
   })();
 </script>

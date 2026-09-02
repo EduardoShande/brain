@@ -538,84 +538,43 @@
   .nextgoal b{color:var(--ink)}
   @media(max-width:620px){.streakbox{text-align:left}.week{justify-content:flex-start}.gamexp{flex-direction:column;align-items:flex-start;gap:2px}}
 
-  /* ===== playable games ===== */
-  .gametabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}
-  .gametab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:9px 14px;border-radius:11px;border:1px solid var(--line);background:var(--card);cursor:pointer;text-align:left}
-  .gametab b{font-family:"Poppins",sans-serif;font-size:14px;font-weight:700;color:var(--ink)}
-  .gametab span{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
-  .gametab:hover{border-color:var(--teal)}
-  .gametab.on{background:var(--grad);border-color:transparent;box-shadow:0 8px 20px rgba(124,58,237,.28)}
-  .gametab.on b,.gametab.on span{color:var(--on-teal)}
-  .gametab.done b::after{content:" ✓";color:var(--good)}
-  .gametab.on.done b::after{color:var(--on-teal)}
-  .gstage{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:0 10px 28px rgba(124,58,237,.07)}
-  .ghead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
-  .ghead h3{font-size:20px}
-  .gscore{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
-  .gscore b{color:var(--teal-ink)}
-  .gwhy{margin:6px 0 16px;font-size:14px;line-height:1.55;color:var(--ink-soft)}
-  .gwhy b{color:var(--ink)}
-  .gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-  .gbtn{font-family:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
-  .gbtn:hover{border-color:var(--teal);color:var(--teal-ink)}
-  .gbtn.pri{background:var(--grad);border-color:transparent;color:var(--on-teal)}
-  .gbtn:disabled{opacity:.45;cursor:not-allowed}
-  .gfeed{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14.5px;line-height:1.55}
-  .gfeed.ok{background:var(--good-wash);color:var(--ink)}
-  .gfeed.no{background:var(--warn-wash);color:var(--ink)}
-  .gfeed b{font-weight:800}
-
-  /* logic lab */
-  .lwrap{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:22px;align-items:start}
-  @media(max-width:720px){.lwrap{grid-template-columns:1fr}}
-  .lgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;aspect-ratio:1;max-width:260px}
-  .lcell{border-radius:7px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:19px}
-  .lcell.wall{background:var(--ink-faint);border-color:transparent;opacity:.35}
-  .lcell.goal{background:var(--good-wash);border-color:var(--good)}
-  .lcell.bot{background:var(--grad);border-color:transparent;color:#fff;font-weight:800}
-  .lcell.trail{background:var(--teal-wash)}
-  .lvlrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .lvlbtn{font-family:"JetBrains Mono",monospace;font-size:12px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer}
-  .lvlbtn.on{background:var(--grad);border-color:transparent;color:var(--on-teal);font-weight:700}
-  .lvlbtn.won{border-color:var(--good);color:var(--good)}
-  .lvlbtn.on.won{color:var(--on-teal)}
-  .lpal{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 14px}
-  .lpal button{font-family:inherit;font-size:13.5px;font-weight:700;padding:8px 13px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
-  .lpal button:hover{border-color:var(--teal);color:var(--teal-ink)}
-  .lstrip{margin-bottom:10px}
-  .lslab{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px;cursor:pointer}
-  .lslab .full{color:var(--warn)}
-  .lstrip.act .lslab{color:var(--teal-ink)}
-  .lslot{min-height:42px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;padding:6px;border-radius:9px;border:1px dashed var(--line-strong);background:var(--surface)}
-  .lstrip.act .lslot{border-color:var(--teal);border-style:solid}
-  .cmdchip{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--teal-wash);color:var(--teal-ink)}
-  .cmdchip.f1{background:var(--clay-wash);color:var(--clay-ink)}
-  .cmdchip.now{outline:2px solid var(--teal);outline-offset:1px}
-  .lempty{font-size:12.5px;color:var(--ink-faint);padding-left:4px}
-
-  /* mini quiz games */
-  .mgcode{margin:0 0 16px}
-  .mgopts{display:grid;gap:8px}
-  .mgopt{font-family:"JetBrains Mono",monospace;font-size:14px;text-align:left;padding:11px 14px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
-  .mgopt:hover:not(:disabled){border-color:var(--teal);color:var(--teal-ink)}
-  .mgopt:disabled{cursor:default}
-  .mgopt.right{background:var(--good-wash);border-color:var(--good);color:var(--ink);font-weight:700}
-  .mgopt.wrong{background:var(--warn-wash);border-color:var(--warn);color:var(--ink)}
-  .bugcode{margin:0 0 4px;background:var(--code-bg);border-radius:var(--radius);overflow:hidden;padding:10px 0}
-  .bugline{display:flex;gap:12px;width:100%;text-align:left;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.7;padding:2px 16px;background:none;border:0;color:var(--code-ink);cursor:pointer}
-  .bugline:hover:not(:disabled){background:rgba(124,58,237,.22)}
-  .bugline:disabled{cursor:default}
-  .bugline .ln{opacity:.4;flex:none;width:16px;text-align:right}
-  .bugline .lc{white-space:pre-wrap;word-break:break-word}
-  .bugline.right{background:rgba(34,197,94,.22)}
-  .bugline.wrong{background:rgba(239,68,68,.22)}
-  .selplate{margin:0 0 14px;padding:16px 18px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);color:var(--ink)}
-  .selplate *{outline-offset:2px}
-  .selplate .hit{outline:2px solid var(--teal);background:var(--teal-wash);border-radius:4px}
-  .selform{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .selform .finput{font-family:"JetBrains Mono",monospace;min-width:180px}
-  .selhtml{margin:12px 0 0;font-size:12px}
-  .gprog{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin-top:14px}
+  /* ===== code lab ===== */
+  .labtabs{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0 0;align-items:center}
+  .labchip{font-family:"JetBrains Mono",monospace;font-size:12px;min-width:32px;height:32px;padding:0 9px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer}
+  .labchip:hover{border-color:var(--teal);color:var(--teal-ink)}
+  .labchip.on{background:var(--grad);border-color:transparent;color:var(--on-teal);font-weight:700}
+  .labchip.won{border-color:var(--good);color:var(--good)}
+  .labchip.on.won{color:var(--on-teal)}
+  .labchip.free{min-width:auto;font-family:"Poppins",sans-serif;font-weight:700;margin-left:6px}
+  .labwrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:20px}
+  @media(max-width:900px){.labwrap{grid-template-columns:1fr}}
+  .labcol{min-width:0}
+  .labbrief{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px}
+  .labbrief .lb-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:7px}
+  .labbrief h3{font-size:18px}
+  .labbrief p{margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+  .labbrief .lb-hint{margin-top:10px;font-size:13.5px;color:var(--ink-faint);border-left:2px solid var(--line-strong);padding-left:10px}
+  .edbar{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+  .editor{display:block;width:100%;min-height:300px;resize:vertical;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.65;tab-size:2;padding:14px 16px;border-radius:var(--radius);border:1px solid var(--line-strong);background:var(--code-bg);color:var(--code-ink);white-space:pre;overflow:auto}
+  .editor:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
+  .pvbar{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+  .pvbar .live{color:var(--good)}
+  .pvframe{width:100%;height:260px;border:1px solid var(--line-strong);border-radius:var(--radius);background:#fff;display:block}
+  .chkhead{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin:18px 0 8px}
+  .chk{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:9px;background:var(--surface);border:1px solid var(--line);margin-bottom:6px;font-size:14px;line-height:1.45;color:var(--ink-soft)}
+  .chk .ci{flex:none;width:16px;text-align:center;font-weight:700;color:var(--ink-faint)}
+  .chk.ok{background:var(--good-wash);border-color:transparent;color:var(--ink)}
+  .chk.ok .ci{color:var(--good)}
+  .chk.no{background:var(--warn-wash);border-color:transparent}
+  .chk.no .ci{color:var(--warn)}
+  .labbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .labbtn{font-family:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+  .labbtn:hover{border-color:var(--teal);color:var(--teal-ink)}
+  .labbtn.pri{background:var(--grad);border-color:transparent;color:var(--on-teal)}
+  .labfeed{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14.5px;line-height:1.55}
+  .labfeed.ok{background:var(--good-wash);color:var(--ink)}
+  .labfeed.no{background:var(--warn-wash);color:var(--ink)}
+  .labfeed b{font-weight:800}
   .stagenote{margin:14px 0 4px;font-size:14px;line-height:1.6;color:var(--ink-soft);padding:11px 14px;background:var(--teal-wash);border-radius:10px}
   .inlinelink{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--teal-ink);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
   .inlinelink:hover{color:var(--clay-ink)}
@@ -693,7 +652,7 @@
     <div class="links" id="links">
       <button data-goto="start">Start here</button>
       <button data-goto="academy">Courses</button>
-      <button data-goto="games">Arcade</button>
+      <button data-goto="lab">Code Lab</button>
     <button data-goto="path">Find your path</button>
       <button data-goto="account" id="nav-account">Account</button>
     </div>
@@ -2267,17 +2226,17 @@
   </div>
 
   <!-- ===================== WEB DEVELOPMENT ===================== -->
-  <!-- ===================== GAMES ===================== -->
-  <div class="page" id="page-games">
+  <!-- ===================== CODE LAB ===================== -->
+  <div class="page" id="page-lab">
     <div class="phead">
       <button class="back" data-goto="academy">← Courses</button>
-      <div class="pn">Arcade · free</div>
-      <h2>Learn by playing</h2>
-      <p class="pd">Five real games, not quizzes with confetti. Each one trains a skill you actually need: thinking in steps, reading code, finding bugs, aiming CSS, knowing your tags. Play a round while you wait for the bus and you will be measurably better at this.</p>
-      <div class="mnote"><span class="label">Why games work here</span>You cannot learn to ride a bike by reading. Logic is the same. These give you the one thing reading never does: <b>you try, you are wrong, you find out immediately, you try again.</b> That loop is how brains actually learn. Every round also gives you XP.</div>
-      <div class="gametabs" id="game-tabs"></div>
+      <div class="pn">Code Lab · free</div>
+      <h2>Write real code, see it instantly</h2>
+      <p class="pd">A real editor and a real browser, side by side. Type on the left, your page appears on the right the moment you stop typing. Twelve challenges check your work automatically and tell you exactly what is still missing, so you are never stuck guessing.</p>
+      <div class="mnote"><span class="label">Why this is the important page</span>Reading about code teaches you almost nothing. <b>You learn by typing it, breaking it, and fixing it.</b> Everything else in this academy exists to get you here. The challenges do not just look at your code, they run it and measure the result, exactly like a real test at a real job.</div>
+      <div class="labtabs" id="lab-tabs"></div>
     </div>
-    <div id="game-stage"></div>
+    <div id="lab-stage"></div>
   </div>
 
   <!-- ===================== RESOURCES ===================== -->
@@ -3016,7 +2975,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','games','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -3464,7 +3423,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       else if(name==='path')renderPath();
       else if(name==='certificate')renderCertificate();
       else if(name==='htmltags')renderTags();
-      else if(name==='games')renderGames();
+      else if(name==='lab')renderLab();
     }
     /* =========================================================
        Academy: courses (roadmap = lessons, quiz = final exam) + certificates
@@ -3782,7 +3741,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     /* =========================================================
        Game system: XP, levels, badges and streaks
     ========================================================= */
-    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['arcade','Arcade champion','Win a round in all 5 games'],['logician','Logician','Solve every Logic Lab level']];
+    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges']];
     var LEVELS=[[1,'Curious'],[2,'Beginner'],[3,'Learner'],[5,'Builder'],[7,'Coder'],[10,'Developer'],[14,'Craftsman'],[20,'Senior'],[28,'Architect'],[40,'Legend']];
     var REFPAGES=['fundamentals','start','htmltags','webconcepts','jsguide','webtools','resources'];
     var QUESTS=[
@@ -3792,8 +3751,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       ['q_p1','Read a reference page','pages',1,20],
       ['q_p2','Read 2 reference pages','pages',2,45],
       ['q_e1','Take an exam','exams',1,40],
-      ['q_g1','Win a game round','games',1,20],
-      ['q_g5','Win 5 game rounds','games',5,55]
+      ['q_c1','Solve a Code Lab challenge','code',1,25],
+      ['q_c3','Solve 3 Code Lab challenges','code',3,60]
     ];
     function gameState(){
       data.game=data.game||{};var g=data.game;
@@ -3911,328 +3870,212 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'<div class="nextgoal">Next up: '+nextGoal()+'</div>'
         +'<div class="badges">'
         +BADGES.map(function(b){var got=hasBadge(b[0]);return '<span class="badge'+(got?' got':'')+'" title="'+esc(b[2])+'"><span class="bi">'+(got?'★':'☆')+'</span>'+esc(b[1])+'</span>';}).join('')
-        +'</div><p class="gamehint">Lesson +10 XP · new reference page +20 XP · exam +25 XP · passing it (80%+) +50 XP more · arcade rounds +5 to +30 XP (max 250 a day) · daily quests up to +135 XP. Every 100 XP is a level.</p></div>';
+        +'</div><p class="gamehint">Lesson +10 XP · new reference page +20 XP · exam +25 XP · passing it (80%+) +50 XP more · Code Lab challenge +25 XP · daily quests up to +135 XP. Every 100 XP is a level.</p></div>';
     }
 
     /* =========================================================
-       Playable games: logic, code reading, debugging, CSS, tags
+       Code Lab: a real editor, a live preview, and checks that
+       RUN the student's code instead of just reading it
     ========================================================= */
-    var GAMES=[
-      {key:'logic',name:'Logic Lab',tag:'Logic · no code'},
-      {key:'output',name:'Predict the Output',tag:'JavaScript'},
-      {key:'bug',name:'Bug Hunter',tag:'Debugging'},
-      {key:'selector',name:'Selector Hunter',tag:'CSS'},
-      {key:'tags',name:'Tag Match',tag:'HTML · speed'}
+    function rgbParts(c){var m=/rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(c||'');return m?[+m[1],+m[2],+m[3]]:null;}
+    function isPurple(c){var p=rgbParts(c);return !!p&&p[2]>110&&p[0]>p[1]+20&&p[2]>p[1]+40;}
+    function txt(el){return el?el.textContent.trim():'';}
+    var LABCH=[
+      {t:'Your first heading',lv:'HTML',
+       b:'Every page starts with something you can actually see. Make a big heading that says your name.',
+       h:'A big heading looks like this: <h1>Ana</h1>. Open the tag, type your name, close the tag.',
+       s:'<!-- Write your heading below this line -->\n',
+       c:[['There is an h1 heading',function(d){return !!d.querySelector('h1');}],
+          ['The heading has text inside it',function(d){return txt(d.querySelector('h1')).length>0;}]]},
+      {t:'A paragraph and a link',lv:'HTML',
+       b:'Add a sentence about yourself, and a link to any website. A link is what made the web a web.',
+       h:'A paragraph is <p>text</p>. A link is <a href="https://example.com">click me</a>. The href is where it goes, the text is what you see.',
+       s:'<h1>My page</h1>\n\n<!-- add a paragraph and a link -->\n',
+       c:[['There is a paragraph',function(d){return !!d.querySelector('p');}],
+          ['The paragraph says something',function(d){return txt(d.querySelector('p')).length>3;}],
+          ['There is a link with an address',function(d){var a=d.querySelector('a[href]');return !!a&&a.getAttribute('href').trim().length>0;}],
+          ['The link has text you can click',function(d){return txt(d.querySelector('a[href]')).length>0;}]]},
+      {t:'An image anyone can understand',lv:'HTML',
+       b:'Add an image. It needs an address to load, and alt text describing it so a blind person and Google both know what it is.',
+       h:'<img src="https://picsum.photos/300/200" alt="A photo of a street">. The src is where the picture lives, the alt describes it in words.',
+       s:'<h1>My photo</h1>\n\n<!-- add an image with src and alt -->\n',
+       c:[['There is an image',function(d){return !!d.querySelector('img');}],
+          ['It has a src address',function(d){var i=d.querySelector('img');return !!i&&(i.getAttribute('src')||'').trim().length>0;}],
+          ['It has alt text that actually describes it',function(d){var i=d.querySelector('img');return !!i&&(i.getAttribute('alt')||'').trim().length>2;}]]},
+      {t:'A real list',lv:'HTML',
+       b:'Show three things you want to learn, as a proper bullet list. Not three paragraphs pretending to be a list.',
+       h:'A bullet list is a <ul> holding one <li> per item. The ul is the list, each li is one line.',
+       s:'<h1>Things I want to learn</h1>\n\n<!-- build a list with exactly 3 items -->\n',
+       c:[['There is an unordered list',function(d){return !!d.querySelector('ul');}],
+          ['It has exactly 3 items',function(d){return d.querySelectorAll('ul li').length===3;}],
+          ['Every item has text',function(d){return [].every.call(d.querySelectorAll('ul li'),function(li){return txt(li).length>0;});}]]},
+      {t:'Paint it purple',lv:'CSS',
+       b:'The heading is black and boring. Use CSS to make it purple. Real CSS in the style block, not an old-fashioned attribute.',
+       h:'Inside the style block write h1 { color: purple; }. The part before the braces says WHO, the part inside says WHAT.',
+       s:'<style>\n  /* your CSS goes here */\n</style>\n\n<h1>Make me purple</h1>\n',
+       c:[['The heading is still there',function(d){return !!d.querySelector('h1');}],
+          ['It is purple now',function(d,w){var h=d.querySelector('h1');return !!h&&isPurple(w.getComputedStyle(h).color);}]]},
+      {t:'Give it room to breathe',lv:'CSS',
+       b:'This card is cramped against its own edges. Give it space inside and round the corners, the two things that instantly make a design look professional.',
+       h:'padding: 20px pushes the content away from the edges. border-radius: 12px rounds the corners.',
+       s:'<style>\n  .card {\n    background: #ede9fe;\n    /* add padding and border-radius */\n  }\n</style>\n\n<div class="card">A cramped little card</div>\n',
+       c:[['The card has space inside it (16px or more)',function(d,w){var e=d.querySelector('.card');return !!e&&parseFloat(w.getComputedStyle(e).paddingTop)>=16;}],
+          ['The corners are rounded',function(d,w){var e=d.querySelector('.card');return !!e&&parseFloat(w.getComputedStyle(e).borderTopLeftRadius)>0;}]]},
+      {t:'Centre it with flexbox',lv:'CSS',
+       b:'Put the purple box in the exact middle of the grey area. Centring things used to be the hardest thing in CSS. Flexbox made it three lines.',
+       h:'On .stage: display: flex; justify-content: center; align-items: center; The first makes it flexible, the second centres left to right, the third top to bottom.',
+       s:'<style>\n  .stage {\n    height: 160px;\n    background: #eee;\n    /* make this centre its child */\n  }\n  .box { width: 60px; height: 60px; background: #7C3AED; }\n</style>\n\n<div class="stage"><div class="box"></div></div>\n',
+       c:[['The stage is a flex container',function(d,w){var e=d.querySelector('.stage');return !!e&&w.getComputedStyle(e).display==='flex';}],
+          ['Centred left to right',function(d,w){var e=d.querySelector('.stage');return !!e&&['center','space-around','space-evenly'].indexOf(w.getComputedStyle(e).justifyContent)>=0;}],
+          ['Centred top to bottom',function(d,w){var e=d.querySelector('.stage');return !!e&&w.getComputedStyle(e).alignItems==='center';}],
+          ['Measured on screen: the box really is in the middle',function(d){var s=d.querySelector('.stage'),b=d.querySelector('.box');if(!s||!b)return false;var sr=s.getBoundingClientRect(),br=b.getBoundingClientRect();return Math.abs((br.left+br.width/2)-(sr.left+sr.width/2))<8&&Math.abs((br.top+br.height/2)-(sr.top+sr.height/2))<8;}]]},
+      {t:'Make it respond to the screen',lv:'CSS',
+       b:'Same page, different screens. Make the bar turn orange when the screen is narrower than 600px, the way a real responsive site adapts to a phone.',
+       h:'@media (max-width: 600px) { .box { background: orange; } } means "only when the screen is this narrow, apply these rules".',
+       s:'<style>\n  .box { height: 80px; background: #7C3AED; }\n\n  /* add a media query below */\n</style>\n\n<div class="box"></div>\n',
+       c:[['There is a media query in your CSS',function(d){try{var f=false;[].forEach.call(d.styleSheets,function(ss){[].forEach.call(ss.cssRules,function(r){if(r.type===4)f=true;});});return f;}catch(e){return false;}}],
+          ['Tested at 900px and 400px: the bar really does change',function(d,w,src,fr){var b=d.querySelector('.box');if(!b||!fr)return false;var old=fr.style.width;fr.style.width='900px';d.body.offsetHeight;var wide=w.getComputedStyle(b).backgroundColor;fr.style.width='400px';d.body.offsetHeight;var narrow=w.getComputedStyle(b).backgroundColor;fr.style.width=old;d.body.offsetHeight;return wide!==narrow;}]]},
+      {t:'JavaScript writes the page',lv:'JS',
+       b:'The heading is empty on purpose. Use JavaScript to put your name inside it. Typing it in the HTML is cheating, and the check will catch you.',
+       h:'document.querySelector("#name").textContent = "Ana"; Find the element, then set its text.',
+       s:'<h1 id="name"></h1>\n\n<script>\n  // your code here\n<\/script>\n',
+       c:[['The heading has text now',function(d){return txt(d.querySelector('#name')).length>0;}],
+          ['JavaScript put it there, not you',function(d,w,src){var m=/<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(src||'');return !!m&&m[1].trim()==='';}]]},
+      {t:'The doorbell: your first event',lv:'JS',
+       b:'Make the button actually do something. This is the single pattern behind every interactive thing on the internet: wait for something, then react.',
+       h:'document.querySelector("#go").addEventListener("click", () => { document.querySelector("#msg").textContent = "You clicked it!"; });',
+       s:'<p id="msg">Nothing has happened yet</p>\n<button id="go">Click me</button>\n\n<script>\n  // listen for a click on #go and change the text of #msg\n<\/script>\n',
+       c:[['The button is still there',function(d){return !!d.querySelector('#go');}],
+          ['We clicked it for real, and the message changed',function(d){var m=d.querySelector('#msg'),b=d.querySelector('#go');if(!m||!b)return false;var before=m.textContent;b.click();return m.textContent!==before;}]]},
+      {t:'Build a list from data',lv:'JS',
+       b:'Three cities are already in an array. Show one list item for each, built by JavaScript. This is how every feed, shop and search result on the web is made.',
+       h:'cities.forEach(city => { const li = document.createElement("li"); li.textContent = city; list.append(li); });',
+       s:'<ul id="list"></ul>\n\n<script>\n  const cities = ["Santa Cruz", "La Paz", "Cochabamba"];\n  const list = document.querySelector("#list");\n  // build one li per city\n<\/script>\n',
+       c:[['There are 3 list items',function(d){return d.querySelectorAll('#list li').length===3;}],
+          ['They show the three city names',function(d){var t=[].map.call(d.querySelectorAll('#list li'),function(x){return txt(x);});return ['Santa Cruz','La Paz','Cochabamba'].every(function(c){return t.indexOf(c)>=0;});}],
+          ['You did not type the items by hand',function(d,w,src){return !/<li[\s>]/i.test(src||'');}]]},
+      {t:'Your first real app',lv:'JS',
+       b:'The final one. Type a task, press Add, and it appears in the list. Everything you have learned, in one small working app. Finish this and you are not a beginner any more.',
+       h:'On click: read input.value, if it is not empty create an li with that text, append it to the list, then clear the input.',
+       s:'<input id="task" placeholder="Something to do">\n<button id="add">Add</button>\n<ul id="list"></ul>\n\n<script>\n  // when #add is clicked, add the value of #task as a new li inside #list\n<\/script>\n',
+       c:[['The list starts empty',function(d){return d.querySelectorAll('#list li').length===0;}],
+          ['We typed "Buy milk" and pressed Add: one item appeared',function(d){var i=d.querySelector('#task'),b=d.querySelector('#add');if(!i||!b)return false;i.value='Buy milk';b.click();return d.querySelectorAll('#list li').length===1;}],
+          ['The item shows what we typed',function(d){var li=d.querySelector('#list li');return !!li&&li.textContent.indexOf('Buy milk')>=0;}],
+          ['A second task added a second item, not a replacement',function(d){var i=d.querySelector('#task'),b=d.querySelector('#add');if(!i||!b)return false;i.value='Call Ana';b.click();return d.querySelectorAll('#list li').length===2;}]]}
     ];
-    var GKEY='logic';
-    function gamePlay(){var g=gameState();g.play=g.play||{};return g.play;}
-    function gameXP(n,why){
-      var t=todayBox();t.gamexp=t.gamexp||0;
-      if(t.gamexp>=250){toast('Arcade XP maxed for today. Go finish a lesson.');return;}
-      t.gamexp+=n;awardXP(n,why,'games');
+    var FREESTART='<style>\n  body { font-family: system-ui, sans-serif; padding: 24px; }\n  h1 { color: #7C3AED; }\n</style>\n\n<h1>Hello from Code Lab</h1>\n<p>Change anything here. The preview updates as you type.</p>\n\n<script>\n  console.log("It runs, too.");\n<\/script>\n';
+    var LABI=0,LABFREE=false,LABTIMER=null,LABMSG='',LABOK=false;
+    function labState(){var g=gameState();g.lab=g.lab||{};g.labCode=g.labCode||{};return g;}
+    function labKey(){return LABFREE?'free':('c'+LABI);}
+    function labCode(){
+      var g=labState(),k=labKey();
+      if(typeof g.labCode[k]==='string')return g.labCode[k];
+      return LABFREE?FREESTART:LABCH[LABI].s;
     }
-    function markPlayed(key){
-      var pl=gamePlay();if(pl[key])return;
-      pl[key]=1;saveData();
-      var b=document.querySelector('[data-gtab="'+key+'"]');if(b)b.classList.add('done');
-      if(GAMES.every(function(g){return pl[g.key];}))unlockBadge('arcade');
-    }
-    function renderGames(){
-      var tabs=document.getElementById('game-tabs');if(!tabs||!data)return;
-      var pl=gamePlay();
-      tabs.innerHTML=GAMES.map(function(g){
-        return '<button class="gametab'+(g.key===GKEY?' on':'')+(pl[g.key]?' done':'')+'" data-gtab="'+g.key+'"><b>'+esc(g.name)+'</b><span>'+esc(g.tag)+'</span></button>';
-      }).join('');
-      tabs.querySelectorAll('[data-gtab]').forEach(function(b){
-        b.addEventListener('click',function(){GKEY=b.getAttribute('data-gtab');renderGames();});
-      });
-      if(GKEY==='logic'){logicInit();drawLogic();}
-      else if(GKEY==='selector'){SEL=null;drawSelector();}
-      else if(GKEY==='bug'){BUG=null;drawBug();}
-      else{MQ=null;drawMiniQuiz();}
-    }
-
-    /* --- Logic Lab: sequencing, debugging and functions, with no syntax --- */
-    var LOGICLV=[
-      {n:'First steps',g:['.....','.....','S...G','.....','.....'],max:8,tip:'The robot already faces right. Just walk forward.'},
-      {n:'One turn',g:['..G..','.....','S....','.....','.....'],max:10,tip:'Walk, turn, walk again. Order matters.'},
-      {n:'Around the wall',g:['.....','.....','S.#.G','..#..','.....'],max:16,tip:'A wall is in the way. Plan the detour before you press Run.'},
-      {n:'Meet F1',g:['#####','#####','##G##','#..##','S.###'],max:9,tip:'The pattern forward, left, forward, right repeats twice. Put it in F1 once and call F1 twice.'},
-      {n:'The staircase',g:['####G','###..','##..#','#..##','S.###'],max:5,tip:'Only 5 commands fit in MAIN. The only way: F1 = forward, left, forward, right. Then call F1 four times.'}
-    ];
-    var LG=null;
-    var DIRCH=['→','↓','←','↑'];
-    function logicInit(i){LG={i:i||0,main:[],f1:[],act:'main',run:false,msg:'',ok:false};}
-    function logicStart(lv){for(var r=0;r<lv.g.length;r++){var c=lv.g[r].indexOf('S');if(c>=0)return{r:r,c:c,d:0};}return{r:0,c:0,d:0};}
-    function drawLogic(bot,trail){
-      var st=document.getElementById('game-stage');if(!st||!LG)return;
-      var lv=LOGICLV[LG.i],pos=bot||logicStart(lv);trail=trail||[];
-      var pl=gamePlay();pl.logic=pl.logic||{};
-      var cells='',r,c;
-      for(r=0;r<5;r++)for(c=0;c<5;c++){
-        var ch=lv.g[r].charAt(c),cl='lcell',txt='';
-        if(ch==='#')cl+=' wall';
-        if(ch==='G'){cl+=' goal';txt='★';}
-        if(trail.indexOf(r+','+c)>=0)cl+=' trail';
-        if(r===pos.r&&c===pos.c){cl+=' bot';txt=DIRCH[pos.d];}
-        cells+='<div class="'+cl+'">'+txt+'</div>';
-      }
-      var lvls=LOGICLV.map(function(x,k){
-        return '<button class="lvlbtn'+(k===LG.i?' on':'')+(pl.logic[k]?' won':'')+'" data-lvl="'+k+'" title="'+esc(x.n)+'">'+(k+1)+'</button>';
-      }).join('');
-      var dis=LG.run?' disabled':'';
-      var pal='<button data-cmd="F"'+dis+'>↑ Forward</button><button data-cmd="L"'+dis+'>↰ Turn left</button><button data-cmd="R"'+dis+'>↱ Turn right</button><button data-cmd="C"'+dis+'>◆ Call F1</button>';
-      function strip(which,label,lim){
-        var arr=which==='main'?LG.main:LG.f1;
-        var chips=arr.length?arr.map(function(cm,k){
-          return '<span class="cmdchip'+(cm==='C'?' f1':'')+'">'+({F:'↑',L:'↰',R:'↱',C:'F1'})[cm]+'</span>';
-        }).join(''):'<span class="lempty">click a command to add it here</span>';
-        return '<div class="lstrip'+(LG.act===which?' act':'')+'" data-strip="'+which+'"><div class="lslab">'+label
-          +' <span class="'+(arr.length>=lim?'full':'')+'">'+arr.length+'/'+lim+'</span></div><div class="lslot">'+chips+'</div></div>';
-      }
-      st.innerHTML='<div class="gstage">'
-        +'<div class="ghead"><h3>Logic Lab</h3><div class="gscore">Level '+(LG.i+1)+' of '+LOGICLV.length+' · solved <b>'+Object.keys(pl.logic).length+'</b></div></div>'
-        +'<p class="gwhy">Get the robot to the star. You write no code here, you do the part that <b>is</b> programming: putting steps in the right order, then finding out exactly where your order was wrong.</p>'
-        +'<div class="lvlrow">'+lvls+'</div>'
-        +'<div class="lwrap"><div><div class="lgrid">'+cells+'</div><p class="gprog">'+esc(lv.n)+': '+esc(lv.tip)+'</p></div><div>'
-        +'<div class="lpal">'+pal+'</div>'
-        +strip('main','Main',lv.max)+strip('f1','F1 · your function',6)
-        +'<div class="gbtns"><button class="gbtn pri" id="lg-run"'+dis+'>▶ Run</button><button class="gbtn" id="lg-undo"'+dis+'>Undo</button><button class="gbtn" id="lg-clear"'+dis+'>Clear</button></div>'
-        +(LG.msg?'<div class="gfeed '+(LG.ok?'ok':'no')+'">'+LG.msg+'</div>':'')
-        +'</div></div></div>';
-      st.querySelectorAll('[data-lvl]').forEach(function(b){b.addEventListener('click',function(){if(LG.run)return;logicInit(parseInt(b.getAttribute('data-lvl'),10));drawLogic();});});
-      st.querySelectorAll('[data-cmd]').forEach(function(b){b.addEventListener('click',function(){logicAdd(b.getAttribute('data-cmd'));});});
-      st.querySelectorAll('[data-strip]').forEach(function(b){b.addEventListener('click',function(){if(LG.run)return;LG.act=b.getAttribute('data-strip');drawLogic();});});
-      var run=document.getElementById('lg-run');if(run)run.addEventListener('click',logicRun);
-      var un=document.getElementById('lg-undo');if(un)un.addEventListener('click',function(){var a=LG.act==='main'?LG.main:LG.f1;a.pop();LG.msg='';drawLogic();});
-      var cl=document.getElementById('lg-clear');if(cl)cl.addEventListener('click',function(){LG.main=[];LG.f1=[];LG.msg='';drawLogic();});
-    }
-    function logicAdd(cmd){
-      if(!LG||LG.run)return;
-      var lv=LOGICLV[LG.i],arr=LG.act==='main'?LG.main:LG.f1,lim=LG.act==='main'?lv.max:6;
-      if(cmd==='C'&&LG.act==='f1'){toast('F1 cannot call itself. That would never stop.');return;}
-      if(arr.length>=lim){toast(LG.act==='main'?'Main is full. Put the repeating part in F1 and call it.':'F1 holds 6 commands.');return;}
-      arr.push(cmd);LG.msg='';drawLogic();
-    }
-    function logicRun(){
-      if(!LG||LG.run)return;
-      var lv=LOGICLV[LG.i],prog=[];
-      LG.main.forEach(function(c){if(c==='C'){LG.f1.forEach(function(f){prog.push(f);});}else prog.push(c);});
-      if(!prog.length){toast('Add some commands first.');return;}
-      LG.run=true;LG.msg='';
-      var pos=logicStart(lv),trail=[pos.r+','+pos.c],k=0;
-      drawLogic(pos,trail);
-      var timer=setInterval(function(){
-        if(k>=prog.length){
-          clearInterval(timer);LG.run=false;
-          LG.msg='<b>Out of commands.</b> The robot stopped before the star. Follow the trail it left and find the step you missed.';LG.ok=false;
-          drawLogic(pos,trail);return;
-        }
-        var cmd=prog[k++];
-        if(cmd==='L')pos.d=(pos.d+3)%4;
-        else if(cmd==='R')pos.d=(pos.d+1)%4;
-        else{
-          var nr=pos.r+[0,1,0,-1][pos.d],nc=pos.c+[1,0,-1,0][pos.d];
-          if(nr<0||nr>4||nc<0||nc>4||lv.g[nr].charAt(nc)==='#'){
-            clearInterval(timer);LG.run=false;
-            LG.msg='<b>Crash on step '+k+'.</b> The robot walked into a wall. That is a bug, and finding which step caused it is the actual job.';LG.ok=false;
-            drawLogic(pos,trail);return;
-          }
-          pos.r=nr;pos.c=nc;trail.push(nr+','+nc);
-        }
-        if(lv.g[pos.r].charAt(pos.c)==='G'){
-          clearInterval(timer);LG.run=false;
-          var pl=gamePlay();pl.logic=pl.logic||{};
-          var fresh=!pl.logic[LG.i];pl.logic[LG.i]=1;saveData();markPlayed('logic');
-          LG.msg='<b>Solved in '+prog.length+' steps.</b> '+(fresh?'':'Already solved before, so no new XP. ')
-            +(LG.i<LOGICLV.length-1?'Pick the next level above.':'That is every level. You just used sequencing, debugging and functions without writing one line of code.');
-          LG.ok=true;
-          if(fresh)gameXP(30,'Logic level solved');
-          if(Object.keys(pl.logic).length>=LOGICLV.length)unlockBadge('logician');
-          drawLogic(pos,trail);return;
-        }
-        drawLogic(pos,trail);
-      },300);
-    }
-
-    /* --- Predict the Output & Tag Match --- */
-    var OUTPUTQ=[
-      ['console.log(2 + "2");',['22','4','NaN','Error'],0,'A number plus a string glues them together instead of adding. JavaScript turned the 2 into "2". This single rule causes more beginner bugs than anything else.'],
-      ['const list = [1, 2, 3];\nconsole.log(list[3]);',['undefined','3','Error','null'],0,'Counting starts at 0, so the items are 0, 1 and 2. Position 3 does not exist, and JavaScript answers "undefined" instead of complaining.'],
-      ['let x = 5;\nfunction add() { x = x + 1; }\nadd();\nadd();\nconsole.log(x);',['7','5','6','undefined'],0,'The function changes the x that lives outside it, and it ran twice. 5 + 1 + 1 = 7.'],
-      ['console.log([1, 2, 3].map(n => n * 2));',['[2, 4, 6]','[1, 2, 3]','6','2'],0,'map changes every item and gives you a NEW list. The original list is untouched.'],
-      ['console.log([1, 2, 3].filter(n => n > 1));',['[2, 3]','[1]','2','[1, 2, 3]'],0,'filter keeps only the items where your test is true. 2 and 3 are bigger than 1.'],
-      ['console.log("5" === 5);',['false','true','Error','undefined'],0,'=== compares the value AND the type. One is text, the other is a number, so they are not the same thing. Always use ===.'],
-      ['const a = { n: 1 };\nconst b = a;\nb.n = 9;\nconsole.log(a.n);',['9','1','undefined','Error'],0,'Objects are shared, not copied. a and b are two names pointing at the same box, so changing one changes both. This surprises everyone once.'],
-      ['for (let i = 0; i < 3; i++) {}\nconsole.log(i);',['Error','3','2','0'],0,'A variable made with let only exists inside its block. Outside the loop, i was never born.'],
-      ['console.log(typeof []);',['"object"','"array"','"list"','undefined'],0,'In JavaScript an array is really a special kind of object. Use Array.isArray() when you need to be sure.'],
-      ['console.log(0.1 + 0.2 === 0.3);',['false','true','Error','NaN'],0,'Computers store decimals approximately, so 0.1 + 0.2 is actually 0.30000000000000004. Never compare money with ===.'],
-      ['const s = "hola";\ns.toUpperCase();\nconsole.log(s);',['hola','HOLA','undefined','Error'],0,'Strings never change. toUpperCase gives you a NEW string, and here nobody caught it, so s is still "hola".'],
-      ['console.log([10, 9, 1].sort());',['[1, 10, 9]','[1, 9, 10]','[10, 9, 1]','Error'],0,'sort() compares as TEXT by default, and "10" comes before "9" alphabetically. For numbers use sort((a, b) => a - b).'],
-      ['const n = "7";\nconsole.log(n * 2);',['14','"77"','NaN','Error'],0,'Multiplying forces the text into a number, but adding would have glued it. JavaScript is inconsistent here, which is exactly why you must know it.'],
-      ['console.log(Boolean(""));',['false','true','""','undefined'],0,'An empty string counts as false. So do 0, null, undefined and NaN. Everything else is true.']
-    ];
-    var MQ=null;
-    function nextOutputQ(){
-      var i=Math.floor(Math.random()*OUTPUTQ.length);
-      if(MQ&&MQ.last===i)i=(i+1)%OUTPUTQ.length;
-      if(MQ)MQ.last=i;
-      var q=OUTPUTQ[i];
-      return {code:q[0],opts:q[1],a:q[2],why:q[3],raw:false};
-    }
-    function nextTagQ(){
-      var i=Math.floor(Math.random()*HTMLTAGS.length);
-      if(MQ&&MQ.last===i)i=(i+1)%HTMLTAGS.length;
-      if(MQ)MQ.last=i;
-      var t=HTMLTAGS[i],opts=[t[0]],used={},j,k,m,tmp;
-      used[i]=1;
-      while(opts.length<4){j=Math.floor(Math.random()*HTMLTAGS.length);if(used[j])continue;used[j]=1;opts.push(HTMLTAGS[j][0]);}
-      for(k=opts.length-1;k>0;k--){m=Math.floor(Math.random()*(k+1));tmp=opts[k];opts[k]=opts[m];opts[m]=tmp;}
-      return {prompt:t[2],opts:opts,a:opts.indexOf(t[0]),why:'It is '+t[0]+'. For example: <code>'+t[3]+'</code>',raw:true};
-    }
-    function drawMiniQuiz(){
-      var st=document.getElementById('game-stage');if(!st||!data)return;
-      if(!MQ||MQ.key!==GKEY)MQ={key:GKEY,score:0,asked:0,streak:0,best:0,ans:-1,last:-1,q:null};
-      if(!MQ.q)MQ.q=GKEY==='output'?nextOutputQ():nextTagQ();
-      var q=MQ.q,done=MQ.ans>=0,isOut=GKEY==='output';
-      var body=isOut
-        ? '<pre class="mgcode">'+esc(q.code)+'</pre><p class="gwhy">What does this print?</p>'
-        : '<p class="gwhy">Which tag does this job?</p><div class="tagcard" style="margin-bottom:16px"><p class="tdesc" style="margin:0">'+esc(q.prompt)+'</p></div>';
-      var opts=q.opts.map(function(o,k){
-        var cl='mgopt';
-        if(done){if(k===q.a)cl+=' right';else if(k===MQ.ans)cl+=' wrong';}
-        return '<button class="'+cl+'" data-opt="'+k+'"'+(done?' disabled':'')+'>'+(q.raw?o:esc(o))+'</button>';
-      }).join('');
-      st.innerHTML='<div class="gstage">'
-        +'<div class="ghead"><h3>'+(isOut?'Predict the Output':'Tag Match')+'</h3><div class="gscore"><b>'+MQ.score+'</b> / '+MQ.asked+' correct · streak <b>'+MQ.streak+'</b> · best <b>'+MQ.best+'</b></div></div>'
-        +'<p class="gwhy">'+(isOut
-          ? 'Reading code you did not write is the skill you will use most at work, and almost nobody practises it. Guess before you scroll. Being wrong here is free.'
-          : 'Speed round from all 100 tags. Knowing the right tag is what separates a page that works from a page that works for everyone, including Google and blind users.')+'</p>'
-        +body+'<div class="mgopts">'+opts+'</div>'
-        +(done?'<div class="gfeed '+(MQ.ans===q.a?'ok':'no')+'"><b>'+(MQ.ans===q.a?'Correct.':'Not this time.')+'</b> '+q.why+'</div><div class="gbtns"><button class="gbtn pri" id="mg-next">Next question →</button></div>':'')
-        +'</div>';
-      st.querySelectorAll('[data-opt]').forEach(function(b){
+    function labSave(v){var g=labState();g.labCode[labKey()]=v;saveData();}
+    function unsafeLoop(src){return /while\s*\(\s*(true|1)\s*\)|for\s*\(\s*;\s*;\s*\)/.test(src||'');}
+    function renderLab(){
+      var tabs=document.getElementById('lab-tabs'),st=document.getElementById('lab-stage');
+      if(!tabs||!st||!data)return;
+      var g=labState();
+      tabs.innerHTML=LABCH.map(function(ch,k){
+        return '<button class="labchip'+(!LABFREE&&k===LABI?' on':'')+(g.lab['c'+k]?' won':'')+'" data-lab="'+k+'" title="'+esc(ch.lv+': '+ch.t)+'">'+(k+1)+'</button>';
+      }).join('')+'<button class="labchip free'+(LABFREE?' on':'')+'" data-lab="free">Free play</button>';
+      tabs.querySelectorAll('[data-lab]').forEach(function(b){
         b.addEventListener('click',function(){
-          if(MQ.ans>=0)return;
-          MQ.ans=parseInt(b.getAttribute('data-opt'),10);MQ.asked++;
-          if(MQ.ans===MQ.q.a){MQ.score++;MQ.streak++;if(MQ.streak>MQ.best)MQ.best=MQ.streak;markPlayed(GKEY);gameXP(MQ.streak>=5?10:5,'Correct answer');}
-          else MQ.streak=0;
-          drawMiniQuiz();
+          var v=b.getAttribute('data-lab');
+          LABFREE=(v==='free');if(!LABFREE)LABI=parseInt(v,10);
+          LABMSG='';renderLab();
         });
       });
-      var nx=document.getElementById('mg-next');
-      if(nx)nx.addEventListener('click',function(){MQ.ans=-1;MQ.q=GKEY==='output'?nextOutputQ():nextTagQ();drawMiniQuiz();});
-    }
-
-    /* --- Bug Hunter --- */
-    var BUGQ=[
-      ['This should print "winner" only when the score is 10.',['let score = 5;','if (score = 10) {','  console.log("winner");','}'],1,'One = puts a value IN the box. Comparing needs ===. This line quietly sets score to 10 and then always runs.'],
-      ['This should print every item in the list.',['const nums = [1, 2, 3];','for (let i = 0; i <= nums.length; i++) {','  console.log(nums[i]);','}'],1,'The list has 3 items at positions 0, 1 and 2. Using <= goes to position 3, which does not exist, so it prints undefined at the end. Use < instead.'],
-      ['The button should show an alert when clicked.',['const btn = document.querySelector(".btn");','btn.addEventListener("click" () => {','  alert("hi");','});'],1,'A comma is missing between the event name and the function. The browser cannot even read this file, so nothing on the page runs.'],
-      ['This should print the name Ana.',['const user = { name: "Ana" };','console.log(user.Name);'],1,'JavaScript is case sensitive. name and Name are two different things, so this prints undefined.'],
-      ['This should print 8.',['function double(n) {','  n * 2;','}','console.log(double(4));'],1,'The function calculates the answer and then throws it away. Without return, a function hands back undefined.'],
-      ['This should print each item.',['const items = ["a", "b"];','items.forEach(item => {','  console.log(itemm);','});'],2,'A typo: itemm with two m. The variable is called item. Read the error message, it names the exact word.'],
-      ['This form field should be properly labelled.',['<label>Email</label>','<input type="email" id="email">','<button>Send</button>'],0,'The label is not connected to the input. It needs for="email" to match the input id. Without it, clicking the label does nothing and a screen reader cannot tell a blind user what the box is for.'],
-      ['The card should have space inside it.',['.card {','  padding: 20;','  background: white;','}'],1,'CSS needs a unit. 20 means nothing, it must be 20px (or rem). The browser silently ignores the whole line.'],
-      ['This should print 8.',['const total = "5" + 3;','console.log(total);'],0,'"5" is text, not a number. Text plus a number glues them into "53". Convert it first with Number("5").'],
-      ['This image should be accessible.',['<img src="cat.jpg">','<p>My cat sleeping</p>'],0,'The image has no alt text. A blind user hears nothing, and Google cannot read it either. Every img needs alt.'],
-      ['Only paragraphs inside the card should be red.',['.card, p {','  color: red;','}'],0,'The comma means "the card AND every paragraph on the page". To mean "paragraphs inside the card" remove the comma: .card p'],
-      ['This should stop the page from reloading.',['form.addEventListener("submit", (e) => {','  preventDefault();','  save();','});'],1,'preventDefault belongs to the event. It has to be e.preventDefault(), otherwise the browser has no idea what you are talking about.']
-    ];
-    var BUG=null;
-    function drawBug(){
-      var st=document.getElementById('game-stage');if(!st||!data)return;
-      if(!BUG)BUG={score:0,asked:0,streak:0,best:0,pick:-1,i:Math.floor(Math.random()*BUGQ.length)};
-      var q=BUGQ[BUG.i],done=BUG.pick>=0;
-      var lines=q[1].map(function(l,k){
-        var cl='bugline';
-        if(done){if(k===q[2])cl+=' right';else if(k===BUG.pick)cl+=' wrong';}
-        return '<button class="'+cl+'" data-line="'+k+'"'+(done?' disabled':'')+'><span class="ln">'+(k+1)+'</span><span class="lc">'+esc(l)+'</span></button>';
-      }).join('');
-      st.innerHTML='<div class="gstage">'
-        +'<div class="ghead"><h3>Bug Hunter</h3><div class="gscore"><b>'+BUG.score+'</b> / '+BUG.asked+' found · streak <b>'+BUG.streak+'</b> · best <b>'+BUG.best+'</b></div></div>'
-        +'<p class="gwhy">Exactly one line is broken. Click it. This is what you will really do all day as a developer, and it is a trainable skill, not a talent.</p>'
-        +'<p class="gwhy" style="color:var(--ink);font-weight:700">Goal: '+esc(q[0])+'</p>'
-        +'<div class="bugcode">'+lines+'</div>'
-        +(done?'<div class="gfeed '+(BUG.pick===q[2]?'ok':'no')+'"><b>'+(BUG.pick===q[2]?'Found it.':'The bug was on line '+(q[2]+1)+'.')+'</b> '+esc(q[3])+'</div><div class="gbtns"><button class="gbtn pri" id="bug-next">Next bug →</button></div>':'')
-        +'</div>';
-      st.querySelectorAll('[data-line]').forEach(function(b){
-        b.addEventListener('click',function(){
-          if(BUG.pick>=0)return;
-          BUG.pick=parseInt(b.getAttribute('data-line'),10);BUG.asked++;
-          if(BUG.pick===BUGQ[BUG.i][2]){BUG.score++;BUG.streak++;if(BUG.streak>BUG.best)BUG.best=BUG.streak;markPlayed('bug');gameXP(8,'Bug found');}
-          else BUG.streak=0;
-          drawBug();
+      var ch=LABCH[LABI],solved=Object.keys(g.lab).length;
+      var brief=LABFREE
+        ? '<div class="labbrief"><div class="lb-top"><span class="chip mut">Free play</span></div><h3>Your own sandbox</h3><p>No rules and no checks here. Write anything, break anything, and watch what happens. Your code is saved in this browser, so it is still here tomorrow.</p></div>'
+        : '<div class="labbrief"><div class="lb-top"><span class="chip mut">Challenge '+(LABI+1)+' of '+LABCH.length+'</span><span class="chip">'+esc(ch.lv)+'</span>'+(g.lab['c'+LABI]?'<span class="chip good">Solved</span>':'')+'</div><h3>'+esc(ch.t)+'</h3><p>'+esc(ch.b)+'</p><p class="lb-hint"><b>Stuck?</b> '+esc(ch.h)+'</p></div>';
+      var checks=LABFREE?'':'<div class="chkhead">What the checker looks for</div><div id="lab-checks">'
+        +ch.c.map(function(c){return '<div class="chk"><span class="ci">○</span><span>'+esc(c[0])+'</span></div>';}).join('')+'</div>';
+      st.innerHTML='<div class="labwrap">'
+        +'<div class="labcol">'+brief
+        +'<div class="edbar"><span>Your code</span><span>'+(LABFREE?'sandbox':'solved '+solved+' / '+LABCH.length)+'</span></div>'
+        +'<textarea class="editor" id="lab-editor" spellcheck="false" autocomplete="off" autocapitalize="off">'+esc(labCode())+'</textarea>'
+        +'<div class="labbtns">'+(LABFREE?'':'<button class="labbtn pri" id="lab-check">Check my work</button>')
+        +'<button class="labbtn" id="lab-run">Run</button><button class="labbtn" id="lab-reset">Start over</button></div>'
+        +(LABMSG?'<div class="labfeed '+(LABOK?'ok':'no')+'">'+LABMSG+'</div>':'')
+        +'</div>'
+        +'<div class="labcol"><div class="pvbar"><span>Live preview</span><span class="live" id="lab-live">updates as you type</span></div>'
+        +'<iframe class="pvframe" id="lab-frame" title="Live preview of your code"></iframe>'
+        +checks+'</div></div>';
+      var ed=document.getElementById('lab-editor');
+      if(ed){
+        ed.addEventListener('input',function(){
+          labSave(ed.value);
+          clearTimeout(LABTIMER);LABTIMER=setTimeout(function(){labRun();},450);
         });
-      });
-      var nx=document.getElementById('bug-next');
-      if(nx)nx.addEventListener('click',function(){
-        var j=Math.floor(Math.random()*BUGQ.length);if(j===BUG.i)j=(j+1)%BUGQ.length;
-        BUG.i=j;BUG.pick=-1;drawBug();
-      });
-    }
-
-    /* --- Selector Hunter --- */
-    var SELLV=[
-      ['Select every paragraph','<p>Milk</p><div>Bread</div><p>Eggs</p>','p','The tag name on its own selects every element of that type.'],
-      ['Select the item on sale','<div class="item">Shoes</div><div class="item sale">Hat</div><div class="item">Bag</div>','.sale','A dot means class. An element can carry several classes at once.'],
-      ['Select the total','<span>Subtotal</span><span id="total">Total</span>','#total','A hash means id. An id must be unique on the page, so it always selects exactly one thing.'],
-      ['Select every list item','<ul><li>Uno</li><li>Dos</li></ul><p>Note</p>','li','li only matches list items, so the paragraph is left alone.'],
-      ['Select the paragraphs inside the box','<p>Outside</p><div class="box"><p>Inside</p><p>Inside too</p></div>','.box p','A space means "anywhere inside". This is the most used selector in real CSS.'],
-      ['Select only the direct children of the menu','<ul class="menu"><li>Home</li><li>More<ul><li>Deep</li></ul></li></ul>','.menu > li','The > arrow means "direct child only", so the nested one is skipped. A space would have caught all three.'],
-      ['Select the first item','<ul><li>First</li><li>Second</li><li>Third</li></ul>','li:first-child','A colon starts a pseudo-class, which selects by position or state rather than by name.'],
-      ['Select every email box','<input type="text"><input type="email"><input type="email">','input[type="email"]','Square brackets select by attribute. This is how you style one input type differently from another.'],
-      ['Select the last item','<ul><li>First</li><li>Second</li><li>Last</li></ul>','li:last-child','Same idea as first-child, from the other end. Great for removing the border on the final row.'],
-      ['Select every button that is disabled','<button>Save</button><button disabled>Save</button>','button[disabled]','An attribute with no value still selects. This is how you grey out disabled buttons.']
-    ];
-    var SEL=null;
-    function drawSelector(){
-      var st=document.getElementById('game-stage');if(!st||!data)return;
-      if(!SEL)SEL={i:0,solved:{},msg:'',ok:false};
-      var lv=SELLV[SEL.i];
-      var lvls=SELLV.map(function(x,k){return '<button class="lvlbtn'+(k===SEL.i?' on':'')+(SEL.solved[k]?' won':'')+'" data-slv="'+k+'">'+(k+1)+'</button>';}).join('');
-      st.innerHTML='<div class="gstage">'
-        +'<div class="ghead"><h3>Selector Hunter</h3><div class="gscore">Level '+(SEL.i+1)+' of '+SELLV.length+' · solved <b>'+Object.keys(SEL.solved).length+'</b></div></div>'
-        +'<p class="gwhy">Write the CSS selector that grabs exactly the right elements, nothing more. Everything you highlight turns purple as you type, so you can see your aim before you commit.</p>'
-        +'<div class="lvlrow">'+lvls+'</div>'
-        +'<p class="gwhy" style="color:var(--ink);font-weight:700">'+esc(lv[0])+'</p>'
-        +'<div class="selplate" id="sel-plate">'+lv[1]+'</div>'
-        +'<div class="selform"><input class="finput" id="sel-input" placeholder="type a selector, e.g. .card p" autocomplete="off" spellcheck="false"><button class="gbtn pri" id="sel-go">Check</button><button class="gbtn" id="sel-hint">Hint</button></div>'
-        +'<pre class="selhtml">'+esc(lv[1].replace(/></g,'>\n<'))+'</pre>'
-        +(SEL.msg?'<div class="gfeed '+(SEL.ok?'ok':'no')+'">'+SEL.msg+'</div>':'')
-        +'</div>';
-      st.querySelectorAll('[data-slv]').forEach(function(b){b.addEventListener('click',function(){SEL.i=parseInt(b.getAttribute('data-slv'),10);SEL.msg='';drawSelector();});});
-      var inp=document.getElementById('sel-input');
-      if(inp){inp.addEventListener('input',selHighlight);inp.addEventListener('keydown',function(e){if(e.key==='Enter')selCheck();});}
-      var go=document.getElementById('sel-go');if(go)go.addEventListener('click',selCheck);
-      var hi=document.getElementById('sel-hint');if(hi)hi.addEventListener('click',function(){toast('Hint: the answer uses '+(SELLV[SEL.i][2].indexOf('.')===0?'a class':SELLV[SEL.i][2].indexOf('#')===0?'an id':SELLV[SEL.i][2].indexOf('[')>=0?'an attribute in square brackets':SELLV[SEL.i][2].indexOf(':')>=0?'a pseudo-class with a colon':SELLV[SEL.i][2].indexOf('>')>=0?'the direct-child arrow':'a plain tag name')+'.');});
-    }
-    function selHighlight(){
-      var plate=document.getElementById('sel-plate');if(!plate)return;
-      plate.querySelectorAll('.hit').forEach(function(e){e.classList.remove('hit');});
-      var v=(val('sel-input')||'').trim();if(!v)return;
-      try{plate.querySelectorAll(v).forEach(function(e){e.classList.add('hit');});}catch(e){}
-    }
-    function selCheck(){
-      var plate=document.getElementById('sel-plate');if(!plate||!SEL)return;
-      var lv=SELLV[SEL.i],v=(val('sel-input')||'').trim();
-      if(!v){toast('Type a selector first.');return;}
-      var got;
-      try{got=[].slice.call(plate.querySelectorAll(v));}
-      catch(e){SEL.msg='<b>That is not a valid selector.</b> A class starts with a dot, an id with a hash, and a tag has neither.';SEL.ok=false;drawSelector();return;}
-      var want=[].slice.call(plate.querySelectorAll(lv[2]));
-      var same=got.length===want.length&&want.every(function(el){return got.indexOf(el)>=0;});
-      if(same){
-        var fresh=!SEL.solved[SEL.i];SEL.solved[SEL.i]=1;markPlayed('selector');
-        if(fresh)gameXP(15,'Selector solved');
-        SEL.msg='<b>Exactly right.</b> '+esc(lv[3])+(SEL.i<SELLV.length-1?' Pick the next level above.':' That is all ten. You can now aim CSS at anything on a page.');
-        SEL.ok=true;
-      }else{
-        SEL.msg='<b>Close, but not the same set.</b> You caught '+got.length+' element'+(got.length===1?'':'s')+', the answer catches '+want.length+'. Watch the purple highlights as you type.';
-        SEL.ok=false;
+        ed.addEventListener('keydown',function(e){
+          if(e.key==='Tab'){e.preventDefault();
+            var s=ed.selectionStart,en=ed.selectionEnd;
+            ed.value=ed.value.slice(0,s)+'  '+ed.value.slice(en);
+            ed.selectionStart=ed.selectionEnd=s+2;labSave(ed.value);}
+        });
       }
-      drawSelector();
-      var inp=document.getElementById('sel-input');if(inp){inp.value=v;selHighlight();}
+      var b1=document.getElementById('lab-check');if(b1)b1.addEventListener('click',labCheck);
+      var b2=document.getElementById('lab-run');if(b2)b2.addEventListener('click',function(){labRun();});
+      var b3=document.getElementById('lab-reset');if(b3)b3.addEventListener('click',function(){
+        var g2=labState();delete g2.labCode[labKey()];saveData();LABMSG='';renderLab();toast('Back to the starting code.');
+      });
+      labRun();
+    }
+    function labRun(cb){
+      var fr=document.getElementById('lab-frame'),ed=document.getElementById('lab-editor');
+      if(!fr||!ed)return;
+      var src=ed.value;
+      if(unsafeLoop(src)){
+        LABMSG='<b>That loop would never stop.</b> A <code>while (true)</code> with no way out freezes the page, so it was not run. Give the loop a condition that eventually becomes false.';LABOK=false;
+        var f=document.querySelector('.labfeed');
+        if(f){f.className='labfeed no';f.innerHTML=LABMSG;}else renderLab();
+        return;
+      }
+      fr.onload=function(){fr.onload=null;if(cb)cb();};
+      fr.srcdoc=src;
+      setTimeout(function(){if(cb&&fr.onload){fr.onload=null;cb();}},700);
+    }
+    function labCheck(){
+      if(LABFREE)return;
+      labRun(function(){
+        var fr=document.getElementById('lab-frame'),ed=document.getElementById('lab-editor');
+        if(!fr||!ed)return;
+        var d,w;
+        try{d=fr.contentDocument;w=fr.contentWindow;}catch(e){d=null;}
+        if(!d){LABMSG='<b>The preview could not be read here.</b> This works on the real site. Try opening the academy at its normal address.';LABOK=false;renderLab();return;}
+        var ch=LABCH[LABI],src=ed.value,pass=0,rows='';
+        ch.c.forEach(function(c){
+          var ok=false;
+          try{ok=!!c[1](d,w,src,fr);}catch(e){ok=false;}
+          if(ok)pass++;
+          rows+='<div class="chk '+(ok?'ok':'no')+'"><span class="ci">'+(ok?'✓':'✕')+'</span><span>'+esc(c[0])+'</span></div>';
+        });
+        var box=document.getElementById('lab-checks');if(box)box.innerHTML=rows;
+        var all=pass===ch.c.length;
+        if(all){
+          var g=labState(),fresh=!g.lab['c'+LABI];
+          g.lab['c'+LABI]=1;saveData();
+          LABMSG='<b>All checks pass.</b> '+(fresh?'':'You had already solved this one, so no new XP. ')
+            +(LABI<LABCH.length-1?'Challenge '+(LABI+2)+' is unlocked above.':'That is all twelve. You have written HTML, CSS and JavaScript and built a working app. You are a web developer now.');
+          LABOK=true;
+          if(fresh)labAward();
+          if(Object.keys(g.lab).length>=LABCH.length)unlockBadge('builder');
+        }else{
+          LABMSG='<b>'+pass+' of '+ch.c.length+' checks pass.</b> Look at the red lines on the right, they say exactly what is missing. Nothing is broken, you are just not finished yet.';
+          LABOK=false;
+        }
+        renderLab();
+        var box2=document.getElementById('lab-checks');if(box2)box2.innerHTML=rows;
+      });
+    }
+    function labAward(){
+      var t=todayBox();t.labxp=t.labxp||0;
+      if(t.labxp>=200){toast('Code Lab XP maxed for today.');return;}
+      t.labxp+=25;awardXP(25,'Challenge solved','code');
     }
 
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();updateAuthChip();}

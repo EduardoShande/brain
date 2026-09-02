@@ -519,6 +519,24 @@
   .tagcard pre{margin:10px 0 0;font-size:12px;padding:11px 13px}
   .tagempty{grid-column:1/-1}
   .gamehint{margin:12px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-faint)}
+  .streakbox{flex:none;text-align:right}
+  .week{display:flex;gap:4px;margin-top:7px;justify-content:flex-end}
+  .week .dot{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:700;background:var(--surface);border:1px solid var(--line);color:var(--ink-faint)}
+  .week .dot.on{background:var(--grad);border-color:transparent;color:#fff}
+  .questbox{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .qhead{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .qhead span{font-weight:400;letter-spacing:.04em;color:var(--ink-faint);text-transform:none}
+  .quest{display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:9px;background:var(--surface);border:1px solid var(--line);margin-bottom:6px;font-size:14px}
+  .quest .qi{flex:none;width:18px;text-align:center;color:var(--ink-faint);font-weight:700}
+  .quest .qn{flex:1;color:var(--ink)}
+  .quest .qp{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
+  .quest .qx{font-family:"JetBrains Mono",monospace;font-size:11.5px;font-weight:700;color:var(--teal-ink);white-space:nowrap}
+  .quest.done{background:var(--teal-wash);border-color:transparent}
+  .quest.done .qi{color:var(--teal-ink)}
+  .quest.done .qn{color:var(--ink-soft);text-decoration:line-through}
+  .nextgoal{margin-top:13px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:9px 12px;border-radius:9px;background:var(--clay-wash)}
+  .nextgoal b{color:var(--ink)}
+  @media(max-width:620px){.streakbox{text-align:left}.week{justify-content:flex-start}.gamexp{flex-direction:column;align-items:flex-start;gap:2px}}
   .stagenote{margin:14px 0 4px;font-size:14px;line-height:1.6;color:var(--ink-soft);padding:11px 14px;background:var(--teal-wash);border-radius:10px}
   .inlinelink{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--teal-ink);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
   .inlinelink:hover{color:var(--clay-ink)}
@@ -2169,6 +2187,163 @@
   </div>
 
   <!-- ===================== WEB DEVELOPMENT ===================== -->
+  <!-- ===================== RESOURCES ===================== -->
+  <div class="page" id="page-resources">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Reference · free</div>
+      <h2>Learn free, from the companies that built it</h2>
+      <p class="pd">Google, Meta, Amazon, Microsoft, IBM and Cisco give away world-class training. Not trial versions, not teasers. Real courses, many with a certificate, all $0. Here is the shortlist, sorted by topic, so you never pay for something that was free.</p>
+      <div class="subnav">
+        <a href="#rs-how" class="jump">How to use this</a>
+        <a href="#rs-fund" class="jump">Fundamentals</a>
+        <a href="#rs-web" class="jump">Web dev</a>
+        <a href="#rs-back" class="jump">Backend &amp; data</a>
+        <a href="#rs-cloud" class="jump">Cloud</a>
+        <a href="#rs-ai" class="jump">AI</a>
+        <a href="#rs-sec" class="jump">Security</a>
+        <a href="#rs-auto" class="jump">Automation</a>
+      </div>
+    </div>
+
+    <section class="sec" id="rs-how">
+      <div class="eyebrow">00 · Read this first</div>
+      <h3>A list of courses is not a plan</h3>
+      <p class="lead">The most common way to waste a year in tech is to collect free courses like stickers and finish none of them.</p>
+      <p>Imagine a kid who owns 40 books and has read none. That is what a bookmark folder full of courses is. Owning is not learning.</p>
+      <div class="rows">
+        <div class="r"><span class="h">Pick ONE per topic</span><span class="m">rule 1</span><span class="d">Not three. One. Finish it before you open another tab. Two half-finished courses teach you less than one finished one.</span></div>
+        <div class="r"><span class="h">Follow the roadmap, use these as the textbook</span><span class="m">rule 2</span><span class="d">Our roadmap tells you what to learn and in what order. These links are where you actually learn it. The order matters more than the source.</span></div>
+        <div class="r"><span class="h">Build something after every course</span><span class="m">rule 3</span><span class="d">A certificate proves you watched. A project proves you can. Nobody has ever been hired for a badge alone.</span></div>
+        <div class="r"><span class="h">"Audit for free" is a real option</span><span class="m">rule 4</span><span class="d">On Coursera you can watch every Google and Meta course for $0 by choosing "audit". You only pay if you want the paper. Learn free, pay later only if a certificate helps you.</span></div>
+      </div>
+      <div class="mnote"><span class="label">Why these companies give it away</span>It is not charity. Google wants more people using Google Cloud. AWS wants more AWS engineers. Meta wants more React developers. Their business need is your free education, and the training is excellent because it has to be. Take the deal.</div>
+    </section>
+
+    <section class="sec" id="rs-fund">
+      <div class="eyebrow">01 · Fundamentals</div>
+      <h3>If you are starting from absolute zero</h3>
+      <p class="lead">Do one of these before anything else. They teach you how to think, which is the part that never expires.</p>
+      <div class="res">
+        <div class="grp"><div class="gh">The two best on Earth, both free</div>
+          <a class="rl" href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener"><span><span class="rn">CS50x, Harvard University</span><span class="rd">The single best introduction to computer science ever made. Hard, famous, and completely free to watch. Start with lecture 0 even if you never finish.</span></span><span class="rt">Harvard · free</span></a>
+          <a class="rl" href="https://www.freecodecamp.org/learn" target="_blank" rel="noopener"><span><span class="rn">freeCodeCamp, full curriculum</span><span class="rd">Thousands of hours of hands-on coding in the browser, with free certifications. A non-profit, no upsell, no credit card, ever.</span></span><span class="rt">Non-profit · certified</span></a>
+          <a class="rl" href="https://www.khanacademy.org/computing" target="_blank" rel="noopener"><span><span class="rn">Khan Academy, Computing</span><span class="rd">The gentlest possible on-ramp, built for total beginners and available in Spanish.</span></span><span class="rt">Free · Español</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="rs-web">
+      <div class="eyebrow">02 · Web development</div>
+      <h3>HTML, CSS, JavaScript and React</h3>
+      <p class="lead">The people who wrote the rules of the web also wrote the best free courses about it. Use the source.</p>
+      <div class="res">
+        <div class="grp"><div class="gh">Official documentation, the industry standard</div>
+          <a class="rl" href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank" rel="noopener"><span><span class="rn">MDN Web Docs, Learn Web Development</span><span class="rd">From Mozilla, the makers of Firefox. This is the reference every professional developer on Earth has open in a tab. Complete, free, no account.</span></span><span class="rt">Mozilla · free</span></a>
+          <a class="rl" href="https://web.dev/learn" target="_blank" rel="noopener"><span><span class="rn">web.dev Learn, by Google</span><span class="rd">Google's own free courses: Learn HTML, Learn CSS, Learn JavaScript, Learn Responsive Design, Learn Accessibility, Learn Performance. Written by the Chrome team.</span></span><span class="rt">Google · free</span></a>
+          <a class="rl" href="https://react.dev/learn" target="_blank" rel="noopener"><span><span class="rn">React, official Learn, by Meta</span><span class="rd">React is made by Meta and their own tutorial is the best one that exists. Interactive, current, free.</span></span><span class="rt">Meta · free</span></a>
+          <a class="rl" href="https://developer.chrome.com/docs/devtools" target="_blank" rel="noopener"><span><span class="rn">Chrome DevTools, by Google</span><span class="rd">Learn to use the X-ray glasses built into your browser. Most beginners never learn this and it slows them down for years.</span></span><span class="rt">Google · free</span></a>
+        </div>
+        <div class="grp"><div class="gh">Big-company certificates (audit them for free)</div>
+          <a class="rl" href="https://www.coursera.org/professional-certificates/meta-front-end-developer" target="_blank" rel="noopener"><span><span class="rn">Meta Front-End Developer Certificate</span><span class="rd">Nine courses built by Meta's own engineers: HTML, CSS, JavaScript, React, Figma, plus interview prep and access to their employer job board. Choose "audit" to watch it all for $0.</span></span><span class="rt">Meta · audit free</span></a>
+          <a class="rl" href="https://www.coursera.org/professional-certificates/google-ux-design" target="_blank" rel="noopener"><span><span class="rn">Google UX Design Certificate</span><span class="rd">Why interfaces work, not just how to build them. The skill that makes a developer's work look professional instead of homemade.</span></span><span class="rt">Google · audit free</span></a>
+        </div>
+        <div class="grp"><div class="gh">The best free courses not made by a company</div>
+          <a class="rl" href="https://javascript.info" target="_blank" rel="noopener"><span><span class="rn">The Modern JavaScript Tutorial</span><span class="rd">The deepest free JavaScript course anywhere. If you only pick one JS resource in your life, pick this.</span></span><span class="rt">Free · tutorial</span></a>
+          <a class="rl" href="https://www.theodinproject.com/" target="_blank" rel="noopener"><span><span class="rn">The Odin Project</span><span class="rd">A complete project-based curriculum from zero to full-stack. Free, open source, and famously effective because you build constantly.</span></span><span class="rt">Free · full path</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="rs-back">
+      <div class="eyebrow">03 · Backend, databases &amp; data</div>
+      <h3>The part behind the screen</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">Backend</div>
+          <a class="rl" href="https://learn.microsoft.com/training/" target="_blank" rel="noopener"><span><span class="rn">Microsoft Learn</span><span class="rd">Thousands of free, hands-on learning paths with free badges, covering C#, Python, APIs, Azure and much more. One of the largest free training libraries on the internet.</span></span><span class="rt">Microsoft · free badges</span></a>
+          <a class="rl" href="https://www.coursera.org/professional-certificates/meta-back-end-developer" target="_blank" rel="noopener"><span><span class="rn">Meta Back-End Developer Certificate</span><span class="rd">Python, Django, APIs, databases and version control, taught by Meta engineers. Auditable for free.</span></span><span class="rt">Meta · audit free</span></a>
+          <a class="rl" href="https://nodejs.org/en/learn" target="_blank" rel="noopener"><span><span class="rn">Node.js, official Learn</span><span class="rd">Run JavaScript on a server, from the people who make Node. Free and official.</span></span><span class="rt">Node.js · free</span></a>
+          <a class="rl" href="https://fastapi.tiangolo.com/tutorial/" target="_blank" rel="noopener"><span><span class="rn">FastAPI, official tutorial</span><span class="rd">The best-written documentation in Python. This is the framework this academy's own backend is built with.</span></span><span class="rt">Official · free</span></a>
+        </div>
+        <div class="grp"><div class="gh">Databases &amp; SQL</div>
+          <a class="rl" href="https://sqlbolt.com" target="_blank" rel="noopener"><span><span class="rn">SQLBolt</span><span class="rd">Learn SQL by writing real queries in the browser, in about two hours. The fastest useful start there is.</span></span><span class="rt">Free · interactive</span></a>
+          <a class="rl" href="https://www.postgresql.org/docs/current/tutorial.html" target="_blank" rel="noopener"><span><span class="rn">PostgreSQL, official tutorial</span><span class="rd">The world's most respected open-source database, explained by its own team.</span></span><span class="rt">Official · free</span></a>
+          <a class="rl" href="https://learn.mongodb.com" target="_blank" rel="noopener"><span><span class="rn">MongoDB University</span><span class="rd">Free courses and free certification prep for the most popular NoSQL database.</span></span><span class="rt">MongoDB · free</span></a>
+        </div>
+        <div class="grp"><div class="gh">Data &amp; analytics</div>
+          <a class="rl" href="https://www.kaggle.com/learn" target="_blank" rel="noopener"><span><span class="rn">Kaggle Learn, by Google</span><span class="rd">Short, practical micro-courses: Python, Pandas, data visualisation, intro to machine learning. Free GPUs included. Kaggle is owned by Google.</span></span><span class="rt">Google · free</span></a>
+          <a class="rl" href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener"><span><span class="rn">Google Data Analytics Certificate</span><span class="rd">The most recognised entry-level data credential in the world. Eight courses, auditable free.</span></span><span class="rt">Google · audit free</span></a>
+          <a class="rl" href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" rel="noopener"><span><span class="rn">Power BI, Microsoft Learn</span><span class="rd">The dashboard tool most companies actually use. Free paths straight from Microsoft.</span></span><span class="rt">Microsoft · free</span></a>
+          <a class="rl" href="https://skillsbuild.org/" target="_blank" rel="noopener"><span><span class="rn">IBM SkillsBuild</span><span class="rd">Free structured programs in data science, AI, cybersecurity and cloud, with IBM digital credentials, built for students and job seekers.</span></span><span class="rt">IBM · free credentials</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="rs-cloud">
+      <div class="eyebrow">04 · Cloud</div>
+      <h3>Where every real app actually lives</h3>
+      <p class="lead">All three giants train you free, because they want you fluent in their platform. That is your gain.</p>
+      <div class="res">
+        <div class="grp"><div class="gh">The big three, all free to learn</div>
+          <a class="rl" href="https://skillbuilder.aws/" target="_blank" rel="noopener"><span><span class="rn">AWS Skill Builder</span><span class="rd">600+ free courses from Amazon, including the full Cloud Practitioner Essentials path and free exam prep. AWS is the largest cloud on Earth, so this is the safest cloud bet.</span></span><span class="rt">Amazon · free</span></a>
+          <a class="rl" href="https://www.cloudskillsboost.google/" target="_blank" rel="noopener"><span><span class="rn">Google Cloud Skills Boost</span><span class="rd">Free skill badges earned in real, live Google Cloud environments with real credentials and real infrastructure. Hundreds of no-cost labs.</span></span><span class="rt">Google · free badges</span></a>
+          <a class="rl" href="https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/" target="_blank" rel="noopener"><span><span class="rn">Azure Fundamentals (AZ-900) path</span><span class="rd">Microsoft's free path that maps exactly to their entry-level cloud certification.</span></span><span class="rt">Microsoft · free</span></a>
+        </div>
+      </div>
+      <div class="mnote"><span class="label">Which one should you learn</span>Pick <b>one</b> and go deep. AWS has the most jobs worldwide, Azure wins in big corporations, Google Cloud is strong in data and AI. The concepts transfer between all three, so the choice matters far less than finishing.</div>
+    </section>
+
+    <section class="sec" id="rs-ai">
+      <div class="eyebrow">05 · AI, agents &amp; GenAI</div>
+      <h3>The fastest-moving field, taught free by the people building it</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">Start here</div>
+          <a class="rl" href="https://developers.google.com/machine-learning/crash-course" target="_blank" rel="noopener"><span><span class="rn">Machine Learning Crash Course, by Google</span><span class="rd">Google's own free introduction to machine learning, with interactive exercises and real code. The classic starting point.</span></span><span class="rt">Google · free</span></a>
+          <a class="rl" href="https://www.elementsofai.com" target="_blank" rel="noopener"><span><span class="rn">Elements of AI</span><span class="rd">Understand what AI actually is with zero maths and zero code. Free, from the University of Helsinki, available in Spanish.</span></span><span class="rt">Free · Español</span></a>
+        </div>
+        <div class="grp"><div class="gh">Build with GenAI and agents</div>
+          <a class="rl" href="https://github.com/microsoft/generative-ai-for-beginners" target="_blank" rel="noopener"><span><span class="rn">Generative AI for Beginners, by Microsoft</span><span class="rd">21 free lessons taking you from "what is a prompt" to building real AI applications. Open source, no signup.</span></span><span class="rt">Microsoft · free</span></a>
+          <a class="rl" href="https://github.com/microsoft/ai-agents-for-beginners" target="_blank" rel="noopener"><span><span class="rn">AI Agents for Beginners, by Microsoft</span><span class="rd">18 free lessons on building AI agents, the skill everyone is hiring for right now.</span></span><span class="rt">Microsoft · free</span></a>
+          <a class="rl" href="https://huggingface.co/learn/agents-course" target="_blank" rel="noopener"><span><span class="rn">Hugging Face AI Agents Course</span><span class="rd">Free, hands-on, beginner to expert, using smolagents, LlamaIndex and LangGraph. Finish the final project above 30% on the GAIA benchmark and you earn a real certificate.</span></span><span class="rt">Hugging Face · certified</span></a>
+          <a class="rl" href="https://huggingface.co/learn/llm-course" target="_blank" rel="noopener"><span><span class="rn">Hugging Face LLM Course</span><span class="rd">How large language models actually work, from the company that hosts most open AI models.</span></span><span class="rt">Hugging Face · free</span></a>
+          <a class="rl" href="https://github.com/anthropics/courses" target="_blank" rel="noopener"><span><span class="rn">Anthropic Courses</span><span class="rd">Official free courses on prompt engineering, tool use and building with the Claude API, straight from Anthropic.</span></span><span class="rt">Anthropic · free</span></a>
+          <a class="rl" href="https://www.deeplearning.ai/short-courses/" target="_blank" rel="noopener"><span><span class="rn">DeepLearning.AI Short Courses</span><span class="rd">Dozens of free one-hour courses built with OpenAI, Meta, Google and others. The fastest way to stay current.</span></span><span class="rt">Free · short</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="rs-sec">
+      <div class="eyebrow">06 · Cybersecurity</div>
+      <h3>Free training that employers actually recognise</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">Official and free</div>
+          <a class="rl" href="https://www.netacad.com/" target="_blank" rel="noopener"><span><span class="rn">Cisco Networking Academy</span><span class="rd">Free courses in cybersecurity, networking, Python and data science from Cisco, who make most of the internet's hardware. Over 20 million learners in 190 countries. Introduction to Cybersecurity and Networking Basics are the places to start.</span></span><span class="rt">Cisco · free certified</span></a>
+          <a class="rl" href="https://www.coursera.org/professional-certificates/google-cybersecurity" target="_blank" rel="noopener"><span><span class="rn">Google Cybersecurity Certificate</span><span class="rd">Eight courses designed for people with no experience, aimed straight at an entry-level security job. Auditable free.</span></span><span class="rt">Google · audit free</span></a>
+          <a class="rl" href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener"><span><span class="rn">OWASP Top 10</span><span class="rd">The ten ways web apps get hacked, updated by the global security community. Every developer should read this once a year. Free forever.</span></span><span class="rt">OWASP · free</span></a>
+          <a class="rl" href="https://tryhackme.com" target="_blank" rel="noopener"><span><span class="rn">TryHackMe</span><span class="rd">Learn security by actually breaking into safe practice machines in your browser. Generous free tier and genuinely fun.</span></span><span class="rt">Free tier · hands-on</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="rs-auto">
+      <div class="eyebrow">07 · Automation &amp; tools</div>
+      <h3>The skills that get you paid fastest</h3>
+      <p class="lead">Automation is the shortest path from "learning" to "someone pays me", because you can save a small business ten hours a week with a weekend of work.</p>
+      <div class="res">
+        <div class="grp"><div class="gh">Automation</div>
+          <a class="rl" href="https://automatetheboringstuff.com" target="_blank" rel="noopener"><span><span class="rn">Automate the Boring Stuff with Python</span><span class="rd">The entire book, free to read online. Files, spreadsheets, emails, PDFs, the web. The most practical programming book ever written for beginners.</span></span><span class="rt">Free · book</span></a>
+          <a class="rl" href="https://docs.n8n.io/courses/" target="_blank" rel="noopener"><span><span class="rn">n8n, official courses</span><span class="rd">Free video and text courses for the open-source automation tool that connects apps and AI agents together.</span></span><span class="rt">Official · free</span></a>
+          <a class="rl" href="https://learn.microsoft.com/en-us/training/powerplatform/power-automate" target="_blank" rel="noopener"><span><span class="rn">Power Automate, Microsoft Learn</span><span class="rd">Free training on the automation tool already installed at thousands of companies, which makes it very easy to sell.</span></span><span class="rt">Microsoft · free</span></a>
+        </div>
+        <div class="grp"><div class="gh">Git and GitHub, non-negotiable</div>
+          <a class="rl" href="https://skills.github.com" target="_blank" rel="noopener"><span><span class="rn">GitHub Skills</span><span class="rd">Free interactive courses that run inside GitHub itself, with instant automated feedback. The fastest way to stop being scared of Git.</span></span><span class="rt">GitHub · free</span></a>
+          <a class="rl" href="https://git-scm.com/book" target="_blank" rel="noopener"><span><span class="rn">Pro Git, the official book</span><span class="rd">The complete Git book, free online, translated into Spanish and dozens of other languages.</span></span><span class="rt">Official · Español</span></a>
+        </div>
+      </div>
+      <div class="pfoot"><b>Next move:</b> close this page, open one link, and finish it. One. The list will still be here when you are done.</div>
+    </section>
+  </div>
+
   <!-- ===================== JAVASCRIPT GUIDE ===================== -->
   <div class="page jsg" id="page-jsguide">
     <div class="phead">
@@ -2358,6 +2533,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         <button data-goto="webconcepts">Core concepts →</button>
         <button data-goto="jsguide">JavaScript explained →</button>
         <button data-goto="webtools">Other ways to build sites →</button>
+        <button data-goto="resources">Free courses from Google, Meta &amp; AWS →</button>
       </div>
       <div class="mnote"><span class="label">About the backend</span>Servers, databases, logins and deploying are <b>not</b> here on purpose. That is a different job and it lives in the <b>Backend Engineering</b> course. Get genuinely good at the front of the website first. That alone can get you paid.</div>
       <div class="progcard" data-scope="rm-webdev"><div class="pt"><span>WEB DEV PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
@@ -2747,7 +2923,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -2768,6 +2944,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       window.scrollTo(0,0);
       if(links)links.classList.remove('open');
       renderFor(name);
+      if(typeof seePage==='function'&&!document.body.classList.contains('preview'))seePage(name);
     }
 
     /* navigation buttons + home cards */
@@ -2817,7 +2994,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     boxes.forEach(function(b){
       var id=b.getAttribute('data-id');
       if(saved[id])b.checked=true;
-      b.addEventListener('change',function(){saved[id]=b.checked;persist();refresh();if(b.checked)awardXP(10,'Lesson done');});
+      b.addEventListener('change',function(){saved[id]=b.checked;persist();refresh();if(b.checked)awardXP(10,'Lesson done','lessons');});
     });
     refresh();
 
@@ -3028,7 +3205,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       saveData();renderAcademy();
       toast(isBest?('New best score: '+pct+'%'):('Scored '+pct+'%'));
       unlockBadge('quiz');
-      awardXP(25+(pct>=80?50:0),'Exam finished');
+      awardXP(25+(pct>=80?50:0),'Exam finished','exams');
       if(pct===100)unlockBadge('ace');
       var res=document.getElementById('quiz-result');
       res.innerHTML='<div class="quizscore"><div class="ring-wrap">'+svgRing(pct,110)+'</div><div><div class="qlevel">'+quizLevel(pct)+'</div><div class="qmeta">'+correct+' / '+q.questions.length+' correct · best '+data.quizzes[key].best+'%</div></div></div><div class="chart-title" style="margin-top:20px">Review</div>'+review;
@@ -3236,7 +3413,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var strip=earned.length
         ? '<div class="certstrip"><div class="chart-title">Certificates earned ('+earned.length+')</div><div class="certchips">'+earned.map(function(c){return '<button class="certchip" data-cert="'+c.key+'"><em>◆</em> '+esc(c.title)+'</button>';}).join('')+'</div></div>'
         : '<div class="certstrip"><div class="chart-title">Certificates</div><p style="color:var(--ink-faint);font-size:14px;margin-top:6px">Finish a course and pass its exam (80%+) to earn your first certificate.</p></div>';
-      var featured='<button class="coursecard" data-goto="fundamentals" style="width:100%;text-align:left;border-color:var(--teal)"><div class="cc-top"><span class="chip mut">Course 00 · Free</span><span class="cc-badge new">Start from zero</span></div><h3>Tech, explained from zero</h3><p class="cc-desc">Never touched code? Software, hardware, the web, IDEs, and the logic, in plain language. The place to start before anything else.</p><div class="cc-actions" style="margin-top:14px"><span class="cc-stats" style="color:var(--teal-ink);font-weight:700">Open the free primer →</span></div></button>';
+      var featured='<button class="coursecard" data-goto="fundamentals" style="width:100%;text-align:left;border-color:var(--teal)"><div class="cc-top"><span class="chip mut">Course 00 · Free</span><span class="cc-badge new">Start from zero</span></div><h3>Tech, explained from zero</h3><p class="cc-desc">Never touched code? Software, hardware, the web, IDEs, and the logic, in plain language. The place to start before anything else.</p><div class="cc-actions" style="margin-top:14px"><span class="cc-stats" style="color:var(--teal-ink);font-weight:700">Open the free primer →</span></div></button>'
+        +'<button class="coursecard" data-goto="resources" style="width:100%;text-align:left;border-color:var(--clay);margin-top:14px"><div class="cc-top"><span class="chip mut">Reference · Free</span><span class="cc-badge new">Google · Meta · AWS · Microsoft</span></div><h3>Learn free, from the companies that built it</h3><p class="cc-desc">The best free official training on the internet, sorted by topic. Real courses and real certificates from the biggest tech companies in the world, all $0. Never pay for something that was free.</p><div class="cc-actions" style="margin-top:14px"><span class="cc-stats" style="color:var(--clay-ink);font-weight:700">Open the resource library →</span></div></button>';
       area.innerHTML='<div id="game-panel"></div>'+featured+'<div class="acad-grid">'+cards+'</div>'+strip;
       renderGame();
       if(changed)saveData();
@@ -3510,9 +3688,64 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     /* =========================================================
        Game system: XP, levels, badges and streaks
     ========================================================= */
-    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row']];
-    function gameState(){data.game=data.game||{xp:0,badges:[],streak:0,last:''};return data.game;}
+    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row']];
+    var LEVELS=[[1,'Curious'],[2,'Beginner'],[3,'Learner'],[5,'Builder'],[7,'Coder'],[10,'Developer'],[14,'Craftsman'],[20,'Senior'],[28,'Architect'],[40,'Legend']];
+    var REFPAGES=['fundamentals','start','htmltags','webconcepts','jsguide','webtools','resources'];
+    var QUESTS=[
+      ['q_l1','Complete 1 lesson','lessons',1,15],
+      ['q_l2','Complete 2 lessons','lessons',2,30],
+      ['q_l4','Complete 4 lessons','lessons',4,70],
+      ['q_p1','Read a reference page','pages',1,20],
+      ['q_p2','Read 2 reference pages','pages',2,45],
+      ['q_e1','Take an exam','exams',1,40]
+    ];
+    function gameState(){
+      data.game=data.game||{};var g=data.game;
+      if(typeof g.xp!=='number')g.xp=0;
+      if(!g.badges)g.badges=[];
+      if(typeof g.streak!=='number')g.streak=0;
+      if(!g.last)g.last='';
+      if(!g.seen)g.seen={};
+      if(!g.days)g.days=[];
+      return g;
+    }
     function gameLevel(xp){return Math.floor(xp/100)+1;}
+    function levelTitle(l){var t=LEVELS[0][1];LEVELS.forEach(function(x){if(l>=x[0])t=x[1];});return t;}
+    function dayKey(d){return (d||new Date()).toISOString().slice(0,10);}
+    function todayBox(){
+      var g=gameState();var k=dayKey();
+      if(!g.today||g.today.date!==k)g.today={date:k,lessons:0,exams:0,pages:0,claimed:[]};
+      return g.today;
+    }
+    function dailyQuests(){
+      var k=dayKey(),seed=0,i;
+      for(i=0;i<k.length;i++)seed=(seed*31+k.charCodeAt(i))>>>0;
+      var pool=QUESTS.slice(),out=[];
+      for(i=0;i<3&&pool.length;i++){seed=(seed*1103515245+12345)>>>0;out.push(pool.splice(seed%pool.length,1)[0]);}
+      return out;
+    }
+    function bumpQuest(metric){
+      if(!metric)return;
+      var t=todayBox(),g=gameState();
+      t[metric]=(t[metric]||0)+1;
+      dailyQuests().forEach(function(q){
+        if(q[2]===metric&&t[metric]>=q[3]&&t.claimed.indexOf(q[0])<0){
+          t.claimed.push(q[0]);g.xp+=q[4];
+          toast('Quest done: '+q[1]+'  +'+q[4]+' XP');
+        }
+      });
+      if(t.claimed.length>=3)unlockBadge('questmaster');
+      saveData();
+    }
+    function seePage(name){
+      if(!data||REFPAGES.indexOf(name)<0)return;
+      var g=gameState();
+      if(g.seen[name])return;
+      g.seen[name]=1;saveData();
+      awardXP(20,'New page explored','pages');
+      var all=REFPAGES.every(function(p){return g.seen[p];});
+      if(all)unlockBadge('explorer');
+    }
     function countLessons(){var n=0;document.querySelectorAll('.skills input[type=checkbox]').forEach(function(i){if(i.checked)n++;});return n;}
     function hasBadge(k){return gameState().badges.indexOf(k)>=0;}
     function unlockBadge(k){
@@ -3523,37 +3756,66 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       renderGame();
     }
     function touchStreak(){
-      var g=gameState();var today=new Date().toISOString().slice(0,10);
-      if(g.last===today)return;
-      var y=new Date(Date.now()-86400000).toISOString().slice(0,10);
+      var g=gameState();var k=dayKey();
+      if(g.days.indexOf(k)<0){g.days.push(k);if(g.days.length>60)g.days=g.days.slice(-60);}
+      if(g.last===k)return;
+      var y=dayKey(new Date(Date.now()-86400000));
       g.streak=(g.last===y)?(g.streak||0)+1:1;
-      g.last=today;saveData();
+      g.last=k;saveData();
       if(g.streak>=3)unlockBadge('streak3');
       if(g.streak>=7)unlockBadge('streak7');
+      if(g.streak>=30)unlockBadge('marathon');
     }
-    function awardXP(n,why){
+    function awardXP(n,why,metric){
       if(!data)return;
       var g=gameState();var before=gameLevel(g.xp);
-      g.xp=(g.xp||0)+n;saveData();touchStreak();
+      g.xp=(g.xp||0)+n;
+      touchStreak();
+      bumpQuest(metric);
+      saveData();
       var after=gameLevel(g.xp);
-      if(after>before)toast('Level up! You are now level '+after+'.');
+      if(after>before)toast('Level up! Level '+after+', '+levelTitle(after)+'.');
       else if(why)toast('+'+n+' XP · '+why);
       var lessons=countLessons();
       if(lessons>=1)unlockBadge('first');
       if(lessons>=10)unlockBadge('ten');
       if(lessons>=50)unlockBadge('fifty');
+      if(g.xp>=1000)unlockBadge('xp1000');
       renderGame();
+    }
+    function nextGoal(){
+      var g=gameState();var lessons=countLessons();
+      if(lessons<1)return 'Tick your first lesson to unlock <b>First step</b>.';
+      if(lessons<10)return (10-lessons)+' more lessons to unlock <b>Getting serious</b>.';
+      if(!hasBadge('quiz'))return 'Take any final exam to unlock <b>Exam taker</b>.';
+      if(!hasBadge('explorer')){var left=REFPAGES.filter(function(p){return !g.seen[p];}).length;return left+' free reference page'+(left===1?'':'s')+' left to unlock <b>Explorer</b>.';}
+      if(!hasBadge('streak7'))return (7-g.streak)+' more days in a row to unlock <b>Unstoppable</b>.';
+      if(!hasBadge('cert'))return 'Finish a course and pass its exam to earn your first <b>certificate</b>.';
+      if(g.xp<1000)return (1000-g.xp)+' XP to reach the <b>Thousand club</b>.';
+      return 'You are ahead of almost everyone. Keep the streak alive.';
     }
     function renderGame(){
       var el=document.getElementById('game-panel');if(!el||!data)return;
-      var g=gameState();var lvl=gameLevel(g.xp);var into=g.xp%100;
+      var g=gameState();var lvl=gameLevel(g.xp);var into=g.xp%100;var t=todayBox();
+      var dots='',i,d,k;
+      for(i=6;i>=0;i--){
+        d=new Date(Date.now()-i*86400000);k=dayKey(d);
+        dots+='<span class="dot'+(g.days.indexOf(k)>=0?' on':'')+'" title="'+k+'">'+'SMTWTFS'.charAt(d.getDay())+'</span>';
+      }
+      var quests=dailyQuests().map(function(q){
+        var have=Math.min(t[q[2]]||0,q[3]);var done=t.claimed.indexOf(q[0])>=0;
+        return '<div class="quest'+(done?' done':'')+'"><span class="qi">'+(done?'✓':'○')+'</span><span class="qn">'+esc(q[1])+'</span><span class="qp">'+have+'/'+q[3]+'</span><span class="qx">+'+q[4]+' XP</span></div>';
+      }).join('');
       el.innerHTML='<div class="gamebar"><div class="gametop">'
         +'<div class="lvlbadge"><span class="lv">'+lvl+'</span><span class="lb">LEVEL</span></div>'
-        +'<div class="gameinfo"><div class="gamexp"><span>'+g.xp+' XP total</span><span><b>'+into+' / 100</b> to level '+(lvl+1)+'</span></div><div class="gamebarline"><i style="width:'+into+'%"></i></div></div>'
-        +(g.streak>0?'<div class="streak">'+g.streak+' day streak</div>':'')
-        +'</div><div class="badges">'
+        +'<div class="gameinfo"><div class="gamexp"><span><b>'+levelTitle(lvl)+'</b> · '+g.xp+' XP</span><span>'+into+' / 100 to level '+(lvl+1)+'</span></div><div class="gamebarline"><i style="width:'+into+'%"></i></div></div>'
+        +'<div class="streakbox"><div class="streak">'+(g.streak||0)+' day streak</div><div class="week">'+dots+'</div></div>'
+        +'</div>'
+        +'<div class="questbox"><div class="qhead">Today\'s quests <span>resets at midnight</span></div>'+quests+'</div>'
+        +'<div class="nextgoal">Next up: '+nextGoal()+'</div>'
+        +'<div class="badges">'
         +BADGES.map(function(b){var got=hasBadge(b[0]);return '<span class="badge'+(got?' got':'')+'" title="'+esc(b[2])+'"><span class="bi">'+(got?'★':'☆')+'</span>'+esc(b[1])+'</span>';}).join('')
-        +'</div><p class="gamehint">Tick a lesson +10 XP · finish an exam +25 XP · pass it (80%+) +50 XP more. Every 100 XP is a new level. Come back tomorrow to keep your streak alive.</p></div>';
+        +'</div><p class="gamehint">Lesson +10 XP · new reference page +20 XP · exam +25 XP · passing it (80%+) +50 XP more · daily quests up to +135 XP. Every 100 XP is a level.</p></div>';
     }
 
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();updateAuthChip();}

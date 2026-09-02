@@ -1137,6 +1137,7 @@
       <button class="tcard" data-goto="genai"><div class="pn">Domain</div><h3>Generative AI</h3><p>LLMs, prompt engineering, LangChain, RAG, and agents. The premium upsell.</p><div class="go">Open →</div></button>
       <button class="tcard" data-goto="cloud"><div class="pn">Domain</div><h3>Cloud Engineering</h3><p>What cloud is, deploy at scale, AWS certs. The step up from your VPS.</p><div class="go">Open →</div></button>
       <button class="tcard" data-goto="cybersecurity"><div class="pn">Domain</div><h3>Security &amp; Secure Coding</h3><p>Secure the software you build, plus the optional high-ticket service.</p><div class="go">Open →</div></button>
+      <button class="tcard" data-goto="backend"><div class="pn">Domain</div><h3>Backend Engineering</h3><p>How the web works, APIs, databases, auth, and deploy. What we're building right now.</p><div class="go">Open →</div></button>
       <button class="tcard" data-goto="data"><div class="pn">Domain</div><h3>Data Analytics</h3><p>SQL, Python, dashboards, and stats. Turn data into decisions.</p><div class="go">Open →</div></button>
       <button class="tcard" data-goto="databases"><div class="pn">Craft</div><h3>Databases</h3><p>The eight laws plus a five-stage path from SQL to trusted-with-money.</p><div class="go">Open →</div></button>
       <button class="tcard" data-goto="shift"><div class="pn">Essay</div><h3>AI &amp; Your Career</h3><p>Has AI killed coding? What to focus on, and which engineer to be.</p><div class="go">Open →</div></button>
@@ -1445,6 +1446,130 @@
     <div class="pfoot"><b>Next move:</b> answer one real Sycosmart question in SQL and turn it into a single clear chart. That is the whole job in one rep.</div>
   </div>
 
+  <!-- ===================== BACKEND ===================== -->
+  <div class="page" id="page-backend">
+    <div class="phead">
+      <button class="back" data-goto="roadmaps">← Roadmaps</button>
+      <div class="pn">Domain · Backend</div>
+      <h2>Backend Engineering</h2>
+      <p class="pd">The server side: APIs, databases, auth, and deploy. This is the exact skill you are building the Brain product to learn.</p>
+      <div class="subnav">
+        <a href="#bk-start" class="jump">How to start</a>
+        <a href="#bk-road" class="jump">Roadmap</a>
+        <a href="#bk-res" class="jump">Resources</a>
+      </div>
+    </div>
+
+    <section class="sec" id="bk-start">
+      <div class="eyebrow">00 · How to start</div>
+      <h3>Learn backend by building one</h3>
+      <p class="lead">You do not learn backend by watching, you learn it by shipping a server that other people log into. That is exactly what the Brain product is for.</p>
+      <p>The backend is the part of an app that runs on a server, not in the browser: it stores data, enforces rules, checks who you are, and answers requests over the internet. Get the mental model first (how a browser talks to a server over HTTP), then build endpoints, connect a database, add login, and deploy. Each stage below maps to a phase of the Brain build, so your learning and your product move together.</p>
+      <div class="mnote"><span class="label">Your fastest path</span>Follow the roadmap below in order, and use the Brain backend as the thing you build at each step. You already have the language (Python) and Docker, so you start at an advantage, spend your time on APIs, the database layer, and auth.</div>
+    </section>
+
+    <section class="sec" id="bk-road">
+      <div class="eyebrow">01 · The roadmap</div>
+      <h3>What to learn, in order</h3>
+      <p>Seven stages, foundation to production. Check off as you go; this path saves its own progress.</p>
+      <div class="progcard" data-scope="rm-backend"><div class="pt"><span>BACKEND PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
+      <div id="rm-backend">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">How the web works</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk1a"><span class="sk"><span class="skt">Client, server &amp; HTTP</span><span class="sub">→ request / response, GET / POST / PUT / DELETE, status codes (2xx / 4xx / 5xx), headers</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk1b"><span class="sk"><span class="skt">JSON, the data format of APIs</span><span class="sub">→ parse / serialize, content-type, nesting</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk1c"><span class="sk"><span class="skt">A backend language: Python</span><span class="sub">→ functions, packages, virtualenv, type hints (you have this)</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk1d"><span class="sk"><span class="skt">Terminal &amp; Git</span><span class="sub">→ run a server, read logs, commit and push</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open your running API's <code>/docs</code> and <code>/health</code>, then watch the request and response in the browser's Network tab.</span></div><div class="row"><span class="tag b">Go deep</span><span>MDN's HTTP overview, and roadmap.sh/backend for the full map.</span></div></div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">APIs &amp; REST</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk2a"><span class="sk"><span class="skt">REST design</span><span class="sub">→ resources &amp; endpoints, verbs ↔ CRUD, path vs query vs body</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk2b"><span class="sk"><span class="skt">Status codes &amp; errors</span><span class="sub">→ return the right code, consistent error shapes</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk2c"><span class="sk"><span class="skt">Validation</span><span class="sub">→ typed request / response schemas with Pydantic</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk2d"><span class="sk"><span class="skt">Docs &amp; testing tools</span><span class="sub">→ OpenAPI / Swagger, Postman</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Add a real endpoint to your FastAPI app that returns JSON, and try it in the auto-generated <code>/docs</code>.</span></div><div class="row"><span class="tag b">Go deep</span><span>The FastAPI tutorial, it teaches by building.</span></div></div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">Databases</span><span class="lv">Core</span><span class="cnt" data-cnt>0/5</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk3a"><span class="sk"><span class="skt">Relational modeling</span><span class="sub">→ tables, primary / foreign keys, relations, normalization</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk3b"><span class="sk"><span class="skt">SQL</span><span class="sub">→ CRUD, joins, GROUP BY, indexes</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk3c"><span class="sk"><span class="skt">ORM</span><span class="sub">→ SQLAlchemy models and queries, sessions</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk3d"><span class="sk"><span class="skt">Migrations</span><span class="sub">→ Alembic, versioned, reversible schema changes</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk3e"><span class="sk"><span class="skt">Transactions</span><span class="sub">→ ACID, isolation, one atomic write</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Model the <code>users</code> table and wire it through SQLAlchemy. This is Phase 2 of the Brain build.</span></div><div class="row"><span class="tag b">Go deep</span><span>PostgreSQL Tutorial, and your own Databases roadmap.</span></div></div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">Auth &amp; security</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk4a"><span class="sk"><span class="skt">Password hashing</span><span class="sub">→ bcrypt / argon2, never store plaintext, salting</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk4b"><span class="sk"><span class="skt">Sessions vs tokens</span><span class="sub">→ JWT access + refresh, how tokens flow</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk4c"><span class="sk"><span class="skt">Authorization</span><span class="sub">→ protect routes, scope every query to the current user</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk4d"><span class="sk"><span class="skt">Web security basics</span><span class="sub">→ CORS, input validation, OWASP Top 10, secrets management</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build signup and login with hashed passwords, then protect one route with a JWT. This is Phase 2 to 3 of the build.</span></div><div class="row"><span class="tag b">Go deep</span><span>FastAPI security docs, and the OWASP Top 10 (see your Security roadmap).</span></div></div>
+        </div>
+        <div class="stage" data-stage="5">
+          <div class="sh"><span class="sn">5</span><span class="st">Structure, quality &amp; testing</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk5a"><span class="sk"><span class="skt">Project architecture</span><span class="sub">→ routers / services / models layering, config from env</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk5b"><span class="sk"><span class="skt">Error handling &amp; logging</span><span class="sub">→ consistent errors, structured logs</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk5c"><span class="sk"><span class="skt">Testing</span><span class="sub">→ pytest, endpoint tests, a test database</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk5d"><span class="sk"><span class="skt">Config &amp; secrets</span><span class="sub">→ 12-factor config, env vars, no secrets in code</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Write your first pytest for the signup endpoint: it should reject a duplicate email.</span></div><div class="row"><span class="tag b">Go deep</span><span>Real Python and the FastAPI testing docs.</span></div></div>
+        </div>
+        <div class="stage" data-stage="6">
+          <div class="sh"><span class="sn">6</span><span class="st">Deploy &amp; operate</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk6a"><span class="sk"><span class="skt">Docker</span><span class="sub">→ containerize the API and database (you do this already)</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk6b"><span class="sk"><span class="skt">A server</span><span class="sub">→ VPS or cloud, reverse proxy, HTTPS, a domain</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk6c"><span class="sk"><span class="skt">CI/CD</span><span class="sub">→ auto-build and deploy on push</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk6d"><span class="sk"><span class="skt">Monitoring &amp; backups</span><span class="sub">→ logs, uptime alerts, tested database backups</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Deploy the Brain backend to your VPS behind HTTPS. This is Phase 5 of the build.</span></div><div class="row"><span class="tag b">Go deep</span><span>Docker docs, and your Cloud roadmap.</span></div></div>
+        </div>
+        <div class="stage" data-stage="7">
+          <div class="sh"><span class="sn">7</span><span class="st">Scaling &amp; beyond</span><span class="lv">Later</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="bk7a"><span class="sk"><span class="skt">Caching</span><span class="sub">→ Redis, what to cache, invalidation</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk7b"><span class="sk"><span class="skt">Background jobs</span><span class="sub">→ queues, workers, webhooks, scheduled tasks</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk7c"><span class="sk"><span class="skt">Performance</span><span class="sub">→ pagination, rate limiting, fixing N+1 queries</span></span></label></li>
+            <li><label><input type="checkbox" data-id="bk7d"><span class="sk"><span class="skt">Architecture</span><span class="sub">→ when to split into services, message queues</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Add rate limiting and pagination once you have real users hitting the API. Not before.</span></div><div class="row"><span class="tag b">Go deep</span><span>System design primers, once stages 1 to 6 are solid.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="bk-res">
+      <div class="eyebrow">02 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">The map &amp; the fundamentals</div>
+          <a class="rl" href="https://roadmap.sh/backend" target="_blank" rel="noopener"><span><span class="rn">roadmap.sh, Backend</span><span class="rd">The visual, ordered map of everything a backend developer learns.</span></span><span class="rt">Free · map</span></a>
+          <a class="rl" href="https://developer.mozilla.org/en-US/docs/Web/HTTP" target="_blank" rel="noopener"><span><span class="rn">MDN, HTTP</span><span class="rd">How the browser talks to a server. The mental model everything sits on.</span></span><span class="rt">Free · docs</span></a>
+        </div>
+        <div class="grp"><div class="gh">Your stack: FastAPI &amp; Postgres</div>
+          <a class="rl" href="https://fastapi.tiangolo.com/tutorial/" target="_blank" rel="noopener"><span><span class="rn">FastAPI Tutorial</span><span class="rd">Excellent, build-along official docs. APIs, validation, auth, testing.</span></span><span class="rt">Free · official</span></a>
+          <a class="rl" href="https://www.postgresqltutorial.com" target="_blank" rel="noopener"><span><span class="rn">PostgreSQL Tutorial</span><span class="rd">Practical, example-driven Postgres from basics to advanced.</span></span><span class="rt">Free · tutorial</span></a>
+          <a class="rl" href="https://realpython.com/" target="_blank" rel="noopener"><span><span class="rn">Real Python</span><span class="rd">Deep, reliable guides on FastAPI, SQLAlchemy, testing, and Docker.</span></span><span class="rt">Free / paid</span></a>
+        </div>
+        <div class="grp"><div class="gh">Structured full path &amp; security</div>
+          <a class="rl" href="https://www.theodinproject.com/" target="_blank" rel="noopener"><span><span class="rn">The Odin Project</span><span class="rd">A free, project-based full-stack curriculum if you want the guided route.</span></span><span class="rt">Free · course</span></a>
+          <a class="rl" href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener"><span><span class="rn">OWASP Top 10</span><span class="rd">The ten ways web apps get broken. Read before you ship auth.</span></span><span class="rt">Free · reference</span></a>
+        </div>
+      </div>
+    </section>
+    <div class="pfoot"><b>Next move:</b> you are already on stage 1 to 3 with the Brain backend running. Nail the <code>users</code> table and JWT login (Phase 2), and you will have learned the hardest 40% of backend by doing.</div>
+  </div>
+
   <!-- ===================== THE SHIFT / CAREERS ===================== -->
   <div class="page" id="page-shift">
     <div class="phead">
@@ -1673,7 +1798,7 @@
 
 <script>
   (function(){
-    var pages=['home','roadmaps','automation','cybersecurity','databases','cloud','genai','data','shift','thoughts','learnings','wishlist','certs'];
+    var pages=['home','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -1683,7 +1808,7 @@
         var el=document.getElementById('page-'+p);
         if(el)el.classList.toggle('active',p===name);
       });
-      var roadmapPages=['roadmaps','automation','cybersecurity','databases','cloud','genai','data','shift'];
+      var roadmapPages=['roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift'];
       var navName=roadmapPages.indexOf(name)>=0?'roadmaps':name;
       document.querySelectorAll('.nav .links button[data-goto]').forEach(function(b){
         b.classList.toggle('on',b.getAttribute('data-goto')===navName);
@@ -1816,7 +1941,7 @@
     }
     function renderColl(coll){if(coll==='thoughts')renderThoughts();else if(coll==='learnings')renderLearnings();else if(coll==='wishlist')renderWishlist();else if(coll==='certs')renderCerts();}
 
-    var RM=[['rm-automation','Automation','automation'],['rm-agents','AI Agents','automation'],['rm-genai','Generative AI','genai'],['rm-cloud','Cloud','cloud'],['rm-security','Security','cybersecurity'],['rm-data','Data Analytics','data'],['rm-databases','Databases','databases']];
+    var RM=[['rm-automation','Automation','automation'],['rm-agents','AI Agents','automation'],['rm-genai','Generative AI','genai'],['rm-backend','Backend','backend'],['rm-cloud','Cloud','cloud'],['rm-security','Security','cybersecurity'],['rm-data','Data Analytics','data'],['rm-databases','Databases','databases']];
     function renderDashRoadmaps(){
       var el=document.getElementById('dash-roadmaps');if(!el)return;
       el.innerHTML=RM.map(function(m){

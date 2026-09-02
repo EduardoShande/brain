@@ -346,6 +346,29 @@
     background:radial-gradient(circle,rgba(139,92,246,.20),rgba(139,92,246,0) 70%);z-index:0;pointer-events:none}
   .hero>*{position:relative;z-index:1}
   .tcard:hover,.cover .map a:hover{box-shadow:0 16px 34px rgba(124,58,237,.16)}
+
+  /* ===== charts ===== */
+  .glance{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center;padding:6px 0}
+  .ring-wrap{text-align:center}
+  .glancesub{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);margin-top:8px}
+  .ring .ringtext{font-family:"Poppins",sans-serif;font-weight:800;font-size:22px;fill:var(--ink)}
+  .radar-wrap{flex:1;min-width:230px;max-width:300px;display:flex;justify-content:center}
+  .radarlabel{font-family:"JetBrains Mono",monospace;font-size:9px;fill:var(--ink-faint)}
+  .chartbox{margin:16px 0 0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 8px 24px rgba(124,58,237,.07)}
+  .chartbox:empty{display:none}
+  .chart-title{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-bottom:12px}
+  .cert-ring{flex:none}
+  .cert-ring .ringtext{font-family:"Poppins",sans-serif;font-weight:700;font-size:13px;fill:var(--ink)}
+  .stack{display:flex;height:16px;border-radius:99px;overflow:hidden;background:var(--line)}
+  .stack i{display:block;height:100%}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:11px;font-size:13px;color:var(--ink-soft)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend em{width:10px;height:10px;border-radius:3px;display:inline-block;font-style:normal}
+  .hbars{display:flex;flex-direction:column;gap:9px}
+  .hbar{display:grid;grid-template-columns:96px 1fr auto;gap:10px;align-items:center;font-size:13.5px;color:var(--ink-soft)}
+  .hbar .hbt{color:var(--ink);font-weight:500}
+  .hbar .hb{height:10px;border-radius:99px;background:var(--grad)}
+  .hbar .hn{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-size:12px;font-weight:700}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -375,6 +398,13 @@
     </header>
 
     <div class="dash">
+      <div class="dcard wide">
+        <div class="dhead"><h3>Progress at a glance</h3></div>
+        <div class="glance">
+          <div class="ring-wrap" id="dash-ring"></div>
+          <div class="radar-wrap" id="dash-radar"></div>
+        </div>
+      </div>
       <div class="dcard wide">
         <div class="dhead"><h3>The two-track plan</h3><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-faint)">Job funds the runway · company is the leverage</span></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
@@ -1730,6 +1760,7 @@
       <select class="fselect" id="le-fdom"><option value="">All domains</option><option>Cybersecurity</option><option>Automation</option><option>Cloud</option><option>AI</option><option>Data</option><option>Business</option></select>
       <span class="tcount" id="le-count"></span>
     </div>
+    <div class="chartbox" id="chart-learnings"></div>
     <div class="tlist" id="list-learnings"></div>
   </div>
 
@@ -1759,6 +1790,7 @@
       <select class="fselect" id="wl-fstatus"><option value="">All statuses</option><option>Not started</option><option>In progress</option><option>Done</option></select>
       <span class="tcount" id="wl-count"></span>
     </div>
+    <div class="chartbox" id="chart-wishlist"></div>
     <div class="tlist" id="list-wishlist"></div>
   </div>
 
@@ -1887,6 +1919,60 @@
     function setv(id,v){var el=document.getElementById(id);if(el)el.value=v;}
     function domCls(d){return({Cybersecurity:'warn',Automation:'',Cloud:'clay',AI:'good',Data:'mut',Business:'clay'})[d]||'mut';}
 
+    /* ---- charts (dependency-free SVG/HTML) ---- */
+    function svgRing(pct,size,center){
+      size=size||96; var sw=Math.max(6,Math.round(size*0.12)); var r=(size-sw)/2; var cx=size/2;
+      var C=2*Math.PI*r; var off=C*(1-Math.max(0,Math.min(100,pct))/100);
+      return '<svg class="ring" viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'" role="img">'
+        +'<circle cx="'+cx+'" cy="'+cx+'" r="'+r.toFixed(1)+'" fill="none" stroke="var(--line)" stroke-width="'+sw+'"/>'
+        +'<circle cx="'+cx+'" cy="'+cx+'" r="'+r.toFixed(1)+'" fill="none" stroke="var(--teal)" stroke-width="'+sw+'" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 '+cx+' '+cx+')"/>'
+        +'<text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" class="ringtext">'+esc(center!=null?center:pct+'%')+'</text></svg>';
+    }
+    function svgRadar(items,size){
+      size=size||240; var cx=size/2, cy=size/2, R=size*0.34, n=items.length;
+      function pt(i,f){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*R*f, cy+Math.sin(a)*R*f];}
+      var grid='';[0.25,0.5,0.75,1].forEach(function(f){var p=items.map(function(_,i){var q=pt(i,f);return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ');grid+='<polygon points="'+p+'" fill="none" stroke="var(--line)" stroke-width="1"/>';});
+      var axes='',labels='';
+      items.forEach(function(it,i){var p=pt(i,1);axes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';var l=pt(i,1.17);labels+='<text x="'+l[0].toFixed(1)+'" y="'+l[1].toFixed(1)+'" text-anchor="middle" dominant-baseline="central" class="radarlabel">'+esc(it.label)+'</text>';});
+      var dp=items.map(function(it,i){var q=pt(i,Math.max(0.02,it.pct/100));return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ');
+      var dots=items.map(function(it,i){var q=pt(i,Math.max(0.02,it.pct/100));return '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="2.5" fill="var(--teal)"/>';}).join('');
+      return '<svg class="radar" viewBox="0 0 '+size+' '+size+'" width="100%" style="max-width:'+size+'px" role="img">'+grid+axes+'<polygon points="'+dp+'" fill="var(--teal)" fill-opacity="0.22" stroke="var(--teal)" stroke-width="2"/>'+dots+labels+'</svg>';
+    }
+    function svgStack(segs,total){
+      var bar=segs.map(function(s){var w=total?(s[1]/total*100):0;return w>0?'<i style="width:'+w+'%;background:'+s[2]+'"></i>':'';}).join('');
+      var leg=segs.map(function(s){return '<span><em style="background:'+s[2]+'"></em>'+esc(s[0])+' ('+s[1]+')</span>';}).join('');
+      return '<div class="stack">'+bar+'</div><div class="legend">'+leg+'</div>';
+    }
+    function svgBars(items){
+      var max=Math.max.apply(null,items.map(function(i){return i.val;}))||1;
+      return '<div class="hbars">'+items.map(function(i){var w=Math.round(i.val/max*100);return '<div class="hbar"><span class="hbt">'+esc(i.label)+'</span><span class="hb" style="width:'+w+'%"></span><span class="hn">'+i.val+'</span></div>';}).join('')+'</div>';
+    }
+    function roadmapTotals(){var done=0,tot=0;RM.forEach(function(m){var w=document.getElementById(m[0]);if(!w)return;var ins=w.querySelectorAll('.skills input[type=checkbox]');tot+=ins.length;ins.forEach(function(i){if(i.checked)done++;});});return {done:done,tot:tot};}
+    function renderGlance(){
+      var t=roadmapTotals(); var pct=t.tot?Math.round(t.done/t.tot*100):0;
+      var ring=document.getElementById('dash-ring');
+      if(ring)ring.innerHTML=svgRing(pct,120)+'<div class="glancesub">'+t.done+' / '+t.tot+' skills done</div>';
+      var radar=document.getElementById('dash-radar');
+      if(radar){
+        var short={'rm-automation':'Auto','rm-agents':'Agents','rm-genai':'GenAI','rm-backend':'Backend','rm-cloud':'Cloud','rm-security':'Security','rm-data':'Data','rm-databases':'DB'};
+        var items=RM.map(function(m){var w=document.getElementById(m[0]);var ins=w?w.querySelectorAll('.skills input[type=checkbox]'):[];var tt=ins.length,dn=0;ins.forEach(function(i){if(i.checked)dn++;});return {label:short[m[0]]||m[1],pct:tt?dn/tt*100:0};});
+        radar.innerHTML=svgRadar(items,240);
+      }
+    }
+    function statusChart(){
+      var el=document.getElementById('chart-wishlist'); if(!el)return;
+      if(!data.wishlist.length){el.innerHTML='';return;}
+      var f=function(s){return data.wishlist.filter(function(x){return x.status===s;}).length;};
+      el.innerHTML='<div class="chart-title">Status breakdown</div>'+svgStack([['Done',f('Done'),'var(--good)'],['In progress',f('In progress'),'var(--clay)'],['Not started',f('Not started'),'var(--ink-faint)']],data.wishlist.length);
+    }
+    function learningsChart(){
+      var el=document.getElementById('chart-learnings'); if(!el)return;
+      if(!data.learnings.length){el.innerHTML='';return;}
+      var doms=['Cybersecurity','Automation','Cloud','AI','Data','Business'];
+      var counts=doms.map(function(dm){return {label:dm,val:data.learnings.filter(function(l){return l.domain===dm;}).length};}).filter(function(x){return x.val>0;});
+      el.innerHTML='<div class="chart-title">Learnings by domain</div>'+svgBars(counts);
+    }
+
     function renderThoughts(){
       if(!data)return;var list=document.getElementById('list-thoughts');if(!list)return;
       var q=val('th-search').toLowerCase(),cat=val('th-fcat');
@@ -1912,6 +1998,7 @@
       list.innerHTML=items.length?items.map(function(l){
         return '<div class="titem"><div class="top"><div class="ttitle">'+esc(l.title)+'</div><button class="del" data-del="learnings" data-id="'+l.id+'" aria-label="Delete">×</button></div>'+(l.cando?'<div class="tbody">'+esc(l.cando)+'</div>':'')+'<div class="meta"><span class="chip '+domCls(l.domain)+'">'+esc(l.domain)+'</span>'+(l.source?'<span class="chip mut">'+esc(l.source)+'</span>':'')+'<span class="tdate">'+fmtDate(l.ts)+'</span></div></div>';
       }).join(''):'<div class="empty">'+(data.learnings.length?'No matches.':'No learnings logged yet.')+'</div>';
+      learningsChart();
     }
     function statusCls(s){return s==='Done'?'good':s==='In progress'?'clay':'mut';}
     function prioCls(p){return p==='High'?'warn':p==='Medium'?'clay':'mut';}
@@ -1927,6 +2014,7 @@
       list.innerHTML=items.length?items.map(function(w){
         return '<div class="titem"><div class="top"><div class="ttitle">'+esc(w.topic)+'</div><button class="del" data-del="wishlist" data-id="'+w.id+'" aria-label="Delete">×</button></div>'+(w.link?'<div class="tbody"><a href="'+esc(w.link)+'" target="_blank" rel="noopener">'+esc(trunc(w.link,60))+'</a></div>':'')+'<div class="meta"><button class="chip '+statusCls(w.status)+'" data-cycle="'+w.id+'" title="Tap to advance">'+esc(w.status)+'</button><span class="chip '+prioCls(w.priority)+'">'+esc(w.priority)+' priority</span><span class="chip '+domCls(w.domain)+'">'+esc(w.domain)+'</span></div></div>';
       }).join(''):'<div class="empty">'+(data.wishlist.length?'No matches.':'Nothing on the wishlist yet. Add a topic above.')+'</div>';
+      statusChart();
     }
     function certCls(s){return s==='Passed'?'good':s==='Scheduled'?'warn':s==='Studying'?'clay':'mut';}
     function renderCerts(){
@@ -1936,7 +2024,13 @@
       var cc=document.getElementById('ce-count');if(cc)cc.textContent=items.length+' / '+data.certs.length;
       list.innerHTML=items.length?items.map(function(c){
         var pr=(c.progress!==''&&c.progress!=null&&!isNaN(+c.progress))?Math.max(0,Math.min(100,+c.progress)):null;
-        return '<div class="titem"><div class="top"><div class="ttitle">'+esc(c.name)+'</div><button class="del" data-del="certs" data-id="'+c.id+'" aria-label="Delete">×</button></div><div class="meta">'+(c.provider?'<span class="chip mut">'+esc(c.provider)+'</span>':'')+'<span class="chip '+certCls(c.status)+'">'+esc(c.status)+'</span>'+(c.cost?'<span class="chip clay">'+esc(c.cost)+'</span>':'')+(c.date?'<span class="tdate">exam '+esc(c.date)+'</span>':'')+'</div>'+(pr!=null?'<div class="cprog"><i style="width:'+pr+'%"></i></div>':'')+'</div>';
+        return '<div class="titem" style="display:flex;align-items:center;gap:14px">'
+          +'<div style="flex:1;min-width:0">'
+          +'<div class="ttitle">'+esc(c.name)+'</div>'
+          +'<div class="meta">'+(c.provider?'<span class="chip mut">'+esc(c.provider)+'</span>':'')+'<span class="chip '+certCls(c.status)+'">'+esc(c.status)+'</span>'+(c.cost?'<span class="chip clay">'+esc(c.cost)+'</span>':'')+(c.date?'<span class="tdate">exam '+esc(c.date)+'</span>':'')+'</div>'
+          +'</div>'
+          +(pr!=null?'<div class="cert-ring">'+svgRing(pr,56,pr+'%')+'</div>':'')
+          +'<button class="del" data-del="certs" data-id="'+c.id+'" aria-label="Delete">×</button></div>';
       }).join(''):'<div class="empty">'+(data.certs.length?'No matches.':'No certifications tracked yet.')+'</div>';
     }
     function renderColl(coll){if(coll==='thoughts')renderThoughts();else if(coll==='learnings')renderLearnings();else if(coll==='wishlist')renderWishlist();else if(coll==='certs')renderCerts();}
@@ -1964,6 +2058,7 @@
       if(!acts.length)acts=['Add a topic to your Wishlist and set it In progress.','Pick one cert on the Certs page and give it a date.','Check off your first roadmap step.'];
       var da=document.getElementById('dash-actions');if(da)da.innerHTML=acts.slice(0,5).map(function(a){return '<div class="dli">'+esc(a)+'</div>';}).join('');
       renderDashRoadmaps();
+      renderGlance();
     }
     function renderFor(name){
       if(name==='home')renderDashboard();

@@ -393,6 +393,50 @@
   .apiadv{margin-top:18px}
   .apiadv summary{cursor:pointer;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.05em;color:var(--ink-faint)}
   .finput:disabled{opacity:.7;cursor:not-allowed}
+
+  /* ===== academy ===== */
+  .acad-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  @media(max-width:680px){.acad-grid{grid-template-columns:1fr}}
+  .coursecard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 8px 24px rgba(124,58,237,.07)}
+  .cc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+  .cc-badge{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+  .cc-badge.done{background:var(--good-wash);color:var(--good-ink)}
+  .cc-badge.prog{background:var(--teal-wash);color:var(--teal-ink)}
+  .cc-badge.new{background:var(--surface);color:var(--ink-faint);border:1px solid var(--line)}
+  .coursecard h3{font-family:"Poppins",sans-serif;font-weight:800;color:var(--ink);font-size:19px;letter-spacing:-.01em}
+  .cc-desc{color:var(--ink-soft);font-size:14.5px;margin:5px 0 0;line-height:1.4}
+  .cc-meta{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin:13px 0 8px}
+  .cc-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+  .cc-bar i{display:block;height:100%;background:var(--grad);border-radius:99px}
+  .cc-stats{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-soft);margin-top:8px}
+  .cc-stats b{color:var(--teal-ink)}
+  .cc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+  .cc-actions button{font-family:"Poppins",sans-serif;font-weight:600;font-size:13px;padding:8px 15px;border-radius:99px;cursor:pointer;border:1px solid var(--line-strong);background:none;color:var(--ink)}
+  .cc-actions button:hover{border-color:var(--teal);color:var(--teal-ink)}
+  .cc-actions button.prim{background:var(--grad);color:var(--on-teal);border:0}
+  .certstrip{margin-top:28px}
+  .certchips{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .certchip{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 15px;cursor:pointer;font-size:14px;color:var(--ink);box-shadow:0 6px 18px rgba(124,58,237,.07)}
+  .certchip:hover{border-color:var(--teal)}
+  .certchip em{color:var(--good-ink);font-style:normal}
+
+  /* ===== certificate ===== */
+  .certificate{max-width:640px;margin:22px auto 0;background:linear-gradient(180deg,var(--card),var(--surface));border:2px solid var(--teal);border-radius:18px;padding:44px 40px;text-align:center;box-shadow:0 20px 50px rgba(124,58,237,.16)}
+  .certificate .seal{width:64px;height:64px;border-radius:50%;background:var(--grad);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Poppins",sans-serif;font-weight:900;font-size:26px}
+  .certificate .ctag{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay-ink)}
+  .certificate h2{font-family:"Poppins",sans-serif;font-weight:900;font-size:clamp(24px,4vw,34px);color:var(--ink);margin:8px 0 4px}
+  .certificate .cname{font-family:"Poppins",sans-serif;font-weight:800;font-size:26px;color:var(--teal-ink);margin:18px 0 6px}
+  .certificate .cline{color:var(--ink-soft);font-size:16px;line-height:1.6;max-width:36em;margin:0 auto}
+  .certificate .cline b{color:var(--ink)}
+  .certificate .cfoot{display:flex;justify-content:space-between;margin-top:30px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
+  .certactions{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+  .certname-set{max-width:440px;margin:16px auto 0}
+  @media print{
+    .nav,.phead,.certactions,.certname-set{display:none!important}
+    body{background:#fff!important}
+    .page:not(.active){display:none!important}
+    .certificate{box-shadow:none}
+  }
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -402,6 +446,7 @@
     <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
     <div class="links" id="links">
       <button data-goto="home">Dashboard</button>
+      <button data-goto="academy">Academy</button>
       <button data-goto="roadmaps">Roadmaps</button>
       <button data-goto="thoughts">Thoughts</button>
       <button data-goto="learnings">Learnings</button>
@@ -1741,6 +1786,22 @@
     <div class="pfoot"><b>Next move:</b> pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.</div>
   </div>
 
+  <!-- ===================== ACADEMY ===================== -->
+  <div class="page" id="page-academy">
+    <div class="phead">
+      <button class="back" data-goto="home">← Dashboard</button>
+      <div class="pn">Brain Academy</div>
+      <h2>Academy</h2>
+      <p class="pd">Your courses. Complete the lessons, pass the final exam, and earn a certificate for each one.</p>
+    </div>
+    <div id="academy-area"></div>
+  </div>
+
+  <!-- ===================== CERTIFICATE ===================== -->
+  <div class="page" id="page-certificate">
+    <div id="cert-area"></div>
+  </div>
+
   <!-- ===================== QUIZZES ===================== -->
   <div class="page" id="page-quizzes">
     <div class="phead">
@@ -1878,7 +1939,7 @@
 
 <script>
   (function(){
-    var pages=['home','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','academy','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -1955,8 +2016,8 @@
        Saved locally in this browser (private to this device).
     ========================================================= */
     var DKEY='fm.data.v1';
-    var data={thoughts:[],learnings:[],wishlist:[],certs:[],quizzes:{}};
-    try{var raw=JSON.parse(localStorage.getItem(DKEY));if(raw&&typeof raw==='object'){data.thoughts=raw.thoughts||[];data.learnings=raw.learnings||[];data.wishlist=raw.wishlist||[];data.certs=raw.certs||[];data.quizzes=raw.quizzes||{};}}catch(e){}
+    var data={thoughts:[],learnings:[],wishlist:[],certs:[],quizzes:{},courses:{}};
+    try{var raw=JSON.parse(localStorage.getItem(DKEY));if(raw&&typeof raw==='object'){data.thoughts=raw.thoughts||[];data.learnings=raw.learnings||[];data.wishlist=raw.wishlist||[];data.certs=raw.certs||[];data.quizzes=raw.quizzes||{};data.courses=raw.courses||{};}}catch(e){}
     function saveData(){try{localStorage.setItem(DKEY,JSON.stringify(data));}catch(e){}}
     function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
     function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});}
@@ -2066,6 +2127,13 @@
         {q:"What does the OWASP Top 10 describe?",options:["Top 10 languages","The most common web-app vulnerabilities","Top 10 clouds","Certification exams"],answer:1},
         {q:"Where should API keys and secrets live?",options:["In the frontend code","In server-side env vars or a secret store","In a public repo","In the URL"],answer:1},
         {q:"What does 'least privilege' mean?",options:["Give everyone admin","Grant only the access each role needs","Use no passwords","One shared account"],answer:1}
+      ]},
+      data:{title:"Data Analytics",questions:[
+        {q:"What is the first step of any real analysis?",options:["Build a chart","Clean the data and define the question","Train a model","Write the report"],answer:1},
+        {q:"Which SQL clause groups rows for aggregation?",options:["WHERE","ORDER BY","GROUP BY","LIMIT"],answer:2},
+        {q:"What does a pivot table do?",options:["Encrypts data","Summarizes and cross-tabulates data","Removes duplicates","Sends email"],answer:1},
+        {q:"Good data storytelling means...",options:["More charts","One clear chart that makes the point","Bigger fonts","Raw tables"],answer:1},
+        {q:"A KPI is...",options:["A chart type","A key metric you track to guide decisions","A database","A Python library"],answer:1}
       ]}
     };
     function quizLevel(pct){return pct>=80?'Advanced':pct>=50?'Intermediate':'Beginner';}
@@ -2251,8 +2319,75 @@
       else if(name==='certs')renderCerts();
       else if(name==='quizzes')renderQuizzes();
       else if(name==='account')renderAccount();
+      else if(name==='academy')renderAcademy();
+      else if(name==='certificate')renderCertificate();
     }
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();updateAuthChip();}
+    /* =========================================================
+       Academy: courses (roadmap = lessons, quiz = final exam) + certificates
+    ========================================================= */
+    var COURSES=[
+      {key:'backend',route:'backend',title:'Backend Engineering',level:'Core',rms:['rm-backend'],quiz:'backend',desc:'How the web works, APIs, databases, auth, and deploy.'},
+      {key:'automation',route:'automation',title:'Automation Engineering',level:'Core',rms:['rm-automation','rm-agents'],quiz:'automation',desc:'Python, APIs, n8n, self-hosting, and AI agents.'},
+      {key:'genai',route:'genai',title:'Generative AI',level:'Core',rms:['rm-genai'],quiz:'genai',desc:'LLMs, prompt engineering, RAG, and agents.'},
+      {key:'databases',route:'databases',title:'Databases',level:'Craft',rms:['rm-databases'],quiz:'databases',desc:'Modeling, SQL, transactions, indexing, and RLS.'},
+      {key:'cloud',route:'cloud',title:'Cloud Engineering',level:'Foundation',rms:['rm-cloud'],quiz:'cloud',desc:'What cloud is, deploy at scale, and AWS certs.'},
+      {key:'security',route:'cybersecurity',title:'Security & Secure Coding',level:'Applied',rms:['rm-security'],quiz:'security',desc:'Secure the software you build.'},
+      {key:'data',route:'data',title:'Data Analytics',level:'Applied',rms:['rm-data'],quiz:'data',desc:'SQL, Python, dashboards, and stats.'}
+    ];
+    function courseStats(c){
+      var done=0,tot=0,mods=0;
+      c.rms.forEach(function(id){var w=document.getElementById(id);if(!w)return;mods+=w.querySelectorAll('.stage').length;var ins=w.querySelectorAll('.skills input[type=checkbox]');tot+=ins.length;ins.forEach(function(i){if(i.checked)done++;});});
+      var pct=tot?Math.round(done/tot*100):0;
+      var qr=(data.quizzes||{})[c.quiz]; var examBest=qr?qr.best:null; var passed=examBest!=null&&examBest>=80;
+      return {done:done,total:tot,pct:pct,modules:mods,examBest:examBest,passed:passed,complete:(tot>0&&done===tot&&passed)};
+    }
+    function certName(){var a=getAuth();if(a&&a.user)return a.user.full_name||a.user.email;try{return localStorage.getItem('fm.certName')||'';}catch(e){return '';}}
+    function renderAcademy(){
+      var area=document.getElementById('academy-area');if(!area||!data)return;
+      data.courses=data.courses||{}; var changed=false;
+      var cards=COURSES.map(function(c){
+        var s=courseStats(c);
+        if(s.complete&&!data.courses[c.key]){data.courses[c.key]={completedAt:new Date().toISOString(),score:s.examBest};changed=true;}
+        var badge=s.complete?'<span class="cc-badge done">◆ Certified</span>':((s.done>0||s.examBest!=null)?'<span class="cc-badge prog">In progress</span>':'<span class="cc-badge new">Not started</span>');
+        var exam=s.examBest!=null?('exam best '+s.examBest+'%'+(s.passed?' · passed':'')):'exam not taken';
+        var actions='<button data-goto="'+c.route+'">Lessons</button><button data-exam="'+c.quiz+'">Final exam</button>'+(s.complete?'<button class="prim" data-cert="'+c.key+'">Certificate</button>':'');
+        return '<div class="coursecard"><div class="cc-top"><span class="chip mut">'+esc(c.level)+'</span>'+badge+'</div>'
+          +'<h3>'+esc(c.title)+'</h3><p class="cc-desc">'+esc(c.desc)+'</p>'
+          +'<div class="cc-meta">'+s.modules+' modules · '+s.total+' lessons</div>'
+          +'<div class="cc-bar"><i style="width:'+s.pct+'%"></i></div>'
+          +'<div class="cc-stats"><span><b>'+s.pct+'%</b> complete</span><span>'+esc(exam)+'</span></div>'
+          +'<div class="cc-actions">'+actions+'</div></div>';
+      }).join('');
+      var earned=COURSES.filter(function(c){return data.courses[c.key];});
+      var strip=earned.length
+        ? '<div class="certstrip"><div class="chart-title">Certificates earned ('+earned.length+')</div><div class="certchips">'+earned.map(function(c){return '<button class="certchip" data-cert="'+c.key+'"><em>◆</em> '+esc(c.title)+'</button>';}).join('')+'</div></div>'
+        : '<div class="certstrip"><div class="chart-title">Certificates</div><p style="color:var(--ink-faint);font-size:14px;margin-top:6px">Finish a course and pass its exam (80%+) to earn your first certificate.</p></div>';
+      area.innerHTML='<div class="acad-grid">'+cards+'</div>'+strip;
+      if(changed)saveData();
+      area.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
+      area.querySelectorAll('[data-exam]').forEach(function(b){b.addEventListener('click',function(){showPage('quizzes');startQuiz(b.getAttribute('data-exam'));});});
+      area.querySelectorAll('[data-cert]').forEach(function(b){b.addEventListener('click',function(){openCertificate(b.getAttribute('data-cert'));});});
+    }
+    var selectedCert=null;
+    function openCertificate(key){selectedCert=key;showPage('certificate');}
+    function renderCertificate(){
+      var area=document.getElementById('cert-area');if(!area)return;
+      var c=null;COURSES.forEach(function(x){if(x.key===selectedCert)c=x;});
+      var rec=c&&(data.courses||{})[c.key];
+      if(!c||!rec){area.innerHTML='<button class="back" data-goto="academy">← Academy</button><div class="empty" style="margin-top:16px">No certificate yet. Complete a course and pass its exam, then open it from the Academy.</div>';var bk=area.querySelector('.back');if(bk)bk.addEventListener('click',function(){showPage('academy');});return;}
+      var nm=certName();
+      var body='<div id="cert-print"><div class="certificate"><div class="seal">B</div><div class="ctag">Brain Academy</div><h2>Certificate of Completion</h2>'
+        +'<div class="cname">'+esc(nm||'Your name')+'</div>'
+        +'<p class="cline">has completed the <b>'+esc(c.title)+'</b> course and passed the final exam with a score of <b>'+(rec.score!=null?rec.score:'—')+'%</b>.</p>'
+        +'<div class="cfoot"><span>Issued '+esc((rec.completedAt||'').slice(0,10))+'</span><span>Brain Academy · '+esc(c.level)+'</span></div></div></div>';
+      var setName=(!getAuth()||!getAuth().user)?'<div class="certname-set"><div class="tfilter"><input class="finput" id="cert-name-input" placeholder="Name on certificate" value="'+esc(nm)+'"><button class="fbtn" id="cert-name-save" type="button">Set name</button></div></div>':'';
+      area.innerHTML='<button class="back" data-goto="academy">← Academy</button>'+body+'<div class="certactions"><button class="fbtn" id="cert-print-btn">Print / Save as PDF</button></div>'+setName;
+      var back=area.querySelector('.back');if(back)back.addEventListener('click',function(){showPage('academy');});
+      document.getElementById('cert-print-btn').addEventListener('click',function(){window.print();});
+      var save=document.getElementById('cert-name-save');if(save)save.addEventListener('click',function(){try{localStorage.setItem('fm.certName',document.getElementById('cert-name-input').value.trim());}catch(e){}renderCertificate();});
+    }
+
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();});

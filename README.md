@@ -58,7 +58,7 @@ so data syncs across devices.
 ## Roadmap
 
 - [x] **Phase 1** — Backend skeleton: FastAPI app, Postgres, Docker, health checks.
-- [ ] **Phase 2** — Auth: users, signup/login, password hashing, JWT, migrations.
+- [x] **Phase 2** — Auth: users table + migration, signup/login, bcrypt hashing, JWT, `/me` profile.
 - [ ] **Phase 3** — Data API: per-user CRUD for thoughts, learnings, wishlist, certs, progress.
 - [ ] **Phase 4** — Frontend wiring: login/signup UI, replace localStorage with the API.
 - [ ] **Phase 5** — Deploy: Docker on a VPS, HTTPS, domain, backups.

@@ -33,7 +33,8 @@ services:
     # Mount the code for live reload during development.
     volumes:
       - ./backend:/app
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # Apply DB migrations, then start the API with live reload.
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
 
 volumes:
   pgdata:

@@ -519,6 +519,16 @@
   .tagcard pre{margin:10px 0 0;font-size:12px;padding:11px 13px}
   .tagempty{grid-column:1/-1}
   .gamehint{margin:12px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-faint)}
+  .stagenote{margin:14px 0 4px;font-size:14px;line-height:1.6;color:var(--ink-soft);padding:11px 14px;background:var(--teal-wash);border-radius:10px}
+  .inlinelink{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--teal-ink);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .inlinelink:hover{color:var(--clay-ink)}
+  .grouplabel{margin:18px 0 -4px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .jsg .cmpitem .tt{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .jsg .cmpitem .tt b{font-family:"Poppins",sans-serif;font-size:16px;font-weight:800;color:var(--ink)}
+  .subh{font-size:18px;font-weight:800;margin:28px 0 12px}
+  .acc .body ul.bul{margin:10px 0 0;padding-left:20px}
+  .acc .body ul.bul li{margin-bottom:6px}
+  .acc .body ul.bul li b{font-family:"JetBrains Mono",monospace;font-size:13.5px;color:var(--teal-ink)}
   .tagempty{grid-column:1 / -1}
 
   /* ===== tool comparison ===== */
@@ -2159,6 +2169,176 @@
   </div>
 
   <!-- ===================== WEB DEVELOPMENT ===================== -->
+  <!-- ===================== JAVASCRIPT GUIDE ===================== -->
+  <div class="page jsg" id="page-jsguide">
+    <div class="phead">
+      <button class="back" data-goto="webdev">← Web Development</button>
+      <div class="pn">Reference · free</div>
+      <h2>JavaScript, from the ground up</h2>
+      <p class="pd">Four blocks, in this order: the language, the DOM, events, libraries. Skip a block and everything after it feels like magic you cannot fix. Do them in order and it feels obvious.</p>
+      <div class="subnav">
+        <a href="#js-what" class="jump">What it is</a>
+        <a href="#js-fund" class="jump">Fundamentals</a>
+        <a href="#js-dom" class="jump">The DOM</a>
+        <a href="#js-ev" class="jump">Events</a>
+        <a href="#js-lib" class="jump">Libraries</a>
+      </div>
+    </div>
+
+    <section class="sec" id="js-what">
+      <div class="eyebrow">01 · The big picture</div>
+      <h3>What JavaScript actually is</h3>
+      <p class="lead">HTML is the body. CSS is the clothes. JavaScript is the brain and the muscles. It is the only one of the three that can <em>decide</em> and <em>change things</em>.</p>
+      <p>Imagine a puppet. HTML builds the puppet: head, arms, legs. CSS paints it and dresses it. But it just sits there. JavaScript is the hand inside it. Now it moves, it answers, it remembers, it reacts to you.</p>
+      <div class="mnote"><span class="label">Why it matters so much</span>JavaScript is the only programming language a browser understands. Every single interactive thing you have ever used on the web, every menu that opens, every "add to cart", every live search, is JavaScript. Learn it well and you can build almost anything on the web.</div>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>Learn the language first.</b> Variables, decisions, loops, functions, arrays, objects. This part has nothing to do with websites. It is just how to think in code.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Then learn the DOM.</b> How JavaScript reaches into the page and changes it.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Then learn events.</b> How the page notices what the user does and reacts.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>Only then, libraries.</b> Other people's code that saves you time. Useless to you before step 3, because you will not know what it is doing for you.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="js-fund">
+      <div class="eyebrow">02 · Block A</div>
+      <h3>The fundamentals: how to think in code</h3>
+      <p class="lead">These eight ideas are the entire language. Everything else, including React, is built out of exactly these. Learn them once, use them for the rest of your life.</p>
+      <div class="acc">
+        <details open><summary>Variables: labeled boxes</summary><div class="body"><p>A <b>variable</b> is a box with a name on it, and you put something inside. Later you say the name and get the thing back.</p><p>Think of your school backpack. One pocket has a label that says "lunch". You do not care what is inside right now, you just say "give me the lunch pocket" and you get it.</p><p><code>const</code> means the box is sealed, you will never swap what is inside. <code>let</code> means you might change it later. Use <code>const</code> by default, it prevents bugs.</p><pre><span class="k">const</span> name = <span class="c">'Ana'</span>;      <span class="c">// never changes</span>
+<span class="k">let</span> score = 0;           <span class="c">// will change</span>
+score = score + 10;      <span class="c">// now it is 10</span></pre></div></details>
+        <details><summary>Types: what kind of thing is in the box</summary><div class="body"><p>The computer needs to know if something is words, a number, or a yes/no, because it treats them differently.</p><p>Real example: <code>"5" + "5"</code> gives you <code>"55"</code> because those are words being glued together, but <code>5 + 5</code> gives you <code>10</code> because those are numbers. Same symbols, completely different result. This exact confusion causes more beginner bugs than anything else.</p><pre><span class="k">string</span>   <span class="c">// words:    'hello', "Ana"</span>
+<span class="k">number</span>   <span class="c">// numbers:  7, 3.5, -20</span>
+<span class="k">boolean</span>  <span class="c">// yes/no:   true, false</span>
+<span class="k">null</span>     <span class="c">// on purpose empty</span>
+<span class="k">undefined</span><span class="c">// nobody put anything here yet</span></pre></div></details>
+        <details><summary>Conditions: teaching the computer to choose</summary><div class="body"><p>An <b>if</b> is a fork in the road. "If it is raining, take the umbrella. Otherwise, do not."</p><p>The computer checks whether something is true, then runs one path or the other. That is it. Every login screen, every game over, every "you must be 18" check in the world is this.</p><p>One trap: <code>=</code> means "put this in the box". <code>===</code> means "are these the same?". Beginners mix them up constantly.</p><pre><span class="k">const</span> age = 15;
+
+<span class="k">if</span> (age &gt;= 18) {
+  console.log(<span class="c">'You can enter'</span>);
+} <span class="k">else</span> {
+  console.log(<span class="c">'Too young, sorry'</span>);
+}</pre></div></details>
+        <details><summary>Loops: doing it again without retyping</summary><div class="body"><p>Imagine your teacher says "write your name 100 times". A <b>loop</b> is telling the computer "do this 100 times" in one line instead of copying it 100 times.</p><p>You will use this every time you have a list: show all 40 products, check all 200 emails, draw all 12 months.</p><pre><span class="k">for</span> (<span class="k">let</span> i = 1; i &lt;= 3; i++) {
+  console.log(<span class="c">'Round '</span> + i);
+}
+<span class="c">// Round 1 / Round 2 / Round 3</span>
+
+<span class="k">for</span> (<span class="k">const</span> fruit <span class="k">of</span> [<span class="c">'apple'</span>, <span class="c">'mango'</span>]) {
+  console.log(fruit);
+}</pre></div></details>
+        <details><summary>Functions: a recipe you save and reuse</summary><div class="body"><p>A <b>function</b> is a set of steps you give a name, so you can run it again whenever you want without rewriting it.</p><p>Like a blender. You put fruit in (the <b>parameters</b>), it does its thing inside, and juice comes out (the <b>return</b>). You do not care how the motor works, you just use it. And you can put in different fruit each time.</p><p>Writing the same code twice is the signal to make a function. Always.</p><pre><span class="k">function</span> greet(name) {
+  <span class="k">return</span> <span class="c">'Hello '</span> + name + <span class="c">'!'</span>;
+}
+
+greet(<span class="c">'Ana'</span>);   <span class="c">// 'Hello Ana!'</span>
+greet(<span class="c">'Luis'</span>);  <span class="c">// 'Hello Luis!'</span>
+
+<span class="c">// same thing, shorter (arrow function)</span>
+<span class="k">const</span> greet2 = (name) =&gt; <span class="c">'Hello '</span> + name;</pre></div></details>
+        <details><summary>Arrays: a numbered shopping list</summary><div class="body"><p>An <b>array</b> is a list of things in order, inside square brackets. Like a shopping list where each line has a number.</p><p>Careful: computers start counting at <b>0</b>, not 1. The first item is number 0. Everyone gets this wrong at first, then never forgets it.</p><pre><span class="k">const</span> fruits = [<span class="c">'apple'</span>, <span class="c">'mango'</span>, <span class="c">'papaya'</span>];
+
+fruits[0];        <span class="c">// 'apple'  (the FIRST one)</span>
+fruits.length;    <span class="c">// 3</span>
+fruits.push(<span class="c">'kiwi'</span>); <span class="c">// add to the end</span></pre></div></details>
+        <details><summary>Objects: a backpack with labeled pockets</summary><div class="body"><p>An <b>object</b> groups related information about one thing, with a label on each piece. An array is "many things"; an object is "many facts about one thing".</p><p>A student is not three separate variables floating around. A student is one object with a name, an age, and a grade. When you fetch data from the internet, this is almost always what you get back.</p><pre><span class="k">const</span> student = {
+  name: <span class="c">'Ana'</span>,
+  age: 15,
+  passing: <span class="k">true</span>
+};
+
+student.name;   <span class="c">// 'Ana'</span>
+student.age = 16;  <span class="c">// birthday!</span></pre></div></details>
+        <details><summary>Array methods: the tools you will use every single day</summary><div class="body"><p>Once you have a list, you almost always want to do one of four things to it. JavaScript gives you a word for each one, and professionals use these constantly.</p><ul class="bul"><li><b>map</b> = change every item. A list of prices, add tax to all of them.</li><li><b>filter</b> = keep only some. From all students, keep the ones who passed.</li><li><b>find</b> = get the first one that matches. Find the student named Ana.</li><li><b>reduce</b> = squash the whole list into one value. Add up the whole bill.</li></ul><pre><span class="k">const</span> prices = [10, 20, 30];
+
+prices.map(p =&gt; p * 2);        <span class="c">// [20, 40, 60]</span>
+prices.filter(p =&gt; p &gt; 15);    <span class="c">// [20, 30]</span>
+prices.find(p =&gt; p &gt; 15);      <span class="c">// 20</span>
+prices.reduce((a, b) =&gt; a + b); <span class="c">// 60</span></pre></div></details>
+      </div>
+      <div class="mnote"><span class="label">Do this before moving on</span>Open your browser, press F12, click Console, and type these in. Right now. Reading code teaches you almost nothing. Typing it, breaking it, and fixing it teaches you everything.</div>
+    </section>
+
+    <section class="sec" id="js-dom">
+      <div class="eyebrow">03 · Block B</div>
+      <h3>The DOM: how JavaScript touches the page</h3>
+      <p class="lead">The DOM is the bridge between your code and what people see. Without it, JavaScript could calculate things beautifully and nobody would ever notice.</p>
+      <p>When the browser reads your HTML file, it does not keep the text. It builds a living <b>tree</b> in its memory: body is the parent, the div inside is the child, the text inside that is the grandchild. That tree is the <b>DOM</b>, and what you see on screen is a picture of it.</p>
+      <p>Here is the key idea nobody explains: <b>JavaScript never edits your HTML file.</b> It edits that tree in memory, and the screen instantly redraws to match. That is why the page changes without reloading, and why refreshing wipes it all away.</p>
+      <div class="acc">
+        <details open><summary>Find something on the page</summary><div class="body"><p>Before you can change anything, you have to grab it. You point at it with the same words you use in CSS: <code>.class</code>, <code>#id</code>, or the tag name.</p><pre><span class="c">// one element (the first match)</span>
+<span class="k">const</span> title = document.querySelector(<span class="c">'h1'</span>);
+<span class="k">const</span> btn   = document.querySelector(<span class="c">'#order-btn'</span>);
+
+<span class="c">// all matches, as a list</span>
+<span class="k">const</span> cards = document.querySelectorAll(<span class="c">'.card'</span>);</pre></div></details>
+        <details><summary>Change what it says and how it looks</summary><div class="body"><p>Once you hold it, you can rewrite its text, add or remove a CSS class, or change a style directly.</p><p>Best practice: change the <b>class</b>, not the style. Keep the look in CSS where it belongs. JavaScript should say "this is now active", and CSS should decide what active looks like.</p><pre>title.textContent = <span class="c">'New title'</span>;
+
+card.classList.add(<span class="c">'active'</span>);
+card.classList.remove(<span class="c">'hidden'</span>);
+card.classList.toggle(<span class="c">'open'</span>);  <span class="c">// on/off switch</span>
+
+card.style.background = <span class="c">'purple'</span>; <span class="c">// works, but prefer classes</span></pre></div></details>
+        <details><summary>Create and delete elements</summary><div class="body"><p>This is how every feed, every list, every search result on the internet appears. The HTML file did not contain those 40 products. JavaScript got the data and built 40 boxes.</p><pre><span class="k">const</span> li = document.createElement(<span class="c">'li'</span>);
+li.textContent = <span class="c">'Buy milk'</span>;
+document.querySelector(<span class="c">'ul'</span>).append(li);
+
+li.remove();  <span class="c">// gone</span></pre></div></details>
+      </div>
+      <div class="mnote"><span class="label">The mental model</span>Find it. Change it. Or build a new one and stick it in. Every DOM task you will ever do is one of those three.</div>
+    </section>
+
+    <section class="sec" id="js-ev">
+      <div class="eyebrow">04 · Block C</div>
+      <h3>Events: how the page listens to a human</h3>
+      <p class="lead">An event is something that happens: a click, a key press, a form being sent, the page finishing loading. Your job is to wait for it and then react.</p>
+      <p>Think of a dog waiting for the doorbell. The dog does not check the door every two seconds. It sleeps, and the bell wakes it up. Your code is the same: you do not constantly ask "did they click yet?". You leave a note that says "when a click happens, run this", and then the browser wakes your code up.</p>
+      <div class="acc">
+        <details open><summary>Listen and react (the whole pattern)</summary><div class="body"><p>Three parts, always: <b>what</b> to watch, <b>which</b> event, and <b>what to do</b>. That is the entire idea of interactive web development.</p><pre><span class="k">const</span> btn = document.querySelector(<span class="c">'#order'</span>);
+
+btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
+  alert(<span class="c">'Your pizza is on the way!'</span>);
+});</pre><p>The events you will actually use: <code>click</code>, <code>input</code> (typing), <code>submit</code> (a form being sent), <code>keydown</code>, <code>change</code>, <code>DOMContentLoaded</code> (the page is ready).</p></div></details>
+        <details><summary>The event object: details about what just happened</summary><div class="body"><p>The browser hands your function a little report about the event. Which element was clicked, what key was pressed, where the mouse was.</p><p><code>e.preventDefault()</code> is the one you will need first: by default, submitting a form reloads the whole page. That one line stops it, so you can handle it yourself.</p><pre>form.addEventListener(<span class="c">'submit'</span>, (e) =&gt; {
+  e.preventDefault();          <span class="c">// stop the page reloading</span>
+  console.log(e.target);       <span class="c">// which element</span>
+});</pre></div></details>
+        <details><summary>Bubbling and delegation: the pro trick</summary><div class="body"><p>When you click a button inside a card inside the page, the click does not only happen on the button. It travels upward: button, then card, then body. That is <b>bubbling</b>, like a bubble rising in water.</p><p>This sounds annoying but it is a gift. Instead of putting 100 listeners on 100 items, you put <b>one</b> on the parent and ask "what got clicked?". It is faster, and it even works for items created later. That is <b>event delegation</b>, and it is what separates a beginner from someone who knows what they are doing.</p><pre>list.addEventListener(<span class="c">'click'</span>, (e) =&gt; {
+  <span class="k">if</span> (e.target.matches(<span class="c">'.delete-btn'</span>)) {
+    e.target.closest(<span class="c">'li'</span>).remove();
+  }
+});</pre></div></details>
+      </div>
+    </section>
+
+    <section class="sec" id="js-lib">
+      <div class="eyebrow">05 · Block D</div>
+      <h3>Libraries: standing on other people's shoulders</h3>
+      <p class="lead">A library is code somebody already wrote, tested, and gave away, so you do not have to write it yourself.</p>
+      <p>You do not build a car engine to drive to school, and you do not grow wheat to eat bread. Somebody solved it already, and solved it better than you would in a weekend. Using a library is not cheating, it is how every professional works.</p>
+      <div class="mnote"><span class="label">Library vs framework, in one line</span>A <b>library</b> is a tool you pick up and use when you want (you are in charge). A <b>framework</b> is a house you move into and follow its rules (it is in charge). jQuery and Chart.js are libraries. React and Next.js are frameworks.</div>
+      <h4 class="subh">What people actually install, and why</h4>
+      <div class="cmp">
+        <div class="cmpitem"><div class="tt"><b>React</b><span class="chip mut">Framework · UI</span></div><p>Builds your screen out of small reusable pieces and redraws it automatically when data changes. The most in-demand frontend skill on the job market.</p><p class="cmpuse"><b>Use when:</b> your app has real state that changes a lot. Overkill for a five-page brochure site.</p></div>
+        <div class="cmpitem"><div class="tt"><b>Chart.js / D3</b><span class="chip mut">Charts</span></div><p>Turns numbers into graphs. Chart.js is quick and easy, D3 gives you total control and is much harder.</p><p class="cmpuse"><b>Use when:</b> you need a dashboard. Writing a bar chart by hand is a week you will never get back.</p></div>
+        <div class="cmpitem"><div class="tt"><b>Day.js / date-fns</b><span class="chip mut">Dates</span></div><p>Dates in JavaScript are famously painful. Time zones, leap years, "3 days ago". These fix it.</p><p class="cmpuse"><b>Use when:</b> you show or calculate dates. Which is nearly every real app.</p></div>
+        <div class="cmpitem"><div class="tt"><b>Zod / Yup</b><span class="chip mut">Validation</span></div><p>Checks that data is actually the shape you expect before your app explodes on it.</p><p class="cmpuse"><b>Use when:</b> you accept forms or data from an API. Never trust incoming data.</p></div>
+        <div class="cmpitem"><div class="tt"><b>Tailwind CSS</b><span class="chip mut">Styling</span></div><p>Style straight in your HTML with tiny class names instead of writing separate CSS files.</p><p class="cmpuse"><b>Use when:</b> you already know real CSS. Learn the fundamentals first or you will be stuck forever.</p></div>
+        <div class="cmpitem"><div class="tt"><b>jQuery</b><span class="chip mut">Legacy</span></div><p>The king of the 2010s. It made DOM work easy back when browsers all disagreed. Modern JavaScript does almost all of it natively now.</p><p class="cmpuse"><b>Use when:</b> you inherit an old site. Do not start a new project with it, but you will meet it at work.</p></div>
+      </div>
+      <h4 class="subh">How you actually add one</h4>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>The quick way: a script tag.</b> Paste one line from a CDN into your HTML and the library is there. Perfect for learning and small pages.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>The real way: npm.</b> <code>npm install chart.js</code> downloads it into a folder called <code>node_modules</code>, and writes it into <code>package.json</code> so anyone else on your project gets the exact same versions.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Then you import it.</b> <code>import Chart from 'chart.js'</code> pulls it into your file. That is what <b>modules</b> are: splitting your code into files that hand pieces to each other with <code>import</code> and <code>export</code>.</span></div>
+      </div>
+      <div class="mnote"><span class="label">The honest warning</span>Every library you install is code you did not write, cannot fully see, and now depend on. It makes your app bigger and slower, and one day it will break or stop being maintained. Before installing, ask: <b>can I do this in 20 lines myself?</b> If yes, do it yourself. If it would take you two weeks, install it. Junior developers install everything. Seniors install almost nothing.</div>
+      <div class="mnote"><span class="label">And the real reason to learn fundamentals first</span>Libraries die. jQuery ruled the web, then React took over, and something will replace React too. The fundamentals on this page have not changed in 20 years and will outlive every library on it. That is why we do them first, always.</div>
+    </section>
+
+    <div class="pfoot"><b>Next move:</b> build the to-do list with zero libraries. When it works, rebuild it with one library and feel the difference yourself. That comparison teaches you more than any tutorial.</div>
+  </div>
+
   <div class="page" id="page-webdev">
     <div class="phead">
       <button class="back" data-goto="academy">← Courses</button>
@@ -2170,16 +2350,29 @@
     <section class="sec" id="wd-road">
       <div class="eyebrow">01 · The roadmap</div>
       <h3>From your first page to real web apps</h3>
-      <p class="lead">Four stages, in order. You build something real at every single stage. No waiting until the end.</p>
-      <p>Think of it like learning to cook. First you learn what the ingredients are (HTML). Then how to make it look and taste good (CSS). Then how to actually run the kitchen so things happen (JavaScript). Then how to cook for 100 people without going crazy (React).</p>
+      <p class="lead">Five stages, in order. Fundamentals first, always. You build something real at every single stage. No waiting until the end.</p>
+      <p>Think of it like learning to cook. First you learn what a kitchen even is and how not to burn yourself (fundamentals). Then what the ingredients are (HTML). Then how to make it look and taste good (CSS). Then how to actually run the kitchen so things happen (JavaScript). Then how to cook for 100 people without going crazy (React).</p>
+      <div class="mnote"><span class="label">The rule of this academy</span><b>Fundamentals first.</b> Every stage starts with the boring idea underneath before the shiny tool on top. People who skip this can copy code but cannot fix it. People who do it can learn any new tool in a weekend, forever. That is the whole difference.</div>
       <div class="cc-actions" style="margin-top:16px">
         <button data-goto="htmltags">The 100 HTML tags →</button>
         <button data-goto="webconcepts">Core concepts →</button>
+        <button data-goto="jsguide">JavaScript explained →</button>
         <button data-goto="webtools">Other ways to build sites →</button>
       </div>
       <div class="mnote"><span class="label">About the backend</span>Servers, databases, logins and deploying are <b>not</b> here on purpose. That is a different job and it lives in the <b>Backend Engineering</b> course. Get genuinely good at the front of the website first. That alone can get you paid.</div>
       <div class="progcard" data-scope="rm-webdev"><div class="pt"><span>WEB DEV PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-webdev">
+        <div class="stage" data-stage="0">
+          <div class="sh"><span class="sn">0</span><span class="st">Fundamentals first</span><span class="lv">Before any code · ~1 week</span><span class="cnt" data-cnt>0/5</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd0a"><span class="sk"><span class="skt">What a program actually is</span><span class="sub">→ a list of instructions the computer follows exactly, in order, like a recipe. It is incredibly fast and completely stupid. It does nothing you did not tell it to do.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd0b"><span class="sk"><span class="skt">Thinking in steps (the real skill)</span><span class="sub">→ take a big problem and cut it into tiny steps in order. Say the steps out loud in your own language BEFORE you touch code. This is 80% of programming and it has nothing to do with typing.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd0c"><span class="sk"><span class="skt">The five words behind every language</span><span class="sub">→ variable (a labeled box), condition (a decision), loop (do it again), function (a saved recipe), data (the stuff you work with). Learn these once and every language after is just new spelling.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd0d"><span class="sk"><span class="skt">Your tools and where code lives</span><span class="sub">→ VS Code (the editor), the browser, dev tools (F12), files and folders, and what "open the folder, not the file" means</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd0e"><span class="sk"><span class="skt">How to read an error</span><span class="sub">→ an error is not punishment, it is directions. Read the message, find the file and line number, copy the exact text and search it. Beginners panic at red text. Professionals read it.</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>On paper, write every step to make a cup of tea, so exact that someone who has never seen tea could follow it. Miss "turn on the kettle" and they will drink cold water. That frustration you feel is exactly what programming is. You just did it without a computer.</span></div><div class="row"><span class="tag b">Go deep</span><span>The free <b>Tech, explained from zero</b> primer in this academy, then Harvard CS50's first lecture on YouTube.</span></div></div>
+        </div>
         <div class="stage" data-stage="1">
           <div class="sh"><span class="sn">1</span><span class="st">The web &amp; HTML</span><span class="lv">Foundation · ~2 weeks</span><span class="cnt" data-cnt>0/6</span></div>
           <ul class="skills">
@@ -2206,17 +2399,33 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Make your profile page beautiful. Then slowly shrink the browser window until it is phone-sized. If nothing breaks and nothing scrolls sideways, you have understood responsive design.</span></div><div class="row"><span class="tag b">Go deep</span><span>freeCodeCamp Responsive Web Design (free certificate), MDN CSS, and the Flexbox Froggy game.</span></div></div>
         </div>
         <div class="stage" data-stage="3">
-          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Core · ~6 weeks</span><span class="cnt" data-cnt>0/7</span></div>
+          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Core · ~8 weeks</span><span class="cnt" data-cnt>0/12</span></div>
+          <p class="stagenote"><b>Four blocks, in this exact order:</b> the language itself → the DOM → events → libraries. Most people jump straight to libraries and then cannot fix anything. Do not be most people. <button class="inlinelink" data-goto="jsguide">Read the full JavaScript guide →</button></p>
+          <div class="grouplabel">Block A · The language fundamentals</div>
           <ul class="skills">
-            <li><label><input type="checkbox" data-id="wd3a"><span class="sk"><span class="skt">The basics</span><span class="sub">→ variables (let, const), strings, numbers, true/false, comments</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3b"><span class="sk"><span class="skt">Logic &amp; data</span><span class="sub">→ if / else, comparisons, loops, arrays (lists), objects (labeled boxes)</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3c"><span class="sk"><span class="skt">Functions</span><span class="sub">→ reusable blocks, parameters, return, arrow functions. Like a recipe you can reuse.</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3d"><span class="sk"><span class="skt">The DOM</span><span class="sub">→ querySelector, changing text, classes and styles from code</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3e"><span class="sk"><span class="skt">Events</span><span class="sub">→ click, input, submit, addEventListener, preventDefault. The doorbell pattern.</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3f"><span class="sk"><span class="skt">Fetching real data</span><span class="sub">→ fetch, JSON, async / await, loading and error states</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3g"><span class="sk"><span class="skt">Debugging</span><span class="sub">→ console.log, browser dev tools, actually reading the error message</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3a"><span class="sk"><span class="skt">Variables &amp; types</span><span class="sub">→ let and const, strings, numbers, true/false, null and undefined. A variable is a labeled box you put a value in.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3b"><span class="sk"><span class="skt">Logic &amp; decisions</span><span class="sub">→ if / else, ===, &amp;&amp; and ||, ternary, switch. Teaching the computer to choose.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3c"><span class="sk"><span class="skt">Loops</span><span class="sub">→ for, while, for...of. Doing the same thing 1,000 times without writing it 1,000 times.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3d"><span class="sk"><span class="skt">Functions</span><span class="sub">→ parameters, return, arrow functions, scope. A saved recipe you can run any time with different ingredients.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3e"><span class="sk"><span class="skt">Arrays &amp; objects</span><span class="sub">→ arrays are a numbered list (a shopping list), objects are labeled pockets (a backpack). Nearly all data you touch is one of these two.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3f"><span class="sk"><span class="skt">Array methods you use daily</span><span class="sub">→ map (change every item), filter (keep some), find (get one), reduce (squash into one value), sort, includes</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a to-do list. Type a task, press add, it appears on screen. Click it and it gets crossed out. That one small project uses almost everything above, which is why every developer builds it.</span></div><div class="row"><span class="tag b">Go deep</span><span>javascript.info (the best free JS course), MDN JavaScript guide.</span></div></div>
+          <div class="grouplabel">Block B · The DOM, touching the page</div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd3g"><span class="sk"><span class="skt">What the DOM is</span><span class="sub">→ the browser turns your HTML into a live family tree in memory. JavaScript does not edit your file, it edits that tree, and the screen follows.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3h"><span class="sk"><span class="skt">Find, change, create, remove</span><span class="sub">→ querySelector and querySelectorAll, textContent, classList.add/remove/toggle, style, createElement, append, remove</span></span></label></li>
+          </ul>
+          <div class="grouplabel">Block C · Events, making it react</div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd3i"><span class="sk"><span class="skt">Listening &amp; reacting</span><span class="sub">→ addEventListener, click, input, submit, keydown. The doorbell pattern: wait for something, then do something.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3j"><span class="sk"><span class="skt">The event object &amp; bubbling</span><span class="sub">→ e.target, e.preventDefault(), why a click on a button also fires on its parent, and event delegation (one listener for 100 items)</span></span></label></li>
+          </ul>
+          <div class="grouplabel">Block D · Libraries, standing on other people's work</div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd3k"><span class="sk"><span class="skt">What a library is and when to use one</span><span class="sub">→ code someone already wrote and shared. You do not build a car engine to drive to school. Learn what problem each one solves, and when NOT to install anything.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3l"><span class="sk"><span class="skt">Modules, npm &amp; fetching data</span><span class="sub">→ import / export, package.json, node_modules, plus fetch, JSON, async / await, loading and error states</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a to-do list with zero libraries. Type a task, press add, it appears. Click it, it gets crossed out. Reload the page and it is still there. That tiny project uses every single thing above, which is exactly why every developer builds it.</span></div><div class="row"><span class="tag b">Go deep</span><span>javascript.info (the best free JS course anywhere), MDN JavaScript guide, and the <b>JavaScript explained</b> page in this academy.</span></div></div>
         </div>
         <div class="stage" data-stage="4">
           <div class="sh"><span class="sn">4</span><span class="st">A framework: React</span><span class="lv">Intermediate · ~4 weeks</span><span class="cnt" data-cnt>0/6</span></div>
@@ -2538,7 +2747,7 @@
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','webtools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 

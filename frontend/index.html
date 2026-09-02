@@ -437,6 +437,18 @@
     .page:not(.active){display:none!important}
     .certificate{box-shadow:none}
   }
+
+  /* ===== toasts ===== */
+  #toasts{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:10px;align-items:center;width:min(92vw,440px);pointer-events:none}
+  .toast{pointer-events:auto;display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--surface);border-radius:12px;padding:12px 16px;box-shadow:0 14px 36px rgba(0,0,0,.30);font-size:14.5px;width:100%;animation:toastin .22s ease}
+  .toast .tmsg{flex:1;line-height:1.4}
+  .toast button{background:none;border:0;color:var(--surface);font-family:"Poppins",sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;padding:4px 8px;border-radius:8px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+  .toast button:hover{opacity:.8}
+  @keyframes toastin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.toast{animation:none}}
+
+  /* ===== data backup card ===== */
+  .datacard{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 8px 24px rgba(124,58,237,.07)}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -1937,6 +1949,8 @@
 
 </div>
 
+<div id="toasts" aria-live="polite" aria-atomic="false"></div>
+
 <script>
   (function(){
     var pages=['home','academy','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
@@ -1952,7 +1966,9 @@
       var roadmapPages=['roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift'];
       var navName=roadmapPages.indexOf(name)>=0?'roadmaps':name;
       document.querySelectorAll('.nav .links button[data-goto]').forEach(function(b){
-        b.classList.toggle('on',b.getAttribute('data-goto')===navName);
+        var active=b.getAttribute('data-goto')===navName;
+        b.classList.toggle('on',active);
+        if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
       });
       try{history.replaceState(null,'','#'+name);}catch(e){}
       window.scrollTo(0,0);
@@ -2027,6 +2043,45 @@
     function val(id){var el=document.getElementById(id);return el?el.value:'';}
     function setv(id,v){var el=document.getElementById(id);if(el)el.value=v;}
     function domCls(d){return({Cybersecurity:'warn',Automation:'',Cloud:'clay',AI:'good',Data:'mut',Business:'clay'})[d]||'mut';}
+
+    /* ---- toast notifications (accessible feedback) ---- */
+    function toast(msg,opts){
+      opts=opts||{};var box=document.getElementById('toasts');if(!box)return;
+      var t=document.createElement('div');t.className='toast';
+      var m=document.createElement('span');m.className='tmsg';m.textContent=msg;t.appendChild(m);
+      var closed=false;function close(){if(closed)return;closed=true;try{t.remove();}catch(e){}}
+      if(opts.action){var b=document.createElement('button');b.type='button';b.textContent=opts.action;b.addEventListener('click',function(){if(opts.onAction)opts.onAction();close();});t.appendChild(b);}
+      box.appendChild(t);
+      setTimeout(close,opts.timeout||(opts.action?6000:3200));
+    }
+
+    /* ---- data backup: export / import / reset ---- */
+    function dataSectionHtml(){
+      return '<div class="datacard"><div class="chart-title">Your data</div>'
+        +'<p class="savenote">Notes, learnings, wishlist, certs, quiz scores and course progress are stored in this browser. Back them up here so nothing is lost.</p>'
+        +'<div class="cc-actions" style="margin-top:12px"><button id="data-export">Export backup</button><button id="data-import-btn">Import backup</button><button id="data-reset" style="border-color:var(--warn);color:var(--warn)">Clear all</button></div>'
+        +'<input type="file" id="data-import" accept="application/json" hidden></div>';
+    }
+    function exportData(){
+      try{
+        var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+        var url=URL.createObjectURL(blob);var a=document.createElement('a');
+        a.href=url;a.download='brain-backup-'+new Date().toISOString().slice(0,10)+'.json';
+        document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
+        toast('Backup downloaded.');
+      }catch(e){toast('Download is blocked in this preview. Use the deployed site.');}
+    }
+    function importData(file){
+      var reader=new FileReader();
+      reader.onload=function(){try{
+        var obj=JSON.parse(reader.result);
+        ['thoughts','learnings','wishlist','certs'].forEach(function(k){if(Array.isArray(obj[k]))data[k]=obj[k];});
+        ['quizzes','courses'].forEach(function(k){if(obj[k]&&typeof obj[k]==='object')data[k]=obj[k];});
+        saveData();renderAll();toast('Backup imported.');
+      }catch(e){toast('That file could not be read.');}};
+      reader.readAsText(file);
+    }
+    function resetData(){data={thoughts:[],learnings:[],wishlist:[],certs:[],quizzes:{},courses:{}};saveData();renderAll();toast('All data cleared.');}
 
     /* ---- charts (dependency-free SVG/HTML) ---- */
     function svgRing(pct,size,center){
@@ -2167,8 +2222,10 @@
       });
       var pct=Math.round(correct/q.questions.length*100);
       data.quizzes=data.quizzes||{};var prev=data.quizzes[key]||{best:0,attempts:0};
+      var isBest=pct>(prev.best||0);
       data.quizzes[key]={best:Math.max(prev.best||0,pct),attempts:(prev.attempts||0)+1};
-      saveData();
+      saveData();renderAcademy();
+      toast(isBest?('New best score: '+pct+'%'):('Scored '+pct+'%'));
       var res=document.getElementById('quiz-result');
       res.innerHTML='<div class="quizscore"><div class="ring-wrap">'+svgRing(pct,110)+'</div><div><div class="qlevel">'+quizLevel(pct)+'</div><div class="qmeta">'+correct+' / '+q.questions.length+' correct · best '+data.quizzes[key].best+'%</div></div></div><div class="chart-title" style="margin-top:20px">Review</div>'+review;
       res.scrollIntoView({behavior:'smooth'});
@@ -2196,7 +2253,7 @@
     async function doLogin(email,pass){
       var tok=await apiFetch('/auth/login',{method:'POST',body:{email:email,password:pass}});
       var auth={access:tok.access_token,refresh:tok.refresh_token};setAuth(auth);
-      var me=await apiFetch('/me',{auth:true});auth.user=me;setAuth(auth);updateAuthChip();renderAccount();
+      var me=await apiFetch('/me',{auth:true});auth.user=me;setAuth(auth);updateAuthChip();renderAccount();toast('Signed in.');
     }
     function renderAccount(){
       var area=document.getElementById('account-area');if(!area)return;
@@ -2209,8 +2266,8 @@
           +'<button class="fbtn" type="submit">Save profile</button>'
           +'<div class="savenote" id="pf-msg">Member since '+esc((a.user.created_at||'').slice(0,10))+'.</div></form>'
           +'<button class="fbtn" id="logout-btn" style="background:none;color:var(--teal-ink);box-shadow:none;border:1px solid var(--line-strong);margin-top:14px">Log out</button>';
-        document.getElementById('profile-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('pf-msg');msg.textContent='Saving...';try{var u=await apiFetch('/me',{method:'PATCH',auth:true,body:{full_name:(document.getElementById('pf-name').value.trim()||null)}});a.user=u;setAuth(a);updateAuthChip();msg.textContent='Saved.';}catch(err){msg.textContent=authErr(err);}});
-        document.getElementById('logout-btn').addEventListener('click',function(){setAuth(null);updateAuthChip();renderAccount();});
+        document.getElementById('profile-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('pf-msg');msg.textContent='Saving...';try{var u=await apiFetch('/me',{method:'PATCH',auth:true,body:{full_name:(document.getElementById('pf-name').value.trim()||null)}});a.user=u;setAuth(a);updateAuthChip();msg.textContent='Saved.';toast('Profile saved.');}catch(err){msg.textContent=authErr(err);}});
+        document.getElementById('logout-btn').addEventListener('click',function(){setAuth(null);updateAuthChip();renderAccount();toast('Signed out.');});
       }else{
         area.innerHTML=''
           +'<div class="authgrid">'
@@ -2218,10 +2275,15 @@
           +'<form class="tform" id="signup-form"><span class="flabel">Sign up</span><input class="finput" id="su-name" placeholder="Full name (optional)"><input class="finput" id="su-email" type="email" placeholder="Email" autocomplete="email"><input class="finput" id="su-pass" type="password" placeholder="Password (min 8 characters)" autocomplete="new-password"><button class="fbtn" type="submit">Create account</button><div class="savenote" id="su-msg"></div></form>'
           +'</div>'
           +'<details class="apiadv"><summary>Advanced: API server</summary><div class="frow" style="margin-top:10px"><input class="finput" id="api-base" value="'+esc(apiBase())+'"><button class="fbtn" id="api-save" type="button">Save</button></div><div class="savenote">Point this at your backend. Local dev default is http://localhost:8000.</div></details>';
-        document.getElementById('login-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('li-msg');msg.textContent='Logging in...';try{await doLogin(document.getElementById('li-email').value.trim(),document.getElementById('li-pass').value);}catch(err){msg.textContent=authErr(err);}});
-        document.getElementById('signup-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('su-msg');msg.textContent='Creating account...';try{await apiFetch('/auth/signup',{method:'POST',body:{email:document.getElementById('su-email').value.trim(),password:document.getElementById('su-pass').value,full_name:(document.getElementById('su-name').value.trim()||null)}});await doLogin(document.getElementById('su-email').value.trim(),document.getElementById('su-pass').value);}catch(err){msg.textContent=authErr(err);}});
-        document.getElementById('api-save').addEventListener('click',function(){try{localStorage.setItem('fm.apiBase',document.getElementById('api-base').value.trim());}catch(e){}var el=document.getElementById('api-base');el.style.borderColor='var(--good)';});
+        document.getElementById('login-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('li-msg');var btn=e.target.querySelector('button[type=submit]');btn.disabled=true;msg.textContent='Logging in...';try{await doLogin(document.getElementById('li-email').value.trim(),document.getElementById('li-pass').value);}catch(err){msg.textContent=authErr(err);}finally{btn.disabled=false;}});
+        document.getElementById('signup-form').addEventListener('submit',async function(e){e.preventDefault();var msg=document.getElementById('su-msg');var btn=e.target.querySelector('button[type=submit]');btn.disabled=true;msg.textContent='Creating account...';try{await apiFetch('/auth/signup',{method:'POST',body:{email:document.getElementById('su-email').value.trim(),password:document.getElementById('su-pass').value,full_name:(document.getElementById('su-name').value.trim()||null)}});await doLogin(document.getElementById('su-email').value.trim(),document.getElementById('su-pass').value);}catch(err){msg.textContent=authErr(err);}finally{btn.disabled=false;}});
+        document.getElementById('api-save').addEventListener('click',function(){try{localStorage.setItem('fm.apiBase',document.getElementById('api-base').value.trim());}catch(e){}var el=document.getElementById('api-base');el.style.borderColor='var(--good)';toast('API server saved.');});
       }
+      area.insertAdjacentHTML('beforeend',dataSectionHtml());
+      var dex=document.getElementById('data-export');if(dex)dex.addEventListener('click',exportData);
+      var dib=document.getElementById('data-import-btn'),dfi=document.getElementById('data-import');
+      if(dib&&dfi){dib.addEventListener('click',function(){dfi.click();});dfi.addEventListener('change',function(){if(dfi.files&&dfi.files[0])importData(dfi.files[0]);});}
+      var drs=document.getElementById('data-reset');if(drs)drs.addEventListener('click',function(){if(confirm('Clear ALL your data on this device? This cannot be undone.'))resetData();});
     }
 
     function renderThoughts(){
@@ -2390,10 +2452,10 @@
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
-    on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();});
-    on('form-learnings','submit',function(e){e.preventDefault();var t=val('le-title').trim();if(!t)return;data.learnings.unshift({id:uid(),ts:Date.now(),domain:val('le-domain'),title:t,source:val('le-source').trim(),cando:val('le-cando').trim()});saveData();setv('le-title','');setv('le-source','');setv('le-cando','');renderLearnings();renderDashboard();});
-    on('form-wishlist','submit',function(e){e.preventDefault();var t=val('wl-topic').trim();if(!t)return;data.wishlist.unshift({id:uid(),topic:t,domain:val('wl-domain'),priority:val('wl-priority'),status:val('wl-status'),link:val('wl-link').trim()});saveData();setv('wl-topic','');setv('wl-link','');renderWishlist();renderDashboard();});
-    on('form-certs','submit',function(e){e.preventDefault();var t=val('ce-name').trim();if(!t)return;data.certs.unshift({id:uid(),name:t,provider:val('ce-provider').trim(),cost:val('ce-cost').trim(),status:val('ce-status'),date:val('ce-date'),progress:val('ce-progress')});saveData();setv('ce-name','');setv('ce-provider','');setv('ce-cost','');setv('ce-date','');setv('ce-progress','');renderCerts();renderDashboard();});
+    on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});
+    on('form-learnings','submit',function(e){e.preventDefault();var t=val('le-title').trim();if(!t)return;data.learnings.unshift({id:uid(),ts:Date.now(),domain:val('le-domain'),title:t,source:val('le-source').trim(),cando:val('le-cando').trim()});saveData();setv('le-title','');setv('le-source','');setv('le-cando','');renderLearnings();renderDashboard();toast('Learning logged.');});
+    on('form-wishlist','submit',function(e){e.preventDefault();var t=val('wl-topic').trim();if(!t)return;data.wishlist.unshift({id:uid(),topic:t,domain:val('wl-domain'),priority:val('wl-priority'),status:val('wl-status'),link:val('wl-link').trim()});saveData();setv('wl-topic','');setv('wl-link','');renderWishlist();renderDashboard();toast('Added to wishlist.');});
+    on('form-certs','submit',function(e){e.preventDefault();var t=val('ce-name').trim();if(!t)return;data.certs.unshift({id:uid(),name:t,provider:val('ce-provider').trim(),cost:val('ce-cost').trim(),status:val('ce-status'),date:val('ce-date'),progress:val('ce-progress')});saveData();setv('ce-name','');setv('ce-provider','');setv('ce-cost','');setv('ce-date','');setv('ce-progress','');renderCerts();renderDashboard();toast('Certification added.');});
 
     ['th-search','th-fcat'].forEach(function(id){on(id,'input',renderThoughts);on(id,'change',renderThoughts);});
     ['le-search','le-fdom'].forEach(function(id){on(id,'input',renderLearnings);on(id,'change',renderLearnings);});
@@ -2402,7 +2464,14 @@
 
     document.addEventListener('click',function(e){
       var del=e.target.closest&&e.target.closest('[data-del]');
-      if(del){var coll=del.getAttribute('data-del'),id=del.getAttribute('data-id');data[coll]=data[coll].filter(function(x){return x.id!==id;});saveData();renderColl(coll);renderDashboard();return;}
+      if(del){
+        var coll=del.getAttribute('data-del'),id=del.getAttribute('data-id'),idx=-1,removed=null;
+        for(var di=0;di<data[coll].length;di++){if(data[coll][di].id===id){idx=di;removed=data[coll][di];break;}}
+        if(idx<0)return;
+        data[coll].splice(idx,1);saveData();renderColl(coll);renderDashboard();
+        toast('Deleted.',{action:'Undo',onAction:function(){data[coll].splice(Math.min(idx,data[coll].length),0,removed);saveData();renderColl(coll);renderDashboard();toast('Restored.');}});
+        return;
+      }
       var cyc=e.target.closest&&e.target.closest('[data-cycle]');
       if(cyc){var id2=cyc.getAttribute('data-cycle'),order=['Not started','In progress','Done'],i;for(i=0;i<data.wishlist.length;i++){if(data.wishlist[i].id===id2){data.wishlist[i].status=order[(order.indexOf(data.wishlist[i].status)+1)%3];break;}}saveData();renderWishlist();renderDashboard();return;}
       var row=e.target.closest&&e.target.closest('.rmrow[data-goto]');

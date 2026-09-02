@@ -503,6 +503,16 @@
   .pathbar .pp{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-size:12px;font-weight:700}
   .pathcta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
 
+  /* ===== nav cleanup ===== */
+  .nav .in{gap:10px}
+  .nav .links{gap:4px}
+  .nav .links button{white-space:nowrap;border-radius:10px;padding:8px 14px;font-size:14.5px}
+  .nav .links button.on{background:var(--grad);color:var(--on-teal);box-shadow:0 6px 16px rgba(124,58,237,.26)}
+  #nav-account{margin-left:6px;border:1px solid var(--line-strong)}
+  #nav-account.on{border-color:transparent}
+  .brand{font-size:17px}
+  @media(max-width:900px){.nav .links button{border-radius:8px}#nav-account{margin-left:0}}
+
   /* ===== responsive polish ===== */
   @media(max-width:560px){
     .wrap{padding-left:16px;padding-right:16px}
@@ -525,19 +535,12 @@
 <!-- ===================== NAV ===================== -->
 <div class="nav">
   <div class="in">
-    <button class="brand" data-goto="home">FIELD<span>/</span>MANUAL</button>
+    <button class="brand" data-goto="academy">Brain<span> Academy</span></button>
     <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
     <div class="links" id="links">
       <button data-goto="start">Start here</button>
-      <button data-goto="academy">Academy</button>
+      <button data-goto="academy">Courses</button>
       <button data-goto="path">Find your path</button>
-      <button data-goto="home">Dashboard</button>
-      <button data-goto="roadmaps">Roadmaps</button>
-      <button data-goto="quizzes">Quizzes</button>
-      <button data-goto="thoughts">Thoughts</button>
-      <button data-goto="learnings">Learnings</button>
-      <button data-goto="wishlist">Wishlist</button>
-      <button data-goto="certs">Certs</button>
       <button data-goto="account" id="nav-account">Account</button>
     </div>
   </div>
@@ -1871,6 +1874,162 @@
     <div class="pfoot"><b>Next move:</b> pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.</div>
   </div>
 
+  <!-- ===================== TECH FUNDAMENTALS ===================== -->
+  <div class="page" id="page-fundamentals">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Course 00 · free · start from zero</div>
+      <h2>Tech, explained from zero</h2>
+      <p class="pd">Never touched code? Start here. No jargon. By the end you'll understand what everyone in tech is actually talking about: software, hardware, the web, and the tools.</p>
+      <div class="subnav">
+        <a href="#fu-machine" class="jump">The machine</a>
+        <a href="#fu-prog" class="jump">Programming</a>
+        <a href="#fu-web" class="jump">The web</a>
+        <a href="#fu-tools" class="jump">Your tools</a>
+      </div>
+    </div>
+
+    <section class="sec" id="fu-machine">
+      <div class="eyebrow">01 · The machine</div>
+      <h3>What a computer actually is</h3>
+      <p class="lead">A computer is just a machine that follows instructions very fast. It has two halves: the physical parts (hardware) and the instructions (software).</p>
+      <div class="acc">
+        <details><summary>Hardware, the physical parts</summary><div class="body"><p>Hardware is anything you can touch. The <b>CPU</b> is the brain that does the calculations. <b>RAM</b> is short-term memory: fast, but wiped when you turn the machine off. <b>Storage</b> (SSD or hard drive) is long-term memory that keeps your files. The screen, keyboard, and mouse are hardware too.</p><p>Think of a kitchen: the CPU is the cook, RAM is the counter space you're working on right now, and storage is the pantry.</p></div></details>
+        <details><summary>Software, the instructions</summary><div class="body"><p>Software is the set of instructions that tells the hardware what to do. You can't touch it. An <b>operating system</b> (Windows, macOS, Android) is the software that runs everything else. <b>Apps</b> (a browser, WhatsApp, a game) are software built to do one job.</p><p>Hardware is the body; software is the thoughts telling it what to do.</p></div></details>
+      </div>
+    </section>
+
+    <section class="sec" id="fu-prog">
+      <div class="eyebrow">02 · Programming</div>
+      <h3>What programming really is</h3>
+      <p class="lead">Programming is writing the exact, step-by-step instructions a computer follows. The computer is fast but literal: it does exactly what you say, nothing more.</p>
+      <div class="acc">
+        <details><summary>The logic (the whole game)</summary><div class="body"><p>Almost all code is built from four simple ideas. <b>Variables</b> are labeled boxes that hold a value (a name, a number). <b>Sequence</b> is doing steps in order, top to bottom. <b>Conditions</b> (if / else) make decisions: "if the user is logged in, show the dashboard, else show login." <b>Loops</b> repeat a step many times so you don't write it a thousand times.</p><p>That's it. Every app, no matter how big, is those four ideas stacked up.</p></div></details>
+        <details><summary>What a programming language is</summary><div class="body"><p>A programming language lets you write instructions in something closer to human words, which the computer then translates into its own 1s and 0s. <b>Python</b> reads almost like English and is great to start with. <b>JavaScript</b> runs in every web browser. There are many, but the logic above is the same in all of them, so learning one makes the next far easier.</p></div></details>
+        <details><summary>Why logic matters more than the language</summary><div class="body"><p>Beginners think they need to memorize a language. You don't. You need to think in steps and conditions. Once you can break a problem into "first do this, then if that, repeat this," writing it in any language is just looking up the exact words. Learn the thinking, not the syntax.</p></div></details>
+      </div>
+    </section>
+
+    <section class="sec" id="fu-web">
+      <div class="eyebrow">03 · The web</div>
+      <h3>The internet, the web, and the words people mix up</h3>
+      <p class="lead">The internet is the roads. The web is one kind of traffic on those roads. And "website" vs "web app" trips everyone up, here's the difference.</p>
+      <div class="acc">
+        <details><summary>Internet vs the web</summary><div class="body"><p>The <b>internet</b> is the global network of cables and computers connected together, the roads. The <b>web</b> is the system of pages and links you browse on top of it. Email and video calls also use the internet but are not "the web." So the web is one thing that runs on the internet, not the same as it.</p></div></details>
+        <details><summary>Web page vs website vs web app</summary><div class="body"><p>A <b>web page</b> is a single page. A <b>website</b> is a collection of pages about one thing, usually to read (a blog, a restaurant's site, a news site). A <b>web app</b> is a website you <em>use</em> and interact with, like a tool: Gmail, Google Docs, Netflix, or this academy. The line is simple: a website you mostly read; a web app you do things in.</p></div></details>
+        <details><summary>Frontend vs backend</summary><div class="body"><p>The <b>frontend</b> is everything you see and click in the browser: buttons, colors, layout. The <b>backend</b> is the engine on a server you never see: it stores data, checks your password, and does the heavy work. When you log in, the frontend takes your password and the backend checks it. Most apps need both.</p></div></details>
+        <details><summary>What a server is</summary><div class="body"><p>A <b>server</b> is just another computer, always on, that other computers ask for things. When you open a website, your browser (the <b>client</b>) asks a server for the page, and the server sends it back. "The cloud" is mostly just someone else's servers you rent instead of owning.</p></div></details>
+      </div>
+    </section>
+
+    <section class="sec" id="fu-tools">
+      <div class="eyebrow">04 · Your tools</div>
+      <h3>The tools you'll actually use</h3>
+      <p class="lead">You don't need much to start. Here are the words for the tools every developer uses daily.</p>
+      <div class="acc">
+        <details><summary>Files, folders, and extensions</summary><div class="body"><p>Code lives in <b>files</b>, organized in <b>folders</b>. A file's <b>extension</b> (the bit after the dot) says what kind it is: <code>.html</code> for a web page, <code>.css</code> for styling, <code>.js</code> for JavaScript, <code>.py</code> for Python. The computer uses it to know how to read the file.</p></div></details>
+        <details><summary>A code editor / IDE</summary><div class="body"><p>You write code in a <b>code editor</b>. The most popular is <b>VS Code</b>, and it's free. An <b>IDE</b> (Integrated Development Environment) is a code editor with extra tools built in: running code, debugging, autocomplete. For most beginners VS Code is all you need, and people use "editor" and "IDE" loosely.</p></div></details>
+        <details><summary>The terminal (command line)</summary><div class="body"><p>The <b>terminal</b> is a text window where you type commands instead of clicking. It looks intimidating but you only need a handful of commands. It's how you run programs, install tools, and use Git. Every developer lives in it a little.</p></div></details>
+        <details><summary>Git and version control</summary><div class="body"><p><b>Git</b> saves snapshots of your code as you work, like save points in a game, so you can go back if you break something. <b>GitHub</b> is a website that stores those snapshots online and lets people work together. You'll learn it early; past your first project it's non-negotiable.</p></div></details>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="eyebrow">05 · Now what</div>
+      <h3>You now speak the language</h3>
+      <p>That's the vocabulary the whole industry uses. You're not "behind" anymore, you just needed someone to explain it plainly. Next, pick a direction and start building.</p>
+      <div class="pathcta" style="margin-top:18px">
+        <button class="btn" data-goto="path">Find my path →</button>
+        <button class="btn" data-goto="academy" style="background:none;color:var(--teal-ink);box-shadow:none;border:1px solid var(--line-strong)">Browse the courses →</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== WEB DEVELOPMENT ===================== -->
+  <div class="page" id="page-webdev">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Course · Web Development</div>
+      <h2>Web Development</h2>
+      <p class="pd">Build real websites and web apps: HTML, CSS, JavaScript, responsive design, and a modern framework.</p>
+      <div class="subnav"><a href="#wd-road" class="jump">Roadmap</a><a href="#wd-res" class="jump">Resources</a></div>
+    </div>
+    <section class="sec" id="wd-road">
+      <div class="eyebrow">01 · The roadmap</div>
+      <h3>From first page to full-stack</h3>
+      <p>Five stages, build as you go. Check off as you learn; progress saves in this browser.</p>
+      <div class="progcard" data-scope="rm-webdev"><div class="pt"><span>WEB DEV PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
+      <div id="rm-webdev">
+        <div class="stage" data-stage="1">
+          <div class="sh"><span class="sn">1</span><span class="st">The web &amp; HTML</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd1a"><span class="sk"><span class="skt">How the web works</span><span class="sub">→ client &amp; server, HTTP, URLs, what the browser does</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1b"><span class="sk"><span class="skt">HTML structure</span><span class="sub">→ tags, elements, attributes, headings, links, images, lists</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1c"><span class="sk"><span class="skt">Semantic HTML &amp; forms</span><span class="sub">→ header / main / footer, inputs, labels, buttons, accessibility basics</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a one-page personal site in pure HTML: a heading, a photo, a few links.</span></div><div class="row"><span class="tag b">Go deep</span><span>MDN "HTML basics", freeCodeCamp Responsive Web Design.</span></div></div>
+        </div>
+        <div class="stage" data-stage="2">
+          <div class="sh"><span class="sn">2</span><span class="st">CSS &amp; responsive design</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd2a"><span class="sk"><span class="skt">Selectors &amp; the box model</span><span class="sub">→ classes, ids, margin / border / padding, colors, fonts</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2b"><span class="sk"><span class="skt">Layout: Flexbox &amp; Grid</span><span class="sub">→ rows, columns, alignment, gaps, responsive grids</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2c"><span class="sk"><span class="skt">Responsive design</span><span class="sub">→ mobile-first, media queries, relative units, images that scale</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2d"><span class="sk"><span class="skt">Modern CSS</span><span class="sub">→ variables, transitions, a light and dark theme</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Style your page so it looks great on a phone and a laptop, with no horizontal scroll.</span></div><div class="row"><span class="tag b">Go deep</span><span>freeCodeCamp Responsive Web Design (free certificate), MDN CSS.</span></div></div>
+        </div>
+        <div class="stage" data-stage="3">
+          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd3a"><span class="sk"><span class="skt">Language basics</span><span class="sub">→ variables, functions, arrays, objects, conditions, loops</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3b"><span class="sk"><span class="skt">The DOM &amp; events</span><span class="sub">→ select elements, change them, respond to clicks and input</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3c"><span class="sk"><span class="skt">Talking to APIs</span><span class="sub">→ fetch, JSON, async / await, showing data on the page</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3d"><span class="sk"><span class="skt">Tooling</span><span class="sub">→ npm, modules, the browser dev tools</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Make your page interactive: fetch data from a public API and show it when a button is clicked.</span></div><div class="row"><span class="tag b">Go deep</span><span>javascript.info, MDN JavaScript guide.</span></div></div>
+        </div>
+        <div class="stage" data-stage="4">
+          <div class="sh"><span class="sn">4</span><span class="st">A framework: React</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd4a"><span class="sk"><span class="skt">Components &amp; props</span><span class="sub">→ reusable UI pieces, passing data in</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4b"><span class="sk"><span class="skt">State &amp; hooks</span><span class="sub">→ useState, useEffect, rendering lists, handling forms</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4c"><span class="sk"><span class="skt">Routing &amp; structure</span><span class="sub">→ pages, a clean project layout, fetching in components</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Rebuild your project in React as reusable components with real state.</span></div><div class="row"><span class="tag b">Go deep</span><span>The official React docs (react.dev) Learn section.</span></div></div>
+        </div>
+        <div class="stage" data-stage="5">
+          <div class="sh"><span class="sn">5</span><span class="st">Full-stack &amp; deploy</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <ul class="skills">
+            <li><label><input type="checkbox" data-id="wd5a"><span class="sk"><span class="skt">Connect a backend</span><span class="sub">→ call an API, handle loading and errors, store data</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd5b"><span class="sk"><span class="skt">Forms &amp; validation</span><span class="sub">→ capture input, validate it, give clear feedback</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd5c"><span class="sk"><span class="skt">Auth basics</span><span class="sub">→ login, tokens, protecting pages (see the Backend course)</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd5d"><span class="sk"><span class="skt">Deploy it</span><span class="sub">→ push to GitHub, deploy free on Vercel or Netlify, a real URL</span></span></label></li>
+          </ul>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Deploy your app to a live URL and share it. That link is your portfolio.</span></div><div class="row"><span class="tag b">Go deep</span><span>Vercel docs, and the Backend course for the server side.</span></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="sec" id="wd-res">
+      <div class="eyebrow">02 · Where to learn it</div>
+      <h3>Best resources</h3>
+      <div class="res">
+        <div class="grp"><div class="gh">Start free</div>
+          <a class="rl" href="https://www.freecodecamp.org/learn/2022/responsive-web-design/" target="_blank" rel="noopener"><span><span class="rn">freeCodeCamp, Responsive Web Design</span><span class="rd">Hands-on HTML &amp; CSS from zero, with a free certificate.</span></span><span class="rt">Free · certified</span></a>
+          <a class="rl" href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank" rel="noopener"><span><span class="rn">MDN, Learn Web Development</span><span class="rd">The reference the whole industry uses. Clear, complete, free.</span></span><span class="rt">Free · docs</span></a>
+        </div>
+        <div class="grp"><div class="gh">JavaScript &amp; React</div>
+          <a class="rl" href="https://javascript.info" target="_blank" rel="noopener"><span><span class="rn">The Modern JavaScript Tutorial</span><span class="rd">The best free, deep JavaScript course.</span></span><span class="rt">Free · tutorial</span></a>
+          <a class="rl" href="https://react.dev/learn" target="_blank" rel="noopener"><span><span class="rn">React, official Learn</span><span class="rd">Learn React from its makers, interactive and current.</span></span><span class="rt">Free · official</span></a>
+        </div>
+        <div class="grp"><div class="gh">Guided full path</div>
+          <a class="rl" href="https://www.theodinproject.com/" target="_blank" rel="noopener"><span><span class="rn">The Odin Project</span><span class="rd">A free, project-based full-stack web dev curriculum, start to finish.</span></span><span class="rt">Free · course</span></a>
+        </div>
+      </div>
+    </section>
+    <div class="pfoot"><b>Next move:</b> build one real page today in plain HTML and CSS, then make it responsive. You are a web developer the moment you ship your first page.</div>
+  </div>
+
   <!-- ===================== START HERE ===================== -->
   <div class="page" id="page-start">
     <div class="phead">
@@ -1968,9 +2127,8 @@
   <!-- ===================== ACADEMY ===================== -->
   <div class="page" id="page-academy">
     <div class="phead">
-      <button class="back" data-goto="home">← Dashboard</button>
       <div class="pn">Brain Academy</div>
-      <h2>Academy</h2>
+      <h2>Courses</h2>
       <p class="pd">Your courses. Complete the lessons, pass the final exam, and earn a certificate for each one.</p>
     </div>
     <div id="academy-area"></div>
@@ -2158,7 +2316,7 @@
 
 <script>
   (function(){
-    var pages=['home','start','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -2388,6 +2546,13 @@
         {q:"Where should API keys and secrets live?",options:["In the frontend code","In server-side env vars or a secret store","In a public repo","In the URL"],answer:1},
         {q:"What does 'least privilege' mean?",options:["Give everyone admin","Grant only the access each role needs","Use no passwords","One shared account"],answer:1}
       ]},
+      webdev:{title:"Web Development",questions:[
+        {q:"What does HTML do?",options:["Styles the page","Structures the content","Runs the logic","Stores the data"],answer:1},
+        {q:"What is CSS for?",options:["Program logic","Styling and layout","Databases","Servers"],answer:1},
+        {q:"What makes a site responsive?",options:["More images","Media queries and flexible layouts","Bigger fonts","Using a framework"],answer:1},
+        {q:"Which language runs interactivity in the browser?",options:["Python","JavaScript","SQL","HTML"],answer:1},
+        {q:"What is a component in React?",options:["A CSS file","A reusable piece of UI","A database table","A server"],answer:1}
+      ]},
       data:{title:"Data Analytics",questions:[
         {q:"What is the first step of any real analysis?",options:["Build a chart","Clean the data and define the question","Train a model","Write the report"],answer:1},
         {q:"Which SQL clause groups rows for aggregation?",options:["WHERE","ORDER BY","GROUP BY","LIMIT"],answer:2},
@@ -2599,6 +2764,7 @@
        Academy: courses (roadmap = lessons, quiz = final exam) + certificates
     ========================================================= */
     var COURSES=[
+      {key:'webdev',route:'webdev',title:'Web Development',level:'Core',rms:['rm-webdev'],quiz:'webdev',desc:'HTML, CSS, JavaScript, responsive design, and React. Build real websites and web apps.'},
       {key:'backend',route:'backend',title:'Backend Engineering',level:'Core',rms:['rm-backend'],quiz:'backend',desc:'How the web works, APIs, databases, auth, and deploy.'},
       {key:'automation',route:'automation',title:'Automation Engineering',level:'Core',rms:['rm-automation','rm-agents'],quiz:'automation',desc:'Python, APIs, n8n, self-hosting, and AI agents.'},
       {key:'genai',route:'genai',title:'Generative AI',level:'Core',rms:['rm-genai'],quiz:'genai',desc:'LLMs, prompt engineering, RAG, and agents.'},
@@ -2635,7 +2801,8 @@
       var strip=earned.length
         ? '<div class="certstrip"><div class="chart-title">Certificates earned ('+earned.length+')</div><div class="certchips">'+earned.map(function(c){return '<button class="certchip" data-cert="'+c.key+'"><em>◆</em> '+esc(c.title)+'</button>';}).join('')+'</div></div>'
         : '<div class="certstrip"><div class="chart-title">Certificates</div><p style="color:var(--ink-faint);font-size:14px;margin-top:6px">Finish a course and pass its exam (80%+) to earn your first certificate.</p></div>';
-      area.innerHTML='<div class="acad-grid">'+cards+'</div>'+strip;
+      var featured='<button class="coursecard" data-goto="fundamentals" style="width:100%;text-align:left;border-color:var(--teal)"><div class="cc-top"><span class="chip mut">Course 00 · Free</span><span class="cc-badge new">Start from zero</span></div><h3>Tech, explained from zero</h3><p class="cc-desc">Never touched code? Software, hardware, the web, IDEs, and the logic, in plain language. The place to start before anything else.</p><div class="cc-actions" style="margin-top:14px"><span class="cc-stats" style="color:var(--teal-ink);font-weight:700">Open the free primer →</span></div></button>';
+      area.innerHTML=featured+'<div class="acad-grid">'+cards+'</div>'+strip;
       if(changed)saveData();
       area.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
       area.querySelectorAll('[data-exam]').forEach(function(b){b.addEventListener('click',function(){showPage('quizzes');startQuiz(b.getAttribute('data-exam'));});});
@@ -2666,7 +2833,7 @@
     ========================================================= */
     function isAuthed(){var a=getAuth();return !!(a&&a.user);}
     function applyGate(){document.body.classList.toggle('locked',!isAuthed());}
-    function onAuthed(){updateAuthChip();applyGate();renderAll();showPage('home');}
+    function onAuthed(){updateAuthChip();applyGate();renderAll();showPage('academy');}
     function localUsers(){try{return JSON.parse(localStorage.getItem('fm.localUsers'))||{};}catch(e){return {};}}
     function saveLocalUsers(u){try{localStorage.setItem('fm.localUsers',JSON.stringify(u));}catch(e){}}
     function localSignup(email,pass,name){

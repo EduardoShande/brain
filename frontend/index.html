@@ -65,7 +65,7 @@
   .nav .links button.on{color:var(--teal-ink);background:var(--teal-wash)}
   .menu-btn{display:none;margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
     background:var(--card);border:1px solid var(--line-strong);color:var(--ink);padding:9px 13px;border-radius:6px;cursor:pointer}
-  @media(max-width:720px){
+  @media(max-width:900px){
     .nav .links{position:absolute;top:100%;left:0;right:0;margin:0;flex-direction:column;gap:0;background:var(--surface);
       border-bottom:1px solid var(--line);padding:6px clamp(16px,4vw,32px) 12px;display:none}
     .nav .links.open{display:flex}
@@ -502,6 +502,24 @@
   .pathbar .pb i{display:block;height:100%;background:var(--grad);border-radius:99px}
   .pathbar .pp{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-size:12px;font-weight:700}
   .pathcta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+
+  /* ===== responsive polish ===== */
+  @media(max-width:560px){
+    .wrap{padding-left:16px;padding-right:16px}
+    .pathbar{grid-template-columns:1fr auto}
+    .pathbar .pb{grid-column:1 / -1;order:3;margin-top:2px}
+    .hbar{grid-template-columns:78px 1fr auto;gap:8px}
+    .certificate{padding:30px 20px}
+    .certificate .cname{font-size:22px}
+    .quizscore{gap:14px}
+    .kpi{min-width:62px}
+    .rows .r{padding:13px 15px}
+    .cc-actions{gap:7px}
+    .cc-actions button{padding:8px 13px}
+    .glance{gap:16px}
+    .subnav{gap:5px}
+    .subnav a{padding:5px 10px;font-size:11.5px}
+  }
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -510,6 +528,7 @@
     <button class="brand" data-goto="home">FIELD<span>/</span>MANUAL</button>
     <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
     <div class="links" id="links">
+      <button data-goto="start">Start here</button>
       <button data-goto="academy">Academy</button>
       <button data-goto="path">Find your path</button>
       <button data-goto="home">Dashboard</button>
@@ -1852,6 +1871,89 @@
     <div class="pfoot"><b>Next move:</b> pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.</div>
   </div>
 
+  <!-- ===================== START HERE ===================== -->
+  <div class="page" id="page-start">
+    <div class="phead">
+      <button class="back" id="start-back">← Back</button>
+      <div class="pn">Start here · free</div>
+      <h2>Before you spend a dollar</h2>
+      <p class="pd">The honest starter guide I wish someone had handed me. Self-taught from Santa Cruz, Bolivia, now building automation and AI for clients in the US. Here is how tech really works, how to start, how to learn, and how to not waste a year.</p>
+      <div class="subnav">
+        <a href="#st-jobs" class="jump">How jobs really work</a>
+        <a href="#st-start" class="jump">How to start</a>
+        <a href="#st-learn" class="jump">How to learn</a>
+        <a href="#st-time" class="jump">Save time</a>
+      </div>
+    </div>
+
+    <section class="sec" id="st-jobs">
+      <div class="eyebrow">01 · The truth</div>
+      <h3>How tech jobs really work</h3>
+      <p class="lead">Forget the movies. Ninety percent of the work is not genius algorithms. It is connecting things, fixing things, and explaining things clearly.</p>
+      <div class="rows">
+        <div class="r"><span class="h">You do not need a degree</span><span class="m">for real</span><span class="d">Nobody has ever asked me for one. They ask what you can build and whether you can be trusted to finish it.</span></div>
+        <div class="r"><span class="h">You get paid to solve problems, not to know everything</span><span class="m">the job</span><span class="d">You will Google and use AI every single day. That is the work, not cheating. Nobody memorizes it all.</span></div>
+        <div class="r"><span class="h">Most work is plumbing</span><span class="m">reality</span><span class="d">Moving data between systems, keeping things running, talking to the people who need it. The hard computer-science part is a small slice.</span></div>
+        <div class="r"><span class="h">Remote changes everything</span><span class="m">your edge</span><span class="d">From Bolivia I work with US clients at close to US rates. Your location is no longer your ceiling.</span></div>
+        <div class="r"><span class="h">A job and a business are different games</span><span class="m">choose on purpose</span><span class="d">A job is stable and caps your income. Your own services uncap it but are unstable. Start with income, build the business on the side.</span></div>
+      </div>
+      <div class="mnote"><span class="label">The part nobody says</span>Imposter syndrome never fully leaves. Everyone feels it, including people far ahead of you. You ship anyway. That is the only difference.</div>
+    </section>
+
+    <section class="sec" id="st-start">
+      <div class="eyebrow">02 · The start</div>
+      <h3>How to actually start</h3>
+      <p class="lead">Pick one direction, build one real thing, put it in front of one real person. Repeat. That is the whole loop.</p>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>Pick ONE path.</b> Do not learn "everything." If you are unsure, take the free path quiz. Depth beats breadth every time.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Learn by building, not watching.</b> Tutorials feel like progress and are not. Build the ugly version yourself.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Ship something real in week one.</b> A script that automates a boring task, a tiny app, anything that works and that you can show.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>Put it in front of someone.</b> A friend, a small business, a forum. Feedback and proof matter more than polish.</span></div>
+        <div class="st"><span class="n">05</span><span class="c"><b>Earn while you learn.</b> A $50 automation or a landing page teaches you more than months of courses, and it pays.</span></div>
+        <div class="st"><span class="n">06</span><span class="c"><b>Do not wait to feel ready.</b> You never will. "Ready" is a feeling that follows action, it does not come before it.</span></div>
+      </div>
+      <div class="mnote"><span class="label">Where most people die</span>The gap between "I should learn this" and actually starting. Close it today, not Monday. Monday is a myth.</div>
+    </section>
+
+    <section class="sec" id="st-learn">
+      <div class="eyebrow">03 · The method</div>
+      <h3>How to learn so it sticks and gets you paid</h3>
+      <p class="lead">Active beats passive. Just-in-time beats just-in-case. Consistency beats intensity.</p>
+      <div class="rows">
+        <div class="r"><span class="h">Build first, look it up second</span><span class="m">active</span><span class="d">Try, get stuck, then learn the exact thing you needed. It sticks because you actually needed it.</span></div>
+        <div class="r"><span class="h">Learn just-in-time</span><span class="m">80 / 20</span><span class="d">Do not learn a whole framework "in case." Learn the 20% the thing in front of you needs, and move.</span></div>
+        <div class="r"><span class="h">Teach it back</span><span class="m">own it</span><span class="d">Write a note, record a short video, explain it to a friend. If you can explain it, you own it.</span></div>
+        <div class="r"><span class="h">Use AI, but verify it</span><span class="m">the paid skill</span><span class="d">AI makes you faster, but 66% of developers get burned by output that is "almost right." Being the one who catches it is what you get paid for.</span></div>
+        <div class="r"><span class="h">Consistency wins</span><span class="m">compound it</span><span class="d">One focused hour a day beats a 10-hour weekend once a month. Momentum compounds, cramming does not.</span></div>
+        <div class="r"><span class="h">Projects over certificates</span><span class="m">proof</span><span class="d">A cert says you studied. A project you can show says you can do it. The project gets the job.</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="st-time">
+      <div class="eyebrow">04 · The traps</div>
+      <h3>How to not waste a year</h3>
+      <p class="lead">Most wasted time is not laziness. It is doing the wrong things that look productive.</p>
+      <div class="rows">
+        <div class="r"><span class="h">Tutorial hell</span><span class="m">the fix</span><span class="d">Build your own version without following along. The struggle is the learning; copying is not.</span></div>
+        <div class="r"><span class="h">Learning "in order" forever</span><span class="m">the fix</span><span class="d">You do not need every fundamental before you build. Learn enough to start, fill the gaps as you hit them.</span></div>
+        <div class="r"><span class="h">Chasing every new tool</span><span class="m">the fix</span><span class="d">Tools change, fundamentals do not. Go deep on one, not shallow on ten.</span></div>
+        <div class="r"><span class="h">Perfectionism</span><span class="m">the fix</span><span class="d">Ship the ugly version. Done and seen beats perfect and hidden, every time.</span></div>
+        <div class="r"><span class="h">Skipping the business side</span><span class="m">the fix</span><span class="d">Scoping, pricing, and clear communication make more money than any framework. Learn them early.</span></div>
+        <div class="r"><span class="h">Comparing to others</span><span class="m">the fix</span><span class="d">Everyone's start looks different. The only comparison that matters is you versus you last month.</span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="eyebrow">05 · Now what</div>
+      <h3>Your next move</h3>
+      <p>Everything in this academy exists to save you the months I wasted. Pick a direction, and build something this week. That is it.</p>
+      <div class="pathcta" style="margin-top:18px">
+        <button class="btn" data-goto="path">Find my path →</button>
+        <button class="btn" data-goto="academy" style="background:none;color:var(--teal-ink);box-shadow:none;border:1px solid var(--line-strong)">Browse the courses →</button>
+      </div>
+    </section>
+  </div>
+
   <!-- ===================== FIND YOUR PATH ===================== -->
   <div class="page" id="page-path">
     <div class="phead">
@@ -2047,6 +2149,7 @@
         <div class="gnote">Accounts are stored on this device for now. A secure server login arrives when the backend is deployed.</div>
       </form>
       <div class="gate-quizlink"><button type="button" id="gate-quiz">Not sure what to study? Take the free quiz →</button></div>
+      <div class="gate-quizlink" style="margin-top:10px"><button type="button" id="gate-start" style="background:none;border:1px solid rgba(255,255,255,.28)">New to tech? Read the free starter guide →</button></div>
     </div>
   </div>
 </div>
@@ -2055,7 +2158,7 @@
 
 <script>
   (function(){
-    var pages=['home','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -2669,7 +2772,8 @@
       var go=res.querySelector('[data-goto]');if(go)go.addEventListener('click',function(){showPage(go.getAttribute('data-goto'));});
       res.scrollIntoView({behavior:'smooth'});
     }
-    function openQuizPreview(){document.body.classList.add('preview');showPage('path');window.scrollTo(0,0);}
+    function openPreview(name){document.body.classList.add('preview');showPage(name);window.scrollTo(0,0);}
+    function openQuizPreview(){openPreview('path');}
     function exitPreview(){document.body.classList.remove('preview');applyGate();window.scrollTo(0,0);}
 
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();updateAuthChip();}
@@ -2705,5 +2809,7 @@
     applyGate();
     var _pb=document.getElementById('path-back');if(_pb)_pb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});
     var _gq=document.getElementById('gate-quiz');if(_gq)_gq.addEventListener('click',openQuizPreview);
+    var _sb=document.getElementById('start-back');if(_sb)_sb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});
+    var _gs=document.getElementById('gate-start');if(_gs)_gs.addEventListener('click',function(){openPreview('start');});
   })();
 </script>

@@ -503,6 +503,52 @@
   .pathbar .pp{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-size:12px;font-weight:700}
   .pathcta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
 
+  /* ===== html tag library ===== */
+  .tagtools{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 0;align-items:center}
+  .tagcats{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
+  .tagcat{font-family:"JetBrains Mono",monospace;font-size:11.5px;padding:5px 11px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer}
+  .tagcat:hover{border-color:var(--teal);color:var(--teal-ink)}
+  .tagcat.on{background:var(--grad);color:var(--on-teal);border-color:transparent}
+  .taggrid{margin:18px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:720px){.taggrid{grid-template-columns:1fr}}
+  .tagcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;box-shadow:0 8px 24px rgba(124,58,237,.06)}
+  .tagcard .tt{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .tagcard .tname{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:15px;color:var(--teal-ink)}
+  .tagcard .tdesc{margin:9px 0 0;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+  .tagcard .tdesc b{color:var(--ink)}
+  .tagcard pre{margin:10px 0 0;font-size:12px;padding:11px 13px}
+  .tagempty{grid-column:1/-1}
+  .gamehint{margin:12px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-faint)}
+  .tagempty{grid-column:1 / -1}
+
+  /* ===== tool comparison ===== */
+  .cmp{margin:20px 0 0;display:flex;flex-direction:column;gap:12px}
+  .cmpitem{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 8px 24px rgba(124,58,237,.06)}
+  .cmpitem h4{font-family:"Poppins",sans-serif;font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .cmpitem .cmpwho{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--clay-ink);font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+  .cmpitem p{margin:7px 0 0;font-size:15px;line-height:1.5}
+  .cmpitem .cmpuse{margin-top:10px;font-size:14px;color:var(--ink-soft)}
+  .cmpitem .cmpuse b{color:var(--good-ink)}
+  .cmpitem .cmpavoid b{color:var(--warn)}
+
+  /* ===== game system ===== */
+  .gamebar{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 10px 28px rgba(124,58,237,.09);margin-bottom:18px}
+  .gametop{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .lvlbadge{flex:none;width:52px;height:52px;border-radius:50%;background:var(--grad);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Poppins",sans-serif;line-height:1}
+  .lvlbadge .lv{font-weight:900;font-size:19px}
+  .lvlbadge .lb{font-size:8px;letter-spacing:.1em;opacity:.85;margin-top:2px}
+  .gameinfo{flex:1;min-width:180px}
+  .gamexp{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin-bottom:6px}
+  .gamexp b{color:var(--teal-ink)}
+  .gamebarline{height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+  .gamebarline i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .5s ease}
+  .streak{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--clay-ink);font-weight:700;white-space:nowrap}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink-faint)}
+  .badge.got{background:var(--good-wash);color:var(--good-ink);border-color:transparent;font-weight:600}
+  .badge .bi{font-size:13px}
+  @media(prefers-reduced-motion:reduce){.gamebarline i{transition:none}}
+
   /* ===== nav cleanup ===== */
   .nav .in{gap:10px}
   .nav .links{gap:4px}
@@ -1945,6 +1991,173 @@
     </section>
   </div>
 
+  <!-- ===================== HTML TAG LIBRARY ===================== -->
+  <div class="page" id="page-htmltags">
+    <div class="phead">
+      <button class="back" data-goto="webdev">← Web Development</button>
+      <div class="pn">Reference · free</div>
+      <h2>The 100 HTML tags that matter</h2>
+      <p class="pd">HTML tags are like LEGO bricks. Each one has a job. You do not need to memorize them, you need to know which brick to grab. Search or filter, and copy the example.</p>
+      <div class="tagtools">
+        <input class="finput" id="tag-search" placeholder="Search a tag or what it does...">
+        <span class="tcount" id="tag-count"></span>
+      </div>
+      <div class="tagcats" id="tag-cats"></div>
+    </div>
+    <div class="taggrid" id="tag-grid"></div>
+  </div>
+
+  <!-- ===================== WEB CONCEPTS ===================== -->
+  <div class="page" id="page-webconcepts">
+    <div class="phead">
+      <button class="back" data-goto="webdev">← Web Development</button>
+      <div class="pn">Reference · free</div>
+      <h2>What every web developer must understand</h2>
+      <p class="pd">Not tools, ideas. If you understand these, every framework and language after this becomes easy. Explained simply, with real examples.</p>
+      <div class="subnav">
+        <a href="#wc-how" class="jump">How the web works</a>
+        <a href="#wc-three" class="jump">The big three</a>
+        <a href="#wc-core" class="jump">Core ideas</a>
+      </div>
+    </div>
+
+    <section class="sec" id="wc-how">
+      <div class="eyebrow">01 · The big picture</div>
+      <h3>What happens when you open a website</h3>
+      <p class="lead">Imagine ordering a pizza. You call the shop, they make it, they deliver it. The web works the same way.</p>
+      <div class="steps">
+        <div class="st"><span class="n">01</span><span class="c"><b>You type the address.</b> Typing <code>google.com</code> is like dialing the pizza shop's number. But computers use numbers, not names, so <b>DNS</b> is the phone book that turns "google.com" into an address like 142.250.0.1.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Your browser sends a request.</b> "Hi, can I have the home page please?" That's an <b>HTTP request</b>. Your browser is the customer, called the <b>client</b>.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>The server makes the order.</b> The <b>server</b> is a computer that is always on. It finds or builds the page you asked for.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>It delivers the files.</b> You get back HTML, CSS, and JavaScript, plus images. That's the pizza arriving in the box.</span></div>
+        <div class="st"><span class="n">05</span><span class="c"><b>Your browser assembles it.</b> It reads the HTML, paints the CSS, runs the JavaScript, and shows you a page. All of that in under a second.</span></div>
+      </div>
+      <div class="mnote"><span class="label">Why this matters</span>Every bug you will ever fix lives in one of those five steps. Knowing which step broke is half of being a developer.</div>
+    </section>
+
+    <section class="sec" id="wc-three">
+      <div class="eyebrow">02 · The big three</div>
+      <h3>HTML, CSS and JavaScript, explained with a house</h3>
+      <p class="lead">Every website on Earth is built from these three. That is not an exaggeration. Even Facebook is these three underneath.</p>
+      <div class="acc">
+        <details open><summary>HTML is the structure (the walls and rooms)</summary><div class="body"><p><b>HTML</b> decides <em>what things are</em>. This is a heading. This is a paragraph. This is a button. This is an image. It is the skeleton of the house: walls, doors, windows. Without it there is no page at all.</p><p>If you only wrote HTML, you would get a plain, ugly, black-and-white page, but it would work. Like a house with no paint and no furniture. It still stands.</p><pre><span class="k">&lt;h1&gt;</span>My Pizza Shop<span class="k">&lt;/h1&gt;</span>
+<span class="k">&lt;p&gt;</span>The best pizza in Santa Cruz.<span class="k">&lt;/p&gt;</span>
+<span class="k">&lt;button&gt;</span>Order now<span class="k">&lt;/button&gt;</span></pre></div></details>
+        <details><summary>CSS is the style (the paint and furniture)</summary><div class="body"><p><b>CSS</b> decides <em>how things look</em>. Colors, sizes, spacing, fonts, where things sit on the screen. Same house, but now painted, furnished, and arranged nicely.</p><p>The magic part: you can change the whole look of a site by changing only CSS, without touching a single word of the HTML. Like repainting your room without rebuilding the walls.</p><pre><span class="k">h1</span> {
+  color: purple;
+  font-size: 40px;
+}
+<span class="k">button</span> {
+  background: purple;
+  border-radius: 999px;
+}</pre></div></details>
+        <details><summary>JavaScript is the behavior (the electricity)</summary><div class="body"><p><b>JavaScript</b> decides <em>what happens</em>. Click a button and a menu opens. Type in a box and it checks your email. Data loads without refreshing the page. It is the electricity and plumbing that make the house actually work.</p><p>HTML and CSS cannot make decisions. JavaScript can: "if the user clicked this, then do that."</p><pre><span class="k">button</span>.addEventListener(<span class="c">'click'</span>, () =&gt; {
+  alert(<span class="c">'Your pizza is on the way!'</span>);
+});</pre></div></details>
+      </div>
+      <div class="mnote"><span class="label">The one-line version</span>HTML = what it is. CSS = what it looks like. JavaScript = what it does. Learn them in that order, always.</div>
+    </section>
+
+    <section class="sec" id="wc-core">
+      <div class="eyebrow">03 · Core ideas</div>
+      <h3>The concepts you will use forever</h3>
+      <p class="lead">These come up on literally every project. Understand them once and you are set.</p>
+      <div class="acc">
+        <details><summary>The DOM, your page as a family tree</summary><div class="body"><p>When the browser reads your HTML, it builds a <b>tree</b> in memory, like a family tree. The <code>body</code> is the parent, a <code>div</code> inside it is the child, the text inside that is the grandchild. That tree is called the <b>DOM</b>.</p><p>Why you care: JavaScript changes the page by grabbing branches of this tree. "Find the button, change its color." Without the DOM there would be nothing to grab.</p></div></details>
+        <details><summary>The box model, everything is a box</summary><div class="body"><p>Every single thing on a web page is a rectangle, even round buttons (they are boxes with rounded corners). Each box has four layers, like a gift: the <b>content</b> (the gift), <b>padding</b> (bubble wrap inside), <b>border</b> (the box itself), and <b>margin</b> (space between this box and the next).</p><p>90% of "why is my layout broken" is a padding or margin misunderstanding. Learn this early and save months.</p></div></details>
+        <details><summary>Responsive design, one site for every screen</summary><div class="body"><p>Your site must look good on a tiny phone and a huge monitor. Instead of building two sites, you build one that <b>stretches</b>, like water taking the shape of its glass.</p><p>You do it with flexible widths (percentages instead of fixed pixels) and <b>media queries</b>, which say "when the screen is smaller than 600px, stack these side-by-side boxes on top of each other instead." Always design the phone version first, it is the hardest and most common.</p></div></details>
+        <details><summary>Semantic HTML and accessibility</summary><div class="body"><p><b>Semantic</b> means using the tag that describes the meaning: <code>&lt;nav&gt;</code> for a menu, <code>&lt;button&gt;</code> for a button, not a <code>&lt;div&gt;</code> for everything.</p><p>Why: a blind person uses a screen reader that reads the page out loud. It can say "navigation, 5 links" only if you used the right tags. Google reads it the same way to rank you. Doing it right helps humans and your search ranking at the same time.</p></div></details>
+        <details><summary>Events, how a page listens</summary><div class="body"><p>An <b>event</b> is something that happens: a click, a key press, the page finishing loading, a form being submitted. Your JavaScript "listens" for these, like a dog waiting for the doorbell.</p><p>Everything interactive is: listen for an event, then do something. That is the entire pattern.</p></div></details>
+        <details><summary>APIs and JSON, how apps talk to each other</summary><div class="body"><p>An <b>API</b> is a waiter. You do not walk into the restaurant kitchen; you tell the waiter what you want and they bring it. Your site asks another service ("give me today's weather") and gets data back.</p><p>That data usually comes as <b>JSON</b>, which is just text organized in labeled boxes: <code>{"city": "Santa Cruz", "temp": 28}</code>. Easy for computers and humans to read.</p></div></details>
+        <details><summary>Version control with Git</summary><div class="body"><p><b>Git</b> takes snapshots of your code, like save points in a video game. Break something? Load the last save. Working with a friend? You each work on your own copy and merge them together.</p><p>Nobody works professionally without it. Learn the five commands you actually use: add, commit, push, pull, branch.</p></div></details>
+        <details><summary>Hosting, domains and deploying</summary><div class="body"><p>Your site on your laptop is a diary in your drawer, nobody can read it. <b>Hosting</b> is putting those files on an always-on computer. A <b>domain</b> (mysite.com) is the easy-to-remember name that points there.</p><p>Today this is free and takes minutes: push to GitHub, connect Vercel or Netlify, and you have a real link you can send to anyone.</p></div></details>
+        <details><summary>Browser dev tools, your X-ray glasses</summary><div class="body"><p>Right-click any website and choose "Inspect." You can now see and change the HTML and CSS of <em>any</em> site live, see errors in the console, and watch the network requests.</p><p>This is the single most underused beginner tool. You learn by taking real sites apart. It is free and it is on every site in the world.</p></div></details>
+        <details><summary>Performance and security, the grown-up stuff</summary><div class="body"><p><b>Performance:</b> people leave if a page takes more than about 3 seconds. The usual culprit is huge images. Shrink them and you have solved most of it.</p><p><b>Security:</b> never trust what a user types, always check it on the server too. Never put passwords or secret keys in your frontend code, anyone can read it with Inspect.</p></div></details>
+      </div>
+    </section>
+    <div class="pfoot"><b>Next move:</b> open any website you like, right-click, Inspect, and change a heading's text and color. You just edited a real website. That is the whole job in miniature.</div>
+  </div>
+
+  <!-- ===================== WAYS TO BUILD A WEBSITE ===================== -->
+  <div class="page" id="page-webtools">
+    <div class="phead">
+      <button class="back" data-goto="webdev">← Web Development</button>
+      <div class="pn">Reference · free</div>
+      <h2>Code is not the only way</h2>
+      <p class="pd">HTML, CSS and JavaScript are tools, not the only tools. You can also build websites with Wix, WordPress, Shopify and others. Here is the honest comparison and when to use each.</p>
+    </div>
+
+    <section class="sec">
+      <div class="eyebrow">01 · The analogy</div>
+      <h3>Three ways to get a house</h3>
+      <p class="lead">You can <b>build it brick by brick</b> (code), <b>assemble a prefab kit</b> (WordPress), or <b>rent a furnished apartment</b> (Wix). None is "wrong." They fit different situations.</p>
+      <div class="mnote"><span class="label">The trap to avoid</span>Beginners argue about which is "real" development. That is a waste of time. Professionals pick the tool that solves the client's problem for the least money and time. Sometimes that is code. Often it is not.</div>
+    </section>
+
+    <section class="sec">
+      <div class="eyebrow">02 · The options</div>
+      <h3>Every option, honestly</h3>
+      <div class="cmp">
+        <div class="cmpitem">
+          <div class="cmpwho">Brick by brick</div>
+          <h4>Writing code (HTML, CSS, JavaScript)</h4>
+          <p>You build everything yourself. Total freedom: any design, any feature, no limits and no monthly fee for the tool itself.</p>
+          <p class="cmpuse"><b>Use it when:</b> you want a career in tech, you are building a real app (login, data, dashboards), you need something custom that no template can do, or performance matters a lot.</p>
+          <p class="cmpuse cmpavoid"><b>Skip it when:</b> a local bakery needs 4 pages by Friday. Coding that from scratch wastes everyone's money.</p>
+        </div>
+        <div class="cmpitem">
+          <div class="cmpwho">The prefab kit</div>
+          <h4>WordPress</h4>
+          <p>A ready-made system you install, then add themes (looks) and plugins (features). It runs roughly 4 out of every 10 websites on Earth. Huge community, cheap, and the client can edit their own text.</p>
+          <p class="cmpuse"><b>Use it when:</b> blogs, news sites, business sites, anything content-heavy, and especially when the client wants to update it themselves without calling you.</p>
+          <p class="cmpuse cmpavoid"><b>Watch out:</b> it gets slow and messy if you stack 30 plugins, and it needs updates and security care.</p>
+        </div>
+        <div class="cmpitem">
+          <div class="cmpwho">The furnished apartment</div>
+          <h4>Wix &amp; Squarespace</h4>
+          <p>Drag and drop, no code at all. You pick a template, move things with the mouse, and publish. Hosting, security and updates are handled for you, for a monthly fee.</p>
+          <p class="cmpuse"><b>Use it when:</b> a small business or a personal portfolio needs to be online fast and cheap, and nobody technical will maintain it.</p>
+          <p class="cmpuse cmpavoid"><b>Watch out:</b> you are renting. You cannot easily move your site somewhere else later, and you hit walls the moment you want something unusual.</p>
+        </div>
+        <div class="cmpitem">
+          <div class="cmpwho">The designer's middle ground</div>
+          <h4>Webflow &amp; Framer</h4>
+          <p>Visual builders that generate real, clean code underneath. You design with your mouse but get near-code-level control, animations and responsive design.</p>
+          <p class="cmpuse"><b>Use it when:</b> the design must be beautiful and custom, but you do not want to hand-code every pixel. Very popular for agency and startup marketing sites.</p>
+          <p class="cmpuse cmpavoid"><b>Watch out:</b> a real learning curve, and still a monthly cost.</p>
+        </div>
+        <div class="cmpitem">
+          <div class="cmpwho">The specialist</div>
+          <h4>Shopify</h4>
+          <p>Built for one job: selling products online. Payments, inventory, shipping and checkout all work out of the box, which is the hardest part of e-commerce to build yourself.</p>
+          <p class="cmpuse"><b>Use it when:</b> the client sells physical or digital products. Do not rebuild a shopping cart from scratch, it is a solved problem.</p>
+        </div>
+        <div class="cmpitem">
+          <div class="cmpwho">The shortcut</div>
+          <h4>AI site builders &amp; no-code tools</h4>
+          <p>Describe your site and it generates one in minutes. Great for a quick landing page or testing an idea before investing.</p>
+          <p class="cmpuse"><b>Use it when:</b> you need something online today to validate an idea.</p>
+          <p class="cmpuse cmpavoid"><b>Watch out:</b> least control, and often generic. Fine as a start, not as a foundation for a serious product.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="eyebrow">03 · How to choose</div>
+      <h3>The 30-second decision</h3>
+      <div class="rows">
+        <div class="r"><span class="h">Is it a shop selling products?</span><span class="m">→ Shopify</span><span class="d">Do not rebuild payments and checkout. It is months of work and a security risk.</span></div>
+        <div class="r"><span class="h">Is it a blog or content site the owner will edit?</span><span class="m">→ WordPress</span><span class="d">They can write posts without you. That is worth more than elegant code here.</span></div>
+        <div class="r"><span class="h">Is it a simple site needed fast and cheap?</span><span class="m">→ Wix / Squarespace</span><span class="d">4 pages, small budget, no technical owner. Done in a weekend.</span></div>
+        <div class="r"><span class="h">Does the design have to be stunning and custom?</span><span class="m">→ Webflow / Framer</span><span class="d">Full visual control without hand-coding every detail.</span></div>
+        <div class="r"><span class="h">Does it have accounts, data or real logic?</span><span class="m">→ Code it</span><span class="d">Logins, dashboards, calculations, anything unique. Builders will fight you.</span></div>
+        <div class="r"><span class="h">Are you learning to become a developer?</span><span class="m">→ Code it</span><span class="d">Builders will not teach you the skills companies pay for. Build by hand while you learn.</span></div>
+      </div>
+      <div class="mnote"><span class="label">The money angle</span>Knowing both makes you more valuable, not less. You can charge for a fast WordPress or Wix site this week, and charge far more for a custom coded app later. Many freelancers earn their first income with builders while learning to code on the side.</div>
+    </section>
+    <div class="pfoot"><b>The honest truth:</b> tools change every few years. WordPress, Wix and whatever comes next are all temporary. HTML, CSS, JavaScript and the concepts behind them have lasted 30 years and will outlive them all. Learn the fundamentals, use whatever tool fits the job.</div>
+  </div>
+
   <!-- ===================== WEB DEVELOPMENT ===================== -->
   <div class="page" id="page-webdev">
     <div class="phead">
@@ -1956,57 +2169,66 @@
     </div>
     <section class="sec" id="wd-road">
       <div class="eyebrow">01 · The roadmap</div>
-      <h3>From first page to full-stack</h3>
-      <p>Five stages, build as you go. Check off as you learn; progress saves in this browser.</p>
+      <h3>From your first page to real web apps</h3>
+      <p class="lead">Four stages, in order. You build something real at every single stage. No waiting until the end.</p>
+      <p>Think of it like learning to cook. First you learn what the ingredients are (HTML). Then how to make it look and taste good (CSS). Then how to actually run the kitchen so things happen (JavaScript). Then how to cook for 100 people without going crazy (React).</p>
+      <div class="cc-actions" style="margin-top:16px">
+        <button data-goto="htmltags">The 100 HTML tags →</button>
+        <button data-goto="webconcepts">Core concepts →</button>
+        <button data-goto="webtools">Other ways to build sites →</button>
+      </div>
+      <div class="mnote"><span class="label">About the backend</span>Servers, databases, logins and deploying are <b>not</b> here on purpose. That is a different job and it lives in the <b>Backend Engineering</b> course. Get genuinely good at the front of the website first. That alone can get you paid.</div>
       <div class="progcard" data-scope="rm-webdev"><div class="pt"><span>WEB DEV PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-webdev">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">The web &amp; HTML</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">The web &amp; HTML</span><span class="lv">Foundation · ~2 weeks</span><span class="cnt" data-cnt>0/6</span></div>
           <ul class="skills">
-            <li><label><input type="checkbox" data-id="wd1a"><span class="sk"><span class="skt">How the web works</span><span class="sub">→ client &amp; server, HTTP, URLs, what the browser does</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd1b"><span class="sk"><span class="skt">HTML structure</span><span class="sub">→ tags, elements, attributes, headings, links, images, lists</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd1c"><span class="sk"><span class="skt">Semantic HTML &amp; forms</span><span class="sub">→ header / main / footer, inputs, labels, buttons, accessibility basics</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1a"><span class="sk"><span class="skt">How the web actually works</span><span class="sub">→ client &amp; server, HTTP request and response, URLs, DNS. Like ordering a pizza by phone.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1b"><span class="sk"><span class="skt">Your very first page</span><span class="sub">→ html / head / body, save a .html file, open it in the browser. That is already a website.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1c"><span class="sk"><span class="skt">Text &amp; structure</span><span class="sub">→ h1 to h6 headings, p paragraphs, ul / ol lists, br, hr, strong, em</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1d"><span class="sk"><span class="skt">Links &amp; images</span><span class="sub">→ a href, img src and alt, file paths, opening a link in a new tab</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1e"><span class="sk"><span class="skt">Semantic layout</span><span class="sub">→ header, nav, main, section, article, aside, footer, and why the right tag matters</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd1f"><span class="sk"><span class="skt">Forms</span><span class="sub">→ form, input types, label, textarea, select, button, required</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a one-page personal site in pure HTML: a heading, a photo, a few links.</span></div><div class="row"><span class="tag b">Go deep</span><span>MDN "HTML basics", freeCodeCamp Responsive Web Design.</span></div></div>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a one-page profile about yourself: a photo, a big heading, two paragraphs, a list of three things you like, and a link to your Instagram. Open it in your browser. That is a real web page, and you made it.</span></div><div class="row"><span class="tag b">Go deep</span><span>The <b>100 HTML tags</b> reference linked above, plus freeCodeCamp Responsive Web Design.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">CSS &amp; responsive design</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">CSS &amp; responsive design</span><span class="lv">Core · ~3 weeks</span><span class="cnt" data-cnt>0/7</span></div>
           <ul class="skills">
-            <li><label><input type="checkbox" data-id="wd2a"><span class="sk"><span class="skt">Selectors &amp; the box model</span><span class="sub">→ classes, ids, margin / border / padding, colors, fonts</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd2b"><span class="sk"><span class="skt">Layout: Flexbox &amp; Grid</span><span class="sub">→ rows, columns, alignment, gaps, responsive grids</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd2c"><span class="sk"><span class="skt">Responsive design</span><span class="sub">→ mobile-first, media queries, relative units, images that scale</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd2d"><span class="sk"><span class="skt">Modern CSS</span><span class="sub">→ variables, transitions, a light and dark theme</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2a"><span class="sk"><span class="skt">Selectors &amp; the cascade</span><span class="sub">→ element, class, id, specificity, inheritance. How CSS decides who wins.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2b"><span class="sk"><span class="skt">The box model</span><span class="sub">→ content, padding, border, margin, box-sizing. Everything is a box, like a wrapped gift.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2c"><span class="sk"><span class="skt">Colors &amp; typography</span><span class="sub">→ hex and rgb, font-family, sizes, line-height, loading a Google Font</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2d"><span class="sk"><span class="skt">Flexbox</span><span class="sub">→ rows and columns, justify-content, align-items, gap. Best for lining things up.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2e"><span class="sk"><span class="skt">CSS Grid</span><span class="sub">→ grid-template-columns, gaps, areas. Best for full page layouts.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2f"><span class="sk"><span class="skt">Responsive design</span><span class="sub">→ mobile-first, media queries, %, rem and vw, images that shrink</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd2g"><span class="sk"><span class="skt">Polish</span><span class="sub">→ hover states, transitions, shadows, border-radius, CSS variables, dark mode</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Style your page so it looks great on a phone and a laptop, with no horizontal scroll.</span></div><div class="row"><span class="tag b">Go deep</span><span>freeCodeCamp Responsive Web Design (free certificate), MDN CSS.</span></div></div>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Make your profile page beautiful. Then slowly shrink the browser window until it is phone-sized. If nothing breaks and nothing scrolls sideways, you have understood responsive design.</span></div><div class="row"><span class="tag b">Go deep</span><span>freeCodeCamp Responsive Web Design (free certificate), MDN CSS, and the Flexbox Froggy game.</span></div></div>
         </div>
         <div class="stage" data-stage="3">
-          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Core · ~6 weeks</span><span class="cnt" data-cnt>0/7</span></div>
           <ul class="skills">
-            <li><label><input type="checkbox" data-id="wd3a"><span class="sk"><span class="skt">Language basics</span><span class="sub">→ variables, functions, arrays, objects, conditions, loops</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3b"><span class="sk"><span class="skt">The DOM &amp; events</span><span class="sub">→ select elements, change them, respond to clicks and input</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3c"><span class="sk"><span class="skt">Talking to APIs</span><span class="sub">→ fetch, JSON, async / await, showing data on the page</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd3d"><span class="sk"><span class="skt">Tooling</span><span class="sub">→ npm, modules, the browser dev tools</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3a"><span class="sk"><span class="skt">The basics</span><span class="sub">→ variables (let, const), strings, numbers, true/false, comments</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3b"><span class="sk"><span class="skt">Logic &amp; data</span><span class="sub">→ if / else, comparisons, loops, arrays (lists), objects (labeled boxes)</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3c"><span class="sk"><span class="skt">Functions</span><span class="sub">→ reusable blocks, parameters, return, arrow functions. Like a recipe you can reuse.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3d"><span class="sk"><span class="skt">The DOM</span><span class="sub">→ querySelector, changing text, classes and styles from code</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3e"><span class="sk"><span class="skt">Events</span><span class="sub">→ click, input, submit, addEventListener, preventDefault. The doorbell pattern.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3f"><span class="sk"><span class="skt">Fetching real data</span><span class="sub">→ fetch, JSON, async / await, loading and error states</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd3g"><span class="sk"><span class="skt">Debugging</span><span class="sub">→ console.log, browser dev tools, actually reading the error message</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Make your page interactive: fetch data from a public API and show it when a button is clicked.</span></div><div class="row"><span class="tag b">Go deep</span><span>javascript.info, MDN JavaScript guide.</span></div></div>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a to-do list. Type a task, press add, it appears on screen. Click it and it gets crossed out. That one small project uses almost everything above, which is why every developer builds it.</span></div><div class="row"><span class="tag b">Go deep</span><span>javascript.info (the best free JS course), MDN JavaScript guide.</span></div></div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">A framework: React</span><span class="lv">Intermediate</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">A framework: React</span><span class="lv">Intermediate · ~4 weeks</span><span class="cnt" data-cnt>0/6</span></div>
           <ul class="skills">
-            <li><label><input type="checkbox" data-id="wd4a"><span class="sk"><span class="skt">Components &amp; props</span><span class="sub">→ reusable UI pieces, passing data in</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd4b"><span class="sk"><span class="skt">State &amp; hooks</span><span class="sub">→ useState, useEffect, rendering lists, handling forms</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd4c"><span class="sk"><span class="skt">Routing &amp; structure</span><span class="sub">→ pages, a clean project layout, fetching in components</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4a"><span class="sk"><span class="skt">Why frameworks exist</span><span class="sub">→ copying the same HTML 50 times does not scale. React builds it from data instead.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4b"><span class="sk"><span class="skt">Components &amp; props</span><span class="sub">→ reusable pieces, like a cookie cutter. Props are the ingredients you pass in.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4c"><span class="sk"><span class="skt">State</span><span class="sub">→ useState. Data that can change, and the screen redraws itself when it does.</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4d"><span class="sk"><span class="skt">Lists &amp; conditionals</span><span class="sub">→ map over data to draw many items, show or hide things based on a condition</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4e"><span class="sk"><span class="skt">Effects &amp; data</span><span class="sub">→ useEffect, fetching from an API inside a component, loading states</span></span></label></li>
+            <li><label><input type="checkbox" data-id="wd4f"><span class="sk"><span class="skt">Forms &amp; routing</span><span class="sub">→ controlled inputs, and multiple pages in one app</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Rebuild your project in React as reusable components with real state.</span></div><div class="row"><span class="tag b">Go deep</span><span>The official React docs (react.dev) Learn section.</span></div></div>
-        </div>
-        <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Full-stack &amp; deploy</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
-          <ul class="skills">
-            <li><label><input type="checkbox" data-id="wd5a"><span class="sk"><span class="skt">Connect a backend</span><span class="sub">→ call an API, handle loading and errors, store data</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd5b"><span class="sk"><span class="skt">Forms &amp; validation</span><span class="sub">→ capture input, validate it, give clear feedback</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd5c"><span class="sk"><span class="skt">Auth basics</span><span class="sub">→ login, tokens, protecting pages (see the Backend course)</span></span></label></li>
-            <li><label><input type="checkbox" data-id="wd5d"><span class="sk"><span class="skt">Deploy it</span><span class="sub">→ push to GitHub, deploy free on Vercel or Netlify, a real URL</span></span></label></li>
-          </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Deploy your app to a live URL and share it. That link is your portfolio.</span></div><div class="row"><span class="tag b">Go deep</span><span>Vercel docs, and the Backend course for the server side.</span></div></div>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Rebuild your to-do list in React. Exactly the same app, but now each task is a component and the list is just data. The moment that clicks, you understand modern frontend.</span></div><div class="row"><span class="tag b">Go deep</span><span>The official React docs at react.dev, Learn section. It is genuinely excellent and free.</span></div></div>
         </div>
       </div>
     </section>
@@ -2316,7 +2538,7 @@
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','webtools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -2386,7 +2608,7 @@
     boxes.forEach(function(b){
       var id=b.getAttribute('data-id');
       if(saved[id])b.checked=true;
-      b.addEventListener('change',function(){saved[id]=b.checked;persist();refresh();});
+      b.addEventListener('change',function(){saved[id]=b.checked;persist();refresh();if(b.checked)awardXP(10,'Lesson done');});
     });
     refresh();
 
@@ -2395,8 +2617,8 @@
        Saved locally in this browser (private to this device).
     ========================================================= */
     var DKEY='fm.data.v1';
-    var data={thoughts:[],learnings:[],wishlist:[],certs:[],quizzes:{},courses:{}};
-    try{var raw=JSON.parse(localStorage.getItem(DKEY));if(raw&&typeof raw==='object'){data.thoughts=raw.thoughts||[];data.learnings=raw.learnings||[];data.wishlist=raw.wishlist||[];data.certs=raw.certs||[];data.quizzes=raw.quizzes||{};data.courses=raw.courses||{};}}catch(e){}
+    var data={thoughts:[],learnings:[],wishlist:[],certs:[],quizzes:{},courses:{},game:{xp:0,badges:[],streak:0,last:''}};
+    try{var raw=JSON.parse(localStorage.getItem(DKEY));if(raw&&typeof raw==='object'){data.thoughts=raw.thoughts||[];data.learnings=raw.learnings||[];data.wishlist=raw.wishlist||[];data.certs=raw.certs||[];data.quizzes=raw.quizzes||{};data.courses=raw.courses||{};data.game=raw.game||{xp:0,badges:[],streak:0,last:''};}}catch(e){}
     function saveData(){try{localStorage.setItem(DKEY,JSON.stringify(data));}catch(e){}}
     function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
     function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});}
@@ -2596,6 +2818,9 @@
       data.quizzes[key]={best:Math.max(prev.best||0,pct),attempts:(prev.attempts||0)+1};
       saveData();renderAcademy();
       toast(isBest?('New best score: '+pct+'%'):('Scored '+pct+'%'));
+      unlockBadge('quiz');
+      awardXP(25+(pct>=80?50:0),'Exam finished');
+      if(pct===100)unlockBadge('ace');
       var res=document.getElementById('quiz-result');
       res.innerHTML='<div class="quizscore"><div class="ring-wrap">'+svgRing(pct,110)+'</div><div><div class="qlevel">'+quizLevel(pct)+'</div><div class="qmeta">'+correct+' / '+q.questions.length+' correct · best '+data.quizzes[key].best+'%</div></div></div><div class="chart-title" style="margin-top:20px">Review</div>'+review;
       res.scrollIntoView({behavior:'smooth'});
@@ -2759,6 +2984,7 @@
       else if(name==='academy')renderAcademy();
       else if(name==='path')renderPath();
       else if(name==='certificate')renderCertificate();
+      else if(name==='htmltags')renderTags();
     }
     /* =========================================================
        Academy: courses (roadmap = lessons, quiz = final exam) + certificates
@@ -2802,7 +3028,8 @@
         ? '<div class="certstrip"><div class="chart-title">Certificates earned ('+earned.length+')</div><div class="certchips">'+earned.map(function(c){return '<button class="certchip" data-cert="'+c.key+'"><em>◆</em> '+esc(c.title)+'</button>';}).join('')+'</div></div>'
         : '<div class="certstrip"><div class="chart-title">Certificates</div><p style="color:var(--ink-faint);font-size:14px;margin-top:6px">Finish a course and pass its exam (80%+) to earn your first certificate.</p></div>';
       var featured='<button class="coursecard" data-goto="fundamentals" style="width:100%;text-align:left;border-color:var(--teal)"><div class="cc-top"><span class="chip mut">Course 00 · Free</span><span class="cc-badge new">Start from zero</span></div><h3>Tech, explained from zero</h3><p class="cc-desc">Never touched code? Software, hardware, the web, IDEs, and the logic, in plain language. The place to start before anything else.</p><div class="cc-actions" style="margin-top:14px"><span class="cc-stats" style="color:var(--teal-ink);font-weight:700">Open the free primer →</span></div></button>';
-      area.innerHTML=featured+'<div class="acad-grid">'+cards+'</div>'+strip;
+      area.innerHTML='<div id="game-panel"></div>'+featured+'<div class="acad-grid">'+cards+'</div>'+strip;
+      renderGame();
       if(changed)saveData();
       area.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
       area.querySelectorAll('[data-exam]').forEach(function(b){b.addEventListener('click',function(){showPage('quizzes');startQuiz(b.getAttribute('data-exam'));});});
@@ -2943,7 +3170,184 @@
     function openQuizPreview(){openPreview('path');}
     function exitPreview(){document.body.classList.remove('preview');applyGate();window.scrollTo(0,0);}
 
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();updateAuthChip();}
+    /* =========================================================
+       HTML tag library: 100 tags, searchable
+    ========================================================= */
+    var TAGCATS=[['all','All'],['doc','Document'],['layout','Layout'],['text','Text'],['list','Lists'],['media','Links & media'],['table','Tables'],['form','Forms'],['interactive','Interactive']];
+    var HTMLTAGS=[
+      ['&lt;html&gt;','doc','The wrapper around your whole page. Everything lives inside it.','&lt;html lang="en"&gt; ... &lt;/html&gt;'],
+      ['&lt;head&gt;','doc','The backstage area. Information for the browser that visitors never see.','&lt;head&gt;&lt;title&gt;My site&lt;/title&gt;&lt;/head&gt;'],
+      ['&lt;body&gt;','doc','Everything people actually see on the page goes in here.','&lt;body&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;/body&gt;'],
+      ['&lt;title&gt;','doc','The name shown in the browser tab and in Google results.','&lt;title&gt;My Pizza Shop&lt;/title&gt;'],
+      ['&lt;meta&gt;','doc','Notes for the browser and Google: description, characters, mobile settings.','&lt;meta name="viewport" content="width=device-width"&gt;'],
+      ['&lt;link&gt;','doc','Connects an outside file, almost always your CSS stylesheet.','&lt;link rel="stylesheet" href="style.css"&gt;'],
+      ['&lt;style&gt;','doc','Write CSS directly inside the page instead of a separate file.','&lt;style&gt;h1{color:red}&lt;/style&gt;'],
+      ['&lt;script&gt;','doc','Adds JavaScript, the brain that makes the page do things.','&lt;script src="app.js"&gt;&lt;/script&gt;'],
+      ['&lt;base&gt;','doc','Sets one default address that all links on the page build from.','&lt;base href="https://site.com/"&gt;'],
+      ['&lt;noscript&gt;','doc','Shows a message only if the visitor turned JavaScript off.','&lt;noscript&gt;Please enable JS&lt;/noscript&gt;'],
+      ['&lt;div&gt;','layout','A plain box with no meaning. The most used tag ever. Groups things so you can style or move them together.','&lt;div class="card"&gt; ... &lt;/div&gt;'],
+      ['&lt;span&gt;','layout','A tiny box for a few words inside a sentence, so you can color just those words.','Big &lt;span class="red"&gt;SALE&lt;/span&gt;'],
+      ['&lt;header&gt;','layout','The top area of a page or section: logo, site title, main menu.','&lt;header&gt;&lt;h1&gt;My Shop&lt;/h1&gt;&lt;/header&gt;'],
+      ['&lt;nav&gt;','layout','The navigation menu, where your main links live.','&lt;nav&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/nav&gt;'],
+      ['&lt;main&gt;','layout','The main content, the star of the page. Only one per page.','&lt;main&gt; ... &lt;/main&gt;'],
+      ['&lt;section&gt;','layout','A chapter of the page, usually with its own heading.','&lt;section&gt;&lt;h2&gt;Prices&lt;/h2&gt;&lt;/section&gt;'],
+      ['&lt;article&gt;','layout','A piece that makes sense on its own, like a blog post or news story.','&lt;article&gt;&lt;h2&gt;My post&lt;/h2&gt;&lt;/article&gt;'],
+      ['&lt;aside&gt;','layout','Side content: a sidebar, related links, an ad.','&lt;aside&gt;Related posts&lt;/aside&gt;'],
+      ['&lt;footer&gt;','layout','The bottom area: copyright, contact, small links.','&lt;footer&gt;© 2026 Me&lt;/footer&gt;'],
+      ['&lt;hgroup&gt;','layout','Groups a heading together with its subtitle.','&lt;hgroup&gt;&lt;h1&gt;Title&lt;/h1&gt;&lt;p&gt;Sub&lt;/p&gt;&lt;/hgroup&gt;'],
+      ['&lt;h1&gt;','text','The biggest, most important heading. Use only one per page, like a book title.','&lt;h1&gt;My Pizza Shop&lt;/h1&gt;'],
+      ['&lt;h2&gt;','text','A section heading, one level under h1. Like a chapter title.','&lt;h2&gt;Our menu&lt;/h2&gt;'],
+      ['&lt;h3&gt;','text','A sub-section heading that sits under an h2.','&lt;h3&gt;Vegetarian&lt;/h3&gt;'],
+      ['&lt;h4&gt;','text','A smaller heading, four levels deep.','&lt;h4&gt;Details&lt;/h4&gt;'],
+      ['&lt;h5&gt;','text','An even smaller heading. Rarely needed.','&lt;h5&gt;Notes&lt;/h5&gt;'],
+      ['&lt;h6&gt;','text','The smallest heading. Almost never used.','&lt;h6&gt;Fine print&lt;/h6&gt;'],
+      ['&lt;p&gt;','text','A paragraph of normal text. Your bread and butter.','&lt;p&gt;We make the best pizza.&lt;/p&gt;'],
+      ['&lt;br&gt;','text','A line break, like pressing Enter once.','Line one&lt;br&gt;Line two'],
+      ['&lt;hr&gt;','text','A horizontal line that separates two ideas.','&lt;p&gt;One&lt;/p&gt;&lt;hr&gt;&lt;p&gt;Two&lt;/p&gt;'],
+      ['&lt;strong&gt;','text','Important text. Shows bold, and screen readers stress it.','&lt;strong&gt;Warning:&lt;/strong&gt; hot!'],
+      ['&lt;b&gt;','text','Bold-looking text with no extra importance. Prefer strong when it matters.','&lt;b&gt;Bold&lt;/b&gt;'],
+      ['&lt;em&gt;','text','Emphasized text, shown italic, with meaning for screen readers.','I &lt;em&gt;really&lt;/em&gt; mean it'],
+      ['&lt;i&gt;','text','Italic-looking text with no extra meaning, like a foreign word.','&lt;i&gt;pizza margherita&lt;/i&gt;'],
+      ['&lt;u&gt;','text','Underlined text. Careful, people think underline means a link.','&lt;u&gt;underlined&lt;/u&gt;'],
+      ['&lt;small&gt;','text','Smaller print, like legal fine print or a side note.','&lt;small&gt;Terms apply&lt;/small&gt;'],
+      ['&lt;mark&gt;','text','Highlights text, like a yellow marker on paper.','&lt;mark&gt;important&lt;/mark&gt;'],
+      ['&lt;del&gt;','text','Text that was removed, shown crossed out. Great for old prices.','&lt;del&gt;$50&lt;/del&gt; $30'],
+      ['&lt;ins&gt;','text','Text that was added, usually shown underlined.','&lt;ins&gt;new price&lt;/ins&gt;'],
+      ['&lt;s&gt;','text','Text that is no longer accurate, shown crossed out.','&lt;s&gt;Sold out&lt;/s&gt;'],
+      ['&lt;sub&gt;','text','Small text below the line, for chemistry or footnotes.','H&lt;sub&gt;2&lt;/sub&gt;O'],
+      ['&lt;sup&gt;','text','Small text above the line, for powers or footnotes.','x&lt;sup&gt;2&lt;/sup&gt;'],
+      ['&lt;blockquote&gt;','text','A long quote taken from somewhere else, usually indented.','&lt;blockquote&gt;To be or not to be.&lt;/blockquote&gt;'],
+      ['&lt;q&gt;','text','A short quote inside a sentence. The browser adds the quote marks.','She said &lt;q&gt;hello&lt;/q&gt;'],
+      ['&lt;cite&gt;','text','The title of a work, like a book or a film.','&lt;cite&gt;The Little Prince&lt;/cite&gt;'],
+      ['&lt;abbr&gt;','text','An abbreviation. Hovering shows the full meaning.','&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;'],
+      ['&lt;code&gt;','text','A piece of computer code, shown in a monospace font.','Use &lt;code&gt;console.log()&lt;/code&gt;'],
+      ['&lt;pre&gt;','text','Keeps your exact spacing and line breaks. Perfect around code.','&lt;pre&gt;  keeps   spacing&lt;/pre&gt;'],
+      ['&lt;kbd&gt;','text','Keys the user should press on the keyboard.','Press &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;S&lt;/kbd&gt;'],
+      ['&lt;samp&gt;','text','Output that a computer produced.','&lt;samp&gt;File not found&lt;/samp&gt;'],
+      ['&lt;var&gt;','text','A variable name in maths or code.','&lt;var&gt;x&lt;/var&gt; = 5'],
+      ['&lt;address&gt;','text','Contact details for the page or article owner.','&lt;address&gt;hi@shop.com&lt;/address&gt;'],
+      ['&lt;time&gt;','text','A date or time that computers can also understand.','&lt;time datetime="2026-01-01"&gt;New Year&lt;/time&gt;'],
+      ['&lt;ul&gt;','list','An unordered list, the one with bullet points.','&lt;ul&gt;&lt;li&gt;Milk&lt;/li&gt;&lt;/ul&gt;'],
+      ['&lt;ol&gt;','list','An ordered list, numbered 1, 2, 3. Use it when order matters, like a recipe.','&lt;ol&gt;&lt;li&gt;Boil water&lt;/li&gt;&lt;/ol&gt;'],
+      ['&lt;li&gt;','list','One single item inside a list.','&lt;li&gt;Cheese&lt;/li&gt;'],
+      ['&lt;dl&gt;','list','A description list, like a small dictionary of terms and meanings.','&lt;dl&gt; ... &lt;/dl&gt;'],
+      ['&lt;dt&gt;','list','The term being described in a description list.','&lt;dt&gt;HTML&lt;/dt&gt;'],
+      ['&lt;dd&gt;','list','The meaning of the term right above it.','&lt;dd&gt;The structure of a page&lt;/dd&gt;'],
+      ['&lt;a&gt;','media','A link. The tag that makes the web a web. Takes you somewhere else.','&lt;a href="https://x.com"&gt;Visit&lt;/a&gt;'],
+      ['&lt;img&gt;','media','Shows an image. Always add alt text describing it, for blind users and Google.','&lt;img src="cat.jpg" alt="A sleeping cat"&gt;'],
+      ['&lt;picture&gt;','media','Lets you serve different images for different screen sizes.','&lt;picture&gt; ... &lt;/picture&gt;'],
+      ['&lt;source&gt;','media','One of the options inside picture, video or audio.','&lt;source src="v.webm" type="video/webm"&gt;'],
+      ['&lt;figure&gt;','media','Groups an image together with its caption.','&lt;figure&gt; ... &lt;/figure&gt;'],
+      ['&lt;figcaption&gt;','media','The caption text that belongs to a figure.','&lt;figcaption&gt;My dog, 2024&lt;/figcaption&gt;'],
+      ['&lt;video&gt;','media','A video player, with optional controls.','&lt;video src="clip.mp4" controls&gt;&lt;/video&gt;'],
+      ['&lt;audio&gt;','media','An audio or music player.','&lt;audio src="song.mp3" controls&gt;&lt;/audio&gt;'],
+      ['&lt;track&gt;','media','Subtitles or captions for a video or audio.','&lt;track src="subs.vtt" kind="captions"&gt;'],
+      ['&lt;iframe&gt;','media','Embeds another website inside yours, like a YouTube video or a Google Map.','&lt;iframe src="https://youtube.com/embed/x"&gt;&lt;/iframe&gt;'],
+      ['&lt;embed&gt;','media','Embeds outside content. Older, rarely used today.','&lt;embed src="file.pdf"&gt;'],
+      ['&lt;object&gt;','media','Embeds an external resource such as a PDF.','&lt;object data="file.pdf"&gt;&lt;/object&gt;'],
+      ['&lt;canvas&gt;','media','A blank drawing area you paint on with JavaScript. Used for games and charts.','&lt;canvas id="game"&gt;&lt;/canvas&gt;'],
+      ['&lt;svg&gt;','media','Draws sharp shapes and icons that never blur, at any size.','&lt;svg&gt;&lt;circle r="20"/&gt;&lt;/svg&gt;'],
+      ['&lt;table&gt;','table','A table of rows and columns. For data only, never for page layout.','&lt;table&gt; ... &lt;/table&gt;'],
+      ['&lt;caption&gt;','table','The title of the table, read out by screen readers.','&lt;caption&gt;Sales 2026&lt;/caption&gt;'],
+      ['&lt;thead&gt;','table','The group of header rows at the top of a table.','&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;'],
+      ['&lt;tbody&gt;','table','The main body rows of the table.','&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Ana&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;'],
+      ['&lt;tfoot&gt;','table','The footer rows, usually totals.','&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;'],
+      ['&lt;tr&gt;','table','One row in the table.','&lt;tr&gt;&lt;td&gt;Ana&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;/tr&gt;'],
+      ['&lt;th&gt;','table','A header cell. Bold and centered by default.','&lt;th&gt;Name&lt;/th&gt;'],
+      ['&lt;td&gt;','table','A normal data cell.','&lt;td&gt;Ana&lt;/td&gt;'],
+      ['&lt;colgroup&gt;','table','Lets you style whole columns at once.','&lt;colgroup&gt;&lt;col&gt;&lt;/colgroup&gt;'],
+      ['&lt;form&gt;','form','The container that collects what the user types and sends it somewhere.','&lt;form action="/save" method="post"&gt; ... &lt;/form&gt;'],
+      ['&lt;input&gt;','form','The most flexible tag. Change its type to get text, email, password, checkbox, radio, date, file or color.','&lt;input type="email" required&gt;'],
+      ['&lt;label&gt;','form','The text that names an input. Clicking it focuses the input. Essential for accessibility.','&lt;label for="name"&gt;Name&lt;/label&gt;'],
+      ['&lt;textarea&gt;','form','A big multi-line text box, for messages and comments.','&lt;textarea rows="4"&gt;&lt;/textarea&gt;'],
+      ['&lt;select&gt;','form','A dropdown menu of choices.','&lt;select&gt;&lt;option&gt;Red&lt;/option&gt;&lt;/select&gt;'],
+      ['&lt;option&gt;','form','One choice inside a dropdown.','&lt;option value="red"&gt;Red&lt;/option&gt;'],
+      ['&lt;optgroup&gt;','form','Groups related options inside a dropdown.','&lt;optgroup label="Colors"&gt; ... &lt;/optgroup&gt;'],
+      ['&lt;button&gt;','form','A clickable button. Use this instead of a div so keyboards and screen readers work.','&lt;button type="submit"&gt;Send&lt;/button&gt;'],
+      ['&lt;fieldset&gt;','form','Groups related form fields with a border around them.','&lt;fieldset&gt; ... &lt;/fieldset&gt;'],
+      ['&lt;legend&gt;','form','The title for a fieldset.','&lt;legend&gt;Your details&lt;/legend&gt;'],
+      ['&lt;datalist&gt;','form','A list of suggestions that autocompletes an input.','&lt;datalist id="cities"&gt; ... &lt;/datalist&gt;'],
+      ['&lt;output&gt;','form','Shows the result of a calculation.','&lt;output&gt;42&lt;/output&gt;'],
+      ['&lt;progress&gt;','form','A progress bar showing how far along something is.','&lt;progress value="70" max="100"&gt;&lt;/progress&gt;'],
+      ['&lt;meter&gt;','form','A gauge showing a value inside a known range, like disk space.','&lt;meter value="0.6"&gt;60%&lt;/meter&gt;'],
+      ['&lt;details&gt;','interactive','A box that opens and closes when clicked. Perfect for FAQs, and it needs no JavaScript.','&lt;details&gt;&lt;summary&gt;More&lt;/summary&gt;Hidden&lt;/details&gt;'],
+      ['&lt;summary&gt;','interactive','The always-visible clickable title of a details box.','&lt;summary&gt;Read more&lt;/summary&gt;'],
+      ['&lt;dialog&gt;','interactive','A real popup or modal window built into HTML.','&lt;dialog open&gt;Hello!&lt;/dialog&gt;'],
+      ['&lt;template&gt;','interactive','Hidden HTML that you copy with JavaScript when you need it.','&lt;template&gt;&lt;li&gt;item&lt;/li&gt;&lt;/template&gt;'],
+      ['&lt;slot&gt;','interactive','A placeholder inside a custom web component.','&lt;slot name="title"&gt;&lt;/slot&gt;']
+    ];
+    var tagCat='all';
+    function renderTagCats(){
+      var el=document.getElementById('tag-cats');if(!el)return;
+      el.innerHTML=TAGCATS.map(function(c){return '<button class="tagcat'+(c[0]===tagCat?' on':'')+'" data-tcat="'+c[0]+'">'+esc(c[1])+'</button>';}).join('');
+      el.querySelectorAll('[data-tcat]').forEach(function(b){b.addEventListener('click',function(){tagCat=b.getAttribute('data-tcat');renderTagCats();renderTags();});});
+    }
+    function renderTags(){
+      var grid=document.getElementById('tag-grid');if(!grid)return;
+      renderTagCats();
+      var q=(val('tag-search')||'').toLowerCase();
+      var items=HTMLTAGS.filter(function(t){
+        if(tagCat!=='all'&&t[1]!==tagCat)return false;
+        if(q&&(t[0]+' '+t[2]).toLowerCase().indexOf(q)<0)return false;
+        return true;
+      });
+      var c=document.getElementById('tag-count');if(c)c.textContent=items.length+' of '+HTMLTAGS.length+' tags';
+      grid.innerHTML=items.length?items.map(function(t){
+        var catName='';TAGCATS.forEach(function(x){if(x[0]===t[1])catName=x[1];});
+        return '<div class="tagcard"><div class="tt"><span class="tname">'+t[0]+'</span><span class="chip mut">'+esc(catName)+'</span></div><p class="tdesc">'+t[2]+'</p><pre>'+t[3]+'</pre></div>';
+      }).join(''):'<div class="empty tagempty">No tag matches that. Try "image", "list" or "form".</div>';
+    }
+
+    /* =========================================================
+       Game system: XP, levels, badges and streaks
+    ========================================================= */
+    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row']];
+    function gameState(){data.game=data.game||{xp:0,badges:[],streak:0,last:''};return data.game;}
+    function gameLevel(xp){return Math.floor(xp/100)+1;}
+    function countLessons(){var n=0;document.querySelectorAll('.skills input[type=checkbox]').forEach(function(i){if(i.checked)n++;});return n;}
+    function hasBadge(k){return gameState().badges.indexOf(k)>=0;}
+    function unlockBadge(k){
+      if(hasBadge(k))return;
+      var g=gameState();g.badges.push(k);saveData();
+      var b=null;BADGES.forEach(function(x){if(x[0]===k)b=x;});
+      if(b)toast('Badge unlocked: '+b[1]+'!');
+      renderGame();
+    }
+    function touchStreak(){
+      var g=gameState();var today=new Date().toISOString().slice(0,10);
+      if(g.last===today)return;
+      var y=new Date(Date.now()-86400000).toISOString().slice(0,10);
+      g.streak=(g.last===y)?(g.streak||0)+1:1;
+      g.last=today;saveData();
+      if(g.streak>=3)unlockBadge('streak3');
+      if(g.streak>=7)unlockBadge('streak7');
+    }
+    function awardXP(n,why){
+      if(!data)return;
+      var g=gameState();var before=gameLevel(g.xp);
+      g.xp=(g.xp||0)+n;saveData();touchStreak();
+      var after=gameLevel(g.xp);
+      if(after>before)toast('Level up! You are now level '+after+'.');
+      else if(why)toast('+'+n+' XP · '+why);
+      var lessons=countLessons();
+      if(lessons>=1)unlockBadge('first');
+      if(lessons>=10)unlockBadge('ten');
+      if(lessons>=50)unlockBadge('fifty');
+      renderGame();
+    }
+    function renderGame(){
+      var el=document.getElementById('game-panel');if(!el||!data)return;
+      var g=gameState();var lvl=gameLevel(g.xp);var into=g.xp%100;
+      el.innerHTML='<div class="gamebar"><div class="gametop">'
+        +'<div class="lvlbadge"><span class="lv">'+lvl+'</span><span class="lb">LEVEL</span></div>'
+        +'<div class="gameinfo"><div class="gamexp"><span>'+g.xp+' XP total</span><span><b>'+into+' / 100</b> to level '+(lvl+1)+'</span></div><div class="gamebarline"><i style="width:'+into+'%"></i></div></div>'
+        +(g.streak>0?'<div class="streak">'+g.streak+' day streak</div>':'')
+        +'</div><div class="badges">'
+        +BADGES.map(function(b){var got=hasBadge(b[0]);return '<span class="badge'+(got?' got':'')+'" title="'+esc(b[2])+'"><span class="bi">'+(got?'★':'☆')+'</span>'+esc(b[1])+'</span>';}).join('')
+        +'</div><p class="gamehint">Tick a lesson +10 XP · finish an exam +25 XP · pass it (80%+) +50 XP more. Every 100 XP is a new level. Come back tomorrow to keep your streak alive.</p></div>';
+    }
+
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});
@@ -2955,6 +3359,7 @@
     ['le-search','le-fdom'].forEach(function(id){on(id,'input',renderLearnings);on(id,'change',renderLearnings);});
     ['wl-search','wl-fstatus'].forEach(function(id){on(id,'input',renderWishlist);on(id,'change',renderWishlist);});
     on('ce-fstatus','change',renderCerts);
+    on('tag-search','input',renderTags);
 
     document.addEventListener('click',function(e){
       var del=e.target.closest&&e.target.closest('[data-del]');

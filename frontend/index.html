@@ -484,6 +484,24 @@
   .gmsg{color:#ffe1ec;text-align:center;min-height:18px;margin-top:14px;font-size:13.5px;line-height:1.4}
   .gtoggle{text-align:center;color:rgba(255,255,255,.85);font-size:13.5px;margin-top:18px}
   .gnote{text-align:center;color:rgba(255,255,255,.55);font-size:11.5px;font-family:"JetBrains Mono",monospace;margin-top:16px;line-height:1.5}
+  .gate-quizlink{margin-top:16px}
+  .gate-quizlink button{width:100%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-family:"Poppins",sans-serif;font-weight:600;font-size:13.5px;padding:11px 16px;border-radius:999px;cursor:pointer;transition:background .15s}
+  .gate-quizlink button:hover{background:rgba(255,255,255,.24)}
+
+  /* ===== find your path ===== */
+  body.preview #gate,body.preview .nav{display:none!important}
+  body.preview .wrap{display:block!important}
+  .pathrec{margin-top:20px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:var(--radius);padding:22px 24px;box-shadow:0 10px 28px rgba(124,58,237,.09)}
+  .pathrec .pr-eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay-ink);font-weight:700}
+  .pathrec h3{font-family:"Poppins",sans-serif;font-weight:900;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:6px 0 8px}
+  .pathrec p{margin:0;font-size:15.5px;color:var(--ink-soft);line-height:1.5}
+  .pathbars{margin:18px 0 0;display:flex;flex-direction:column;gap:9px}
+  .pathbar{display:grid;grid-template-columns:150px 1fr auto;gap:10px;align-items:center;font-size:13.5px}
+  .pathbar .pl{color:var(--ink);font-weight:500}
+  .pathbar .pb{height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+  .pathbar .pb i{display:block;height:100%;background:var(--grad);border-radius:99px}
+  .pathbar .pp{font-family:"JetBrains Mono",monospace;color:var(--teal-ink);font-size:12px;font-weight:700}
+  .pathcta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -493,6 +511,7 @@
     <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
     <div class="links" id="links">
       <button data-goto="academy">Academy</button>
+      <button data-goto="path">Find your path</button>
       <button data-goto="home">Dashboard</button>
       <button data-goto="roadmaps">Roadmaps</button>
       <button data-goto="quizzes">Quizzes</button>
@@ -1833,6 +1852,17 @@
     <div class="pfoot"><b>Next move:</b> pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.</div>
   </div>
 
+  <!-- ===================== FIND YOUR PATH ===================== -->
+  <div class="page" id="page-path">
+    <div class="phead">
+      <button class="back" id="path-back">← Back</button>
+      <div class="pn">Free · about 2 minutes</div>
+      <h2>Find your path</h2>
+      <p class="pd">Not sure what to study? Answer a few questions and we'll tell you where to start, based on how you like to work and what you want.</p>
+    </div>
+    <div id="path-area"></div>
+  </div>
+
   <!-- ===================== ACADEMY ===================== -->
   <div class="page" id="page-academy">
     <div class="phead">
@@ -2016,6 +2046,7 @@
         <div class="gtoggle"><span id="g-toggle-text">Don't have an account? </span><button type="button" class="glink strong" id="g-switch">Register</button></div>
         <div class="gnote">Accounts are stored on this device for now. A secure server login arrives when the backend is deployed.</div>
       </form>
+      <div class="gate-quizlink"><button type="button" id="gate-quiz">Not sure what to study? Take the free quiz →</button></div>
     </div>
   </div>
 </div>
@@ -2024,7 +2055,7 @@
 
 <script>
   (function(){
-    var pages=['home','academy','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -2458,6 +2489,7 @@
       else if(name==='quizzes')renderQuizzes();
       else if(name==='account')renderAccount();
       else if(name==='academy')renderAcademy();
+      else if(name==='path')renderPath();
       else if(name==='certificate')renderCertificate();
     }
     /* =========================================================
@@ -2588,7 +2620,59 @@
       });
     })();
 
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();updateAuthChip();}
+    /* =========================================================
+       Find your path: a free quiz that recommends what to study
+    ========================================================= */
+    var PATHREC={
+      automation:{name:"Automation Engineering",route:"automation",why:"You like fast, tangible results and systems that save real hours. Automation is the quickest path to freelance income, and the spine everything else builds on."},
+      backend:{name:"Backend Engineering",route:"backend",why:"You like logic, structure, and building the engine other apps depend on. It's the most in-demand core skill in tech."},
+      genai:{name:"Generative AI",route:"genai",why:"You want to ride the AI wave and build things that feel like magic. The fastest-growing field there is, and it pairs perfectly with automation."},
+      data:{name:"Data Analytics",route:"data",why:"You like numbers, patterns, and driving decisions. A clear path into business-facing tech roles."},
+      security:{name:"Security & Secure Coding",route:"cybersecurity",why:"You think like a defender and value trust. A high-pay, high-respect niche with a real shortage of talent."},
+      cloud:{name:"Cloud Engineering",route:"cloud",why:"You care about scale, reliability, and infrastructure. The certifications here pay well and open doors."},
+      databases:{name:"Databases",route:"databases",why:"You care about getting data right and the systems that quietly hold a business together."}
+    };
+    var PATHQ=[
+      {q:"Which kind of work sounds most exciting?",o:[["Building systems that run themselves","automation"],["The engine behind apps: servers, APIs, databases","backend"],["Getting AI to do real, useful work","genai"],["Finding insights and telling stories with data","data"],["Keeping systems and data safe from attackers","security"],["Running apps at scale in the cloud","cloud"]]},
+      {q:"Pick the win you'd be proudest of:",o:[["A workflow that saves a business 10 hours a week","automation"],["An app that thousands of people rely on","backend"],["An AI assistant that answers customers on its own","genai"],["A dashboard that changes how a company decides","data"],["Catching a security hole before criminals do","security"],["Infrastructure that scales and never goes down","cloud"]]},
+      {q:"How do you like to work?",o:[["Wiring tools together for fast results","automation"],["Deep logic, structure, and clean code","backend"],["Experimenting with the newest tech","genai"],["Spreadsheets, numbers, and patterns","data"],["Thinking like an attacker and a defender","security"],["Systems, reliability, and operations","cloud"]]},
+      {q:"What's your main goal right now?",o:[["Start earning fast, freelance or gigs","automation"],["Land a solid, in-demand tech job","backend"],["Get ahead of the AI curve","genai"],["Move into business or analyst roles","data"],["A high-pay, specialized niche","security"],["Big-company infrastructure roles","cloud"]]},
+      {q:"Which matters more to you?",o:[["Money and business results","automation"],["Craft and correctness","backend"],["Cutting-edge and creative","genai"],["Evidence and decisions","data"],["Trust and protection","security"],["Scale and stability","cloud"]]},
+      {q:"Where are you now with tech?",o:[["Total beginner","_beg"],["Some coding or scripting","_int"],["Experienced, leveling up","_adv"]]}
+    ];
+    function renderPath(){
+      var area=document.getElementById('path-area');if(!area)return;
+      area.innerHTML='<form id="path-form">'+PATHQ.map(function(item,qi){
+        return '<div class="qitem"><div class="qq">'+(qi+1)+'. '+esc(item.q)+'</div><div class="qopts">'+item.o.map(function(opt,oi){return '<label class="qopt"><input type="radio" name="p'+qi+'" value="'+oi+'"><span>'+esc(opt[0])+'</span></label>';}).join('')+'</div></div>';
+      }).join('')+'<button class="fbtn" type="submit">See my path</button></form><div id="path-result"></div>';
+      document.getElementById('path-form').addEventListener('submit',function(e){e.preventDefault();gradePath();});
+    }
+    function gradePath(){
+      var scores={},level='';
+      PATHQ.forEach(function(item,qi){
+        var sel=document.querySelector('input[name="p'+qi+'"]:checked');if(!sel)return;
+        var dom=item.o[parseInt(sel.value,10)][1];
+        if(dom.charAt(0)==='_'){level=dom;return;}
+        scores[dom]=(scores[dom]||0)+1;
+      });
+      var ranked=Object.keys(scores).map(function(k){return {dom:k,n:scores[k]};}).sort(function(a,b){return b.n-a.n;});
+      var res=document.getElementById('path-result');
+      if(!ranked.length){res.innerHTML='<div class="empty">Answer the questions above, then see your path.</div>';return;}
+      var rec=PATHREC[ranked[0].dom];var total=0;ranked.forEach(function(r){total+=r.n;});
+      var bars=ranked.slice(0,4).map(function(r){var pct=Math.round(r.n/total*100);var nm=PATHREC[r.dom]?PATHREC[r.dom].name:r.dom;return '<div class="pathbar"><span class="pl">'+esc(nm)+'</span><span class="pb"><i style="width:'+pct+'%"></i></span><span class="pp">'+pct+'%</span></div>';}).join('');
+      var levelNote=level==='_beg'?' Start at stage 1 and take it in order.':level==='_int'?' You have a base, so move quickly through the early stages.':level==='_adv'?' You are experienced, so jump to the advanced stages and projects.':'';
+      var preview=document.body.classList.contains('preview');
+      var cta=preview?'<button class="btn" id="path-signup">Create a free account to start →</button>':'<button class="btn" data-goto="'+rec.route+'">Open the '+esc(rec.name)+' course →</button>';
+      try{localStorage.setItem('fm.pathResult',ranked[0].dom);}catch(e){}
+      res.innerHTML='<div class="pathrec"><div class="pr-eyebrow">Your best-fit path</div><h3>'+esc(rec.name)+'</h3><p>'+esc(rec.why)+esc(levelNote)+'</p><div class="pathbars">'+bars+'</div><div class="pathcta">'+cta+'</div></div>';
+      var su=document.getElementById('path-signup');if(su)su.addEventListener('click',function(){exitPreview();setGateMode('register');});
+      var go=res.querySelector('[data-goto]');if(go)go.addEventListener('click',function(){showPage(go.getAttribute('data-goto'));});
+      res.scrollIntoView({behavior:'smooth'});
+    }
+    function openQuizPreview(){document.body.classList.add('preview');showPage('path');window.scrollTo(0,0);}
+    function exitPreview(){document.body.classList.remove('preview');applyGate();window.scrollTo(0,0);}
+
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});
@@ -2619,5 +2703,7 @@
 
     renderAll();
     applyGate();
+    var _pb=document.getElementById('path-back');if(_pb)_pb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});
+    var _gq=document.getElementById('gate-quiz');if(_gq)_gq.addEventListener('click',openQuizPreview);
   })();
 </script>

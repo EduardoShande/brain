@@ -538,6 +538,25 @@
   .nextgoal b{color:var(--ink)}
   @media(max-width:620px){.streakbox{text-align:left}.week{justify-content:flex-start}.gamexp{flex-direction:column;align-items:flex-start;gap:2px}}
 
+  /* ===== profile KPIs ===== */
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:0 10px 28px rgba(124,58,237,.08)}
+  .pctop{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .pavatar{flex:none;width:64px;height:64px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-family:"Poppins",sans-serif;font-size:27px;font-weight:900}
+  .pcwho{flex:1;min-width:200px}
+  .pcwho h3{font-size:23px}
+  .pcmeta{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);margin-top:4px}
+  .pcmeta b{color:var(--teal-ink)}
+  .pcring{flex:none;text-align:center}
+  .pcringlab{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-top:2px}
+  .kpigrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin-top:18px}
+  .pkpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+  .pkpi.teal{border-color:var(--teal);background:var(--teal-wash)}
+  .pkpi.clay{border-color:var(--clay);background:var(--clay-wash)}
+  .pkpi .kn{font-family:"Poppins",sans-serif;font-size:30px;font-weight:900;line-height:1;color:var(--ink);letter-spacing:-.02em}
+  .pkpi .kl{font-size:13.5px;font-weight:700;color:var(--ink);margin-top:7px;line-height:1.3}
+  .pkpi .ks{font-size:12px;color:var(--ink-faint);margin-top:3px;line-height:1.4}
+  @media(max-width:560px){.kpigrid{grid-template-columns:1fr 1fr}.pkpi .kn{font-size:25px}}
+
   /* ===== logic lab ===== */
   .modetabs{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 0}
   .modetab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:11px 17px;border-radius:12px;border:1px solid var(--line);background:var(--card);cursor:pointer;text-align:left}
@@ -700,7 +719,7 @@
       <button data-goto="academy">Courses</button>
       <button data-goto="lab">Practice</button>
     <button data-goto="path">Find your path</button>
-      <button data-goto="account" id="nav-account">Account</button>
+      <button data-goto="profile" id="nav-account">Profile</button>
     </div>
   </div>
 </div>
@@ -2272,6 +2291,17 @@
   </div>
 
   <!-- ===================== WEB DEVELOPMENT ===================== -->
+  <!-- ===================== PROFILE ===================== -->
+  <div class="page" id="page-profile">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Your profile</div>
+      <h2>Everything you have done, in one place</h2>
+      <p class="pd">These numbers are yours and they never reset. Show this page to a parent, a teacher, or one day an employer. It is proof you did the work, and proof is worth more than a promise.</p>
+    </div>
+    <div id="profile-body"></div>
+  </div>
+
   <!-- ===================== CODE LAB ===================== -->
   <div class="page" id="page-lab">
     <div class="phead">
@@ -3022,7 +3052,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','profile','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -3122,6 +3152,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var closed=false;function close(){if(closed)return;closed=true;try{t.remove();}catch(e){}}
       if(opts.action){var b=document.createElement('button');b.type='button';b.textContent=opts.action;b.addEventListener('click',function(){if(opts.onAction)opts.onAction();close();});t.appendChild(b);}
       box.appendChild(t);
+      var keep=box.querySelectorAll('.toast');
+      while(keep.length>3&&box.firstChild){try{box.removeChild(box.firstChild);}catch(e){break;}keep=box.querySelectorAll('.toast');}
       setTimeout(close,opts.timeout||(opts.action?6000:3200));
     }
 
@@ -3334,7 +3366,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       if(err&&err.status)return typeof err.detail==='string'?err.detail:('Error '+err.status);
       return "Can't reach the server. Is the backend running, and is the API URL correct? Note: login can't work inside the Claude artifact preview, use the deployed or locally-served site.";
     }
-    function updateAuthChip(){var b=document.getElementById('nav-account');if(!b)return;var a=getAuth();b.textContent=(a&&a.user)?((a.user.full_name||a.user.email).split(' ')[0]):'Account';}
+    function updateAuthChip(){var b=document.getElementById('nav-account');if(!b)return;var a=getAuth();b.textContent=(a&&a.user)?((a.user.full_name||a.user.email).split(' ')[0]):'Profile';}
     async function doLogin(email,pass){
       var tok=await apiFetch('/auth/login',{method:'POST',body:{email:email,password:pass}});
       var auth={access:tok.access_token,refresh:tok.refresh_token};setAuth(auth);
@@ -3471,6 +3503,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       else if(name==='certificate')renderCertificate();
       else if(name==='htmltags')renderTags();
       else if(name==='lab')renderLab();
+      else if(name==='profile')renderProfile();
     }
     /* =========================================================
        Academy: courses (roadmap = lessons, quiz = final exam) + certificates
@@ -4022,6 +4055,83 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     function labSave(v){var g=labState();g.labCode[labKey()]=v;saveData();}
     function unsafeLoop(src){return /while\s*\(\s*(true|1)\s*\)|for\s*\(\s*;\s*;\s*\)/.test(src||'');}
     /* =========================================================
+       Profile: permanent KPIs the student can show to someone
+    ========================================================= */
+    function kpiStats(){
+      var g=gameState(),i;
+      var boxesAll=document.querySelectorAll('.skills input[type=checkbox]');
+      var lessons=0;boxesAll.forEach(function(b){if(b.checked)lessons++;});
+      var quizKeys=Object.keys(data.quizzes||{}),exams=0,bestScore=0,passed=0;
+      quizKeys.forEach(function(k){var q=data.quizzes[k];exams+=(q.attempts||0);if((q.best||0)>bestScore)bestScore=q.best||0;if((q.best||0)>=80)passed++;});
+      var lab=Object.keys(g.lab||{}).length;
+      var logic=Object.keys(g.logic||{}).length;
+      var stars=0;Object.keys(g.logic||{}).forEach(function(k){stars+=g.logic[k].s||0;});
+      var pages=Object.keys(g.seen||{}).length;
+      var certs=Object.keys(data.courses||{}).length;
+      var longest=0,run=0,days=(g.days||[]).slice().sort();
+      for(i=0;i<days.length;i++){
+        if(i>0&&(new Date(days[i])-new Date(days[i-1]))===86400000)run++;else run=1;
+        if(run>longest)longest=run;
+      }
+      return {xp:g.xp||0,level:gameLevel(g.xp||0),title:levelTitle(gameLevel(g.xp||0)),
+        lessons:lessons,totalLessons:boxesAll.length,exams:exams,bestScore:bestScore,passed:passed,
+        lab:lab,logic:logic,logicRnd:g.logicRnd||0,stars:stars,pages:pages,certs:certs,
+        badges:(g.badges||[]).length,streak:g.streak||0,longest:longest,days:days.length};
+    }
+    function kpiTile(n,label,sub,tone){
+      return '<div class="pkpi'+(tone?' '+tone:'')+'"><div class="kn">'+n+'</div><div class="kl">'+esc(label)+'</div>'
+        +(sub?'<div class="ks">'+esc(sub)+'</div>':'')+'</div>';
+    }
+    function renderProfile(){
+      var el=document.getElementById('profile-body');if(!el||!data)return;
+      var s=kpiStats(),g=gameState();
+      var auth=getAuth(),name='';
+      try{name=(auth&&auth.user&&(auth.user.full_name||auth.user.email))||localStorage.getItem('fm.certName')||'';}catch(e){name=(auth&&auth.user&&(auth.user.full_name||auth.user.email))||'';}
+      var into=s.xp%100;
+      var pct=s.totalLessons?Math.round(s.lessons/s.totalLessons*100):0;
+      var head='<div class="pcard"><div class="pctop">'
+        +'<div class="pavatar">'+esc((name||'?').trim().charAt(0).toUpperCase()||'?')+'</div>'
+        +'<div class="pcwho"><h3>'+esc(name||'Your name')+'</h3>'
+        +'<div class="pcmeta">Level '+s.level+' · <b>'+esc(s.title)+'</b> · '+s.xp+' XP total</div>'
+        +'<div class="gamebarline" style="margin-top:9px"><i style="width:'+into+'%"></i></div>'
+        +'<div class="pcmeta" style="margin-top:6px">'+into+' / 100 XP to level '+(s.level+1)+'</div></div>'
+        +'<div class="pcring">'+svgRing(pct,104)+'<div class="pcringlab">course progress</div></div>'
+        +'</div></div>';
+      var tiles='<div class="kpigrid">'
+        +kpiTile(s.lessons,'Lessons completed','out of '+s.totalLessons+' in the academy','teal')
+        +kpiTile(s.logic,'Logic levels solved',s.stars+' stars · '+s.logicRnd+' random beaten')
+        +kpiTile(s.lab,'Code challenges solved','you wrote real code '+s.lab+' time'+(s.lab===1?'':'s'),'teal')
+        +kpiTile(s.exams,'Exams taken',s.passed+' passed at 80% or more')
+        +kpiTile(s.bestScore+'%','Best exam score',s.bestScore>=80?'certificate standard':'80% earns a certificate')
+        +kpiTile(s.certs,'Certificates earned',s.certs?'shown below':'finish a course to earn one','clay')
+        +kpiTile(s.streak,'Day streak','longest ever: '+s.longest+' days','clay')
+        +kpiTile(s.days,'Days you showed up','the number that actually predicts success')
+        +kpiTile(s.pages,'Reference pages read','out of 7 free guides')
+        +kpiTile(s.badges,'Badges unlocked','out of '+BADGES.length)
+        +'</div>';
+      var dom=[],rmMap=[['rm-fundamentals','Computers'],['rm-webdev','Web dev'],['rm-backend','Backend'],['rm-automation','Automation'],['rm-security','Security'],['rm-databases','Databases'],['rm-cloud','Cloud'],['rm-genai','AI'],['rm-data','Data']];
+      rmMap.forEach(function(x){
+        var w=document.getElementById(x[0]);if(!w)return;
+        var ins=w.querySelectorAll('.skills input[type=checkbox]'),done=0;
+        ins.forEach(function(i){if(i.checked)done++;});
+        if(ins.length)dom.push({label:x[1],val:Math.round(done/ins.length*100)});
+      });
+      var chart=dom.length?'<div class="chartcard"><div class="chart-title">Where your hours went</div>'+svgBars(dom)+'</div>':'';
+      var badges='<div class="chartcard"><div class="chart-title">Badges</div><div class="badges" style="margin-top:10px">'
+        +BADGES.map(function(b){var got=hasBadge(b[0]);return '<span class="badge'+(got?' got':'')+'" title="'+esc(b[2])+'"><span class="bi">'+(got?'★':'☆')+'</span>'+esc(b[1])+'</span>';}).join('')
+        +'</div></div>';
+      var earned=COURSES.filter(function(c){return data.courses[c.key];});
+      var certs=earned.length
+        ? '<div class="chartcard"><div class="chart-title">Certificates ('+earned.length+')</div><div class="certchips" style="margin-top:10px">'
+          +earned.map(function(c){return '<button class="certchip" data-cert="'+c.key+'"><em>◆</em> '+esc(c.title)+'</button>';}).join('')+'</div></div>'
+        : '';
+      el.innerHTML=head+tiles+chart+badges+certs
+        +'<div class="gbtns" style="margin-top:20px"><button class="gbtn pri" data-goto="lab">Keep practising</button><button class="gbtn" data-goto="account">Settings and account</button></div>';
+      el.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
+      el.querySelectorAll('[data-cert]').forEach(function(b){b.addEventListener('click',function(){openCertificate(b.getAttribute('data-cert'));});});
+    }
+
+    /* =========================================================
        Logic Lab: sequencing, debugging and functions, no syntax
     ========================================================= */
     var DIRCH=['→','↓','←','↑'];
@@ -4338,7 +4448,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       t.labxp+=25;awardXP(25,'Challenge solved','code');
     }
 
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();updateAuthChip();}
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});

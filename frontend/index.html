@@ -1120,9 +1120,11 @@
   /* the section rail moves with the sidebar instead of the old centred column */
   @media(min-width:1240px){
     .srail{left:calc(var(--side) + clamp(20px,3.4vw,48px));top:96px}
-    .page{max-width:1160px;margin-left:238px}
+    /* only shift the content when a rail is actually there to shift it for */
+    body.has-rail .page{margin-left:238px}
   }
-  @media(min-width:1700px){.page{margin-left:auto;margin-right:auto}
+  @media(min-width:1700px){
+    body.has-rail .page{margin-left:auto;margin-right:auto}
     .srail{left:calc(50% + var(--side)/2 - 580px - 228px)}}
 
   /* --- welcome banner, straight off the references --- */
@@ -1212,6 +1214,29 @@
     border:1px solid var(--line);font-size:13px;line-height:1.5;color:var(--ink-soft)}
   .lvlcard .lvlbuild b{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;
     letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px}
+  /* ===== toolchains ===== */
+  .chainbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;margin-bottom:14px;box-shadow:var(--shade)}
+  .chain-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .chain-h h4{font-size:17px}
+  .chain-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--clay-ink)}
+  .chain-d{margin:7px 0 0;font-size:14px;line-height:1.55;color:var(--ink-soft);max-width:70ch}
+  .chain{display:flex;align-items:stretch;flex-wrap:wrap;gap:0;margin:16px 0 0}
+  .charr{flex:none;align-self:center;width:16px;height:1px;background:var(--line-strong);margin:0 3px;position:relative}
+  .charr::after{content:"";position:absolute;right:0;top:-3px;border:3px solid transparent;
+    border-left-color:var(--line-strong)}
+  .chnode{flex:1;min-width:96px;display:flex;flex-direction:column;gap:2px;padding:10px 12px;
+    border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+  .chnode b{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+  .chnode span{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-faint);line-height:1.3}
+  .chnode.out{background:var(--teal-wash);border-color:var(--teal)}
+  .chnode.out b{color:var(--teal-ink)}
+  .chain-n{margin:14px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink-soft);
+    padding-top:12px;border-top:1px solid var(--line)}
+  .chain-n b{color:var(--ink)}
+  @media(max-width:700px){.chain{flex-direction:column}.charr{width:1px;height:12px;align-self:flex-start;margin:3px 0 3px 22px}
+    .charr::after{right:-3px;top:auto;bottom:0;border-color:transparent;border-top-color:var(--line-strong)}}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -1227,6 +1252,7 @@
   <nav class="sidenav" aria-label="Main">
       <button data-goto="start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M21 12l-9 5-9-5"/></svg><span>Start here</span></button>
       <button data-goto="academy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M3 9h5"/></svg><span>Courses</span></button>
+      <button data-goto="tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 01-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 015.4-5.4l-2.5 2.5-2-2 2.5-2.5z"/></svg><span>Tools</span></button>
       <button data-goto="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v6l-5 9a2 2 0 001.7 3h12.6a2 2 0 001.7-3l-5-9V3"/><path d="M8 3h8"/></svg><span>Practice</span></button>
       <button data-goto="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1"/><circle cx="10" cy="7" r="3.2"/><path d="M21 20v-1a4 4 0 00-3-3.8"/></svg><span>Community</span></button>
       <button data-goto="path"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg><span>Find your path</span></button>
@@ -3390,6 +3416,189 @@
     </section>
   </div>
 
+  <!-- ===================== TOOLS ===================== -->
+  <div class="page" id="page-tools">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Reference · free</div>
+      <h2>The tools, and how they fit together</h2>
+      <p class="pd">Nobody builds anything with one tool. They build with a chain of them, where each one hands its work to the next. Beginners drown because they meet the tools one at a time and never see the chain. Here is the chain first, then the tools.</p>
+      <div class="subnav">
+        <a href="#tl-kit" class="jump">The starter kit</a>
+        <a href="#tl-chains" class="jump">Toolchains</a>
+        <a href="#tl-cat" class="jump">Every tool</a>
+        <a href="#tl-when" class="jump">When to add one</a>
+      </div>
+    </div>
+
+    <section class="sec" id="tl-kit">
+      <div class="eyebrow">01 · The starter kit</div>
+      <h3>Eight tools, and you can build almost anything</h3>
+      <p class="lead">There are thousands of developer tools and it is genuinely overwhelming. You need about eight, they are all free, and the list has barely changed in a decade.</p>
+      <div class="rows">
+        <div class="r"><span class="h">A code editor</span><span class="m">VS Code</span><span class="d">Where you write everything. Free, runs on any machine, and what most of the industry uses. Install it today and open a folder, not a file.</span></div>
+        <div class="r"><span class="h">A browser with dev tools</span><span class="m">Chrome or Firefox</span><span class="d">Not for browsing. F12 opens the X-ray view: the HTML as it really is, the network requests, the errors. You will live here.</span></div>
+        <div class="r"><span class="h">A terminal</span><span class="m">already installed</span><span class="d">Typing commands instead of clicking. Roughly six commands cover almost everything you will do in your first year.</span></div>
+        <div class="r"><span class="h">Git</span><span class="m">save points</span><span class="d">Snapshots of your work you can return to. The reason you never lose a day again, and non-negotiable past your first project.</span></div>
+        <div class="r"><span class="h">GitHub</span><span class="m">the shelf</span><span class="d">Where those snapshots live online. Also your portfolio, your backup, and the first thing an employer looks at.</span></div>
+        <div class="r"><span class="h">A place to deploy</span><span class="m">Vercel or Netlify</span><span class="d">Turns your folder into a real address other people can open. Free tier, connects to GitHub, deploys on every push.</span></div>
+        <div class="r"><span class="h">An AI assistant</span><span class="m">use it properly</span><span class="d">A tutor that never gets tired, and a trap if you let it write things you cannot read. The academy has a whole page on using it well.</span></div>
+        <div class="r"><span class="h">Somewhere to think</span><span class="m">Notion, paper, anything</span><span class="d">Where the plan lives before the code does. The step almost every beginner skips and then pays for.</span></div>
+      </div>
+      <div class="mnote"><span class="label">All of it is free</span>Every tool in that list has a free tier that is genuinely enough to learn on and to ship real projects. If a tutorial tells you to pay for something in your first year, close the tutorial.</div>
+    </section>
+
+    <section class="sec" id="tl-chains">
+      <div class="eyebrow">02 · Toolchains</div>
+      <h3>How the tools combine to make one real thing</h3>
+      <p class="lead">This is the part nobody explains. A tool on its own is trivia. A tool passing its output to the next tool is how work actually happens. Each chain below is a real workflow you can copy today.</p>
+
+      <article class="chainbox">
+        <header class="chain-h"><h4>Ship a website</h4><span class="chain-tag">Start here</span></header>
+        <p class="chain-d">The first chain everyone should complete, end to end, in one afternoon. Do this once and half of tech stops being mysterious.</p>
+        <div class="chain">
+          <span class="chnode"><b>VS Code</b><span>write it</span></span><span class="charr"></span>
+          <span class="chnode"><b>Git</b><span>save points</span></span><span class="charr"></span>
+          <span class="chnode"><b>GitHub</b><span>store it</span></span><span class="charr"></span>
+          <span class="chnode"><b>Vercel</b><span>publish it</span></span><span class="charr"></span>
+          <span class="chnode out"><b>A real URL</b><span>send to anyone</span></span>
+        </div>
+        <p class="chain-n"><b>The magic moment:</b> once GitHub and Vercel are connected, you type <code>git push</code> and your live site updates by itself in about twenty seconds. That is the whole modern workflow, and it is free.</p>
+      </article>
+
+      <article class="chainbox">
+        <header class="chain-h"><h4>Build an API</h4><span class="chain-tag">Backend</span></header>
+        <p class="chain-d">The chain behind every app that has accounts, saves data, or does anything a page alone cannot.</p>
+        <div class="chain">
+          <span class="chnode"><b>VS Code</b><span>write it</span></span><span class="charr"></span>
+          <span class="chnode"><b>FastAPI</b><span>the framework</span></span><span class="charr"></span>
+          <span class="chnode"><b>PostgreSQL</b><span>store the data</span></span><span class="charr"></span>
+          <span class="chnode"><b>Postman</b><span>test it</span></span><span class="charr"></span>
+          <span class="chnode"><b>Docker</b><span>package it</span></span><span class="charr"></span>
+          <span class="chnode out"><b>Railway</b><span>run it</span></span>
+        </div>
+        <p class="chain-n"><b>Worth knowing:</b> FastAPI generates an interactive test page for free, so you can skip Postman until you need to save collections. That is the general rule with tools: use the one already in the box first.</p>
+      </article>
+
+      <article class="chainbox">
+        <header class="chain-h"><h4>Automate a business</h4><span class="chain-tag">Fastest to get paid</span></header>
+        <p class="chain-d">The chain that earns money soonest, because a small business will pay for ten hours a week back and will not care how you did it.</p>
+        <div class="chain">
+          <span class="chnode"><b>The problem</b><span>watch them work</span></span><span class="charr"></span>
+          <span class="chnode"><b>n8n</b><span>the wiring</span></span><span class="charr"></span>
+          <span class="chnode"><b>Their apps</b><span>Sheets, WhatsApp, mail</span></span><span class="charr"></span>
+          <span class="chnode"><b>An AI step</b><span>read and classify</span></span><span class="charr"></span>
+          <span class="chnode out"><b>Hours saved</b><span>you invoice this</span></span>
+        </div>
+        <p class="chain-n"><b>The trick:</b> you are not selling n8n. You are selling "the order confirmations send themselves now." Never lead with the tool, always lead with the hours.</p>
+      </article>
+
+      <article class="chainbox">
+        <header class="chain-h"><h4>Answer a question with data</h4><span class="chain-tag">Data</span></header>
+        <p class="chain-d">Least code of any chain here, and it is a real job in almost every company.</p>
+        <div class="chain">
+          <span class="chnode"><b>The question</b><span>make it specific</span></span><span class="charr"></span>
+          <span class="chnode"><b>SQL</b><span>fetch it</span></span><span class="charr"></span>
+          <span class="chnode"><b>Sheets or pandas</b><span>clean it</span></span><span class="charr"></span>
+          <span class="chnode"><b>Looker Studio</b><span>show it</span></span><span class="charr"></span>
+          <span class="chnode out"><b>A decision</b><span>somebody acts</span></span>
+        </div>
+        <p class="chain-n"><b>Where beginners stop too early:</b> at the chart. The chart is not the deliverable. The sentence under it is.</p>
+      </article>
+
+      <article class="chainbox">
+        <header class="chain-h"><h4>Add AI to something real</h4><span class="chain-tag">AI</span></header>
+        <p class="chain-d">Notice that the model is one box in the middle. Everything around it is ordinary engineering, which is exactly why the fundamentals matter more now, not less.</p>
+        <div class="chain">
+          <span class="chnode"><b>Your app</b><span>where users are</span></span><span class="charr"></span>
+          <span class="chnode"><b>Your backend</b><span>holds the key</span></span><span class="charr"></span>
+          <span class="chnode"><b>Claude or GPT</b><span>the model</span></span><span class="charr"></span>
+          <span class="chnode"><b>Validation</b><span>check the output</span></span><span class="charr"></span>
+          <span class="chnode out"><b>A feature</b><span>that can be trusted</span></span>
+        </div>
+        <p class="chain-n"><b>Never skip the second box.</b> The API key lives on your server, never in the browser. A key in frontend code is visible to everyone and people will spend your money with it.</p>
+      </article>
+
+      <article class="chainbox">
+        <header class="chain-h"><h4>Design, then build</h4><span class="chain-tag">Frontend</span></header>
+        <p class="chain-d">Deciding what it should look like before you write CSS saves more time than any other habit on this page.</p>
+        <div class="chain">
+          <span class="chnode"><b>Paper</b><span>ugly and fast</span></span><span class="charr"></span>
+          <span class="chnode"><b>Figma</b><span>the real layout</span></span><span class="charr"></span>
+          <span class="chnode"><b>HTML</b><span>structure first</span></span><span class="charr"></span>
+          <span class="chnode"><b>CSS</b><span>then looks</span></span><span class="charr"></span>
+          <span class="chnode out"><b>A page</b><span>that survives a phone</span></span>
+        </div>
+        <p class="chain-n"><b>Free for students:</b> Figma's free tier is generous, and paper is cheaper. Most professionals still start on paper.</p>
+      </article>
+    </section>
+
+    <section class="sec" id="tl-cat">
+      <div class="eyebrow">03 · Every tool</div>
+      <h3>What each one is for, in one line</h3>
+      <p class="lead">Grouped by the job it does. You do not need most of these yet. The point is that when someone says the name, you know which box on a chain it lives in.</p>
+      <div class="acc">
+        <details open><summary>Writing code</summary><div class="body"><ul class="bul">
+          <li><b>VS Code</b> the editor almost everyone uses. Free.</li>
+          <li><b>Extensions</b> Prettier formats your code, ESLint catches mistakes, Live Server reloads the page as you type.</li>
+          <li><b>A terminal</b> where you run things. Six commands cover year one.</li>
+          <li><b>CodePen</b> a scratchpad in the browser for a quick test with nothing installed.</li>
+        </ul></div></details>
+        <details><summary>Keeping and sharing your work</summary><div class="body"><ul class="bul">
+          <li><b>Git</b> the save points, on your machine.</li>
+          <li><b>GitHub</b> those save points online, plus your public portfolio.</li>
+          <li><b>Branches</b> a copy where you try something risky without breaking the working version.</li>
+          <li><b>Pull requests</b> how teams review each other's work before it counts.</li>
+        </ul></div></details>
+        <details><summary>Publishing it</summary><div class="body"><ul class="bul">
+          <li><b>Vercel or Netlify</b> best for frontends. Connect GitHub, done.</li>
+          <li><b>Railway or Render</b> for a backend and a database, with usable free tiers.</li>
+          <li><b>Cloudflare</b> free DNS, and makes your site faster worldwide.</li>
+          <li><b>A domain</b> around ten dollars a year, and it changes how people see you.</li>
+        </ul></div></details>
+        <details><summary>Data</summary><div class="body"><ul class="bul">
+          <li><b>PostgreSQL</b> the default serious database. Free and open source.</li>
+          <li><b>SQLite</b> a database in a single file, perfect for learning.</li>
+          <li><b>DBeaver or TablePlus</b> click around your database instead of guessing.</li>
+          <li><b>Looker Studio</b> free dashboards, connects to Sheets in a minute.</li>
+        </ul></div></details>
+        <details><summary>Testing and checking</summary><div class="body"><ul class="bul">
+          <li><b>Browser dev tools</b> the most underused tool in this entire list.</li>
+          <li><b>Postman or Thunder Client</b> poke an API without building a frontend.</li>
+          <li><b>Lighthouse</b> built into Chrome, grades speed and accessibility for free.</li>
+        </ul></div></details>
+        <details><summary>Automation and AI</summary><div class="body"><ul class="bul">
+          <li><b>n8n</b> connect apps together visually, self-hostable and free.</li>
+          <li><b>Zapier or Make</b> the same idea, easier, paid sooner.</li>
+          <li><b>Claude, ChatGPT, Gemini</b> tutor and pair, never an author you cannot check.</li>
+          <li><b>APIs</b> not a tool but the thing that makes tools combine at all.</li>
+        </ul></div></details>
+        <details><summary>Thinking and planning</summary><div class="body"><ul class="bul">
+          <li><b>Figma</b> design the screen before you build it. Free tier.</li>
+          <li><b>Notion or Obsidian</b> where your notes and plans live.</li>
+          <li><b>Excalidraw</b> free, ugly on purpose, perfect for sketching how something works.</li>
+          <li><b>Paper</b> still undefeated for the first five minutes of any problem.</li>
+        </ul></div></details>
+      </div>
+    </section>
+
+    <section class="sec" id="tl-when">
+      <div class="eyebrow">04 · When to add one</div>
+      <h3>Learn a tool when the problem appears, not before</h3>
+      <p class="lead">The most common way to waste a month is to learn a tool you have no use for yet. You will forget it, because nothing hurt enough to make it stick.</p>
+      <div class="rows">
+        <div class="r"><span class="h">You lost work, or broke something and could not go back</span><span class="m">now learn</span><span class="d">Git. The pain of losing a day is what makes commits become a habit.</span></div>
+        <div class="r"><span class="h">Somebody asked to see your project</span><span class="m">now learn</span><span class="d">GitHub and a deploy host. A link beats a zip file every single time.</span></div>
+        <div class="r"><span class="h">Your page needs to remember something</span><span class="m">now learn</span><span class="d">A backend and a database. Not before, or you are learning an answer to a question you have not asked.</span></div>
+        <div class="r"><span class="h">"It works on my machine"</span><span class="m">now learn</span><span class="d">Docker. That exact sentence is the moment it starts making sense, and not one day earlier.</span></div>
+        <div class="r"><span class="h">You changed something and broke something else</span><span class="m">now learn</span><span class="d">Automated tests. Everyone resists this until it happens twice.</span></div>
+        <div class="r"><span class="h">You do the same twenty clicks every week</span><span class="m">now learn</span><span class="d">Automation, with a script or n8n. This is also the moment somebody would pay you to do it for them.</span></div>
+      </div>
+      <div class="mnote"><span class="label">The rule, in one line</span>A tool is an answer. Go and find the question first, and the tool will take an afternoon instead of a month.</div>
+      <div class="pfoot"><b>Next move:</b> do the first chain today. Write one HTML page, put it on GitHub, connect Vercel, and send the link to somebody. It takes about an hour and it makes every chain after it obvious.</div>
+    </section>
+  </div>
+
   <!-- ===================== COMMUNITY ===================== -->
   <div class="page" id="page-community">
     <div class="phead">
@@ -4213,7 +4422,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','community','askwell','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 

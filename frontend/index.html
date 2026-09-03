@@ -1186,6 +1186,32 @@
     .side{border-radius:0 26px 26px 0}
     .sidetoggle{background:var(--grad);color:#fff;border-color:transparent}
   }
+  /* ===== beginner / intermediate / expert level cards ===== */
+  .lvls{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  @media(max-width:900px){.lvls{grid-template-columns:1fr}}
+  .lvlcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;box-shadow:var(--shade);display:flex;flex-direction:column}
+  .lvlcard.b{border-top:3px solid var(--good)}
+  .lvlcard.i{border-top:3px solid var(--teal)}
+  .lvlcard.x{border-top:3px solid var(--clay)}
+  .lvlhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .lvltag{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;padding:4px 9px;border-radius:99px}
+  .lvlcard.b .lvltag{background:var(--good-wash);color:var(--good-ink)}
+  .lvlcard.i .lvltag{background:var(--teal-wash);color:var(--teal-ink)}
+  .lvlcard.x .lvltag{background:var(--clay-wash);color:var(--clay-ink)}
+  .lvltime{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
+  .lvlcard h4{font-size:16.5px;margin-bottom:7px}
+  .lvlcard p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+  .lvlcard ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;line-height:1.6;color:var(--ink-soft)}
+  .lvlcard ul li{margin-bottom:5px}
+  .lvlcard ul li b{color:var(--ink);font-weight:600}
+  .lvlout{margin-top:auto;padding-top:14px;font-size:13.5px;line-height:1.55;color:var(--ink-soft)}
+  .lvlout b{color:var(--ink)}
+  .lvlcard .lvlbuild{margin-top:12px;padding:11px 13px;border-radius:10px;background:var(--surface);
+    border:1px solid var(--line);font-size:13px;line-height:1.5;color:var(--ink-soft)}
+  .lvlcard .lvlbuild b{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -1379,7 +1405,7 @@
       </div>
 
       <div class="stage" data-stage="4">
-        <div class="sh"><span class="sn">4</span><span class="st">AI &amp; agents</span><span class="lv">Intermediate → Advanced</span><span class="cnt" data-cnt>0/6</span></div>
+        <div class="sh"><span class="sn">4</span><span class="st">AI &amp; agents</span><span class="lv">Intermediate → Expert</span><span class="cnt" data-cnt>0/6</span></div>
         <ul class="skills">
           <li><label><input type="checkbox" data-id="s4a"><span class="sk"><span class="skt">LLM APIs: call Claude or OpenAI, get reliable structured JSON out</span><span class="sub">→ system vs user prompt, temperature, tokens, JSON mode, structured output</span></span></label></li>
           <li><label><input type="checkbox" data-id="s4b"><span class="sk"><span class="skt">Tool / function calling: let a model trigger real actions</span><span class="sub">→ tool schema, arguments, execute the call, feed the result back to the model</span></span></label></li>
@@ -1395,7 +1421,7 @@
       </div>
 
       <div class="stage" data-stage="5">
-        <div class="sh"><span class="sn">5</span><span class="st">Reliability &amp; infrastructure</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/5</span></div>
+        <div class="sh"><span class="sn">5</span><span class="st">Reliability &amp; infrastructure</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/5</span></div>
         <ul class="skills">
           <li><label><input type="checkbox" data-id="s5a"><span class="sk"><span class="skt">Docker: self-host n8n and your tools cheaply</span><span class="sub">→ images, containers, Dockerfile, docker-compose, volumes, ports</span></span></label></li>
           <li><label><input type="checkbox" data-id="s5b"><span class="sk"><span class="skt">VPS / cloud basics: deploy on a $5 to $20 per month server</span><span class="sub">→ SSH, Nginx reverse proxy, domains &amp; DNS, HTTPS via Let's Encrypt</span></span></label></li>
@@ -1410,7 +1436,7 @@
       </div>
 
       <div class="stage" data-stage="6">
-        <div class="sh"><span class="sn">6</span><span class="st">The business layer</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/5</span></div>
+        <div class="sh"><span class="sn">6</span><span class="st">The business layer</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/5</span></div>
         <ul class="skills">
           <li><label><input type="checkbox" data-id="s6a"><span class="sk"><span class="skt">Process discovery: interview a team, find what's worth automating</span><span class="sub">→ shadow the work, process mapping, time-per-task, pick ROI candidates</span></span></label></li>
           <li><label><input type="checkbox" data-id="s6b"><span class="sk"><span class="skt">Scoping &amp; pricing: fixed fee vs. retainer, and when</span><span class="sub">→ deliverables, statement of work, fixed fee vs retainer, change requests</span></span></label></li>
@@ -1563,7 +1589,7 @@
       </div>
       <div id="rm-agents">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">Reliable single calls</span><span class="lv">Start here</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">Reliable single calls</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ag1a"><span class="sk"><span class="skt">Get structured JSON out of an LLM every time, with a schema</span><span class="sub">→ JSON schema, response format, validation, retry on malformed output</span></span></label></li>
             <li><label><input type="checkbox" data-id="ag1b"><span class="sk"><span class="skt">Make one clean tool / function call and handle the result</span><span class="sub">→ tool definition, arguments, execute, feed result back, error handling</span></span></label></li>
@@ -1587,7 +1613,7 @@
           </div>
         </div>
         <div class="stage" data-stage="3">
-          <div class="sh"><span class="sn">3</span><span class="st">Real multi-step agents</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">3</span><span class="st">Real multi-step agents</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ag3a"><span class="sk"><span class="skt">Build a multi-step agent with LangGraph or CrewAI</span><span class="sub">→ nodes &amp; edges, state graph, agent roles, handoffs between agents</span></span></label></li>
             <li><label><input type="checkbox" data-id="ag3b"><span class="sk"><span class="skt">Add memory and state that survive across the loop</span><span class="sub">→ persistent state, checkpoints, conversation memory, resume runs</span></span></label></li>
@@ -1599,7 +1625,7 @@
           </div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">Production &amp; trust</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">Production &amp; trust</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ag4a"><span class="sk"><span class="skt">Write evals that score agent output so you can improve it safely</span><span class="sub">→ golden set, scoring, regression tests, LLM-as-judge</span></span></label></li>
             <li><label><input type="checkbox" data-id="ag4b"><span class="sk"><span class="skt">Add guardrails: keep the agent on-task and safe</span><span class="sub">→ allow / deny lists, output filters, human-in-the-loop approval</span></span></label></li>
@@ -1677,7 +1703,7 @@
         <a href="#p2-jobs" class="jump">Six jobs</a>
         <a href="#p2-lanes" class="jump">Two lanes</a>
         <a href="#p2-offer" class="jump">The offer</a>
-        <a href="#p2-roadmap" class="jump">Roadmap</a>
+        <a href="#sec-levels" class="jump">The three levels</a><a href="#p2-roadmap" class="jump">Roadmap</a>
         <a href="#p2-resources" class="jump">Resources</a>
         <a href="#p2-trap" class="jump">The trap</a>
       </div>
@@ -1739,6 +1765,59 @@
         <p class="q">"I automate your SOC 2 / ISO 27001 readiness, so you don't pay $20K to a consultant or wait months for an audit firm."</p>
         <p>Consultants charge $10K to $30K for a SOC 2 Type I doing evidence-gathering by hand. Your scripts automate it against AWS, GCP, GitHub, and Okta APIs. Package it as a <b>$3K to $8K engagement</b> or a <b>$2K to $5K per month retainer</b>. Undercut them on price, beat them on turnaround.</p>
       </div>
+    </section>
+
+    <section class="sec" id="sec-levels">
+      <div class="eyebrow">05 · The three levels</div>
+      <h3>Beginner, intermediate, expert</h3>
+      <p class="lead">Security is the one field where you cannot skip a level. You cannot defend a system you could not have built, which is why beginner here looks a lot like being a developer.</p>
+      <div class="lvls">
+        <article class="lvlcard b">
+          <div class="lvlhead"><span class="lvltag">Beginner</span><span class="lvltime">~6 weeks</span></div>
+          <h4>You stop writing the obvious holes</h4>
+          <p>You know how the common attacks work because you have done them to your own practice app.</p>
+          <ul>
+            <li><b>The OWASP Top 10,</b> understood rather than memorised</li>
+            <li><b>Injection:</b> what it is, and why parameters fix it</li>
+            <li><b>XSS:</b> why you never trust what a user typed</li>
+            <li><b>Passwords:</b> hashing, salting, and never rolling your own</li>
+            <li><b>HTTPS, cookies and the same-origin rule</b></li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A deliberately vulnerable page, then the fixed version, with a short write-up of each hole and the one line that closed it.</div>
+          <div class="lvlout"><b>Worth:</b> makes you a noticeably safer developer, which is what most employers actually need.</div>
+        </article>
+        <article class="lvlcard i">
+          <div class="lvlhead"><span class="lvltag">Intermediate</span><span class="lvltime">~5 months</span></div>
+          <h4>You can find holes in someone else's work</h4>
+          <p>You can test a system methodically instead of poking at it, and write up what you found.</p>
+          <ul>
+            <li><b>Networking properly:</b> TCP/IP, DNS, TLS, ports</li>
+            <li><b>Linux and the terminal</b> at a level you are comfortable in</li>
+            <li><b>Tooling:</b> Burp Suite, nmap, and reading the traffic</li>
+            <li><b>Auth attacks:</b> session fixation, token mistakes, IDOR</li>
+            <li><b>Practice ranges:</b> TryHackMe and Hack The Box, consistently</li>
+            <li><b>Writing a report</b> a developer can act on</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A full write-up of a practice machine you compromised: what you tried, what worked, the impact, and the fix.</div>
+          <div class="lvlout"><b>Worth:</b> junior security analyst, or a developer nobody worries about.</div>
+        </article>
+        <article class="lvlcard x">
+          <div class="lvlhead"><span class="lvltag">Expert</span><span class="lvltime">years, honestly</span></div>
+          <h4>You are responsible for whether it holds</h4>
+          <p>Design, detection and response, with the judgement to know which risks are worth money.</p>
+          <ul>
+            <li><b>Threat modelling</b> before a line is written</li>
+            <li><b>Detection:</b> logs, SIEM, noticing the quiet intrusion</li>
+            <li><b>Incident response:</b> contain, investigate, recover, report</li>
+            <li><b>Cloud and identity security</b> at organisation scale</li>
+            <li><b>Compliance</b> that is real rather than a checklist</li>
+            <li><b>Secure design reviews</b> other engineers respect</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A threat model and hardening plan for a real application, with the risks ranked by what they would actually cost.</div>
+          <div class="lvlout"><b>Worth:</b> among the highest-paid work in tech, and rarely an entry-level job.</div>
+        </article>
+      </div>
+      <div class="mnote"><span class="label">The honest route in</span>Almost nobody starts in security. They start as a developer, a sysadmin or in IT support, and move across once they understand how systems really work. If you are 17 and this is the goal, the fastest path is to become a good developer first. That is not a detour, it is the road.</div>
     </section>
 
     <section class="sec" id="p2-roadmap">
@@ -1838,7 +1917,7 @@
       <div class="subnav">
         <a href="#p3-laws" class="jump">The eight laws</a>
         <a href="#p3-remember" class="jump">Short version</a>
-        <a href="#p3-roadmap" class="jump">Roadmap</a>
+        <a href="#db-levels" class="jump">The three levels</a><a href="#p3-roadmap" class="jump">Roadmap</a>
         <a href="#p3-resources" class="jump">Resources</a>
       </div>
     </div>
@@ -1878,6 +1957,59 @@
       </div>
     </section>
 
+    <section class="sec" id="db-levels">
+      <div class="eyebrow">03 · The three levels</div>
+      <h3>Beginner, intermediate, expert</h3>
+      <p class="lead">Databases are the least glamorous thing on this list and the one that most reliably separates people who can build something real from people who cannot.</p>
+      <div class="lvls">
+        <article class="lvlcard b">
+          <div class="lvlhead"><span class="lvltag">Beginner</span><span class="lvltime">~4 weeks</span></div>
+          <h4>You can ask a database questions</h4>
+          <p>You can get the data you want out of tables somebody else designed.</p>
+          <ul>
+            <li><b>Tables, rows, columns, types</b> and why types matter</li>
+            <li><b>SELECT:</b> where, order by, limit</li>
+            <li><b>Aggregates:</b> count, sum, group by, having</li>
+            <li><b>Joins:</b> inner and left, and drawing them before writing them</li>
+            <li><b>Primary and foreign keys:</b> how tables know about each other</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>Ten questions about a sample database, answered in SQL, including at least three that need a join.</div>
+          <div class="lvlout"><b>Worth:</b> the single most transferable skill here. Analysts, developers and marketers all use it.</div>
+        </article>
+        <article class="lvlcard i">
+          <div class="lvlhead"><span class="lvltag">Intermediate</span><span class="lvltime">~3 months</span></div>
+          <h4>You can design one that will not embarrass you</h4>
+          <p>You choose the tables, and the app still works when the data gets big and messy.</p>
+          <ul>
+            <li><b>Normalisation:</b> storing a fact once, and when to break that rule</li>
+            <li><b>Indexes:</b> why a query goes from 8 seconds to 8 milliseconds</li>
+            <li><b>Transactions:</b> all of it happens or none of it does</li>
+            <li><b>Migrations</b> that change a live table without losing data</li>
+            <li><b>SQL vs NoSQL,</b> chosen for a reason you can defend</li>
+            <li><b>Backups,</b> and having actually restored one</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A schema for a real app with migrations and indexes, plus a before-and-after timing of one slow query you fixed.</div>
+          <div class="lvlout"><b>Worth:</b> expected of any backend developer, and the thing juniors are weakest at.</div>
+        </article>
+        <article class="lvlcard x">
+          <div class="lvlhead"><span class="lvltag">Expert</span><span class="lvltime">a year and onward</span></div>
+          <h4>You are trusted with the company's data</h4>
+          <p>Performance, correctness under concurrency, and never losing anything.</p>
+          <ul>
+            <li><b>Query plans:</b> reading EXPLAIN and acting on it</li>
+            <li><b>Concurrency:</b> isolation levels, locks, deadlocks</li>
+            <li><b>Replication and failover</b> when a server dies</li>
+            <li><b>Partitioning and scale,</b> and delaying it as long as possible</li>
+            <li><b>Row-level security</b> and encryption at rest</li>
+            <li><b>Recovery drills:</b> a backup you have not restored is a rumour</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A load test that finds where your schema breaks, and the change that moved the ceiling.</div>
+          <div class="lvlout"><b>Worth:</b> database and platform engineering, and it stays in demand for decades.</div>
+        </article>
+      </div>
+      <div class="mnote"><span class="label">Why this one pays off quietly</span>Frameworks change every few years. SQL was standardised before most of your teachers were born and it is unchanged in the ways that matter. It is the highest-return thing on this whole site per hour spent.</div>
+    </section>
+
     <section class="sec" id="p3-roadmap">
       <div class="eyebrow">03 · The roadmap</div>
       <h3>Learn it in order, hands-on</h3>
@@ -1889,7 +2021,7 @@
       </div>
       <div id="rm-databases">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">SQL &amp; modeling</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">SQL &amp; modeling</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="db1a"><span class="sk"><span class="skt">SQL core: read and write data</span><span class="sub">→ SELECT / INSERT / UPDATE / DELETE, WHERE, ORDER BY, LIMIT</span></span></label></li>
             <li><label><input type="checkbox" data-id="db1b"><span class="sk"><span class="skt">Joins &amp; aggregation</span><span class="sub">→ INNER / LEFT JOIN, GROUP BY, HAVING, subqueries, CTEs</span></span></label></li>
@@ -1926,7 +2058,7 @@
           </div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">Security on Supabase</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">Security on Supabase</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="db4a"><span class="sk"><span class="skt">Row-Level Security</span><span class="sub">→ ENABLE RLS, policies, auth.uid(), per-tenant isolation</span></span></label></li>
             <li><label><input type="checkbox" data-id="db4b"><span class="sk"><span class="skt">Least privilege</span><span class="sub">→ roles &amp; grants, anon vs service key, no secrets in the frontend</span></span></label></li>
@@ -1938,7 +2070,7 @@
           </div>
         </div>
         <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Migrations, scale &amp; backups</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">5</span><span class="st">Migrations, scale &amp; backups</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="db5a"><span class="sk"><span class="skt">Migrations without downtime</span><span class="sub">→ version-controlled, expand-then-contract, lock-aware ALTERs</span></span></label></li>
             <li><label><input type="checkbox" data-id="db5b"><span class="sk"><span class="skt">Scaling in order</span><span class="sub">→ connection pooling, caching, read replicas, partitioning</span></span></label></li>
@@ -2006,7 +2138,7 @@
       <p class="pd">The step up from your VPS: run systems at client scale, with certs that pay.</p>
       <div class="subnav">
         <a href="#cl-what" class="jump">What it is</a>
-        <a href="#cl-road" class="jump">Roadmap</a>
+        <a href="#cl-levels" class="jump">The three levels</a><a href="#cl-parts" class="jump">The pieces</a><a href="#cl-road" class="jump">Roadmap</a>
         <a href="#cl-res" class="jump">Resources</a>
       </div>
     </div>
@@ -2019,6 +2151,75 @@
       <div class="mnote"><span class="label">Why it pays</span>AWS-certified engineers earn noticeably more than uncertified peers, and there are tens of thousands of open cloud roles at any time. For you it is leverage: host client systems reliably instead of on a single fragile server.</div>
     </section>
 
+    <section class="sec" id="cl-levels">
+      <div class="eyebrow">02 · The three levels</div>
+      <h3>Beginner, intermediate, expert</h3>
+      <p class="lead">Cloud is the field where the gap between "I passed the exam" and "I can be trusted with the account" is widest. These levels are written around what you can actually be handed.</p>
+      <div class="lvls">
+        <article class="lvlcard b">
+          <div class="lvlhead"><span class="lvltag">Beginner</span><span class="lvltime">~4 weeks</span></div>
+          <h4>You can put something on the internet</h4>
+          <p>You understand what you are renting and you have a real URL that other people can open.</p>
+          <ul>
+            <li><b>What the cloud is:</b> renting somebody else's computer, by the second</li>
+            <li><b>The four things you ever rent:</b> compute, storage, network, database</li>
+            <li><b>Regions and zones:</b> why your app is slow in Bolivia</li>
+            <li><b>IAM basics:</b> users, roles, and why nobody uses the root account</li>
+            <li><b>Deploy a static site</b> and then a small server</li>
+            <li><b>Billing alarms,</b> set on day one, not after the first invoice</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>Your portfolio deployed on a real domain with HTTPS, and a spending alert that emails you at five dollars.</div>
+          <div class="lvlout"><b>Worth:</b> not a cloud job, but it makes you a far more employable developer.</div>
+        </article>
+        <article class="lvlcard i">
+          <div class="lvlhead"><span class="lvltag">Intermediate</span><span class="lvltime">~3 months</span></div>
+          <h4>You can run something other people depend on</h4>
+          <p>It deploys itself, it comes back after a crash, and you know when it breaks before the users tell you.</p>
+          <ul>
+            <li><b>Containers:</b> Docker, and why "it works on my machine" stopped being an excuse</li>
+            <li><b>CI/CD:</b> push to main, it tests and ships itself</li>
+            <li><b>Infrastructure as code:</b> Terraform, so the setup is a file and not a memory</li>
+            <li><b>Managed databases,</b> backups, and actually restoring one</li>
+            <li><b>Logging, metrics, alerts:</b> knowing before the client calls</li>
+            <li><b>Secrets:</b> never in the repository, ever</li>
+            <li><b>Cost control:</b> right-sizing, autoscaling, turning things off</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A containerised app with a managed database that deploys on every push, alerts you on errors, and restores from backup because you tested it.</div>
+          <div class="lvlout"><b>Worth:</b> this is a real, well-paid job title in most companies.</div>
+        </article>
+        <article class="lvlcard x">
+          <div class="lvlhead"><span class="lvltag">Expert</span><span class="lvltime">a year and onward</span></div>
+          <h4>You can be handed the whole account</h4>
+          <p>Architecture, spend and blast radius. The questions stop having a single correct answer.</p>
+          <ul>
+            <li><b>Designing for failure:</b> multi-zone, health checks, graceful degradation</li>
+            <li><b>Kubernetes,</b> and the harder skill of knowing when not to use it</li>
+            <li><b>Networking properly:</b> VPCs, subnets, private links</li>
+            <li><b>Security posture:</b> least privilege, audit trails, encryption everywhere</li>
+            <li><b>FinOps:</b> cutting a bill in half without cutting the service</li>
+            <li><b>Disaster recovery:</b> a tested plan, not a document</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A design document a company would act on: the architecture, the failure modes, the monthly cost, and what happens at ten times the traffic.</div>
+          <div class="lvlout"><b>Worth:</b> among the best paid roles in software, because a mistake here costs money every hour.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sec" id="cl-parts">
+      <div class="eyebrow">03 · The pieces</div>
+      <h3>Everything you rent, explained plainly</h3>
+      <p class="lead">Every cloud provider sells hundreds of services with different names for the same ideas. Underneath there are four things, and then conveniences built on top of them.</p>
+      <div class="acc">
+        <details open><summary>The restaurant, which explains the whole industry</summary><div class="body"><p>You want to serve dinner to people. There are three ways.</p><p><b>Buy a kitchen</b> and maintain it yourself. Total control, and the oven breaking is your problem at 2am. That is your own server in a room.</p><p><b>Rent a kitchen</b> by the hour. Somebody else fixes the oven, you still cook. That is <b>IaaS</b>, a virtual machine.</p><p><b>Rent a kitchen that comes with staff.</b> You hand over the recipe, food comes out. That is <b>PaaS</b>, like Vercel or App Engine.</p><p>And if you just order the food already made, that is <b>SaaS</b>, like Gmail. When someone lists twelve cloud services at you, ask which of these they are. It is always one of them.</p></div></details>
+        <details><summary>Compute: the part that runs your code</summary><div class="body"><p>A computer you rent by the second. It can be a whole machine (EC2, Compute Engine), a container that starts in a second, or a <b>function</b> that exists only while it handles one request and costs nothing when idle.</p><p>Rule of thumb for a beginner: start with the simplest thing that runs your app. You can move to something cleverer when you have users, and most projects never need to.</p></div></details>
+        <details><summary>Storage: files that outlive the machine</summary><div class="body"><p>Anything you save on a rented server disappears when that server is replaced, which happens more often than beginners expect. <b>Object storage</b> (S3 and its equivalents) is the separate, effectively infinite place you put uploads, images and backups.</p><p>It is remarkably cheap to store and it is the retrieval and transfer that costs. That surprises people every single time.</p></div></details>
+        <details><summary>Network: how anyone reaches you</summary><div class="body"><p>DNS points your domain at your machine. A <b>load balancer</b> spreads traffic across several machines and quietly stops sending it to the broken one. A <b>CDN</b> keeps copies of your images near your users, which is the single biggest speed win for anyone serving people far from their server.</p><p>Security groups are the doors: if your app is unreachable, this is where to look before you rewrite anything.</p></div></details>
+        <details><summary>Database: the part you should not run yourself</summary><div class="body"><p>You can install PostgreSQL on a rented machine. You should not, not at first. A <b>managed database</b> handles backups, patching and failover, and those three things are exactly what you will get wrong and only discover at the worst moment.</p><p>Pay the small premium. Spend the attention on your actual product.</p></div></details>
+        <details><summary>The bill, which is the part that ends careers</summary><div class="body"><p>Cloud charges by the second and never asks whether you meant it. The classic story is a forgotten test machine, or a loop that calls a paid service a million times, discovered thirty days later.</p><p>Three habits, from day one: a budget alarm at a number that would annoy you, tags on everything so you know what is costing what, and turning off anything you are not using tonight. Every experienced engineer has a story here. Have a cheap one.</p></div></details>
+      </div>
+      <div class="mnote"><span class="label">Which provider</span>AWS has the most jobs, Azure wins inside large corporations, Google Cloud is strong in data and AI. Learn one properly. The concepts on this page are identical across all three, so the second one takes weeks rather than months.</div>
+    </section>
+
     <section class="sec" id="cl-road">
       <div class="eyebrow">02 · The roadmap</div>
       <h3>Learn it in order</h3>
@@ -2026,7 +2227,7 @@
       <div class="progcard" data-scope="rm-cloud"><div class="pt"><span>CLOUD PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-cloud">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">Cloud fundamentals</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">Cloud fundamentals</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="cl1a"><span class="sk"><span class="skt">What cloud actually is</span><span class="sub">→ IaaS / PaaS / SaaS, on-demand, pay-as-you-go, shared responsibility model</span></span></label></li>
             <li><label><input type="checkbox" data-id="cl1b"><span class="sk"><span class="skt">The big three &amp; how they're laid out</span><span class="sub">→ AWS / Azure / Google Cloud, regions &amp; availability zones</span></span></label></li>
@@ -2035,7 +2236,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open an AWS free-tier account, set a billing alert, then launch and stop one server.</span></div><div class="row"><span class="tag b">Go deep</span><span>AWS Cloud Practitioner Essentials (free).</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">Core building blocks</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">Core building blocks</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="cl2a"><span class="sk"><span class="skt">Compute</span><span class="sub">→ EC2 / virtual machines, instance types, containers, serverless (Lambda)</span></span></label></li>
             <li><label><input type="checkbox" data-id="cl2b"><span class="sk"><span class="skt">Storage</span><span class="sub">→ S3 / object storage, block vs object, buckets &amp; access control</span></span></label></li>
@@ -2055,7 +2256,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Deploy your n8n stack to a cloud VM or container service, with failure alerts.</span></div><div class="row"><span class="tag b">Go deep</span><span>Docker plus cloud deployment guides.</span></div></div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">Scale, cost &amp; security</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">Scale, cost &amp; security</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="cl4a"><span class="sk"><span class="skt">Scale</span><span class="sub">→ autoscaling, load balancing, managed databases (RDS)</span></span></label></li>
             <li><label><input type="checkbox" data-id="cl4b"><span class="sk"><span class="skt">Reliability</span><span class="sub">→ backups, multi-AZ, health checks</span></span></label></li>
@@ -2065,7 +2266,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Put a load balancer and autoscaling in front of one app, and set a hard monthly budget.</span></div><div class="row"><span class="tag b">Go deep</span><span>AWS Well-Architected basics.</span></div></div>
         </div>
         <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Certify</span><span class="lv">Proof</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">5</span><span class="st">Certify</span><span class="lv">Certify</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="cl5a"><span class="sk"><span class="skt">AWS Certified Cloud Practitioner</span><span class="sub">→ foundational, about $100, start here</span></span></label></li>
             <li><label><input type="checkbox" data-id="cl5b"><span class="sk"><span class="skt">AWS Solutions Architect Associate</span><span class="sub">→ about $150, the resume-mover</span></span></label></li>
@@ -2102,10 +2303,80 @@
       <h2>Generative AI</h2>
       <p class="pd">The premium layer you upsell inside automations. LLMs, prompting, RAG, and agents.</p>
       <div class="subnav">
-        <a href="#ai-road" class="jump">Roadmap</a>
+        <a href="#ai-what" class="jump">What it is</a><a href="#ai-levels" class="jump">The three levels</a><a href="#ai-road" class="jump">Roadmap</a>
         <a href="#ai-res" class="jump">Resources</a>
       </div>
     </div>
+    <section class="sec" id="ai-what">
+      <div class="eyebrow">01 · What it actually is</div>
+      <h3>An LLM is autocomplete that read almost everything</h3>
+      <p class="lead">Strip away the mystery and a large language model does one thing: given some text, it guesses the next word. Then the next. Then the next. That is genuinely it.</p>
+      <p>Your phone keyboard does the same trick. Type "I am going to the" and it offers "store". It learned that from your messages. An LLM learned from a substantial share of the public internet, so its guesses are extraordinarily good, and stacking enough good guesses looks a lot like thinking.</p>
+      <div class="acc">
+        <details open><summary>Why it says things that are simply not true</summary><div class="body"><p>Because it is not looking anything up. It is producing the words that <b>usually follow</b> words like yours. Most of the time the usual answer is the correct one. Sometimes the usual-sounding answer is invented, and the model has no way to tell the difference, so it says it in the same confident voice.</p><p>That is called a <b>hallucination</b>, and it is not a bug someone forgot to fix. It is the direct consequence of how the thing works. Which is why you verify anything that matters, especially names, numbers, dates and links.</p></div></details>
+        <details><summary>Tokens: it does not see words, it sees pieces</summary><div class="body"><p>Text gets chopped into <b>tokens</b> before the model sees it. A token is roughly three quarters of a word: "unbelievable" might arrive as "un", "believ", "able".</p><p>Two practical consequences. You pay per token, so a chatty prompt literally costs more. And the model is bad at letter-level tasks like counting the r's in a word, because it never saw the letters, only the chunks.</p></div></details>
+        <details><summary>The context window is a desk, not a memory</summary><div class="body"><p>The <b>context window</b> is how much text the model can hold at once. Picture a desk: you can spread out a certain number of pages, and to add a new page you push an old one off the edge.</p><p>The model does not remember you between conversations. When a chat app seems to, it is quietly putting a summary of earlier messages back on the desk each time. Understanding this explains most "why did it forget?" moments.</p></div></details>
+        <details><summary>Temperature: the boring-to-reckless dial</summary><div class="body"><p>Instead of always taking its single best guess, the model can pick from among its top guesses. <b>Temperature</b> controls how adventurous that pick is.</p><p>Low temperature gives repeatable, conservative answers, which is what you want for extracting data or writing code. High temperature gives variety, which is what you want for brainstorming names. Same model, very different behaviour, one number.</p></div></details>
+        <details><summary>Training, fine-tuning and RAG, in one paragraph each</summary><div class="body"><p><b>Training</b> is what the lab did: months, thousands of machines, unimaginable cost. You will never do this and you do not need to.</p><p><b>Fine-tuning</b> is nudging an existing model with your own examples so it adopts a style or format. Useful occasionally, expensive to maintain, and usually reached for far too early.</p><p><b>RAG</b> means retrieval augmented generation, and it is what you actually want almost every time. You search your own documents, paste the relevant bits into the prompt, and ask the question. The model does not need to have learned your data. It just needs to be handed it. Most "AI that knows our company" products are this and nothing more.</p></div></details>
+        <details><summary>What an agent is, minus the hype</summary><div class="body"><p>An <b>agent</b> is a model in a loop that is allowed to use tools. You give it a goal, a list of things it can do (search the web, read a file, send an email, call an API), and it decides which to use, looks at the result, and decides again.</p><p>That is the whole idea. The difficulty is never the loop, it is everything around it: what happens when a tool fails, how you stop it looping forever, and how you make sure it cannot do real damage while it experiments.</p></div></details>
+      </div>
+      <div class="mnote"><span class="label">The honest state of it</span>AI writes a great deal of the world's code now, and the people it made redundant were mostly the ones who only knew how to type code. The people it made more valuable are the ones who can tell whether the output is right. That judgement comes from the fundamentals, which is why this academy makes you learn them first.</div>
+    </section>
+
+    <section class="sec" id="ai-levels">
+      <div class="eyebrow">02 · The three levels</div>
+      <h3>Beginner, intermediate, expert</h3>
+      <p class="lead">Everybody can reach beginner in a weekend. Intermediate is where you become employable. Expert is where you are trusted with things that can break.</p>
+      <div class="lvls">
+        <article class="lvlcard b">
+          <div class="lvlhead"><span class="lvltag">Beginner</span><span class="lvltime">~3 weeks</span></div>
+          <h4>You can talk to a model on purpose</h4>
+          <p>You understand what the thing is doing and you can get consistently good output instead of getting lucky.</p>
+          <ul>
+            <li><b>Prompting that works:</b> role, context, task, format, examples</li>
+            <li><b>Few-shot:</b> show two examples and it copies the pattern</li>
+            <li><b>Where it lies:</b> spotting the confident invention</li>
+            <li><b>Tokens and cost:</b> why your bill looks like that</li>
+            <li><b>Your first API call</b> in Python, about fifteen lines</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A script that reads 50 customer messages from a file and returns a tidy table of the complaint, the urgency and the suggested reply.</div>
+          <div class="lvlout"><b>Worth:</b> not a job yet, but immediately useful at any job you already have.</div>
+        </article>
+        <article class="lvlcard i">
+          <div class="lvlhead"><span class="lvltag">Intermediate</span><span class="lvltime">~8 weeks</span></div>
+          <h4>You can build something a business would pay for</h4>
+          <p>Structured output, your own documents, and a thing that stays up when other people use it.</p>
+          <ul>
+            <li><b>Structured output:</b> forcing reliable JSON, and validating it</li>
+            <li><b>Embeddings:</b> turning meaning into numbers you can search</li>
+            <li><b>Vector search and RAG</b> over real documents</li>
+            <li><b>Chunking:</b> the unglamorous part that decides whether RAG works</li>
+            <li><b>Tool calling:</b> letting the model trigger your own functions</li>
+            <li><b>Evaluation:</b> proving a change made it better, not just different</li>
+            <li><b>Cost and latency:</b> caching, smaller models, streaming</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A chatbot that answers questions from one company's actual PDFs, cites the page it used, and says "I do not know" instead of inventing.</div>
+          <div class="lvlout"><b>Worth:</b> this is the level that gets hired, and the level that gets freelance clients.</div>
+        </article>
+        <article class="lvlcard x">
+          <div class="lvlhead"><span class="lvltag">Expert</span><span class="lvltime">6 months and onward</span></div>
+          <h4>You can be trusted with it in production</h4>
+          <p>Agents that do real work, and the judgement to know what they must never be allowed to touch.</p>
+          <ul>
+            <li><b>Agent loops:</b> planning, tool use, retries, knowing when to stop</li>
+            <li><b>Multi-step workflows</b> with a human approving the risky step</li>
+            <li><b>Guardrails:</b> prompt injection, data leaking, spend limits</li>
+            <li><b>Observability:</b> tracing why a run went wrong three days ago</li>
+            <li><b>Model choice:</b> when a small cheap model is the right answer</li>
+            <li><b>Fine-tuning,</b> and why the answer is usually still RAG</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>An agent that reads incoming invoices, extracts the fields, checks them against a database, and queues anything unusual for a person instead of guessing.</div>
+          <div class="lvlout"><b>Worth:</b> the highest-paid corner of this field, because the risk is real and few people can manage it.</div>
+        </article>
+      </div>
+      <div class="mnote"><span class="label">The trap at every level</span>It is unusually easy to build an AI demo and unusually hard to build an AI product. The demo works on the three examples you tried. The product has to work on the four hundred you did not. Almost the entire difference between beginner and expert here is evaluation, guardrails and knowing what to refuse to automate.</div>
+    </section>
+
     <section class="sec" id="ai-road">
       <div class="eyebrow">01 · The roadmap</div>
       <h3>From LLM calls to agents that earn</h3>
@@ -2114,7 +2385,7 @@
       <div class="progcard" data-scope="rm-genai"><div class="pt"><span>GENERATIVE AI PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-genai">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">LLM foundations</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">LLM foundations</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ai1a"><span class="sk"><span class="skt">What an LLM is, and its limits</span><span class="sub">→ tokens, context window, temperature, why it hallucinates</span></span></label></li>
             <li><label><input type="checkbox" data-id="ai1b"><span class="sk"><span class="skt">Choosing a model</span><span class="sub">→ Claude / GPT / Gemini, cost vs quality, open vs closed</span></span></label></li>
@@ -2123,7 +2394,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Call the Claude API and get clean, schema-valid JSON back from a real prompt.</span></div><div class="row"><span class="tag b">Go deep</span><span>Anthropic docs, and DeepLearning.AI's Prompt Engineering course.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">Prompt engineering</span><span class="lv">Core</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">Prompt engineering</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ai2a"><span class="sk"><span class="skt">Prompt structure</span><span class="sub">→ system prompt, few-shot examples, chain-of-thought</span></span></label></li>
             <li><label><input type="checkbox" data-id="ai2b"><span class="sk"><span class="skt">Reliability</span><span class="sub">→ output schemas, guardrails, simple evals</span></span></label></li>
@@ -2141,7 +2412,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a RAG bot over your own notes so it answers from your data, not guesses.</span></div><div class="row"><span class="tag b">Go deep</span><span>LangChain RAG tutorial, DeepLearning.AI LangChain course.</span></div></div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">AI agents in workflows</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">AI agents in workflows</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ai4a"><span class="sk"><span class="skt">Tool calling &amp; agents</span><span class="sub">→ let the model act across tools; the Thought-Action-Observation loop</span></span></label></li>
             <li><label><input type="checkbox" data-id="ai4b"><span class="sk"><span class="skt">Agents inside n8n</span><span class="sub">→ the AI Agent node, the premium upsell on an automation</span></span></label></li>
@@ -2150,7 +2421,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Add an AI agent step to a real n8n automation. The full build lives on the Automation page.</span></div><div class="row"><span class="tag b">Go deep</span><span><button class="linklike" data-goto="automation">Automation → Go deeper: AI agents</button>.</span></div></div>
         </div>
         <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Certify</span><span class="lv">Proof</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">5</span><span class="st">Certify</span><span class="lv">Certify</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="ai5a"><span class="sk"><span class="skt">Google Cloud Generative AI Leader</span><span class="sub">→ foundational GenAI cert, launched 2025</span></span></label></li>
             <li><label><input type="checkbox" data-id="ai5b"><span class="sk"><span class="skt">AWS AI Practitioner / GenAI Developer</span><span class="sub">→ validates building with foundation models, RAG, vector DBs</span></span></label></li>
@@ -2190,7 +2461,7 @@
       <p class="pd">Turn raw data into decisions clients pay for. You are already a data engineer; this is the analyst layer on top.</p>
       <div class="subnav">
         <a href="#da-verdict" class="jump">Worth it?</a>
-        <a href="#da-road" class="jump">Roadmap</a>
+        <a href="#da-what" class="jump">The job</a><a href="#da-levels" class="jump">The three levels</a><a href="#da-road" class="jump">Roadmap</a>
         <a href="#da-res" class="jump">Resources</a>
       </div>
     </div>
@@ -2217,6 +2488,73 @@
       </div>
     </section>
 
+    <section class="sec" id="da-what">
+      <div class="eyebrow">02 · What the job actually is</div>
+      <h3>Turning a messy question into a number somebody acts on</h3>
+      <p class="lead">People imagine data work is building charts. Charts are the last ten minutes. The job is deciding what to ask, finding out the data is a mess, cleaning it, and then saying something a manager will actually do something about.</p>
+      <p>A useful way to picture it: a shop owner says "sales are down, do something". That is not a question anyone can answer. Your job is to turn it into "sales of the three cheapest items dropped 40% after we moved them to the back shelf", which is a sentence that decides itself.</p>
+      <div class="acc">
+        <details open><summary>The five steps, every single time</summary><div class="body"><p><b>1. Sharpen the question.</b> "Are sales down?" becomes "down compared to what, over which period, for which products?" Half of all bad analysis is answering a question nobody asked.</p><p><b>2. Get the data.</b> A spreadsheet, an export, a database. It will be messier than you were told.</p><p><b>3. Clean it.</b> Duplicates, blank cells, three spellings of the same city, dates in two formats. This is genuinely most of the work and nobody warns you.</p><p><b>4. Analyse.</b> Group, compare, look for what changed and when.</p><p><b>5. Communicate.</b> One chart and one sentence. If the manager needs you to explain it, it has not worked.</p></div></details>
+        <details><summary>Why "average" is usually the wrong answer</summary><div class="body"><p>Nine people earn 1,000 and one earns 100,000. The average salary is 10,900, and it describes nobody in the room. The <b>median</b>, 1,000, describes almost everyone.</p><p>Averages get destroyed by extremes. Whenever you report an average, look at the spread too. This single habit will make you better than a surprising number of working analysts.</p></div></details>
+        <details><summary>Correlation is not cause, and this one costs money</summary><div class="body"><p>Ice cream sales and drownings rise together. Ice cream does not drown anybody. Summer causes both.</p><p>In real work this shows up as: "customers who use feature X stay longer, so let us push everyone to feature X." Perhaps. Or perhaps the customers who were already committed are the ones who bother to find feature X. Getting this wrong sends a company in the wrong direction for a year.</p></div></details>
+        <details><summary>The tool ladder, and where to stop</summary><div class="body"><p><b>Spreadsheets</b> do more than beginners think and are what most of the business already uses. <b>SQL</b> is the actual entry ticket, because the data lives in a database and everyone expects you to fetch it yourself. <b>Python</b> takes over when the job is too repetitive or too large for a sheet. <b>A BI tool</b> like Power BI or Looker Studio is how the result becomes a dashboard other people can open without you.</p><p>You do not need machine learning to be a working analyst. Most of the value in most companies is still SQL plus clear thinking.</p></div></details>
+        <details><summary>Where the data actually comes from</summary><div class="body"><p>Somebody has to move it from the app into the place you query. That is a <b>pipeline</b>, and doing it is the neighbouring job of data engineer, which pays more and is closer to programming.</p><p>Worth knowing early, because plenty of people discover halfway through that they enjoy the plumbing more than the reporting, and that is a completely valid direction from here.</p></div></details>
+      </div>
+    </section>
+
+    <section class="sec" id="da-levels">
+      <div class="eyebrow">03 · The three levels</div>
+      <h3>Beginner, intermediate, expert</h3>
+      <p class="lead">Data is the friendliest well-paid entry into tech, because level one is genuinely reachable without writing much code at all.</p>
+      <div class="lvls">
+        <article class="lvlcard b">
+          <div class="lvlhead"><span class="lvltag">Beginner</span><span class="lvltime">~5 weeks</span></div>
+          <h4>You can answer a question with a spreadsheet</h4>
+          <p>Given a messy export and a vague question, you produce a clean answer and one honest chart.</p>
+          <ul>
+            <li><b>Spreadsheets properly:</b> pivot tables, lookups, filters</li>
+            <li><b>Cleaning:</b> duplicates, blanks, inconsistent spellings, dates</li>
+            <li><b>Describing data:</b> average versus median, and the spread</li>
+            <li><b>Charts that do not mislead:</b> starting the axis at zero, and when not to</li>
+            <li><b>SQL SELECT:</b> where, order by, group by</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A one-page answer to a real question using open government data about Bolivia, with the cleaning steps written down so somebody could repeat it.</div>
+          <div class="lvlout"><b>Worth:</b> genuinely useful in an office job, and the fastest route in for anyone who likes maths.</div>
+        </article>
+        <article class="lvlcard i">
+          <div class="lvlhead"><span class="lvltag">Intermediate</span><span class="lvltime">~4 months</span></div>
+          <h4>You can be the analyst on a team</h4>
+          <p>You fetch your own data, automate the boring parts, and ship dashboards other people use without you.</p>
+          <ul>
+            <li><b>SQL that earns money:</b> joins, subqueries, window functions, CTEs</li>
+            <li><b>Python with pandas</b> for anything a sheet cannot hold</li>
+            <li><b>Reproducible work:</b> a notebook someone else can rerun</li>
+            <li><b>Dashboards</b> in Power BI or Looker Studio, built for the reader</li>
+            <li><b>Statistics you will use:</b> distributions, sampling, significance</li>
+            <li><b>Telling the story:</b> the finding first, the method underneath</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A dashboard fed by your own SQL that a small business checks weekly, with a written page on what each number means and what to do when it moves.</div>
+          <div class="lvlout"><b>Worth:</b> this is the job. It is also the level freelance clients pay for.</div>
+        </article>
+        <article class="lvlcard x">
+          <div class="lvlhead"><span class="lvltag">Expert</span><span class="lvltime">a year and onward</span></div>
+          <h4>You change what the company decides</h4>
+          <p>You choose the questions, you build the plumbing, and people trust the numbers because you made them trustworthy.</p>
+          <ul>
+            <li><b>Modelling:</b> designing the tables the whole company reports from</li>
+            <li><b>Pipelines:</b> Airflow or dbt, scheduled and monitored</li>
+            <li><b>Experiments:</b> A/B tests that are actually valid</li>
+            <li><b>Forecasting</b> and knowing the honest error bars</li>
+            <li><b>Data quality:</b> tests on data, so a silent breakage is loud</li>
+            <li><b>Influence:</b> saying "the data does not support that" to a director</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>An automated pipeline with quality tests that feeds a dashboard nobody has to check by hand, and a memo that changed a real decision.</div>
+          <div class="lvlout"><b>Worth:</b> senior analyst, analytics engineer, or the step into data engineering.</div>
+        </article>
+      </div>
+      <div class="mnote"><span class="label">The unglamorous truth</span>You will spend more time cleaning than analysing, and more time explaining than either. The people who get promoted are not the ones with the fanciest models. They are the ones whose numbers turn out to be right and whose sentences are short.</div>
+    </section>
+
     <section class="sec" id="da-road">
       <div class="eyebrow">01 · The roadmap</div>
       <h3>From clean data to decisions</h3>
@@ -2225,7 +2563,7 @@
       <div class="progcard" data-scope="rm-data"><div class="pt"><span>DATA ANALYTICS PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-data">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">Spreadsheets &amp; data thinking</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">Spreadsheets &amp; data thinking</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="da1a"><span class="sk"><span class="skt">Clean data</span><span class="sub">→ dedupe, fix types, handle missing values, consistent formats</span></span></label></li>
             <li><label><input type="checkbox" data-id="da1b"><span class="sk"><span class="skt">Spreadsheets</span><span class="sub">→ formulas, pivot tables, VLOOKUP / XLOOKUP</span></span></label></li>
@@ -2234,7 +2572,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Turn a messy Sycosmart export into one clean pivot table with a real insight.</span></div><div class="row"><span class="tag b">Go deep</span><span>Google Data Analytics Certificate, courses 1 to 2.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">SQL for analysis</span><span class="lv">Core</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">SQL for analysis</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="da2a"><span class="sk"><span class="skt">Query</span><span class="sub">→ SELECT, WHERE, ORDER BY, GROUP BY, HAVING</span></span></label></li>
             <li><label><input type="checkbox" data-id="da2b"><span class="sk"><span class="skt">Joins &amp; subqueries</span><span class="sub">→ combine tables, CTEs</span></span></label></li>
@@ -2261,7 +2599,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a Tableau or Power BI dashboard for one real Sycosmart metric and share the link.</span></div><div class="row"><span class="tag b">Go deep</span><span>Tableau Public, and the Google cert's Tableau course.</span></div></div>
         </div>
         <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Stats &amp; decisions</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/3</span></div>
+          <div class="sh"><span class="sn">5</span><span class="st">Stats &amp; decisions</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/3</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="da5a"><span class="sk"><span class="skt">Descriptive stats</span><span class="sub">→ mean / median, variance, percentiles</span></span></label></li>
             <li><label><input type="checkbox" data-id="da5b"><span class="sk"><span class="skt">Testing</span><span class="sub">→ A/B basics, significance, sample size</span></span></label></li>
@@ -2270,7 +2608,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Define three KPIs for a business and exactly how you would measure each.</span></div><div class="row"><span class="tag b">Go deep</span><span>Google Advanced Data Analytics Certificate.</span></div></div>
         </div>
         <div class="stage" data-stage="6">
-          <div class="sh"><span class="sn">6</span><span class="st">Certify</span><span class="lv">Proof</span><span class="cnt" data-cnt>0/2</span></div>
+          <div class="sh"><span class="sn">6</span><span class="st">Certify</span><span class="lv">Certify</span><span class="cnt" data-cnt>0/2</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="da6a"><span class="sk"><span class="skt">Google Data Analytics Professional Certificate</span><span class="sub">→ the standard entry cert, ~180 hours, on Coursera</span></span></label></li>
             <li><label><input type="checkbox" data-id="da6b"><span class="sk"><span class="skt">Log it in your Certs tracker</span><span class="sub">→ cost, status, target date</span></span></label></li>
@@ -2308,7 +2646,7 @@
       <p class="pd">The server side: APIs, databases, auth, and deploy. This is the exact skill you are building the Brain product to learn.</p>
       <div class="subnav">
         <a href="#bk-start" class="jump">How to start</a>
-        <a href="#bk-road" class="jump">Roadmap</a>
+        <a href="#bk-what" class="jump">What it is</a><a href="#bk-levels" class="jump">The three levels</a><a href="#bk-road" class="jump">Roadmap</a>
         <a href="#bk-res" class="jump">Resources</a>
       </div>
     </div>
@@ -2321,6 +2659,76 @@
       <div class="mnote"><span class="label">Your fastest path</span>Follow the roadmap below in order, and use the Brain backend as the thing you build at each step. You already have the language (Python) and Docker, so you start at an advantage, spend your time on APIs, the database layer, and auth.</div>
     </section>
 
+    <section class="sec" id="bk-what">
+      <div class="eyebrow">02 · What it actually is</div>
+      <h3>The kitchen nobody in the restaurant ever sees</h3>
+      <p class="lead">The frontend is the dining room: the menu, the tables, the person taking your order. The backend is the kitchen. Customers never go in, and nothing arrives without it.</p>
+      <p>When you press "log in", the frontend does not know whether your password is right. It cannot: if it knew everybody's password, anyone could read the page source and take them. So it hands the order to the kitchen, the kitchen checks, and sends back either a meal or an apology.</p>
+      <div class="acc">
+        <details open><summary>What happens between the click and the answer</summary><div class="body"><p><b>1.</b> The browser sends a <b>request</b>: a method (GET, POST), an address, and usually some data.</p><p><b>2.</b> The <b>router</b> decides which piece of your code handles that address.</p><p><b>3.</b> <b>Middleware</b> runs first: is this person logged in, are they allowed, are they hammering us?</p><p><b>4.</b> Your <b>handler</b> does the actual work, usually talking to the database.</p><p><b>5.</b> A <b>response</b> goes back: a status code and some JSON.</p><p>Every backend you ever meet, in any language, is that list. The frameworks differ in spelling.</p></div></details>
+        <details><summary>Status codes, which are a language you must speak</summary><div class="body"><p><b>200</b> fine. <b>201</b> created something. <b>400</b> your request was malformed. <b>401</b> I do not know who you are. <b>403</b> I know who you are and no. <b>404</b> no such thing. <b>500</b> I broke, and it is my fault not yours.</p><p>The 401 and 403 distinction matters more than beginners expect, and returning 200 with an error message inside is a habit that will make other developers wince.</p></div></details>
+        <details><summary>Why you never store a password</summary><div class="body"><p>You store a <b>hash</b>: a one-way scramble. Feed "banana" to bcrypt and you get a long string. There is no way back. When someone logs in you scramble what they typed and compare the scrambles.</p><p>So when a company is breached, the passwords are not sitting there in a column. This is not optional and it is not hard, and the academy's own backend does exactly this in about four lines.</p></div></details>
+        <details><summary>Sessions and tokens: how it remembers you</summary><div class="body"><p>HTTP forgets you between requests. Every single one arrives as if from a stranger. So after you log in, the server hands you a <b>token</b>, and your browser presents it on every later request like a wristband at a festival.</p><p>A <b>JWT</b> is a token that carries a little signed information inside it, so the server can trust it without looking anything up. Powerful, and easy to get wrong: anyone can read what is inside one, so it holds who you are, never a secret.</p></div></details>
+        <details><summary>The database, and the one bug everyone writes</summary><div class="body"><p>Your data lives in tables with relationships: a user has many questions, a question has many answers. You fetch it with SQL.</p><p>The bug everyone writes once: building a query by gluing user input into a string. Someone types <code>'; DROP TABLE users; --</code> and your database obeys. That is <b>SQL injection</b>, it is decades old, and it still works on new code. The fix is to never glue: use parameters, or an ORM that does it for you.</p></div></details>
+        <details><summary>Why "it works on my machine" stops being funny</summary><div class="body"><p>Your laptop has your Python version, your database, your files. The server has none of that. <b>Docker</b> packages the app together with everything it needs, so what runs on your machine is literally the same thing that runs on theirs.</p><p>The other half is <b>environment variables</b>: your database password lives in the environment, never in the code, never in the repository. Committing a secret to GitHub is one of the most common and most expensive beginner mistakes.</p></div></details>
+      </div>
+      <div class="mnote"><span class="label">Learn it by reading this one</span>The backend for this academy is in the same repository you are looking at: FastAPI, PostgreSQL, JWT auth and a real community API, all commented. Once the roadmap below makes sense, open <code>backend/app</code> and read it. Reading a small real backend teaches faster than any tutorial.</div>
+    </section>
+
+    <section class="sec" id="bk-levels">
+      <div class="eyebrow">03 · The three levels</div>
+      <h3>Beginner, intermediate, expert</h3>
+      <p class="lead">Backend is where "it runs" and "it is safe to run" are very different achievements, and the whole career is the distance between them.</p>
+      <div class="lvls">
+        <article class="lvlcard b">
+          <div class="lvlhead"><span class="lvltag">Beginner</span><span class="lvltime">~6 weeks</span></div>
+          <h4>You can build an API that works</h4>
+          <p>Something on the internet can ask your program a question and get a sensible answer back.</p>
+          <ul>
+            <li><b>HTTP for real:</b> methods, headers, status codes, JSON</li>
+            <li><b>One framework:</b> FastAPI or Express, four endpoints</li>
+            <li><b>CRUD:</b> create, read, update, delete against a database</li>
+            <li><b>SQL basics</b> and one table design that is not silly</li>
+            <li><b>Reading the docs</b> instead of copying a tutorial</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A to-do API with four endpoints and a real database, tested by hand in the interactive docs your framework generates for free.</div>
+          <div class="lvlout"><b>Worth:</b> your frontend projects stop being fake. That alone changes a portfolio.</div>
+        </article>
+        <article class="lvlcard i">
+          <div class="lvlhead"><span class="lvltag">Intermediate</span><span class="lvltime">~5 months</span></div>
+          <h4>You can build one people can safely use</h4>
+          <p>Accounts, permissions, tests, and it is deployed somewhere real with a domain.</p>
+          <ul>
+            <li><b>Auth:</b> hashing, tokens, refresh, logout that actually logs out</li>
+            <li><b>Authorisation:</b> the difference between logged in and allowed</li>
+            <li><b>Validation:</b> never trust anything the client sends</li>
+            <li><b>Relationships and migrations</b> that do not lose data</li>
+            <li><b>Tests</b> that fail when you break something</li>
+            <li><b>Deploy:</b> Docker, environment variables, a domain, HTTPS</li>
+            <li><b>Errors and logs</b> you can read at midnight</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>An app with signup, login and per-user data, deployed publicly, where you can show a stranger that they cannot read your account.</div>
+          <div class="lvlout"><b>Worth:</b> junior backend developer, and enough to build a product on your own.</div>
+        </article>
+        <article class="lvlcard x">
+          <div class="lvlhead"><span class="lvltag">Expert</span><span class="lvltime">a year and onward</span></div>
+          <h4>You can build one that stays up under pressure</h4>
+          <p>Thousands of users, money involved, and other developers depending on your decisions.</p>
+          <ul>
+            <li><b>Performance:</b> indexes, the N+1 query, caching, connection pools</li>
+            <li><b>Background jobs and queues</b> for the slow work</li>
+            <li><b>Concurrency:</b> transactions, race conditions, idempotency</li>
+            <li><b>Security in depth:</b> OWASP Top 10, rate limits, secret rotation</li>
+            <li><b>Design:</b> layering, boundaries, why the monolith is often correct</li>
+            <li><b>Operating it:</b> monitoring, tracing, migrations with no downtime</li>
+          </ul>
+          <div class="lvlbuild"><b>You build</b>A service with background jobs and caching, load-tested, with a written note on what breaks first and what you would do about it.</div>
+          <div class="lvlout"><b>Worth:</b> senior backend, and the foundation for platform and infrastructure work.</div>
+        </article>
+      </div>
+      <div class="mnote"><span class="label">The line that separates the levels</span>A beginner asks "does it work?". An intermediate asks "does it work when the input is wrong?". An expert asks "what happens when two people do this at the same time, and the database goes down halfway through?". Nothing else is really different.</div>
+    </section>
+
     <section class="sec" id="bk-road">
       <div class="eyebrow">01 · The roadmap</div>
       <h3>What to learn, in order</h3>
@@ -2328,7 +2736,7 @@
       <div class="progcard" data-scope="rm-backend"><div class="pt"><span>BACKEND PATH PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-backend">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">How the web works</span><span class="lv">Foundation</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">How the web works</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk1a"><span class="sk"><span class="skt">Client, server &amp; HTTP</span><span class="sub">→ request / response, GET / POST / PUT / DELETE, status codes (2xx / 4xx / 5xx), headers</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk1b"><span class="sk"><span class="skt">JSON, the data format of APIs</span><span class="sub">→ parse / serialize, content-type, nesting</span></span></label></li>
@@ -2338,7 +2746,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open your running API's <code>/docs</code> and <code>/health</code>, then watch the request and response in the browser's Network tab.</span></div><div class="row"><span class="tag b">Go deep</span><span>MDN's HTTP overview, and roadmap.sh/backend for the full map.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">APIs &amp; REST</span><span class="lv">Core</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">APIs &amp; REST</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk2a"><span class="sk"><span class="skt">REST design</span><span class="sub">→ resources &amp; endpoints, verbs ↔ CRUD, path vs query vs body</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk2b"><span class="sk"><span class="skt">Status codes &amp; errors</span><span class="sub">→ return the right code, consistent error shapes</span></span></label></li>
@@ -2348,7 +2756,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Add a real endpoint to your FastAPI app that returns JSON, and try it in the auto-generated <code>/docs</code>.</span></div><div class="row"><span class="tag b">Go deep</span><span>The FastAPI tutorial, it teaches by building.</span></div></div>
         </div>
         <div class="stage" data-stage="3">
-          <div class="sh"><span class="sn">3</span><span class="st">Databases</span><span class="lv">Core</span><span class="cnt" data-cnt>0/5</span></div>
+          <div class="sh"><span class="sn">3</span><span class="st">Databases</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/5</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk3a"><span class="sk"><span class="skt">Relational modeling</span><span class="sub">→ tables, primary / foreign keys, relations, normalization</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk3b"><span class="sk"><span class="skt">SQL</span><span class="sub">→ CRUD, joins, GROUP BY, indexes</span></span></label></li>
@@ -2359,7 +2767,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Model the <code>users</code> table and wire it through SQLAlchemy. This is Phase 2 of the Brain build.</span></div><div class="row"><span class="tag b">Go deep</span><span>PostgreSQL Tutorial, and your own Databases roadmap.</span></div></div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">Auth &amp; security</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">Auth &amp; security</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk4a"><span class="sk"><span class="skt">Password hashing</span><span class="sub">→ bcrypt / argon2, never store plaintext, salting</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk4b"><span class="sk"><span class="skt">Sessions vs tokens</span><span class="sub">→ JWT access + refresh, how tokens flow</span></span></label></li>
@@ -2369,7 +2777,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build signup and login with hashed passwords, then protect one route with a JWT. This is Phase 2 to 3 of the build.</span></div><div class="row"><span class="tag b">Go deep</span><span>FastAPI security docs, and the OWASP Top 10 (see your Security roadmap).</span></div></div>
         </div>
         <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Structure, quality &amp; testing</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">5</span><span class="st">Structure, quality &amp; testing</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk5a"><span class="sk"><span class="skt">Project architecture</span><span class="sub">→ routers / services / models layering, config from env</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk5b"><span class="sk"><span class="skt">Error handling &amp; logging</span><span class="sub">→ consistent errors, structured logs</span></span></label></li>
@@ -2379,7 +2787,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Write your first pytest for the signup endpoint: it should reject a duplicate email.</span></div><div class="row"><span class="tag b">Go deep</span><span>Real Python and the FastAPI testing docs.</span></div></div>
         </div>
         <div class="stage" data-stage="6">
-          <div class="sh"><span class="sn">6</span><span class="st">Deploy &amp; operate</span><span class="lv">Advanced</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">6</span><span class="st">Deploy &amp; operate</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk6a"><span class="sk"><span class="skt">Docker</span><span class="sub">→ containerize the API and database (you do this already)</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk6b"><span class="sk"><span class="skt">A server</span><span class="sub">→ VPS or cloud, reverse proxy, HTTPS, a domain</span></span></label></li>
@@ -2389,7 +2797,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Deploy the Brain backend to your VPS behind HTTPS. This is Phase 5 of the build.</span></div><div class="row"><span class="tag b">Go deep</span><span>Docker docs, and your Cloud roadmap.</span></div></div>
         </div>
         <div class="stage" data-stage="7">
-          <div class="sh"><span class="sn">7</span><span class="st">Scaling &amp; beyond</span><span class="lv">Later</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">7</span><span class="st">Scaling &amp; beyond</span><span class="lv">Expert</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="bk7a"><span class="sk"><span class="skt">Caching</span><span class="sub">→ Redis, what to cache, invalidation</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk7b"><span class="sk"><span class="skt">Background jobs</span><span class="sub">→ queues, workers, webhooks, scheduled tasks</span></span></label></li>
@@ -2565,7 +2973,7 @@
       <div class="progcard" data-scope="rm-fundamentals"><div class="pt"><span>FOUNDATION PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-fundamentals">
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">What a computer is</span><span class="lv">Foundation · ~3 days</span><span class="cnt" data-cnt>0/5</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">What a computer is</span><span class="lv">Beginner · ~3 days</span><span class="cnt" data-cnt>0/5</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu1a"><span class="sk"><span class="skt">Hardware, the parts you can touch</span><span class="sub">→ CPU is the cook, RAM is the counter, storage is the pantry. Screen, keyboard and mouse are hardware too.</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu1b"><span class="sk"><span class="skt">Software, the instructions</span><span class="sub">→ the operating system runs everything else, apps do one job each. Hardware is the body, software is the thoughts.</span></span></label></li>
@@ -2576,7 +2984,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open Task Manager on Windows (Ctrl+Shift+Esc) or Activity Monitor on Mac and just look. Every line is a program using a slice of the cook and a slice of the counter. That is your operating system doing its job.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">Files, folders and your tools</span><span class="lv">Foundation · ~3 days</span><span class="cnt" data-cnt>0/5</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">Files, folders and your tools</span><span class="lv">Beginner · ~3 days</span><span class="cnt" data-cnt>0/5</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu2a"><span class="sk"><span class="skt">Files, folders and extensions</span><span class="sub">→ what .html, .css, .js, .py mean, and why the bit after the dot decides how the computer reads a file</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu2b"><span class="sk"><span class="skt">Where your things actually are</span><span class="sub">→ paths, the difference between saving and saving-as, and finding a file without searching the whole machine</span></span></label></li>
@@ -2587,7 +2995,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Make a folder called <b>code</b> somewhere you will not lose it. Open it in VS Code. Create a file called <b>index.html</b>, type the word Hello, save it, and double-click it. Your first web page took ten seconds.</span></div></div>
         </div>
         <div class="stage" data-stage="3">
-          <div class="sh"><span class="sn">3</span><span class="st">The internet and the web</span><span class="lv">Foundation · ~4 days</span><span class="cnt" data-cnt>0/5</span></div>
+          <div class="sh"><span class="sn">3</span><span class="st">The internet and the web</span><span class="lv">Beginner · ~4 days</span><span class="cnt" data-cnt>0/5</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu3a"><span class="sk"><span class="skt">Internet vs the web</span><span class="sub">→ the internet is the roads, the web is one thing that drives on them. Email and video calls use the roads too.</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu3b"><span class="sk"><span class="skt">What happens when you open a site</span><span class="sub">→ DNS looks up the address, your browser asks, a server answers, your browser assembles the page. Like ordering a pizza.</span></span></label></li>
@@ -2598,7 +3006,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Press F12 on any website and click Network, then reload the page. You are watching every single request your browser makes. Most people never see this. You just did.</span></div></div>
         </div>
         <div class="stage" data-stage="4">
-          <div class="sh"><span class="sn">4</span><span class="st">Thinking like a computer</span><span class="lv">Core · ~1 week</span><span class="cnt" data-cnt>0/6</span></div>
+          <div class="sh"><span class="sn">4</span><span class="st">Thinking like a computer</span><span class="lv">Beginner · ~1 week</span><span class="cnt" data-cnt>0/6</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu4a"><span class="sk"><span class="skt">Sequence: order is everything</span><span class="sub">→ the computer does exactly what you said, in exactly the order you said it, and nothing else</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu4b"><span class="sk"><span class="skt">Variables, conditions, loops</span><span class="sub">→ a labelled box, a fork in the road, and doing it again. Almost every program ever written is these three plus sequence.</span></span></label></li>
@@ -2610,7 +3018,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open <b>Logic Lab</b> in Practice and solve the first five levels. Level 5 is impossible unless you find the repeating pattern and turn it into a function. When that clicks, you have understood something most first-year students have not.</span></div></div>
         </div>
         <div class="stage" data-stage="5">
-          <div class="sh"><span class="sn">5</span><span class="st">Computer science basics</span><span class="lv">Core · ~1 week</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">5</span><span class="st">Computer science basics</span><span class="lv">Beginner · ~1 week</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu5a"><span class="sk"><span class="skt">Data structures</span><span class="sub">→ list, dictionary, stack, queue. Where you put things decides how fast you find them. Undo is a stack.</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu5b"><span class="sk"><span class="skt">How work grows with data</span><span class="sub">→ the idea behind Big O. Doubling the list doubles one approach and adds one step to another.</span></span></label></li>
@@ -2620,7 +3028,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Take one thing you did today, like making breakfast, and write it as numbered steps so exact that someone who has never done it could follow. Miss a step and they fail. That frustration is programming, and you just did it on paper.</span></div></div>
         </div>
         <div class="stage" data-stage="6">
-          <div class="sh"><span class="sn">6</span><span class="st">The tech field and where you fit</span><span class="lv">Decide · ~2 days</span><span class="cnt" data-cnt>0/4</span></div>
+          <div class="sh"><span class="sn">6</span><span class="st">The tech field and where you fit</span><span class="lv">Beginner · ~2 days</span><span class="cnt" data-cnt>0/4</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu6a"><span class="sk"><span class="skt">The jobs that actually exist</span><span class="sub">→ frontend, backend, data, automation, security, AI, cloud, design, QA, IT support. Read what the days really look like.</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu6b"><span class="sk"><span class="skt">Which ones need heavy maths, and which do not</span><span class="sub">→ AI and graphics do. Web and automation mostly do not. Choose knowing this, not fearing it.</span></span></label></li>
@@ -2630,7 +3038,7 @@
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Pick the two jobs from the list that sound most like you, then find one real person doing each on LinkedIn or YouTube and watch a day in their life. Ten minutes each. It will teach you more than any careers talk.</span></div></div>
         </div>
         <div class="stage" data-stage="7">
-          <div class="sh"><span class="sn">7</span><span class="st">Ready for what comes next</span><span class="lv">Prepare · ~1 week</span><span class="cnt" data-cnt>0/5</span></div>
+          <div class="sh"><span class="sn">7</span><span class="st">Ready for what comes next</span><span class="lv">Beginner · ~1 week</span><span class="cnt" data-cnt>0/5</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="fu7a"><span class="sk"><span class="skt">The maths that actually shows up</span><span class="sub">→ logic and truth tables, basic algebra, percentages, a little probability. Add matrices and calculus only for AI or graphics.</span></span></label></li>
             <li><label><input type="checkbox" data-id="fu7b"><span class="sk"><span class="skt">Enough English to read the answer</span><span class="sub">→ nearly every good document and error message is in English. Reading is enough to start, and it is a huge unfair advantage.</span></span></label></li>
@@ -3420,7 +3828,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       <div class="progcard" data-scope="rm-webdev"><div class="pt"><span>WEB DEV PROGRESS</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
       <div id="rm-webdev">
         <div class="stage" data-stage="0">
-          <div class="sh"><span class="sn">0</span><span class="st">Fundamentals first</span><span class="lv">Before any code · ~1 week</span><span class="cnt" data-cnt>0/5</span></div>
+          <div class="sh"><span class="sn">0</span><span class="st">Fundamentals first</span><span class="lv">Beginner · ~1 week</span><span class="cnt" data-cnt>0/5</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="wd0a"><span class="sk"><span class="skt">What a program actually is</span><span class="sub">→ a list of instructions the computer follows exactly, in order, like a recipe. It is incredibly fast and completely stupid. It does nothing you did not tell it to do.</span></span></label></li>
             <li><label><input type="checkbox" data-id="wd0b"><span class="sk"><span class="skt">Thinking in steps (the real skill)</span><span class="sub">→ take a big problem and cut it into tiny steps in order. Say the steps out loud in your own language BEFORE you touch code. This is 80% of programming and it has nothing to do with typing.</span></span></label></li>
@@ -3431,7 +3839,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>On paper, write every step to make a cup of tea, so exact that someone who has never seen tea could follow it. Miss "turn on the kettle" and they will drink cold water. That frustration you feel is exactly what programming is. You just did it without a computer.</span></div><div class="row"><span class="tag b">Go deep</span><span>The free <b>Tech, explained from zero</b> primer in this academy, then Harvard CS50's first lecture on YouTube.</span></div></div>
         </div>
         <div class="stage" data-stage="1">
-          <div class="sh"><span class="sn">1</span><span class="st">The web &amp; HTML</span><span class="lv">Foundation · ~2 weeks</span><span class="cnt" data-cnt>0/6</span></div>
+          <div class="sh"><span class="sn">1</span><span class="st">The web &amp; HTML</span><span class="lv">Beginner · ~2 weeks</span><span class="cnt" data-cnt>0/6</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="wd1a"><span class="sk"><span class="skt">How the web actually works</span><span class="sub">→ client &amp; server, HTTP request and response, URLs, DNS. Like ordering a pizza by phone.</span></span></label></li>
             <li><label><input type="checkbox" data-id="wd1b"><span class="sk"><span class="skt">Your very first page</span><span class="sub">→ html / head / body, save a .html file, open it in the browser. That is already a website.</span></span></label></li>
@@ -3443,7 +3851,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a one-page profile about yourself: a photo, a big heading, two paragraphs, a list of three things you like, and a link to your Instagram. Open it in your browser. That is a real web page, and you made it.</span></div><div class="row"><span class="tag b">Go deep</span><span>The <b>100 HTML tags</b> reference linked above, plus freeCodeCamp Responsive Web Design.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
-          <div class="sh"><span class="sn">2</span><span class="st">CSS &amp; responsive design</span><span class="lv">Core · ~3 weeks</span><span class="cnt" data-cnt>0/7</span></div>
+          <div class="sh"><span class="sn">2</span><span class="st">CSS &amp; responsive design</span><span class="lv">Beginner · ~3 weeks</span><span class="cnt" data-cnt>0/7</span></div>
           <ul class="skills">
             <li><label><input type="checkbox" data-id="wd2a"><span class="sk"><span class="skt">Selectors &amp; the cascade</span><span class="sub">→ element, class, id, specificity, inheritance. How CSS decides who wins.</span></span></label></li>
             <li><label><input type="checkbox" data-id="wd2b"><span class="sk"><span class="skt">The box model</span><span class="sub">→ content, padding, border, margin, box-sizing. Everything is a box, like a wrapped gift.</span></span></label></li>
@@ -3456,7 +3864,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
           <div class="do"><div class="row"><span class="tag a">Do this</span><span>Make your profile page beautiful. Then slowly shrink the browser window until it is phone-sized. If nothing breaks and nothing scrolls sideways, you have understood responsive design.</span></div><div class="row"><span class="tag b">Go deep</span><span>freeCodeCamp Responsive Web Design (free certificate), MDN CSS, and the Flexbox Froggy game.</span></div></div>
         </div>
         <div class="stage" data-stage="3">
-          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Core · ~8 weeks</span><span class="cnt" data-cnt>0/12</span></div>
+          <div class="sh"><span class="sn">3</span><span class="st">JavaScript</span><span class="lv">Beginner · ~8 weeks</span><span class="cnt" data-cnt>0/12</span></div>
           <p class="stagenote"><b>Four blocks, in this exact order:</b> the language itself → the DOM → events → libraries. Most people jump straight to libraries and then cannot fix anything. Do not be most people. <button class="inlinelink" data-goto="jsguide">Read the full JavaScript guide →</button></p>
           <div class="grouplabel">Block A · The language fundamentals</div>
           <ul class="skills">

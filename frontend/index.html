@@ -1237,6 +1237,38 @@
   .chain-n b{color:var(--ink)}
   @media(max-width:700px){.chain{flex-direction:column}.charr{width:1px;height:12px;align-self:flex-start;margin:3px 0 3px 22px}
     .charr::after{right:-3px;top:auto;bottom:0;border-color:transparent;border-top-color:var(--line-strong)}}
+  /* ===== language switch + word helper ===== */
+  .langrow{display:flex;gap:6px;align-items:center;padding:0 4px 10px;flex-wrap:wrap}
+  .langbtn{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:99px;overflow:hidden;
+    background:rgba(255,255,255,.10);cursor:pointer;padding:0;font-family:"JetBrains Mono",monospace}
+  .langbtn span{padding:4px 10px;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.72)}
+  .langbtn span.on{background:#fff;color:var(--teal-ink)}
+  .lookupbtn{flex:1;min-width:0;border:1px solid rgba(255,255,255,.28);border-radius:99px;
+    background:none;color:rgba(255,255,255,.72);cursor:pointer;font-family:inherit;font-size:11px;
+    font-weight:600;padding:5px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lookupbtn.on{background:rgba(255,255,255,.20);color:#fff}
+
+  .lkp{position:fixed;z-index:200;max-width:320px;min-width:210px;background:var(--card);
+    border:1px solid var(--line-strong);border-radius:14px;padding:13px 15px;box-shadow:var(--shade-lg);
+    animation:lkpin .14s ease}
+  @keyframes lkpin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .lkp-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .lkp-term{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);word-break:break-word}
+  .lkp-x{background:none;border:0;color:var(--ink-faint);font-size:17px;line-height:1;cursor:pointer;padding:0 2px}
+  .lkp-x:hover{color:var(--ink)}
+  .lkp-es{margin-top:6px;font-family:"Space Grotesk",sans-serif;font-size:18px;font-weight:700;
+    color:var(--teal-ink);letter-spacing:-.01em;line-height:1.25}
+  .lkp-mean{margin-top:7px;font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+  .lkp-mean b{color:var(--ink)}
+  .lkp-eg{margin-top:7px;font-size:12.5px;line-height:1.45;color:var(--ink-faint);font-style:italic;
+    padding-left:9px;border-left:2px solid var(--line-strong)}
+  .lkp-src{margin-top:9px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--ink-faint)}
+  .lkp-acts{margin-top:9px}
+  .lkp-go{font-family:inherit;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:8px;
+    border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+  .lkp-go:hover{border-color:var(--teal);color:var(--teal-ink)}
+  @media(prefers-reduced-motion:reduce){.lkp{animation:none}}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -4458,6 +4490,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       if(menuBtn)menuBtn.setAttribute('aria-expanded','false');
       renderFor(name);
       if(typeof buildRail==='function')buildRail(name);
+      if(typeof applyLang==='function'&&LANG==='es')applyLang();
       if(typeof readProgress==='function')readProgress();
       if(typeof seePage==='function'&&!document.body.classList.contains('preview'))seePage(name);
     }
@@ -6787,6 +6820,394 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       if(clr)clr.addEventListener('click',function(){AWQ.draft='';renderAskWell();});
     }
 
+    /* Spanish for the interface, keyed on the exact English text.
+       Anything missing simply stays in English, so this can grow one
+       line at a time without ever breaking the app. Add entries here. */
+    var ES={
+      /* navigation and shell */
+      'Start here':'Empieza aquí','Courses':'Cursos','Tools':'Herramientas','Practice':'Práctica',
+      'Community':'Comunidad','Find your path':'Encuentra tu camino','Profile':'Perfil',
+      'Academy':'Academia','Word helper':'Ayuda con palabras','Menu':'Menú',
+      '← Courses':'← Cursos','← Community':'← Comunidad','← Web Development':'← Desarrollo Web',
+      /* login */
+      'Login':'Iniciar sesión','Register':'Crear cuenta','Email':'Correo','Password':'Contraseña',
+      'Full name':'Nombre completo','Remember me':'Recuérdame','Forgot Password?':'¿Olvidaste tu contraseña?',
+      'Welcome back. Sign in to continue.':'Bienvenido de nuevo. Inicia sesión para continuar.',
+      'understand it · try it · then choose':'entiéndelo · pruébalo · luego elige',
+      /* course catalog */
+      'Start here, whoever you are':'Empieza aquí, seas quien seas',
+      'Then pick one track and finish it':'Luego elige una ruta y termínala',
+      'Every course, if you would rather browse':'Todos los cursos, si prefieres explorar',
+      'Free, and not a course':'Gratis, y no es un curso',
+      'Certificates you have earned':'Certificados que has ganado',
+      'Web Developer':'Desarrollador Web','Automation & AI':'Automatización e IA',
+      'Data Analyst':'Analista de Datos','Secure Developer':'Desarrollador Seguro',
+      'Widest door in':'La puerta más ancha','Fastest to get paid':'El camino más rápido a cobrar',
+      'Least code':'Menos código','Build, then defend':'Construye, luego defiende',
+      'Welcome back.':'Bienvenido de nuevo.',
+      'Lessons done':'Lecciones hechas','Certificates':'Certificados','Day streak':'Días seguidos',
+      'XP total':'XP total','Keep practising':'Sigue practicando','Start Foundations':'Empezar Fundamentos',
+      /* levels */
+      'Beginner':'Principiante','Intermediate':'Intermedio','Expert':'Experto','Certify':'Certificar',
+      'Beginner, intermediate, expert':'Principiante, intermedio, experto',
+      'The three levels':'Los tres niveles','You build':'Construyes','Worth:':'Vale:',
+      /* practice */
+      'Practice: think it, then build it':'Práctica: piénsalo, luego constrúyelo',
+      'Logic Lab':'Laboratorio de Lógica','Code Lab':'Laboratorio de Código',
+      'Think in steps · no code at all':'Piensa en pasos · sin nada de código',
+      'Write real HTML, CSS and JavaScript':'Escribe HTML, CSS y JavaScript de verdad',
+      'Forward':'Adelante','Left':'Izquierda','Right':'Derecha','Run':'Ejecutar','Step':'Paso',
+      'Undo':'Deshacer','Clear':'Limpiar','Slow':'Lento','Normal':'Normal','Fast':'Rápido',
+      'Easy':'Fácil','Medium':'Medio','Hard':'Difícil','Daily':'Diario','Random':'Aleatorio',
+      'Build a level':'Crea un nivel','Main':'Principal','F1 · function':'F1 · función','F2 · function':'F2 · función',
+      'New chips run':'Las nuevas fichas se ejecutan','Always':'Siempre',
+      'If clear ahead':'Si hay paso libre','If blocked ahead':'Si está bloqueado',
+      'click a command to add it here':'haz clic en un comando para añadirlo aquí',
+      'Your code':'Tu código','Live preview':'Vista en vivo','Check my work':'Revisar mi trabajo',
+      'Start over':'Empezar de nuevo','Free play':'Juego libre','updates as you type':'se actualiza mientras escribes',
+      'What the checker looks for':'Lo que revisa el corrector',
+      /* community + ask well */
+      'Nobody learns this alone':'Nadie aprende esto solo',
+      'Ask the room':'Pregunta a la sala','Post the question':'Publicar la pregunta',
+      'Post answer':'Publicar respuesta','Everything':'Todo','Unanswered':'Sin responder',
+      'Solved':'Resuelto','Mine':'Mías','Report':'Reportar','This helped':'Esto me ayudó',
+      'Report this question':'Reportar esta pregunta',
+      'Four rules, then you are in':'Cuatro reglas, y estás dentro',
+      'I understand, let me in':'Entiendo, déjame entrar','Read the rules':'Leer las reglas',
+      'Ask a better question':'Haz una mejor pregunta',
+      'Copy':'Copiar','Next question →':'Siguiente pregunta →',
+      /* profile */
+      'Everything you have done, in one place':'Todo lo que has hecho, en un solo lugar',
+      'Badges':'Insignias','The last seven days':'Los últimos siete días',
+      'Settings and account':'Ajustes y cuenta','Next up:':'Lo siguiente:',
+      'Lessons completed':'Lecciones completadas','Logic levels solved':'Niveles de lógica resueltos',
+      'Code challenges solved':'Retos de código resueltos','Exams taken':'Exámenes rendidos',
+      'Best exam score':'Mejor nota de examen','Certificates earned':'Certificados ganados',
+      'Days you showed up':'Días que apareciste','Reference pages read':'Páginas de referencia leídas',
+      'Badges unlocked':'Insignias desbloqueadas','course progress':'progreso del curso',
+      /* common labels */
+      'Roadmap':'Ruta de aprendizaje','Resources':'Recursos','Best resources':'Mejores recursos',
+      'Do this':'Haz esto','Go deep':'Profundiza','Next move:':'Siguiente paso:',
+      'On this page':'En esta página','Free':'Gratis','Reference · free':'Referencia · gratis',
+      'What it is':'Qué es','The job':'El trabajo','The pieces':'Las piezas',
+      'The starter kit':'El kit inicial','Toolchains':'Cadenas de herramientas',
+      'Every tool':'Cada herramienta','When to add one':'Cuándo añadir una',
+      'The tool':'La herramienta','Why it matters':'Por qué importa','Using AI properly':'Usar IA correctamente',
+      'How the web works':'Cómo funciona la web','The big three':'Los tres grandes','Core ideas':'Ideas centrales',
+      'How to start':'Cómo empezar','How to learn':'Cómo aprender','Save time':'Ahorra tiempo',
+      'How jobs really work':'Cómo funcionan los trabajos de verdad'
+    };
+
+    /* =========================================================
+       Language: a word helper, and a site-wide EN/ES switch.
+
+       Two separate problems, solved separately:
+
+       1. LOOKUP. Select any word or sentence and get help with it.
+          Offline glossary first (instant, works with no connection,
+          and teaches by giving the meaning and an example rather
+          than only a translation). Then the browser's on-device
+          translator if the student has it. Then, only if they tap
+          it themselves, an external translator.
+
+       2. SWITCHING the whole interface. Keyed on the English text
+          itself, so no markup had to change and translation can be
+          added a string at a time. Anything not yet translated
+          simply stays in English instead of breaking.
+    ========================================================= */
+
+    /* ---- 1. the glossary: [english, spanish, what it means, example] ---- */
+    var GLOSS=[
+      ['algorithm','algoritmo','A set of steps that solves a problem, guaranteed to finish.','Long division is an algorithm.'],
+      ['array','arreglo, lista','A numbered list of things, in order.','fruits[0] is the first item in the array.'],
+      ['backend','backend, servidor','The part of an app you never see, on a server.','The backend checks your password.'],
+      ['bug','error, fallo','A mistake in code that makes it behave wrongly.','I found the bug on line 12.'],
+      ['branch','rama','A copy of your code where you try something risky.','Work on a branch, not on main.'],
+      ['build','compilar, construir','To turn your source code into the thing that runs.','The build failed because of a typo.'],
+      ['cache','caché','A copy kept nearby so you do not fetch it again.','Images load fast from the cache.'],
+      ['commit','confirmar, guardar cambios','One saved snapshot of your work in Git.','Make a commit before you experiment.'],
+      ['deploy','desplegar, publicar','To put your code somewhere people can use it.','We deploy on every push.'],
+      ['debug','depurar','To find and fix the cause of a bug.','Use the console to debug it.'],
+      ['default','por defecto, predeterminado','What happens when you do not choose.','By default the list is empty.'],
+      ['deprecated','obsoleto','Still works, but you should stop using it.','That method is deprecated.'],
+      ['edge case','caso extremo','A rare situation that breaks normal code.','An empty name is an edge case.'],
+      ['endpoint','endpoint, punto de acceso','One address on an API that does one job.','POST /login is an endpoint.'],
+      ['fetch','obtener, traer','To go and get data from somewhere else.','Fetch the users from the API.'],
+      ['framework','framework, marco de trabajo','A ready-made structure you build inside.','React is a framework.'],
+      ['frontend','frontend, interfaz','Everything the user sees and clicks.','The frontend runs in the browser.'],
+      ['handler','manejador','The function that deals with an event or request.','The click handler opens the menu.'],
+      ['hardcode','escribir a mano, fijar en el código','To write a value directly instead of making it flexible.','Do not hardcode the password.'],
+      ['input','entrada, dato de entrada','What goes into a program or a form.','Never trust user input.'],
+      ['issue','problema, incidencia','A reported problem or task.','Open an issue on GitHub.'],
+      ['library','librería, biblioteca','Code somebody else wrote that you reuse.','Chart.js is a library.'],
+      ['loop','bucle, ciclo','Doing the same thing many times.','A loop prints every name.'],
+      ['merge','fusionar, combinar','To join two versions of the code together.','Merge your branch into main.'],
+      ['nested','anidado','One thing placed inside another.','A nested loop is a loop inside a loop.'],
+      ['output','salida, resultado','What comes out of a program.','The output was 42.'],
+      ['override','sobrescribir, anular','To replace the normal behaviour with your own.','This rule overrides the default.'],
+      ['parse','analizar, interpretar','To read text and turn it into structured data.','Parse the JSON into an object.'],
+      ['patch','parche','A small fix.','They released a patch for the bug.'],
+      ['payload','carga, contenido','The actual data sent in a request.','The payload is JSON.'],
+      ['pull request','pull request, solicitud de cambios','Asking a team to review and accept your changes.','Open a pull request when you are done.'],
+      ['query','consulta','A question you ask a database.','This query returns all users.'],
+      ['refactor','refactorizar','To improve code without changing what it does.','Refactor before adding features.'],
+      ['repository','repositorio','The folder where your project and its history live.','Clone the repository.'],
+      ['request','petición, solicitud','A message asking a server for something.','The browser sends a request.'],
+      ['response','respuesta','What the server sends back.','The response was 404.'],
+      ['scope','ámbito, alcance','Where a variable exists and can be used.','That variable is out of scope.'],
+      ['seed','semilla','A starting number that makes randomness repeatable.','The same seed gives the same level.'],
+      ['stack','pila','A pile where the last thing in is the first out.','Undo works like a stack.'],
+      ['state','estado','The data an app currently holds.','Clicking changes the state.'],
+      ['statement','instrucción, sentencia','One complete instruction in code.','An if statement makes a decision.'],
+      ['string','cadena de texto','Text, as opposed to a number.','"hello" is a string.'],
+      ['throughput','rendimiento, caudal','How much work gets done per second.','Caching improved throughput.'],
+      ['token','token','A small piece of text, or a pass that proves who you are.','You pay per token.'],
+      ['type','tipo','What kind of value something is.','The type is a number, not a string.'],
+      ['variable','variable','A labelled box that holds a value.','Store the score in a variable.'],
+      ['whitespace','espacio en blanco','Spaces, tabs and line breaks.','Python cares about whitespace.'],
+      ['wrapper','envoltorio','Something that goes around another thing.','A wrapper function calls the real one.'],
+      /* the ordinary English that blocks comprehension, which is most of the problem */
+      ['brittle','frágil','Breaks easily when anything changes.','That code is brittle.'],
+      ['blunt','contundente, poco preciso','Simple and not very precise.','A blunt first line of defence.'],
+      ['clumsy','torpe','Awkward, badly put together.','A clumsy layout.'],
+      ['deliberate','deliberado, a propósito','Done on purpose.','That gap is deliberate.'],
+      ['edge','borde, extremo','The outer limit of something.','The edge of the screen.'],
+      ['glamorous','glamoroso, llamativo','Exciting and attractive.','Databases are not glamorous.'],
+      ['grasp','entender, captar','To understand something firmly.','Once you grasp loops, the rest follows.'],
+      ['handful','puñado','A small number of things.','A handful of commands.'],
+      ['honest','honesto, sincero','Truthful, even when it is uncomfortable.','The honest answer is no.'],
+      ['leverage','aprovechar, palanca','To use something to get a bigger effect.','Leverage what you already know.'],
+      ['messy','desordenado','Untidy and disorganised.','Real data is messy.'],
+      ['overkill','exagerado, excesivo','Far more than the situation needs.','React is overkill for one page.'],
+      ['pitfall','trampa, escollo','A hidden mistake that is easy to make.','A common pitfall for beginners.'],
+      ['plumbing','fontanería, tuberías','The unglamorous connecting work.','Most of the job is plumbing.'],
+      ['ruthless','implacable, despiadado','Willing to cut without sentiment.','Be ruthless about scope.'],
+      ['seamless','sin interrupciones, fluido','Smooth, with no visible joins.','A seamless experience.'],
+      ['shortcut','atajo','A faster way that skips steps.','There is no shortcut here.'],
+      ['stuck','atascado, trabado','Unable to continue.','Being stuck is normal.'],
+      ['subtle','sutil','Small and hard to notice.','A subtle bug.'],
+      ['thorough','minucioso, exhaustivo','Complete and careful.','A thorough test.'],
+      ['tidy','ordenado','Neat and organised.','Keep the folder tidy.'],
+      ['tricky','complicado, engañoso','Difficult in a sneaky way.','Dates are tricky.'],
+      ['worth it','vale la pena','Good enough to justify the effort.','Learning SQL is worth it.'],
+      ['straightforward','sencillo, directo','Simple, with no complications.','The fix is straightforward.'],
+      ['overwhelming','abrumador','Too much to handle at once.','The tool list is overwhelming.'],
+      ['reliable','confiable, fiable','Can be trusted to work every time.','A reliable backup.'],
+      ['spot','detectar, notar','To notice something.','Spot the mistake.'],
+      ['skip','saltar, omitir','To leave something out.','Do not skip the fundamentals.'],
+      ['gap','brecha, hueco','A missing space between two things.','A gap in your knowledge.'],
+      ['guess','adivinar, suposición','To answer without being sure.','Do not guess, measure.'],
+      ['claim','afirmar, afirmación','To say something is true.','Verify the claim.'],
+      ['trade-off','compensación, sacrificio','Gaining one thing by giving up another.','Speed and clarity are a trade-off.']
+    ];
+    var GLOSSMAP=null;
+    function glossLookup(term){
+      if(!GLOSSMAP){
+        GLOSSMAP={};
+        GLOSS.forEach(function(g){GLOSSMAP[g[0].toLowerCase()]=g;});
+      }
+      var k=String(term||'').toLowerCase().trim().replace(/[.,;:!?"'()]+$/,'').replace(/^[.,;:!?"'()]+/,'');
+      if(GLOSSMAP[k])return GLOSSMAP[k];
+      if(k.length>3&&k.slice(-1)==='s'&&GLOSSMAP[k.slice(0,-1)])return GLOSSMAP[k.slice(0,-1)];
+      if(k.length>4&&k.slice(-3)==='ing'&&GLOSSMAP[k.slice(0,-3)])return GLOSSMAP[k.slice(0,-3)];
+      if(k.length>4&&k.slice(-2)==='ed'&&GLOSSMAP[k.slice(0,-2)])return GLOSSMAP[k.slice(0,-2)];
+      return null;
+    }
+
+    /* ---- on-device translation, strictly optional and never blocking ---- */
+    var MTR={en_es:null,es_en:null,broken:false};
+    function withTimeout(promise,ms){
+      return new Promise(function(res,rej){
+        var done=false;
+        var t=setTimeout(function(){if(!done){done=true;rej(new Error('timeout'));}},ms);
+        promise.then(function(v){if(!done){done=true;clearTimeout(t);res(v);}},
+                     function(e){if(!done){done=true;clearTimeout(t);rej(e);}});
+      });
+    }
+    async function machineTranslate(text,from,to){
+      if(MTR.broken||!('Translator' in self))return null;
+      var key=from+'_'+to;
+      try{
+        if(!MTR[key]){
+          MTR[key]=await withTimeout(Translator.create({sourceLanguage:from,targetLanguage:to}),4000);
+        }
+        return await withTimeout(MTR[key].translate(text),4000);
+      }catch(e){
+        /* a missing model, a download prompt, an unsupported build: never block on it */
+        MTR.broken=true;MTR[key]=null;return null;
+      }
+    }
+
+    /* ---- the selection popover ---- */
+    var LOOKUP_ON=true,LKP=null;
+    function lookupEnabled(){
+      try{var v=localStorage.getItem('fm.lookup');return v===null?true:v==='1';}catch(e){return LOOKUP_ON;}
+    }
+    function setLookup(on){
+      LOOKUP_ON=on;
+      try{localStorage.setItem('fm.lookup',on?'1':'0');}catch(e){}
+      if(!on)closeLookup();
+    }
+    function closeLookup(){
+      var el=document.getElementById('lkp');
+      if(el&&el.parentNode)el.parentNode.removeChild(el);
+      LKP=null;
+    }
+    function lookupHtml(sel,g,state,translated){
+      var esc2=esc;
+      var head='<div class="lkp-h"><span class="lkp-term">'+esc2(sel.length>44?sel.slice(0,44)+'…':sel)+'</span>'
+        +'<button class="lkp-x" data-lkpclose aria-label="Close">×</button></div>';
+      if(g){
+        return head
+          +'<div class="lkp-es">'+esc2(g[1])+'</div>'
+          +'<div class="lkp-mean"><b>Means:</b> '+esc2(g[2])+'</div>'
+          +'<div class="lkp-eg">'+esc2(g[3])+'</div>'
+          +'<div class="lkp-src">from the academy glossary</div>';
+      }
+      if(state==='ok'){
+        return head+'<div class="lkp-es">'+esc2(translated)+'</div>'
+          +'<div class="lkp-src">translated on your device, nothing was sent anywhere</div>';
+      }
+      if(state==='working'){
+        return head+'<div class="lkp-mean">Translating…</div>';
+      }
+      return head
+        +'<div class="lkp-mean">Not in the glossary, and your browser cannot translate offline.</div>'
+        +'<div class="lkp-acts"><button class="lkp-go" data-lkpext>Open in Google Translate</button></div>'
+        +'<div class="lkp-src">only if you tap it, and it opens in a new tab</div>';
+    }
+    function placeLookup(box,rect){
+      var pad=10,w=box.offsetWidth||300,h=box.offsetHeight||120;
+      var left=rect.left+rect.width/2-w/2;
+      left=Math.max(pad,Math.min(left,window.innerWidth-w-pad));
+      var top=rect.top-h-10;
+      if(top<pad)top=rect.bottom+10;
+      box.style.left=Math.round(left)+'px';
+      box.style.top=Math.round(top)+'px';
+    }
+    async function showLookup(sel,rect){
+      closeLookup();
+      var box=document.createElement('div');
+      box.id='lkp';box.className='lkp';box.setAttribute('role','dialog');
+      box.setAttribute('aria-label','Word helper');
+      var g=glossLookup(sel);
+      box.innerHTML=lookupHtml(sel,g,g?'gloss':'working');
+      document.body.appendChild(box);
+      placeLookup(box,rect);
+      LKP={sel:sel};
+      box.addEventListener('click',function(e){
+        if(e.target.closest('[data-lkpclose]')){closeLookup();return;}
+        if(e.target.closest('[data-lkpext]')){
+          var dir=LANG==='es'?'es|en':'en|es';
+          window.open('https://translate.google.com/?sl='+dir.split('|')[0]+'&tl='+dir.split('|')[1]
+            +'&text='+encodeURIComponent(sel)+'&op=translate','_blank','noopener');
+        }
+      });
+      if(g)return;
+      var from=LANG==='es'?'es':'en', to=LANG==='es'?'en':'es';
+      var out=await machineTranslate(sel,from,to);
+      if(!LKP||LKP.sel!==sel)return;
+      var still=document.getElementById('lkp');
+      if(!still)return;
+      still.innerHTML=lookupHtml(sel,null,out?'ok':'none',out);
+      placeLookup(still,rect);
+    }
+    function initLookup(){
+      LOOKUP_ON=lookupEnabled();
+      document.addEventListener('mouseup',function(e){
+        if(!LOOKUP_ON)return;
+        if(e.target.closest&&e.target.closest('.lkp'))return;
+        setTimeout(function(){
+          var s=window.getSelection();
+          if(!s||s.isCollapsed){closeLookup();return;}
+          var text=String(s).trim();
+          if(!text||text.length>180){closeLookup();return;}
+          var node=s.anchorNode;
+          if(node&&node.parentElement&&node.parentElement.closest('input,textarea,.editor,#lkp')){return;}
+          var r=s.getRangeAt(0).getBoundingClientRect();
+          if(!r||(!r.width&&!r.height))return;
+          showLookup(text,r);
+        },10);
+      });
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLookup();});
+      window.addEventListener('scroll',function(){closeLookup();},{passive:true});
+    }
+
+    /* ---- 2. the interface language switch ---- */
+    var LANG='en';
+    var SKIP_TAGS={SCRIPT:1,STYLE:1,PRE:1,CODE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,SVG:1};
+    var ORIG=new WeakMap();
+    function langLoad(){
+      try{return localStorage.getItem('fm.lang')||'en';}catch(e){return 'en';}
+    }
+    function langCoverage(){
+      var have=Object.keys(ES).length;
+      return {have:have};
+    }
+    function walkText(root,fn){
+      var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+        acceptNode:function(n){
+          if(!n.nodeValue||!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;
+          var p=n.parentElement;
+          while(p){
+            if(SKIP_TAGS[p.tagName]||p.hasAttribute&&p.hasAttribute('data-noi18n'))return NodeFilter.FILTER_REJECT;
+            p=p.parentElement;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var n;while((n=w.nextNode()))fn(n);
+    }
+    function applyLang(){
+      var toEs=LANG==='es';
+      walkText(document.body,function(n){
+        if(!ORIG.has(n))ORIG.set(n,n.nodeValue);
+        var en=ORIG.get(n);
+        if(!toEs){ if(n.nodeValue!==en)n.nodeValue=en; return; }
+        var key=en.trim();
+        var hit=ES[key];
+        if(hit){
+          var lead=en.match(/^\s*/)[0], tail=en.match(/\s*$/)[0];
+          var next=lead+hit+tail;
+          if(n.nodeValue!==next)n.nodeValue=next;
+        }else if(n.nodeValue!==en){ n.nodeValue=en; }
+      });
+      document.documentElement.lang=toEs?'es':'en';
+    }
+    function setLang(l){
+      LANG=(l==='es')?'es':'en';
+      try{localStorage.setItem('fm.lang',LANG);}catch(e){}
+      applyLang();
+      renderLangBtn();
+    }
+    function renderLangBtn(){
+      var b=document.getElementById('langbtn');if(!b)return;
+      b.innerHTML='<span class="'+(LANG==='en'?'on':'')+'">EN</span><span class="'+(LANG==='es'?'on':'')+'">ES</span>';
+      b.setAttribute('aria-label',LANG==='en'?'Cambiar a español':'Switch to English');
+      var t=document.getElementById('lookuptoggle');
+      if(t)t.setAttribute('aria-pressed',LOOKUP_ON?'true':'false');
+      if(t)t.classList.toggle('on',LOOKUP_ON);
+    }
+    function initLang(){
+      LANG=langLoad();
+      var host=document.querySelector('.sidefoot');
+      if(host&&!document.getElementById('langbtn')){
+        var wrap=document.createElement('div');
+        wrap.className='langrow';
+        wrap.innerHTML='<button class="langbtn" id="langbtn" type="button"></button>'
+          +'<button class="lookupbtn'+(LOOKUP_ON?' on':'')+'" id="lookuptoggle" type="button" '
+          +'title="Select any word to see what it means" aria-pressed="'+(LOOKUP_ON?'true':'false')+'">Word helper</button>';
+        host.insertBefore(wrap,host.firstChild);
+        wrap.querySelector('#langbtn').addEventListener('click',function(){setLang(LANG==='en'?'es':'en');});
+        wrap.querySelector('#lookuptoggle').addEventListener('click',function(){
+          setLookup(!LOOKUP_ON);renderLangBtn();
+          toast(LOOKUP_ON?'Word helper on. Select any word.':'Word helper off.');
+        });
+      }
+      renderLangBtn();
+      if(LANG==='es')applyLang();
+    }
+
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
@@ -6818,6 +7239,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     });
 
     window.addEventListener('scroll',function(){if(typeof readProgress==='function')readProgress();},{passive:true});
+    initLookup();
+    initLang();
     renderAll();
     applyGate();
     var _pb=document.getElementById('path-back');if(_pb)_pb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});

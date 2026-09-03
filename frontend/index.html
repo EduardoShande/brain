@@ -572,7 +572,8 @@
   .gscore{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
   .gwhy{margin:6px 0 16px;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
   .gwhy b{color:var(--ink)}
-  .gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+  .gbtns .gbtn{flex:0 0 auto}
   .gbtn{font-family:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
   .gbtn:hover{border-color:var(--teal);color:var(--teal-ink)}
   .gbtn.pri{background:var(--grad);border-color:transparent;color:var(--on-teal)}
@@ -584,11 +585,21 @@
   .lwrap{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:24px;align-items:start}
   @media(max-width:720px){.lwrap{grid-template-columns:1fr}}
   .lgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;aspect-ratio:1;max-width:260px}
-  .lcell{border-radius:7px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:19px;transition:background .12s}
-  .lcell.wall{background:var(--ink-faint);border-color:transparent;opacity:.35}
+  .lcell{border-radius:7px;background:var(--card);border:1px solid var(--line-strong);display:grid;place-items:center;font-size:19px;transition:background .12s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+  .lcell.wall{background:var(--ink-faint);border-color:var(--ink-faint);opacity:1;box-shadow:none;
+    background-image:repeating-linear-gradient(45deg,rgba(0,0,0,.30) 0 4px,transparent 4px 8px)}
   .lcell.goal{background:var(--good-wash);border-color:var(--good);color:var(--good)}
-  .lcell.trail{background:var(--teal-wash)}
-  .lcell.bot{background:var(--grad);border-color:transparent;color:#fff;font-weight:800}
+  .lcell.got{background:var(--good-wash);border-color:var(--good);color:var(--good);opacity:.5}
+  .lcell.trail{background:var(--teal-wash);border-color:var(--teal)}
+  .lcell.bot{background:var(--grad);border-color:transparent;color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(124,58,237,.45)}
+  .lcell.ed{cursor:pointer}
+  .lcell.ed:hover{outline:2px solid var(--teal);outline-offset:1px}
+  .starcount{display:flex;align-items:center;gap:5px;margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
+  .starcount .sdot{color:var(--line-strong);font-size:15px}
+  .starcount .sdot.on{color:var(--good)}
+  .starcount b{margin-left:5px;color:var(--ink)}
+  .pcline{margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
+  .pcline b{color:var(--teal-ink)}
   .lpal{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
   .lpal button{font-family:inherit;font-size:13.5px;font-weight:700;padding:8px 13px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
   .lpal button:hover:not(:disabled){border-color:var(--teal);color:var(--teal-ink)}
@@ -599,8 +610,11 @@
   .lstrip.act .lslab{color:var(--teal-ink)}
   .lslot{min-height:42px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;padding:6px;border-radius:9px;border:1px dashed var(--line-strong);background:var(--surface)}
   .lstrip.act .lslot{border-color:var(--teal);border-style:solid}
-  .cmdchip{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--teal-wash);color:var(--teal-ink)}
+  .cmdchip{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--teal-wash);color:var(--teal-ink);cursor:pointer;user-select:none}
+  .cmdchip:hover{filter:brightness(1.12)}
+  .cmdchip i{font-style:normal;font-size:11px;opacity:.75;margin-left:3px}
   .cmdchip.f1{background:var(--clay-wash);color:var(--clay-ink)}
+  .cmdchip.now{outline:2px solid var(--teal);outline-offset:2px;background:var(--grad);color:var(--on-teal)}
   .lempty{font-size:12.5px;color:var(--ink-faint);padding-left:4px}
 
   /* ===== code lab ===== */
@@ -2513,8 +2527,8 @@
       <button class="back" data-goto="academy">← Courses</button>
       <div class="pn">Code Lab · free</div>
       <h2>Practice: think it, then build it</h2>
-      <p class="pd">Two labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all, which is the part everyone skips and then struggles with forever. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.</p>
-      <div class="mnote"><span class="label">Why this is the important page</span>Reading about code teaches you almost nothing. <b>You learn by typing it, breaking it, and fixing it.</b> Everything else in this academy exists to get you here. The challenges do not just look at your code, they run it and measure the result, exactly like a real test at a real job.</div>
+      <p class="pd">Two labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all: sequencing, loops, functions and debugging, as a puzzle. It is the part everyone skips and then struggles with forever. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.</p>
+      <div class="mnote"><span class="label">Why this is the important page</span>Reading about code teaches you almost nothing. <b>You learn by trying it, breaking it, and fixing it.</b> Everything else in this academy exists to get you here. Logic Lab has 14 levels, a new challenge every day, endless generated levels, and an editor so you can build your own and send them to friends. Code Lab actually runs your code and measures the result, exactly like a real test at a real job.</div>
       <div class="modetabs" id="lab-modes"></div>
       <div class="labtabs" id="lab-tabs"></div>
     </div>
@@ -4040,7 +4054,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     /* =========================================================
        Game system: XP, levels, badges and streaks
     ========================================================= */
-    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges'],['logician','Logician','Solve all 10 Logic Lab levels'],['generator','Machine beater','Solve 10 randomly generated levels']];
+    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges'],['logician','Logician','Solve all 10 Logic Lab levels'],['generator','Machine beater','Solve 10 randomly generated levels'],['daily5','Regular','Beat the daily challenge on 5 days']];
     var LEVELS=[[1,'Curious'],[2,'Beginner'],[3,'Learner'],[5,'Builder'],[7,'Coder'],[10,'Developer'],[14,'Craftsman'],[20,'Senior'],[28,'Architect'],[40,'Legend']];
     var REFPAGES=['fundamentals','start','htmltags','webconcepts','jsguide','webtools','resources'];
     var QUESTS=[
@@ -4351,7 +4365,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
 
     /* =========================================================
-       Logic Lab: sequencing, debugging and functions, no syntax
+       Logic Lab: sequencing, loops, functions and debugging,
+       with no syntax at all
     ========================================================= */
     var DIRCH=['→','↓','←','↑'];
     var DR=[0,1,0,-1],DC=[1,0,-1,0];
@@ -4360,32 +4375,49 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       {n:'One turn',g:['..G..','.....','S....','.....','.....'],max:10,tip:'Walk, turn, walk again. The order is the whole puzzle.'},
       {n:'Around the wall',g:['.....','.....','S.#.G','..#..','.....'],max:16,tip:'A wall is in the way. Plan the detour before you press Run.'},
       {n:'Meet F1',g:['#####','#####','##G##','#..##','S.###'],max:9,tip:'The pattern forward, left, forward, right happens twice. Put it in F1 once and call F1 twice.'},
-      {n:'The staircase',g:['####G','###..','##..#','#..##','S.###'],max:5,tip:'Only 5 commands fit in Main. The only way is F1 = forward, left, forward, right, called four times.'},
-      {n:'The zigzag',g:['S.###','#..##','##..#','###..','####G'],max:6,tip:'The same trick, mirrored. Find the four-command pattern that repeats and put it in F1.'},
-      {n:'The long way round',g:['S....','####.','.....','.####','....G'],max:26,tip:'No trick here, just a long path. Trace it with your finger before you click anything.'},
+      {n:'The staircase',g:['####G','###..','##..#','#..##','S.###'],max:5,tip:'Only 5 slots in Main. Put forward, left, forward, right in F1, then call F1 four times. Or use one F1 with a repeat of 4.'},
+      {n:'The zigzag',g:['S.###','#..##','##..#','###..','####G'],max:6,tip:'The same trick, mirrored. Find the four-command pattern that repeats.'},
+      {n:'The long way round',g:['S....','####.','.....','.####','....G'],max:26,tip:'No trick here, just a long path. Click a command twice to make it repeat instead of adding it again.'},
       {n:'Two doors',g:['S.#..','..#..','.##..','.....','..##G'],max:24,tip:'There is more than one route. The shorter one earns three stars.'},
       {n:'The climb',g:['..#.G','..#.#','..#.#','....#','S####'],max:26,tip:'Read the whole map first. Every wrong turn is a crash, and a crash tells you exactly which step was wrong.'},
-      {n:'The tight one',g:['S.###','#..##','##..#','###..','####G'],max:4,tip:'The same map as the zigzag, but Main now holds only 4 commands. One F1, called four times, and nothing else.'}
+      {n:'The tight one',g:['S.###','#..##','##..#','###..','####G'],max:4,tip:'The same map as the zigzag, but Main now holds only 4 slots. One function, repeated.'},
+      {n:'Two stars',g:['*...*','.....','..S..','.....','.....'],max:20,tip:'Two stars now. Collect both, in whichever order is shorter. Nothing else changes.'},
+      {n:'Collect three',g:['.....','.*.*.','.....','.*...','S....'],max:24,tip:'Three stars. The order you choose decides whether you get three stars or one.'},
+      {n:'The ring',g:['S...*','.###.','.###.','.###.','*....'],max:3,tip:'Only 3 slots in Main. Walk four, turn, and repeat that. One function with a repeat count does the whole lap.'},
+      {n:'The comb',g:['*.*.*','.....','.###.','.....','S....'],max:6,tip:'Three stars along the top. Find the pattern that gets from one to the next, and repeat it.'}
     ];
-    var LG=null,LOGDIFF=2;
+    var LG=null,LOGDIFF=2,LOGSPEED=300;
+
+    function lvStars(lv){
+      var out=[],r,c,ch;
+      for(r=0;r<5;r++)for(c=0;c<5;c++){ch=lv.g[r].charAt(c);if(ch==='*'||ch==='G')out.push(r+','+c);}
+      return out;
+    }
     function logicStart(lv){for(var r=0;r<lv.g.length;r++){var c=lv.g[r].indexOf('S');if(c>=0)return{r:r,c:c,d:0};}return{r:0,c:0,d:0};}
     function walkable(lv,r,c){return r>=0&&r<5&&c>=0&&c<5&&lv.g[r].charAt(c)!=='#';}
+    /* exact shortest solution: BFS over position, facing and which stars are collected */
     function bfsPar(lv){
-      var s=logicStart(lv),seen={},q=[[s.r,s.c,s.d,0]],i=0,k;
-      seen[s.r+','+s.c+','+s.d]=1;
+      var stars=lvStars(lv);if(!stars.length)return -1;
+      var full=(1<<stars.length)-1,s=logicStart(lv),k;
+      function maskAt(r,c,m){var i=stars.indexOf(r+','+c);return i<0?m:(m|(1<<i));}
+      var m0=maskAt(s.r,s.c,0);
+      if(m0===full)return 0;
+      var seen={},q=[[s.r,s.c,s.d,m0,0]],i=0;
+      seen[s.r+','+s.c+','+s.d+','+m0]=1;
       while(i<q.length){
-        var cur=q[i++],r=cur[0],c=cur[1],d=cur[2],n=cur[3];
-        if(lv.g[r].charAt(c)==='G')return n;
-        var nx=[[r,c,(d+1)%4],[r,c,(d+3)%4]],fr=r+DR[d],fc=c+DC[d];
-        if(walkable(lv,fr,fc))nx.push([fr,fc,d]);
+        var cur=q[i++],r=cur[0],c=cur[1],d=cur[2],m=cur[3],n=cur[4];
+        var nx=[[r,c,(d+1)%4,m],[r,c,(d+3)%4,m]],fr=r+DR[d],fc=c+DC[d];
+        if(walkable(lv,fr,fc))nx.push([fr,fc,d,maskAt(fr,fc,m)]);
         for(k=0;k<nx.length;k++){
-          var key=nx[k][0]+','+nx[k][1]+','+nx[k][2];
+          if(nx[k][3]===full)return n+1;
+          var key=nx[k][0]+','+nx[k][1]+','+nx[k][2]+','+nx[k][3];
           if(seen[key])continue;
-          seen[key]=1;q.push([nx[k][0],nx[k][1],nx[k][2],n+1]);
+          seen[key]=1;q.push([nx[k][0],nx[k][1],nx[k][2],nx[k][3],n+1]);
         }
       }
       return -1;
     }
+    function seedRand(seed){var s=(seed>>>0)||1;return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
     function logicCosts(rows){
       var lv={g:rows.map(function(x){return typeof x==='string'?x:x.join('');})};
       var s=logicStart(lv),seen={},q=[[s.r,s.c,s.d,0]],i=0,best={},k;
@@ -4403,17 +4435,18 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       }
       return best;
     }
-    function randLevel(diff,tries){
-      tries=tries||0;
+    function randLevel(diff,rnd,tries,name){
+      rnd=rnd||Math.random;tries=tries||0;
       var minPar=tries>=40?4:(diff===1?5:diff===3?13:9);
+      var nStars=tries>=40?1:(diff===1?1:diff===2?2:3);
       var N=5,g=[],r,c,i,k,m,t;
       for(r=0;r<N;r++){g.push([]);for(c=0;c<N;c++)g[r].push('#');}
-      var sr=Math.floor(Math.random()*N),sc=Math.floor(Math.random()*N),cr=sr,cc=sc;
+      var sr=Math.floor(rnd()*N),sc=Math.floor(rnd()*N),cr=sr,cc=sc;
       g[cr][cc]='.';
       var steps=diff===1?8:diff===3?20:14;
       for(i=0;i<steps;i++){
         var dirs=[[0,1],[1,0],[0,-1],[-1,0]];
-        for(k=dirs.length-1;k>0;k--){m=Math.floor(Math.random()*(k+1));t=dirs[k];dirs[k]=dirs[m];dirs[m]=t;}
+        for(k=dirs.length-1;k>0;k--){m=Math.floor(rnd()*(k+1));t=dirs[k];dirs[k]=dirs[m];dirs[m]=t;}
         var moved=false;
         for(k=0;k<4;k++){
           var nr=cr+dirs[k][0],nc=cc+dirs[k][1];
@@ -4423,132 +4456,402 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         if(!moved)break;
       }
       g[sr][sc]='S';
-      var costs=logicCosts(g),bk=null,bc=-1,home=sr+','+sc;
-      Object.keys(costs).forEach(function(key){if(key!==home&&costs[key]>bc){bc=costs[key];bk=key;}});
-      if(!bk||bc<minPar)return randLevel(diff,tries+1);
-      var gp=bk.split(',');
-      g[+gp[0]][+gp[1]]='G';
-      var lv={n:'Random level',g:g.map(function(row){return row.join('');}),rnd:true,par:bc,
-        tip:'Generated one second ago. Nobody has ever solved this exact level before, including me.'};
-      lv.max=Math.max(12,bc+8);
+      var costs=logicCosts(g),home=sr+','+sc;
+      var cand=Object.keys(costs).filter(function(key){return key!==home;})
+        .sort(function(a,b){return costs[b]-costs[a];});
+      if(!cand.length)return randLevel(diff,rnd,tries+1,name);
+      var placed=0;
+      for(i=0;i<cand.length&&placed<nStars;i++){
+        if(placed>0&&costs[cand[i]]<3)break;
+        var gp=cand[i].split(',');
+        g[+gp[0]][+gp[1]]='*';placed++;
+      }
+      if(!placed)return randLevel(diff,rnd,tries+1,name);
+      var lv={n:name||'Random level',g:g.map(function(row){return row.join('');}),rnd:true,
+        tip:'Generated a second ago. Nobody has ever solved this exact level before, including me.'};
+      var par=bfsPar(lv);
+      if(par<minPar)return randLevel(diff,rnd,tries+1,name);
+      lv.par=par;lv.max=Math.max(12,par+8);
       return lv;
     }
-    function logicStore(){var g=gameState();g.logic=g.logic||{};if(typeof g.logicRnd!=='number')g.logicRnd=0;return g;}
+    function dailyLevel(){
+      var k=dayKey(),seed=0,i;
+      for(i=0;i<k.length;i++)seed=(seed*31+k.charCodeAt(i))>>>0;
+      var lv=randLevel(2,seedRand(seed),0,'Challenge of the day');
+      lv.daily=true;
+      lv.tip='The same level for everybody today, everywhere. It changes at midnight. Beat the par and compare with your class.';
+      return lv;
+    }
+
+    function logicStore(){
+      var g=gameState();g.logic=g.logic||{};
+      if(typeof g.logicRnd!=='number')g.logicRnd=0;
+      g.logicDaily=g.logicDaily||{};g.custom=g.custom||[];
+      return g;
+    }
     function logicStars(steps,par){return steps<=par?3:steps<=par+3?2:1;}
     function starStr(n){return '★★★☆☆☆'.slice(3-n,6-n);}
-    function logicOpen(i){
-      var lv=i<0?randLevel(LOGDIFF):LOGICLV[i];
-      LG={lv:lv,i:i,key:i<0?'rnd':('c'+i),main:[],f1:[],act:'main',run:false,msg:'',ok:false,par:bfsPar(lv)};
-      drawLogic();
+
+    /* flatten Main into a step list, remembering which chip produced each step */
+    function expand(){
+      var out=[],cap=600,over=false;
+      function push(cmd,strip,idx){if(out.length>=cap){over=true;return;}out.push({c:cmd,s:strip,i:idx});}
+      function runStrip(entries,strip,depth){
+        entries.forEach(function(e,idx){
+          for(var r=0;r<e.n&&!over;r++){
+            if(e.c==='1'){if(depth<2)runStrip(LG.f1,'f1',depth+1);}
+            else if(e.c==='2'){if(depth<2)runStrip(LG.f2,'f2',depth+1);}
+            else push(e.c,strip,idx);
+          }
+        });
+      }
+      runStrip(LG.main,'main',0);
+      return {prog:out,over:over};
     }
-    function drawLogic(bot,trail){
+    function logicOpen(i,custom){
+      var lv,key;
+      if(i===-1){lv=randLevel(LOGDIFF);key='rnd';}
+      else if(i===-2){lv=dailyLevel();key='daily';}
+      else if(i===-3){lv=custom;key='custom';}
+      else{lv=LOGICLV[i];key='c'+i;}
+      LG={lv:lv,i:i,key:key,main:[],f1:[],f2:[],act:'main',run:false,step:false,
+        msg:'',ok:false,par:(lv.par!==undefined?lv.par:bfsPar(lv)),
+        prog:null,pc:0,pos:null,trail:[],mask:0,timer:null};
+      LGED=null;drawLogic();
+    }
+    function resetRun(){
+      if(LG.timer){clearInterval(LG.timer);LG.timer=null;}
+      LG.run=false;LG.step=false;LG.prog=null;LG.pc=0;LG.pos=null;LG.trail=[];LG.mask=0;
+    }
+
+    function drawLogic(){
       var st=document.getElementById('lab-stage'),tabs=document.getElementById('lab-tabs');
       if(!st||!tabs||!data)return;
+      if(LGED){drawEditor();return;}
       if(!LG){logicOpen(0);return;}
-      var lv=LG.lv,pos=bot||logicStart(lv);trail=trail||[];
-      var g=logicStore(),r,c;
+      var lv=LG.lv,g=logicStore(),r,c;
+      var stars=lvStars(lv);
+      var pos=LG.pos||logicStart(lv);
+      var mask=LG.pos?LG.mask:0;
+      var trail=LG.trail;
+
       tabs.innerHTML=LOGICLV.map(function(x,k){
         var rec=g.logic['c'+k];
         return '<button class="labchip'+(LG.i===k?' on':'')+(rec?' won':'')+'" data-log="'+k+'" title="'+esc(x.n)+(rec?' · '+rec.s+' stars':'')+'">'+(k+1)+'</button>';
       }).join('')
-        +'<button class="labchip free'+(LG.i<0?' on':'')+'" data-log="-1">↻ New random level</button>'
-        +'<select class="logdiff" id="log-diff"><option value="1"'+(LOGDIFF===1?' selected':'')+'>Easy</option><option value="2"'+(LOGDIFF===2?' selected':'')+'>Medium</option><option value="3"'+(LOGDIFF===3?' selected':'')+'>Hard</option></select>';
+        +'<button class="labchip free'+(LG.i===-2?' on':'')+(g.logicDaily[dayKey()]?' won':'')+'" data-log="-2">☀ Daily</button>'
+        +'<button class="labchip free'+(LG.i===-1?' on':'')+'" data-log="-1">↻ Random</button>'
+        +'<select class="logdiff" id="log-diff"><option value="1"'+(LOGDIFF===1?' selected':'')+'>Easy</option><option value="2"'+(LOGDIFF===2?' selected':'')+'>Medium</option><option value="3"'+(LOGDIFF===3?' selected':'')+'>Hard</option></select>'
+        +'<button class="labchip free" data-log="-4">✎ Build a level</button>';
+
       var cells='';
       for(r=0;r<5;r++)for(c=0;c<5;c++){
-        var ch=lv.g[r].charAt(c),cl='lcell',t='';
+        var ch=lv.g[r].charAt(c),cl='lcell',t='',si=stars.indexOf(r+','+c);
         if(ch==='#')cl+=' wall';
-        if(ch==='G'){cl+=' goal';t='★';}
+        if(si>=0){
+          if(mask&(1<<si)){cl+=' got';t='✓';}
+          else{cl+=' goal';t='★';}
+        }
         if(trail.indexOf(r+','+c)>=0)cl+=' trail';
         if(r===pos.r&&c===pos.c){cl+=' bot';t=DIRCH[pos.d];}
         cells+='<div class="'+cl+'">'+t+'</div>';
       }
+
       var dis=LG.run?' disabled':'';
-      var pal='<button data-cmd="F"'+dis+'>↑ Forward</button><button data-cmd="L"'+dis+'>↰ Turn left</button><button data-cmd="R"'+dis+'>↱ Turn right</button><button data-cmd="C"'+dis+'>◆ Call F1</button>';
+      var pal='<button data-cmd="F"'+dis+'>↑ Forward</button><button data-cmd="L"'+dis+'>↰ Left</button><button data-cmd="R"'+dis+'>↱ Right</button>'
+        +'<button data-cmd="1"'+dis+'>◆ F1</button><button data-cmd="2"'+dis+'>◈ F2</button>';
+
+      var cur=(LG.prog&&LG.pc>0&&LG.pc<=LG.prog.length)?LG.prog[LG.pc-1]:null;
       function strip(which,label,lim){
-        var arr=which==='main'?LG.main:LG.f1;
-        var chips=arr.length?arr.map(function(cm){return '<span class="cmdchip'+(cm==='C'?' f1':'')+'">'+({F:'↑',L:'↰',R:'↱',C:'F1'})[cm]+'</span>';}).join('')
-          :'<span class="lempty">click a command to add it here</span>';
+        var arr=which==='main'?LG.main:(which==='f1'?LG.f1:LG.f2);
+        var chips=arr.length?arr.map(function(e,idx){
+          var live=cur&&cur.s===which&&cur.i===idx;
+          var face=({F:'↑',L:'↰',R:'↱','1':'F1','2':'F2'})[e.c];
+          return '<span class="cmdchip'+(e.c==='1'||e.c==='2'?' f1':'')+(live?' now':'')+'" data-chip="'+which+':'+idx+'" title="Click to repeat it, again to remove">'
+            +face+(e.n>1?'<i>×'+e.n+'</i>':'')+'</span>';
+        }).join(''):'<span class="lempty">click a command to add it here</span>';
+        var used=arr.length;
         return '<div class="lstrip'+(LG.act===which?' act':'')+'" data-strip="'+which+'"><div class="lslab">'+label
-          +' <span class="'+(arr.length>=lim?'full':'')+'">'+arr.length+'/'+lim+'</span></div><div class="lslot">'+chips+'</div></div>';
+          +' <span class="'+(used>=lim?'full':'')+'">'+used+'/'+lim+'</span></div><div class="lslot">'+chips+'</div></div>';
       }
+
       var rec=g.logic[LG.key],solved=Object.keys(g.logic).length;
+      var meta=solved+' of '+LOGICLV.length+' levels · '+g.logicRnd+' random beaten';
+      if(rec&&LG.i>=0)meta+=' · best '+starStr(rec.s)+' in '+rec.st+' steps';
+      var starLine=stars.length>1?'Collect <b>all '+stars.length+' stars</b>, in any order you like. ':'Get the robot to the star. ';
+
       st.innerHTML='<div class="gstage">'
-        +'<div class="ghead"><h3>'+esc(lv.n)+(LG.i>=0?' · level '+(LG.i+1):'')+'</h3>'
-        +'<div class="gscore">'+solved+' of '+LOGICLV.length+' levels · '+g.logicRnd+' random solved'+(rec&&LG.i>=0?' · your best '+starStr(rec.s)+' in '+rec.st+' steps':'')+'</div></div>'
-        +'<p class="gwhy">Get the robot to the star. You write no code here. You do the part that <b>is</b> programming: putting steps in the right order, then working out exactly where your order was wrong. Perfect play on this level is <b>'+LG.par+' steps</b>, which is three stars.</p>'
-        +'<div class="lwrap"><div><div class="lgrid">'+cells+'</div><p class="gprog">'+esc(lv.tip)+'</p></div><div>'
+        +'<div class="ghead"><h3>'+esc(lv.n)+(LG.i>=0?' · level '+(LG.i+1):'')+'</h3><div class="gscore">'+meta+'</div></div>'
+        +'<p class="gwhy">'+starLine+'You write no code here. You do the part that <b>is</b> programming: putting steps in the right order, then working out exactly where your order was wrong. Perfect play is <b>'+LG.par+' steps</b>, which is three stars.</p>'
+        +'<div class="lwrap"><div>'
+        +'<div class="lgrid">'+cells+'</div>'
+        +(stars.length>1?'<div class="starcount">'+stars.map(function(s,i){return '<span class="sdot'+((mask&(1<<i))?' on':'')+'">★</span>';}).join('')+'<b>'+countBits(mask)+' / '+stars.length+'</b> collected</div>':'')
+        +'<p class="gprog">'+esc(lv.tip)+'</p>'
+        +(lv.rnd||lv.daily?'':'<p class="gprog"><button class="inlinelink" id="lg-share">Copy this level as a code</button></p>')
+        +'</div><div>'
         +'<div class="lpal">'+pal+'</div>'
-        +strip('main','Main',lv.max)+strip('f1','F1 · your function',6)
-        +'<div class="gbtns"><button class="gbtn pri" id="lg-run"'+dis+'>▶ Run</button><button class="gbtn" id="lg-undo"'+dis+'>Undo</button><button class="gbtn" id="lg-clear"'+dis+'>Clear</button></div>'
+        +strip('main','Main',lv.max)+strip('f1','F1 · function',6)+strip('f2','F2 · function',6)
+        +'<div class="gbtns">'
+        +'<button class="gbtn pri" id="lg-run"'+dis+'>▶ Run</button>'
+        +'<button class="gbtn" id="lg-step">'+(LG.prog?'Step ▸':'Step through ▸')+'</button>'
+        +'<button class="gbtn" id="lg-undo"'+dis+'>Undo</button>'
+        +'<button class="gbtn" id="lg-clear"'+dis+'>Clear</button>'
+        +'<select class="logdiff" id="lg-speed"><option value="480"'+(LOGSPEED===480?' selected':'')+'>Slow</option><option value="300"'+(LOGSPEED===300?' selected':'')+'>Normal</option><option value="130"'+(LOGSPEED===130?' selected':'')+'>Fast</option></select>'
+        +'</div>'
+        +(LG.prog?'<div class="pcline">Step <b>'+LG.pc+'</b> of '+LG.prog.length+(cur?' · running <b>'+({F:'forward',L:'turn left',R:'turn right'})[cur.c]+'</b> from '+cur.s.toUpperCase():'')+'</div>':'')
         +(LG.msg?'<div class="gfeed '+(LG.ok?'ok':'no')+'">'+LG.msg+'</div>':'')
         +'</div></div></div>';
-      tabs.querySelectorAll('[data-log]').forEach(function(b){b.addEventListener('click',function(){if(LG.run)return;logicOpen(parseInt(b.getAttribute('data-log'),10));});});
+
+      tabs.querySelectorAll('[data-log]').forEach(function(b){
+        b.addEventListener('click',function(){
+          if(LG&&LG.run)return;
+          var v=parseInt(b.getAttribute('data-log'),10);
+          if(v===-4){openEditor();return;}
+          logicOpen(v);
+        });
+      });
       var dsel=document.getElementById('log-diff');
-      if(dsel)dsel.addEventListener('change',function(){LOGDIFF=parseInt(dsel.value,10);if(LG.i<0)logicOpen(-1);});
+      if(dsel)dsel.addEventListener('change',function(){LOGDIFF=parseInt(dsel.value,10);if(LG.i===-1)logicOpen(-1);});
+      var sp=document.getElementById('lg-speed');
+      if(sp)sp.addEventListener('change',function(){LOGSPEED=parseInt(sp.value,10);});
       st.querySelectorAll('[data-cmd]').forEach(function(b){b.addEventListener('click',function(){logicAdd(b.getAttribute('data-cmd'));});});
+      st.querySelectorAll('[data-chip]').forEach(function(b){
+        b.addEventListener('click',function(e){e.stopPropagation();cycleChip(b.getAttribute('data-chip'));});
+      });
       st.querySelectorAll('[data-strip]').forEach(function(b){b.addEventListener('click',function(){if(LG.run)return;LG.act=b.getAttribute('data-strip');drawLogic();});});
       var rn=document.getElementById('lg-run');if(rn)rn.addEventListener('click',logicRun);
-      var un=document.getElementById('lg-undo');if(un)un.addEventListener('click',function(){(LG.act==='main'?LG.main:LG.f1).pop();LG.msg='';drawLogic();});
-      var cl=document.getElementById('lg-clear');if(cl)cl.addEventListener('click',function(){LG.main=[];LG.f1=[];LG.msg='';drawLogic();});
+      var sb=document.getElementById('lg-step');if(sb)sb.addEventListener('click',logicStep);
+      var un=document.getElementById('lg-undo');if(un)un.addEventListener('click',function(){
+        var a=LG.act==='main'?LG.main:(LG.act==='f1'?LG.f1:LG.f2);a.pop();LG.msg='';resetRun();drawLogic();});
+      var cl=document.getElementById('lg-clear');if(cl)cl.addEventListener('click',function(){
+        LG.main=[];LG.f1=[];LG.f2=[];LG.msg='';resetRun();drawLogic();});
+      var sh=document.getElementById('lg-share');if(sh)sh.addEventListener('click',function(){shareLevel(lv);});
     }
+    function countBits(m){var n=0;while(m){n+=m&1;m>>=1;}return n;}
+
     function logicAdd(cmd){
       if(!LG||LG.run)return;
-      var arr=LG.act==='main'?LG.main:LG.f1,lim=LG.act==='main'?LG.lv.max:6;
-      if(cmd==='C'&&LG.act==='f1'){toast('F1 cannot call itself. That would never stop.');return;}
-      if(arr.length>=lim){toast(LG.act==='main'?'Main is full. Put the repeating part in F1 and call it.':'F1 holds 6 commands.');return;}
-      arr.push(cmd);LG.msg='';drawLogic();
+      resetRun();
+      var arr=LG.act==='main'?LG.main:(LG.act==='f1'?LG.f1:LG.f2);
+      var lim=LG.act==='main'?LG.lv.max:6;
+      if(LG.act==='f2'&&(cmd==='1'||cmd==='2')){toast('F2 is the simple one. It cannot call another function.');return;}
+      if(LG.act==='f1'&&cmd==='1'){toast('F1 cannot call itself. That would never stop.');return;}
+      if(arr.length>=lim){toast(LG.act==='main'?'Main is full. Put the repeating part in a function, or click a command to give it a repeat count.':'A function holds 6 commands.');return;}
+      var last=arr[arr.length-1];
+      if(last&&last.c===cmd&&last.n<9)last.n++;
+      else arr.push({c:cmd,n:1});
+      LG.msg='';drawLogic();
+    }
+    function cycleChip(ref){
+      if(!LG||LG.run)return;
+      resetRun();
+      var p=ref.split(':'),which=p[0],idx=parseInt(p[1],10);
+      var arr=which==='main'?LG.main:(which==='f1'?LG.f1:LG.f2);
+      var e=arr[idx];if(!e)return;
+      if(e.n>=4)arr.splice(idx,1);else e.n++;
+      LG.act=which;LG.msg='';drawLogic();
+    }
+
+    function buildProgram(){
+      var ex=expand();
+      if(ex.over){toast('That program runs more than 600 steps. Something is repeating far more than it needs to.');return null;}
+      if(!ex.prog.length){toast('Add some commands to Main first.');return null;}
+      return ex.prog;
+    }
+    function startRun(){
+      var prog=buildProgram();if(!prog)return false;
+      var s=logicStart(LG.lv);
+      LG.prog=prog;LG.pc=0;LG.pos={r:s.r,c:s.c,d:s.d};LG.trail=[s.r+','+s.c];
+      LG.mask=0;LG.msg='';
+      var stars=lvStars(LG.lv),si=stars.indexOf(s.r+','+s.c);
+      if(si>=0)LG.mask|=(1<<si);
+      return true;
+    }
+    /* one command. returns 'ok' | 'crash' | 'win' | 'end' */
+    function tick(){
+      var lv=LG.lv;
+      if(LG.pc>=LG.prog.length)return 'end';
+      var cmd=LG.prog[LG.pc].c;LG.pc++;
+      var pos=LG.pos;
+      if(cmd==='L')pos.d=(pos.d+3)%4;
+      else if(cmd==='R')pos.d=(pos.d+1)%4;
+      else{
+        var nr=pos.r+DR[pos.d],nc=pos.c+DC[pos.d];
+        if(!walkable(lv,nr,nc))return 'crash';
+        pos.r=nr;pos.c=nc;LG.trail.push(nr+','+nc);
+        var stars=lvStars(lv),si=stars.indexOf(nr+','+nc);
+        if(si>=0)LG.mask|=(1<<si);
+        if(LG.mask===(1<<stars.length)-1)return 'win';
+      }
+      return 'ok';
+    }
+    function finish(res){
+      var lv=LG.lv;
+      if(res==='crash'){
+        LG.msg='<b>Crash on step '+LG.pc+'.</b> The robot walked into a wall. Press <b>Step through</b> to watch it one command at a time and see exactly which one was wrong.';
+        LG.ok=false;
+      }else if(res==='end'){
+        LG.msg='<b>Out of commands.</b> The robot stopped before collecting everything. Follow the trail it left and find the step you missed.';
+        LG.ok=false;
+      }else{
+        var g=logicStore(),steps=LG.pc,stars=logicStars(steps,LG.par);
+        var size=LG.main.length+LG.f1.length+LG.f2.length,fresh=true;
+        if(LG.i===-1)g.logicRnd++;
+        else if(LG.i===-2){if(!g.logicDaily[dayKey()])g.logicDaily[dayKey()]={s:stars,st:steps};else fresh=false;}
+        else if(LG.i>=0){
+          var old=g.logic[LG.key];fresh=!old;
+          g.logic[LG.key]={s:Math.max(stars,old?old.s:0),st:old?Math.min(steps,old.st):steps};
+        }
+        saveData();
+        LG.msg='<b>'+starStr(stars)+' Solved in '+steps+' steps</b> using '+size+' command'+(size===1?'':'s')+'. Perfect play is '+LG.par+' steps. '
+          +(stars<3?'A shorter route with fewer turns gets you three stars.':'That is optimal. Nobody can do better than that.')
+          +(LG.i>=0&&LG.i<LOGICLV.length-1?' Level '+(LG.i+2)+' is above.':'');
+        LG.ok=true;
+        logicAward(LG.i<0?15:(fresh?30:5));
+        if(Object.keys(g.logic).length>=LOGICLV.length)unlockBadge('logician');
+        if(g.logicRnd>=10)unlockBadge('generator');
+        if(Object.keys(g.logicDaily).length>=5)unlockBadge('daily5');
+      }
     }
     function logicRun(){
       if(!LG||LG.run)return;
-      var lv=LG.lv,prog=[];
-      LG.main.forEach(function(c){if(c==='C'){LG.f1.forEach(function(f){prog.push(f);});}else prog.push(c);});
-      if(!prog.length){toast('Add some commands first.');return;}
-      LG.run=true;LG.msg='';
-      var pos=logicStart(lv),trail=[pos.r+','+pos.c],k=0;
-      drawLogic(pos,trail);
-      var timer=setInterval(function(){
-        if(k>=prog.length){
-          clearInterval(timer);LG.run=false;
-          LG.msg='<b>Out of commands.</b> The robot stopped before the star. Follow the trail it left and find the step you missed.';LG.ok=false;
-          drawLogic(pos,trail);return;
+      resetRun();
+      if(!startRun()){drawLogic();return;}
+      LG.run=true;drawLogic();
+      LG.timer=setInterval(function(){
+        var res=tick();
+        if(res!=='ok'){
+          clearInterval(LG.timer);LG.timer=null;LG.run=false;
+          finish(res);drawLogic();return;
         }
-        var cmd=prog[k++];
-        if(cmd==='L')pos.d=(pos.d+3)%4;
-        else if(cmd==='R')pos.d=(pos.d+1)%4;
-        else{
-          var nr=pos.r+DR[pos.d],nc=pos.c+DC[pos.d];
-          if(!walkable(lv,nr,nc)){
-            clearInterval(timer);LG.run=false;
-            LG.msg='<b>Crash on step '+k+'.</b> The robot walked into a wall. That is a bug, and working out which step caused it is the actual job.';LG.ok=false;
-            drawLogic(pos,trail);return;
-          }
-          pos.r=nr;pos.c=nc;trail.push(nr+','+nc);
-        }
-        if(lv.g[pos.r].charAt(pos.c)==='G'){
-          clearInterval(timer);LG.run=false;
-          var g=logicStore(),stars=logicStars(k,LG.par),size=LG.main.length+LG.f1.length,fresh=true;
-          if(LG.i<0)g.logicRnd++;
-          else{
-            var old=g.logic[LG.key];fresh=!old;
-            g.logic[LG.key]={s:Math.max(stars,old?old.s:0),st:old?Math.min(k,old.st):k};
-          }
-          saveData();
-          LG.msg='<b>'+starStr(stars)+' Solved in '+k+' steps</b> using '+size+' command'+(size===1?'':'s')+'. Perfect play is '+LG.par+' steps. '
-            +(stars<3?'A shorter route with fewer turns gets you three stars.':'That is optimal. Nobody can do better than that.')
-            +(LG.i>=0&&LG.i<LOGICLV.length-1?' Level '+(LG.i+2)+' is above.':'');
-          LG.ok=true;
-          logicAward(LG.i<0?15:(fresh?30:5));
-          if(Object.keys(g.logic).length>=LOGICLV.length)unlockBadge('logician');
-          if(g.logicRnd>=10)unlockBadge('generator');
-          drawLogic(pos,trail);return;
-        }
-        drawLogic(pos,trail);
-      },300);
+        drawLogic();
+      },LOGSPEED);
+    }
+    function logicStep(){
+      if(!LG||LG.run)return;
+      if(!LG.prog){if(!startRun()){drawLogic();return;}drawLogic();return;}
+      var res=tick();
+      if(res!=='ok'){finish(res);LG.prog=LG.prog;}
+      drawLogic();
     }
     function logicAward(n){
       var t=todayBox();t.logxp=t.logxp||0;
       if(t.logxp>=200){toast('Logic Lab XP maxed for today. Go build something.');return;}
       t.logxp+=n;awardXP(n,'Logic level solved','code');
+    }
+
+    /* ---- share codes ---- */
+    function levelCode(lv){return 'LL1-'+lv.g.join('');}
+    function parseCode(code){
+      var m=/^\s*LL1-([.#*SG]{25})\s*$/.exec(code||'');
+      if(!m)return null;
+      var raw=m[1],rows=[],i;
+      for(i=0;i<5;i++)rows.push(raw.slice(i*5,i*5+5));
+      var lv={n:'Shared level',g:rows,max:26,rnd:true,tip:'Somebody built this level and sent you the code.'};
+      if(rows.join('').indexOf('S')<0)return null;
+      if(!lvStars(lv).length)return null;
+      var par=bfsPar(lv);
+      if(par<1)return null;
+      lv.par=par;lv.max=Math.max(12,par+8);
+      return lv;
+    }
+    function shareLevel(lv){
+      var code=levelCode(lv);
+      try{
+        if(navigator.clipboard&&navigator.clipboard.writeText){
+          navigator.clipboard.writeText(code);
+          toast('Code copied. Send it to a friend.',{timeout:5000});
+          return;
+        }
+      }catch(e){}
+      window.prompt('Copy this code and send it to a friend:',code);
+    }
+
+    /* ---- level editor ---- */
+    var LGED=null;
+    function openEditor(){
+      LGED={g:['.....','.....','..S..','.....','.....'],tool:'#',msg:'',ok:false};
+      drawEditor();
+    }
+    function edSet(r,c,ch){
+      var rows=LGED.g.slice();
+      if(ch==='S')rows=rows.map(function(row){return row.replace('S','.');});
+      var row=rows[r];
+      rows[r]=row.slice(0,c)+ch+row.slice(c+1);
+      LGED.g=rows;
+    }
+    function drawEditor(){
+      var st=document.getElementById('lab-stage'),tabs=document.getElementById('lab-tabs');
+      if(!st||!tabs)return;
+      var g=logicStore();
+      tabs.innerHTML='<button class="labchip free" data-edback>← Back to levels</button>'
+        +(g.custom.length?g.custom.map(function(c,i){return '<button class="labchip" data-edload="'+i+'">Mine '+(i+1)+'</button>';}).join(''):'')
+        +'<button class="labchip free" data-edpaste>⇩ Paste a code</button>';
+      var cells='',r,c;
+      for(r=0;r<5;r++)for(c=0;c<5;c++){
+        var ch=LGED.g[r].charAt(c),cl='lcell ed',t='';
+        if(ch==='#')cl+=' wall';
+        if(ch==='*'){cl+=' goal';t='★';}
+        if(ch==='S'){cl+=' bot';t='→';}
+        cells+='<div class="'+cl+'" data-ed="'+r+','+c+'">'+t+'</div>';
+      }
+      var tools=[['#','Wall'],['*','Star'],['S','Start'],['.','Erase']].map(function(t){
+        return '<button class="gbtn'+(LGED.tool===t[0]?' pri':'')+'" data-tool="'+t[0]+'">'+t[1]+'</button>';
+      }).join('');
+      st.innerHTML='<div class="gstage">'
+        +'<div class="ghead"><h3>Build your own level</h3><div class="gscore">'+g.custom.length+' saved</div></div>'
+        +'<p class="gwhy">Pick a tool, then click the squares. Every level needs one start and at least one star. Designing a puzzle is harder than solving one, which is exactly why it teaches you more. When it works, copy the code and send it to a friend.</p>'
+        +'<div class="lwrap"><div><div class="lgrid">'+cells+'</div></div><div>'
+        +'<div class="lpal">'+tools+'</div>'
+        +'<div class="gbtns"><button class="gbtn pri" id="ed-test">Check it works</button><button class="gbtn" id="ed-play">Play it</button><button class="gbtn" id="ed-save">Save</button><button class="gbtn" id="ed-code">Copy code</button></div>'
+        +(LGED.msg?'<div class="gfeed '+(LGED.ok?'ok':'no')+'">'+LGED.msg+'</div>':'')
+        +'</div></div></div>';
+      st.querySelectorAll('[data-ed]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var p=b.getAttribute('data-ed').split(',');
+          edSet(+p[0],+p[1],LGED.tool);LGED.msg='';drawEditor();
+        });
+      });
+      st.querySelectorAll('[data-tool]').forEach(function(b){
+        b.addEventListener('click',function(){LGED.tool=b.getAttribute('data-tool');drawEditor();});
+      });
+      tabs.querySelector('[data-edback]').addEventListener('click',function(){LGED=null;logicOpen(0);});
+      tabs.querySelectorAll('[data-edload]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var lv=parseCode(g.custom[parseInt(b.getAttribute('data-edload'),10)]);
+          if(lv){LGED=null;logicOpen(-3,lv);}else toast('That saved level is no longer valid.');
+        });
+      });
+      tabs.querySelector('[data-edpaste]').addEventListener('click',function(){
+        var code=window.prompt('Paste a level code (it starts with LL1-):','');
+        if(!code)return;
+        var lv=parseCode(code.trim());
+        if(!lv){toast('That code is not valid, or that level cannot be finished.');return;}
+        LGED=null;logicOpen(-3,lv);
+      });
+      var t=document.getElementById('ed-test');if(t)t.addEventListener('click',edCheck);
+      var pl=document.getElementById('ed-play');if(pl)pl.addEventListener('click',function(){
+        var lv=edLevel();if(!lv)return;LGED=null;logicOpen(-3,lv);});
+      var sv=document.getElementById('ed-save');if(sv)sv.addEventListener('click',function(){
+        var lv=edLevel();if(!lv)return;
+        g.custom.push(levelCode(lv));saveData();toast('Saved. It is in the strip above.');drawEditor();});
+      var cd=document.getElementById('ed-code');if(cd)cd.addEventListener('click',function(){
+        var lv=edLevel();if(!lv)return;shareLevel(lv);});
+    }
+    function edLevel(){
+      var joined=LGED.g.join('');
+      if(joined.indexOf('S')<0){LGED.msg='<b>No start.</b> Pick the Start tool and click a square to say where the robot begins.';LGED.ok=false;drawEditor();return null;}
+      var lv={n:'Your level',g:LGED.g.slice(),max:26,rnd:true,tip:'A level you built yourself.'};
+      if(!lvStars(lv).length){LGED.msg='<b>No stars.</b> Pick the Star tool and add at least one thing to collect.';LGED.ok=false;drawEditor();return null;}
+      var par=bfsPar(lv);
+      if(par<1){LGED.msg='<b>Impossible.</b> The robot cannot reach every star from where it starts. Walls are blocking the way.';LGED.ok=false;drawEditor();return null;}
+      lv.par=par;lv.max=Math.max(12,par+8);
+      return lv;
+    }
+    function edCheck(){
+      var lv=edLevel();if(!lv)return;
+      LGED.msg='<b>It works.</b> The shortest solution is '+lv.par+' steps. Press Play it to try, or Copy code to send it to someone.';
+      LGED.ok=true;drawEditor();
     }
 
     var LABMODE='logic';

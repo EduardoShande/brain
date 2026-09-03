@@ -907,6 +907,47 @@
   @media(prefers-reduced-motion:reduce){
     .minibar i,.tnode,.crow,.startcard{transition:none}
   }
+  /* ===== community ===== */
+  .cqrules{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px}
+  .cqrules h3{font-size:20px;margin-bottom:16px}
+  .cqrules-mini{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin-bottom:18px}
+  .cqask{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:22px}
+  .cqask-h{font-family:"Poppins",sans-serif;font-size:15px;font-weight:800;color:var(--ink);margin-bottom:12px}
+  .cqask .finput,.cqask .ftext{width:100%;margin-bottom:10px}
+  .cqask-f{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .cqask-f .fselect{flex:1;min-width:150px}
+  .cqnote{margin:12px 0 0;font-size:12px;color:var(--ink-faint)}
+  .cqtabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+  .cqtab{font-family:inherit;font-size:13px;font-weight:700;padding:6px 13px;border-radius:99px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;transition:border-color .2s}
+  .cqtab:hover{border-color:var(--teal)}
+  .cqtab.on{background:var(--ink);border-color:transparent;color:var(--bg)}
+  .cqlist{display:grid;gap:10px}
+  .cqcard{border:1px solid var(--line);border-radius:13px;background:var(--card);overflow:hidden;transition:border-color .2s}
+  .cqcard.open{border-color:var(--teal)}
+  .cqhead{display:block;width:100%;text-align:left;padding:15px 18px;border:0;background:none;cursor:pointer;font-family:inherit}
+  .cqhead:hover{background:var(--surface)}
+  .cqtitle{display:block;font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.4}
+  .cqmeta{display:block;margin-top:6px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
+  .cqmeta b{color:var(--ink-soft)}
+  .cqsolved{font-style:normal;color:var(--good);font-weight:700}
+  .cqbody{padding:0 18px 18px;border-top:1px solid var(--line)}
+  .cqq{margin:14px 0;font-size:14.5px;line-height:1.6;color:var(--ink-soft);white-space:pre-wrap}
+  .cqans{border-left:2px solid var(--line-strong);padding:2px 0 2px 14px;margin-bottom:14px}
+  .cqans.ok{border-left-color:var(--good)}
+  .cqans-b{font-size:14.5px;line-height:1.6;color:var(--ink-soft);white-space:pre-wrap}
+  .cqans-f{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    margin-top:7px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
+  .cqans-f b{color:var(--good)}
+  .cqacts{display:flex;gap:12px}
+  .cqlink{background:none;border:0;padding:0;font-family:inherit;font-size:11.5px;font-weight:700;
+    color:var(--teal-ink);cursor:pointer}
+  .cqlink:hover{text-decoration:underline}
+  .cqlink.warn{color:var(--ink-faint)}
+  .cqlink.warn:hover{color:var(--warn)}
+  .cqempty{font-size:13.5px;color:var(--ink-faint);margin:0 0 14px}
+  .cqreply{margin-top:6px}
+  .cqreply .ftext{width:100%;margin-bottom:9px}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -918,6 +959,7 @@
       <button data-goto="start">Start here</button>
       <button data-goto="academy">Courses</button>
       <button data-goto="lab">Practice</button>
+    <button data-goto="community">Community</button>
     <button data-goto="path">Find your path</button>
       <button data-goto="profile" id="nav-account">Profile</button>
     </div>
@@ -2696,6 +2738,17 @@
     </section>
   </div>
 
+  <!-- ===================== COMMUNITY ===================== -->
+  <div class="page" id="page-community">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Community · public and moderated</div>
+      <h2>Nobody learns this alone</h2>
+      <p class="pd">Every developer you admire got unstuck by asking somebody. Ask here when you are stuck, and answer when you are not. Explaining something badly and then better is how you find out you actually understood it.</p>
+    </div>
+    <div id="community-body"></div>
+  </div>
+
   <!-- ===================== PROFILE ===================== -->
   <div class="page" id="page-profile">
     <div class="phead">
@@ -3457,7 +3510,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','community','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -3921,6 +3974,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       else if(name==='htmltags')renderTags();
       else if(name==='lab')renderLab();
       else if(name==='profile')renderProfile();
+      else if(name==='community')renderCommunity();
     }
     /* =========================================================
        Academy: courses (roadmap = lessons, quiz = final exam) + certificates
@@ -4314,7 +4368,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     /* =========================================================
        Game system: XP, levels, badges and streaks
     ========================================================= */
-    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges'],['logician','Logician','Solve all 10 Logic Lab levels'],['generator','Machine beater','Solve 10 randomly generated levels'],['daily5','Regular','Beat the daily challenge on 5 days']];
+    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges'],['logician','Logician','Solve all 10 Logic Lab levels'],['generator','Machine beater','Solve 10 randomly generated levels'],['daily5','Regular','Beat the daily challenge on 5 days'],['helper','Helper','Answer somebody else in the community']];
     var LEVELS=[[1,'Curious'],[2,'Beginner'],[3,'Learner'],[5,'Builder'],[7,'Coder'],[10,'Developer'],[14,'Craftsman'],[20,'Senior'],[28,'Architect'],[40,'Legend']];
     var REFPAGES=['fundamentals','start','htmltags','webconcepts','jsguide','webtools','resources'];
     var QUESTS=[
@@ -5309,7 +5363,232 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       t.labxp+=25;awardXP(25,'Challenge solved','code');
     }
 
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();updateAuthChip();}
+    /* =========================================================
+       Community: public questions and answers between students.
+
+       There are no private messages here on purpose. The students are
+       minors, and a private one-to-one channel is exactly where the harm
+       happens. Everything below is public, attributed and reportable.
+       The same checks run again on the server, because a client-side
+       check is a courtesy, not a defence.
+    ========================================================= */
+    var CQ_ALLOWED_HOSTS=['developer.mozilla.org','web.dev','freecodecamp.org','javascript.info',
+      'react.dev','theodinproject.com','github.com','stackoverflow.com','cs50.harvard.edu',
+      'learn.microsoft.com','docs.python.org'];
+    function safetyCheck(text){
+      text=String(text||'');
+      if(!text.trim())return 'There is nothing written here yet.';
+      if(text.length>4000)return 'That is longer than 4000 characters. Try to get to the point.';
+      if(/[A-Za-z0-9._%+-]+\s*(?:@|\(at\)|\[at\])\s*[A-Za-z0-9.-]+\.[A-Za-z]{2,}/i.test(text))
+        return 'That looks like an email address. Keep the conversation here where a moderator can see it, and never share personal contact details.';
+      if(/(?:\+?\d[\s.\-()]*){7,}/.test(text))
+        return 'That looks like a phone number. Never post one. Keep the conversation here where a moderator can see it.';
+      if(/\b(?:whats\s?app|wasap|telegram|snap(?:chat)?|insta(?:gram)?|discord|tiktok|facebook|messenger)\b/i.test(text))
+        return 'Do not move the conversation to a private app. Everything here is public on purpose, because that is what keeps it safe.';
+      var urls=text.match(/\b(?:https?:\/\/|www\.)\S+/ig)||[],i;
+      for(i=0;i<urls.length;i++){
+        var host=urls[i].replace(/^https?:\/\//i,'').split('/')[0].toLowerCase().replace('www.','');
+        var okHost=CQ_ALLOWED_HOSTS.some(function(h){return host===h||host.slice(-(h.length+1))==='.'+h;});
+        if(!okHost)return 'Links are limited to the learning sites the academy already points to. '+urls[i]+' is not one of them.';
+      }
+      if(/\b(kill\s+your ?self|kys|idiota|est[uú]pido|stupid|retard|loser|ugly)\b/i.test(text))
+        return 'That reads as an insult. Ask about the code, not the person. Posts like this get accounts removed.';
+      return null;
+    }
+
+    var CQ_TAB='all',CQ_OPEN=null,CQ_LAST=0;
+    function cqStore(){
+      data.community=data.community||{questions:[],seenRules:false};
+      if(!data.community.questions)data.community.questions=[];
+      return data.community;
+    }
+    function cqMe(){
+      var a=getAuth();
+      if(a&&a.user&&a.user.full_name)return a.user.full_name.trim().split(' ')[0].slice(0,40);
+      if(a&&a.user&&a.user.email)return 'Student';
+      return 'You';
+    }
+    function cqAgo(ts){
+      var s=Math.floor((Date.now()-ts)/1000);
+      if(s<60)return 'just now';
+      if(s<3600)return Math.floor(s/60)+' min ago';
+      if(s<86400)return Math.floor(s/3600)+' h ago';
+      return Math.floor(s/86400)+' d ago';
+    }
+    function cqCourseName(k){
+      var c=typeof courseByKey==='function'?courseByKey(k):null;
+      return c?c.title:'General';
+    }
+    function cqPost(kind){
+      /* one post every 30 seconds, same rule the server enforces */
+      var now=Date.now();
+      if(now-CQ_LAST<30000){toast('Give it half a minute between posts.');return false;}
+      CQ_LAST=now;return true;
+    }
+
+    function renderCommunity(){
+      var el=document.getElementById('community-body');if(!el||!data)return;
+      var st=cqStore();
+      if(!st.seenRules){el.innerHTML=cqRulesHtml();bindRules(el);return;}
+
+      var qs=st.questions.slice().sort(function(a,b){return b.ts-a.ts;});
+      if(CQ_TAB==='open')qs=qs.filter(function(q){return !q.answers.length;});
+      else if(CQ_TAB==='mine')qs=qs.filter(function(q){return q.mine;});
+      else if(CQ_TAB==='solved')qs=qs.filter(function(q){return q.answers.some(function(a){return a.accepted;});});
+
+      var tabs=[['all','Everything'],['open','Unanswered'],['solved','Solved'],['mine','Mine']]
+        .map(function(t){return '<button class="cqtab'+(CQ_TAB===t[0]?' on':'')+'" data-cqtab="'+t[0]+'">'+t[1]+'</button>';}).join('');
+
+      var courseOpts='<option value="">General question</option>'
+        +(typeof COURSES!=='undefined'?COURSES.map(function(c){return '<option value="'+c.key+'">'+esc(c.title)+'</option>';}).join(''):'');
+
+      var ask='<form class="cqask" id="cq-form">'
+        +'<div class="cqask-h">Ask the room</div>'
+        +'<input class="finput" id="cq-title" maxlength="160" placeholder="What are you stuck on? One clear sentence.">'
+        +'<textarea class="ftext" id="cq-body" rows="4" maxlength="4000" placeholder="What did you try, and what happened instead? Paste the code and the error message."></textarea>'
+        +'<div class="cqask-f"><select class="fselect" id="cq-course">'+courseOpts+'</select>'
+        +'<button class="lbtn pri" type="submit">Post the question</button></div>'
+        +'<p class="cqnote">Public to every student. Never post your phone, your email, or a link to another app.</p>'
+        +'</form>';
+
+      var list=qs.length?qs.map(function(q){
+        var solved=q.answers.some(function(a){return a.accepted;});
+        return '<article class="cqcard'+(CQ_OPEN===q.id?' open':'')+'">'
+          +'<button class="cqhead" data-cqopen="'+q.id+'">'
+          +'<span class="cqtitle">'+esc(q.title)+'</span>'
+          +'<span class="cqmeta">'+esc(q.author)+' · '+cqAgo(q.ts)+' · '+esc(cqCourseName(q.course))
+          +' · <b>'+q.answers.length+'</b> '+(q.answers.length===1?'answer':'answers')
+          +(solved?' · <em class="cqsolved">solved</em>':'')+'</span></button>'
+          +(CQ_OPEN===q.id?cqDetailHtml(q):'')
+          +'</article>';
+      }).join(''):'<div class="empty">Nothing here yet. Ask the first question, or answer one so somebody else is not stuck.</div>';
+
+      el.innerHTML='<div class="cqrules-mini">Public, moderated, no private messages. '
+        +'<button class="inlinelink" id="cq-rules-again">Read the rules</button></div>'
+        +ask+'<div class="cqtabs">'+tabs+'</div><div class="cqlist">'+list+'</div>';
+      bindCommunity(el);
+    }
+    function cqDetailHtml(q){
+      var answers=q.answers.slice().sort(function(a,b){return (b.accepted?1:0)-(a.accepted?1:0)||a.ts-b.ts;});
+      var list=answers.map(function(a){
+        return '<div class="cqans'+(a.accepted?' ok':'')+'">'
+          +'<div class="cqans-b">'+linkify(a.body)+'</div>'
+          +'<div class="cqans-f"><span>'+esc(a.author)+' · '+cqAgo(a.ts)+(a.accepted?' · <b>this one helped</b>':'')+'</span>'
+          +'<span class="cqacts">'
+          +(q.mine&&!a.accepted?'<button class="cqlink" data-cqaccept="'+q.id+':'+a.id+'">This helped</button>':'')
+          +'<button class="cqlink warn" data-cqreport="answer:'+q.id+':'+a.id+'">Report</button>'
+          +'</span></div></div>';
+      }).join('');
+      return '<div class="cqbody">'
+        +'<div class="cqq">'+linkify(q.body)+'</div>'
+        +'<div class="cqans-f" style="margin-bottom:14px"><span></span><span class="cqacts">'
+        +'<button class="cqlink warn" data-cqreport="question:'+q.id+':0">Report this question</button></span></div>'
+        +(list||'<p class="cqempty">No answers yet. If you know this one, you are the person who unblocks them.</p>')
+        +'<form class="cqreply" data-cqreply="'+q.id+'">'
+        +'<textarea class="ftext" rows="3" maxlength="4000" placeholder="Explain it the way you wish someone had explained it to you."></textarea>'
+        +'<button class="lbtn" type="submit">Post answer</button></form>'
+        +'</div>';
+    }
+    function cqRulesHtml(){
+      return '<div class="cqrules">'
+        +'<h3>Four rules, then you are in</h3>'
+        +'<div class="rows">'
+        +'<div class="r"><span class="h">Everything here is public</span><span class="m">rule 1</span><span class="d">There are no private messages in this academy, and there never will be. Every post has your name on it and a teacher can read all of it. That is what makes a student community safe.</span></div>'
+        +'<div class="r"><span class="h">Never share how to contact you</span><span class="m">rule 2</span><span class="d">No phone number, no email, no WhatsApp, no Instagram, no Discord. Not yours and not anyone else’s. If somebody asks you for it, report them instead of answering.</span></div>'
+        +'<div class="r"><span class="h">Ask about the code, not the person</span><span class="m">rule 3</span><span class="d">Nobody here is stupid, they are just earlier than you. You were there last month. Insults get the account removed, and that is the whole process.</span></div>'
+        +'<div class="r"><span class="h">Answer like you wish someone had answered you</span><span class="m">rule 4</span><span class="d">Say what was wrong AND why. "Add a semicolon" teaches nothing. "The line before it never ended, so JavaScript read both lines as one" teaches everything.</span></div>'
+        +'</div>'
+        +'<div class="mnote"><span class="label">If something is wrong</span>Press <b>Report</b> on any post. Three reports hide it immediately until a person reads it. If a post frightens you or somebody asks to talk to you privately, report it and tell an adult you trust. You will never get in trouble for reporting something.</div>'
+        +'<div class="lbtns"><button class="lbtn pri" id="cq-accept-rules">I understand, let me in</button></div>'
+        +'</div>';
+    }
+    function bindRules(el){
+      var b=document.getElementById('cq-accept-rules');
+      if(b)b.addEventListener('click',function(){cqStore().seenRules=true;saveData();renderCommunity();});
+    }
+    function bindCommunity(el){
+      el.querySelectorAll('[data-cqtab]').forEach(function(b){
+        b.addEventListener('click',function(){CQ_TAB=b.getAttribute('data-cqtab');renderCommunity();});
+      });
+      el.querySelectorAll('[data-cqopen]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var id=b.getAttribute('data-cqopen');
+          CQ_OPEN=(CQ_OPEN===id)?null:id;renderCommunity();
+        });
+      });
+      var rules=document.getElementById('cq-rules-again');
+      if(rules)rules.addEventListener('click',function(){cqStore().seenRules=false;saveData();renderCommunity();});
+
+      var form=document.getElementById('cq-form');
+      if(form)form.addEventListener('submit',function(e){
+        e.preventDefault();
+        var title=val('cq-title').trim(),body=val('cq-body').trim();
+        if(title.length<8){toast('Give the question a real title, at least a few words.');return;}
+        if(body.length<10){toast('Explain what you tried and what happened.');return;}
+        var bad=safetyCheck(title)||safetyCheck(body);
+        if(bad){toast(bad,{timeout:7000});return;}
+        if(!cqPost())return;
+        cqStore().questions.unshift({
+          id:uid(),author:cqMe(),mine:true,course:val('cq-course'),
+          title:title,body:body,ts:Date.now(),answers:[]
+        });
+        saveData();setv('cq-title','');setv('cq-body','');
+        awardXP(15,'Question asked','code');
+        toast('Posted. Somebody will see it.');
+        renderCommunity();
+      });
+
+      el.querySelectorAll('[data-cqreply]').forEach(function(f){
+        f.addEventListener('submit',function(e){
+          e.preventDefault();
+          var ta=f.querySelector('textarea'),body=ta.value.trim();
+          if(body.length<10){toast('An answer needs more than a few words to help.');return;}
+          var bad=safetyCheck(body);
+          if(bad){toast(bad,{timeout:7000});return;}
+          if(!cqPost())return;
+          var id=f.getAttribute('data-cqreply'),st=cqStore();
+          st.questions.forEach(function(q){
+            if(q.id!==id)return;
+            q.answers.push({id:uid(),author:cqMe(),mine:true,body:body,ts:Date.now(),accepted:false});
+          });
+          saveData();awardXP(20,'You helped somebody','code');
+          unlockBadge('helper');
+          toast('Answer posted. That is how this place works.');
+          renderCommunity();
+        });
+      });
+
+      el.querySelectorAll('[data-cqaccept]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var p=b.getAttribute('data-cqaccept').split(':'),st=cqStore();
+          st.questions.forEach(function(q){
+            if(q.id!==p[0])return;
+            q.answers.forEach(function(a){a.accepted=(a.id===p[1]);});
+          });
+          saveData();toast('Marked as the answer that helped.');renderCommunity();
+        });
+      });
+
+      el.querySelectorAll('[data-cqreport]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var p=b.getAttribute('data-cqreport').split(':');
+          var why=window.prompt('What is wrong with this post? A moderator will read it.','');
+          if(why===null)return;
+          if(!why.trim()){toast('Tell us what is wrong so a moderator can act on it.');return;}
+          var st=cqStore();
+          st.questions.forEach(function(q){
+            if(q.id!==p[1])return;
+            if(p[0]==='question'){q.reports=(q.reports||0)+1;if(q.reports>=3)q.hidden=true;}
+            else q.answers.forEach(function(a){if(a.id===p[2]){a.reports=(a.reports||0)+1;}});
+          });
+          saveData();
+          toast('Reported. A moderator will read it. Thank you for saying something.',{timeout:6000});
+          renderCommunity();
+        });
+      });
+    }
+
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});

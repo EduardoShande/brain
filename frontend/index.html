@@ -1057,6 +1057,33 @@
   section.sec > h3{margin-top:2px}
 
   @media(prefers-reduced-motion:reduce){#rprog{transition:none}}
+  /* ===== ask a better question ===== */
+  .awform{margin-bottom:22px}
+  .awlab{display:block;font-size:14.5px;color:var(--ink-soft);margin-bottom:9px}
+  .awform .ftext{width:100%;font-size:15.5px}
+  .awscore{display:flex;align-items:center;gap:22px;flex-wrap:wrap;background:var(--card);
+    border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--shade)}
+  .awring{flex:none}
+  .awverdict h3{font-size:19px}
+  .awverdict p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-soft);max-width:52ch}
+  .awlist{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:7px}
+  .awlist li{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border-radius:11px;
+    background:var(--surface);border:1px solid var(--line)}
+  .awlist li.ok{background:var(--good-wash);border-color:transparent}
+  .awlist li.no{background:var(--card)}
+  .awlist .awi{flex:none;width:16px;text-align:center;font-weight:700;color:var(--ink-faint)}
+  .awlist li.ok .awi{color:var(--good)}
+  .awlist li.no .awi{color:var(--warn)}
+  .awlist .awt{display:flex;flex-direction:column;gap:3px}
+  .awlist .awt b{font-size:14.5px;color:var(--ink);font-weight:600}
+  .awlist .awt span{font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+  .awout{display:grid;gap:16px}
+  .awbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shade)}
+  .awbox-h{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:11px}
+  .awbox pre{margin:0;white-space:pre-wrap;font-size:13px;line-height:1.65}
+  .awhint{margin:11px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-faint)}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -2858,6 +2885,56 @@
     <div id="community-body"></div>
   </div>
 
+  <!-- ===================== ASK A BETTER QUESTION ===================== -->
+  <div class="page" id="page-askwell">
+    <div class="phead">
+      <button class="back" data-goto="community">← Community</button>
+      <div class="pn">Free tool · nothing leaves your device</div>
+      <h2>Ask a better question</h2>
+      <p class="pd">Type the question you were about to send. This will tell you exactly what is missing from it, rewrite it into one that can actually be answered, and turn it into a prompt worth giving an AI. Learning to ask well is the single skill that speeds up everything else you learn.</p>
+      <div class="subnav">
+        <a href="#aw-tool" class="jump">The tool</a>
+        <a href="#aw-why" class="jump">Why it matters</a>
+        <a href="#aw-ai" class="jump">Using AI properly</a>
+      </div>
+    </div>
+
+    <section class="sec" id="aw-tool">
+      <div class="eyebrow">01 · The tool</div>
+      <h3>Paste your question, badly</h3>
+      <div id="askwell-body"></div>
+    </section>
+
+    <section class="sec" id="aw-why">
+      <div class="eyebrow">02 · Why it matters</div>
+      <h3>A good question is half the answer</h3>
+      <p class="lead">This is not about being polite. It is that the act of writing a proper question solves the problem surprisingly often, before anybody reads it.</p>
+      <p>It has a name: <b>rubber duck debugging</b>. Programmers keep a rubber duck on the desk and explain the problem to it out loud. Somewhere around sentence three they say "oh" and fix it themselves. Nothing about the duck helped. Being forced to say it in order did.</p>
+      <div class="rows">
+        <div class="r"><span class="h">"My code doesn't work"</span><span class="m">unanswerable</span><span class="d">Doesn't work how? Blank page, wrong number, red text, nothing at all when you click? Each of those is a different problem with a different cause. Nobody can pick.</span></div>
+        <div class="r"><span class="h">"Why is my button broken?"</span><span class="m">unanswerable</span><span class="d">Nobody can see your button. They cannot see your code, your screen, or your error. You have to bring all of that to them.</span></div>
+        <div class="r"><span class="h">"I expected the list to show 3 items, it shows none, console says Cannot read properties of null"</span><span class="m">answerable in one line</span><span class="d">Anybody who has written JavaScript knows this one instantly. It is the same problem as the first two. It is just askable now.</span></div>
+      </div>
+      <div class="mnote"><span class="label">The five ingredients</span>Every answerable question has these: <b>what you are trying to do</b>, <b>what you expected</b>, <b>what happened instead</b>, <b>the exact error</b>, and <b>what you already tried</b>. Miss one and the person helping has to guess. Miss three and they move on to somebody else's question.</div>
+    </section>
+
+    <section class="sec" id="aw-ai">
+      <div class="eyebrow">03 · Using AI properly</div>
+      <h3>How to make AI actually teach you</h3>
+      <p class="lead">AI will answer a lazy question. That is exactly the danger. It hands you code that works, you paste it, and you have learned nothing and cannot fix it when it breaks next week.</p>
+      <div class="acc">
+        <details open><summary>Ask for the reason before the code</summary><div class="body"><p>The default reply to "fix my code" is a wall of code. You paste it, it works, and you are no better than you were an hour ago. Then it breaks and you are stuck again with a file you no longer recognise.</p><p>Always say: <b>"explain what is causing this before showing me any code."</b> That single sentence turns a vending machine into a tutor.</p></div></details>
+        <details><summary>Give it what you would give a person</summary><div class="body"><p>The five ingredients above work on AI too, for the same reason. "It doesn't work" gets a guess. Your goal, your code, your error and what you tried gets an actual diagnosis.</p><p>The prompt this page builds already has them arranged in that order, which is why it is worth copying rather than typing "help" and hoping.</p></div></details>
+        <details><summary>Ask for the smallest fix, not a rewrite</summary><div class="body"><p>Left alone, AI will happily rewrite your whole file in a style you did not choose, using things you have not learned. Now you cannot read your own project.</p><p>Say <b>"show me only the lines that change."</b> You want a repair, not a replacement.</p></div></details>
+        <details><summary>Never paste code you cannot explain</summary><div class="body"><p>This is the rule that matters most, so make it a hard one for yourself. If you cannot say out loud what a line does, you are not allowed to use it yet.</p><p>Ask instead: <b>"what does line 3 do, and why is it needed?"</b> Keep asking until you could rewrite it from memory. That is the difference between a student who gets good in a year and one who is still stuck in three.</p></div></details>
+        <details><summary>It will be confidently wrong</summary><div class="body"><p>AI does not know when it is guessing. It will invent a function that does not exist, name an option that was removed years ago, and describe it all in the same calm, certain voice it uses when it is right.</p><p>So verify: run it, and check anything unfamiliar against the real documentation. When it names something you have never heard of, that is exactly the moment to look it up rather than trust it.</p></div></details>
+        <details><summary>Ask it to quiz you</summary><div class="body"><p>The most underused prompt there is: <b>"ask me three questions about this code to check whether I actually understood it."</b></p><p>You will find out in about a minute whether you learned the thing or just watched it happen. Uncomfortable, and worth far more than another answer.</p></div></details>
+      </div>
+      <div class="mnote"><span class="label">Where AI does not belong</span>Do not paste anything personal into it: not your full name, not your school, not your address, not anyone else's. And when a task is meant to prove <b>you</b> can do something, doing it with AI only proves the AI can. You will be the one in the interview.</div>
+      <div class="pfoot"><b>Next move:</b> take the last thing you were stuck on, run it through the tool above, and notice how often you solve it before you finish typing.</div>
+    </section>
+  </div>
+
   <!-- ===================== PROFILE ===================== -->
   <div class="page" id="page-profile">
     <div class="phead">
@@ -3620,7 +3697,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 <script>
   (function(){
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','community','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','lab','community','askwell','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -4087,6 +4164,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       else if(name==='lab')renderLab();
       else if(name==='profile')renderProfile();
       else if(name==='community')renderCommunity();
+      else if(name==='askwell')renderAskWell();
     }
     /* =========================================================
        Academy: courses (roadmap = lessons, quiz = final exam) + certificates
@@ -5560,7 +5638,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'<textarea class="ftext" id="cq-body" rows="4" maxlength="4000" placeholder="What did you try, and what happened instead? Paste the code and the error message."></textarea>'
         +'<div class="cqask-f"><select class="fselect" id="cq-course">'+courseOpts+'</select>'
         +'<button class="lbtn pri" type="submit">Post the question</button></div>'
-        +'<p class="cqnote">Public to every student. Never post your phone, your email, or a link to another app.</p>'
+        +'<p class="cqnote">Public to every student. Never post your phone, your email, or a link to another app. '
+        +'<button class="inlinelink" data-goto="askwell">Not sure how to ask? Fix your question first.</button></p>'
         +'</form>';
 
       var list=qs.length?qs.map(function(q){
@@ -5619,6 +5698,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       if(b)b.addEventListener('click',function(){cqStore().seenRules=true;saveData();renderCommunity();});
     }
     function bindCommunity(el){
+      el.querySelectorAll('[data-goto]').forEach(function(b){
+        b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});
+      });
       el.querySelectorAll('[data-cqtab]').forEach(function(b){
         b.addEventListener('click',function(){CQ_TAB=b.getAttribute('data-cqtab');renderCommunity();});
       });
@@ -5777,7 +5859,176 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       railSync();
     }
 
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();updateAuthChip();}
+    /* =========================================================
+       Ask a better question.
+
+       A student types the question they were about to send. The
+       checks below are deterministic and run in the browser: no
+       API key, no cost, and nothing a student writes ever leaves
+       their device. That is deliberate. It also teaches better,
+       because the student sees WHICH ingredient was missing
+       rather than watching a machine silently fix it for them.
+    ========================================================= */
+    var AWQ={draft:'',ran:false};
+
+    var VAGUE=/\b(doesn'?t work|does not work|not working|is broken|nothing happens|it fails|no funciona|se rompe|help me|ayuda|urgent|asap|please help)\b/i;
+    var ERRORISH=/(error|exception|traceback|uncaught|cannot read|is not defined|is not a function|unexpected token|syntaxerror|typeerror|referenceerror|404|500|failed to|undefined is not)/i;
+    var CODEISH=/[{};<>]|=>|\bfunction\b|\bconst\b|\blet\b|\bvar\b|\bdef\b|\bclass\b|<\/?[a-z]+>|\.\w+\(/;
+    var TRIEDISH=/\b(i tried|i've tried|ive tried|i attempted|i changed|i added|i removed|i checked|i searched|i read|i looked|probé|intenté|revisé)\b/i;
+    var GOALISH=/\b(i(?:'m| am)? (?:trying|building|making|writing)|i want to|my goal|supposed to|should (?:show|display|be|do|return)|quiero|estoy tratando)\b/i;
+    var EXPECTISH=/\b(expected|i expected|should have|instead of|but it|but instead|rather than|esperaba)\b/i;
+
+    function awChecks(t){
+      var text=String(t||''),words=text.trim().split(/\s+/).filter(Boolean).length;
+      var qmarks=(text.match(/\?/g)||[]).length;
+      return [
+        {id:'len',ok:words>=12,
+         good:'Long enough to be answerable',
+         bad:'Too short to answer',
+         fix:'Under a dozen words almost never contains enough to help. Say what you are building and what went wrong.'},
+        {id:'goal',ok:GOALISH.test(text),
+         good:'Says what you are trying to do',
+         bad:'Does not say what you are trying to do',
+         fix:'Start with the goal: "I am trying to make the button show a message when clicked."'},
+        {id:'vague',ok:!VAGUE.test(text)||ERRORISH.test(text),
+         good:'Describes the problem specifically',
+         bad:'Uses "it does not work" without saying how',
+         fix:'"Does not work" could be a thousand things. Did nothing happen, did the page go blank, did red text appear? Say which.'},
+        {id:'error',ok:ERRORISH.test(text),
+         good:'Includes the actual error',
+         bad:'No error message',
+         fix:'Open the console with F12 and copy the red text exactly, character for character. It usually names the file and the line.'},
+        {id:'code',ok:CODEISH.test(text),
+         good:'Includes the relevant code',
+         bad:'No code included',
+         fix:'Paste the few lines around the problem. Not the whole file, just the part that matters.'},
+        {id:'expect',ok:EXPECTISH.test(text)||/instead/i.test(text),
+         good:'Says expected versus actual',
+         bad:'Does not say what you expected',
+         fix:'Two sentences: "I expected the list to show three items. Instead the page is empty."'},
+        {id:'tried',ok:TRIEDISH.test(text),
+         good:'Says what you already tried',
+         bad:'Does not say what you already tried',
+         fix:'Saying what you ruled out stops people repeating it, and it shows you did the work first.'},
+        {id:'one',ok:qmarks<=2,
+         good:'Asks one clear thing',
+         bad:'Asks several questions at once',
+         fix:'Three questions in one post usually gets zero answers. Post the one that blocks you.'}
+      ];
+    }
+    function awScore(checks){
+      var w={len:10,goal:18,vague:14,error:16,code:16,expect:12,tried:9,one:5},total=0;
+      checks.forEach(function(c){if(c.ok)total+=w[c.id]||0;});
+      return Math.min(100,total);
+    }
+    function awVerdict(n){
+      if(n>=85)return ['Ready to send','Somebody can actually answer this. Post it.'];
+      if(n>=60)return ['Almost there','Add the missing pieces below and it becomes easy to answer.'];
+      if(n>=35)return ['Needs work','As written, anyone who wants to help has to guess. Fill the gaps.'];
+      return ['Nobody can answer this yet','Not because it is a bad question, but because the information needed to answer it is not here yet.'];
+    }
+    function awGrab(text,re,fallback){
+      var lines=String(text).split(/(?<=[.!?])\s+|\n+/).map(function(x){return x.trim();}).filter(Boolean);
+      for(var i=0;i<lines.length;i++)if(re.test(lines[i]))return lines[i];
+      return fallback;
+    }
+    function awRewrite(text){
+      var t=String(text||'').trim();
+      var goal=awGrab(t,GOALISH,'[what were you trying to build or make happen?]');
+      var err=awGrab(t,ERRORISH,'[paste the exact red text from the console, or write "no error, it just does nothing"]');
+      var tried=awGrab(t,TRIEDISH,'[what did you already try, and what happened when you tried it?]');
+      var expect=awGrab(t,EXPECTISH,'[what did you expect to happen, and what happened instead?]');
+      var hasCode=CODEISH.test(t);
+      return 'What I am trying to do\n'+goal
+        +'\n\nWhat happens instead\n'+expect
+        +'\n\nThe error\n'+err
+        +'\n\nThe code\n'+(hasCode?'(the lines you pasted above)':'[paste the few lines around the problem]')
+        +'\n\nWhat I already tried\n'+tried;
+    }
+    function awPrompt(text){
+      var t=String(text||'').trim()||'[your question]';
+      return 'I am a student learning to code. Please answer at a beginner level.\n\n'
+        +'Here is my problem:\n'+t+'\n\n'
+        +'Please do this, in this order:\n'
+        +'1. Tell me what is causing it, in plain language, before you show any code.\n'
+        +'2. Show the smallest possible fix, and only the lines that change.\n'
+        +'3. Tell me how I could have found this myself next time.\n\n'
+        +'Do not rewrite my whole file. If you need something I have not given you, ask me for it instead of guessing.';
+    }
+
+    function renderAskWell(){
+      var el=document.getElementById('askwell-body');if(!el||!data)return;
+      var t=AWQ.draft,checks=awChecks(t),score=awScore(checks),v=awVerdict(score);
+      var has=t.trim().length>0;
+
+      var meter=has?('<div class="awscore"><div class="awring">'+svgRing(score,96)+'</div>'
+        +'<div class="awverdict"><h3>'+esc(v[0])+'</h3><p>'+esc(v[1])+'</p></div></div>'):'';
+
+      var list=has?('<ul class="awlist">'+checks.map(function(c){
+        return '<li class="'+(c.ok?'ok':'no')+'"><span class="awi">'+(c.ok?'✓':'✕')+'</span>'
+          +'<span class="awt"><b>'+esc(c.ok?c.good:c.bad)+'</b>'
+          +(c.ok?'':'<span>'+esc(c.fix)+'</span>')+'</span></li>';
+      }).join('')+'</ul>'):'';
+
+      var out=has?('<div class="awout">'
+        +'<div class="awbox"><div class="awbox-h">Your question, restructured'
+        +'<button class="cqlink" data-awcopy="rewrite">Copy</button></div>'
+        +'<pre id="aw-rewrite">'+esc(awRewrite(t))+'</pre>'
+        +'<p class="awhint">Anything in [brackets] is a gap only you can fill. Fill them and the question answers itself half the time.</p></div>'
+        +'<div class="awbox"><div class="awbox-h">The same thing, as a prompt for an AI'
+        +'<button class="cqlink" data-awcopy="prompt">Copy</button></div>'
+        +'<pre id="aw-prompt">'+esc(awPrompt(t))+'</pre>'
+        +'<p class="awhint">Paste that into ChatGPT, Claude or Gemini. The numbered instructions are the important part: they stop it dumping code you cannot read.</p></div>'
+        +'<div class="lbtns"><button class="lbtn pri" id="aw-post">Post the good version to the community</button>'
+        +'<button class="lbtn" id="aw-clear">Start again</button></div>'
+        +'</div>'):'';
+
+      el.innerHTML='<div class="awform">'
+        +'<label class="awlab" for="aw-input">Write the question exactly as you were about to ask it. Badly is fine, that is the point.</label>'
+        +'<textarea class="ftext" id="aw-input" rows="5" maxlength="4000" placeholder="my code doesnt work">'+esc(t)+'</textarea>'
+        +'</div>'+meter+list+out;
+
+      var ta=document.getElementById('aw-input');
+      if(ta){
+        ta.addEventListener('input',function(){
+          AWQ.draft=ta.value;
+          var start=ta.selectionStart;
+          renderAskWell();
+          var ta2=document.getElementById('aw-input');
+          if(ta2){ta2.focus();try{ta2.setSelectionRange(start,start);}catch(e){}}
+          if(!AWQ.ran&&ta.value.trim().length>15){AWQ.ran=true;awardXP(10,'You checked your question first','code');}
+        });
+      }
+      el.querySelectorAll('[data-awcopy]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var id=b.getAttribute('data-awcopy')==='prompt'?'aw-prompt':'aw-rewrite';
+          var txt=document.getElementById(id).textContent;
+          try{
+            if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt);toast('Copied.');return;}
+          }catch(e){}
+          window.prompt('Copy this:',txt);
+        });
+      });
+      var post=document.getElementById('aw-post');
+      if(post)post.addEventListener('click',function(){
+        var body=awRewrite(AWQ.draft);
+        if(/\[/.test(body)&&!window.confirm('There are still [gaps] in your question. Post it anyway?'))return;
+        var st=cqStore();
+        var title=AWQ.draft.trim().split(/\n/)[0].slice(0,150);
+        if(title.length<8){toast('Give it a title of at least a few words first.');return;}
+        var bad=safetyCheck(title)||safetyCheck(body);
+        if(bad){toast(bad,{timeout:7000});return;}
+        st.seenRules=true;
+        st.questions.unshift({id:uid(),author:cqMe(),mine:true,course:'',title:title,body:body,ts:Date.now(),answers:[]});
+        saveData();awardXP(15,'Question asked','code');
+        toast('Posted to the community.');
+        showPage('community');
+      });
+      var clr=document.getElementById('aw-clear');
+      if(clr)clr.addEventListener('click',function(){AWQ.draft='';renderAskWell();});
+    }
+
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});

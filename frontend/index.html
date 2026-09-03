@@ -538,6 +538,52 @@
   .nextgoal b{color:var(--ink)}
   @media(max-width:620px){.streakbox{text-align:left}.week{justify-content:flex-start}.gamexp{flex-direction:column;align-items:flex-start;gap:2px}}
 
+  /* ===== logic lab ===== */
+  .modetabs{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 0}
+  .modetab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:11px 17px;border-radius:12px;border:1px solid var(--line);background:var(--card);cursor:pointer;text-align:left}
+  .modetab b{font-family:"Poppins",sans-serif;font-size:15px;font-weight:800;color:var(--ink)}
+  .modetab span{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;color:var(--ink-faint)}
+  .modetab:hover{border-color:var(--teal)}
+  .modetab.on{background:var(--grad);border-color:transparent;box-shadow:0 8px 22px rgba(124,58,237,.28)}
+  .modetab.on b,.modetab.on span{color:var(--on-teal)}
+  .logdiff{font-family:"JetBrains Mono",monospace;font-size:12px;height:32px;padding:0 8px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer;margin-left:6px}
+  .gstage{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:0 10px 28px rgba(124,58,237,.07)}
+  .ghead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .ghead h3{font-size:20px}
+  .gscore{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint)}
+  .gwhy{margin:6px 0 16px;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+  .gwhy b{color:var(--ink)}
+  .gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .gbtn{font-family:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+  .gbtn:hover{border-color:var(--teal);color:var(--teal-ink)}
+  .gbtn.pri{background:var(--grad);border-color:transparent;color:var(--on-teal)}
+  .gbtn:disabled{opacity:.45;cursor:not-allowed}
+  .gfeed{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14.5px;line-height:1.55}
+  .gfeed.ok{background:var(--good-wash);color:var(--ink)}
+  .gfeed.no{background:var(--warn-wash);color:var(--ink)}
+  .gprog{font-family:"JetBrains Mono",monospace;font-size:11.5px;line-height:1.6;color:var(--ink-faint);margin-top:14px}
+  .lwrap{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:24px;align-items:start}
+  @media(max-width:720px){.lwrap{grid-template-columns:1fr}}
+  .lgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;aspect-ratio:1;max-width:260px}
+  .lcell{border-radius:7px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:19px;transition:background .12s}
+  .lcell.wall{background:var(--ink-faint);border-color:transparent;opacity:.35}
+  .lcell.goal{background:var(--good-wash);border-color:var(--good);color:var(--good)}
+  .lcell.trail{background:var(--teal-wash)}
+  .lcell.bot{background:var(--grad);border-color:transparent;color:#fff;font-weight:800}
+  .lpal{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+  .lpal button{font-family:inherit;font-size:13.5px;font-weight:700;padding:8px 13px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
+  .lpal button:hover:not(:disabled){border-color:var(--teal);color:var(--teal-ink)}
+  .lpal button:disabled{opacity:.45;cursor:not-allowed}
+  .lstrip{margin-bottom:10px;cursor:pointer}
+  .lslab{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .lslab .full{color:var(--warn)}
+  .lstrip.act .lslab{color:var(--teal-ink)}
+  .lslot{min-height:42px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;padding:6px;border-radius:9px;border:1px dashed var(--line-strong);background:var(--surface)}
+  .lstrip.act .lslot{border-color:var(--teal);border-style:solid}
+  .cmdchip{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--teal-wash);color:var(--teal-ink)}
+  .cmdchip.f1{background:var(--clay-wash);color:var(--clay-ink)}
+  .lempty{font-size:12.5px;color:var(--ink-faint);padding-left:4px}
+
   /* ===== code lab ===== */
   .labtabs{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0 0;align-items:center}
   .labchip{font-family:"JetBrains Mono",monospace;font-size:12px;min-width:32px;height:32px;padding:0 9px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer}
@@ -652,7 +698,7 @@
     <div class="links" id="links">
       <button data-goto="start">Start here</button>
       <button data-goto="academy">Courses</button>
-      <button data-goto="lab">Code Lab</button>
+      <button data-goto="lab">Practice</button>
     <button data-goto="path">Find your path</button>
       <button data-goto="account" id="nav-account">Account</button>
     </div>
@@ -2231,9 +2277,10 @@
     <div class="phead">
       <button class="back" data-goto="academy">← Courses</button>
       <div class="pn">Code Lab · free</div>
-      <h2>Write real code, see it instantly</h2>
-      <p class="pd">A real editor and a real browser, side by side. Type on the left, your page appears on the right the moment you stop typing. Twelve challenges check your work automatically and tell you exactly what is still missing, so you are never stuck guessing.</p>
+      <h2>Practice: think it, then build it</h2>
+      <p class="pd">Two labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all, which is the part everyone skips and then struggles with forever. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.</p>
       <div class="mnote"><span class="label">Why this is the important page</span>Reading about code teaches you almost nothing. <b>You learn by typing it, breaking it, and fixing it.</b> Everything else in this academy exists to get you here. The challenges do not just look at your code, they run it and measure the result, exactly like a real test at a real job.</div>
+      <div class="modetabs" id="lab-modes"></div>
       <div class="labtabs" id="lab-tabs"></div>
     </div>
     <div id="lab-stage"></div>
@@ -3741,7 +3788,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     /* =========================================================
        Game system: XP, levels, badges and streaks
     ========================================================= */
-    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges']];
+    var BADGES=[['first','First step','Complete your first lesson'],['ten','Getting serious','Complete 10 lessons'],['fifty','Halfway hero','Complete 50 lessons'],['quiz','Exam taker','Take your first exam'],['ace','Perfect score','Score 100% on any exam'],['cert','Certified','Earn your first certificate'],['streak3','On a roll','Learn 3 days in a row'],['streak7','Unstoppable','Learn 7 days in a row'],['explorer','Explorer','Open all 7 free reference pages'],['questmaster','Quest master','Finish all 3 daily quests in one day'],['xp1000','Thousand club','Reach 1,000 XP'],['marathon','Marathon','Learn 30 days in a row'],['builder','Builder','Solve all 12 Code Lab challenges'],['logician','Logician','Solve all 10 Logic Lab levels'],['generator','Machine beater','Solve 10 randomly generated levels']];
     var LEVELS=[[1,'Curious'],[2,'Beginner'],[3,'Learner'],[5,'Builder'],[7,'Coder'],[10,'Developer'],[14,'Craftsman'],[20,'Senior'],[28,'Architect'],[40,'Legend']];
     var REFPAGES=['fundamentals','start','htmltags','webconcepts','jsguide','webtools','resources'];
     var QUESTS=[
@@ -3974,7 +4021,220 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
     function labSave(v){var g=labState();g.labCode[labKey()]=v;saveData();}
     function unsafeLoop(src){return /while\s*\(\s*(true|1)\s*\)|for\s*\(\s*;\s*;\s*\)/.test(src||'');}
+    /* =========================================================
+       Logic Lab: sequencing, debugging and functions, no syntax
+    ========================================================= */
+    var DIRCH=['→','↓','←','↑'];
+    var DR=[0,1,0,-1],DC=[1,0,-1,0];
+    var LOGICLV=[
+      {n:'First steps',g:['.....','.....','S...G','.....','.....'],max:8,tip:'The robot already faces right. Just walk forward.'},
+      {n:'One turn',g:['..G..','.....','S....','.....','.....'],max:10,tip:'Walk, turn, walk again. The order is the whole puzzle.'},
+      {n:'Around the wall',g:['.....','.....','S.#.G','..#..','.....'],max:16,tip:'A wall is in the way. Plan the detour before you press Run.'},
+      {n:'Meet F1',g:['#####','#####','##G##','#..##','S.###'],max:9,tip:'The pattern forward, left, forward, right happens twice. Put it in F1 once and call F1 twice.'},
+      {n:'The staircase',g:['####G','###..','##..#','#..##','S.###'],max:5,tip:'Only 5 commands fit in Main. The only way is F1 = forward, left, forward, right, called four times.'},
+      {n:'The zigzag',g:['S.###','#..##','##..#','###..','####G'],max:6,tip:'The same trick, mirrored. Find the four-command pattern that repeats and put it in F1.'},
+      {n:'The long way round',g:['S....','####.','.....','.####','....G'],max:26,tip:'No trick here, just a long path. Trace it with your finger before you click anything.'},
+      {n:'Two doors',g:['S.#..','..#..','.##..','.....','..##G'],max:24,tip:'There is more than one route. The shorter one earns three stars.'},
+      {n:'The climb',g:['..#.G','..#.#','..#.#','....#','S####'],max:26,tip:'Read the whole map first. Every wrong turn is a crash, and a crash tells you exactly which step was wrong.'},
+      {n:'The tight one',g:['S.###','#..##','##..#','###..','####G'],max:4,tip:'The same map as the zigzag, but Main now holds only 4 commands. One F1, called four times, and nothing else.'}
+    ];
+    var LG=null,LOGDIFF=2;
+    function logicStart(lv){for(var r=0;r<lv.g.length;r++){var c=lv.g[r].indexOf('S');if(c>=0)return{r:r,c:c,d:0};}return{r:0,c:0,d:0};}
+    function walkable(lv,r,c){return r>=0&&r<5&&c>=0&&c<5&&lv.g[r].charAt(c)!=='#';}
+    function bfsPar(lv){
+      var s=logicStart(lv),seen={},q=[[s.r,s.c,s.d,0]],i=0,k;
+      seen[s.r+','+s.c+','+s.d]=1;
+      while(i<q.length){
+        var cur=q[i++],r=cur[0],c=cur[1],d=cur[2],n=cur[3];
+        if(lv.g[r].charAt(c)==='G')return n;
+        var nx=[[r,c,(d+1)%4],[r,c,(d+3)%4]],fr=r+DR[d],fc=c+DC[d];
+        if(walkable(lv,fr,fc))nx.push([fr,fc,d]);
+        for(k=0;k<nx.length;k++){
+          var key=nx[k][0]+','+nx[k][1]+','+nx[k][2];
+          if(seen[key])continue;
+          seen[key]=1;q.push([nx[k][0],nx[k][1],nx[k][2],n+1]);
+        }
+      }
+      return -1;
+    }
+    function logicCosts(rows){
+      var lv={g:rows.map(function(x){return typeof x==='string'?x:x.join('');})};
+      var s=logicStart(lv),seen={},q=[[s.r,s.c,s.d,0]],i=0,best={},k;
+      seen[s.r+','+s.c+','+s.d]=1;
+      while(i<q.length){
+        var cur=q[i++],r=cur[0],c=cur[1],d=cur[2],n=cur[3],ck=r+','+c;
+        if(best[ck]===undefined||n<best[ck])best[ck]=n;
+        var nx=[[r,c,(d+1)%4],[r,c,(d+3)%4]],fr=r+DR[d],fc=c+DC[d];
+        if(walkable(lv,fr,fc))nx.push([fr,fc,d]);
+        for(k=0;k<nx.length;k++){
+          var key=nx[k][0]+','+nx[k][1]+','+nx[k][2];
+          if(seen[key])continue;
+          seen[key]=1;q.push([nx[k][0],nx[k][1],nx[k][2],n+1]);
+        }
+      }
+      return best;
+    }
+    function randLevel(diff,tries){
+      tries=tries||0;
+      var minPar=tries>=40?4:(diff===1?5:diff===3?13:9);
+      var N=5,g=[],r,c,i,k,m,t;
+      for(r=0;r<N;r++){g.push([]);for(c=0;c<N;c++)g[r].push('#');}
+      var sr=Math.floor(Math.random()*N),sc=Math.floor(Math.random()*N),cr=sr,cc=sc;
+      g[cr][cc]='.';
+      var steps=diff===1?8:diff===3?20:14;
+      for(i=0;i<steps;i++){
+        var dirs=[[0,1],[1,0],[0,-1],[-1,0]];
+        for(k=dirs.length-1;k>0;k--){m=Math.floor(Math.random()*(k+1));t=dirs[k];dirs[k]=dirs[m];dirs[m]=t;}
+        var moved=false;
+        for(k=0;k<4;k++){
+          var nr=cr+dirs[k][0],nc=cc+dirs[k][1];
+          if(nr<0||nr>=N||nc<0||nc>=N)continue;
+          cr=nr;cc=nc;g[cr][cc]='.';moved=true;break;
+        }
+        if(!moved)break;
+      }
+      g[sr][sc]='S';
+      var costs=logicCosts(g),bk=null,bc=-1,home=sr+','+sc;
+      Object.keys(costs).forEach(function(key){if(key!==home&&costs[key]>bc){bc=costs[key];bk=key;}});
+      if(!bk||bc<minPar)return randLevel(diff,tries+1);
+      var gp=bk.split(',');
+      g[+gp[0]][+gp[1]]='G';
+      var lv={n:'Random level',g:g.map(function(row){return row.join('');}),rnd:true,par:bc,
+        tip:'Generated one second ago. Nobody has ever solved this exact level before, including me.'};
+      lv.max=Math.max(12,bc+8);
+      return lv;
+    }
+    function logicStore(){var g=gameState();g.logic=g.logic||{};if(typeof g.logicRnd!=='number')g.logicRnd=0;return g;}
+    function logicStars(steps,par){return steps<=par?3:steps<=par+3?2:1;}
+    function starStr(n){return '★★★☆☆☆'.slice(3-n,6-n);}
+    function logicOpen(i){
+      var lv=i<0?randLevel(LOGDIFF):LOGICLV[i];
+      LG={lv:lv,i:i,key:i<0?'rnd':('c'+i),main:[],f1:[],act:'main',run:false,msg:'',ok:false,par:bfsPar(lv)};
+      drawLogic();
+    }
+    function drawLogic(bot,trail){
+      var st=document.getElementById('lab-stage'),tabs=document.getElementById('lab-tabs');
+      if(!st||!tabs||!data)return;
+      if(!LG){logicOpen(0);return;}
+      var lv=LG.lv,pos=bot||logicStart(lv);trail=trail||[];
+      var g=logicStore(),r,c;
+      tabs.innerHTML=LOGICLV.map(function(x,k){
+        var rec=g.logic['c'+k];
+        return '<button class="labchip'+(LG.i===k?' on':'')+(rec?' won':'')+'" data-log="'+k+'" title="'+esc(x.n)+(rec?' · '+rec.s+' stars':'')+'">'+(k+1)+'</button>';
+      }).join('')
+        +'<button class="labchip free'+(LG.i<0?' on':'')+'" data-log="-1">↻ New random level</button>'
+        +'<select class="logdiff" id="log-diff"><option value="1"'+(LOGDIFF===1?' selected':'')+'>Easy</option><option value="2"'+(LOGDIFF===2?' selected':'')+'>Medium</option><option value="3"'+(LOGDIFF===3?' selected':'')+'>Hard</option></select>';
+      var cells='';
+      for(r=0;r<5;r++)for(c=0;c<5;c++){
+        var ch=lv.g[r].charAt(c),cl='lcell',t='';
+        if(ch==='#')cl+=' wall';
+        if(ch==='G'){cl+=' goal';t='★';}
+        if(trail.indexOf(r+','+c)>=0)cl+=' trail';
+        if(r===pos.r&&c===pos.c){cl+=' bot';t=DIRCH[pos.d];}
+        cells+='<div class="'+cl+'">'+t+'</div>';
+      }
+      var dis=LG.run?' disabled':'';
+      var pal='<button data-cmd="F"'+dis+'>↑ Forward</button><button data-cmd="L"'+dis+'>↰ Turn left</button><button data-cmd="R"'+dis+'>↱ Turn right</button><button data-cmd="C"'+dis+'>◆ Call F1</button>';
+      function strip(which,label,lim){
+        var arr=which==='main'?LG.main:LG.f1;
+        var chips=arr.length?arr.map(function(cm){return '<span class="cmdchip'+(cm==='C'?' f1':'')+'">'+({F:'↑',L:'↰',R:'↱',C:'F1'})[cm]+'</span>';}).join('')
+          :'<span class="lempty">click a command to add it here</span>';
+        return '<div class="lstrip'+(LG.act===which?' act':'')+'" data-strip="'+which+'"><div class="lslab">'+label
+          +' <span class="'+(arr.length>=lim?'full':'')+'">'+arr.length+'/'+lim+'</span></div><div class="lslot">'+chips+'</div></div>';
+      }
+      var rec=g.logic[LG.key],solved=Object.keys(g.logic).length;
+      st.innerHTML='<div class="gstage">'
+        +'<div class="ghead"><h3>'+esc(lv.n)+(LG.i>=0?' · level '+(LG.i+1):'')+'</h3>'
+        +'<div class="gscore">'+solved+' of '+LOGICLV.length+' levels · '+g.logicRnd+' random solved'+(rec&&LG.i>=0?' · your best '+starStr(rec.s)+' in '+rec.st+' steps':'')+'</div></div>'
+        +'<p class="gwhy">Get the robot to the star. You write no code here. You do the part that <b>is</b> programming: putting steps in the right order, then working out exactly where your order was wrong. Perfect play on this level is <b>'+LG.par+' steps</b>, which is three stars.</p>'
+        +'<div class="lwrap"><div><div class="lgrid">'+cells+'</div><p class="gprog">'+esc(lv.tip)+'</p></div><div>'
+        +'<div class="lpal">'+pal+'</div>'
+        +strip('main','Main',lv.max)+strip('f1','F1 · your function',6)
+        +'<div class="gbtns"><button class="gbtn pri" id="lg-run"'+dis+'>▶ Run</button><button class="gbtn" id="lg-undo"'+dis+'>Undo</button><button class="gbtn" id="lg-clear"'+dis+'>Clear</button></div>'
+        +(LG.msg?'<div class="gfeed '+(LG.ok?'ok':'no')+'">'+LG.msg+'</div>':'')
+        +'</div></div></div>';
+      tabs.querySelectorAll('[data-log]').forEach(function(b){b.addEventListener('click',function(){if(LG.run)return;logicOpen(parseInt(b.getAttribute('data-log'),10));});});
+      var dsel=document.getElementById('log-diff');
+      if(dsel)dsel.addEventListener('change',function(){LOGDIFF=parseInt(dsel.value,10);if(LG.i<0)logicOpen(-1);});
+      st.querySelectorAll('[data-cmd]').forEach(function(b){b.addEventListener('click',function(){logicAdd(b.getAttribute('data-cmd'));});});
+      st.querySelectorAll('[data-strip]').forEach(function(b){b.addEventListener('click',function(){if(LG.run)return;LG.act=b.getAttribute('data-strip');drawLogic();});});
+      var rn=document.getElementById('lg-run');if(rn)rn.addEventListener('click',logicRun);
+      var un=document.getElementById('lg-undo');if(un)un.addEventListener('click',function(){(LG.act==='main'?LG.main:LG.f1).pop();LG.msg='';drawLogic();});
+      var cl=document.getElementById('lg-clear');if(cl)cl.addEventListener('click',function(){LG.main=[];LG.f1=[];LG.msg='';drawLogic();});
+    }
+    function logicAdd(cmd){
+      if(!LG||LG.run)return;
+      var arr=LG.act==='main'?LG.main:LG.f1,lim=LG.act==='main'?LG.lv.max:6;
+      if(cmd==='C'&&LG.act==='f1'){toast('F1 cannot call itself. That would never stop.');return;}
+      if(arr.length>=lim){toast(LG.act==='main'?'Main is full. Put the repeating part in F1 and call it.':'F1 holds 6 commands.');return;}
+      arr.push(cmd);LG.msg='';drawLogic();
+    }
+    function logicRun(){
+      if(!LG||LG.run)return;
+      var lv=LG.lv,prog=[];
+      LG.main.forEach(function(c){if(c==='C'){LG.f1.forEach(function(f){prog.push(f);});}else prog.push(c);});
+      if(!prog.length){toast('Add some commands first.');return;}
+      LG.run=true;LG.msg='';
+      var pos=logicStart(lv),trail=[pos.r+','+pos.c],k=0;
+      drawLogic(pos,trail);
+      var timer=setInterval(function(){
+        if(k>=prog.length){
+          clearInterval(timer);LG.run=false;
+          LG.msg='<b>Out of commands.</b> The robot stopped before the star. Follow the trail it left and find the step you missed.';LG.ok=false;
+          drawLogic(pos,trail);return;
+        }
+        var cmd=prog[k++];
+        if(cmd==='L')pos.d=(pos.d+3)%4;
+        else if(cmd==='R')pos.d=(pos.d+1)%4;
+        else{
+          var nr=pos.r+DR[pos.d],nc=pos.c+DC[pos.d];
+          if(!walkable(lv,nr,nc)){
+            clearInterval(timer);LG.run=false;
+            LG.msg='<b>Crash on step '+k+'.</b> The robot walked into a wall. That is a bug, and working out which step caused it is the actual job.';LG.ok=false;
+            drawLogic(pos,trail);return;
+          }
+          pos.r=nr;pos.c=nc;trail.push(nr+','+nc);
+        }
+        if(lv.g[pos.r].charAt(pos.c)==='G'){
+          clearInterval(timer);LG.run=false;
+          var g=logicStore(),stars=logicStars(k,LG.par),size=LG.main.length+LG.f1.length,fresh=true;
+          if(LG.i<0)g.logicRnd++;
+          else{
+            var old=g.logic[LG.key];fresh=!old;
+            g.logic[LG.key]={s:Math.max(stars,old?old.s:0),st:old?Math.min(k,old.st):k};
+          }
+          saveData();
+          LG.msg='<b>'+starStr(stars)+' Solved in '+k+' steps</b> using '+size+' command'+(size===1?'':'s')+'. Perfect play is '+LG.par+' steps. '
+            +(stars<3?'A shorter route with fewer turns gets you three stars.':'That is optimal. Nobody can do better than that.')
+            +(LG.i>=0&&LG.i<LOGICLV.length-1?' Level '+(LG.i+2)+' is above.':'');
+          LG.ok=true;
+          logicAward(LG.i<0?15:(fresh?30:5));
+          if(Object.keys(g.logic).length>=LOGICLV.length)unlockBadge('logician');
+          if(g.logicRnd>=10)unlockBadge('generator');
+          drawLogic(pos,trail);return;
+        }
+        drawLogic(pos,trail);
+      },300);
+    }
+    function logicAward(n){
+      var t=todayBox();t.logxp=t.logxp||0;
+      if(t.logxp>=200){toast('Logic Lab XP maxed for today. Go build something.');return;}
+      t.logxp+=n;awardXP(n,'Logic level solved','code');
+    }
+
+    var LABMODE='logic';
     function renderLab(){
+      var m=document.getElementById('lab-modes');if(!m||!data)return;
+      m.innerHTML=[['logic','Logic Lab','Think in steps · no code at all'],['code','Code Lab','Write real HTML, CSS and JavaScript']].map(function(x){
+        return '<button class="modetab'+(LABMODE===x[0]?' on':'')+'" data-mode="'+x[0]+'"><b>'+x[1]+'</b><span>'+x[2]+'</span></button>';
+      }).join('');
+      m.querySelectorAll('[data-mode]').forEach(function(b){
+        b.addEventListener('click',function(){LABMODE=b.getAttribute('data-mode');LABMSG='';renderLab();});
+      });
+      if(LABMODE==='logic'){if(!LG)logicOpen(0);else drawLogic();}
+      else renderCodeLab();
+    }
+    function renderCodeLab(){
       var tabs=document.getElementById('lab-tabs'),st=document.getElementById('lab-stage');
       if(!tabs||!st||!data)return;
       var g=labState();

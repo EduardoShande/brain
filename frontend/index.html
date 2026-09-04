@@ -6999,6 +6999,781 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'Answer like you wish someone had answered you':'Responde como te hubiera gustado que te respondieran',
       /* --- profile --- */
       'Longest ever':'La más larga','longest':'la más larga',
+      /* ===== Data ===== */
+      "Turn raw data into decisions clients pay for. You are already a data engineer; this is the analyst layer on top.":
+        "Convierte datos crudos en decisiones por las que los clientes pagan. Ya eres ingeniero de datos; esta es la capa de analista encima.",
+      "00 · Is this worth it for you?":"00 · ¿Vale la pena para ti?",
+      "Partly. Take the slice, skip the cert.":"En parte. Toma la rebanada, sáltate el certificado.",
+      "You already own the hard 80%: SQL, Python, dashboards, pipelines. So do not study this to \"become an analyst.\" Grab the thin business-facing layer and keep automation and AI agents as the engine.":
+        "Ya tienes el 80% difícil: SQL, Python, tableros, pipelines. Así que no estudies esto para \"convertirte en analista\". Toma la capa delgada que da la cara al negocio y deja la automatización y los agentes de IA como el motor.",
+      "The Google Data Analytics certificate is built for career-changers with zero background. For you it is a sideways move, not a step toward your goals.":
+        "El certificado de Google Data Analytics está hecho para gente que cambia de carrera sin ninguna base. Para ti es un movimiento lateral, no un paso hacia tus metas.",
+      "The slice that pays":"La rebanada que paga","the real gap":"el hueco real",
+      "One clear dashboard a non-technical owner acts on. You have the engineering; this is the communication layer.":
+        "Un tablero claro sobre el que un dueño sin conocimientos técnicos actúa. La ingeniería ya la tienes; esta es la capa de comunicación.",
+      "CAC, LTV, retention, MRR, conversion. You cannot grow what you cannot measure.":
+        "CAC, LTV, retención, MRR, conversión. No puedes hacer crecer lo que no puedes medir.",
+      "Basic A/B and \"is this real or noise\" thinking. Enough to make calls, not a stats degree.":
+        "Pruebas A/B básicas y pensar \"¿esto es real o es ruido?\". Suficiente para tomar decisiones, no una carrera en estadística.",
+      "<span class=\"label\">How it serves your goals</span>\"I automate your ops <b>and</b> hand you a live dashboard proving what it saved\" is a stickier, higher-priced offer than automation alone, and it lets you quantify results non-technical competitors can only claim. For your own company, reading your numbers is survival. But the money engine stays automation and AI agents; analytics makes it sell for more, it is not a second career.":
+        "<span class=\"label\">Cómo sirve a tus metas</span>\"Automatizo tus operaciones <b>y</b> te entrego un tablero en vivo que prueba lo que ahorró\" es una oferta más pegajosa y de mayor precio que la automatización sola, y te deja cuantificar resultados que los competidores sin base técnica solo pueden afirmar. Para tu propia empresa, leer tus números es supervivencia. Pero el motor del dinero sigue siendo la automatización y los agentes de IA; la analítica hace que se venda más caro, no es una segunda carrera.",
+      "Build one real BI dashboard for Sycosmart or a client that shows a single number that matters, hours saved or money owed, and put it in front of someone. That one artifact teaches the only part you are missing and doubles as a sales asset.":
+        "Construye un tablero de BI real para Sycosmart o para un cliente que muestre un solo número que importe, horas ahorradas o dinero adeudado, y ponlo frente a alguien. Ese único artefacto te enseña la única parte que te falta y además sirve como material de venta.",
+      "02 · What the job actually is":"02 · Qué es realmente el trabajo",
+      "Turning a messy question into a number somebody acts on":
+        "Convertir una pregunta desordenada en un número sobre el que alguien actúa",
+      "People imagine data work is building charts. Charts are the last ten minutes. The job is deciding what to ask, finding out the data is a mess, cleaning it, and then saying something a manager will actually do something about.":
+        "La gente imagina que el trabajo con datos es hacer gráficos. Los gráficos son los últimos diez minutos. El trabajo es decidir qué preguntar, descubrir que los datos son un desastre, limpiarlos, y luego decir algo sobre lo que un gerente de verdad va a hacer algo.",
+      "A useful way to picture it: a shop owner says \"sales are down, do something\". That is not a question anyone can answer. Your job is to turn it into \"sales of the three cheapest items dropped 40% after we moved them to the back shelf\", which is a sentence that decides itself.":
+        "Una forma útil de imaginarlo: el dueño de una tienda dice \"las ventas bajaron, haz algo\". Esa no es una pregunta que alguien pueda responder. Tu trabajo es convertirla en \"las ventas de los tres productos más baratos cayeron 40% después de que los movimos al estante del fondo\", que es una frase que se decide sola.",
+      "The five steps, every single time":"Los cinco pasos, siempre",
+      "<b>1. Sharpen the question.</b> \"Are sales down?\" becomes \"down compared to what, over which period, for which products?\" Half of all bad analysis is answering a question nobody asked.":
+        "<b>1. Afila la pregunta.</b> \"¿Bajaron las ventas?\" se vuelve \"¿bajaron comparadas con qué, en qué periodo, de qué productos?\". La mitad de todo el análisis malo es responder una pregunta que nadie hizo.",
+      "<b>2. Get the data.</b> A spreadsheet, an export, a database. It will be messier than you were told.":
+        "<b>2. Consigue los datos.</b> Una hoja de cálculo, una exportación, una base de datos. Va a estar más desordenado de lo que te dijeron.",
+      "<b>3. Clean it.</b> Duplicates, blank cells, three spellings of the same city, dates in two formats. This is genuinely most of the work and nobody warns you.":
+        "<b>3. Límpialos.</b> Duplicados, celdas vacías, tres formas de escribir la misma ciudad, fechas en dos formatos. Esto es genuinamente la mayor parte del trabajo y nadie te avisa.",
+      "<b>4. Analyse.</b> Group, compare, look for what changed and when.":
+        "<b>4. Analiza.</b> Agrupa, compara, busca qué cambió y cuándo.",
+      "<b>5. Communicate.</b> One chart and one sentence. If the manager needs you to explain it, it has not worked.":
+        "<b>5. Comunica.</b> Un gráfico y una frase. Si el gerente necesita que se lo expliques, no funcionó.",
+      "Why \"average\" is usually the wrong answer":"Por qué el \"promedio\" suele ser la respuesta equivocada",
+      "Nine people earn 1,000 and one earns 100,000. The average salary is 10,900, and it describes nobody in the room. The <b>median</b>, 1,000, describes almost everyone.":
+        "Nueve personas ganan 1.000 y una gana 100.000. El salario promedio es 10.900, y no describe a nadie en la sala. La <b>mediana</b>, 1.000, describe a casi todos.",
+      "Averages get destroyed by extremes. Whenever you report an average, look at the spread too. This single habit will make you better than a surprising number of working analysts.":
+        "Los promedios los destruyen los extremos. Cada vez que reportes un promedio, mira también la dispersión. Este solo hábito te hará mejor que una cantidad sorprendente de analistas en ejercicio.",
+      "Correlation is not cause, and this one costs money":"La correlación no es causa, y esta cuesta dinero",
+      "In real work this shows up as: \"customers who use feature X stay longer, so let us push everyone to feature X.\" Perhaps. Or perhaps the customers who were already committed are the ones who bother to find feature X. Getting this wrong sends a company in the wrong direction for a year.":
+        "En el trabajo real esto aparece como: \"los clientes que usan la función X se quedan más tiempo, así que empujemos a todos hacia la función X\". Tal vez. O tal vez los clientes que ya estaban comprometidos son los que se molestan en encontrar la función X. Equivocarse en esto manda a una empresa en la dirección equivocada durante un año.",
+      "The tool ladder, and where to stop":"La escalera de herramientas, y dónde detenerse",
+      "<b>Spreadsheets</b> do more than beginners think and are what most of the business already uses. <b>SQL</b> is the actual entry ticket, because the data lives in a database and everyone expects you to fetch it yourself. <b>Python</b> takes over when the job is too repetitive or too large for a sheet. <b>A BI tool</b> like Power BI or Looker Studio is how the result becomes a dashboard other people can open without you.":
+        "Las <b>hojas de cálculo</b> hacen más de lo que los principiantes creen y son lo que ya usa casi todo el negocio. <b>SQL</b> es el verdadero boleto de entrada, porque los datos viven en una base de datos y todos esperan que los traigas tú mismo. <b>Python</b> toma el relevo cuando el trabajo es demasiado repetitivo o demasiado grande para una hoja. <b>Una herramienta de BI</b> como Power BI o Looker Studio es cómo el resultado se convierte en un tablero que otras personas pueden abrir sin ti.",
+      "You do not need machine learning to be a working analyst. Most of the value in most companies is still SQL plus clear thinking.":
+        "No necesitas aprendizaje automático para ser un analista en ejercicio. La mayor parte del valor en la mayoría de las empresas sigue siendo SQL más pensar con claridad.",
+      "Where the data actually comes from":"De dónde vienen realmente los datos",
+      "Somebody has to move it from the app into the place you query. That is a <b>pipeline</b>, and doing it is the neighbouring job of data engineer, which pays more and is closer to programming.":
+        "Alguien tiene que moverlos desde la app hasta el lugar donde consultas. Eso es un <b>pipeline</b>, y hacerlo es el trabajo vecino de ingeniero de datos, que paga más y está más cerca de la programación.",
+      "Worth knowing early, because plenty of people discover halfway through that they enjoy the plumbing more than the reporting, and that is a completely valid direction from here.":
+        "Vale la pena saberlo temprano, porque bastante gente descubre a mitad de camino que disfruta más la fontanería que los reportes, y esa es una dirección completamente válida desde aquí.",
+      "Data is the friendliest well-paid entry into tech, because level one is genuinely reachable without writing much code at all.":
+        "Los datos son la entrada bien pagada más amable a la tecnología, porque el nivel uno es genuinamente alcanzable sin escribir mucho código.",
+      "You can answer a question with a spreadsheet":"Puedes responder una pregunta con una hoja de cálculo",
+      "Given a messy export and a vague question, you produce a clean answer and one honest chart.":
+        "Con una exportación desordenada y una pregunta vaga, produces una respuesta limpia y un gráfico honesto.",
+      "<b>Describing data:</b> average versus median, and the spread":
+        "<b>Describir datos:</b> promedio contra mediana, y la dispersión",
+      "<b>Charts that do not mislead:</b> starting the axis at zero, and when not to":
+        "<b>Gráficos que no engañan:</b> empezar el eje en cero, y cuándo no hacerlo",
+      "<b>You build</b>A one-page answer to a real question using open government data about Bolivia, with the cleaning steps written down so somebody could repeat it.":
+        "<b>Construyes</b>Una respuesta de una página a una pregunta real usando datos abiertos del gobierno sobre Bolivia, con los pasos de limpieza escritos para que alguien pueda repetirlo.",
+      "<b>Worth:</b> genuinely useful in an office job, and the fastest route in for anyone who likes maths.":
+        "<b>Valor:</b> genuinamente útil en un trabajo de oficina, y la ruta de entrada más rápida para quien le gusten las matemáticas.",
+      "You can be the analyst on a team":"Puedes ser el analista de un equipo",
+      "You fetch your own data, automate the boring parts, and ship dashboards other people use without you.":
+        "Traes tus propios datos, automatizas las partes aburridas, y publicas tableros que otras personas usan sin ti.",
+      "<b>Python with pandas</b> for anything a sheet cannot hold":
+        "<b>Python con pandas</b> para todo lo que una hoja no aguante",
+      "<b>Reproducible work:</b> a notebook someone else can rerun":
+        "<b>Trabajo reproducible:</b> un cuaderno que otra persona pueda volver a correr",
+      "<b>Dashboards</b> in Power BI or Looker Studio, built for the reader":
+        "<b>Tableros</b> en Power BI o Looker Studio, hechos para quien los lee",
+      "<b>Statistics you will use:</b> distributions, sampling, significance":
+        "<b>Estadística que sí vas a usar:</b> distribuciones, muestreo, significancia",
+      "<b>Telling the story:</b> the finding first, the method underneath":
+        "<b>Contar la historia:</b> el hallazgo primero, el método debajo",
+      "<b>You build</b>A dashboard fed by your own SQL that a small business checks weekly, with a written page on what each number means and what to do when it moves.":
+        "<b>Construyes</b>Un tablero alimentado por tu propio SQL que un negocio pequeño revisa cada semana, con una página escrita sobre qué significa cada número y qué hacer cuando se mueve.",
+      "<b>Worth:</b> this is the job. It is also the level freelance clients pay for.":
+        "<b>Valor:</b> este es el trabajo. También es el nivel por el que pagan los clientes independientes.",
+      "You change what the company decides":"Cambias lo que la empresa decide",
+      "You choose the questions, you build the plumbing, and people trust the numbers because you made them trustworthy.":
+        "Tú eliges las preguntas, construyes la fontanería, y la gente confía en los números porque tú los hiciste confiables.",
+      "<b>Modelling:</b> designing the tables the whole company reports from":
+        "<b>Modelado:</b> diseñar las tablas desde las que reporta toda la empresa",
+      "<b>Forecasting</b> and knowing the honest error bars":
+        "<b>Pronósticos</b> y conocer los márgenes de error honestos",
+      "<b>Data quality:</b> tests on data, so a silent breakage is loud":
+        "<b>Calidad de datos:</b> pruebas sobre los datos, para que una rotura silenciosa haga ruido",
+      "<b>Influence:</b> saying \"the data does not support that\" to a director":
+        "<b>Influencia:</b> decirle a un director \"los datos no respaldan eso\"",
+      "<b>You build</b>An automated pipeline with quality tests that feeds a dashboard nobody has to check by hand, and a memo that changed a real decision.":
+        "<b>Construyes</b>Un pipeline automatizado con pruebas de calidad que alimenta un tablero que nadie tiene que revisar a mano, y un informe que cambió una decisión real.",
+      "<b>Worth:</b> senior analyst, analytics engineer, or the step into data engineering.":
+        "<b>Valor:</b> analista senior, ingeniero de analítica, o el paso hacia la ingeniería de datos.",
+      "<span class=\"label\">The unglamorous truth</span>You will spend more time cleaning than analysing, and more time explaining than either. The people who get promoted are not the ones with the fanciest models. They are the ones whose numbers turn out to be right and whose sentences are short.":
+        "<span class=\"label\">La verdad poco glamorosa</span>Vas a pasar más tiempo limpiando que analizando, y más tiempo explicando que cualquiera de las dos. La gente que asciende no es la que tiene los modelos más elegantes. Es aquella cuyos números resultan estar bien y cuyas frases son cortas.",
+      "From clean data to decisions":"De datos limpios a decisiones",
+      "Analytics is asking the right question, answering it with data, and telling the story so someone acts.":
+        "La analítica es hacer la pregunta correcta, responderla con datos, y contar la historia para que alguien actúe.",
+      "Every \"Do this\" uses Sycosmart. Check off as you go; this path saves its own progress.":
+        "Cada \"Haz esto\" usa Sycosmart. Marca a medida que avanzas; este camino guarda su propio progreso.",
+      /* ===== Cloud ===== */
+      "The step up from your VPS: run systems at client scale, with certs that pay.":
+        "El paso que sigue a tu VPS: operar sistemas a escala de cliente, con certificaciones que pagan.",
+      "01 · First, what is it":"01 · Primero, qué es",
+      "Cloud computing is renting computers, storage, and databases over the internet instead of owning them. Cloud engineering is the job of designing and running systems on it.":
+        "La computación en la nube es alquilar computadoras, almacenamiento y bases de datos por internet en vez de tenerlos. La ingeniería en la nube es el trabajo de diseñar y operar sistemas sobre eso.",
+      "You already self-host on a VPS with Docker, so this is not a new world, it is the next step up: the same instincts at client scale, with managed services that do the hard parts and certificates that raise your rate. <b>Should you learn it? Yes, the fundamentals.</b> You do not need to become a full-time cloud engineer. You need enough to deploy, scale, and secure what you build, and one cert to prove it.":
+        "Ya te autoalojas en un VPS con Docker, así que esto no es un mundo nuevo, es el siguiente escalón: los mismos instintos a escala de cliente, con servicios administrados que hacen las partes difíciles y certificaciones que suben tu tarifa. <b>¿Deberías aprenderlo? Sí, los fundamentos.</b> No necesitas convertirte en ingeniero de nube a tiempo completo. Necesitas lo suficiente para desplegar, escalar y asegurar lo que construyes, y una certificación que lo pruebe.",
+      "<span class=\"label\">Why it pays</span>AWS-certified engineers earn noticeably more than uncertified peers, and there are tens of thousands of open cloud roles at any time. For you it is leverage: host client systems reliably instead of on a single fragile server.":
+        "<span class=\"label\">Por qué paga</span>Los ingenieros certificados en AWS ganan notablemente más que sus pares sin certificación, y hay decenas de miles de puestos de nube abiertos en cualquier momento. Para ti es apalancamiento: alojar los sistemas de tus clientes de forma confiable en vez de en un solo servidor frágil.",
+      "Cloud is the field where the gap between \"I passed the exam\" and \"I can be trusted with the account\" is widest. These levels are written around what you can actually be handed.":
+        "La nube es el campo donde la distancia entre \"aprobé el examen\" y \"se me puede confiar la cuenta\" es más grande. Estos niveles están escritos alrededor de lo que de verdad te pueden entregar.",
+      "You can put something on the internet":"Puedes poner algo en internet",
+      "You understand what you are renting and you have a real URL that other people can open.":
+        "Entiendes qué estás alquilando y tienes una URL real que otras personas pueden abrir.",
+      "<b>What the cloud is:</b> renting somebody else's computer, by the second":
+        "<b>Qué es la nube:</b> alquilar la computadora de otra persona, por segundo",
+      "<b>The four things you ever rent:</b> compute, storage, network, database":
+        "<b>Las cuatro cosas que alquilas:</b> cómputo, almacenamiento, red, base de datos",
+      "<b>Regions and zones:</b> why your app is slow in Bolivia":
+        "<b>Regiones y zonas:</b> por qué tu app es lenta en Bolivia",
+      "<b>IAM basics:</b> users, roles, and why nobody uses the root account":
+        "<b>Fundamentos de IAM:</b> usuarios, roles, y por qué nadie usa la cuenta root",
+      "<b>Deploy a static site</b> and then a small server":
+        "<b>Publica un sitio estático</b> y luego un servidor pequeño",
+      "<b>Billing alarms,</b> set on day one, not after the first invoice":
+        "<b>Alarmas de facturación,</b> puestas el día uno, no después de la primera factura",
+      "<b>You build</b>Your portfolio deployed on a real domain with HTTPS, and a spending alert that emails you at five dollars.":
+        "<b>Construyes</b>Tu portafolio publicado en un dominio real con HTTPS, y una alerta de gasto que te manda un correo a los cinco dólares.",
+      "<b>Worth:</b> not a cloud job, but it makes you a far more employable developer.":
+        "<b>Valor:</b> no es un trabajo de nube, pero te vuelve un programador mucho más contratable.",
+      "It deploys itself, it comes back after a crash, and you know when it breaks before the users tell you.":
+        "Se despliega solo, vuelve después de una caída, y sabes cuándo se rompe antes de que te lo digan los usuarios.",
+      "<b>Containers:</b> Docker, and why \"it works on my machine\" stopped being an excuse":
+        "<b>Contenedores:</b> Docker, y por qué \"en mi máquina funciona\" dejó de ser una excusa",
+      "<b>CI/CD:</b> push to main, it tests and ships itself":
+        "<b>CI/CD:</b> haces push a main, y se prueba y se publica solo",
+      "<b>Infrastructure as code:</b> Terraform, so the setup is a file and not a memory":
+        "<b>Infraestructura como código:</b> Terraform, para que la configuración sea un archivo y no un recuerdo",
+      "<b>Logging, metrics, alerts:</b> knowing before the client calls":
+        "<b>Registros, métricas, alertas:</b> enterarte antes de que llame el cliente",
+      "<b>Secrets:</b> never in the repository, ever":
+        "<b>Secretos:</b> nunca en el repositorio, jamás",
+      "<b>You build</b>A containerised app with a managed database that deploys on every push, alerts you on errors, and restores from backup because you tested it.":
+        "<b>Construyes</b>Una app en contenedores con una base de datos administrada que se despliega en cada push, te alerta ante errores, y se restaura desde el respaldo porque lo probaste.",
+      "<b>Worth:</b> this is a real, well-paid job title in most companies.":
+        "<b>Valor:</b> este es un puesto real y bien pagado en la mayoría de las empresas.",
+      "You can be handed the whole account":"Se te puede entregar la cuenta entera",
+      "Architecture, spend and blast radius. The questions stop having a single correct answer.":
+        "Arquitectura, gasto y radio de daño. Las preguntas dejan de tener una sola respuesta correcta.",
+      "<b>Designing for failure:</b> multi-zone, health checks, graceful degradation":
+        "<b>Diseñar para el fallo:</b> multizona, chequeos de salud, degradación elegante",
+      "<b>Kubernetes,</b> and the harder skill of knowing when not to use it":
+        "<b>Kubernetes,</b> y la habilidad más difícil de saber cuándo no usarlo",
+      "<b>FinOps:</b> cutting a bill in half without cutting the service":
+        "<b>FinOps:</b> partir una factura a la mitad sin recortar el servicio",
+      "<b>Disaster recovery:</b> a tested plan, not a document":
+        "<b>Recuperación ante desastres:</b> un plan probado, no un documento",
+      "<b>You build</b>A design document a company would act on: the architecture, the failure modes, the monthly cost, and what happens at ten times the traffic.":
+        "<b>Construyes</b>Un documento de diseño sobre el que una empresa actuaría: la arquitectura, las formas de fallar, el costo mensual, y qué pasa con diez veces el tráfico.",
+      "<b>Worth:</b> among the best paid roles in software, because a mistake here costs money every hour.":
+        "<b>Valor:</b> de los puestos mejor pagados del software, porque un error aquí cuesta dinero cada hora.",
+      "03 · The pieces":"03 · Las piezas",
+      "Every cloud provider sells hundreds of services with different names for the same ideas. Underneath there are four things, and then conveniences built on top of them.":
+        "Cada proveedor de nube vende cientos de servicios con nombres distintos para las mismas ideas. Debajo hay cuatro cosas, y después comodidades construidas encima.",
+      "The restaurant, which explains the whole industry":"El restaurante, que explica toda la industria",
+      "You want to serve dinner to people. There are three ways.":
+        "Quieres servirle la cena a la gente. Hay tres formas.",
+      "<b>Buy a kitchen</b> and maintain it yourself. Total control, and the oven breaking is your problem at 2am. That is your own server in a room.":
+        "<b>Compra una cocina</b> y mantenla tú mismo. Control total, y que se rompa el horno es tu problema a las 2 de la mañana. Ese es tu propio servidor en un cuarto.",
+      "<b>Rent a kitchen</b> by the hour. Somebody else fixes the oven, you still cook. That is <b>IaaS</b>, a virtual machine.":
+        "<b>Alquila una cocina</b> por hora. Otra persona arregla el horno, tú sigues cocinando. Eso es <b>IaaS</b>, una máquina virtual.",
+      "<b>Rent a kitchen that comes with staff.</b> You hand over the recipe, food comes out. That is <b>PaaS</b>, like Vercel or App Engine.":
+        "<b>Alquila una cocina que viene con personal.</b> Entregas la receta y sale la comida. Eso es <b>PaaS</b>, como Vercel o App Engine.",
+      "And if you just order the food already made, that is <b>SaaS</b>, like Gmail. When someone lists twelve cloud services at you, ask which of these they are. It is always one of them.":
+        "Y si simplemente pides la comida ya hecha, eso es <b>SaaS</b>, como Gmail. Cuando alguien te enumere doce servicios de nube, pregunta cuál de estos son. Siempre es uno de ellos.",
+      "Compute: the part that runs your code":"Cómputo: la parte que ejecuta tu código",
+      "A computer you rent by the second. It can be a whole machine (EC2, Compute Engine), a container that starts in a second, or a <b>function</b> that exists only while it handles one request and costs nothing when idle.":
+        "Una computadora que alquilas por segundo. Puede ser una máquina entera (EC2, Compute Engine), un contenedor que arranca en un segundo, o una <b>función</b> que existe solo mientras atiende una petición y no cuesta nada cuando está inactiva.",
+      "Rule of thumb for a beginner: start with the simplest thing that runs your app. You can move to something cleverer when you have users, and most projects never need to.":
+        "Regla práctica para un principiante: empieza con lo más simple que ejecute tu app. Puedes pasarte a algo más ingenioso cuando tengas usuarios, y la mayoría de los proyectos nunca lo necesitan.",
+      "Storage: files that outlive the machine":"Almacenamiento: archivos que sobreviven a la máquina",
+      "Anything you save on a rented server disappears when that server is replaced, which happens more often than beginners expect. <b>Object storage</b> (S3 and its equivalents) is the separate, effectively infinite place you put uploads, images and backups.":
+        "Todo lo que guardes en un servidor alquilado desaparece cuando ese servidor se reemplaza, lo que pasa más seguido de lo que los principiantes esperan. El <b>almacenamiento de objetos</b> (S3 y sus equivalentes) es el lugar aparte, prácticamente infinito, donde pones las subidas, las imágenes y los respaldos.",
+      "It is remarkably cheap to store and it is the retrieval and transfer that costs. That surprises people every single time.":
+        "Guardar es notablemente barato y lo que cuesta es recuperar y transferir. Eso sorprende a la gente todas las veces.",
+      "Network: how anyone reaches you":"Red: cómo alguien llega hasta ti",
+      "DNS points your domain at your machine. A <b>load balancer</b> spreads traffic across several machines and quietly stops sending it to the broken one. A <b>CDN</b> keeps copies of your images near your users, which is the single biggest speed win for anyone serving people far from their server.":
+        "El DNS apunta tu dominio hacia tu máquina. Un <b>balanceador de carga</b> reparte el tráfico entre varias máquinas y en silencio deja de mandarlo a la que está rota. Una <b>CDN</b> mantiene copias de tus imágenes cerca de tus usuarios, que es la mayor ganancia de velocidad para cualquiera que atienda gente lejos de su servidor.",
+      "Security groups are the doors: if your app is unreachable, this is where to look before you rewrite anything.":
+        "Los grupos de seguridad son las puertas: si tu app no se puede alcanzar, mira aquí antes de reescribir nada.",
+      "Database: the part you should not run yourself":"Base de datos: la parte que no deberías operar tú mismo",
+      "You can install PostgreSQL on a rented machine. You should not, not at first. A <b>managed database</b> handles backups, patching and failover, and those three things are exactly what you will get wrong and only discover at the worst moment.":
+        "Puedes instalar PostgreSQL en una máquina alquilada. No deberías, al menos no al principio. Una <b>base de datos administrada</b> se encarga de los respaldos, los parches y la conmutación por error, y esas tres cosas son exactamente las que harás mal y solo descubrirás en el peor momento.",
+      "Pay the small premium. Spend the attention on your actual product.":
+        "Paga el pequeño sobreprecio. Gasta la atención en tu producto de verdad.",
+      "The bill, which is the part that ends careers":"La factura, que es la parte que termina carreras",
+      "Cloud charges by the second and never asks whether you meant it. The classic story is a forgotten test machine, or a loop that calls a paid service a million times, discovered thirty days later.":
+        "La nube cobra por segundo y nunca pregunta si lo hiciste a propósito. La historia clásica es una máquina de prueba olvidada, o un bucle que llama a un servicio de pago un millón de veces, descubierto treinta días después.",
+      "Three habits, from day one: a budget alarm at a number that would annoy you, tags on everything so you know what is costing what, and turning off anything you are not using tonight. Every experienced engineer has a story here. Have a cheap one.":
+        "Tres hábitos, desde el día uno: una alarma de presupuesto en un número que te molestaría, etiquetas en todo para saber qué está costando qué, y apagar esta noche todo lo que no estés usando. Todo ingeniero con experiencia tiene una historia aquí. Que la tuya sea barata.",
+      "<span class=\"label\">Which provider</span>AWS has the most jobs, Azure wins inside large corporations, Google Cloud is strong in data and AI. Learn one properly. The concepts on this page are identical across all three, so the second one takes weeks rather than months.":
+        "<span class=\"label\">Qué proveedor</span>AWS tiene la mayor cantidad de trabajos, Azure gana dentro de las grandes corporaciones, Google Cloud es fuerte en datos e IA. Aprende uno bien. Los conceptos de esta página son idénticos en los tres, así que el segundo toma semanas en vez de meses.",
+      "Learn it in order":"Apréndelo en orden",
+      "Pick one provider (AWS is the safe default) and go deep. Check off as you go; this path saves its own progress.":
+        "Elige un proveedor (AWS es la opción segura por defecto) y profundiza. Marca a medida que avanzas; este camino guarda su propio progreso.",
+      "03 · Where to learn it":"03 · Dónde aprenderlo",
+      /* ===== Web development ===== */
+      "Build real websites and web apps: HTML, CSS, JavaScript, responsive design, and a modern framework.":
+        "Construye sitios y aplicaciones web de verdad: HTML, CSS, JavaScript, diseño responsivo, y un framework moderno.",
+      "From your first page to real web apps":"De tu primera página a aplicaciones web reales",
+      "Five stages, in order. Fundamentals first, always. You build something real at every single stage. No waiting until the end.":
+        "Cinco etapas, en orden. Los fundamentos primero, siempre. Construyes algo real en cada etapa. Nada de esperar hasta el final.",
+      "Think of it like learning to cook. First you learn what a kitchen even is and how not to burn yourself (fundamentals). Then what the ingredients are (HTML). Then how to make it look and taste good (CSS). Then how to actually run the kitchen so things happen (JavaScript). Then how to cook for 100 people without going crazy (React).":
+        "Piénsalo como aprender a cocinar. Primero aprendes qué es siquiera una cocina y cómo no quemarte (fundamentos). Luego cuáles son los ingredientes (HTML). Luego cómo hacer que se vea y sepa bien (CSS). Luego cómo llevar la cocina de verdad para que pasen cosas (JavaScript). Luego cómo cocinar para 100 personas sin volverte loco (React).",
+      "<span class=\"label\">The rule of this academy</span><b>Fundamentals first.</b> Every stage starts with the boring idea underneath before the shiny tool on top. People who skip this can copy code but cannot fix it. People who do it can learn any new tool in a weekend, forever. That is the whole difference.":
+        "<span class=\"label\">La regla de esta academia</span><b>Los fundamentos primero.</b> Cada etapa empieza con la idea aburrida de abajo antes que la herramienta brillante de arriba. La gente que se salta esto puede copiar código pero no puede arreglarlo. La gente que lo hace puede aprender cualquier herramienta nueva en un fin de semana, para siempre. Esa es toda la diferencia.",
+      "<span class=\"label\">About the backend</span>Servers, databases, logins and deploying are <b>not</b> here on purpose. That is a different job and it lives in the <b>Backend Engineering</b> course. Get genuinely good at the front of the website first. That alone can get you paid.":
+        "<span class=\"label\">Sobre el backend</span>Los servidores, las bases de datos, los inicios de sesión y el despliegue <b>no</b> están aquí a propósito. Ese es otro trabajo y vive en el curso de <b>Ingeniería Backend</b>. Vuélvete genuinamente bueno en el frente del sitio primero. Solo eso ya puede hacer que te paguen.",
+      /* ===== Resources ===== */
+      "Learn free, from the companies that built it":"Aprende gratis, de las empresas que lo construyeron",
+      "Google, Meta, Amazon, Microsoft, IBM and Cisco give away world-class training. Not trial versions, not teasers. Real courses, many with a certificate, all $0. Here is the shortlist, sorted by topic, so you never pay for something that was free.":
+        "Google, Meta, Amazon, Microsoft, IBM y Cisco regalan formación de clase mundial. No versiones de prueba, no adelantos. Cursos reales, muchos con certificado, todos a 0 dólares. Aquí está la lista corta, ordenada por tema, para que nunca pagues por algo que era gratis.",
+      "00 · Read this first":"00 · Lee esto primero",
+      "A list of courses is not a plan":"Una lista de cursos no es un plan",
+      "The most common way to waste a year in tech is to collect free courses like stickers and finish none of them.":
+        "La forma más común de perder un año en tecnología es coleccionar cursos gratis como si fueran estampas y no terminar ninguno.",
+      "Imagine a kid who owns 40 books and has read none. That is what a bookmark folder full of courses is. Owning is not learning.":
+        "Imagina a un niño que tiene 40 libros y no ha leído ninguno. Eso es una carpeta de marcadores llena de cursos. Tener no es aprender.",
+      "Not three. One. Finish it before you open another tab. Two half-finished courses teach you less than one finished one.":
+        "No tres. Uno. Termínalo antes de abrir otra pestaña. Dos cursos a medias enseñan menos que uno terminado.",
+      "Follow the roadmap, use these as the textbook":"Sigue la ruta, usa estos como libro de texto",
+      "Our roadmap tells you what to learn and in what order. These links are where you actually learn it. The order matters more than the source.":
+        "Nuestra ruta te dice qué aprender y en qué orden. Estos enlaces son donde realmente lo aprendes. El orden importa más que la fuente.",
+      "Build something after every course":"Construye algo después de cada curso",
+      "A certificate proves you watched. A project proves you can. Nobody has ever been hired for a badge alone.":
+        "Un certificado prueba que miraste. Un proyecto prueba que puedes. Nunca han contratado a nadie solo por una insignia.",
+      "\"Audit for free\" is a real option":"\"Auditar gratis\" es una opción real",
+      "On Coursera you can watch every Google and Meta course for $0 by choosing \"audit\". You only pay if you want the paper. Learn free, pay later only if a certificate helps you.":
+        "En Coursera puedes ver todos los cursos de Google y Meta por 0 dólares eligiendo \"auditar\". Solo pagas si quieres el papel. Aprende gratis, y paga después solo si un certificado te sirve.",
+      "<span class=\"label\">Why these companies give it away</span>It is not charity. Google wants more people using Google Cloud. AWS wants more AWS engineers. Meta wants more React developers. Their business need is your free education, and the training is excellent because it has to be. Take the deal.":
+        "<span class=\"label\">Por qué estas empresas lo regalan</span>No es caridad. Google quiere más gente usando Google Cloud. AWS quiere más ingenieros de AWS. Meta quiere más programadores de React. Su necesidad de negocio es tu educación gratuita, y la formación es excelente porque tiene que serlo. Acepta el trato.",
+      "If you are starting from absolute zero":"Si estás empezando desde cero absoluto",
+      "Do one of these before anything else. They teach you how to think, which is the part that never expires.":
+        "Haz uno de estos antes que nada. Te enseñan a pensar, que es la parte que nunca caduca.",
+      "The people who wrote the rules of the web also wrote the best free courses about it. Use the source.":
+        "La gente que escribió las reglas de la web también escribió los mejores cursos gratuitos sobre ella. Usa la fuente.",
+      "The part behind the screen":"La parte detrás de la pantalla",
+      "Where every real app actually lives":"Donde vive realmente toda app de verdad",
+      "All three giants train you free, because they want you fluent in their platform. That is your gain.":
+        "Los tres gigantes te forman gratis, porque quieren que domines su plataforma. Esa es tu ganancia.",
+      "<span class=\"label\">Which one should you learn</span>Pick <b>one</b> and go deep. AWS has the most jobs worldwide, Azure wins in big corporations, Google Cloud is strong in data and AI. The concepts transfer between all three, so the choice matters far less than finishing.":
+        "<span class=\"label\">Cuál deberías aprender</span>Elige <b>uno</b> y profundiza. AWS tiene la mayor cantidad de trabajos en el mundo, Azure gana en las grandes corporaciones, Google Cloud es fuerte en datos e IA. Los conceptos se transfieren entre los tres, así que la elección importa mucho menos que terminar.",
+      "The fastest-moving field, taught free by the people building it":
+        "El campo que se mueve más rápido, enseñado gratis por la gente que lo está construyendo",
+      "The skills that get you paid fastest":"Las habilidades que hacen que te paguen más rápido",
+      "Automation is the shortest path from \"learning\" to \"someone pays me\", because you can save a small business ten hours a week with a weekend of work.":
+        "La automatización es el camino más corto de \"estoy aprendiendo\" a \"alguien me paga\", porque puedes ahorrarle diez horas a la semana a un negocio pequeño con un fin de semana de trabajo.",
+      /* ===== Backend, complete ===== */
+      "The server side: APIs, databases, auth, and deploy. This is the exact skill you are building the Brain product to learn.":
+        "El lado del servidor: APIs, bases de datos, autenticación y despliegue. Esta es exactamente la habilidad que estás construyendo el producto Brain para aprender.",
+      "00 · How to start":"00 · Cómo empezar",
+      "You do not learn backend by watching, you learn it by shipping a server that other people log into. That is exactly what the Brain product is for.":
+        "El backend no se aprende mirando, se aprende publicando un servidor en el que otras personas inician sesión. Para eso sirve exactamente el producto Brain.",
+      "The backend is the part of an app that runs on a server, not in the browser: it stores data, enforces rules, checks who you are, and answers requests over the internet. Get the mental model first (how a browser talks to a server over HTTP), then build endpoints, connect a database, add login, and deploy. Each stage below maps to a phase of the Brain build, so your learning and your product move together.":
+        "El backend es la parte de una app que corre en un servidor, no en el navegador: guarda datos, hace cumplir reglas, verifica quién eres, y responde peticiones por internet. Primero consigue el modelo mental (cómo un navegador le habla a un servidor por HTTP), luego construye endpoints, conecta una base de datos, agrega el inicio de sesión, y publica. Cada etapa de abajo corresponde a una fase de la construcción de Brain, así que tu aprendizaje y tu producto avanzan juntos.",
+      "<span class=\"label\">Your fastest path</span>Follow the roadmap below in order, and use the Brain backend as the thing you build at each step. You already have the language (Python) and Docker, so you start at an advantage, spend your time on APIs, the database layer, and auth.":
+        "<span class=\"label\">Tu camino más rápido</span>Sigue la ruta de abajo en orden, y usa el backend de Brain como lo que construyes en cada paso. Ya tienes el lenguaje (Python) y Docker, así que empiezas con ventaja: invierte tu tiempo en las APIs, la capa de base de datos y la autenticación.",
+      "02 · What it actually is":"02 · Qué es realmente",
+      "The kitchen nobody in the restaurant ever sees":"La cocina que nadie en el restaurante llega a ver",
+      "The frontend is the dining room: the menu, the tables, the person taking your order. The backend is the kitchen. Customers never go in, and nothing arrives without it.":
+        "El frontend es el comedor: el menú, las mesas, la persona que toma tu pedido. El backend es la cocina. Los clientes nunca entran, y nada llega sin ella.",
+      "When you press \"log in\", the frontend does not know whether your password is right. It cannot: if it knew everybody's password, anyone could read the page source and take them. So it hands the order to the kitchen, the kitchen checks, and sends back either a meal or an apology.":
+        "Cuando aprietas \"iniciar sesión\", el frontend no sabe si tu contraseña está bien. No puede saberlo: si conociera la contraseña de todos, cualquiera podría leer el código de la página y llevárselas. Así que le pasa el pedido a la cocina, la cocina revisa, y devuelve un plato o una disculpa.",
+      "What happens between the click and the answer":"Qué pasa entre el clic y la respuesta",
+      "<b>1.</b> The browser sends a <b>request</b>: a method (GET, POST), an address, and usually some data.":
+        "<b>1.</b> El navegador manda una <b>petición</b>: un método (GET, POST), una dirección, y normalmente algunos datos.",
+      "<b>2.</b> The <b>router</b> decides which piece of your code handles that address.":
+        "<b>2.</b> El <b>router</b> decide qué parte de tu código atiende esa dirección.",
+      "<b>3.</b> <b>Middleware</b> runs first: is this person logged in, are they allowed, are they hammering us?":
+        "<b>3.</b> El <b>middleware</b> corre primero: ¿esta persona inició sesión, tiene permiso, nos está saturando de peticiones?",
+      "<b>4.</b> Your <b>handler</b> does the actual work, usually talking to the database.":
+        "<b>4.</b> Tu <b>manejador</b> hace el trabajo de verdad, normalmente hablando con la base de datos.",
+      "<b>5.</b> A <b>response</b> goes back: a status code and some JSON.":
+        "<b>5.</b> Vuelve una <b>respuesta</b>: un código de estado y algo de JSON.",
+      "Every backend you ever meet, in any language, is that list. The frameworks differ in spelling.":
+        "Todo backend que te encuentres, en cualquier lenguaje, es esa lista. Los frameworks solo se escriben distinto.",
+      "Status codes, which are a language you must speak":"Los códigos de estado, que son un idioma que debes hablar",
+      "<b>200</b> fine. <b>201</b> created something. <b>400</b> your request was malformed. <b>401</b> I do not know who you are. <b>403</b> I know who you are and no. <b>404</b> no such thing. <b>500</b> I broke, and it is my fault not yours.":
+        "<b>200</b> todo bien. <b>201</b> creé algo. <b>400</b> tu petición estaba mal formada. <b>401</b> no sé quién eres. <b>403</b> sé quién eres y no. <b>404</b> no existe. <b>500</b> me rompí, y es mi culpa, no la tuya.",
+      "The 401 and 403 distinction matters more than beginners expect, and returning 200 with an error message inside is a habit that will make other developers wince.":
+        "La diferencia entre 401 y 403 importa más de lo que los principiantes esperan, y devolver un 200 con un mensaje de error adentro es una costumbre que hará que otros programadores hagan una mueca.",
+      "Why you never store a password":"Por qué nunca guardas una contraseña",
+      "You store a <b>hash</b>: a one-way scramble. Feed \"banana\" to bcrypt and you get a long string. There is no way back. When someone logs in you scramble what they typed and compare the scrambles.":
+        "Guardas un <b>hash</b>: un revoltijo de una sola dirección. Mete \"banana\" en bcrypt y sale una cadena larga. No hay camino de vuelta. Cuando alguien inicia sesión revuelves lo que escribió y comparas los revoltijos.",
+      "So when a company is breached, the passwords are not sitting there in a column. This is not optional and it is not hard, and the academy's own backend does exactly this in about four lines.":
+        "Así que cuando hackean una empresa, las contraseñas no están ahí sentadas en una columna. Esto no es opcional y no es difícil, y el propio backend de la academia hace exactamente esto en unas cuatro líneas.",
+      "Sessions and tokens: how it remembers you":"Sesiones y tokens: cómo te recuerda",
+      "HTTP forgets you between requests. Every single one arrives as if from a stranger. So after you log in, the server hands you a <b>token</b>, and your browser presents it on every later request like a wristband at a festival.":
+        "HTTP te olvida entre peticiones. Cada una llega como si viniera de un desconocido. Así que después de iniciar sesión, el servidor te entrega un <b>token</b>, y tu navegador lo presenta en cada petición posterior como una pulsera en un festival.",
+      "A <b>JWT</b> is a token that carries a little signed information inside it, so the server can trust it without looking anything up. Powerful, and easy to get wrong: anyone can read what is inside one, so it holds who you are, never a secret.":
+        "Un <b>JWT</b> es un token que lleva un poco de información firmada adentro, para que el servidor pueda confiar en él sin consultar nada. Poderoso, y fácil de hacer mal: cualquiera puede leer lo que hay dentro de uno, así que guarda quién eres, nunca un secreto.",
+      "The database, and the one bug everyone writes":"La base de datos, y el error que todos escriben",
+      "Your data lives in tables with relationships: a user has many questions, a question has many answers. You fetch it with SQL.":
+        "Tus datos viven en tablas con relaciones: un usuario tiene muchas preguntas, una pregunta tiene muchas respuestas. Los traes con SQL.",
+      "The bug everyone writes once: building a query by gluing user input into a string. Someone types <code>'; DROP TABLE users; --</code> and your database obeys. That is <b>SQL injection</b>, it is decades old, and it still works on new code. The fix is to never glue: use parameters, or an ORM that does it for you.":
+        "El error que todos escriben una vez: armar una consulta pegando la entrada del usuario dentro de un texto. Alguien escribe <code>'; DROP TABLE users; --</code> y tu base de datos obedece. Eso es la <b>inyección SQL</b>, tiene décadas, y todavía funciona en código nuevo. La solución es nunca pegar: usa parámetros, o un ORM que lo haga por ti.",
+      "Why \"it works on my machine\" stops being funny":"Por qué \"en mi máquina funciona\" deja de ser gracioso",
+      "Your laptop has your Python version, your database, your files. The server has none of that. <b>Docker</b> packages the app together with everything it needs, so what runs on your machine is literally the same thing that runs on theirs.":
+        "Tu laptop tiene tu versión de Python, tu base de datos, tus archivos. El servidor no tiene nada de eso. <b>Docker</b> empaqueta la app junto con todo lo que necesita, así que lo que corre en tu máquina es literalmente lo mismo que corre en la de ellos.",
+      "The other half is <b>environment variables</b>: your database password lives in the environment, never in the code, never in the repository. Committing a secret to GitHub is one of the most common and most expensive beginner mistakes.":
+        "La otra mitad son las <b>variables de entorno</b>: la contraseña de tu base de datos vive en el entorno, nunca en el código, nunca en el repositorio. Subir un secreto a GitHub es uno de los errores de principiante más comunes y más caros.",
+      "<span class=\"label\">Learn it by reading this one</span>The backend for this academy is in the same repository you are looking at: FastAPI, PostgreSQL, JWT auth and a real community API, all commented. Once the roadmap below makes sense, open <code>backend/app</code> and read it. Reading a small real backend teaches faster than any tutorial.":
+        "<span class=\"label\">Apréndelo leyendo este</span>El backend de esta academia está en el mismo repositorio que estás viendo: FastAPI, PostgreSQL, autenticación con JWT y una API de comunidad real, todo comentado. Cuando la ruta de abajo tenga sentido, abre <code>backend/app</code> y léelo. Leer un backend real pequeño enseña más rápido que cualquier tutorial.",
+      "03 · The three levels":"03 · Los tres niveles",
+      "Backend is where \"it runs\" and \"it is safe to run\" are very different achievements, and the whole career is the distance between them.":
+        "El backend es donde \"funciona\" y \"es seguro que funcione\" son logros muy distintos, y toda la carrera es la distancia entre los dos.",
+      "Something on the internet can ask your program a question and get a sensible answer back.":
+        "Algo en internet puede hacerle una pregunta a tu programa y recibir una respuesta sensata.",
+      "<b>HTTP for real:</b> methods, headers, status codes, JSON":
+        "<b>HTTP de verdad:</b> métodos, cabeceras, códigos de estado, JSON",
+      "<b>CRUD:</b> create, read, update, delete against a database":
+        "<b>CRUD:</b> crear, leer, actualizar y borrar contra una base de datos",
+      "<b>SQL basics</b> and one table design that is not silly":
+        "<b>SQL básico</b> y un diseño de tablas que no sea tonto",
+      "<b>Reading the docs</b> instead of copying a tutorial":
+        "<b>Leer la documentación</b> en vez de copiar un tutorial",
+      "<b>You build</b>A to-do API with four endpoints and a real database, tested by hand in the interactive docs your framework generates for free.":
+        "<b>Construyes</b>Una API de tareas con cuatro endpoints y una base de datos real, probada a mano en la documentación interactiva que tu framework genera gratis.",
+      "<b>Worth:</b> your frontend projects stop being fake. That alone changes a portfolio.":
+        "<b>Valor:</b> tus proyectos de frontend dejan de ser falsos. Solo eso ya cambia un portafolio.",
+      "Accounts, permissions, tests, and it is deployed somewhere real with a domain.":
+        "Cuentas, permisos, pruebas, y está publicado en algún lugar real con un dominio.",
+      "<b>Authorisation:</b> the difference between logged in and allowed":
+        "<b>Autorización:</b> la diferencia entre haber iniciado sesión y tener permiso",
+      "<b>Validation:</b> never trust anything the client sends":
+        "<b>Validación:</b> nunca confíes en nada que mande el cliente",
+      "<b>Tests</b> that fail when you break something":
+        "<b>Pruebas</b> que fallan cuando rompes algo",
+      "<b>Deploy:</b> Docker, environment variables, a domain, HTTPS":
+        "<b>Despliegue:</b> Docker, variables de entorno, un dominio, HTTPS",
+      "<b>You build</b>An app with signup, login and per-user data, deployed publicly, where you can show a stranger that they cannot read your account.":
+        "<b>Construyes</b>Una app con registro, inicio de sesión y datos por usuario, publicada al público, donde puedes mostrarle a un desconocido que no puede leer tu cuenta.",
+      "<b>Worth:</b> junior backend developer, and enough to build a product on your own.":
+        "<b>Valor:</b> programador backend junior, y suficiente para construir un producto por tu cuenta.",
+      "a year and onward":"un año en adelante",
+      "Thousands of users, money involved, and other developers depending on your decisions.":
+        "Miles de usuarios, dinero de por medio, y otros programadores dependiendo de tus decisiones.",
+      "<b>Performance:</b> indexes, the N+1 query, caching, connection pools":
+        "<b>Rendimiento:</b> índices, la consulta N+1, caché, pools de conexiones",
+      "<b>Background jobs and queues</b> for the slow work":
+        "<b>Trabajos en segundo plano y colas</b> para lo lento",
+      "<b>Design:</b> layering, boundaries, why the monolith is often correct":
+        "<b>Diseño:</b> capas, fronteras, por qué el monolito muchas veces es lo correcto",
+      "<b>You build</b>A service with background jobs and caching, load-tested, with a written note on what breaks first and what you would do about it.":
+        "<b>Construyes</b>Un servicio con trabajos en segundo plano y caché, probado bajo carga, con una nota escrita sobre qué se rompe primero y qué harías al respecto.",
+      "<b>Worth:</b> senior backend, and the foundation for platform and infrastructure work.":
+        "<b>Valor:</b> backend senior, y la base para el trabajo de plataforma e infraestructura.",
+      "<span class=\"label\">The line that separates the levels</span>A beginner asks \"does it work?\". An intermediate asks \"does it work when the input is wrong?\". An expert asks \"what happens when two people do this at the same time, and the database goes down halfway through?\". Nothing else is really different.":
+        "<span class=\"label\">La línea que separa los niveles</span>Un principiante pregunta \"¿funciona?\". Un intermedio pregunta \"¿funciona cuando la entrada está mal?\". Un experto pregunta \"¿qué pasa cuando dos personas hacen esto al mismo tiempo, y la base de datos se cae a la mitad?\". Nada más es realmente distinto.",
+      "What to learn, in order":"Qué aprender, en orden",
+      "Seven stages, foundation to production. Check off as you go; this path saves its own progress.":
+        "Siete etapas, de los cimientos a producción. Marca a medida que avanzas; este camino guarda su propio progreso.",
+      /* ===== Databases, complete ===== */
+      "Page 03 · The Craft":"Página 03 · El oficio",
+      "You already know the mechanics. This is the judgment layer: the eight decisions that keep a database from losing trust, money, or a client at the worst moment.":
+        "Ya conoces la mecánica. Esta es la capa de criterio: las ocho decisiones que evitan que una base de datos pierda confianza, dinero o un cliente en el peor momento.",
+      "01 · The eight laws":"01 · Las ocho leyes",
+      "What actually matters about databases":"Qué importa realmente de las bases de datos",
+      "Your apps are ledgers: a fiado balance, a client's revenue, a payment record. The database is the product's promise. Get it right and \"your data is safe and correct\" becomes a real selling point for high-ticket work.":
+        "Tus apps son libros de cuentas: un saldo de fiado, los ingresos de un cliente, un registro de pago. La base de datos es la promesa del producto. Hazlo bien y \"tus datos están seguros y correctos\" se vuelve un argumento de venta real para trabajos de alto valor.",
+      "Choose the boring database":"Elige la base de datos aburrida",
+      "It does relational, JSON, full text, geospatial, and vector in one engine you already know, and Supabase gives it to you managed. Snowflake and BigQuery are for analytics, never the live app. Redis is a layer, not a home. A second database type triples your failure modes, so earn that cost.":
+        "Hace relacional, JSON, texto completo, geoespacial y vectorial en un solo motor que ya conoces, y Supabase te lo da administrado. Snowflake y BigQuery son para analítica, nunca para la app en vivo. Redis es una capa, no un hogar. Un segundo tipo de base de datos triplica tus formas de fallar, así que gánate ese costo.",
+      "Model for how you read":"Modela según cómo lees",
+      "Start normalized so writes stay correct, then denormalize only a proven hot path. Use stable surrogate keys, and put real foreign keys and constraints in the schema. And never store money as <code>float</code>: use <code>numeric</code> or integer cents, or rounding will bite a fiado balance.":
+        "Empieza normalizado para que las escrituras se mantengan correctas, y luego desnormaliza solo un camino caliente comprobado. Usa llaves sustitutas estables, y pon llaves foráneas y restricciones reales en el esquema. Y nunca guardes dinero como <code>float</code>: usa <code>numeric</code> o centavos enteros, o el redondeo se va a comer un saldo de fiado.",
+      "Indexes are the line between fast and dead":"Los índices son la línea entre rápido y muerto",
+      "A missing index is why an app that felt instant at 100 rows crawls at 100,000. But every index slows writes, so do not index everything. Read the plan instead of guessing.":
+        "Un índice que falta es la razón por la que una app que se sentía instantánea con 100 filas se arrastra con 100.000. Pero cada índice hace las escrituras más lentas, así que no indexes todo. Lee el plan de ejecución en vez de adivinar.",
+      "Transactions are how you keep promises":"Las transacciones son cómo cumples promesas",
+      "Recording a payment and lowering a balance are one atomic act, never two hopeful writes. Then know your isolation level: the default lets two requests read a balance and clobber each other. Under real concurrency, raise isolation or take <code>SELECT ... FOR UPDATE</code>. Keep transactions short, and never hold one open across an external API call.":
+        "Registrar un pago y bajar un saldo son un solo acto atómico, nunca dos escrituras esperanzadas. Y conoce tu nivel de aislamiento: el que viene por defecto deja que dos peticiones lean un saldo y se pisen entre sí. Con concurrencia real, sube el aislamiento o usa <code>SELECT ... FOR UPDATE</code>. Mantén las transacciones cortas, y nunca dejes una abierta durante una llamada a una API externa.",
+      "On a live table, expand then contract: add the new column, backfill in batches, ship code that writes both and reads the new, then drop the old later. Never rename or drop in the deploy that stops using it. A dropped column is gone except from backup.":
+        "En una tabla en vivo, expande y luego contrae: agrega la columna nueva, rellena por lotes, publica código que escriba en las dos y lea la nueva, y borra la vieja después. Nunca renombres ni borres en el despliegue que deja de usarla. Una columna borrada se fue, salvo desde el respaldo.",
+      "Assume the client is hostile":"Asume que el cliente es hostil",
+      "On Supabase this is the lesson: the moment a database is reachable from a browser, Row-Level Security is the wall. Add least privilege, keep secrets out of the bundle, parameterize every query, and use TLS.":
+        "En Supabase esta es la lección: en el momento en que una base de datos es alcanzable desde un navegador, la seguridad a nivel de fila es el muro. Agrega el mínimo privilegio, mantén los secretos fuera del paquete, parametriza cada consulta, y usa TLS.",
+      "Scale in the right order":"Escala en el orden correcto",
+      "Walk the ladder and stop when the pain stops: fix the index and query, add connection pooling, then a cache, then read replicas, and only at real scale, partition or shard. On scan-priced warehouses, partition and select columns explicitly, because <code>SELECT *</code> over a wide table is a literal invoice.":
+        "Sube la escalera y detente cuando pare el dolor: arregla el índice y la consulta, agrega un pool de conexiones, luego una caché, luego réplicas de lectura, y solo a escala real, particiona o fragmenta. En almacenes que cobran por escaneo, particiona y selecciona las columnas explícitamente, porque <code>SELECT *</code> sobre una tabla ancha es literalmente una factura.",
+      "A backup you have never restored is a rumor":"Un respaldo que nunca restauraste es un rumor",
+      "Turn on point-in-time recovery, then actually restore into a scratch environment. Monitor slow queries, connections, replication lag, and disk, and alert before disk fills, because a Postgres that cannot write is an outage.":
+        "Activa la recuperación a un punto en el tiempo, y luego restaura de verdad en un entorno de prueba. Monitorea consultas lentas, conexiones, retraso de replicación y disco, y alerta antes de que el disco se llene, porque un Postgres que no puede escribir es una caída.",
+      "02 · The short version":"02 · La versión corta",
+      "<b>Default to Postgres.</b> Add another engine only when a real constraint forces it.":
+        "<b>Por defecto, Postgres.</b> Agrega otro motor solo cuando una restricción real te obligue.",
+      "<b>Let the database enforce your rules.</b> Constraints, foreign keys, and RLS beat every app-layer check.":
+        "<b>Deja que la base de datos haga cumplir tus reglas.</b> Las restricciones, las llaves foráneas y la seguridad a nivel de fila le ganan a cualquier revisión en la capa de la app.",
+      "<b>Money and correctness live in transactions.</b> Know your isolation level before load finds it.":
+        "<b>El dinero y la exactitud viven en transacciones.</b> Conoce tu nivel de aislamiento antes de que la carga lo descubra.",
+      "<b>Migrate expand-then-contract.</b> Never drop in the deploy that stops using it.":
+        "<b>Migra expandiendo y luego contrayendo.</b> Nunca borres en el despliegue que deja de usarlo.",
+      "<b>Test a restore.</b> Untested backups are not backups.":
+        "<b>Prueba una restauración.</b> Los respaldos sin probar no son respaldos.",
+      "Databases are the least glamorous thing on this list and the one that most reliably separates people who can build something real from people who cannot.":
+        "Las bases de datos son lo menos glamoroso de esta lista y lo que más confiablemente separa a la gente que puede construir algo real de la que no.",
+      "You can ask a database questions":"Puedes hacerle preguntas a una base de datos",
+      "You can get the data you want out of tables somebody else designed.":
+        "Puedes sacar los datos que quieres de tablas que diseñó otra persona.",
+      "<b>Primary and foreign keys:</b> how tables know about each other":
+        "<b>Llaves primarias y foráneas:</b> cómo las tablas se conocen entre sí",
+      "<b>You build</b>Ten questions about a sample database, answered in SQL, including at least three that need a join.":
+        "<b>Construyes</b>Diez preguntas sobre una base de datos de ejemplo, respondidas en SQL, incluyendo al menos tres que necesiten un join.",
+      "<b>Worth:</b> the single most transferable skill here. Analysts, developers and marketers all use it.":
+        "<b>Valor:</b> la habilidad más transferible de todas. La usan analistas, programadores y gente de marketing.",
+      "You choose the tables, and the app still works when the data gets big and messy.":
+        "Tú eliges las tablas, y la app sigue funcionando cuando los datos se vuelven grandes y desordenados.",
+      "<b>Normalisation:</b> storing a fact once, and when to break that rule":
+        "<b>Normalización:</b> guardar un dato una sola vez, y cuándo romper esa regla",
+      "<b>Indexes:</b> why a query goes from 8 seconds to 8 milliseconds":
+        "<b>Índices:</b> por qué una consulta pasa de 8 segundos a 8 milisegundos",
+      "<b>Transactions:</b> all of it happens or none of it does":
+        "<b>Transacciones:</b> pasa todo o no pasa nada",
+      "<b>Migrations</b> that change a live table without losing data":
+        "<b>Migraciones</b> que cambian una tabla en vivo sin perder datos",
+      "<b>SQL vs NoSQL,</b> chosen for a reason you can defend":
+        "<b>SQL contra NoSQL,</b> elegido por una razón que puedas defender",
+      "<b>You build</b>A schema for a real app with migrations and indexes, plus a before-and-after timing of one slow query you fixed.":
+        "<b>Construyes</b>Un esquema para una app real con migraciones e índices, más una medición antes y después de una consulta lenta que arreglaste.",
+      "<b>Worth:</b> expected of any backend developer, and the thing juniors are weakest at.":
+        "<b>Valor:</b> se espera de cualquier programador backend, y es en lo que los juniors están más flojos.",
+      "You are trusted with the company's data":"Se te confían los datos de la empresa",
+      "<b>Replication and failover</b> when a server dies":
+        "<b>Replicación y conmutación por error</b> cuando un servidor muere",
+      "<b>Partitioning and scale,</b> and delaying it as long as possible":
+        "<b>Particionado y escala,</b> y retrasarlo lo más posible",
+      "<b>Recovery drills:</b> a backup you have not restored is a rumour":
+        "<b>Simulacros de recuperación:</b> un respaldo que no has restaurado es un rumor",
+      "<b>You build</b>A load test that finds where your schema breaks, and the change that moved the ceiling.":
+        "<b>Construyes</b>Una prueba de carga que encuentra dónde se rompe tu esquema, y el cambio que subió el techo.",
+      "<b>Worth:</b> database and platform engineering, and it stays in demand for decades.":
+        "<b>Valor:</b> ingeniería de bases de datos y de plataforma, y sigue teniendo demanda por décadas.",
+      "<span class=\"label\">Why this one pays off quietly</span>Frameworks change every few years. SQL was standardised before most of your teachers were born and it is unchanged in the ways that matter. It is the highest-return thing on this whole site per hour spent.":
+        "<span class=\"label\">Por qué esto rinde en silencio</span>Los frameworks cambian cada pocos años. SQL se estandarizó antes de que nacieran la mayoría de tus profesores y no ha cambiado en lo que importa. Es lo de mayor retorno de todo este sitio por hora invertida.",
+      "03 · The roadmap":"03 · La ruta",
+      "Learn it in order, hands-on":"Apréndelo en orden, con las manos",
+      "The eight laws are the what. This is the how: five stages that take you from writing SQL to running a database you can trust with money.":
+        "Las ocho leyes son el qué. Esto es el cómo: cinco etapas que te llevan de escribir SQL a operar una base de datos a la que le puedes confiar dinero.",
+      "Every \"Do this\" uses Sycosmart, so you learn on your real app. Check steps off as you go; this path saves its own progress in your browser.":
+        "Cada \"Haz esto\" usa Sycosmart, así aprendes sobre tu app real. Marca los pasos a medida que avanzas; este camino guarda su propio progreso en tu navegador.",
+      "04 · Where to learn it":"04 · Dónde aprenderlo",
+      /* ===== Automation, complete ===== */
+      "Page 01 · The Path":"Página 01 · El camino",
+      "The spine. It pays on its own, and everything else in this manual is built on top of it.":
+        "La columna vertebral. Se paga sola, y todo lo demás en este manual se construye encima.",
+      "01 · The role":"01 · El rol",
+      "What an automation engineer actually does":"Qué hace realmente un ingeniero de automatización",
+      "Not a job title you apply for so much as a capability you sell. You find work that humans repeat, replace it with a system that runs itself, keep it alive, and prove it saved money. Five moves:":
+        "No es tanto un puesto al que postulas como una capacidad que vendes. Encuentras trabajo que los humanos repiten, lo reemplazas con un sistema que funciona solo, lo mantienes vivo, y demuestras que ahorró dinero. Cinco movimientos:",
+      "<b>Map the work.</b> Sit with a process, find the repetitive rule-based steps that eat hours, and decide what is worth automating.":
+        "<b>Mapea el trabajo.</b> Siéntate con un proceso, encuentra los pasos repetitivos y basados en reglas que se comen las horas, y decide qué vale la pena automatizar.",
+      "<b>Wire the systems together.</b> Connect apps and APIs so data flows without a human copy-pasting: forms, CRMs, databases, spreadsheets, email, Slack.":
+        "<b>Conecta los sistemas entre sí.</b> Une apps y APIs para que los datos fluyan sin que un humano copie y pegue: formularios, CRMs, bases de datos, hojas de cálculo, correo, Slack.",
+      "<b>Add judgment with AI.</b> Where a step needs reading, deciding, or drafting, call an LLM or an agent instead of a person. The premium tier today.":
+        "<b>Agrega criterio con IA.</b> Donde un paso necesita leer, decidir o redactar, llama a un LLM o a un agente en vez de a una persona. Hoy ese es el nivel premium.",
+      "<b>Make it reliable.</b> Handle errors, retries, and edge cases. Monitor it. Get alerted when it breaks. This separates a $500 toy from a $2K per month system.":
+        "<b>Hazlo confiable.</b> Maneja errores, reintentos y casos raros. Monitorealo. Que te avise cuando se rompa. Esto separa un juguete de 500 dólares de un sistema de 2.000 al mes.",
+      "<b>Prove the value.</b> Document it, hand it off, and quantify hours and cost saved. That number gets you paid and renewed.":
+        "<b>Demuestra el valor.</b> Documéntalo, entrégalo, y cuantifica las horas y el costo ahorrados. Ese número es el que te hace cobrar y que te renueven.",
+      "Six things you need to know":"Seis cosas que necesitas saber",
+      "The logic no tool can do":"La lógica que ninguna herramienta puede hacer",
+      "Python, Git, the command line, HTTP. The base everything sits on.":
+        "Python, Git, la línea de comandos, HTTP. La base sobre la que se apoya todo.",
+      "The plumbing":"La fontanería",
+      "REST, auth, webhooks, and a database. What everything flows through.":
+        "REST, autenticación, webhooks y una base de datos. Por donde fluye todo.",
+      "What you build and bill with":"Con qué construyes y facturas",
+      "n8n, Zapier, Make. The tools that turn a skill into invoices fastest.":
+        "n8n, Zapier, Make. Las herramientas que convierten una habilidad en facturas más rápido.",
+      "Where the money is moving":"Hacia dónde se mueve el dinero",
+      "LLM calls, tool use, RAG, agent frameworks. The premium tier.":
+        "Llamadas a LLMs, uso de herramientas, RAG, frameworks de agentes. El nivel premium.",
+      "Production, not a demo":"Producción, no un demo",
+      "Docker, hosting, retries, monitoring. What makes it hold up.":
+        "Docker, hosting, reintentos, monitoreo. Lo que hace que aguante.",
+      "What turns skill into income":"Lo que convierte la habilidad en ingresos",
+      "Scoping, pricing, ROI, handoff. The half most engineers skip.":
+        "Definir el alcance, poner precio, ROI, entrega. La mitad que casi todos los ingenieros se saltan.",
+      "02 · The roadmap":"02 · La ruta",
+      "The path, in order":"El camino, en orden",
+      "Six stages, roughly beginner to advanced. Do them in order, each leans on the last. Check off skills as you learn them. Your progress saves in this browser.":
+        "Seis etapas, más o menos de principiante a avanzado. Hazlas en orden, cada una se apoya en la anterior. Marca las habilidades a medida que las aprendas. Tu progreso se guarda en este navegador.",
+      "How the six areas connect":"Cómo se conectan las seis áreas",
+      "Read the roadmap as a stack, not a checklist. Programming and APIs are the <b>foundation</b>. Orchestration is the <b>delivery vehicle</b> you bill with. AI and agents are the <b>premium multiplier</b> on top. Reliability turns a demo into something a business trusts, and Business turns all of it into income. Skip Business and you stay an engineer who is underpaid.":
+        "Lee la ruta como una pila, no como una lista de tareas. Programación y APIs son los <b>cimientos</b>. La orquestación es el <b>vehículo de entrega</b> con el que facturas. La IA y los agentes son el <b>multiplicador premium</b> encima. La confiabilidad convierte un demo en algo en lo que un negocio confía, y la parte de negocio convierte todo eso en ingresos. Sáltate la parte de negocio y te quedas siendo un ingeniero mal pagado.",
+      "<span class=\"label\">Your unfair advantage</span>You already hold most of stages 1, 2, and 5 from your day job. Your real gap is not the tech. It is stage 6, packaging and pricing, and the agent depth in stage 4. Spend your time there.":
+        "<span class=\"label\">Tu ventaja injusta</span>Ya tienes la mayor parte de las etapas 1, 2 y 5 gracias a tu trabajo diario. Tu verdadero hueco no es la tecnología. Es la etapa 6, empaquetar y poner precio, y la profundidad en agentes de la etapa 4. Invierte tu tiempo ahí.",
+      "The one thing to master in each":"Lo único que hay que dominar en cada una",
+      "The 20 lines of Python a workflow calls when it hits something no-code cannot do.":
+        "Las 20 líneas de Python que un flujo llama cuando se topa con algo que el no-code no puede hacer.",
+      "Auth, pagination, and rate limits are where beginners stall. A database is where the data lands.":
+        "La autenticación, la paginación y los límites de peticiones son donde los principiantes se atascan. La base de datos es donde aterrizan los datos.",
+      "The self-hostable one with the best margins. Zapier and Make win on speed and client familiarity.":
+        "La que puedes autoalojar y la de mejores márgenes. Zapier y Make ganan en velocidad y en que el cliente ya las conoce.",
+      "structured output, then a framework":"salida estructurada, y después un framework",
+      "Anyone builds a flow that works once. Getting paid means it works at 3am and tells you when it cannot.":
+        "Cualquiera arma un flujo que funciona una vez. Que te paguen significa que funciona a las 3 de la mañana y te avisa cuando no puede.",
+      "The skill engineers skip and agencies live on. Worth more than any single tool.":
+        "La habilidad que los ingenieros se saltan y de la que viven las agencias. Vale más que cualquier herramienta.",
+      "04 · The work, concretely":"04 · El trabajo, en concreto",
+      "What you actually build":"Qué construyes realmente",
+      "Real automations engineers ship. Each one below is a sellable offer: a trigger, a few steps, the tools, and the outcome you get paid for.":
+        "Automatizaciones reales que los ingenieros publican. Cada una de abajo es una oferta vendible: un disparador, unos pasos, las herramientas, y el resultado por el que te pagan.",
+      "05 · Where to learn it":"05 · Dónde aprenderlo",
+      "From workflows to agents, the frontier of stage 4":"De flujos a agentes, la frontera de la etapa 4",
+      "An agent is just an LLM in a loop: it thinks, calls a tool, looks at the result, and repeats until the job is done.":
+        "Un agente es solo un LLM en un bucle: piensa, llama a una herramienta, mira el resultado, y repite hasta terminar el trabajo.",
+      "The mental model":"El modelo mental",
+      "Tap any idea to expand it. These seven concepts are the whole game.":
+        "Toca cualquier idea para expandirla. Estos siete conceptos son todo el juego.",
+      "The augmented LLM, the building block":"El LLM aumentado, la pieza básica",
+      "The unit an agent is built from is a normal LLM given three extra powers: it can <b>call tools</b>, <b>retrieve information</b>, and <b>keep memory</b>. Everything else is orchestration around that. Get one augmented LLM call reliable before you build anything bigger.":
+        "La unidad con la que se construye un agente es un LLM normal al que le dieron tres poderes extra: puede <b>llamar herramientas</b>, <b>recuperar información</b> y <b>mantener memoria</b>. Todo lo demás es orquestación alrededor de eso. Haz que una sola llamada de LLM aumentado sea confiable antes de construir algo más grande.",
+      "The agent loop: Thought, Action, Observation":"El bucle del agente: Pensamiento, Acción, Observación",
+      "An agent runs a cycle: <b>Thought</b> (decide the next step), <b>Action</b> (call a tool), <b>Observation</b> (read the result), then loops with that new information until it decides it is finished. This is the single idea the whole field is built on. The Hugging Face course drills it directly.":
+        "Un agente corre un ciclo: <b>Pensamiento</b> (decide el siguiente paso), <b>Acción</b> (llama a una herramienta), <b>Observación</b> (lee el resultado), y luego repite con esa nueva información hasta que decide que terminó. Esta es la única idea sobre la que se construye todo el campo. El curso de Hugging Face la practica directamente.",
+      "Workflows vs agents, and why it matters for your bill":"Flujos contra agentes, y por qué importa para tu factura",
+      "Anthropic draws a sharp line. A <b>workflow</b> follows a fixed path you coded. An <b>agent</b> lets the model decide the steps at runtime. Workflows are cheaper, faster, and more predictable, so use them whenever the steps are known. Reach for a true agent only when the steps genuinely cannot be predicted. Most \"agents\" clients need are actually workflows.":
+        "Anthropic traza una línea clara. Un <b>flujo</b> sigue un camino fijo que tú programaste. Un <b>agente</b> deja que el modelo decida los pasos en el momento. Los flujos son más baratos, más rápidos y más predecibles, así que úsalos siempre que los pasos se conozcan. Recurre a un agente de verdad solo cuando los pasos genuinamente no se puedan predecir. La mayoría de los \"agentes\" que los clientes necesitan son en realidad flujos.",
+      "The five patterns that cover almost everything":"Los cinco patrones que cubren casi todo",
+      "Anthropic's guide names five reusable patterns: <b>Prompt chaining</b> (steps in sequence), <b>Routing</b> (send each input to a specialist), <b>Parallelization</b> (run independent subtasks at once), <b>Orchestrator-workers</b> (a lead model splits a task and delegates), and <b>Evaluator-optimizer</b> (one model drafts, another critiques and improves). Learn these five and you can design most systems.":
+        "La guía de Anthropic nombra cinco patrones reutilizables: <b>Encadenamiento de prompts</b> (pasos en secuencia), <b>Enrutamiento</b> (mandar cada entrada a un especialista), <b>Paralelización</b> (correr subtareas independientes a la vez), <b>Orquestador y trabajadores</b> (un modelo líder divide una tarea y delega), y <b>Evaluador y optimizador</b> (un modelo redacta, otro critica y mejora). Aprende estos cinco y podrás diseñar la mayoría de los sistemas.",
+      "Tools and MCP, how an agent acts on the world":"Herramientas y MCP, cómo un agente actúa sobre el mundo",
+      "Tools are functions the model can call: search, send an email, query a database. <b>MCP (Model Context Protocol)</b> is the open standard, from Anthropic, for exposing tools, data, and prompts to any model in a consistent way. Learn MCP and your tools work across Claude, n8n, and other clients instead of being wired one at a time.":
+        "Las herramientas son funciones que el modelo puede llamar: buscar, mandar un correo, consultar una base de datos. <b>MCP (Model Context Protocol)</b> es el estándar abierto, de Anthropic, para exponer herramientas, datos y prompts a cualquier modelo de forma consistente. Aprende MCP y tus herramientas funcionan en Claude, n8n y otros clientes en vez de tener que conectarlas una por una.",
+      "RAG and memory, giving the model real, current data":"RAG y memoria, darle al modelo datos reales y actuales",
+      "<b>RAG</b> (retrieval-augmented generation) puts your documents into a vector database, retrieves the relevant pieces at question time, and feeds them to the model, so it answers from your data instead of guessing. <b>Memory</b> is state that survives across steps of the loop. Together they turn a clever demo into something that knows a specific business.":
+        "<b>RAG</b> (generación aumentada por recuperación) mete tus documentos en una base de datos vectorial, recupera las partes relevantes al momento de la pregunta, y se las pasa al modelo, para que responda desde tus datos en vez de adivinar. La <b>memoria</b> es el estado que sobrevive entre pasos del bucle. Juntas convierten un demo ingenioso en algo que conoce un negocio específico.",
+      "Evals and guardrails, the line between demo and production":"Evaluaciones y barreras, la línea entre demo y producción",
+      "An <b>eval</b> is an automated test that scores an agent's output so you know if a change made it better or worse. <b>Guardrails</b> stop it from doing something unsafe or off-task. This is the unglamorous half almost no one does well, which is exactly why clients pay a premium for someone who does.":
+        "Una <b>evaluación</b> es una prueba automatizada que califica la salida de un agente para que sepas si un cambio la mejoró o la empeoró. Las <b>barreras</b> evitan que haga algo inseguro o fuera de tarea. Esta es la mitad poco glamorosa que casi nadie hace bien, que es justamente por lo que los clientes pagan más por alguien que sí la hace.",
+      "The deep path, hands-on":"El camino profundo, con las manos",
+      "Four stages beyond roadmap stage 4. Check them off as you go; this path tracks its own progress.":
+        "Cuatro etapas más allá de la etapa 4 de la ruta. Márcalas mientras avanzas; este camino lleva su propio progreso.",
+      "Every resource, in order":"Todos los recursos, en orden",
+      "<b>Do not read all of this before you start.</b> Read the Anthropic guide once, then build the stage-1 task in your own n8n. You learn agents by shipping one, then hardening it, not by finishing courses. Everything above is there for when you get stuck, not before.":
+        "<b>No leas todo esto antes de empezar.</b> Lee la guía de Anthropic una vez, y luego construye la tarea de la etapa 1 en tu propio n8n. Los agentes se aprenden publicando uno y después endureciéndolo, no terminando cursos. Todo lo de arriba está ahí para cuando te atasques, no antes.",
+      "What the work is worth":"Cuánto vale el trabajo",
+      "The jump in pay is not more hours, it is moving up the stack. A wiring job that saves a team ten hours a week is worth a retainer, not an hourly rate. An agent that replaces a judgment step is worth more again, because almost no one can deliver one that holds up in production. <b>Price the outcome, never your time.</b>":
+        "El salto en la paga no son más horas, es subir en la pila. Un trabajo de conexión que le ahorra diez horas a la semana a un equipo vale una iguala mensual, no una tarifa por hora. Un agente que reemplaza un paso de criterio vale todavía más, porque casi nadie puede entregar uno que aguante en producción. <b>Ponle precio al resultado, nunca a tu tiempo.</b>",
+      /* ===== Generative AI, complete ===== */
+      "The premium layer you upsell inside automations. LLMs, prompting, RAG, and agents.":
+        "La capa premium que vendes encima de las automatizaciones. LLMs, prompting, RAG y agentes.",
+      "01 · What it actually is":"01 · Qué es realmente",
+      "Strip away the mystery and a large language model does one thing: given some text, it guesses the next word. Then the next. Then the next. That is genuinely it.":
+        "Quítale el misterio y un modelo de lenguaje grande hace una sola cosa: dado un texto, adivina la siguiente palabra. Luego la siguiente. Luego la siguiente. Eso es genuinamente todo.",
+      "Your phone keyboard does the same trick. Type \"I am going to the\" and it offers \"store\". It learned that from your messages. An LLM learned from a substantial share of the public internet, so its guesses are extraordinarily good, and stacking enough good guesses looks a lot like thinking.":
+        "El teclado de tu teléfono hace el mismo truco. Escribe \"voy a ir a la\" y te ofrece \"tienda\". Lo aprendió de tus mensajes. Un LLM aprendió de una parte enorme del internet público, así que sus adivinanzas son extraordinariamente buenas, y apilar suficientes buenas adivinanzas se parece mucho a pensar.",
+      "Why it says things that are simply not true":"Por qué dice cosas que simplemente no son ciertas",
+      "Because it is not looking anything up. It is producing the words that <b>usually follow</b> words like yours. Most of the time the usual answer is the correct one. Sometimes the usual-sounding answer is invented, and the model has no way to tell the difference, so it says it in the same confident voice.":
+        "Porque no está consultando nada. Está produciendo las palabras que <b>suelen seguir</b> a palabras como las tuyas. La mayoría de las veces la respuesta habitual es la correcta. A veces la respuesta que suena habitual es inventada, y el modelo no tiene forma de notar la diferencia, así que la dice con la misma voz segura.",
+      "That is called a <b>hallucination</b>, and it is not a bug someone forgot to fix. It is the direct consequence of how the thing works. Which is why you verify anything that matters, especially names, numbers, dates and links.":
+        "A eso se le llama una <b>alucinación</b>, y no es un error que alguien olvidó arreglar. Es la consecuencia directa de cómo funciona la cosa. Por eso verificas todo lo que importa, en especial nombres, números, fechas y enlaces.",
+      "Tokens: it does not see words, it sees pieces":"Tokens: no ve palabras, ve pedazos",
+      "Text gets chopped into <b>tokens</b> before the model sees it. A token is roughly three quarters of a word: \"unbelievable\" might arrive as \"un\", \"believ\", \"able\".":
+        "El texto se corta en <b>tokens</b> antes de que el modelo lo vea. Un token es más o menos tres cuartos de palabra: \"increíble\" podría llegar como \"in\", \"creí\", \"ble\".",
+      "Two practical consequences. You pay per token, so a chatty prompt literally costs more. And the model is bad at letter-level tasks like counting the r's in a word, because it never saw the letters, only the chunks.":
+        "Dos consecuencias prácticas. Pagas por token, así que un prompt hablador literalmente cuesta más. Y el modelo es malo en tareas a nivel de letra, como contar las erres de una palabra, porque nunca vio las letras, solo los pedazos.",
+      "The context window is a desk, not a memory":"La ventana de contexto es un escritorio, no una memoria",
+      "The <b>context window</b> is how much text the model can hold at once. Picture a desk: you can spread out a certain number of pages, and to add a new page you push an old one off the edge.":
+        "La <b>ventana de contexto</b> es cuánto texto puede sostener el modelo a la vez. Imagina un escritorio: puedes extender cierta cantidad de páginas, y para agregar una nueva empujas una vieja por el borde.",
+      "The model does not remember you between conversations. When a chat app seems to, it is quietly putting a summary of earlier messages back on the desk each time. Understanding this explains most \"why did it forget?\" moments.":
+        "El modelo no te recuerda entre conversaciones. Cuando una app de chat parece hacerlo, lo que hace en silencio es volver a poner un resumen de los mensajes anteriores sobre el escritorio cada vez. Entender esto explica casi todos los momentos de \"¿por qué se le olvidó?\".",
+      "Temperature: the boring-to-reckless dial":"Temperatura: la perilla de aburrido a temerario",
+      "Instead of always taking its single best guess, the model can pick from among its top guesses. <b>Temperature</b> controls how adventurous that pick is.":
+        "En vez de tomar siempre su mejor adivinanza única, el modelo puede elegir entre sus mejores adivinanzas. La <b>temperatura</b> controla qué tan aventurada es esa elección.",
+      "Low temperature gives repeatable, conservative answers, which is what you want for extracting data or writing code. High temperature gives variety, which is what you want for brainstorming names. Same model, very different behaviour, one number.":
+        "Una temperatura baja da respuestas repetibles y conservadoras, que es lo que quieres para extraer datos o escribir código. Una temperatura alta da variedad, que es lo que quieres para lluvia de ideas de nombres. Mismo modelo, comportamiento muy distinto, un solo número.",
+      "<b>Training</b> is what the lab did: months, thousands of machines, unimaginable cost. You will never do this and you do not need to.":
+        "El <b>entrenamiento</b> es lo que hizo el laboratorio: meses, miles de máquinas, un costo inimaginable. Nunca vas a hacer esto y no necesitas hacerlo.",
+      "<b>Fine-tuning</b> is nudging an existing model with your own examples so it adopts a style or format. Useful occasionally, expensive to maintain, and usually reached for far too early.":
+        "El <b>ajuste fino</b> es empujar un modelo existente con tus propios ejemplos para que adopte un estilo o formato. Útil de vez en cuando, caro de mantener, y normalmente se recurre a él demasiado pronto.",
+      "<b>RAG</b> means retrieval augmented generation, and it is what you actually want almost every time. You search your own documents, paste the relevant bits into the prompt, and ask the question. The model does not need to have learned your data. It just needs to be handed it. Most \"AI that knows our company\" products are this and nothing more.":
+        "<b>RAG</b> significa generación aumentada por recuperación, y es lo que en realidad quieres casi siempre. Buscas en tus propios documentos, pegas las partes relevantes en el prompt, y haces la pregunta. El modelo no necesita haber aprendido tus datos. Solo necesita que se los entreguen. La mayoría de los productos de \"IA que conoce nuestra empresa\" son esto y nada más.",
+      "What an agent is, minus the hype":"Qué es un agente, sin el bombo",
+      "An <b>agent</b> is a model in a loop that is allowed to use tools. You give it a goal, a list of things it can do (search the web, read a file, send an email, call an API), and it decides which to use, looks at the result, and decides again.":
+        "Un <b>agente</b> es un modelo en un bucle al que se le permite usar herramientas. Le das una meta, una lista de cosas que puede hacer (buscar en la web, leer un archivo, mandar un correo, llamar a una API), y él decide cuál usar, mira el resultado, y decide de nuevo.",
+      "That is the whole idea. The difficulty is never the loop, it is everything around it: what happens when a tool fails, how you stop it looping forever, and how you make sure it cannot do real damage while it experiments.":
+        "Esa es toda la idea. La dificultad nunca es el bucle, es todo lo que lo rodea: qué pasa cuando una herramienta falla, cómo evitas que se quede en bucle para siempre, y cómo te aseguras de que no pueda hacer daño real mientras experimenta.",
+      "<span class=\"label\">The honest state of it</span>AI writes a great deal of the world's code now, and the people it made redundant were mostly the ones who only knew how to type code. The people it made more valuable are the ones who can tell whether the output is right. That judgement comes from the fundamentals, which is why this academy makes you learn them first.":
+        "<span class=\"label\">El estado honesto de las cosas</span>La IA escribe hoy buena parte del código del mundo, y la gente que dejó sin trabajo fue sobre todo la que solo sabía teclear código. La gente a la que hizo más valiosa es la que puede decir si el resultado está bien. Ese criterio viene de los fundamentos, y por eso esta academia te los hace aprender primero.",
+      "02 · The three levels":"02 · Los tres niveles",
+      "Everybody can reach beginner in a weekend. Intermediate is where you become employable. Expert is where you are trusted with things that can break.":
+        "Cualquiera llega a principiante en un fin de semana. Intermedio es donde te vuelves contratable. Experto es donde te confían cosas que se pueden romper.",
+      "You can talk to a model on purpose":"Puedes hablarle a un modelo a propósito",
+      "You understand what the thing is doing and you can get consistently good output instead of getting lucky.":
+        "Entiendes qué está haciendo la cosa y puedes obtener buenos resultados de forma consistente en vez de por suerte.",
+      "<b>Few-shot:</b> show two examples and it copies the pattern":
+        "<b>Few-shot:</b> muéstrale dos ejemplos y copia el patrón",
+      "<b>Where it lies:</b> spotting the confident invention":
+        "<b>Dónde miente:</b> detectar el invento dicho con seguridad",
+      "<b>Tokens and cost:</b> why your bill looks like that":
+        "<b>Tokens y costo:</b> por qué tu factura se ve así",
+      "<b>Your first API call</b> in Python, about fifteen lines":
+        "<b>Tu primera llamada a una API</b> en Python, unas quince líneas",
+      "<b>You build</b>A script that reads 50 customer messages from a file and returns a tidy table of the complaint, the urgency and the suggested reply.":
+        "<b>Construyes</b>Un script que lee 50 mensajes de clientes desde un archivo y devuelve una tabla ordenada con el reclamo, la urgencia y la respuesta sugerida.",
+      "<b>Worth:</b> not a job yet, but immediately useful at any job you already have.":
+        "<b>Valor:</b> todavía no es un trabajo, pero es útil de inmediato en cualquier trabajo que ya tengas.",
+      "You can build something a business would pay for":"Puedes construir algo por lo que un negocio pagaría",
+      "Structured output, your own documents, and a thing that stays up when other people use it.":
+        "Salida estructurada, tus propios documentos, y algo que se mantiene en pie cuando otras personas lo usan.",
+      "<b>Chunking:</b> the unglamorous part that decides whether RAG works":
+        "<b>Troceado:</b> la parte poco glamorosa que decide si RAG funciona",
+      "<b>Tool calling:</b> letting the model trigger your own functions":
+        "<b>Llamada a herramientas:</b> dejar que el modelo dispare tus propias funciones",
+      "<b>Evaluation:</b> proving a change made it better, not just different":
+        "<b>Evaluación:</b> demostrar que un cambio lo mejoró, no solo que lo hizo distinto",
+      "<b>You build</b>A chatbot that answers questions from one company's actual PDFs, cites the page it used, and says \"I do not know\" instead of inventing.":
+        "<b>Construyes</b>Un chatbot que responde preguntas usando los PDFs reales de una empresa, cita la página que usó, y dice \"no lo sé\" en vez de inventar.",
+      "<b>Worth:</b> this is the level that gets hired, and the level that gets freelance clients.":
+        "<b>Valor:</b> este es el nivel que consigue empleo, y el nivel que consigue clientes independientes.",
+      "You can be trusted with it in production":"Se te puede confiar en producción",
+      "Agents that do real work, and the judgement to know what they must never be allowed to touch.":
+        "Agentes que hacen trabajo real, y el criterio para saber qué nunca se les debe permitir tocar.",
+      "<b>Agent loops:</b> planning, tool use, retries, knowing when to stop":
+        "<b>Bucles de agente:</b> planear, usar herramientas, reintentar, saber cuándo parar",
+      "<b>Multi-step workflows</b> with a human approving the risky step":
+        "<b>Flujos de varios pasos</b> con una persona aprobando el paso arriesgado",
+      "<b>Observability:</b> tracing why a run went wrong three days ago":
+        "<b>Observabilidad:</b> rastrear por qué una ejecución salió mal hace tres días",
+      "<b>Model choice:</b> when a small cheap model is the right answer":
+        "<b>Elección de modelo:</b> cuándo un modelo pequeño y barato es la respuesta correcta",
+      "<b>Fine-tuning,</b> and why the answer is usually still RAG":
+        "<b>Ajuste fino,</b> y por qué la respuesta casi siempre sigue siendo RAG",
+      "<b>You build</b>An agent that reads incoming invoices, extracts the fields, checks them against a database, and queues anything unusual for a person instead of guessing.":
+        "<b>Construyes</b>Un agente que lee las facturas que llegan, extrae los campos, los revisa contra una base de datos, y deja en cola cualquier cosa rara para que la vea una persona en vez de adivinar.",
+      "<b>Worth:</b> the highest-paid corner of this field, because the risk is real and few people can manage it.":
+        "<b>Valor:</b> el rincón mejor pagado de este campo, porque el riesgo es real y poca gente sabe manejarlo.",
+      "<span class=\"label\">The trap at every level</span>It is unusually easy to build an AI demo and unusually hard to build an AI product. The demo works on the three examples you tried. The product has to work on the four hundred you did not. Almost the entire difference between beginner and expert here is evaluation, guardrails and knowing what to refuse to automate.":
+        "<span class=\"label\">La trampa en cada nivel</span>Es inusualmente fácil construir un demo de IA e inusualmente difícil construir un producto de IA. El demo funciona con los tres ejemplos que probaste. El producto tiene que funcionar con los cuatrocientos que no probaste. Casi toda la diferencia entre principiante y experto aquí es evaluación, barreras, y saber qué negarse a automatizar.",
+      "01 · The roadmap":"01 · La ruta",
+      "From LLM calls to agents that earn":"De llamadas a LLMs a agentes que generan ingresos",
+      "Learn to make a model do reliable, useful work, then wrap it in an automation a client pays for.":
+        "Aprende a hacer que un modelo haga trabajo útil y confiable, y luego envuélvelo en una automatización por la que un cliente pague.",
+      "Stage 4 links to the Automation page's deep-dive, where the agent build lives. Check off as you go; this path saves its own progress.":
+        "La etapa 4 enlaza con la parte profunda de la página de Automatización, donde vive la construcción del agente. Marca a medida que avanzas; este camino guarda su propio progreso.",
+      "02 · Where to learn it":"02 · Dónde aprenderlo",
+      /* ===== Tools, complete ===== */
+      "A code editor":"Un editor de código",
+      "Where you write everything. Free, runs on any machine, and what most of the industry uses. Install it today and open a folder, not a file.":
+        "Donde escribes todo. Gratis, funciona en cualquier máquina, y es lo que usa casi toda la industria. Instálalo hoy y abre una carpeta, no un archivo.",
+      "A browser with dev tools":"Un navegador con herramientas de desarrollo",
+      "Not for browsing. F12 opens the X-ray view: the HTML as it really is, the network requests, the errors. You will live here.":
+        "No para navegar. F12 abre la vista de rayos X: el HTML como realmente es, las peticiones de red, los errores. Vas a vivir aquí.",
+      "A terminal":"Una terminal",
+      "Typing commands instead of clicking. Roughly six commands cover almost everything you will do in your first year.":
+        "Escribir comandos en vez de hacer clic. Unos seis comandos cubren casi todo lo que harás en tu primer año.",
+      "Snapshots of your work you can return to. The reason you never lose a day again, and non-negotiable past your first project.":
+        "Fotos de tu trabajo a las que puedes volver. La razón por la que nunca más pierdes un día, y algo no negociable después de tu primer proyecto.",
+      "the shelf":"el estante",
+      "Where those snapshots live online. Also your portfolio, your backup, and the first thing an employer looks at.":
+        "Donde viven esas fotos en línea. También es tu portafolio, tu respaldo, y lo primero que mira un empleador.",
+      "A place to deploy":"Un lugar donde publicar",
+      "Turns your folder into a real address other people can open. Free tier, connects to GitHub, deploys on every push.":
+        "Convierte tu carpeta en una dirección real que otras personas pueden abrir. Plan gratis, se conecta a GitHub, y publica en cada push.",
+      "use it properly":"úsala bien",
+      "A tutor that never gets tired, and a trap if you let it write things you cannot read. The academy has a whole page on using it well.":
+        "Un tutor que nunca se cansa, y una trampa si dejas que escriba cosas que no puedes leer. La academia tiene una página entera sobre cómo usarla bien.",
+      "Somewhere to think":"Un lugar para pensar",
+      "Where the plan lives before the code does. The step almost every beginner skips and then pays for.":
+        "Donde vive el plan antes que el código. El paso que casi todo principiante se salta y luego paga.",
+      "<span class=\"label\">All of it is free</span>Every tool in that list has a free tier that is genuinely enough to learn on and to ship real projects. If a tutorial tells you to pay for something in your first year, close the tutorial.":
+        "<span class=\"label\">Todo esto es gratis</span>Cada herramienta de esa lista tiene un plan gratuito que de verdad alcanza para aprender y para publicar proyectos reales. Si un tutorial te dice que pagues por algo en tu primer año, cierra el tutorial.",
+      "<b>The magic moment:</b> once GitHub and Vercel are connected, you type <code>git push</code> and your live site updates by itself in about twenty seconds. That is the whole modern workflow, and it is free.":
+        "<b>El momento mágico:</b> una vez que GitHub y Vercel están conectados, escribes <code>git push</code> y tu sitio en vivo se actualiza solo en unos veinte segundos. Ese es todo el flujo de trabajo moderno, y es gratis.",
+      "<b>Worth knowing:</b> FastAPI generates an interactive test page for free, so you can skip Postman until you need to save collections. That is the general rule with tools: use the one already in the box first.":
+        "<b>Vale la pena saberlo:</b> FastAPI genera una página de pruebas interactiva gratis, así que puedes saltarte Postman hasta que necesites guardar colecciones. Esa es la regla general con las herramientas: usa primero la que ya viene en la caja.",
+      "The chain that earns money soonest, because a small business will pay for ten hours a week back and will not care how you did it.":
+        "La cadena que gana dinero más rápido, porque un negocio pequeño va a pagar por recuperar diez horas a la semana y no le va a importar cómo lo hiciste.",
+      "<b>The trick:</b> you are not selling n8n. You are selling \"the order confirmations send themselves now.\" Never lead with the tool, always lead with the hours.":
+        "<b>El truco:</b> no estás vendiendo n8n. Estás vendiendo \"las confirmaciones de pedido ahora se mandan solas\". Nunca empieces por la herramienta, siempre empieza por las horas.",
+      "Least code of any chain here, and it is a real job in almost every company.":
+        "La cadena con menos código de todas, y es un trabajo real en casi toda empresa.",
+      "<b>Where beginners stop too early:</b> at the chart. The chart is not the deliverable. The sentence under it is.":
+        "<b>Donde los principiantes se detienen demasiado pronto:</b> en el gráfico. El gráfico no es lo que entregas. Lo que entregas es la frase que va debajo.",
+      "Notice that the model is one box in the middle. Everything around it is ordinary engineering, which is exactly why the fundamentals matter more now, not less.":
+        "Fíjate que el modelo es una sola caja en el medio. Todo lo que lo rodea es ingeniería común y corriente, que es justamente por lo que los fundamentos importan más ahora, no menos.",
+      "<b>Never skip the second box.</b> The API key lives on your server, never in the browser. A key in frontend code is visible to everyone and people will spend your money with it.":
+        "<b>Nunca te saltes la segunda caja.</b> La llave de la API vive en tu servidor, nunca en el navegador. Una llave en el código del frontend la ve todo el mundo y la gente va a gastar tu dinero con ella.",
+      "Deciding what it should look like before you write CSS saves more time than any other habit on this page.":
+        "Decidir cómo se debe ver antes de escribir CSS ahorra más tiempo que cualquier otro hábito de esta página.",
+      "<b>Free for students:</b> Figma's free tier is generous, and paper is cheaper. Most professionals still start on paper.":
+        "<b>Gratis para estudiantes:</b> el plan gratuito de Figma es generoso, y el papel es más barato. La mayoría de los profesionales todavía empieza en papel.",
+      "Grouped by the job it does. You do not need most of these yet. The point is that when someone says the name, you know which box on a chain it lives in.":
+        "Agrupadas por el trabajo que hacen. Todavía no necesitas la mayoría. El punto es que cuando alguien diga el nombre, sepas en qué caja de qué cadena vive.",
+      "<b>VS Code</b> the editor almost everyone uses. Free.":
+        "<b>VS Code</b> el editor que usa casi todo el mundo. Gratis.",
+      "<b>Extensions</b> Prettier formats your code, ESLint catches mistakes, Live Server reloads the page as you type.":
+        "<b>Extensiones</b> Prettier formatea tu código, ESLint atrapa errores, Live Server recarga la página mientras escribes.",
+      "<b>A terminal</b> where you run things. Six commands cover year one.":
+        "<b>Una terminal</b> donde ejecutas cosas. Seis comandos cubren el primer año.",
+      "<b>CodePen</b> a scratchpad in the browser for a quick test with nothing installed.":
+        "<b>CodePen</b> un borrador en el navegador para una prueba rápida sin instalar nada.",
+      "Keeping and sharing your work":"Guardar y compartir tu trabajo",
+      "<b>Git</b> the save points, on your machine.":"<b>Git</b> los puntos de guardado, en tu máquina.",
+      "<b>GitHub</b> those save points online, plus your public portfolio.":
+        "<b>GitHub</b> esos puntos de guardado en línea, más tu portafolio público.",
+      "<b>Branches</b> a copy where you try something risky without breaking the working version.":
+        "<b>Ramas</b> una copia donde pruebas algo arriesgado sin romper la versión que funciona.",
+      "<b>Pull requests</b> how teams review each other's work before it counts.":
+        "<b>Pull requests</b> cómo los equipos revisan el trabajo de los demás antes de que cuente.",
+      "<b>Vercel or Netlify</b> best for frontends. Connect GitHub, done.":
+        "<b>Vercel o Netlify</b> lo mejor para frontends. Conectas GitHub y listo.",
+      "<b>Railway or Render</b> for a backend and a database, with usable free tiers.":
+        "<b>Railway o Render</b> para un backend y una base de datos, con planes gratuitos que sí sirven.",
+      "<b>Cloudflare</b> free DNS, and makes your site faster worldwide.":
+        "<b>Cloudflare</b> DNS gratis, y hace tu sitio más rápido en todo el mundo.",
+      "<b>A domain</b> around ten dollars a year, and it changes how people see you.":
+        "<b>Un dominio</b> unos diez dólares al año, y cambia cómo te ve la gente.",
+      "<b>PostgreSQL</b> the default serious database. Free and open source.":
+        "<b>PostgreSQL</b> la base de datos seria por defecto. Gratis y de código abierto.",
+      "<b>SQLite</b> a database in a single file, perfect for learning.":
+        "<b>SQLite</b> una base de datos en un solo archivo, perfecta para aprender.",
+      "<b>DBeaver or TablePlus</b> click around your database instead of guessing.":
+        "<b>DBeaver o TablePlus</b> navega tu base de datos con clics en vez de adivinar.",
+      "<b>Looker Studio</b> free dashboards, connects to Sheets in a minute.":
+        "<b>Looker Studio</b> tableros gratis, se conecta a Sheets en un minuto.",
+      "<b>Browser dev tools</b> the most underused tool in this entire list.":
+        "<b>Herramientas de desarrollo del navegador</b> la herramienta más desaprovechada de toda esta lista.",
+      "<b>Postman or Thunder Client</b> poke an API without building a frontend.":
+        "<b>Postman o Thunder Client</b> prueba una API sin construir un frontend.",
+      "<b>Lighthouse</b> built into Chrome, grades speed and accessibility for free.":
+        "<b>Lighthouse</b> viene dentro de Chrome, califica velocidad y accesibilidad gratis.",
+      "<b>Zapier or Make</b> the same idea, easier, paid sooner.":
+        "<b>Zapier o Make</b> la misma idea, más fácil, se vuelve de pago antes.",
+      "<b>APIs</b> not a tool but the thing that makes tools combine at all.":
+        "<b>APIs</b> no son una herramienta sino lo que hace que las herramientas se combinen.",
+      "<b>Figma</b> design the screen before you build it. Free tier.":
+        "<b>Figma</b> diseña la pantalla antes de construirla. Tiene plan gratis.",
+      "<b>Notion or Obsidian</b> where your notes and plans live.":
+        "<b>Notion u Obsidian</b> donde viven tus notas y tus planes.",
+      "<b>Excalidraw</b> free, ugly on purpose, perfect for sketching how something works.":
+        "<b>Excalidraw</b> gratis, feo a propósito, perfecto para bosquejar cómo funciona algo.",
+      "<b>Paper</b> still undefeated for the first five minutes of any problem.":
+        "<b>Papel</b> sigue invicto para los primeros cinco minutos de cualquier problema.",
+      "The most common way to waste a month is to learn a tool you have no use for yet. You will forget it, because nothing hurt enough to make it stick.":
+        "La forma más común de perder un mes es aprender una herramienta para la que todavía no tienes uso. Se te va a olvidar, porque nada dolió lo suficiente como para que se quedara.",
+      "Git. The pain of losing a day is what makes commits become a habit.":
+        "Git. El dolor de perder un día es lo que convierte los commits en un hábito.",
+      "Somebody asked to see your project":"Alguien te pidió ver tu proyecto",
+      "GitHub and a deploy host. A link beats a zip file every single time.":
+        "GitHub y un lugar donde publicar. Un enlace le gana a un archivo zip siempre.",
+      "Your page needs to remember something":"Tu página necesita recordar algo",
+      "A backend and a database. Not before, or you are learning an answer to a question you have not asked.":
+        "Un backend y una base de datos. No antes, o estarás aprendiendo la respuesta a una pregunta que no has hecho.",
+      "\"It works on my machine\"":"\"En mi máquina funciona\"",
+      "Docker. That exact sentence is the moment it starts making sense, and not one day earlier.":
+        "Docker. Esa frase exacta es el momento en que empieza a tener sentido, y ni un día antes.",
+      "Automated tests. Everyone resists this until it happens twice.":
+        "Pruebas automatizadas. Todos se resisten hasta que pasa dos veces.",
+      "You do the same twenty clicks every week":"Haces los mismos veinte clics cada semana",
+      "Automation, with a script or n8n. This is also the moment somebody would pay you to do it for them.":
+        "Automatización, con un script o con n8n. Este también es el momento en que alguien te pagaría por hacérselo.",
+      "<span class=\"label\">The rule, in one line</span>A tool is an answer. Go and find the question first, and the tool will take an afternoon instead of a month.":
+        "<span class=\"label\">La regla, en una línea</span>Una herramienta es una respuesta. Ve y encuentra primero la pregunta, y la herramienta te tomará una tarde en vez de un mes.",
       /* ===== Foundations, complete ===== */
       "If you are in high school and wondering whether tech is for you, this is the honest way to find out. By the end you will know what the field really is, which job fits you, and whether you like the thinking. That is worth far more than guessing at 17 and regretting it at 20.":
         "Si estás en el colegio y te preguntas si la tecnología es para ti, esta es la forma honesta de averiguarlo. Al final vas a saber qué es realmente este campo, qué trabajo encaja contigo, y si te gusta esta forma de pensar. Eso vale muchísimo más que adivinar a los 17 y arrepentirte a los 20.",

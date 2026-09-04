@@ -4489,8 +4489,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var sc=document.getElementById('scrim');if(sc)sc.hidden=true;
       if(menuBtn)menuBtn.setAttribute('aria-expanded','false');
       renderFor(name);
+      CURPAGE=name;
+      /* translate first, then build the rail from the translated headings */
+      if(typeof applyLang==='function')applyLang();
       if(typeof buildRail==='function')buildRail(name);
-      if(typeof applyLang==='function'&&LANG==='es')applyLang();
       if(typeof readProgress==='function')readProgress();
       if(typeof seePage==='function'&&!document.body.classList.contains('preview'))seePage(name);
     }
@@ -6577,7 +6579,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Built from whatever <section class="sec" id> the page has,
        so no page markup had to change.
     ========================================================= */
-    var RAIL=null,RAILSECS=null;
+    var RAIL=null,RAILSECS=null,CURPAGE=null;
     function railTitle(sec){
       var h=sec.querySelector('h3, h2');
       var eb=sec.querySelector('.eyebrow');
@@ -6824,6 +6826,107 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* ================= START HERE, complete ================= */
+      'Before you spend a dollar':'Antes de gastar un peso',
+      'Start here · free':'Empieza aquí · gratis',
+      '← Back':'← Atrás',
+      'The honest starter guide I wish someone had handed me. Self-taught from Santa Cruz, Bolivia, now building automation and AI for clients in the US. Here is how tech really works, how to start, how to learn, and how to not waste a year.':
+        'La guía honesta para empezar que me hubiera gustado que alguien me diera. Autodidacta desde Santa Cruz, Bolivia, y hoy construyo automatización e IA para clientes en Estados Unidos. Aquí está cómo funciona de verdad la tecnología, cómo empezar, cómo aprender y cómo no perder un año.',
+      'How jobs really work':'Cómo funcionan los trabajos de verdad',
+      'How to start':'Cómo empezar','How to learn':'Cómo aprender','Save time':'Ahorra tiempo',
+      '01 · The truth':'01 · La verdad','02 · The start':'02 · El comienzo',
+      '03 · The method':'03 · El método','04 · The traps':'04 · Las trampas','05 · Now what':'05 · Y ahora qué',
+      'How tech jobs really work':'Cómo funcionan de verdad los trabajos en tecnología',
+      'How to actually start':'Cómo empezar de verdad',
+      'How to learn so it sticks and gets you paid':'Cómo aprender para que se te quede y te paguen',
+      'How to not waste a year':'Cómo no perder un año',
+      'Your next move':'Tu siguiente paso',
+      'Forget the movies. Ninety percent of the work is not genius algorithms. It is connecting things, fixing things, and explaining things clearly.':
+        'Olvida las películas. El noventa por ciento del trabajo no son algoritmos geniales. Es conectar cosas, arreglar cosas y explicarlas con claridad.',
+      'Pick one direction, build one real thing, put it in front of one real person. Repeat. That is the whole loop.':
+        'Elige una dirección, construye una cosa real, ponla frente a una persona real. Repite. Ese es todo el ciclo.',
+      'Active beats passive. Just-in-time beats just-in-case. Consistency beats intensity.':
+        'Activo le gana a pasivo. Justo a tiempo le gana a por si acaso. La constancia le gana a la intensidad.',
+      'Most wasted time is not laziness. It is doing the wrong things that look productive.':
+        'La mayor parte del tiempo perdido no es pereza. Es hacer las cosas equivocadas que parecen productivas.',
+      'Everything in this academy exists to save you the months I wasted. Pick a direction, and build something this week. That is it.':
+        'Todo en esta academia existe para ahorrarte los meses que yo perdí. Elige una dirección y construye algo esta semana. Eso es todo.',
+      /* the truth */
+      'You do not need a degree':'No necesitas un título','for real':'en serio',
+      'Nobody has ever asked me for one. They ask what you can build and whether you can be trusted to finish it.':
+        'Nunca nadie me ha pedido uno. Preguntan qué sabes construir y si se puede confiar en que lo termines.',
+      'You get paid to solve problems, not to know everything':'Te pagan por resolver problemas, no por saberlo todo',
+      'the job':'el trabajo',
+      'You will Google and use AI every single day. That is the work, not cheating. Nobody memorizes it all.':
+        'Vas a buscar en Google y usar IA todos los días. Ese es el trabajo, no es hacer trampa. Nadie se lo memoriza todo.',
+      'Most work is plumbing':'La mayor parte del trabajo es fontanería','reality':'la realidad',
+      'Moving data between systems, keeping things running, talking to the people who need it. The hard computer-science part is a small slice.':
+        'Mover datos entre sistemas, mantener las cosas funcionando, hablar con la gente que las necesita. La parte difícil de ciencias de la computación es una porción pequeña.',
+      'Remote changes everything':'El trabajo remoto lo cambia todo','your edge':'tu ventaja',
+      'From Bolivia I work with US clients at close to US rates. Your location is no longer your ceiling.':
+        'Desde Bolivia trabajo con clientes de Estados Unidos a tarifas cercanas a las de allá. Tu ubicación ya no es tu techo.',
+      'A job and a business are different games':'Un empleo y un negocio son juegos distintos',
+      'choose on purpose':'elige a propósito',
+      'A job is stable and caps your income. Your own services uncap it but are unstable. Start with income, build the business on the side.':
+        'Un empleo es estable y le pone techo a tus ingresos. Tus propios servicios quitan el techo pero son inestables. Empieza con ingresos y construye el negocio en paralelo.',
+      'The part nobody says':'La parte que nadie dice',
+      '<span class="label">The part nobody says</span>Imposter syndrome never fully leaves. Everyone feels it, including people far ahead of you. You ship anyway. That is the only difference.':
+        '<span class="label">La parte que nadie dice</span>El síndrome del impostor nunca se va del todo. Todos lo sienten, incluida la gente que está mucho más adelante que tú. Igual publicas tu trabajo. Esa es la única diferencia.',
+      /* the start */
+      '<b>Pick ONE path.</b> Do not learn "everything." If you are unsure, take the free path quiz. Depth beats breadth every time.':
+        '<b>Elige UN camino.</b> No aprendas "todo". Si no estás seguro, haz el test gratuito. La profundidad le gana a la amplitud siempre.',
+      '<b>Learn by building, not watching.</b> Tutorials feel like progress and are not. Build the ugly version yourself.':
+        '<b>Aprende construyendo, no mirando.</b> Los tutoriales se sienten como progreso y no lo son. Construye tú mismo la versión fea.',
+      '<b>Ship something real in week one.</b> A script that automates a boring task, a tiny app, anything that works and that you can show.':
+        '<b>Publica algo real en la primera semana.</b> Un script que automatice una tarea aburrida, una app pequeña, cualquier cosa que funcione y que puedas mostrar.',
+      '<b>Put it in front of someone.</b> A friend, a small business, a forum. Feedback and proof matter more than polish.':
+        '<b>Ponlo frente a alguien.</b> Un amigo, un negocio pequeño, un foro. La retroalimentación y la prueba importan más que el acabado.',
+      '<b>Earn while you learn.</b> A $50 automation or a landing page teaches you more than months of courses, and it pays.':
+        '<b>Gana mientras aprendes.</b> Una automatización de 50 dólares o una landing page te enseña más que meses de cursos, y además paga.',
+      '<b>Do not wait to feel ready.</b> You never will. "Ready" is a feeling that follows action, it does not come before it.':
+        '<b>No esperes a sentirte listo.</b> Nunca lo vas a sentir. "Listo" es una sensación que viene después de actuar, no antes.',
+      'Where most people die':'Donde se queda la mayoría',
+      '<span class="label">Where most people die</span>The gap between "I should learn this" and actually starting. Close it today, not Monday. Monday is a myth.':
+        '<span class="label">Donde se queda la mayoría</span>El hueco entre "debería aprender esto" y empezar de verdad. Ciérralo hoy, no el lunes. El lunes es un mito.',
+      /* the method */
+      'Build first, look it up second':'Construye primero, busca después','active':'activo',
+      'Try, get stuck, then learn the exact thing you needed. It sticks because you actually needed it.':
+        'Intenta, atáscate, y luego aprende exactamente lo que necesitabas. Se te queda porque de verdad lo necesitabas.',
+      'Learn just-in-time':'Aprende justo a tiempo','80 / 20':'80 / 20',
+      'Do not learn a whole framework "in case." Learn the 20% the thing in front of you needs, and move.':
+        'No aprendas un framework entero "por si acaso". Aprende el 20% que necesita lo que tienes enfrente, y avanza.',
+      'Teach it back':'Enséñalo de vuelta','own it':'hazlo tuyo',
+      'Write a note, record a short video, explain it to a friend. If you can explain it, you own it.':
+        'Escribe una nota, graba un video corto, explícaselo a un amigo. Si puedes explicarlo, es tuyo.',
+      'Use AI, but verify it':'Usa la IA, pero verifícala','the paid skill':'la habilidad que se paga',
+      'AI makes you faster, but 66% of developers get burned by output that is "almost right." Being the one who catches it is what you get paid for.':
+        'La IA te hace más rápido, pero al 66% de los programadores les explota en la cara un resultado que estaba "casi bien". Ser quien lo detecta es por lo que te pagan.',
+      'Consistency wins':'La constancia gana','compound it':'que se acumule',
+      'One focused hour a day beats a 10-hour weekend once a month. Momentum compounds, cramming does not.':
+        'Una hora concentrada al día le gana a un fin de semana de 10 horas una vez al mes. El impulso se acumula, atracarse no.',
+      'Projects over certificates':'Proyectos antes que certificados','proof':'prueba',
+      'A cert says you studied. A project you can show says you can do it. The project gets the job.':
+        'Un certificado dice que estudiaste. Un proyecto que puedes mostrar dice que sabes hacerlo. El proyecto consigue el trabajo.',
+      /* the traps */
+      'Tutorial hell':'El infierno de los tutoriales','the fix':'la solución',
+      'Build your own version without following along. The struggle is the learning; copying is not.':
+        'Construye tu propia versión sin seguir el paso a paso. La dificultad es el aprendizaje; copiar no lo es.',
+      'Learning "in order" forever':'Aprender "en orden" para siempre',
+      'You do not need every fundamental before you build. Learn enough to start, fill the gaps as you hit them.':
+        'No necesitas todos los fundamentos antes de construir. Aprende lo suficiente para empezar y llena los huecos cuando aparezcan.',
+      'Chasing every new tool':'Perseguir cada herramienta nueva',
+      'Tools change, fundamentals do not. Go deep on one, not shallow on ten.':
+        'Las herramientas cambian, los fundamentos no. Profundiza en una, no roces diez.',
+      'Perfectionism':'Perfeccionismo',
+      'Ship the ugly version. Done and seen beats perfect and hidden, every time.':
+        'Publica la versión fea. Hecho y visto le gana a perfecto y escondido, siempre.',
+      'Skipping the business side':'Saltarse la parte de negocio',
+      'Scoping, pricing, and clear communication make more money than any framework. Learn them early.':
+        'Definir el alcance, poner precios y comunicar con claridad dan más dinero que cualquier framework. Apréndelos temprano.',
+      'Comparing to others':'Compararte con otros',
+      "Everyone's start looks different. The only comparison that matters is you versus you last month.":
+        'El comienzo de cada quien se ve distinto. La única comparación que importa es tú contra ti del mes pasado.',
+      'Find my path →':'Encontrar mi camino →','Browse the courses →':'Ver los cursos →',
       /* --- courses / roadmap --- */
       '<span class="rnum">1</span>Start here, whoever you are':'<span class="rnum">1</span>Empieza aquí, seas quien seas',
       '<span class="rnum">2</span>Then pick one track and finish it':'<span class="rnum">2</span>Luego elige una ruta y termínala',
@@ -6840,7 +6943,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'You cannot protect what you do not understand. Learn to build it properly first, then learn exactly how it breaks.':
         'No puedes proteger lo que no entiendes. Aprende primero a construirlo bien, y luego aprende exactamente cómo se rompe.',
       /* --- foundations, exact text --- */
-      'Never touched code? Start here. No jargon. By the end you&#x27;ll understand what everyone in tech is actually talking about: software, hardware, the web, and the tools.':
+      "Never touched code? Start here. No jargon. By the end you'll understand what everyone in tech is actually talking about: software, hardware, the web, and the tools.":
         '¿Nunca tocaste código? Empieza aquí. Sin jerga. Al final entenderás de qué habla realmente toda la gente de tecnología: software, hardware, la web y las herramientas.',
       'Seven stages, before a single line of code':'Siete etapas, antes de una sola línea de código',
       'Do this course first. Everything else in the academy assumes it. Tick each line as you understand it, and the academy tracks your progress for you.':
@@ -7295,10 +7398,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        block elements are the unit, keyed on their inner markup with
        the inline tags left in place. Loose text nodes (menu labels,
        chips) still get the simple per-node treatment.            */
-    var LANG='en';
+    var LANG='en', LANG_READY=false;
     var INLINE_OK={B:1,STRONG:1,I:1,EM:1,CODE:1,SPAN:1,A:1,BR:1,SMALL:1,U:1,MARK:1,SUP:1,SUB:1};
     var SKIP_TAGS={SCRIPT:1,STYLE:1,PRE:1,CODE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,SVG:1};
-    var UNIT_SEL='p,h1,h2,h3,h4,h5,h6,li,summary,figcaption,td,th,dt,dd,blockquote,.mnote,.lead,.pd,.gwhy,.ltip,.rhint,.tk-d,.chain-d,.chain-n,.cr-d,.lvlout,.lvlbuild,.awhint,.cqnote,.lgoal,.chain-tag,.lvltime,.eyebrow,.pn,.tk-tag';
+    var UNIT_SEL='p,h1,h2,h3,h4,h5,h6,li,summary,figcaption,td,th,dt,dd,blockquote,.mnote,.lead,.pd,.gwhy,.ltip,.rhint,.tk-d,.chain-d,.chain-n,.cr-d,.lvlout,.lvlbuild,.awhint,.cqnote,.lgoal,.chain-tag,.lvltime,.eyebrow,.pn,.tk-tag,.r .h,.r .m,.r .d,.st .c,.cmpuse,.sk .skt,.sk .sub';
     var ORIG=new WeakMap(), ORIGHTML=new WeakMap();
 
     function langLoad(){try{return localStorage.getItem('fm.lang')||'en';}catch(e){return 'en';}}
@@ -7344,6 +7447,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var n;while((n=w.nextNode()))fn(n);
     }
     function applyLang(){
+      /* this function is hoisted but its lookup tables are not; showPage runs
+         before they are assigned, so do nothing until initLang has run */
+      if(!LANG_READY)return;
       var toEs=LANG==='es', els=unitElements(), i, el, key, hit;
       /* pass 1: whole blocks, so sentences can be reordered properly */
       for(i=0;i<els.length;i++){
@@ -7383,6 +7489,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       LANG=(l==='es')?'es':'en';
       try{localStorage.setItem('fm.lang',LANG);}catch(e){}
       applyLang();
+      if(typeof buildRail==='function'&&CURPAGE)buildRail(CURPAGE);
       renderLangBtn();
       if(announce&&LANG==='es'){
         toast('Español activado. Lo que aún no está traducido se queda en inglés, y puedes seleccionar cualquier palabra para ver qué significa.',{timeout:7000});
@@ -7397,6 +7504,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
     function initLang(){
       LANG=langLoad();
+      LANG_READY=true;
       var host=document.querySelector('.sidefoot');
       if(host&&!document.getElementById('langbtn')){
         var wrap=document.createElement('div');
@@ -7415,7 +7523,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         });
       }
       renderLangBtn();
-      if(LANG==='es')applyLang();
+      applyLang();
     }
 
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();}

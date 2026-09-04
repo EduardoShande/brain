@@ -6999,6 +6999,763 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'Answer like you wish someone had answered you':'Responde como te hubiera gustado que te respondieran',
       /* --- profile --- */
       'Longest ever':'La más larga','longest':'la más larga',
+      /* ===== JavaScript guide ===== */
+      "JavaScript, from the ground up":"JavaScript, desde cero",
+      "Four blocks, in this order: the language, the DOM, events, libraries. Skip a block and everything after it feels like magic you cannot fix. Do them in order and it feels obvious.":
+        "Cuatro bloques, en este orden: el lenguaje, el DOM, los eventos, las librerías. Sáltate un bloque y todo lo que viene después se siente como magia que no puedes arreglar. Hazlos en orden y se siente obvio.",
+      "What JavaScript actually is":"Qué es realmente JavaScript",
+      "HTML is the body. CSS is the clothes. JavaScript is the brain and the muscles. It is the only one of the three that can <em>decide</em> and <em>change things</em>.":
+        "HTML es el cuerpo. CSS es la ropa. JavaScript es el cerebro y los músculos. Es el único de los tres que puede <em>decidir</em> y <em>cambiar cosas</em>.",
+      "Imagine a puppet. HTML builds the puppet: head, arms, legs. CSS paints it and dresses it. But it just sits there. JavaScript is the hand inside it. Now it moves, it answers, it remembers, it reacts to you.":
+        "Imagina un títere. HTML construye el títere: cabeza, brazos, piernas. CSS lo pinta y lo viste. Pero se queda ahí sentado. JavaScript es la mano que va adentro. Ahora se mueve, responde, recuerda y reacciona a ti.",
+      "<span class=\"label\">Why it matters so much</span>JavaScript is the only programming language a browser understands. Every single interactive thing you have ever used on the web, every menu that opens, every \"add to cart\", every live search, is JavaScript. Learn it well and you can build almost anything on the web.":
+        "<span class=\"label\">Por qué importa tanto</span>JavaScript es el único lenguaje de programación que entiende un navegador. Absolutamente todo lo interactivo que has usado en la web, cada menú que se abre, cada \"agregar al carrito\", cada búsqueda en vivo, es JavaScript. Apréndelo bien y podrás construir casi cualquier cosa en la web.",
+      "<b>Learn the language first.</b> Variables, decisions, loops, functions, arrays, objects. This part has nothing to do with websites. It is just how to think in code.":
+        "<b>Aprende primero el lenguaje.</b> Variables, decisiones, bucles, funciones, arreglos, objetos. Esta parte no tiene nada que ver con sitios web. Es simplemente cómo pensar en código.",
+      "<b>Then learn the DOM.</b> How JavaScript reaches into the page and changes it.":
+        "<b>Después aprende el DOM.</b> Cómo JavaScript mete la mano en la página y la cambia.",
+      "<b>Then learn events.</b> How the page notices what the user does and reacts.":
+        "<b>Después aprende los eventos.</b> Cómo la página nota lo que hace el usuario y reacciona.",
+      "<b>Only then, libraries.</b> Other people's code that saves you time. Useless to you before step 3, because you will not know what it is doing for you.":
+        "<b>Solo entonces, las librerías.</b> Código de otras personas que te ahorra tiempo. Inútil para ti antes del paso 3, porque no vas a saber qué está haciendo por ti.",
+      "The fundamentals: how to think in code":"Los fundamentos: cómo pensar en código",
+      "These eight ideas are the entire language. Everything else, including React, is built out of exactly these. Learn them once, use them for the rest of your life.":
+        "Estas ocho ideas son todo el lenguaje. Todo lo demás, incluido React, está construido exactamente con esto. Apréndelas una vez y úsalas el resto de tu vida.",
+      "A <b>variable</b> is a box with a name on it, and you put something inside. Later you say the name and get the thing back.":
+        "Una <b>variable</b> es una caja con un nombre, y le pones algo adentro. Después dices el nombre y recuperas lo que guardaste.",
+      "Think of your school backpack. One pocket has a label that says \"lunch\". You do not care what is inside right now, you just say \"give me the lunch pocket\" and you get it.":
+        "Piensa en tu mochila del colegio. Un bolsillo tiene una etiqueta que dice \"almuerzo\". No te importa qué hay adentro ahora mismo, solo dices \"dame el bolsillo del almuerzo\" y lo tienes.",
+      "<code>const</code> means the box is sealed, you will never swap what is inside. <code>let</code> means you might change it later. Use <code>const</code> by default, it prevents bugs.":
+        "<code>const</code> significa que la caja está sellada, nunca vas a cambiar lo que hay adentro. <code>let</code> significa que tal vez lo cambies después. Usa <code>const</code> por defecto, previene errores.",
+      "Types: what kind of thing is in the box":"Tipos: qué clase de cosa hay en la caja",
+      "The computer needs to know if something is words, a number, or a yes/no, because it treats them differently.":
+        "La computadora necesita saber si algo son palabras, un número, o un sí/no, porque los trata distinto.",
+      "Real example: <code>\"5\" + \"5\"</code> gives you <code>\"55\"</code> because those are words being glued together, but <code>5 + 5</code> gives you <code>10</code> because those are numbers. Same symbols, completely different result. This exact confusion causes more beginner bugs than anything else.":
+        "Ejemplo real: <code>\"5\" + \"5\"</code> te da <code>\"55\"</code> porque son palabras que se están pegando, pero <code>5 + 5</code> te da <code>10</code> porque son números. Los mismos símbolos, un resultado completamente distinto. Esta confusión exacta causa más errores de principiante que cualquier otra cosa.",
+      "Conditions: teaching the computer to choose":"Condiciones: enseñarle a la computadora a elegir",
+      "An <b>if</b> is a fork in the road. \"If it is raining, take the umbrella. Otherwise, do not.\"":
+        "Un <b>if</b> es una bifurcación en el camino. \"Si está lloviendo, lleva el paraguas. Si no, no\".",
+      "The computer checks whether something is true, then runs one path or the other. That is it. Every login screen, every game over, every \"you must be 18\" check in the world is this.":
+        "La computadora revisa si algo es verdadero, y luego ejecuta un camino o el otro. Eso es todo. Cada pantalla de inicio de sesión, cada game over, cada revisión de \"debes tener 18 años\" del mundo es esto.",
+      "One trap: <code>=</code> means \"put this in the box\". <code>===</code> means \"are these the same?\". Beginners mix them up constantly.":
+        "Una trampa: <code>=</code> significa \"pon esto en la caja\". <code>===</code> significa \"¿son iguales estos dos?\". Los principiantes los confunden todo el tiempo.",
+      "Loops: doing it again without retyping":"Bucles: hacerlo otra vez sin volver a escribirlo",
+      "Imagine your teacher says \"write your name 100 times\". A <b>loop</b> is telling the computer \"do this 100 times\" in one line instead of copying it 100 times.":
+        "Imagina que tu profesor dice \"escribe tu nombre 100 veces\". Un <b>bucle</b> es decirle a la computadora \"haz esto 100 veces\" en una línea en vez de copiarlo 100 veces.",
+      "You will use this every time you have a list: show all 40 products, check all 200 emails, draw all 12 months.":
+        "Vas a usar esto cada vez que tengas una lista: mostrar los 40 productos, revisar los 200 correos, dibujar los 12 meses.",
+      "Functions: a recipe you save and reuse":"Funciones: una receta que guardas y reutilizas",
+      "A <b>function</b> is a set of steps you give a name, so you can run it again whenever you want without rewriting it.":
+        "Una <b>función</b> es un conjunto de pasos al que le pones un nombre, para poder ejecutarlo otra vez cuando quieras sin volver a escribirlo.",
+      "Like a blender. You put fruit in (the <b>parameters</b>), it does its thing inside, and juice comes out (the <b>return</b>). You do not care how the motor works, you just use it. And you can put in different fruit each time.":
+        "Como una licuadora. Le metes fruta (los <b>parámetros</b>), hace lo suyo adentro, y sale jugo (el <b>retorno</b>). No te importa cómo funciona el motor, solo la usas. Y puedes meterle fruta distinta cada vez.",
+      "Writing the same code twice is the signal to make a function. Always.":
+        "Escribir el mismo código dos veces es la señal para hacer una función. Siempre.",
+      "Arrays: a numbered shopping list":"Arreglos: una lista de compras numerada",
+      "An <b>array</b> is a list of things in order, inside square brackets. Like a shopping list where each line has a number.":
+        "Un <b>arreglo</b> es una lista de cosas en orden, dentro de corchetes. Como una lista de compras donde cada línea tiene un número.",
+      "Careful: computers start counting at <b>0</b>, not 1. The first item is number 0. Everyone gets this wrong at first, then never forgets it.":
+        "Cuidado: las computadoras empiezan a contar en <b>0</b>, no en 1. El primer elemento es el número 0. Todos se equivocan en esto al principio, y después nunca se les olvida.",
+      "Objects: a backpack with labeled pockets":"Objetos: una mochila con bolsillos etiquetados",
+      "An <b>object</b> groups related information about one thing, with a label on each piece. An array is \"many things\"; an object is \"many facts about one thing\".":
+        "Un <b>objeto</b> agrupa información relacionada sobre una sola cosa, con una etiqueta en cada pieza. Un arreglo es \"muchas cosas\"; un objeto es \"muchos datos sobre una cosa\".",
+      "A student is not three separate variables floating around. A student is one object with a name, an age, and a grade. When you fetch data from the internet, this is almost always what you get back.":
+        "Un estudiante no son tres variables sueltas flotando por ahí. Un estudiante es un objeto con un nombre, una edad y una nota. Cuando traes datos de internet, esto es casi siempre lo que recibes.",
+      "Array methods: the tools you will use every single day":
+        "Métodos de arreglo: las herramientas que vas a usar todos los días",
+      "Once you have a list, you almost always want to do one of four things to it. JavaScript gives you a word for each one, and professionals use these constantly.":
+        "Una vez que tienes una lista, casi siempre quieres hacerle una de cuatro cosas. JavaScript te da una palabra para cada una, y los profesionales las usan constantemente.",
+      "<b>map</b> = change every item. A list of prices, add tax to all of them.":
+        "<b>map</b> = cambia cada elemento. Una lista de precios, agrégale impuesto a todos.",
+      "<b>filter</b> = keep only some. From all students, keep the ones who passed.":
+        "<b>filter</b> = quédate solo con algunos. De todos los estudiantes, quédate con los que aprobaron.",
+      "<b>find</b> = get the first one that matches. Find the student named Ana.":
+        "<b>find</b> = obtén el primero que coincida. Encuentra a la estudiante llamada Ana.",
+      "<b>reduce</b> = squash the whole list into one value. Add up the whole bill.":
+        "<b>reduce</b> = aplasta toda la lista en un solo valor. Suma la cuenta entera.",
+      "<span class=\"label\">Do this before moving on</span>Open your browser, press F12, click Console, and type these in. Right now. Reading code teaches you almost nothing. Typing it, breaking it, and fixing it teaches you everything.":
+        "<span class=\"label\">Haz esto antes de seguir</span>Abre tu navegador, aprieta F12, haz clic en Consola, y escribe esto ahí. Ahora mismo. Leer código no te enseña casi nada. Escribirlo, romperlo y arreglarlo te lo enseña todo.",
+      "The DOM: how JavaScript touches the page":"El DOM: cómo JavaScript toca la página",
+      "The DOM is the bridge between your code and what people see. Without it, JavaScript could calculate things beautifully and nobody would ever notice.":
+        "El DOM es el puente entre tu código y lo que la gente ve. Sin él, JavaScript podría calcular cosas maravillosamente y nadie se daría cuenta jamás.",
+      "When the browser reads your HTML file, it does not keep the text. It builds a living <b>tree</b> in its memory: body is the parent, the div inside is the child, the text inside that is the grandchild. That tree is the <b>DOM</b>, and what you see on screen is a picture of it.":
+        "Cuando el navegador lee tu archivo HTML, no se queda con el texto. Construye un <b>árbol</b> vivo en su memoria: el body es el padre, el div de adentro es el hijo, y el texto dentro de ese es el nieto. Ese árbol es el <b>DOM</b>, y lo que ves en pantalla es una foto de él.",
+      "Here is the key idea nobody explains: <b>JavaScript never edits your HTML file.</b> It edits that tree in memory, and the screen instantly redraws to match. That is why the page changes without reloading, and why refreshing wipes it all away.":
+        "Aquí está la idea clave que nadie explica: <b>JavaScript nunca edita tu archivo HTML.</b> Edita ese árbol en memoria, y la pantalla se redibuja al instante para coincidir. Por eso la página cambia sin recargar, y por eso al refrescar se borra todo.",
+      "Find something on the page":"Encontrar algo en la página",
+      "Before you can change anything, you have to grab it. You point at it with the same words you use in CSS: <code>.class</code>, <code>#id</code>, or the tag name.":
+        "Antes de poder cambiar algo, tienes que agarrarlo. Lo señalas con las mismas palabras que usas en CSS: <code>.clase</code>, <code>#id</code>, o el nombre de la etiqueta.",
+      "Change what it says and how it looks":"Cambiar lo que dice y cómo se ve",
+      "Once you hold it, you can rewrite its text, add or remove a CSS class, or change a style directly.":
+        "Una vez que lo tienes agarrado, puedes reescribir su texto, agregar o quitar una clase de CSS, o cambiar un estilo directamente.",
+      "Best practice: change the <b>class</b>, not the style. Keep the look in CSS where it belongs. JavaScript should say \"this is now active\", and CSS should decide what active looks like.":
+        "Buena práctica: cambia la <b>clase</b>, no el estilo. Deja la apariencia en el CSS, que es donde corresponde. JavaScript debería decir \"esto ahora está activo\", y el CSS debería decidir cómo se ve lo activo.",
+      "This is how every feed, every list, every search result on the internet appears. The HTML file did not contain those 40 products. JavaScript got the data and built 40 boxes.":
+        "Así es como aparece cada feed, cada lista, cada resultado de búsqueda del internet. El archivo HTML no contenía esos 40 productos. JavaScript trajo los datos y construyó 40 cajas.",
+      "<span class=\"label\">The mental model</span>Find it. Change it. Or build a new one and stick it in. Every DOM task you will ever do is one of those three.":
+        "<span class=\"label\">El modelo mental</span>Encuéntralo. Cámbialo. O construye uno nuevo y métele. Cada tarea de DOM que hagas en tu vida es una de esas tres.",
+      "Events: how the page listens to a human":"Eventos: cómo la página escucha a una persona",
+      "An event is something that happens: a click, a key press, a form being sent, the page finishing loading. Your job is to wait for it and then react.":
+        "Un evento es algo que pasa: un clic, una tecla apretada, un formulario que se envía, la página que termina de cargar. Tu trabajo es esperarlo y luego reaccionar.",
+      "Think of a dog waiting for the doorbell. The dog does not check the door every two seconds. It sleeps, and the bell wakes it up. Your code is the same: you do not constantly ask \"did they click yet?\". You leave a note that says \"when a click happens, run this\", and then the browser wakes your code up.":
+        "Piensa en un perro esperando el timbre. El perro no revisa la puerta cada dos segundos. Duerme, y el timbre lo despierta. Tu código es igual: no preguntas constantemente \"¿ya hicieron clic?\". Dejas una nota que dice \"cuando pase un clic, ejecuta esto\", y luego el navegador despierta a tu código.",
+      "Listen and react (the whole pattern)":"Escuchar y reaccionar (todo el patrón)",
+      "Three parts, always: <b>what</b> to watch, <b>which</b> event, and <b>what to do</b>. That is the entire idea of interactive web development.":
+        "Tres partes, siempre: <b>qué</b> vigilar, <b>cuál</b> evento, y <b>qué hacer</b>. Esa es toda la idea del desarrollo web interactivo.",
+      "The events you will actually use: <code>click</code>, <code>input</code> (typing), <code>submit</code> (a form being sent), <code>keydown</code>, <code>change</code>, <code>DOMContentLoaded</code> (the page is ready).":
+        "Los eventos que de verdad vas a usar: <code>click</code>, <code>input</code> (escribir), <code>submit</code> (un formulario que se envía), <code>keydown</code>, <code>change</code>, <code>DOMContentLoaded</code> (la página está lista).",
+      "The event object: details about what just happened":"El objeto del evento: detalles de lo que acaba de pasar",
+      "The browser hands your function a little report about the event. Which element was clicked, what key was pressed, where the mouse was.":
+        "El navegador le entrega a tu función un pequeño reporte sobre el evento. Qué elemento recibió el clic, qué tecla se apretó, dónde estaba el mouse.",
+      "<code>e.preventDefault()</code> is the one you will need first: by default, submitting a form reloads the whole page. That one line stops it, so you can handle it yourself.":
+        "<code>e.preventDefault()</code> es el que vas a necesitar primero: por defecto, enviar un formulario recarga toda la página. Esa línea lo detiene, para que lo manejes tú mismo.",
+      "Bubbling and delegation: the pro trick":"Burbujeo y delegación: el truco profesional",
+      "When you click a button inside a card inside the page, the click does not only happen on the button. It travels upward: button, then card, then body. That is <b>bubbling</b>, like a bubble rising in water.":
+        "Cuando haces clic en un botón dentro de una tarjeta dentro de la página, el clic no ocurre solo en el botón. Viaja hacia arriba: botón, luego tarjeta, luego body. Eso es el <b>burbujeo</b>, como una burbuja que sube en el agua.",
+      "This sounds annoying but it is a gift. Instead of putting 100 listeners on 100 items, you put <b>one</b> on the parent and ask \"what got clicked?\". It is faster, and it even works for items created later. That is <b>event delegation</b>, and it is what separates a beginner from someone who knows what they are doing.":
+        "Esto suena molesto pero es un regalo. En vez de poner 100 escuchadores en 100 elementos, pones <b>uno</b> en el padre y preguntas \"¿en qué se hizo clic?\". Es más rápido, e incluso funciona para elementos creados después. Eso es la <b>delegación de eventos</b>, y es lo que separa a un principiante de alguien que sabe lo que hace.",
+      "A library is code somebody already wrote, tested, and gave away, so you do not have to write it yourself.":
+        "Una librería es código que alguien ya escribió, probó y regaló, para que tú no tengas que escribirlo.",
+      "You do not build a car engine to drive to school, and you do not grow wheat to eat bread. Somebody solved it already, and solved it better than you would in a weekend. Using a library is not cheating, it is how every professional works.":
+        "No construyes el motor de un auto para ir al colegio, y no cultivas trigo para comer pan. Alguien ya lo resolvió, y lo resolvió mejor de lo que tú lo harías en un fin de semana. Usar una librería no es hacer trampa, es como trabaja todo profesional.",
+      "<span class=\"label\">Library vs framework, in one line</span>A <b>library</b> is a tool you pick up and use when you want (you are in charge). A <b>framework</b> is a house you move into and follow its rules (it is in charge). jQuery and Chart.js are libraries. React and Next.js are frameworks.":
+        "<span class=\"label\">Librería contra framework, en una línea</span>Una <b>librería</b> es una herramienta que tomas y usas cuando quieres (tú mandas). Un <b>framework</b> es una casa a la que te mudas y cuyas reglas sigues (él manda). jQuery y Chart.js son librerías. React y Next.js son frameworks.",
+      "What people actually install, and why":"Qué instala la gente de verdad, y por qué",
+      "Builds your screen out of small reusable pieces and redraws it automatically when data changes. The most in-demand frontend skill on the job market.":
+        "Construye tu pantalla con piezas pequeñas reutilizables y la redibuja automáticamente cuando los datos cambian. La habilidad de frontend con más demanda del mercado laboral.",
+      "<b>Use when:</b> your app has real state that changes a lot. Overkill for a five-page brochure site.":
+        "<b>Úsalo cuando:</b> tu app tiene estado real que cambia mucho. Es excesivo para un sitio informativo de cinco páginas.",
+      "<b>Use when:</b> you need a dashboard. Writing a bar chart by hand is a week you will never get back.":
+        "<b>Úsalo cuando:</b> necesitas un tablero. Escribir un gráfico de barras a mano es una semana que nunca vas a recuperar.",
+      "Dates in JavaScript are famously painful. Time zones, leap years, \"3 days ago\". These fix it.":
+        "Las fechas en JavaScript son famosamente dolorosas. Zonas horarias, años bisiestos, \"hace 3 días\". Estas lo arreglan.",
+      "<b>Use when:</b> you show or calculate dates. Which is nearly every real app.":
+        "<b>Úsalo cuando:</b> muestras o calculas fechas. Que es casi toda app real.",
+      "Checks that data is actually the shape you expect before your app explodes on it.":
+        "Revisa que los datos de verdad tengan la forma que esperas antes de que tu app explote con ellos.",
+      "<b>Use when:</b> you accept forms or data from an API. Never trust incoming data.":
+        "<b>Úsalo cuando:</b> aceptas formularios o datos de una API. Nunca confíes en los datos que llegan.",
+      "Style straight in your HTML with tiny class names instead of writing separate CSS files.":
+        "Da estilo directamente en tu HTML con nombres de clase diminutos en vez de escribir archivos CSS aparte.",
+      "<b>Use when:</b> you already know real CSS. Learn the fundamentals first or you will be stuck forever.":
+        "<b>Úsalo cuando:</b> ya sabes CSS de verdad. Aprende primero los fundamentos o te vas a quedar atascado para siempre.",
+      "The king of the 2010s. It made DOM work easy back when browsers all disagreed. Modern JavaScript does almost all of it natively now.":
+        "El rey de la década de 2010. Hizo fácil el trabajo con el DOM cuando los navegadores no se ponían de acuerdo. El JavaScript moderno hace casi todo eso de forma nativa ahora.",
+      "<b>Use when:</b> you inherit an old site. Do not start a new project with it, but you will meet it at work.":
+        "<b>Úsalo cuando:</b> heredas un sitio viejo. No empieces un proyecto nuevo con él, pero te lo vas a encontrar en el trabajo.",
+      "How you actually add one":"Cómo se agrega una, en la práctica",
+      "<b>The quick way: a script tag.</b> Paste one line from a CDN into your HTML and the library is there. Perfect for learning and small pages.":
+        "<b>La forma rápida: una etiqueta script.</b> Pega una línea de un CDN en tu HTML y la librería ya está ahí. Perfecto para aprender y para páginas pequeñas.",
+      "<b>The real way: npm.</b> <code>npm install chart.js</code> downloads it into a folder called <code>node_modules</code>, and writes it into <code>package.json</code> so anyone else on your project gets the exact same versions.":
+        "<b>La forma real: npm.</b> <code>npm install chart.js</code> la descarga en una carpeta llamada <code>node_modules</code>, y la anota en <code>package.json</code> para que cualquier otra persona en tu proyecto reciba exactamente las mismas versiones.",
+      "<b>Then you import it.</b> <code>import Chart from 'chart.js'</code> pulls it into your file. That is what <b>modules</b> are: splitting your code into files that hand pieces to each other with <code>import</code> and <code>export</code>.":
+        "<b>Después la importas.</b> <code>import Chart from 'chart.js'</code> la trae a tu archivo. Eso son los <b>módulos</b>: partir tu código en archivos que se pasan piezas entre sí con <code>import</code> y <code>export</code>.",
+      "<span class=\"label\">The honest warning</span>Every library you install is code you did not write, cannot fully see, and now depend on. It makes your app bigger and slower, and one day it will break or stop being maintained. Before installing, ask: <b>can I do this in 20 lines myself?</b> If yes, do it yourself. If it would take you two weeks, install it. Junior developers install everything. Seniors install almost nothing.":
+        "<span class=\"label\">La advertencia honesta</span>Cada librería que instalas es código que no escribiste, que no puedes ver del todo, y del que ahora dependes. Hace tu app más grande y más lenta, y algún día se va a romper o se va a dejar de mantener. Antes de instalar, pregunta: <b>¿puedo hacer esto en 20 líneas yo mismo?</b> Si la respuesta es sí, hazlo tú. Si te tomaría dos semanas, instálala. Los programadores junior instalan todo. Los senior no instalan casi nada.",
+      "<span class=\"label\">And the real reason to learn fundamentals first</span>Libraries die. jQuery ruled the web, then React took over, and something will replace React too. The fundamentals on this page have not changed in 20 years and will outlive every library on it. That is why we do them first, always.":
+        "<span class=\"label\">Y la verdadera razón para aprender los fundamentos primero</span>Las librerías mueren. jQuery reinó en la web, después React tomó el control, y algo va a reemplazar a React también. Los fundamentos de esta página no han cambiado en 20 años y van a sobrevivir a todas las librerías que hay en ella. Por eso los hacemos primero, siempre.",
+      /* ===== The Shift ===== */
+      "Page 04 · The Shift":"Página 04 · El cambio",
+      "Coding, AI, and what to become":"Programar, la IA, y en qué convertirse",
+      "Has AI made coding obsolete? What the real data says, what to focus on now, and which kind of engineer to be.":
+        "¿La IA volvió obsoleta la programación? Lo que dicen los datos reales, en qué enfocarte ahora, y qué tipo de ingeniero ser.",
+      "01 · The claim":"01 · La afirmación",
+      "Is it true that we won't code much anymore?":"¿Es cierto que ya no vamos a programar mucho?",
+      "Half true. The typing is being automated. The engineering is not, and demand for it is going up, not down.":
+        "Medio cierto. El tecleo se está automatizando. La ingeniería no, y la demanda por ella está subiendo, no bajando.",
+      "AI now writes a lot of the boilerplate, so you spend less time on raw syntax. But you do not stop being an engineer. Every official source points the same way: more demand for people who build software, and it moves higher up the stack.":
+        "La IA ahora escribe mucho del código repetitivo, así que pasas menos tiempo en la sintaxis pura. Pero no dejas de ser ingeniero. Todas las fuentes oficiales apuntan al mismo lado: más demanda de gente que construye software, y se mueve más arriba en la pila.",
+      "<span class=\"label\">The nuance that matters</span>The BLS is explicit: AI grows roles focused on software <b>design</b>, and squeezes roles focused on routine <b>production</b>. Translation: the person who only types code to spec loses ground. The person who decides what to build and checks that it is right pulls ahead.":
+        "<span class=\"label\">El matiz que importa</span>La Oficina de Estadísticas Laborales de Estados Unidos es explícita: la IA hace crecer los puestos enfocados en el <b>diseño</b> de software, y aprieta los enfocados en la <b>producción</b> rutinaria. Traducción: quien solo teclea código según una especificación pierde terreno. Quien decide qué construir y verifica que esté bien toma la delantera.",
+      "02 · The real shift":"02 · El cambio real",
+      "From writing code to directing and verifying it":"De escribir código a dirigirlo y verificarlo",
+      "What changed is where your value sits. AI drafts; you judge. The 2025 Stack Overflow survey of tens of thousands of developers makes it concrete:":
+        "Lo que cambió es dónde está tu valor. La IA redacta; tú juzgas. La encuesta de Stack Overflow de 2025 a decenas de miles de programadores lo hace concreto:",
+      "Up from 76% the year before. Nearly universal now.":
+        "Subió desde el 76% del año anterior. Ya es casi universal.",
+      "Down from 40%. Adoption rose, trust fell.":"Bajó desde el 40%. La adopción subió, la confianza cayó.",
+      "The single biggest complaint in the survey.":"La mayor queja de toda la encuesta.",
+      "AI moved the work, it did not remove it.":"La IA movió el trabajo, no lo eliminó.",
+      "Read that carefully. AI writing code did not delete the work, it relocated it. The scarce, paid skill is now catching the \"almost right\", understanding the whole system, and being accountable for correctness and security. In the same survey, <b>61% of developers said they want to fully understand their code</b>, and they are right to.":
+        "Lee eso con cuidado. Que la IA escriba código no borró el trabajo, lo reubicó. La habilidad escasa y bien pagada ahora es atrapar lo que está \"casi bien\", entender el sistema completo, y ser responsable de la corrección y la seguridad. En la misma encuesta, el <b>61% de los programadores dijo que quiere entender su código por completo</b>, y hacen bien.",
+      "03 · What to focus on":"03 · En qué enfocarte",
+      "The skills that go up in value":"Las habilidades que suben de valor",
+      "If AI does more of the typing, invest where it cannot be trusted to act alone. In rough priority for you:":
+        "Si la IA hace más del tecleo, invierte donde no se le puede confiar que actúe sola. En orden aproximado de prioridad para ti:",
+      "what to build":"qué construir",
+      "Structure, tradeoffs, data flow. BLS says design-focused work is exactly what AI grows.":
+        "Estructura, compensaciones, flujo de datos. La Oficina de Estadísticas Laborales dice que el trabajo enfocado en diseño es justamente lo que la IA hace crecer.",
+      "The scarce skill in an AI world. You are accountable for the \"almost right\" output.":
+        "La habilidad escasa en un mundo con IA. Tú eres responsable del resultado que está \"casi bien\".",
+      "prove it works":"demuestra que funciona",
+      "Where AI-generated code fails, and the human still owns the fix.":
+        "Donde falla el código generado por IA, y el arreglo sigue siendo del humano.",
+      "the frontier":"la frontera",
+      "LLM APIs, tool-calling, RAG, agents. The fastest-growing role and skill set there is.":
+        "APIs de LLMs, llamada a herramientas, RAG, agentes. El puesto y el conjunto de habilidades que más rápido crece.",
+      "trust is the product":"la confianza es el producto",
+      "A top-3 fastest-growing skill (WEF). Ties straight to your Cybersecurity page.":
+        "Una de las 3 habilidades de más rápido crecimiento (Foro Económico Mundial). Se conecta directo con tu página de Ciberseguridad.",
+      "Pipelines, retrieval, clean data. This is already your edge as a data engineer.":
+        "Pipelines, recuperación, datos limpios. Esta ya es tu ventaja como ingeniero de datos.",
+      "the right problem":"el problema correcto",
+      "AI cannot decide what matters. Judgment and domain knowledge stay human.":
+        "La IA no puede decidir qué importa. El criterio y el conocimiento del dominio siguen siendo humanos.",
+      "Scoping, pricing, explaining. The half most engineers skip, and AI cannot do for you.":
+        "Definir el alcance, poner precio, explicar. La mitad que casi todos los ingenieros se saltan, y que la IA no puede hacer por ti.",
+      "04 · The identity question":"04 · La pregunta de identidad",
+      "All three, as one person. That composite is exactly where the market is moving, and you are already most of the way there.":
+        "Los tres, en una sola persona. Ese perfil combinado es justo hacia donde se mueve el mercado, y ya tienes recorrida la mayor parte del camino.",
+      "You wanted to be a software engineer. Keep that. Software engineering is the foundation that makes everything else trustworthy: without it you cannot review what AI writes or design a system that holds together. But do not stop there, because \"produce code to spec\" is the part AI compresses. Layer up:":
+        "Querías ser ingeniero de software. Quédate con eso. La ingeniería de software es la base que hace confiable todo lo demás: sin ella no puedes revisar lo que escribe la IA ni diseñar un sistema que se sostenga. Pero no te quedes ahí, porque \"producir código según una especificación\" es la parte que la IA comprime. Agrega capas:",
+      "<b>AI &amp; agent engineering, the frontier.</b> LLMs and agents that decide and act. The premium tier and the fastest-growing role in the market.":
+        "<b>Ingeniería de IA y agentes, la frontera.</b> LLMs y agentes que deciden y actúan. El nivel premium y el puesto que más rápido crece en el mercado.",
+      "<b>Automation engineering, the delivery.</b> Wiring systems and workflows into things a business pays for. This is your job today.":
+        "<b>Ingeniería de automatización, la entrega.</b> Conectar sistemas y flujos de trabajo hasta volverlos cosas por las que un negocio paga. Este es tu trabajo hoy.",
+      "<b>Software engineering, the foundation.</b> Fundamentals, systems, review, security. What makes you accountable for AI's output.":
+        "<b>Ingeniería de software, los cimientos.</b> Fundamentos, sistemas, revisión, seguridad. Lo que te vuelve responsable del resultado de la IA.",
+      "That is a rarer and more valuable profile than any one of the three alone, and it is a straight extension of the Data &amp; Automation Engineer you already are.":
+        "Ese es un perfil más raro y más valioso que cualquiera de los tres por separado, y es una extensión directa del ingeniero de datos y automatización que ya eres.",
+      "05 · What to do":"05 · Qué hacer",
+      "Concretely, for you":"En concreto, para ti",
+      "<b>Do not skip fundamentals.</b> Keep sharpening software engineering, especially reading and reviewing code. AI makes this more valuable, not less.":
+        "<b>No te saltes los fundamentos.</b> Sigue afilando la ingeniería de software, sobre todo leer y revisar código. La IA hace esto más valioso, no menos.",
+      "<b>Use AI, and verify everything.</b> Treat its output as a fast draft you are accountable for. The 66% who get burned are the ones who trust it blindly.":
+        "<b>Usa la IA, y verifica todo.</b> Trata su resultado como un borrador rápido del que tú eres responsable. Al 66% que se quema son los que confían ciegamente.",
+      "<b>Go deep on agents.</b> The fastest-growing role in the market, sitting right on top of your automation work. Follow the Automation page roadmap, stage 4.":
+        "<b>Profundiza en agentes.</b> El puesto que más rápido crece en el mercado, y que se apoya justo encima de tu trabajo de automatización. Sigue la ruta de la página de Automatización, etapa 4.",
+      "<b>Keep security in view.</b> A top-3 growing skill and a high-ticket wedge for you. See the Cybersecurity page.":
+        "<b>No pierdas de vista la seguridad.</b> Una de las 3 habilidades que más crecen y una cuña de alto valor para ti. Mira la página de Ciberseguridad.",
+      "<b>Sell outcomes, not code.</b> The market pays for judgment and results, which AI cannot supply. That is your business layer.":
+        "<b>Vende resultados, no código.</b> El mercado paga por criterio y resultados, que la IA no puede aportar. Esa es tu capa de negocio.",
+      "Everything above converges on the same next step: <b>build one real AI agent.</b> It is the frontier skill, it rides your automation strength, and it is the profile every source on this page is pointing at.":
+        "Todo lo de arriba converge en el mismo siguiente paso: <b>construye un agente de IA real.</b> Es la habilidad de frontera, se monta sobre tu fuerza en automatización, y es el perfil al que apunta cada fuente de esta página.",
+      "Where this comes from":"De dónde sale esto",
+      "Official and primary sources, so you can check every number yourself.":
+        "Fuentes oficiales y primarias, para que puedas verificar cada número tú mismo.",
+      /* ===== Account, certs, learnings ===== */
+      "Your account":"Tu cuenta",
+      "Sign up or log in to your Brain account. Syncing your data across devices comes next; for now this connects to your backend.":
+        "Regístrate o inicia sesión en tu cuenta de Brain. Sincronizar tus datos entre dispositivos viene después; por ahora esto se conecta a tu backend.",
+      "Notes, learnings, wishlist, certs, quiz scores and course progress are stored in this browser. Back them up here so nothing is lost.":
+        "Las notas, los aprendizajes, la lista de deseos, las certificaciones, las notas de los test y el progreso de los cursos se guardan en este navegador. Respáldalos aquí para que no se pierda nada.",
+      "The certs you're pursuing: provider, cost, status, exam date, and study progress.":
+        "Las certificaciones que estás persiguiendo: proveedor, costo, estado, fecha de examen, y progreso de estudio.",
+      "<span class=\"label\">Recommended for your domains</span>Cloud: <b>AWS Cloud Practitioner</b> (~$100) then <b>Solutions Architect Associate</b> (~$150). Data: <b>Google Data Analytics Professional Certificate</b>. GenAI: <b>Google Cloud Generative AI Leader</b> or <b>AWS AI Practitioner</b>. Agents: the <b>Hugging Face Agents</b> certificate (free). Security: <b>Security+</b> only if you sell compliance, otherwise skip the exam.":
+        "<span class=\"label\">Recomendadas para tus áreas</span>Nube: <b>AWS Cloud Practitioner</b> (~100 dólares) y luego <b>Solutions Architect Associate</b> (~150 dólares). Datos: <b>Google Data Analytics Professional Certificate</b>. IA generativa: <b>Google Cloud Generative AI Leader</b> o <b>AWS AI Practitioner</b>. Agentes: el certificado de <b>Hugging Face Agents</b> (gratis). Seguridad: <b>Security+</b> solo si vendes cumplimiento, si no sáltate el examen.",
+      "Things you've learned, tagged by domain, with the source and what you can now do with it.":
+        "Cosas que has aprendido, etiquetadas por área, con la fuente y lo que ahora puedes hacer con ellas.",
+      /* ===== Web concepts ===== */
+      "What every web developer must understand":"Lo que todo desarrollador web debe entender",
+      "Not tools, ideas. If you understand these, every framework and language after this becomes easy. Explained simply, with real examples.":
+        "No herramientas, ideas. Si entiendes esto, todo framework y lenguaje que venga después se vuelve fácil. Explicado de forma simple, con ejemplos reales.",
+      "01 · The big picture":"01 · El panorama general",
+      "What happens when you open a website":"Qué pasa cuando abres un sitio web",
+      "Imagine ordering a pizza. You call the shop, they make it, they deliver it. The web works the same way.":
+        "Imagina que pides una pizza. Llamas al local, la hacen, te la entregan. La web funciona igual.",
+      "<b>You type the address.</b> Typing <code>google.com</code> is like dialing the pizza shop's number. But computers use numbers, not names, so <b>DNS</b> is the phone book that turns \"google.com\" into an address like 142.250.0.1.":
+        "<b>Escribes la dirección.</b> Escribir <code>google.com</code> es como marcar el número de la pizzería. Pero las computadoras usan números, no nombres, así que el <b>DNS</b> es la guía telefónica que convierte \"google.com\" en una dirección como 142.250.0.1.",
+      "<b>Your browser sends a request.</b> \"Hi, can I have the home page please?\" That's an <b>HTTP request</b>. Your browser is the customer, called the <b>client</b>.":
+        "<b>Tu navegador manda una petición.</b> \"Hola, ¿me das la página de inicio por favor?\". Eso es una <b>petición HTTP</b>. Tu navegador es el cliente, y se le llama <b>cliente</b>.",
+      "<b>The server makes the order.</b> The <b>server</b> is a computer that is always on. It finds or builds the page you asked for.":
+        "<b>El servidor prepara el pedido.</b> El <b>servidor</b> es una computadora que está siempre encendida. Encuentra o construye la página que pediste.",
+      "<b>It delivers the files.</b> You get back HTML, CSS, and JavaScript, plus images. That's the pizza arriving in the box.":
+        "<b>Entrega los archivos.</b> Recibes HTML, CSS y JavaScript, más imágenes. Esa es la pizza llegando en la caja.",
+      "<b>Your browser assembles it.</b> It reads the HTML, paints the CSS, runs the JavaScript, and shows you a page. All of that in under a second.":
+        "<b>Tu navegador lo arma.</b> Lee el HTML, pinta el CSS, ejecuta el JavaScript, y te muestra una página. Todo eso en menos de un segundo.",
+      "<span class=\"label\">Why this matters</span>Every bug you will ever fix lives in one of those five steps. Knowing which step broke is half of being a developer.":
+        "<span class=\"label\">Por qué importa</span>Cada error que vayas a arreglar vive en uno de esos cinco pasos. Saber qué paso se rompió es la mitad de ser programador.",
+      "02 · The big three":"02 · Los tres grandes",
+      "HTML, CSS and JavaScript, explained with a house":"HTML, CSS y JavaScript, explicados con una casa",
+      "Every website on Earth is built from these three. That is not an exaggeration. Even Facebook is these three underneath.":
+        "Todo sitio web del planeta está hecho con estos tres. No es una exageración. Hasta Facebook es estos tres por debajo.",
+      "HTML is the structure (the walls and rooms)":"HTML es la estructura (las paredes y los cuartos)",
+      "<b>HTML</b> decides <em>what things are</em>. This is a heading. This is a paragraph. This is a button. This is an image. It is the skeleton of the house: walls, doors, windows. Without it there is no page at all.":
+        "<b>HTML</b> decide <em>qué son las cosas</em>. Esto es un título. Esto es un párrafo. Esto es un botón. Esto es una imagen. Es el esqueleto de la casa: paredes, puertas, ventanas. Sin él no hay página en absoluto.",
+      "If you only wrote HTML, you would get a plain, ugly, black-and-white page, but it would work. Like a house with no paint and no furniture. It still stands.":
+        "Si solo escribieras HTML, tendrías una página simple, fea y en blanco y negro, pero funcionaría. Como una casa sin pintura y sin muebles. Igual se mantiene en pie.",
+      "CSS is the style (the paint and furniture)":"CSS es el estilo (la pintura y los muebles)",
+      "<b>CSS</b> decides <em>how things look</em>. Colors, sizes, spacing, fonts, where things sit on the screen. Same house, but now painted, furnished, and arranged nicely.":
+        "<b>CSS</b> decide <em>cómo se ven las cosas</em>. Colores, tamaños, espaciado, tipografías, dónde se ubica cada cosa en la pantalla. La misma casa, pero ahora pintada, amoblada y bien acomodada.",
+      "The magic part: you can change the whole look of a site by changing only CSS, without touching a single word of the HTML. Like repainting your room without rebuilding the walls.":
+        "La parte mágica: puedes cambiar toda la apariencia de un sitio cambiando solo el CSS, sin tocar una sola palabra del HTML. Como repintar tu cuarto sin volver a construir las paredes.",
+      "JavaScript is the behavior (the electricity)":"JavaScript es el comportamiento (la electricidad)",
+      "<b>JavaScript</b> decides <em>what happens</em>. Click a button and a menu opens. Type in a box and it checks your email. Data loads without refreshing the page. It is the electricity and plumbing that make the house actually work.":
+        "<b>JavaScript</b> decide <em>qué pasa</em>. Haces clic en un botón y se abre un menú. Escribes en una caja y revisa tu correo. Los datos se cargan sin recargar la página. Es la electricidad y la fontanería que hacen que la casa funcione de verdad.",
+      "HTML and CSS cannot make decisions. JavaScript can: \"if the user clicked this, then do that.\"":
+        "HTML y CSS no pueden tomar decisiones. JavaScript sí: \"si el usuario hizo clic en esto, entonces haz aquello\".",
+      "<span class=\"label\">The one-line version</span>HTML = what it is. CSS = what it looks like. JavaScript = what it does. Learn them in that order, always.":
+        "<span class=\"label\">La versión de una línea</span>HTML = qué es. CSS = cómo se ve. JavaScript = qué hace. Apréndelos en ese orden, siempre.",
+      "The concepts you will use forever":"Los conceptos que vas a usar para siempre",
+      "These come up on literally every project. Understand them once and you are set.":
+        "Estos aparecen literalmente en todos los proyectos. Entiéndelos una vez y ya está.",
+      "The DOM, your page as a family tree":"El DOM, tu página como un árbol genealógico",
+      "When the browser reads your HTML, it builds a <b>tree</b> in memory, like a family tree. The <code>body</code> is the parent, a <code>div</code> inside it is the child, the text inside that is the grandchild. That tree is called the <b>DOM</b>.":
+        "Cuando el navegador lee tu HTML, construye un <b>árbol</b> en memoria, como un árbol genealógico. El <code>body</code> es el padre, un <code>div</code> adentro es el hijo, y el texto dentro de ese es el nieto. A ese árbol se le llama el <b>DOM</b>.",
+      "Why you care: JavaScript changes the page by grabbing branches of this tree. \"Find the button, change its color.\" Without the DOM there would be nothing to grab.":
+        "Por qué te importa: JavaScript cambia la página agarrando ramas de este árbol. \"Encuentra el botón, cámbiale el color\". Sin el DOM no habría nada que agarrar.",
+      "The box model, everything is a box":"El modelo de cajas, todo es una caja",
+      "Every single thing on a web page is a rectangle, even round buttons (they are boxes with rounded corners). Each box has four layers, like a gift: the <b>content</b> (the gift), <b>padding</b> (bubble wrap inside), <b>border</b> (the box itself), and <b>margin</b> (space between this box and the next).":
+        "Absolutamente todo en una página web es un rectángulo, incluso los botones redondos (son cajas con esquinas redondeadas). Cada caja tiene cuatro capas, como un regalo: el <b>contenido</b> (el regalo), el <b>relleno</b> (el plástico de burbujas adentro), el <b>borde</b> (la caja misma), y el <b>margen</b> (el espacio entre esta caja y la siguiente).",
+      "90% of \"why is my layout broken\" is a padding or margin misunderstanding. Learn this early and save months.":
+        "El 90% de los \"¿por qué está roto mi diseño?\" es un malentendido de relleno o margen. Aprende esto temprano y ahórrate meses.",
+      "Responsive design, one site for every screen":"Diseño responsivo, un sitio para cada pantalla",
+      "Your site must look good on a tiny phone and a huge monitor. Instead of building two sites, you build one that <b>stretches</b>, like water taking the shape of its glass.":
+        "Tu sitio tiene que verse bien en un celular diminuto y en un monitor enorme. En vez de construir dos sitios, construyes uno que se <b>estira</b>, como el agua que toma la forma de su vaso.",
+      "You do it with flexible widths (percentages instead of fixed pixels) and <b>media queries</b>, which say \"when the screen is smaller than 600px, stack these side-by-side boxes on top of each other instead.\" Always design the phone version first, it is the hardest and most common.":
+        "Lo haces con anchos flexibles (porcentajes en vez de píxeles fijos) y <b>media queries</b>, que dicen \"cuando la pantalla sea menor a 600px, apila estas cajas que están lado a lado una encima de la otra\". Diseña siempre primero la versión de celular, es la más difícil y la más común.",
+      "<b>Semantic</b> means using the tag that describes the meaning: <code>&lt;nav&gt;</code> for a menu, <code>&lt;button&gt;</code> for a button, not a <code>&lt;div&gt;</code> for everything.":
+        "<b>Semántico</b> significa usar la etiqueta que describe el significado: <code>&lt;nav&gt;</code> para un menú, <code>&lt;button&gt;</code> para un botón, no un <code>&lt;div&gt;</code> para todo.",
+      "Why: a blind person uses a screen reader that reads the page out loud. It can say \"navigation, 5 links\" only if you used the right tags. Google reads it the same way to rank you. Doing it right helps humans and your search ranking at the same time.":
+        "Por qué: una persona ciega usa un lector de pantalla que lee la página en voz alta. Puede decir \"navegación, 5 enlaces\" solo si usaste las etiquetas correctas. Google la lee de la misma forma para posicionarte. Hacerlo bien ayuda a las personas y a tu posicionamiento al mismo tiempo.",
+      "Events, how a page listens":"Eventos, cómo escucha una página",
+      "An <b>event</b> is something that happens: a click, a key press, the page finishing loading, a form being submitted. Your JavaScript \"listens\" for these, like a dog waiting for the doorbell.":
+        "Un <b>evento</b> es algo que pasa: un clic, una tecla apretada, la página que termina de cargar, un formulario que se envía. Tu JavaScript \"escucha\" estos eventos, como un perro esperando el timbre.",
+      "Everything interactive is: listen for an event, then do something. That is the entire pattern.":
+        "Todo lo interactivo es: escucha un evento, y luego haz algo. Ese es todo el patrón.",
+      "APIs and JSON, how apps talk to each other":"APIs y JSON, cómo se hablan las apps entre sí",
+      "An <b>API</b> is a waiter. You do not walk into the restaurant kitchen; you tell the waiter what you want and they bring it. Your site asks another service (\"give me today's weather\") and gets data back.":
+        "Una <b>API</b> es un mesero. No entras a la cocina del restaurante; le dices al mesero qué quieres y él te lo trae. Tu sitio le pide a otro servicio (\"dame el clima de hoy\") y recibe datos de vuelta.",
+      "That data usually comes as <b>JSON</b>, which is just text organized in labeled boxes: <code>{\"city\": \"Santa Cruz\", \"temp\": 28}</code>. Easy for computers and humans to read.":
+        "Esos datos normalmente vienen como <b>JSON</b>, que es simplemente texto organizado en cajas con etiqueta: <code>{\"city\": \"Santa Cruz\", \"temp\": 28}</code>. Fácil de leer para computadoras y para humanos.",
+      "<b>Git</b> takes snapshots of your code, like save points in a video game. Break something? Load the last save. Working with a friend? You each work on your own copy and merge them together.":
+        "<b>Git</b> toma fotos de tu código, como los puntos de guardado de un videojuego. ¿Rompiste algo? Carga el último guardado. ¿Trabajas con un amigo? Cada uno trabaja en su propia copia y luego las unen.",
+      "Nobody works professionally without it. Learn the five commands you actually use: add, commit, push, pull, branch.":
+        "Nadie trabaja profesionalmente sin él. Aprende los cinco comandos que de verdad usas: add, commit, push, pull, branch.",
+      "Your site on your laptop is a diary in your drawer, nobody can read it. <b>Hosting</b> is putting those files on an always-on computer. A <b>domain</b> (mysite.com) is the easy-to-remember name that points there.":
+        "Tu sitio en tu laptop es un diario en tu cajón, nadie puede leerlo. El <b>alojamiento</b> es poner esos archivos en una computadora siempre encendida. Un <b>dominio</b> (misitio.com) es el nombre fácil de recordar que apunta ahí.",
+      "Today this is free and takes minutes: push to GitHub, connect Vercel or Netlify, and you have a real link you can send to anyone.":
+        "Hoy esto es gratis y toma minutos: haces push a GitHub, conectas Vercel o Netlify, y ya tienes un enlace real que le puedes mandar a cualquiera.",
+      "Browser dev tools, your X-ray glasses":"Las herramientas del navegador, tus lentes de rayos X",
+      "Right-click any website and choose \"Inspect.\" You can now see and change the HTML and CSS of <em>any</em> site live, see errors in the console, and watch the network requests.":
+        "Haz clic derecho en cualquier sitio web y elige \"Inspeccionar\". Ahora puedes ver y cambiar el HTML y el CSS de <em>cualquier</em> sitio en vivo, ver los errores en la consola, y observar las peticiones de red.",
+      "This is the single most underused beginner tool. You learn by taking real sites apart. It is free and it is on every site in the world.":
+        "Esta es la herramienta para principiantes más desaprovechada de todas. Aprendes desarmando sitios reales. Es gratis y está en todos los sitios del mundo.",
+      "Performance and security, the grown-up stuff":"Rendimiento y seguridad, las cosas de gente grande",
+      "<b>Performance:</b> people leave if a page takes more than about 3 seconds. The usual culprit is huge images. Shrink them and you have solved most of it.":
+        "<b>Rendimiento:</b> la gente se va si una página tarda más de unos 3 segundos. El culpable de siempre son las imágenes enormes. Redúcelas y ya resolviste la mayor parte.",
+      "<b>Security:</b> never trust what a user types, always check it on the server too. Never put passwords or secret keys in your frontend code, anyone can read it with Inspect.":
+        "<b>Seguridad:</b> nunca confíes en lo que escribe un usuario, revísalo también en el servidor. Nunca pongas contraseñas ni llaves secretas en el código de tu frontend, cualquiera puede leerlo con Inspeccionar.",
+      /* ===== Cybersecurity ===== */
+      "Page 02 · The Edge":"Página 02 · La ventaja",
+      "Is cybersecurity worth learning, for you specifically? Yes. But not the way the internet means it.":
+        "¿Vale la pena aprender ciberseguridad, para ti en específico? Sí. Pero no de la forma en que lo dice el internet.",
+      "01 · The verdict":"01 · El veredicto",
+      "You already write software, automate workflows, and know APIs. So the question is not whether cybersecurity is worth learning in the abstract. It is whether it wins you high-ticket clients faster than automation already can. That flips the answer.":
+        "Ya escribes software, automatizas flujos de trabajo y conoces las APIs. Así que la pregunta no es si vale la pena aprender ciberseguridad en abstracto. Es si te consigue clientes de alto valor más rápido de lo que la automatización ya puede. Eso le da vuelta a la respuesta.",
+      "\"Become a cybersecurity analyst\" is low-ROI for you. <b>\"The automation engineer who makes security and compliance provable\"</b> is high-ticket and hard to copy.":
+        "\"Conviértete en analista de ciberseguridad\" es de bajo retorno para ti. <b>\"El ingeniero de automatización que hace que la seguridad y el cumplimiento sean demostrables\"</b> es de alto valor y difícil de copiar.",
+      "<span class=\"label\">The catch</span>That gap is senior, cloud, and AI-adjacent. Entry-level \"get Security+ then apply\" is flooded. Your edge is that you can skip the junior job and sell the automation the market is actually short on.":
+        "<span class=\"label\">El detalle</span>Ese hueco es senior, de nube y cercano a la IA. El nivel de entrada de \"saca el Security+ y postula\" está saturado. Tu ventaja es que puedes saltarte el puesto junior y vender la automatización que al mercado de verdad le falta.",
+      "<b>Go deeper on Automation Engineering before you lean into security.</b> Automation is the engine; security is the wrapper you bolt on top. Why it is better this way: going deeper on automation and AI agents first wins high-ticket clients faster and is harder to copy, and security consulting sells on trust and referral, so you want automation wins and warm intros already in hand. Lead with automation, and add security as the specialization, not an identity you restart from zero.":
+        "<b>Profundiza en ingeniería de automatización antes de inclinarte hacia la seguridad.</b> La automatización es el motor; la seguridad es la envoltura que le atornillas encima. Por qué es mejor así: profundizar primero en automatización y agentes de IA consigue clientes de alto valor más rápido y es más difícil de copiar, y la consultoría de seguridad se vende por confianza y recomendación, así que conviene tener ya victorias de automatización y presentaciones de confianza en la mano. Lidera con la automatización, y agrega la seguridad como especialización, no como una identidad que reinicias desde cero.",
+      "Most content pushes you toward the worst-fitting one":
+        "La mayoría del contenido te empuja hacia el que peor encaja",
+      "Takes companies through SOC 2, ISO 27001, HIPAA. Process plus evidence collection. Your scripts already do this. <span class=\"fit hi\">Highest fit</span>":
+        "Lleva a las empresas por SOC 2, ISO 27001, HIPAA. Proceso más recolección de evidencia. Tus scripts ya hacen esto. <span class=\"fit hi\">El que mejor encaja</span>",
+      "Builds the scripts and platforms that do the work. Vanta turned this into a $4.15B company. <span class=\"fit hi\">Highest leverage</span>":
+        "Construye los scripts y las plataformas que hacen el trabajo. Vanta convirtió esto en una empresa de 4.150 millones de dólares. <span class=\"fit hi\">El de mayor apalancamiento</span>",
+      "Retained security lead for small companies. Needs 3 to 5 years of credibility first. <span class=\"fit mid\">Future fit</span>":
+        "Responsable de seguridad contratado por iguala para empresas pequeñas. Necesita antes de 3 a 5 años de credibilidad. <span class=\"fit mid\">Encaja a futuro</span>",
+      "Watches alerts in someone else's SOC. Capped pay, wastes your edge. <span class=\"fit lo\">Low fit</span>":
+        "Vigila alertas en el centro de operaciones de seguridad de otro. Sueldo con techo, desperdicia tu ventaja. <span class=\"fit lo\">Encaja poco</span>",
+      "A few earn six figures, most earn nothing. Side-quest, not a business. <span class=\"fit lo\">Not a model</span>":
+        "Unos pocos ganan seis cifras, la mayoría no gana nada. Misión secundaria, no un negocio. <span class=\"fit lo\">No es un modelo</span>",
+      "Run both lanes, weight the first":"Corre las dos vías, dale más peso a la primera",
+      "Compliance automation for SaaS / SMB":"Automatización de cumplimiento para SaaS y pymes",
+      "SOC 2 and ISO 27001 evidence via scripts. Retainer, then SaaS. Sits right on top of automation and APIs. <span class=\"fit hi\">Do this</span>":
+        "Evidencia de SOC 2 e ISO 27001 mediante scripts. Iguala mensual, y luego SaaS. Se apoya justo encima de la automatización y las APIs. <span class=\"fit hi\">Haz esto</span>",
+      "$3K to $20K per job. You build APIs, so you know where they break. <span class=\"fit hi\">Do this</span>":
+        "De 3.000 a 20.000 dólares por trabajo. Tú construyes APIs, así que sabes dónde se rompen. <span class=\"fit hi\">Haz esto</span>",
+      "$5K to $20K per month, but it needs a track record first. <span class=\"fit mid\">Later</span>":
+        "De 5.000 a 20.000 dólares al mes, pero antes necesita un historial. <span class=\"fit mid\">Más adelante</span>",
+      "Salary-capped and it wastes your edge. <span class=\"fit lo\">Skip</span>":
+        "Tiene techo salarial y desperdicia tu ventaja. <span class=\"fit lo\">Sáltalo</span>",
+      "A lottery. Hobby, not a plan. <span class=\"fit lo\">Skip</span>":
+        "Una lotería. Pasatiempo, no un plan. <span class=\"fit lo\">Sáltalo</span>",
+      "04 · The offer to build":"04 · La oferta que hay que construir",
+      "\"I automate your SOC 2 / ISO 27001 readiness, so you don't pay $20K to a consultant or wait months for an audit firm.\"":
+        "\"Automatizo tu preparación para SOC 2 e ISO 27001, para que no le pagues 20.000 dólares a un consultor ni esperes meses a una firma de auditoría\".",
+      "Consultants charge $10K to $30K for a SOC 2 Type I doing evidence-gathering by hand. Your scripts automate it against AWS, GCP, GitHub, and Okta APIs. Package it as a <b>$3K to $8K engagement</b> or a <b>$2K to $5K per month retainer</b>. Undercut them on price, beat them on turnaround.":
+        "Los consultores cobran de 10.000 a 30.000 dólares por un SOC 2 Tipo I recolectando evidencia a mano. Tus scripts lo automatizan contra las APIs de AWS, GCP, GitHub y Okta. Empaquétalo como un <b>trabajo de 3.000 a 8.000 dólares</b> o una <b>iguala de 2.000 a 5.000 dólares al mes</b>. Gánales en precio, y gánales en tiempo de entrega.",
+      "05 · The three levels":"05 · Los tres niveles",
+      "Security is the one field where you cannot skip a level. You cannot defend a system you could not have built, which is why beginner here looks a lot like being a developer.":
+        "La seguridad es el único campo donde no te puedes saltar un nivel. No puedes defender un sistema que no habrías podido construir, y por eso el nivel principiante aquí se parece mucho a ser programador.",
+      "You stop writing the obvious holes":"Dejas de escribir los agujeros obvios",
+      "You know how the common attacks work because you have done them to your own practice app.":
+        "Sabes cómo funcionan los ataques comunes porque se los has hecho a tu propia app de práctica.",
+      "<b>The OWASP Top 10,</b> understood rather than memorised":
+        "<b>El Top 10 de OWASP,</b> entendido en vez de memorizado",
+      "<b>Injection:</b> what it is, and why parameters fix it":
+        "<b>Inyección:</b> qué es, y por qué los parámetros la arreglan",
+      "<b>XSS:</b> why you never trust what a user typed":
+        "<b>XSS:</b> por qué nunca confías en lo que escribió un usuario",
+      "<b>Passwords:</b> hashing, salting, and never rolling your own":
+        "<b>Contraseñas:</b> hashing, salting, y nunca inventar el tuyo propio",
+      "<b>HTTPS, cookies and the same-origin rule</b>":
+        "<b>HTTPS, cookies y la regla del mismo origen</b>",
+      "<b>You build</b>A deliberately vulnerable page, then the fixed version, with a short write-up of each hole and the one line that closed it.":
+        "<b>Construyes</b>Una página vulnerable a propósito, y luego la versión arreglada, con una nota corta sobre cada agujero y la línea que lo cerró.",
+      "<b>Worth:</b> makes you a noticeably safer developer, which is what most employers actually need.":
+        "<b>Valor:</b> te convierte en un programador notablemente más seguro, que es lo que la mayoría de los empleadores realmente necesita.",
+      "You can test a system methodically instead of poking at it, and write up what you found.":
+        "Puedes probar un sistema con método en vez de picotearlo, y documentar lo que encontraste.",
+      "<b>Linux and the terminal</b> at a level you are comfortable in":
+        "<b>Linux y la terminal</b> a un nivel en el que te sientas cómodo",
+      "<b>Tooling:</b> Burp Suite, nmap, and reading the traffic":
+        "<b>Herramientas:</b> Burp Suite, nmap, y leer el tráfico",
+      "<b>Practice ranges:</b> TryHackMe and Hack The Box, consistently":
+        "<b>Campos de práctica:</b> TryHackMe y Hack The Box, con constancia",
+      "<b>Writing a report</b> a developer can act on":
+        "<b>Escribir un reporte</b> sobre el que un programador pueda actuar",
+      "<b>You build</b>A full write-up of a practice machine you compromised: what you tried, what worked, the impact, and the fix.":
+        "<b>Construyes</b>Un informe completo de una máquina de práctica que vulneraste: qué intentaste, qué funcionó, el impacto, y el arreglo.",
+      "<b>Worth:</b> junior security analyst, or a developer nobody worries about.":
+        "<b>Valor:</b> analista de seguridad junior, o un programador por el que nadie se preocupa.",
+      "You are responsible for whether it holds":"Eres responsable de que aguante",
+      "Design, detection and response, with the judgement to know which risks are worth money.":
+        "Diseño, detección y respuesta, con el criterio para saber qué riesgos valen dinero.",
+      "<b>Threat modelling</b> before a line is written":
+        "<b>Modelado de amenazas</b> antes de escribir una línea",
+      "<b>Detection:</b> logs, SIEM, noticing the quiet intrusion":
+        "<b>Detección:</b> registros, SIEM, notar la intrusión silenciosa",
+      "<b>Compliance</b> that is real rather than a checklist":
+        "<b>Cumplimiento</b> que sea real y no una lista de casillas",
+      "<b>You build</b>A threat model and hardening plan for a real application, with the risks ranked by what they would actually cost.":
+        "<b>Construyes</b>Un modelo de amenazas y un plan de endurecimiento para una aplicación real, con los riesgos ordenados por lo que costarían de verdad.",
+      "<b>Worth:</b> among the highest-paid work in tech, and rarely an entry-level job.":
+        "<b>Valor:</b> de los trabajos mejor pagados de la tecnología, y rara vez un puesto de entrada.",
+      "<span class=\"label\">The honest route in</span>Almost nobody starts in security. They start as a developer, a sysadmin or in IT support, and move across once they understand how systems really work. If you are 17 and this is the goal, the fastest path is to become a good developer first. That is not a detour, it is the road.":
+        "<span class=\"label\">La ruta honesta de entrada</span>Casi nadie empieza en seguridad. Empiezan como programador, administrador de sistemas o en soporte técnico, y se mueven hacia acá una vez que entienden cómo funcionan de verdad los sistemas. Si tienes 17 y esta es la meta, el camino más rápido es volverte un buen programador primero. Eso no es un desvío, es el camino.",
+      "05 · The roadmap":"05 · La ruta",
+      "Six months to your first paid engagement":"Seis meses hasta tu primer trabajo pagado",
+      "Certs buy vocabulary, not clients. This is the order that gets you to a paid engagement: hands-on, mostly free. Check off steps as you go. Your progress saves in this browser.":
+        "Las certificaciones compran vocabulario, no clientes. Este es el orden que te lleva a un trabajo pagado: con las manos, y casi todo gratis. Marca los pasos a medida que avanzas. Tu progreso se guarda en este navegador.",
+      "06 · Where to learn it":"06 · Dónde aprenderlo",
+      "Pick your lane, then work one resource at a time. Do not collect them.":
+        "Elige tu vía, y luego trabaja un recurso a la vez. No los colecciones.",
+      "07 · The trap":"07 · La trampa",
+      "The advice that would waste a year":"El consejo que te haría perder un año",
+      "The generic path is \"get Security+, become a SOC analyst, work up.\" For you that is a downgrade.":
+        "El camino genérico es \"saca el Security+, vuélvete analista de SOC, y ve subiendo\". Para ti eso es un retroceso.",
+      "It drops you into the one part of the market that is flooded, caps your income on a salary, and throws away the automation edge that makes you rare. The whole point is that you do not need the junior job. You sell the senior, cloud, and AI-adjacent work the market is short on, wrapped around skills you already have. <b>Security is the wrapper. Automation is the leverage.</b> Agents are the tier clients pay 30 to 50 percent more for. Build the spine on the Automation page, then bolt security on as a premium layer, not a reset button.":
+        "Te deja caer en la única parte del mercado que está saturada, le pone techo a tus ingresos con un sueldo, y tira a la basura la ventaja en automatización que te hace raro. Todo el punto es que no necesitas el puesto junior. Vendes el trabajo senior, de nube y cercano a la IA que le falta al mercado, envuelto alrededor de habilidades que ya tienes. <b>La seguridad es la envoltura. La automatización es el apalancamiento.</b> Los agentes son el nivel por el que los clientes pagan de 30 a 50 por ciento más. Construye la columna vertebral en la página de Automatización, y después atorníllale la seguridad como capa premium, no como botón de reinicio.",
+      /* ===== HTML tag reference ===== */
+      "The 100 HTML tags that matter":"Las 100 etiquetas HTML que importan",
+      "HTML tags are like LEGO bricks. Each one has a job. You do not need to memorize them, you need to know which brick to grab. Search or filter, and copy the example.":
+        "Las etiquetas HTML son como piezas de LEGO. Cada una tiene una función. No necesitas memorizarlas, necesitas saber qué pieza agarrar. Busca o filtra, y copia el ejemplo.",
+      "The wrapper around your whole page. Everything lives inside it.":
+        "La envoltura de toda tu página. Todo vive adentro.",
+      "The backstage area. Information for the browser that visitors never see.":
+        "La zona de bastidores. Información para el navegador que los visitantes nunca ven.",
+      "Everything people actually see on the page goes in here.":
+        "Todo lo que la gente ve realmente en la página va aquí adentro.",
+      "The name shown in the browser tab and in Google results.":
+        "El nombre que aparece en la pestaña del navegador y en los resultados de Google.",
+      "Notes for the browser and Google: description, characters, mobile settings.":
+        "Notas para el navegador y para Google: descripción, caracteres, ajustes para móvil.",
+      "Connects an outside file, almost always your CSS stylesheet.":
+        "Conecta un archivo externo, casi siempre tu hoja de estilos CSS.",
+      "Write CSS directly inside the page instead of a separate file.":
+        "Escribe CSS directamente dentro de la página en vez de en un archivo aparte.",
+      "Adds JavaScript, the brain that makes the page do things.":
+        "Agrega JavaScript, el cerebro que hace que la página haga cosas.",
+      "Sets one default address that all links on the page build from.":
+        "Define una dirección base desde la que se construyen todos los enlaces de la página.",
+      "Shows a message only if the visitor turned JavaScript off.":
+        "Muestra un mensaje solo si el visitante desactivó JavaScript.",
+      "A plain box with no meaning. The most used tag ever. Groups things so you can style or move them together.":
+        "Una caja simple sin significado. La etiqueta más usada de todas. Agrupa cosas para que puedas darles estilo o moverlas juntas.",
+      "A tiny box for a few words inside a sentence, so you can color just those words.":
+        "Una caja diminuta para unas pocas palabras dentro de una frase, para que puedas darles color solo a esas.",
+      "The top area of a page or section: logo, site title, main menu.":
+        "La zona de arriba de una página o sección: logo, título del sitio, menú principal.",
+      "The navigation menu, where your main links live.":
+        "El menú de navegación, donde viven tus enlaces principales.",
+      "The main content, the star of the page. Only one per page.":
+        "El contenido principal, la estrella de la página. Solo uno por página.",
+      "A chapter of the page, usually with its own heading.":
+        "Un capítulo de la página, normalmente con su propio título.",
+      "A piece that makes sense on its own, like a blog post or news story.":
+        "Una pieza que tiene sentido por sí sola, como una entrada de blog o una noticia.",
+      "Side content: a sidebar, related links, an ad.":
+        "Contenido lateral: una barra lateral, enlaces relacionados, un anuncio.",
+      "The bottom area: copyright, contact, small links.":
+        "La zona de abajo: derechos de autor, contacto, enlaces pequeños.",
+      "Groups a heading together with its subtitle.":"Agrupa un título junto con su subtítulo.",
+      "The biggest, most important heading. Use only one per page, like a book title.":
+        "El título más grande e importante. Usa solo uno por página, como el título de un libro.",
+      "A section heading, one level under h1. Like a chapter title.":
+        "Un título de sección, un nivel debajo de h1. Como el título de un capítulo.",
+      "A sub-section heading that sits under an h2.":"Un título de subsección que va debajo de un h2.",
+      "A smaller heading, four levels deep.":"Un título más pequeño, de cuarto nivel.",
+      "The smallest heading. Almost never used.":"El título más pequeño. Casi nunca se usa.",
+      "A paragraph of normal text. Your bread and butter.":
+        "Un párrafo de texto normal. Tu pan de cada día.",
+      "A line break, like pressing Enter once.":"Un salto de línea, como apretar Enter una vez.",
+      "A horizontal line that separates two ideas.":"Una línea horizontal que separa dos ideas.",
+      "Bold-looking text with no extra importance. Prefer strong when it matters.":
+        "Texto que se ve en negrita pero sin importancia extra. Prefiere strong cuando sí importa.",
+      "Emphasized text, shown italic, with meaning for screen readers.":
+        "Texto enfatizado, se muestra en cursiva, y tiene significado para los lectores de pantalla.",
+      "Italic-looking text with no extra meaning, like a foreign word.":
+        "Texto que se ve en cursiva sin significado extra, como una palabra extranjera.",
+      "Underlined text. Careful, people think underline means a link.":
+        "Texto subrayado. Cuidado, la gente cree que subrayado significa enlace.",
+      "Smaller print, like legal fine print or a side note.":
+        "Letra más pequeña, como la letra chica legal o una nota al margen.",
+      "Highlights text, like a yellow marker on paper.":
+        "Resalta texto, como un marcador amarillo sobre papel.",
+      "Text that was removed, shown crossed out. Great for old prices.":
+        "Texto que se quitó, se muestra tachado. Perfecto para precios viejos.",
+      "Text that is no longer accurate, shown crossed out.":
+        "Texto que ya no es correcto, se muestra tachado.",
+      "Small text below the line, for chemistry or footnotes.":
+        "Texto pequeño debajo de la línea, para química o notas al pie.",
+      "Small text above the line, for powers or footnotes.":
+        "Texto pequeño encima de la línea, para potencias o notas al pie.",
+      "A long quote taken from somewhere else, usually indented.":
+        "Una cita larga tomada de otro lugar, normalmente con sangría.",
+      "A short quote inside a sentence. The browser adds the quote marks.":
+        "Una cita corta dentro de una frase. El navegador agrega las comillas.",
+      "The title of a work, like a book or a film.":"El título de una obra, como un libro o una película.",
+      "An abbreviation. Hovering shows the full meaning.":
+        "Una abreviatura. Al pasar el mouse se muestra el significado completo.",
+      "A piece of computer code, shown in a monospace font.":
+        "Un fragmento de código, mostrado en una fuente monoespaciada.",
+      "Keeps your exact spacing and line breaks. Perfect around code.":
+        "Conserva tus espacios y saltos de línea exactos. Perfecta alrededor de código.",
+      "Keys the user should press on the keyboard.":"Teclas que el usuario debe apretar en el teclado.",
+      "Output that a computer produced.":"Salida producida por una computadora.",
+      "A variable name in maths or code.":"El nombre de una variable en matemáticas o en código.",
+      "Contact details for the page or article owner.":
+        "Datos de contacto del dueño de la página o del artículo.",
+      "A date or time that computers can also understand.":
+        "Una fecha u hora que las computadoras también pueden entender.",
+      "An unordered list, the one with bullet points.":"Una lista sin orden, la de los puntos.",
+      "An ordered list, numbered 1, 2, 3. Use it when order matters, like a recipe.":
+        "Una lista ordenada, numerada 1, 2, 3. Úsala cuando el orden importa, como en una receta.",
+      "One single item inside a list.":"Un solo elemento dentro de una lista.",
+      "A description list, like a small dictionary of terms and meanings.":
+        "Una lista de descripciones, como un pequeño diccionario de términos y significados.",
+      "The term being described in a description list.":
+        "El término que se describe en una lista de descripciones.",
+      "The meaning of the term right above it.":"El significado del término que está justo arriba.",
+      "A link. The tag that makes the web a web. Takes you somewhere else.":
+        "Un enlace. La etiqueta que hace que la web sea una red. Te lleva a otro lado.",
+      "Shows an image. Always add alt text describing it, for blind users and Google.":
+        "Muestra una imagen. Siempre agrega un texto alternativo que la describa, para usuarios ciegos y para Google.",
+      "Lets you serve different images for different screen sizes.":
+        "Te deja entregar imágenes distintas para tamaños de pantalla distintos.",
+      "One of the options inside picture, video or audio.":
+        "Una de las opciones dentro de picture, video o audio.",
+      "The caption text that belongs to a figure.":"El texto del pie que pertenece a una figura.",
+      "A video player, with optional controls.":"Un reproductor de video, con controles opcionales.",
+      "Subtitles or captions for a video or audio.":"Subtítulos o leyendas para un video o audio.",
+      "Embeds another website inside yours, like a YouTube video or a Google Map.":
+        "Incrusta otro sitio web dentro del tuyo, como un video de YouTube o un mapa de Google.",
+      "Embeds an external resource such as a PDF.":"Incrusta un recurso externo, como un PDF.",
+      "A blank drawing area you paint on with JavaScript. Used for games and charts.":
+        "Un área de dibujo en blanco que pintas con JavaScript. Se usa para juegos y gráficos.",
+      "A table of rows and columns. For data only, never for page layout.":
+        "Una tabla de filas y columnas. Solo para datos, nunca para maquetar la página.",
+      "The title of the table, read out by screen readers.":
+        "El título de la tabla, que leen los lectores de pantalla.",
+      "The group of header rows at the top of a table.":
+        "El grupo de filas de encabezado en la parte de arriba de una tabla.",
+      "The main body rows of the table.":"Las filas del cuerpo principal de la tabla.",
+      "The footer rows, usually totals.":"Las filas del pie, normalmente los totales.",
+      "One row in the table.":"Una fila de la tabla.",
+      "A header cell. Bold and centered by default.":
+        "Una celda de encabezado. En negrita y centrada por defecto.",
+      "A normal data cell.":"Una celda de datos normal.",
+      "The container that collects what the user types and sends it somewhere.":
+        "El contenedor que recoge lo que el usuario escribe y lo manda a algún lado.",
+      "The most flexible tag. Change its type to get text, email, password, checkbox, radio, date, file or color.":
+        "La etiqueta más flexible. Cambia su tipo para obtener texto, correo, contraseña, casilla, opción, fecha, archivo o color.",
+      "The text that names an input. Clicking it focuses the input. Essential for accessibility.":
+        "El texto que nombra un campo. Al hacer clic se enfoca el campo. Esencial para la accesibilidad.",
+      "A big multi-line text box, for messages and comments.":
+        "Una caja de texto grande de varias líneas, para mensajes y comentarios.",
+      "A dropdown menu of choices.":"Un menú desplegable de opciones.",
+      "One choice inside a dropdown.":"Una opción dentro de un desplegable.",
+      "Groups related options inside a dropdown.":"Agrupa opciones relacionadas dentro de un desplegable.",
+      "A clickable button. Use this instead of a div so keyboards and screen readers work.":
+        "Un botón en el que se puede hacer clic. Usa esto en vez de un div para que funcionen el teclado y los lectores de pantalla.",
+      "Groups related form fields with a border around them.":
+        "Agrupa campos relacionados de un formulario con un borde alrededor.",
+      "The title for a fieldset.":"El título de un fieldset.",
+      "A list of suggestions that autocompletes an input.":
+        "Una lista de sugerencias que autocompleta un campo.",
+      "Shows the result of a calculation.":"Muestra el resultado de un cálculo.",
+      "A progress bar showing how far along something is.":
+        "Una barra de progreso que muestra qué tan avanzado está algo.",
+      "A gauge showing a value inside a known range, like disk space.":
+        "Un medidor que muestra un valor dentro de un rango conocido, como el espacio en disco.",
+      "A box that opens and closes when clicked. Perfect for FAQs, and it needs no JavaScript.":
+        "Una caja que se abre y se cierra al hacer clic. Perfecta para preguntas frecuentes, y no necesita JavaScript.",
+      "The always-visible clickable title of a details box.":
+        "El título siempre visible y clicable de una caja de detalles.",
+      "A real popup or modal window built into HTML.":
+        "Una ventana emergente o modal de verdad, incluida en HTML.",
+      "Hidden HTML that you copy with JavaScript when you need it.":
+        "HTML oculto que copias con JavaScript cuando lo necesitas.",
+      "A placeholder inside a custom web component.":
+        "Un espacio reservado dentro de un componente web personalizado.",
+      /* ===== Web tools / no-code comparison ===== */
+      "Code is not the only way":"El código no es el único camino",
+      "HTML, CSS and JavaScript are tools, not the only tools. You can also build websites with Wix, WordPress, Shopify and others. Here is the honest comparison and when to use each.":
+        "HTML, CSS y JavaScript son herramientas, no las únicas herramientas. También puedes construir sitios web con Wix, WordPress, Shopify y otros. Aquí está la comparación honesta y cuándo usar cada uno.",
+      "01 · The analogy":"01 · La analogía",
+      "Three ways to get a house":"Tres formas de conseguir una casa",
+      "You can <b>build it brick by brick</b> (code), <b>assemble a prefab kit</b> (WordPress), or <b>rent a furnished apartment</b> (Wix). None is \"wrong.\" They fit different situations.":
+        "Puedes <b>construirla ladrillo por ladrillo</b> (código), <b>armar un kit prefabricado</b> (WordPress), o <b>alquilar un departamento amoblado</b> (Wix). Ninguna está \"mal\". Sirven para situaciones distintas.",
+      "<span class=\"label\">The trap to avoid</span>Beginners argue about which is \"real\" development. That is a waste of time. Professionals pick the tool that solves the client's problem for the least money and time. Sometimes that is code. Often it is not.":
+        "<span class=\"label\">La trampa que hay que evitar</span>Los principiantes discuten sobre cuál es desarrollo \"de verdad\". Eso es una pérdida de tiempo. Los profesionales eligen la herramienta que resuelve el problema del cliente con el menor dinero y tiempo. A veces eso es código. Muchas veces no.",
+      "02 · The options":"02 · Las opciones",
+      "Every option, honestly":"Cada opción, con honestidad",
+      "You build everything yourself. Total freedom: any design, any feature, no limits and no monthly fee for the tool itself.":
+        "Construyes todo tú mismo. Libertad total: cualquier diseño, cualquier función, sin límites y sin cuota mensual por la herramienta en sí.",
+      "<b>Use it when:</b> you want a career in tech, you are building a real app (login, data, dashboards), you need something custom that no template can do, or performance matters a lot.":
+        "<b>Úsalo cuando:</b> quieres una carrera en tecnología, estás construyendo una app de verdad (inicio de sesión, datos, tableros), necesitas algo a medida que ninguna plantilla puede hacer, o el rendimiento importa mucho.",
+      "<b>Skip it when:</b> a local bakery needs 4 pages by Friday. Coding that from scratch wastes everyone's money.":
+        "<b>Sáltatelo cuando:</b> una panadería del barrio necesita 4 páginas para el viernes. Programar eso desde cero desperdicia el dinero de todos.",
+      "A ready-made system you install, then add themes (looks) and plugins (features). It runs roughly 4 out of every 10 websites on Earth. Huge community, cheap, and the client can edit their own text.":
+        "Un sistema ya hecho que instalas, y al que después le agregas temas (apariencia) y plugins (funciones). Hace funcionar aproximadamente 4 de cada 10 sitios web del planeta. Comunidad enorme, barato, y el cliente puede editar su propio texto.",
+      "<b>Use it when:</b> blogs, news sites, business sites, anything content-heavy, and especially when the client wants to update it themselves without calling you.":
+        "<b>Úsalo cuando:</b> blogs, sitios de noticias, sitios de empresas, cualquier cosa cargada de contenido, y sobre todo cuando el cliente quiere actualizarlo por su cuenta sin llamarte.",
+      "<b>Watch out:</b> it gets slow and messy if you stack 30 plugins, and it needs updates and security care.":
+        "<b>Ojo:</b> se pone lento y desordenado si le apilas 30 plugins, y necesita actualizaciones y cuidado de seguridad.",
+      "Drag and drop, no code at all. You pick a template, move things with the mouse, and publish. Hosting, security and updates are handled for you, for a monthly fee.":
+        "Arrastrar y soltar, sin nada de código. Eliges una plantilla, mueves cosas con el mouse, y publicas. El alojamiento, la seguridad y las actualizaciones las manejan por ti, por una cuota mensual.",
+      "<b>Use it when:</b> a small business or a personal portfolio needs to be online fast and cheap, and nobody technical will maintain it.":
+        "<b>Úsalo cuando:</b> un negocio pequeño o un portafolio personal necesita estar en línea rápido y barato, y nadie técnico lo va a mantener.",
+      "<b>Watch out:</b> you are renting. You cannot easily move your site somewhere else later, and you hit walls the moment you want something unusual.":
+        "<b>Ojo:</b> estás alquilando. Después no puedes mover tu sitio a otro lado con facilidad, y te topas con muros en cuanto quieres algo fuera de lo común.",
+      "Visual builders that generate real, clean code underneath. You design with your mouse but get near-code-level control, animations and responsive design.":
+        "Constructores visuales que generan código real y limpio por debajo. Diseñas con el mouse pero obtienes un control casi a nivel de código, animaciones y diseño responsivo.",
+      "<b>Use it when:</b> the design must be beautiful and custom, but you do not want to hand-code every pixel. Very popular for agency and startup marketing sites.":
+        "<b>Úsalo cuando:</b> el diseño tiene que ser bonito y a medida, pero no quieres programar a mano cada píxel. Muy popular para sitios de marketing de agencias y startups.",
+      "<b>Watch out:</b> a real learning curve, and still a monthly cost.":
+        "<b>Ojo:</b> tiene una curva de aprendizaje real, y aun así un costo mensual.",
+      "Built for one job: selling products online. Payments, inventory, shipping and checkout all work out of the box, which is the hardest part of e-commerce to build yourself.":
+        "Hecho para una sola tarea: vender productos en línea. Los pagos, el inventario, los envíos y el checkout funcionan de fábrica, que es la parte más difícil del comercio electrónico de construir por tu cuenta.",
+      "<b>Use it when:</b> the client sells physical or digital products. Do not rebuild a shopping cart from scratch, it is a solved problem.":
+        "<b>Úsalo cuando:</b> el cliente vende productos físicos o digitales. No vuelvas a construir un carrito de compras desde cero, es un problema ya resuelto.",
+      "Describe your site and it generates one in minutes. Great for a quick landing page or testing an idea before investing.":
+        "Describe tu sitio y genera uno en minutos. Excelente para una landing page rápida o para probar una idea antes de invertir.",
+      "<b>Use it when:</b> you need something online today to validate an idea.":
+        "<b>Úsalo cuando:</b> necesitas algo en línea hoy para validar una idea.",
+      "<b>Watch out:</b> least control, and often generic. Fine as a start, not as a foundation for a serious product.":
+        "<b>Ojo:</b> el menor control, y muchas veces genérico. Está bien para empezar, no como base de un producto serio.",
+      "03 · How to choose":"03 · Cómo elegir",
+      "The 30-second decision":"La decisión de 30 segundos",
+      "Is it a shop selling products?":"¿Es una tienda que vende productos?",
+      "Do not rebuild payments and checkout. It is months of work and a security risk.":
+        "No vuelvas a construir los pagos y el checkout. Son meses de trabajo y un riesgo de seguridad.",
+      "Is it a blog or content site the owner will edit?":
+        "¿Es un blog o un sitio de contenido que el dueño va a editar?",
+      "They can write posts without you. That is worth more than elegant code here.":
+        "Pueden escribir publicaciones sin ti. Aquí eso vale más que el código elegante.",
+      "Is it a simple site needed fast and cheap?":"¿Es un sitio simple que se necesita rápido y barato?",
+      "4 pages, small budget, no technical owner. Done in a weekend.":
+        "4 páginas, presupuesto chico, dueño sin conocimientos técnicos. Listo en un fin de semana.",
+      "Does the design have to be stunning and custom?":"¿El diseño tiene que ser espectacular y a medida?",
+      "Full visual control without hand-coding every detail.":
+        "Control visual total sin programar a mano cada detalle.",
+      "Does it have accounts, data or real logic?":"¿Tiene cuentas, datos o lógica de verdad?",
+      "Are you learning to become a developer?":"¿Estás aprendiendo para ser programador?",
+      "Builders will not teach you the skills companies pay for. Build by hand while you learn.":
+        "Los constructores visuales no te van a enseñar las habilidades por las que pagan las empresas. Construye a mano mientras aprendes.",
+      "<span class=\"label\">The money angle</span>Knowing both makes you more valuable, not less. You can charge for a fast WordPress or Wix site this week, and charge far more for a custom coded app later. Many freelancers earn their first income with builders while learning to code on the side.":
+        "<span class=\"label\">El ángulo del dinero</span>Saber los dos te hace más valioso, no menos. Puedes cobrar por un sitio rápido en WordPress o Wix esta semana, y cobrar mucho más por una app programada a medida más adelante. Muchos independientes ganan sus primeros ingresos con constructores visuales mientras aprenden a programar en paralelo.",
+      /* ===== Path quiz, Home, Roadmaps ===== */
+      "Free · about 2 minutes":"Gratis · unos 2 minutos",
+      "Not sure what to study? Answer a few questions and we'll tell you where to start, based on how you like to work and what you want.":
+        "¿No sabes qué estudiar? Responde unas preguntas y te decimos por dónde empezar, según cómo te gusta trabajar y qué quieres.",
+      "Two tracks at once: <b>land a tech job now</b> for steady income, and <b>build your own company and services</b> on top of it. Master technology and business together, go from $0 to $100K+, and track all of it here, roadmaps, thoughts, learnings, a wishlist, and certs, in one place.":
+        "Dos vías a la vez: <b>conseguir un trabajo en tecnología ahora</b> para tener ingresos estables, y <b>construir tu propia empresa y servicios</b> encima. Domina tecnología y negocio juntos, ve de 0 a más de 100.000 dólares, y lleva el registro de todo aquí: rutas, ideas, aprendizajes, una lista de deseos y certificaciones, en un solo lugar.",
+      "Progress at a glance":"El progreso de un vistazo",
+      "The two-track plan":"El plan de dos vías",
+      "A tech job for income":"Un trabajo en tecnología para tener ingresos",
+      "Get hired in an automation, backend, or data role, or take paid freelance gigs, using the skills you already hold. It covers your costs, buys runway, and pays you to keep leveling up. <b>Target: steady monthly income in 60–90 days.</b>":
+        "Que te contraten en un puesto de automatización, backend o datos, o toma trabajos independientes pagados, usando las habilidades que ya tienes. Cubre tus costos, te compra tiempo, y te paga por seguir subiendo de nivel. <b>Meta: ingreso mensual estable en 60 a 90 días.</b>",
+      "Your company &amp; tech services":"Tu empresa y tus servicios de tecnología",
+      "Build the high-ticket services company on nights and weekends with the roadmaps in this manual, automation and agents first, security and cloud as premium layers. <b>This is the ceiling: recurring revenue and leverage.</b>":
+        "Construye la empresa de servicios de alto valor en las noches y los fines de semana con las rutas de este manual: automatización y agentes primero, seguridad y nube como capas premium. <b>Este es el techo: ingresos recurrentes y apalancamiento.</b>",
+      "<span class=\"label\">The rule</span>The job is the floor, the company is the ceiling. Do not quit the job until the company's recurring revenue can replace it. Two income lines beat one, and a paycheck removes the desperation that makes you underprice clients.":
+        "<span class=\"label\">La regla</span>El trabajo es el piso, la empresa es el techo. No renuncies al trabajo hasta que los ingresos recurrentes de la empresa puedan reemplazarlo. Dos líneas de ingreso le ganan a una, y un sueldo quita la desesperación que te hace cobrarle poco a los clientes.",
+      "By the numbers":"En números",
+      "Pick a domain":"Elige un área",
+      "Phase-based paths in learning order, each with sub-concepts, resources, and checkable progress. Your focus domains, plus the craft and career pages.":
+        "Caminos por fases en orden de aprendizaje, cada uno con subconceptos, recursos y progreso que puedes marcar. Tus áreas de enfoque, más las páginas de oficio y carrera.",
+      "The spine: Python, APIs, n8n, Docker, plus a deep-dive into AI agents.":
+        "La columna vertebral: Python, APIs, n8n, Docker, más una inmersión profunda en agentes de IA.",
+      "LLMs, prompt engineering, LangChain, RAG, and agents. The premium upsell.":
+        "LLMs, ingeniería de prompts, LangChain, RAG y agentes. La venta premium adicional.",
+      "What cloud is, deploy at scale, AWS certs. The step up from your VPS.":
+        "Qué es la nube, desplegar a escala, certificaciones de AWS. El paso que sigue a tu VPS.",
+      "Secure the software you build, plus the optional high-ticket service.":
+        "Asegura el software que construyes, más el servicio opcional de alto valor.",
+      "How the web works, APIs, databases, auth, and deploy. What we're building right now.":
+        "Cómo funciona la web, APIs, bases de datos, autenticación y despliegue. Lo que estamos construyendo ahora mismo.",
+      "The eight laws plus a five-stage path from SQL to trusted-with-money.":
+        "Las ocho leyes más un camino de cinco etapas de SQL a que te confíen dinero.",
+      "AI &amp; Your Career":"La IA y tu carrera",
+      "Has AI killed coding? What to focus on, and which engineer to be.":
+        "¿La IA mató la programación? En qué enfocarte, y qué tipo de ingeniero ser.",
+      /* ===== Schools / workshop ===== */
+      "They pick at 17, based on a job title, a salary they read somewhere, and what a relative told them. Then a third of them change course or drop out, having lost a year and a lot of money. This is a fixable problem, and it is fixed before university, not during it.":
+        "Eligen a los 17, según un título de trabajo, un sueldo que leyeron en algún lado, y lo que les dijo un pariente. Después un tercio cambia de carrera o abandona, habiendo perdido un año y mucho dinero. Este es un problema que se puede arreglar, y se arregla antes de la universidad, no durante.",
+      "01 · The problem":"01 · El problema",
+      "A student picks \"systems engineering\" without knowing the difference between frontend, backend, data and security, or that design and IT support are careers too. They are choosing a word, not a life.":
+        "Un estudiante elige \"ingeniería de sistemas\" sin saber la diferencia entre frontend, backend, datos y seguridad, ni que el diseño y el soporte técnico también son carreras. Está eligiendo una palabra, no una vida.",
+      "First-year computing has one of the highest drop-out rates of any degree. Not because students are not clever, but because half the room already knew what a file path, a terminal and a variable were, and half met all of it in week one while also learning to live alone.":
+        "El primer año de computación tiene una de las tasas de abandono más altas de cualquier carrera. No porque los estudiantes no sean inteligentes, sino porque la mitad del salón ya sabía qué era una ruta de archivo, una terminal y una variable, y la otra mitad se encontró con todo eso en la semana uno mientras además aprendía a vivir sola.",
+      "The cost is real":"El costo es real","what it means":"lo que significa",
+      "A year of tuition, a year of their life, and a confidence hit that some of them never fully recover from. Meanwhile the ones who arrived prepared find the same degree genuinely enjoyable.":
+        "Un año de matrícula, un año de su vida, y un golpe a la confianza del que algunos nunca se recuperan del todo. Mientras tanto, los que llegaron preparados encuentran que la misma carrera es genuinamente disfrutable.",
+      "<span class=\"label\">The good news</span>Both problems are solved by the same thing: <b>a few weeks of honest foundations before they commit.</b> Not a coding bootcamp. Understanding what the field is, what the jobs are really like, and how computers actually think.":
+        "<span class=\"label\">La buena noticia</span>Los dos problemas se resuelven con lo mismo: <b>unas semanas de fundamentos honestos antes de que se comprometan.</b> No un bootcamp de programación. Entender qué es el campo, cómo son de verdad los trabajos, y cómo piensan realmente las computadoras.",
+      "02 · What we do":"02 · Qué hacemos",
+      "A workshop, and a platform they keep afterwards":"Un taller, y una plataforma que se quedan después",
+      "Two parts. The talk gets their attention. The platform is what actually changes the outcome, because it keeps working after I leave the building.":
+        "Dos partes. La charla capta su atención. La plataforma es lo que de verdad cambia el resultado, porque sigue funcionando después de que me voy del colegio.",
+      "A working engineer, not a recruiter, explaining the tech field honestly: what the jobs really are, which need heavy maths and which do not, what a normal day looks like, what it pays, and what nobody tells them. Then every student takes a short quiz that suggests a direction based on how they actually answered.":
+        "Un ingeniero en ejercicio, no un reclutador, explicando el campo de la tecnología con honestidad: qué son realmente los trabajos, cuáles necesitan matemáticas pesadas y cuáles no, cómo se ve un día normal, cuánto paga, y lo que nadie les dice. Después cada estudiante hace un test corto que le sugiere una dirección según lo que de verdad respondió.",
+      "<b>Students leave with:</b> a suggested direction, a free account, and the first course already open.":
+        "<b>Los estudiantes se van con:</b> una dirección sugerida, una cuenta gratuita, y el primer curso ya abierto.",
+      "The Foundations course: what a computer really is, how the internet works, how computers think, the jobs that exist, and how to arrive ready. Plus Logic Lab, which teaches programming logic as a puzzle with no code at all, and Code Lab, where they write real code in the browser and it checks their work automatically.":
+        "El curso de Fundamentos: qué es realmente una computadora, cómo funciona el internet, cómo piensan las computadoras, qué trabajos existen, y cómo llegar preparado. Más Logic Lab, que enseña la lógica de programación como un acertijo sin nada de código, y Code Lab, donde escriben código real en el navegador y este revisa su trabajo automáticamente.",
+      "<b>You get:</b> students who keep going after the assembly ends, which is the part most careers talks never achieve.":
+        "<b>Ustedes obtienen:</b> estudiantes que siguen adelante después de que termina la charla, que es la parte que casi ninguna charla de orientación vocacional logra.",
+      "What a student can actually show you afterwards":"Qué puede mostrarles un estudiante después",
+      "A profile with real numbers":"Un perfil con números reales",
+      "Lessons completed, logic levels solved, code challenges passed, exam scores, day streak. Not a certificate of attendance. Evidence of work, visible to a parent or a teacher at a glance.":
+        "Lecciones completadas, niveles de lógica resueltos, retos de código superados, notas de examen, racha de días. No un certificado de asistencia. Evidencia de trabajo, visible de un vistazo para un padre o un profesor.",
+      "The challenges are checked by running the student's code and measuring the result, not by ticking a box. If it says they built it, they built it.":
+        "Los retos se revisan ejecutando el código del estudiante y midiendo el resultado, no marcando una casilla. Si dice que lo construyó, lo construyó.",
+      "A direction, with a reason":"Una dirección, con una razón","the point":"el punto",
+      "Not \"I think I'll do systems.\" Rather \"I want backend because I prefer logic to design, and I already built three things to check.\"":
+        "No \"creo que voy a estudiar sistemas\". Más bien \"quiero backend porque prefiero la lógica al diseño, y ya construí tres cosas para comprobarlo\".",
+      "03 · How it works":"03 · Cómo funciona",
+      "<b>One session, 60 to 90 minutes.</b> Works as an assembly, a class, or a careers day slot. Any year group from 15 upwards, though 16 to 18 is the sweet spot because the decision is close enough to feel real.":
+        "<b>Una sesión, de 60 a 90 minutos.</b> Funciona como acto general, como clase, o como espacio en una feria vocacional. Cualquier curso desde los 15 años, aunque de 16 a 18 es el punto ideal porque la decisión está lo bastante cerca como para sentirse real.",
+      "<b>All it needs is a projector.</b> Students can follow on phones if there is wifi, or on school computers, or on nothing at all and sign up later. Nothing to install, ever. It runs in a browser.":
+        "<b>Solo hace falta un proyector.</b> Los estudiantes pueden seguirlo en el celular si hay wifi, o en las computadoras del colegio, o en nada y registrarse después. Nada que instalar, nunca. Funciona en el navegador.",
+      "<b>Every student gets free access.</b> The Foundations course, the path quiz, Logic Lab, Code Lab and every reference guide cost nothing and stay free. There is no trial that expires on them.":
+        "<b>Cada estudiante recibe acceso gratuito.</b> El curso de Fundamentos, el test de orientación, Logic Lab, Code Lab y todas las guías de referencia no cuestan nada y siguen siendo gratis. No hay una prueba que se les venza.",
+      "<b>Teachers can see the group's progress.</b> Useful for a careers department that has to report on what actually happened after the talk.":
+        "<b>Los profesores pueden ver el progreso del grupo.</b> Útil para un departamento de orientación que tiene que reportar qué pasó realmente después de la charla.",
+      "<b>It is in Spanish and English.</b> Built in Santa Cruz, for students here first, by someone who learned all of it here.":
+        "<b>Está en español y en inglés.</b> Hecho en Santa Cruz, primero para los estudiantes de aquí, por alguien que aprendió todo esto aquí.",
+      "<span class=\"label\">Why I am doing this</span>I taught myself all of this from Santa Cruz and now build software and automation for clients in the United States. Nobody told me any of it at 17, and I lost time I did not need to lose. The whole point is that the next student does not have to.":
+        "<span class=\"label\">Por qué hago esto</span>Aprendí todo esto solo desde Santa Cruz y hoy construyo software y automatización para clientes en Estados Unidos. Nadie me contó nada de esto a los 17, y perdí tiempo que no tenía por qué perder. Todo el punto es que el siguiente estudiante no tenga que perderlo.",
+      "A working engineer, not a careers advisor":"Un ingeniero en ejercicio, no un orientador vocacional",
+      "Eduardo Shande. Data and automation engineer, Santa Cruz, Bolivia. Three years building software, data pipelines and AI automation for clients in Bolivia and the United States.":
+        "Eduardo Shande. Ingeniero de datos y automatización, Santa Cruz, Bolivia. Tres años construyendo software, pipelines de datos y automatización con IA para clientes en Bolivia y Estados Unidos.",
+      "Self-taught, no computer science degree. That matters here, because it means the advice students get is about what actually works rather than what a syllabus says should work. It also means the honest parts get said out loud: which jobs are oversold, which are quietly well paid, when a degree is worth it and when it is not.":
+        "Autodidacta, sin título en ciencias de la computación. Eso importa aquí, porque significa que el consejo que reciben los estudiantes es sobre lo que de verdad funciona y no sobre lo que un plan de estudios dice que debería funcionar. También significa que las partes honestas se dicen en voz alta: qué trabajos están sobrevendidos, cuáles pagan bien en silencio, cuándo vale la pena un título y cuándo no.",
       /* ===== Data ===== */
       "Turn raw data into decisions clients pay for. You are already a data engineer; this is the analyst layer on top.":
         "Convierte datos crudos en decisiones por las que los clientes pagan. Ya eres ingeniero de datos; esta es la capa de analista encima.",

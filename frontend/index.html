@@ -6997,6 +6997,30 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'Answer like you wish someone had answered you':'Responde como te hubiera gustado que te respondieran',
       /* --- profile --- */
       'Longest ever':'La más larga','longest':'la más larga',
+      /* ===== attribute text: menu, form fields, badge and quest labels ===== */
+      "Open menu":"Abrir menú",
+      "my code doesnt work":"mi codigo no funciona",
+      "Complete 10 lessons":"Completa 10 lecciones",
+      "Complete 50 lessons":"Completa 50 lecciones",
+      "Reach 1,000 XP":"Llega a 1.000 XP",
+      "Solve 10 randomly generated levels":"Resuelve 10 niveles generados al azar",
+      "Full name (optional)":"Nombre completo (opcional)",
+      "Password (min 8 characters)":"Contraseña (mínimo 8 caracteres)",
+      "Search thoughts...":"Buscar ideas...",
+      "Source (course, doc, video)":"Fuente (curso, documento, video)",
+      "Search learnings...":"Buscar aprendizajes...",
+      "Resource link (optional)":"Enlace del recurso (opcional)",
+      "Search wishlist...":"Buscar en la lista de deseos...",
+      "Certification name":"Nombre de la certificación",
+      "Provider (AWS, Google...)":"Proveedor (AWS, Google...)",
+      "Cost (e.g. $100)":"Costo (por ejemplo $100)",
+      "Exam date":"Fecha del examen",
+      "Progress %":"Progreso %",
+      /* ===== Logic Lab controls ===== */
+      "Easy":"Fácil","Medium":"Medio","Hard":"Difícil",
+      "Slow":"Lenta","Normal":"Normal","Fast":"Rápida",
+      "Click to repeat it: 2, 3, 4, 6, 9, then it is removed.":
+        "Haz clic para repetirla: 2, 3, 4, 6, 9, y luego se quita.",
       /* ===== Resource titles: keep the product name, translate the description ===== */
       "CS50x, Harvard University":"CS50x, Universidad de Harvard",
       "freeCodeCamp, full curriculum":"freeCodeCamp, currículo completo",
@@ -11432,6 +11456,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var els=document.querySelectorAll('[placeholder],[title],[aria-label],[alt]'),i,j,el,a,orig,hit,store;
       for(i=0;i<els.length;i++){
         el=els[i];
+        /* the language toggle names the language you switch to, and
+           renderLangBtn already sets it for the current language */
+        if(el.closest&&el.closest('[data-noi18n]'))continue;
         store=ATTR_ORIG.get(el);
         if(!store){store={};ATTR_ORIG.set(el,store);}
         for(j=0;j<ATTRS.length;j++){
@@ -11474,6 +11501,14 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}],
       [/^Solved in (\d+) steps$/, function(m){
         return 'Resuelto en '+m[1]+' pasos';}]
+      ,[/^Complete (\d+) lessons?, worth (\d+) XP$/, function(m){
+        return 'Completa '+m[1]+(m[1]==='1'?' lección':' lecciones')+', vale '+m[2]+' XP';}]
+      ,[/^(.+), (\d+) percent done$/, function(m){
+        var n=trBase(m[1]); return (n||m[1])+', '+m[2]+' por ciento completado';}]
+      ,[/^(.+) · (\d+) stars?$/, function(m){
+        var n=trBase(m[1]); return (n||m[1])+' · '+m[2]+(m[2]==='1'?' estrella':' estrellas');}]
+      ,[/^([★☆]+) Solved in (\d+) steps$/, function(m){
+        return m[1]+' Resuelto en '+m[2]+' pasos';}]
       ,[/^(.+?) (\d+\/\d+)$/, function(m){
         var n=trBase(m[1]); return n?(n+' '+m[2]):null;}]
       ,[/^of ([\d,]+) in the academy$/, function(m){return 'de '+m[1]+' en la academia';}]
@@ -11521,6 +11556,37 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       return any;
     }
     /* every string still needing a translation, units first */
+    /* ---- keeping the language after a re-render ----
+       Half this app builds its HTML at runtime from English source strings:
+       the dashboard, the profile, every list, and anything a form rebuilds
+       after you submit it. Those nodes are created after applyLang has run,
+       so on their own they stay English until you navigate to them, and a
+       deep link like #profile lands on an English page.
+
+       Rather than remember to translate at every render site, watch the
+       document and re-run a pass when the content actually changes. The
+       busy flag keeps applyLang's own edits from re-triggering it, and the
+       delay coalesces a burst of renders into one pass. */
+    var I18N_BUSY=false, I18N_TIMER=null;
+    function scheduleLang(){
+      if(!LANG_READY||I18N_BUSY)return;
+      if(I18N_TIMER)clearTimeout(I18N_TIMER);
+      I18N_TIMER=setTimeout(function(){
+        I18N_TIMER=null; I18N_BUSY=true;
+        try{applyLang();}catch(e){}
+        I18N_BUSY=false;
+      },120);
+    }
+    function watchForRenders(){
+      if(!('MutationObserver' in window))return;
+      var mo=new MutationObserver(function(muts){
+        if(I18N_BUSY)return;
+        for(var i=0;i<muts.length;i++){
+          if(muts[i].addedNodes&&muts[i].addedNodes.length){scheduleLang();return;}
+        }
+      });
+      mo.observe(document.body,{childList:true,subtree:true});
+    }
     function applyLang(){
       /* this function is hoisted but its lookup tables are not; showPage runs
          before they are assigned, so do nothing until initLang has run */
@@ -11611,7 +11677,11 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       applyLang();
     }
 
-    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();}
+    function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();
+      /* every one of those rebuilt its DOM from the English source, so the
+         new nodes need a pass; without this only the page you navigate to
+         gets translated and a deep link lands on an English page */
+      if(LANG_READY)applyLang();}
 
     function on(id,ev,fn){var el=document.getElementById(id);if(el)el.addEventListener(ev,fn);}
     on('form-thoughts','submit',function(e){e.preventDefault();var t=val('th-text').trim();if(!t)return;data.thoughts.unshift({id:uid(),ts:Date.now(),cat:val('th-cat'),text:t});saveData();setv('th-text','');renderThoughts();renderDashboard();toast('Thought captured.');});
@@ -11645,6 +11715,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     initLookup();
     initLang();
     renderAll();
+    watchForRenders();
     applyGate();
     var _pb=document.getElementById('path-back');if(_pb)_pb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});
     var _gq=document.getElementById('gate-quiz');if(_gq)_gq.addEventListener('click',openQuizPreview);

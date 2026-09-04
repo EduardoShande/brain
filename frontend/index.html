@@ -1269,6 +1269,10 @@
     border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
   .lkp-go:hover{border-color:var(--teal);color:var(--teal-ink)}
   @media(prefers-reduced-motion:reduce){.lkp{animation:none}}
+  .autobadge{flex-basis:100%;margin-top:7px;font-family:"JetBrains Mono",monospace;font-size:10px;
+    line-height:1.45;letter-spacing:.02em;color:rgba(255,255,255,.80)}
+  .autobadge.work{color:rgba(255,255,255,.92)}
+  .autobadge.warn{color:#FFD9A8}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -6995,6 +6999,241 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'Answer like you wish someone had answered you':'Responde como te hubiera gustado que te respondieran',
       /* --- profile --- */
       'Longest ever':'La más larga','longest':'la más larga',
+      /* ===== Foundations, complete ===== */
+      "If you are in high school and wondering whether tech is for you, this is the honest way to find out. By the end you will know what the field really is, which job fits you, and whether you like the thinking. That is worth far more than guessing at 17 and regretting it at 20.":
+        "Si estás en el colegio y te preguntas si la tecnología es para ti, esta es la forma honesta de averiguarlo. Al final vas a saber qué es realmente este campo, qué trabajo encaja contigo, y si te gusta esta forma de pensar. Eso vale muchísimo más que adivinar a los 17 y arrepentirte a los 20.",
+      "Hardware is anything you can touch. The <b>CPU</b> is the brain that does the calculations. <b>RAM</b> is short-term memory: fast, but wiped when you turn the machine off. <b>Storage</b> (SSD or hard drive) is long-term memory that keeps your files. The screen, keyboard, and mouse are hardware too.":
+        "El hardware es todo lo que puedes tocar. El <b>CPU</b> es el cerebro que hace los cálculos. La <b>RAM</b> es la memoria de corto plazo: rápida, pero se borra cuando apagas la máquina. El <b>almacenamiento</b> (SSD o disco duro) es la memoria de largo plazo que guarda tus archivos. La pantalla, el teclado y el mouse también son hardware.",
+      "Think of a kitchen: the CPU is the cook, RAM is the counter space you're working on right now, and storage is the pantry.":
+        "Piensa en una cocina: el CPU es el cocinero, la RAM es el mesón en el que estás trabajando ahora mismo, y el almacenamiento es la despensa.",
+      "Software is the set of instructions that tells the hardware what to do. You can't touch it. An <b>operating system</b> (Windows, macOS, Android) is the software that runs everything else. <b>Apps</b> (a browser, WhatsApp, a game) are software built to do one job.":
+        "El software es el conjunto de instrucciones que le dice al hardware qué hacer. No lo puedes tocar. Un <b>sistema operativo</b> (Windows, macOS, Android) es el software que hace funcionar todo lo demás. Las <b>apps</b> (un navegador, WhatsApp, un juego) son software hecho para una sola tarea.",
+      "What programming really is":"Qué es realmente programar",
+      "Programming is writing the exact, step-by-step instructions a computer follows. The computer is fast but literal: it does exactly what you say, nothing more.":
+        "Programar es escribir las instrucciones exactas, paso a paso, que una computadora sigue. La computadora es rápida pero literal: hace exactamente lo que le dices, nada más.",
+      "The logic (the whole game)":"La lógica (todo el juego)",
+      "Almost all code is built from four simple ideas. <b>Variables</b> are labeled boxes that hold a value (a name, a number). <b>Sequence</b> is doing steps in order, top to bottom. <b>Conditions</b> (if / else) make decisions: \"if the user is logged in, show the dashboard, else show login.\" <b>Loops</b> repeat a step many times so you don't write it a thousand times.":
+        "Casi todo el código se construye con cuatro ideas simples. Las <b>variables</b> son cajas con etiqueta que guardan un valor (un nombre, un número). La <b>secuencia</b> es hacer los pasos en orden, de arriba a abajo. Las <b>condiciones</b> (si / si no) toman decisiones: \"si el usuario inició sesión, muestra el panel, si no muestra el login\". Los <b>bucles</b> repiten un paso muchas veces para que no lo escribas mil veces.",
+      "That's it. Every app, no matter how big, is those four ideas stacked up.":
+        "Eso es todo. Cada app, por más grande que sea, son esas cuatro ideas apiladas.",
+      "What a programming language is":"Qué es un lenguaje de programación",
+      "A programming language lets you write instructions in something closer to human words, which the computer then translates into its own 1s and 0s. <b>Python</b> reads almost like English and is great to start with. <b>JavaScript</b> runs in every web browser. There are many, but the logic above is the same in all of them, so learning one makes the next far easier.":
+        "Un lenguaje de programación te deja escribir instrucciones en algo más parecido a palabras humanas, que la computadora luego traduce a sus propios unos y ceros. <b>Python</b> se lee casi como inglés y es excelente para empezar. <b>JavaScript</b> funciona en todos los navegadores web. Hay muchos, pero la lógica de arriba es la misma en todos, así que aprender uno hace que el siguiente sea mucho más fácil.",
+      "Why logic matters more than the language":"Por qué la lógica importa más que el lenguaje",
+      "Beginners think they need to memorize a language. You don't. You need to think in steps and conditions. Once you can break a problem into \"first do this, then if that, repeat this,\" writing it in any language is just looking up the exact words. Learn the thinking, not the syntax.":
+        "Los principiantes creen que tienen que memorizar un lenguaje. No es así. Lo que necesitas es pensar en pasos y condiciones. Una vez que puedes partir un problema en \"primero haz esto, luego si pasa aquello, repite esto\", escribirlo en cualquier lenguaje es solo buscar las palabras exactas. Aprende a pensar, no la sintaxis.",
+      "03 · The web":"03 · La web",
+      "The internet, the web, and the words people mix up":"El internet, la web, y las palabras que todos confunden",
+      "The internet is the roads. The web is one kind of traffic on those roads. And \"website\" vs \"web app\" trips everyone up, here's the difference.":
+        "El internet son las carreteras. La web es un tipo de tráfico sobre esas carreteras. Y \"sitio web\" contra \"aplicación web\" confunde a todo el mundo, aquí está la diferencia.",
+      "Internet vs the web":"Internet contra la web",
+      "The <b>internet</b> is the global network of cables and computers connected together, the roads. The <b>web</b> is the system of pages and links you browse on top of it. Email and video calls also use the internet but are not \"the web.\" So the web is one thing that runs on the internet, not the same as it.":
+        "El <b>internet</b> es la red global de cables y computadoras conectadas entre sí, las carreteras. La <b>web</b> es el sistema de páginas y enlaces que navegas encima de eso. El correo y las videollamadas también usan internet pero no son \"la web\". Así que la web es una cosa que corre sobre internet, no es lo mismo que internet.",
+      "A <b>web page</b> is a single page. A <b>website</b> is a collection of pages about one thing, usually to read (a blog, a restaurant's site, a news site). A <b>web app</b> is a website you <em>use</em> and interact with, like a tool: Gmail, Google Docs, Netflix, or this academy. The line is simple: a website you mostly read; a web app you do things in.":
+        "Una <b>página web</b> es una sola página. Un <b>sitio web</b> es un conjunto de páginas sobre un mismo tema, normalmente para leer (un blog, la página de un restaurante, un sitio de noticias). Una <b>aplicación web</b> es un sitio que <em>usas</em> y con el que interactúas, como una herramienta: Gmail, Google Docs, Netflix, o esta academia. La regla es simple: un sitio web sobre todo lo lees; en una aplicación web haces cosas.",
+      "The <b>frontend</b> is everything you see and click in the browser: buttons, colors, layout. The <b>backend</b> is the engine on a server you never see: it stores data, checks your password, and does the heavy work. When you log in, the frontend takes your password and the backend checks it. Most apps need both.":
+        "El <b>frontend</b> es todo lo que ves y tocas en el navegador: botones, colores, distribución. El <b>backend</b> es el motor en un servidor que nunca ves: guarda los datos, revisa tu contraseña y hace el trabajo pesado. Cuando inicias sesión, el frontend toma tu contraseña y el backend la verifica. Casi todas las apps necesitan los dos.",
+      "What a server is":"Qué es un servidor",
+      "A <b>server</b> is just another computer, always on, that other computers ask for things. When you open a website, your browser (the <b>client</b>) asks a server for the page, and the server sends it back. \"The cloud\" is mostly just someone else's servers you rent instead of owning.":
+        "Un <b>servidor</b> es simplemente otra computadora, siempre encendida, a la que otras computadoras le piden cosas. Cuando abres un sitio web, tu navegador (el <b>cliente</b>) le pide la página a un servidor, y el servidor se la devuelve. \"La nube\" es en su mayoría los servidores de otra persona que alquilas en vez de comprar.",
+      "04 · Your tools":"04 · Tus herramientas",
+      "The tools you'll actually use":"Las herramientas que de verdad vas a usar",
+      "You don't need much to start. Here are the words for the tools every developer uses daily.":
+        "No necesitas mucho para empezar. Aquí están los nombres de las herramientas que todo programador usa a diario.",
+      "Code lives in <b>files</b>, organized in <b>folders</b>. A file's <b>extension</b> (the bit after the dot) says what kind it is: <code>.html</code> for a web page, <code>.css</code> for styling, <code>.js</code> for JavaScript, <code>.py</code> for Python. The computer uses it to know how to read the file.":
+        "El código vive en <b>archivos</b>, organizados en <b>carpetas</b>. La <b>extensión</b> de un archivo (lo que va después del punto) dice de qué tipo es: <code>.html</code> para una página web, <code>.css</code> para los estilos, <code>.js</code> para JavaScript, <code>.py</code> para Python. La computadora la usa para saber cómo leer el archivo.",
+      "A code editor / IDE":"Un editor de código / IDE",
+      "You write code in a <b>code editor</b>. The most popular is <b>VS Code</b>, and it's free. An <b>IDE</b> (Integrated Development Environment) is a code editor with extra tools built in: running code, debugging, autocomplete. For most beginners VS Code is all you need, and people use \"editor\" and \"IDE\" loosely.":
+        "El código se escribe en un <b>editor de código</b>. El más popular es <b>VS Code</b>, y es gratis. Un <b>IDE</b> (Entorno de Desarrollo Integrado) es un editor de código con herramientas extra incluidas: ejecutar código, depurar, autocompletar. Para casi todos los principiantes VS Code es todo lo que necesitas, y la gente usa \"editor\" e \"IDE\" sin mucha precisión.",
+      "The terminal (command line)":"La terminal (línea de comandos)",
+      "The <b>terminal</b> is a text window where you type commands instead of clicking. It looks intimidating but you only need a handful of commands. It's how you run programs, install tools, and use Git. Every developer lives in it a little.":
+        "La <b>terminal</b> es una ventana de texto donde escribes comandos en vez de hacer clic. Se ve intimidante pero solo necesitas un puñado de comandos. Es como ejecutas programas, instalas herramientas y usas Git. Todo programador vive un poco ahí.",
+      "<b>Git</b> saves snapshots of your code as you work, like save points in a game, so you can go back if you break something. <b>GitHub</b> is a website that stores those snapshots online and lets people work together. You'll learn it early; past your first project it's non-negotiable.":
+        "<b>Git</b> guarda fotos de tu código mientras trabajas, como los puntos de guardado de un juego, para que puedas volver atrás si rompes algo. <b>GitHub</b> es un sitio web que guarda esas fotos en línea y deja que varias personas trabajen juntas. Lo vas a aprender temprano; después de tu primer proyecto ya no es negociable.",
+      "How computers actually think":"Cómo piensan realmente las computadoras",
+      "This is the part universities test you on in first year, and the part almost nobody arrives knowing. Learn it now and your degree gets dramatically easier.":
+        "Esta es la parte que las universidades te evalúan en primer año, y la parte que casi nadie llega sabiendo. Apréndela ahora y tu carrera se vuelve muchísimo más fácil.",
+      "A computer has no idea what a letter, a photo or a song is. It only knows <b>on</b> and <b>off</b>, which we write as 1 and 0. That is <b>binary</b>.":
+        "Una computadora no tiene idea de qué es una letra, una foto o una canción. Solo conoce <b>encendido</b> y <b>apagado</b>, que escribimos como 1 y 0. Eso es el <b>binario</b>.",
+      "Think of a row of light switches. One switch gives you 2 options. Two switches give 4. Eight switches give 256, and eight switches is called a <b>byte</b>. Every letter you type is a number: the letter A is 65. Every colour is three numbers. Every song is thousands of numbers per second.":
+        "Piensa en una fila de interruptores de luz. Un interruptor te da 2 opciones. Dos interruptores dan 4. Ocho interruptores dan 256, y a ocho interruptores se les llama un <b>byte</b>. Cada letra que escribes es un número: la letra A es 65. Cada color son tres números. Cada canción son miles de números por segundo.",
+      "So when someone says \"it is all ones and zeros\", they mean it literally. Everything above that is humans agreeing on what the numbers mean.":
+        "Así que cuando alguien dice \"todo son unos y ceros\", lo dice literalmente. Todo lo que está por encima de eso son humanos poniéndose de acuerdo en qué significan los números.",
+      "What \"running a program\" really means":"Qué significa realmente \"ejecutar un programa\"",
+      "The CPU does one boring thing, billions of times a second: <b>fetch an instruction, work out what it means, do it, repeat.</b> That is called the fetch-decode-execute cycle and it is the entire secret of computing.":
+        "El CPU hace una sola cosa aburrida, miles de millones de veces por segundo: <b>traer una instrucción, averiguar qué significa, hacerla, repetir.</b> A eso se le llama el ciclo de buscar-decodificar-ejecutar y es todo el secreto de la computación.",
+      "Each instruction is tiny. \"Add these two numbers.\" \"Put this number over there.\" \"If this is zero, jump to that instruction.\" Nothing more clever than that. Fortnite, Instagram and the software flying an aeroplane are all just enormous piles of those tiny steps.":
+        "Cada instrucción es diminuta. \"Suma estos dos números\". \"Pon este número allá\". \"Si esto es cero, salta a esa instrucción\". Nada más ingenioso que eso. Fortnite, Instagram y el software que vuela un avión son solo montañas enormes de esos pasitos.",
+      "That is genuinely encouraging: the computer is not smarter than you. It is just much, much faster and never gets bored.":
+        "Eso es genuinamente alentador: la computadora no es más inteligente que tú. Solo es muchísimo más rápida y nunca se aburre.",
+      "An algorithm is just a recipe":"Un algoritmo es solo una receta",
+      "An <b>algorithm</b> is a set of steps that solves a problem, guaranteed to finish. A recipe is an algorithm. Long division is an algorithm you already learned at school.":
+        "Un <b>algoritmo</b> es un conjunto de pasos que resuelve un problema y que se garantiza que termina. Una receta es un algoritmo. La división larga es un algoritmo que ya aprendiste en el colegio.",
+      "Here is one you use without noticing. Looking up \"Morales\" in a phone book: you do not start at page 1. You open the middle, see you are too far, open the middle of what is left, and repeat. That is <b>binary search</b>, and it finds one name in a million in about 20 steps instead of a million.":
+        "Aquí hay uno que usas sin darte cuenta. Buscar \"Morales\" en una guía telefónica: no empiezas en la página 1. Abres a la mitad, ves que te pasaste, abres la mitad de lo que queda, y repites. Eso es la <b>búsqueda binaria</b>, y encuentra un nombre entre un millón en unos 20 pasos en vez de un millón.",
+      "Computer science is largely the study of finding steps like that: the ones that get the answer without doing the stupid amount of work.":
+        "Las ciencias de la computación son en gran parte el estudio de encontrar pasos así: los que llegan a la respuesta sin hacer la cantidad absurda de trabajo.",
+      "Two programs can do the same job, one in a second and one in a week. The difference is how the work grows as the data grows.":
+        "Dos programas pueden hacer el mismo trabajo, uno en un segundo y otro en una semana. La diferencia está en cómo crece el trabajo cuando crecen los datos.",
+      "Checking every name one by one in a list of 1,000 takes up to 1,000 looks. Double the list and it doubles to 2,000. Binary search on the same list takes about 10 looks, and doubling the list adds <b>one</b> look. That gap is why your phone can search millions of photos instantly.":
+        "Revisar cada nombre uno por uno en una lista de 1.000 toma hasta 1.000 revisiones. Duplica la lista y se duplica a 2.000. La búsqueda binaria en esa misma lista toma unas 10 revisiones, y duplicar la lista agrega <b>una</b> revisión. Esa diferencia es por la que tu teléfono puede buscar entre millones de fotos al instante.",
+      "You will meet this in university as \"Big O notation\". It sounds terrifying and it means exactly what you just read.":
+        "Esto te lo vas a encontrar en la universidad como \"notación Big O\". Suena aterrador y significa exactamente lo que acabas de leer.",
+      "Data structures: how you arrange your stuff":"Estructuras de datos: cómo acomodas tus cosas",
+      "Where you put things decides how fast you can find them. A messy bedroom and an organised one hold the same objects, but finding a sock takes very different amounts of time.":
+        "Dónde pones las cosas decide qué tan rápido las encuentras. Un cuarto desordenado y uno ordenado tienen los mismos objetos, pero encontrar un calcetín toma tiempos muy distintos.",
+      "<b>List (array):</b> things in a row, numbered. Great for going through everything in order. <b>Dictionary (map):</b> things with labels, like a real dictionary. Instantly find \"cat\" without reading every word. <b>Stack:</b> like a pile of plates, last in, first out. That is exactly how the undo button works. <b>Queue:</b> like a line at the bank, first in, first out.":
+        "<b>Lista (arreglo):</b> cosas en fila, numeradas. Perfecta para recorrer todo en orden. <b>Diccionario (mapa):</b> cosas con etiquetas, como un diccionario de verdad. Encuentras \"gato\" al instante sin leer cada palabra. <b>Pila:</b> como un montón de platos, el último en entrar es el primero en salir. Así funciona exactamente el botón de deshacer. <b>Cola:</b> como una fila en el banco, el primero en entrar es el primero en salir.",
+      "Choosing the right one is half of writing fast software.":
+        "Elegir la correcta es la mitad de escribir software rápido.",
+      "Abstraction: the idea the whole field is built on":"Abstracción: la idea sobre la que se construye todo este campo",
+      "You drive a car without knowing how the engine burns petrol. The steering wheel <b>hides</b> the complexity and gives you a simple handle. That is <b>abstraction</b>.":
+        "Manejas un auto sin saber cómo el motor quema la gasolina. El volante <b>esconde</b> la complejidad y te da una manija simple. Eso es la <b>abstracción</b>.",
+      "Software is layers of this. Someone wrote the tiny CPU instructions so someone else could write an operating system, so someone else could write a language, so you can write one line that puts a button on a screen. You stand on about seven layers of other people's work every time you code.":
+        "El software son capas de esto. Alguien escribió las instrucciones diminutas del CPU para que otra persona pudiera escribir un sistema operativo, para que otra pudiera escribir un lenguaje, para que tú puedas escribir una línea que pone un botón en la pantalla. Estás parado sobre unas siete capas del trabajo de otras personas cada vez que programas.",
+      "Practical meaning: you do not need to understand everything to build something. You need to understand the layer you are on, and trust the rest until you need it.":
+        "Significado práctico: no necesitas entender todo para construir algo. Necesitas entender la capa en la que estás, y confiar en el resto hasta que lo necesites.",
+      "Breaking a big problem into small ones":"Partir un problema grande en problemas pequeños",
+      "This is the single most valuable skill in this entire academy, and it needs no computer.":
+        "Esta es la habilidad más valiosa de toda esta academia, y no necesita computadora.",
+      "\"Build Instagram\" is impossible. \"Show one photo on a page\" is a Tuesday afternoon. Then \"show a list of photos\". Then \"let someone upload one\". Then \"add a like button\". Each one is small enough to actually start.":
+        "\"Construir Instagram\" es imposible. \"Mostrar una foto en una página\" es un martes por la tarde. Después \"mostrar una lista de fotos\". Después \"dejar que alguien suba una\". Después \"agregar un botón de me gusta\". Cada uno es lo bastante pequeño como para empezar de verdad.",
+      "Every professional developer does exactly this, every day. When you feel stuck, you are almost never facing a hard problem. You are facing a big one you have not cut up yet.":
+        "Todo programador profesional hace exactamente esto, todos los días. Cuando te sientes atascado, casi nunca estás frente a un problema difícil. Estás frente a uno grande que todavía no has partido.",
+      "<span class=\"label\">Try it with no computer</span>Play <b>Logic Lab</b> in the Practice section. It is this whole section as a puzzle: break the route into steps, spot the repeating pattern, and turn it into a function. Nothing to install, no syntax to memorise.":
+        "<span class=\"label\">Pruébalo sin computadora</span>Juega <b>Logic Lab</b> en la sección de Práctica. Es toda esta sección convertida en acertijo: parte la ruta en pasos, detecta el patrón que se repite, y conviértelo en una función. Nada que instalar, ninguna sintaxis que memorizar.",
+      "06 · The tech field":"06 · El campo de la tecnología",
+      "The jobs that actually exist, honestly described":"Los trabajos que existen de verdad, descritos con honestidad",
+      "Most people choose a career from a job title they half understand. Here is what the days actually look like, so you choose with your eyes open.":
+        "La mayoría elige una carrera a partir de un título de trabajo que entiende a medias. Aquí está cómo son los días de verdad, para que elijas con los ojos abiertos.",
+      "Builds what you see and click. You see your work immediately, which makes it satisfying to learn. Good if you like design and instant results. Needs: HTML, CSS, JavaScript, React.":
+        "Construye lo que ves y tocas. Ves tu trabajo de inmediato, lo que lo hace satisfactorio de aprender. Bueno si te gusta el diseño y los resultados instantáneos. Necesitas: HTML, CSS, JavaScript, React.",
+      "Builds the engine: databases, logins, payments, the rules. Nobody sees your work, but nothing runs without it. Good if you like puzzles more than pixels. Needs: a language, databases, APIs.":
+        "Construye el motor: bases de datos, inicios de sesión, pagos, las reglas. Nadie ve tu trabajo, pero nada funciona sin él. Bueno si te gustan más los acertijos que los píxeles. Necesitas: un lenguaje, bases de datos, APIs.",
+      "Turns messy numbers into decisions a company acts on. Less coding, more asking the right question. The easiest well-paid entry into tech if you are decent at maths. Needs: Excel, SQL, a bit of Python.":
+        "Convierte números desordenados en decisiones que una empresa toma. Menos código, más hacer la pregunta correcta. La entrada bien pagada más fácil a la tecnología si eres decente en matemáticas. Necesitas: Excel, SQL, un poco de Python.",
+      "Makes boring repeated work happen by itself. Fewer people compete for it, and small businesses pay well because you save them real hours. This is what I do. Needs: Python, APIs, tools like n8n.":
+        "Hace que el trabajo aburrido y repetido se haga solo. Menos gente compite por esto, y los negocios pequeños pagan bien porque les ahorras horas reales. Esto es lo que yo hago. Necesitas: Python, APIs, herramientas como n8n.",
+      "Stops people breaking in, and finds out how they did when they do. Rarely an entry-level job straight from school. Learn how systems work first, then secure them.":
+        "Evita que la gente entre por la fuerza, y averigua cómo lo hicieron cuando lo logran. Rara vez es un trabajo de entrada saliendo del colegio. Aprende primero cómo funcionan los sistemas, y después asegúralos.",
+      "Builds systems that learn from data. Genuinely exciting and genuinely maths-heavy. The hype makes people skip the fundamentals and then stall. Do not skip them.":
+        "Construye sistemas que aprenden de los datos. Genuinamente emocionante y genuinamente cargado de matemáticas. El bombo hace que la gente se salte los fundamentos y luego se estanque. No te los saltes.",
+      "Keeps everything running, deployed and not on fire. Very well paid, usually after a few years elsewhere first.":
+        "Mantiene todo funcionando, desplegado y sin incendios. Muy bien pagado, normalmente después de unos años en otra área primero.",
+      "Decides how a product should feel and work before anyone builds it. If you love the idea of tech but hate the idea of code, look here properly before you rule tech out.":
+        "Decide cómo debe sentirse y funcionar un producto antes de que alguien lo construya. Si te encanta la idea de la tecnología pero odias la idea de programar, mira bien por aquí antes de descartar la tecnología.",
+      "Breaks software on purpose so users never do. Often the easiest first job in the industry, and a normal route into development from the inside.":
+        "Rompe el software a propósito para que los usuarios nunca lo hagan. Suele ser el primer trabajo más fácil de la industria, y una ruta normal hacia el desarrollo desde adentro.",
+      "IT support":"Soporte técnico","the real ladder":"la escalera de verdad",
+      "Fixes things for people who need them working. Not glamorous, hires without a degree, and a huge number of senior engineers started exactly here.":
+        "Arregla cosas para gente que las necesita funcionando. Nada glamoroso, contrata sin título, y una cantidad enorme de ingenieros senior empezaron exactamente aquí.",
+      "<span class=\"label\">The honest bit</span>You do not have to pick right now, and you will probably change your mind twice. What matters is that every job on this list is built on the same foundation you are reading. Learn the foundation and you can change direction later without starting over.":
+        "<span class=\"label\">La parte honesta</span>No tienes que elegir ahora mismo, y probablemente vas a cambiar de opinión dos veces. Lo que importa es que todos los trabajos de esta lista se construyen sobre la misma base que estás leyendo. Aprende la base y podrás cambiar de dirección más adelante sin empezar de cero.",
+      "First-year computer science has a brutal drop-out rate almost everywhere. It is not because the students are not clever. It is because half of them meet all of this for the first time in week one, while the other half already knew it.":
+        "El primer año de ciencias de la computación tiene una tasa de abandono brutal en casi todas partes. No es porque los estudiantes no sean inteligentes. Es porque la mitad se encuentra con todo esto por primera vez en la semana uno, mientras la otra mitad ya lo sabía.",
+      "<b>Learn to type properly.</b> Genuinely. If you look at the keyboard, every exercise takes you twice as long as the person next to you, forever. Ten minutes a day for a month fixes it permanently.":
+        "<b>Aprende a escribir bien en el teclado.</b> En serio. Si miras el teclado, cada ejercicio te toma el doble de tiempo que a la persona de al lado, para siempre. Diez minutos al día durante un mes lo arregla de forma permanente.",
+      "<b>Get comfortable with files and folders.</b> Know where things are saved, what an extension is, and how to find a file without searching your whole computer. Lecturers assume this and never teach it.":
+        "<b>Siéntete cómodo con archivos y carpetas.</b> Saber dónde se guardan las cosas, qué es una extensión, y cómo encontrar un archivo sin buscar en toda la computadora. Los profesores dan esto por hecho y nunca lo enseñan.",
+      "<b>Do the maths that actually shows up.</b> Not all of it. Logic and truth tables, basic algebra, percentages, and a little probability. If you want graphics or AI later, add matrices and calculus. If you want web or automation, you barely need more than the first list.":
+        "<b>Haz las matemáticas que de verdad aparecen.</b> No todas. Lógica y tablas de verdad, álgebra básica, porcentajes, y un poco de probabilidad. Si más adelante quieres gráficos o IA, agrega matrices y cálculo. Si quieres web o automatización, apenas necesitas más que la primera lista.",
+      "<b>Push your English.</b> Almost every good document, error message and answer is in English. It is not a small advantage, it is the difference between finding your answer in one minute or thirty. Reading is enough to start.":
+        "<b>Empuja tu inglés.</b> Casi todo documento bueno, mensaje de error y respuesta está en inglés. No es una ventaja pequeña, es la diferencia entre encontrar tu respuesta en un minuto o en treinta. Con leer basta para empezar.",
+      "<b>Write one small program before you arrive.</b> One. Anything. The students who struggle most are not the ones who are bad at it, they are the ones for whom the entire thing is new at the same time as living away from home.":
+        "<b>Escribe un programa pequeño antes de llegar.</b> Uno. Lo que sea. Los estudiantes que más sufren no son los que son malos para esto, son aquellos para quienes todo es nuevo al mismo tiempo que vivir lejos de casa.",
+      "<b>Learn how to be stuck.</b> Read the error, search the exact text, ask a specific question. Being stuck is not a sign you are failing, it is the normal state of the job. Panicking about being stuck is what makes people quit.":
+        "<b>Aprende a estar atascado.</b> Lee el error, busca el texto exacto, haz una pregunta específica. Estar atascado no es señal de que estás fracasando, es el estado normal del trabajo. Entrar en pánico por estar atascado es lo que hace que la gente abandone.",
+      "<span class=\"label\">If you are not going to university</span>Everything above still applies, and none of it needs a degree. Nobody has ever asked me for mine. They ask what you can build. The difference is that without a degree you need proof, so build things and keep them where people can see them.":
+        "<span class=\"label\">Si no vas a ir a la universidad</span>Todo lo de arriba sigue aplicando, y nada de eso necesita un título. Nunca nadie me ha pedido el mío. Preguntan qué sabes construir. La diferencia es que sin título necesitas pruebas, así que construye cosas y guárdalas donde la gente pueda verlas.",
+      "08 · Now what":"08 · Y ahora qué",
+      "You now speak the language":"Ahora hablas el idioma",
+      "That's the vocabulary the whole industry uses. You're not \"behind\" anymore, you just needed someone to explain it plainly. Next, pick a direction and start building.":
+        "Ese es el vocabulario que usa toda la industria. Ya no estás \"atrasado\", solo necesitabas que alguien te lo explicara con claridad. Ahora elige una dirección y empieza a construir.",
+      /* ===== Logic Lab, every level ===== */
+      'First steps':'Primeros pasos','One turn':'Un giro','Around the wall':'Rodea el muro',
+      'Meet F1':'Conoce a F1','The staircase':'La escalera','The zigzag':'El zigzag',
+      'The long way round':'El camino largo','Two doors':'Dos puertas','The climb':'La subida',
+      'The tight one':'La apretada','Two stars':'Dos estrellas','Collect three':'Junta tres',
+      'The ring':'El anillo','The comb':'El peine','Turn when blocked':'Gira cuando esté bloqueado',
+      'Two corners':'Dos esquinas','The wall follower':'El seguidor de muros','Forever':'Para siempre',
+      'The robot already faces right. Just walk forward.':
+        'El robot ya mira a la derecha. Solo camina hacia adelante.',
+      'Walk, turn, walk again. The order is the whole puzzle.':
+        'Camina, gira, camina otra vez. El orden es todo el acertijo.',
+      'A wall is in the way. Plan the detour before you press Run.':
+        'Hay un muro en el camino. Planea el rodeo antes de apretar Ejecutar.',
+      'The pattern forward, left, forward, right happens twice. Put it in F1 once and call F1 twice.':
+        'El patrón adelante, izquierda, adelante, derecha se repite dos veces. Ponlo en F1 una vez y llama a F1 dos veces.',
+      'Only 5 slots in Main. Put forward, left, forward, right in F1, then call F1 four times.':
+        'Solo hay 5 espacios en Principal. Pon adelante, izquierda, adelante, derecha en F1, y luego llama a F1 cuatro veces.',
+      'The same trick, mirrored. Find the four-command pattern that repeats.':
+        'El mismo truco, en espejo. Encuentra el patrón de cuatro comandos que se repite.',
+      'No trick here, just a long path. Click a chip to make it repeat instead of adding it again.':
+        'Aquí no hay truco, solo un camino largo. Haz clic en una ficha para que se repita en vez de agregarla otra vez.',
+      'There is more than one route. The shorter one earns three stars.':
+        'Hay más de una ruta. La más corta te da tres estrellas.',
+      'Read the whole map first. Every wrong turn is a crash, and a crash tells you which step was wrong.':
+        'Lee todo el mapa primero. Cada giro equivocado es un choque, y un choque te dice cuál paso estuvo mal.',
+      'The same map as the zigzag, but Main holds only 4 slots. One function, repeated.':
+        'El mismo mapa que el zigzag, pero Principal solo tiene 4 espacios. Una función, repetida.',
+      'Two stars now. Collect both, in whichever order is shorter.':
+        'Ahora son dos estrellas. Junta las dos, en el orden que resulte más corto.',
+      'Three stars. The order you choose decides whether you get three stars or one.':
+        'Tres estrellas. El orden que elijas decide si te llevas tres estrellas o una.',
+      'Only 3 slots. Walk four, turn, and repeat that whole thing.':
+        'Solo 3 espacios. Camina cuatro, gira, y repite todo eso.',
+      'Three stars along the top. Find the pattern that gets from one to the next.':
+        'Tres estrellas arriba. Encuentra el patrón que te lleva de una a la siguiente.',
+      'New tool: conditions. Give a chip "If blocked ahead" and it only runs when something is in the way. Try F1 = forward if clear, turn right if blocked. Then call F1 nine times.':
+        'Herramienta nueva: las condiciones. Dale a una ficha "Si está bloqueado adelante" y solo se ejecuta cuando algo estorba. Prueba F1 = adelante si está libre, girar a la derecha si está bloqueado. Luego llama a F1 nueve veces.',
+      'The exact same F1 as the last level solves this one too. That is the whole point of a function: write it once, use it anywhere.':
+        'El mismo F1 exacto del nivel anterior también resuelve este. De eso se trata una función: la escribes una vez y la usas donde sea.',
+      'Two stars, and still the exact same two-chip function. A rule that says "go if you can, turn if you cannot" walks the whole lap on its own. You may need to call F1 more than nine times, so use both Main slots.':
+        'Dos estrellas, y sigue siendo la misma función de dos fichas. Una regla que dice "avanza si puedes, gira si no puedes" recorre la vuelta entera sola. Puede que necesites llamar a F1 más de nueve veces, así que usa los dos espacios de Principal.',
+      'The same map, but Main now has a single slot, so no repeat count is large enough. Put forward-if-clear and turn-if-blocked in F1, then let F1 call itself at the end. It repeats until it wins. That is a loop that never needed a number.':
+        'El mismo mapa, pero ahora Principal tiene un solo espacio, así que ningún número de repeticiones alcanza. Pon adelante-si-está-libre y girar-si-está-bloqueado en F1, y luego deja que F1 se llame a sí misma al final. Se repite hasta ganar. Ese es un bucle que nunca necesitó un número.',
+      '<span class="label">Why this is the important page</span>Reading about code teaches you almost nothing. <b>You learn by trying it, breaking it, and fixing it.</b> Everything else in this academy exists to get you here. Logic Lab has 14 levels, a new challenge every day, endless generated levels, and an editor so you can build your own and send them to friends. Code Lab actually runs your code and measures the result, exactly like a real test at a real job.':
+        '<span class="label">Por qué esta es la página importante</span>Leer sobre código no te enseña casi nada. <b>Aprendes intentándolo, rompiéndolo y arreglándolo.</b> Todo lo demás en esta academia existe para traerte hasta aquí. Logic Lab tiene 14 niveles, un reto nuevo cada día, niveles generados sin fin, y un editor para que armes los tuyos y se los mandes a tus amigos. Code Lab de verdad ejecuta tu código y mide el resultado, igual que una prueba real en un trabajo real.',
+      /* ===== Courses roadmap, every card ===== */
+      'HTML, CSS, JavaScript, responsive design, and React. Build real websites and web apps.':
+        'HTML, CSS, JavaScript, diseño responsivo y React. Construye sitios y apps web de verdad.',
+      'How the web works, APIs, databases, auth, and deploy.':
+        'Cómo funciona la web, APIs, bases de datos, autenticación y despliegue.',
+      'Python, APIs, n8n, self-hosting, and AI agents.':
+        'Python, APIs, n8n, autoalojamiento y agentes de IA.',
+      'LLMs, prompt engineering, RAG, and agents.':
+        'LLMs, ingeniería de prompts, RAG y agentes.',
+      'Modeling, SQL, transactions, indexing, and RLS.':
+        'Modelado, SQL, transacciones, índices y RLS.',
+      'What cloud is, deploy at scale, and AWS certs.':
+        'Qué es la nube, desplegar a escala y certificaciones de AWS.',
+      'Secure the software you build.':'Asegura el software que construyes.',
+      'SQL, Python, dashboards, and stats.':'SQL, Python, tableros y estadística.',
+      'Logic Lab and Code Lab. Puzzles and a real editor. The fastest way to find out whether you actually enjoy this.':
+        'Logic Lab y Code Lab. Acertijos y un editor de verdad. La forma más rápida de descubrir si esto realmente te gusta.',
+      '42 official free courses from Google, Meta, Amazon, Microsoft, IBM and Cisco, sorted by topic.':
+        '42 cursos oficiales y gratuitos de Google, Meta, Amazon, Microsoft, IBM y Cisco, ordenados por tema.',
+      'Six questions, and the academy suggests a track based on how you actually answered.':
+        'Seis preguntas, y la academia te sugiere una ruta según lo que de verdad respondiste.',
+      'What the workshop is, what students walk away with, and how to book one.':
+        'Qué es el taller, qué se llevan los estudiantes, y cómo reservar uno.',
+      /* ===== Community rules, in full ===== */
+      'rule 1':'regla 1','rule 2':'regla 2','rule 3':'regla 3','rule 4':'regla 4',
+      'There are no private messages in this academy, and there never will be. Every post has your name on it and a teacher can read all of it. That is what makes a student community safe.':
+        'En esta academia no hay mensajes privados, y nunca los va a haber. Cada publicación lleva tu nombre y un profesor puede leerla toda. Eso es lo que hace segura a una comunidad de estudiantes.',
+      "No phone number, no email, no WhatsApp, no Instagram, no Discord. Not yours and not anyone else’s. If somebody asks you for it, report them instead of answering.":
+        'Ni número de teléfono, ni correo, ni WhatsApp, ni Instagram, ni Discord. Ni el tuyo ni el de nadie más. Si alguien te lo pide, repórtalo en vez de responder.',
+      'Nobody here is stupid, they are just earlier than you. You were there last month. Insults get the account removed, and that is the whole process.':
+        'Aquí nadie es tonto, solo van más atrás que tú. Tú estabas ahí el mes pasado. Los insultos hacen que se elimine la cuenta, y ese es todo el proceso.',
+      'Say what was wrong AND why. "Add a semicolon" teaches nothing. "The line before it never ended, so JavaScript read both lines as one" teaches everything.':
+        'Di qué estuvo mal Y por qué. "Agrega un punto y coma" no enseña nada. "La línea anterior nunca terminó, así que JavaScript leyó las dos líneas como una" lo enseña todo.',
+      '<span class="label">If something is wrong</span>Press <b>Report</b> on any post. Three reports hide it immediately until a person reads it. If a post frightens you or somebody asks to talk to you privately, report it and tell an adult you trust. You will never get in trouble for reporting something.':
+        '<span class="label">Si algo está mal</span>Aprieta <b>Reportar</b> en cualquier publicación. Tres reportes la ocultan de inmediato hasta que una persona la lea. Si una publicación te asusta o alguien te pide hablar en privado, repórtalo y dile a un adulto de confianza. Nunca te vas a meter en problemas por reportar algo.',
+      /* ===== Profile ===== */
+      'Tick your first lesson to unlock <b>First step</b>.':
+        'Marca tu primera lección para desbloquear <b>Primer paso</b>.',
+      'XP total':'XP en total','of 100 to level':'de 100 para el nivel',
+      'random beaten':'aleatorios superados','levels':'niveles',
       /* --- element-level prose, keyed on the inner markup --- */
       'Two labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all: sequencing, loops, functions and debugging, as a puzzle. It is the part everyone skips and then struggles with forever. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.':
         'Dos laboratorios, en este orden. El <b>Laboratorio de Lógica</b> te enseña a pensar en pasos sin nada de código: secuencias, bucles, funciones y depuración, como un rompecabezas. Es la parte que todos se saltan y con la que luego sufren para siempre. Después el <b>Laboratorio de Código</b> te da un editor de verdad y una vista en vivo para escribir HTML, CSS y JavaScript reales.',
@@ -7446,6 +7685,139 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       });
       var n;while((n=w.nextNode()))fn(n);
     }
+    /* ---- filling the gaps ----
+       The curated dictionary above is the quality tier and always wins.
+       Everything it does not cover is translated by the browser's own
+       on-device model and cached, so "Spanish" means all of it rather
+       than most of it. If the browser has no model, a block stays fully
+       English rather than half-and-half, and the sidebar says so. */
+    var ESAUTO={}, AUTO_STATE='idle', AUTO_LEFT=0, AUTO_TR=null;
+    function autoLoad(){try{ESAUTO=JSON.parse(localStorage.getItem('fm.es.auto')||'{}')||{};}catch(e){ESAUTO={};}}
+    function autoSave(){try{localStorage.setItem('fm.es.auto',JSON.stringify(ESAUTO));}catch(e){}}
+    /* Strings the app builds at runtime (a name, a level number, an XP total)
+       can never be dictionary keys, so they get patterns instead. Each one
+       rebuilds the sentence in Spanish and looks the variable parts back up,
+       which is why a level title inside a heading still translates. */
+    var DYN=[
+      [/^Welcome back, (.+)\.$/, function(m){return 'Hola de nuevo, '+m[1]+'.';}],
+      [/^(.*)<em>level (\d+)<\/em>$/, function(m){
+        var n=trBase(m[1]); return (n||m[1])+'<em>nivel '+m[2]+'</em>';}],
+      [/^Reach the star\. Perfect play is <b>(\d+) steps<\/b>, which is three stars\.$/, function(m){
+        return 'Llega a la estrella. El juego perfecto son <b>'+m[1]+' pasos</b>, que valen tres estrellas.';}],
+      [/^Collect all <b>(\d+) stars<\/b>, in any order\. Perfect play is <b>(\d+) steps<\/b>, which is three stars\.$/, function(m){
+        return 'Junta las <b>'+m[1]+' estrellas</b>, en el orden que quieras. El juego perfecto son <b>'+m[2]+' pasos</b>, que valen tres estrellas.';}],
+      [/^You are level (\d+), (.+), with (\d+) lessons behind you\. Pick up where you stopped\.$/, function(m){
+        return 'Vas en el nivel '+m[1]+', '+(trBase(m[2])||m[2])+', con '+m[3]+' lecciones ya hechas. Sigue donde lo dejaste.';}],
+      [/^(\d+) XP total, (\d+) of 100 to level (\d+)(.*)$/, function(m){
+        return m[1]+' XP en total, '+m[2]+' de 100 para el nivel '+m[3]+(trBase(m[4].trim())||m[4]);}],
+      [/^(\d+) \/ 100 XP to level (\d+)$/, function(m){
+        return m[1]+' / 100 XP para el nivel '+m[2];}],
+      [/^level (\d+), (.+)$/, function(m){
+        return 'nivel '+m[1]+', '+(trBase(m[2])||m[2]);}],
+      [/^· (\d+) day streak$/, function(m){
+        return '· racha de '+m[1]+(m[1]==='1'?' día':' días');}],
+      [/^Next up: (.+)$/, function(m){
+        return 'Lo siguiente: '+(trBase(m[1])||m[1]);}],
+      [/^(\d+) of (\d+) levels · (\d+) random beaten$/, function(m){
+        return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}],
+      [/^Solved in (\d+) steps$/, function(m){
+        return 'Resuelto en '+m[1]+' pasos';}]
+    ];
+    function trBase(key){var k=(key||'').trim();return ES[k]||ESAUTO[k]||null;}
+    function tr(key){
+      var k=(key||'').trim(), hit=ES[k]||ESAUTO[k];
+      if(hit)return hit;
+      for(var i=0;i<DYN.length;i++){
+        var m=k.match(DYN[i][0]);
+        if(m)return DYN[i][1](m);
+      }
+      return null;
+    }
+
+    /* a block may only turn Spanish if every part of it can */
+    function fullyTranslatable(el){
+      var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),n,any=false;
+      while((n=w.nextNode())){
+        var t=n.nodeValue.trim();
+        if(!t)continue;
+        any=true;
+        if(!tr(t))return false;
+      }
+      return any;
+    }
+    /* every string still needing a translation, units first */
+    function missingKeys(){
+      var out=[],seen={},els=unitElements(),i,el,k;
+      for(i=0;i<els.length;i++){
+        el=els[i];
+        k=normKey(ORIGHTML.has(el)?ORIGHTML.get(el):el.innerHTML);
+        if(k&&!tr(k)&&!seen[k]&&k.length<1200&&/[A-Za-z]{3}/.test(k)){seen[k]=1;out.push(k);}
+      }
+      walkTextAll(document.body,function(n){
+        var t=(ORIG.has(n)?ORIG.get(n):n.nodeValue).trim();
+        if(t&&!tr(t)&&!seen[t]&&t.length<1200&&/[A-Za-z]{3}/.test(t)){seen[t]=1;out.push(t);}
+      });
+      return out;
+    }
+    function walkTextAll(root,fn){
+      var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+        acceptNode:function(n){
+          if(!n.nodeValue||!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;
+          var p=n.parentElement;
+          while(p){
+            if(SKIP_TAGS[p.tagName])return NodeFilter.FILTER_REJECT;
+            if(p.hasAttribute&&p.hasAttribute('data-noi18n'))return NodeFilter.FILTER_REJECT;
+            p=p.parentElement;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }});
+      var n;while((n=w.nextNode()))fn(n);
+    }
+    async function getAutoTranslator(){
+      if(AUTO_TR)return AUTO_TR;
+      if(!('Translator' in self))return null;
+      try{
+        AUTO_TR=await withTimeout(Translator.create({sourceLanguage:'en',targetLanguage:'es'}),8000);
+        return AUTO_TR;
+      }catch(e){return null;}
+    }
+    async function autoFill(){
+      if(LANG!=='es'||AUTO_STATE==='running'||AUTO_STATE==='unavailable')return;
+      var keys=missingKeys();
+      if(!keys.length){AUTO_STATE='done';AUTO_LEFT=0;renderAutoBadge();return;}
+      AUTO_STATE='running';AUTO_LEFT=keys.length;renderAutoBadge();
+      var t=await getAutoTranslator();
+      if(!t){AUTO_STATE='unavailable';renderAutoBadge();return;}
+      var i,done=0;
+      for(i=0;i<keys.length;i++){
+        var k=keys[i];
+        try{
+          var v=await withTimeout(t.translate(k),6000);
+          if(v&&v!==k)ESAUTO[k]=v;
+        }catch(e){AUTO_STATE='unavailable';renderAutoBadge();return;}
+        done++;AUTO_LEFT=keys.length-done;
+        if(done%25===0){autoSave();applyLang();renderAutoBadge();
+          await new Promise(function(r){setTimeout(r,0);});}
+      }
+      autoSave();AUTO_STATE='done';AUTO_LEFT=0;applyLang();renderAutoBadge();
+    }
+    function renderAutoBadge(){
+      var el=document.getElementById('autobadge');
+      if(!el){
+        var row=document.querySelector('.langrow');
+        if(!row)return;
+        el=document.createElement('div');el.id='autobadge';el.className='autobadge';
+        el.setAttribute('data-noi18n','1');
+        row.appendChild(el);
+      }
+      if(LANG!=='es'){el.hidden=true;return;}
+      el.hidden=false;
+      if(AUTO_STATE==='running'){el.className='autobadge work';el.textContent='Traduciendo el resto… '+AUTO_LEFT;}
+      else if(AUTO_STATE==='unavailable'){el.className='autobadge warn';
+        el.textContent='Tu navegador no puede traducir lo que falta. Esas partes se quedan en inglés.';}
+      else {el.hidden=true;}
+    }
+
     function applyLang(){
       /* this function is hoisted but its lookup tables are not; showPage runs
          before they are assigned, so do nothing until initLang has run */
@@ -7457,14 +7829,21 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         if(!ORIGHTML.has(el))ORIGHTML.set(el,el.innerHTML);
         var orig=ORIGHTML.get(el);
         key=normKey(orig);
-        hit=toEs?ES[key]:null;
+        hit=toEs?tr(key):null;
         /* Owned by this pass either way. A block is translated whole or
            left in English whole; it is never half of each. */
-        el.setAttribute('data-i18n-unit','1');
         if(hit){
+          /* curated translation for the whole block, tags and all */
+          el.setAttribute('data-i18n-unit','1');
           if(normKey(el.innerHTML)!==normKey(hit))el.innerHTML=hit;
-        }else if(normKey(el.innerHTML)!==key){
-          el.innerHTML=orig;
+        }else if(toEs&&fullyTranslatable(el)){
+          /* no whole-block entry, but every piece inside can be translated,
+             so hand it to the per-node pass and it will come out all Spanish */
+          el.removeAttribute('data-i18n-unit');
+        }else{
+          /* cannot be fully translated, so keep it fully English */
+          el.setAttribute('data-i18n-unit','1');
+          if(normKey(el.innerHTML)!==key)el.innerHTML=orig;
         }
       }
       /* pass 2: loose text nodes the block pass did not own */
@@ -7472,7 +7851,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         if(!ORIG.has(n))ORIG.set(n,n.nodeValue);
         var en=ORIG.get(n);
         if(!toEs){if(n.nodeValue!==en)n.nodeValue=en;return;}
-        var h=ES[en.trim()];
+        var h=tr(en.trim());
         if(h){
           var next=en.match(/^\s*/)[0]+h+en.match(/\s*$/)[0];
           if(n.nodeValue!==next)n.nodeValue=next;
@@ -7491,6 +7870,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       applyLang();
       if(typeof buildRail==='function'&&CURPAGE)buildRail(CURPAGE);
       renderLangBtn();
+      renderAutoBadge();
+      if(LANG==='es')setTimeout(autoFill,60);
       if(announce&&LANG==='es'){
         toast('Español activado. Lo que aún no está traducido se queda en inglés, y puedes seleccionar cualquier palabra para ver qué significa.',{timeout:7000});
       }
@@ -7505,6 +7886,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     function initLang(){
       LANG=langLoad();
       LANG_READY=true;
+      autoLoad();
       var host=document.querySelector('.sidefoot');
       if(host&&!document.getElementById('langbtn')){
         var wrap=document.createElement('div');
@@ -7524,6 +7906,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       }
       renderLangBtn();
       applyLang();
+      renderAutoBadge();
+      if(LANG==='es')setTimeout(autoFill,300);
     }
 
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();}

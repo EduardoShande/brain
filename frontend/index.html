@@ -6999,6 +6999,449 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'Answer like you wish someone had answered you':'Responde como te hubiera gustado que te respondieran',
       /* --- profile --- */
       'Longest ever':'La más larga','longest':'la más larga',
+      /* ===== Automation: roadmap, builds, resources ===== */
+      "← All pages":"← Todas las páginas","The role":"El rol","What you build":"Qué construyes",
+      "Getting paid":"Cobrar","The trap":"La trampa","The verdict":"El veredicto","The offer":"La oferta",
+      "REST auth + one SQL DB":"Autenticación REST + una base SQL",
+      "Single reliable LLM calls, then tool-calling, then multi-step agents with memory and evals.":
+        "Llamadas confiables a un LLM, luego llamada a herramientas, y luego agentes de varios pasos con memoria y evaluaciones.",
+      "Curated, current, mostly free. Open one per stage and actually work through it. Do not collect them.":
+        "Seleccionados, actuales, casi todos gratis. Abre uno por etapa y trabájalo de verdad. No los coleccciones.",
+      "HTTP & JSON: methods, status codes, request and response":
+        "HTTP y JSON: métodos, códigos de estado, petición y respuesta",
+      "Automate one boring task end to end as a Python script: rename a folder of files, scrape a page into a spreadsheet, or email yourself a daily summary.":
+        "Automatiza una tarea aburrida de principio a fin con un script de Python: renombra una carpeta de archivos, extrae una página a una hoja de cálculo, o mándate por correo un resumen diario.",
+      "Automate the Boring Stuff with Python":"Automate the Boring Stuff with Python",
+      ", free online, the classic starting point.":", gratis en línea, el punto de partida clásico.",
+      "Webhooks: receive real-time events from other apps":
+        "Webhooks: recibir eventos en tiempo real de otras apps",
+      "→ SELECT / INSERT / UPDATE / DELETE, INNER & LEFT JOIN, GROUP BY, indexes, keys":
+        "→ SELECT / INSERT / UPDATE / DELETE, INNER y LEFT JOIN, GROUP BY, índices, llaves",
+      "Files & formats: CSV, JSON, Sheets and Excel":"Archivos y formatos: CSV, JSON, Sheets y Excel",
+      "Postman: test and explore APIs before you wire them":
+        "Postman: prueba y explora APIs antes de conectarlas",
+      "On a schedule, pull data from a public API (weather, exchange rates, a CRM sandbox), clean it, and store rows in Postgres.":
+        "De forma programada, trae datos de una API pública (clima, tipos de cambio, un CRM de prueba), límpialos, y guarda las filas en Postgres.",
+      "→ triggers, nodes, expressions {{ }}, IF / Switch, error workflow, sub-workflows":
+        "→ disparadores, nodos, expresiones {{ }}, IF / Switch, flujo de errores, subflujos",
+      "Zapier & Make: fast client-facing wins; most clients already use one":
+        "Zapier y Make: victorias rápidas de cara al cliente; la mayoría ya usa alguno",
+      "Schedulers & cron: run work on a timetable":"Programadores y cron: ejecutar trabajo con horario",
+      "Airtable / Sheets as a backend: the glue in most SMB automations":
+        "Airtable o Sheets como backend: el pegamento de casi toda automatización para pymes",
+      "Rebuild three tasks you now do by hand as n8n workflows, each with real error handling and a notification when it fails.":
+        "Reconstruye tres tareas que hoy haces a mano como flujos de n8n, cada uno con manejo de errores real y una notificación cuando falle.",
+      "(official), then Class Central's roundup of n8n courses.":
+        "(oficial), y luego la recopilación de cursos de n8n de Class Central.",
+      "LLM APIs: call Claude or OpenAI, get reliable structured JSON out":
+        "APIs de LLMs: llama a Claude o a OpenAI y obtén JSON estructurado y confiable",
+      "→ tool schema, arguments, execute the call, feed the result back to the model":
+        "→ esquema de la herramienta, argumentos, ejecutar la llamada, devolverle el resultado al modelo",
+      "RAG: embeddings plus a vector DB so the model uses your data":
+        "RAG: embeddings más una base vectorial para que el modelo use tus datos",
+      "Memory & state: context that survives across steps":
+        "Memoria y estado: contexto que sobrevive entre pasos",
+      "Evals & guardrails: measure quality; keep agents from misbehaving":
+        "Evaluaciones y barreras: medir la calidad y evitar que los agentes se porten mal",
+      "→ test set, LLM-as-judge, output validation, input / output filters":
+        "→ conjunto de prueba, LLM como juez, validación de salida, filtros de entrada y salida",
+      "Build one real agent: it reads a document, decides something, and acts across two tools (classify an email, then draft a reply and file it). Add one eval that scores its output.":
+        "Construye un agente real: lee un documento, decide algo, y actúa con dos herramientas (clasifica un correo, y luego redacta una respuesta y la archiva). Agrégale una evaluación que califique su resultado.",
+      "(free, certified), then DeepLearning.AI's":"(gratis, con certificado), y luego el de DeepLearning.AI",
+      "AI Agents in LangGraph":"AI Agents in LangGraph",
+      "Docker: self-host n8n and your tools cheaply":
+        "Docker: autoaloja n8n y tus herramientas de forma barata",
+      "VPS / cloud basics: deploy on a $5 to $20 per month server":
+        "Fundamentos de VPS y nube: publica en un servidor de 5 a 20 dólares al mes",
+      "→ exponential backoff, dead-letter queue, idempotency keys, at-least-once":
+        "→ reintentos con espera exponencial, cola de mensajes fallidos, llaves de idempotencia, entrega al menos una vez",
+      "Monitoring & alerting: know it broke before the client does":
+        "Monitoreo y alertas: enterarte de que se rompió antes que el cliente",
+      "→ health checks, uptime monitor, logs, alerts to phone / Slack":
+        "→ chequeos de salud, monitor de disponibilidad, registros, alertas al teléfono o a Slack",
+      "Secrets management: where security and automation meet":
+        "Gestión de secretos: donde se encuentran la seguridad y la automatización",
+      "→ env vars, .env files, secret store, key rotation, never in the frontend":
+        "→ variables de entorno, archivos .env, bóveda de secretos, rotación de llaves, nunca en el frontend",
+      "Move your best n8n workflow off your laptop: self-host it on a VPS with Docker, add backups, and wire a failure alert to your phone.":
+        "Saca tu mejor flujo de n8n de tu laptop: autoalójalo en un VPS con Docker, agrega respaldos, y conecta una alerta de fallo a tu teléfono.",
+      "and the":"y el",". You already do most of this at work.":". Ya haces casi todo esto en el trabajo.",
+      "The business layer":"La capa de negocio",
+      "Process discovery: interview a team, find what's worth automating":
+        "Descubrimiento de procesos: entrevista a un equipo y encuentra qué vale la pena automatizar",
+      "→ shadow the work, process mapping, time-per-task, pick ROI candidates":
+        "→ acompaña el trabajo, mapea el proceso, mide el tiempo por tarea, elige los candidatos con mejor retorno",
+      "Scoping & pricing: fixed fee vs. retainer, and when":
+        "Alcance y precio: tarifa fija contra iguala, y cuándo",
+      "→ deliverables, statement of work, fixed fee vs retainer, change requests":
+        "→ entregables, documento de alcance, tarifa fija contra iguala, solicitudes de cambio",
+      "SOPs & handoff: docs that make a client renew, not ghost":
+        "Procedimientos y entrega: documentos que hacen que un cliente renueve en vez de desaparecer",
+      "Maintenance retainers: recurring revenue from keeping flows alive":
+        "Igualas de mantenimiento: ingresos recurrentes por mantener los flujos vivos",
+      "Map one real process for someone you know, end to end, and quote it with a concrete hours-saved-per-month number attached.":
+        "Mapea un proceso real para alguien que conozcas, de principio a fin, y cotízalo con un número concreto de horas ahorradas al mes.",
+      "Model your first offers on real workflow automation examples, then bring one to":
+        "Modela tus primeras ofertas sobre ejemplos reales de automatización de flujos, y luego lleva una a",
+      "to price it.":"para ponerle precio.",
+      "generate offer letter for e-sign":"genera la carta oferta para firma electrónica",
+      "open an IT ticket for accounts":"abre un ticket de sistemas para las cuentas",
+      "add to payroll & schedule a day-1 check-in":"agrégalo a la planilla y agenda una reunión del día 1",
+      ", and nothing gets dropped on a new hire's first day.":
+        ", y no se cae nada el primer día de alguien nuevo.",
+      "pull sales from CRM + database":"trae las ventas del CRM y de la base de datos",
+      "post to Slack & email the team":"publica en Slack y manda correo al equipo",
+      "Saves hours every month and the report":"Ahorra horas cada mes y el reporte",
+      "alert the right rep":"avisa al vendedor correcto","Leads answered in":"Prospectos atendidos en",
+      ", not the next business day.":", no al siguiente día hábil.",
+      "store in Airtable":"guarda en Airtable","queue for human review":"deja en cola para revisión humana",
+      "One post becomes":"Una publicación se convierte en",
+      ", with a person only approving.":", y una persona solo aprueba.",
+      "push to accounting, flag exceptions":"envía a contabilidad y marca las excepciones",
+      "No more manual data entry. Humans":"Se acabó la carga manual de datos. Los humanos",
+      "only touch the odd ones":"solo tocan los casos raros",
+      "drafts a reply using RAG over your docs":"redacta una respuesta usando RAG sobre tus documentos",
+      "auto-answers simple ones, routes the rest":"responde solo las simples y deriva el resto",
+      "Faster first response, and":"Primera respuesta más rápida, y",
+      "agents focus on the hard tickets":"los agentes se enfocan en los tickets difíciles",
+      "The canonical way to learn practical Python. Full 3rd edition online.":
+        "La forma canónica de aprender Python práctico. La 3ra edición completa en línea.",
+      "Visual skill roadmaps (Backend, DevOps, SQL) to fill gaps in order.":
+        "Rutas visuales de habilidades (Backend, DevOps, SQL) para llenar huecos en orden.",
+      "Call, test, and debug APIs before wiring them into a workflow.":
+        "Llama, prueba y depura APIs antes de conectarlas a un flujo.",
+      "Free · hands-on":"Gratis · práctico",
+      "Learn SQL in the browser, one short exercise at a time.":
+        "Aprende SQL en el navegador, un ejercicio corto a la vez.",
+      "The official hands-on course. Fastest path to billable workflows.":
+        "El curso práctico oficial. El camino más rápido a flujos que puedes facturar.",
+      "Nodes, expressions, hosting. The reference you keep open daily.":
+        "Nodos, expresiones, alojamiento. La referencia que tienes abierta a diario.",
+      "Fundamentals through frameworks (LangGraph, smolagents), with certificates.":
+        "Desde los fundamentos hasta los frameworks (LangGraph, smolagents), con certificados.",
+      "Go deep on explicit agent state and control flow.":
+        "Profundiza en el estado explícito del agente y el flujo de control.",
+      "Reliable structured output and tool use from an LLM.":
+        "Salida estructurada confiable y uso de herramientas desde un LLM.",
+      "This is where the money and the moat are, and it is the exact skill the":
+        "Aquí es donde están el dinero y la ventaja defensiva, y es exactamente la habilidad a la que apuntan los datos de",
+      "data points to. Below is the mental model, a deeper hands-on path with its own progress, and every resource worth your time. Anthropic's core rule sits over all of it:":
+        ". Abajo está el modelo mental, un camino práctico más profundo con su propio progreso, y todos los recursos que valen tu tiempo. La regla central de Anthropic está por encima de todo:",
+      "start simple, and add complexity only when it earns its place.":
+        "empieza simple, y agrega complejidad solo cuando se gane su lugar.",
+      "Get structured JSON out of an LLM every time, with a schema":
+        "Obtén JSON estructurado de un LLM siempre, con un esquema",
+      "→ JSON schema, response format, validation, retry on malformed output":
+        "→ esquema JSON, formato de respuesta, validación, reintento si la salida viene mal formada",
+      "Make one clean tool / function call and handle the result":
+        "Haz una llamada limpia a una herramienta o función y maneja el resultado",
+      "Understand the Thought → Action → Observation loop cold":
+        "Entiende al derecho y al revés el bucle Pensamiento → Acción → Observación",
+      "→ the loop, stop conditions, max iterations, when to end":
+        "→ el bucle, las condiciones de parada, el máximo de iteraciones, cuándo terminar",
+      "Take a task you already automate in n8n and replace one rule-based step with a single, schema-validated LLM call.":
+        "Toma una tarea que ya automatizas en n8n y reemplaza un paso basado en reglas con una sola llamada a un LLM validada por esquema.",
+      "Anthropic, Building Effective AI Agents, and the Hugging Face Agents Course, unit 1.":
+        "Anthropic, Building Effective AI Agents, y el curso de agentes de Hugging Face, unidad 1.",
+      "Give a model several tools and let it choose between them":
+        "Dale al modelo varias herramientas y deja que elija entre ellas",
+      "Build a basic MCP server exposing one tool (tools, resources, prompts)":
+        "Construye un servidor MCP básico que exponga una herramienta (herramientas, recursos, prompts)",
+      "Stand up a small RAG pipeline: embed docs, retrieve, answer from them":
+        "Levanta un pipeline de RAG pequeño: incrusta documentos, recupéralos, y responde desde ellos",
+      "Build a RAG bot over your own notes, then expose one action as an MCP tool so Claude can call it.":
+        "Construye un bot RAG sobre tus propias notas, y luego expón una acción como herramienta MCP para que Claude pueda llamarla.",
+      "Anthropic's Intro to MCP course, the MCP docs, and a LangChain RAG tutorial.":
+        "El curso Intro a MCP de Anthropic, la documentación de MCP, y un tutorial de RAG con LangChain.",
+      "Build a multi-step agent with LangGraph or CrewAI":
+        "Construye un agente de varios pasos con LangGraph o CrewAI",
+      "Add memory and state that survive across the loop":
+        "Agrega memoria y estado que sobrevivan a lo largo del bucle",
+      "Apply the five patterns: chaining, routing, parallelization, orchestrator, evaluator":
+        "Aplica los cinco patrones: encadenamiento, enrutamiento, paralelización, orquestador, evaluador",
+      "Build an agent that reads a document, decides, and acts across two tools, using an orchestrator-workers or evaluator-optimizer pattern.":
+        "Construye un agente que lea un documento, decida, y actúe con dos herramientas, usando el patrón orquestador-trabajadores o evaluador-optimizador.",
+      "DeepLearning.AI's AI Agents in LangGraph, and Multi-AI-Agent Systems with crewAI.":
+        "AI Agents in LangGraph de DeepLearning.AI, y Multi-AI-Agent Systems with crewAI.",
+      "Write evals that score agent output so you can improve it safely":
+        "Escribe evaluaciones que califiquen la salida del agente para poder mejorarlo con seguridad",
+      "→ golden set, scoring, regression tests, LLM-as-judge":
+        "→ conjunto de referencia, puntuación, pruebas de regresión, LLM como juez",
+      "Add guardrails: keep the agent on-task and safe":
+        "Agrega barreras: mantén al agente en su tarea y seguro",
+      "→ allow / deny lists, output filters, human-in-the-loop approval":
+        "→ listas de permitidos y bloqueados, filtros de salida, aprobación de una persona en el circuito",
+      "Monitoring, logging, and cost control on every run":
+        "Monitoreo, registro y control de costos en cada ejecución",
+      "Deploy it, self-hosted in n8n or as its own service":
+        "Publícalo, autoalojado en n8n o como su propio servicio",
+      "Wrap your stage-3 agent with an eval set and a spend cap, then deploy it where a real user can hit it.":
+        "Envuelve tu agente de la etapa 3 con un conjunto de evaluaciones y un tope de gasto, y luego publícalo donde un usuario real pueda usarlo.",
+      "n8n Advanced AI docs for deployment, and Anthropic's Writing tools for agents.":
+        "La documentación de IA avanzada de n8n para el despliegue, y Writing tools for agents de Anthropic.",
+      "The reference. Workflows vs agents and the five patterns. Read it twice.":
+        "La referencia. Flujos contra agentes y los cinco patrones. Léela dos veces.",
+      "Anthropic, Writing tools for agents":"Anthropic, Writing tools for agents",
+      "How to design tools an agent can actually use well.":
+        "Cómo diseñar herramientas que un agente de verdad pueda usar bien.",
+      "Courses · build the skill":"Cursos · construye la habilidad",
+      "Fundamentals through smolagents, LlamaIndex, and LangGraph. Two free certificates.":
+        "Desde los fundamentos hasta smolagents, LlamaIndex y LangGraph. Dos certificados gratis.",
+      "DeepLearning.AI, AI Agents in LangGraph":"DeepLearning.AI, AI Agents in LangGraph",
+      "Explicit agent state and control flow, hands-on.":
+        "Estado explícito del agente y flujo de control, con las manos.",
+      "DeepLearning.AI, Multi-AI-Agent Systems with crewAI":"DeepLearning.AI, Multi-AI-Agent Systems with crewAI",
+      "Multiple agents cooperating on a task.":"Varios agentes cooperando en una tarea.",
+      "Official free LangGraph courses from the framework's makers.":
+        "Cursos oficiales y gratuitos de LangGraph, de quienes hicieron el framework.",
+      "In n8n · your delivery tool":"En n8n · tu herramienta de entrega",
+      "AI agent nodes, cluster nodes, and how to wire them. Your daily reference.":
+        "Nodos de agente de IA, nodos de clúster, y cómo conectarlos. Tu referencia diaria.",
+      "n8n, Build an AI workflow (tutorial)":"n8n, Construye un flujo con IA (tutorial)",
+      "The official walkthrough that builds a working AI chat agent.":
+        "El recorrido oficial que construye un agente de chat con IA que funciona.",
+      "MCP · give models your tools":"MCP · dale tus herramientas a los modelos",
+      "Anthropic, Introduction to MCP":"Anthropic, Introducción a MCP",
+      "Build MCP servers and clients with the Python SDK: tools, resources, prompts.":
+        "Construye servidores y clientes MCP con el SDK de Python: herramientas, recursos, prompts.",
+      "The spec and quickstarts. Build your first server.":
+        "La especificación y las guías rápidas. Construye tu primer servidor.",
+      "Microsoft, MCP for Beginners":"Microsoft, MCP para principiantes",
+      "Open curriculum with runnable examples across several languages.":
+        "Currículo abierto con ejemplos ejecutables en varios lenguajes.",
+      "RAG · answer from real data":"RAG · responde desde datos reales",
+      "Embed, retrieve, and answer from your own documents, step by step.":
+        "Incrusta, recupera y responde desde tus propios documentos, paso a paso.",
+      "The one build":"La construcción clave",
+      "See how this becomes a paid offer →":"Mira cómo esto se convierte en una oferta pagada →",
+      "n8n project range, from a single build to an agency retainer.":
+        "Rango de proyectos de n8n, desde una sola construcción hasta una iguala de agencia.",
+      "Automation market, 2026 to 2035. Roughly 24% CAGR.":
+        "Mercado de la automatización, de 2026 a 2035. Alrededor de 24% de crecimiento anual.",
+      "\"AI engineer\", fastest-growing title for young workers in 2026.":
+        "\"Ingeniero de IA\", el puesto que más rápido crece entre los jóvenes en 2026.",
+      "self-host n8n on a cheap VPS and rebuild three of your manual tasks as monitored workflows. That is stages 1, 2, 3, and 5 in one weekend, and your first portfolio piece.":
+        "autoaloja n8n en un VPS barato y reconstruye tres de tus tareas manuales como flujos monitoreados. Eso son las etapas 1, 2, 3 y 5 en un fin de semana, y tu primera pieza de portafolio.",
+      /* ===== Foundations: syllabus lines ===== */
+      "Files, folders, and extensions":"Archivos, carpetas y extensiones",
+      "Git and version control":"Git y el control de versiones",
+      "Everything is numbers, and numbers are switches":"Todo son números, y los números son interruptores",
+      "Why some programs are fast and others crawl":"Por qué algunos programas son rápidos y otros se arrastran",
+      "answers, not apps":"respuestas, no apps","plumbing at scale":"fontanería a gran escala",
+      "Arrive ready, not scared":"Llega preparado, no asustado",
+      "The machine":"La máquina","The web":"La web","Your tools":"Tus herramientas","The jobs":"Los trabajos",
+      "What a computer is":"Qué es una computadora",
+      "Hardware, the parts you can touch":"Hardware, las partes que puedes tocar",
+      "→ CPU is the cook, RAM is the counter, storage is the pantry. Screen, keyboard and mouse are hardware too.":
+        "→ el CPU es el cocinero, la RAM es el mesón, el almacenamiento es la despensa. La pantalla, el teclado y el mouse también son hardware.",
+      "→ the operating system runs everything else, apps do one job each. Hardware is the body, software is the thoughts.":
+        "→ el sistema operativo hace funcionar todo lo demás, y cada app hace una sola tarea. El hardware es el cuerpo, el software son los pensamientos.",
+      "Binary: everything is switches":"Binario: todo son interruptores",
+      "→ 1 and 0, on and off. 8 switches make a byte. The letter A is the number 65. Photos and songs are numbers too.":
+        "→ 1 y 0, encendido y apagado. 8 interruptores hacen un byte. La letra A es el número 65. Las fotos y las canciones también son números.",
+      "What \"running a program\" means":"Qué significa \"ejecutar un programa\"",
+      "→ fetch, decode, execute, repeat, billions of times a second. Every app on Earth is a pile of tiny steps like that.":
+        "→ traer, decodificar, ejecutar, repetir, miles de millones de veces por segundo. Cada app del planeta es un montón de pasitos así.",
+      "The operating system's job":"El trabajo del sistema operativo",
+      "→ shares the CPU between programs, manages memory, owns your files, talks to the hardware so apps do not have to":
+        "→ reparte el CPU entre los programas, administra la memoria, es dueño de tus archivos, y le habla al hardware para que las apps no tengan que hacerlo",
+      "Open Task Manager on Windows (Ctrl+Shift+Esc) or Activity Monitor on Mac and just look. Every line is a program using a slice of the cook and a slice of the counter. That is your operating system doing its job.":
+        "Abre el Administrador de tareas en Windows (Ctrl+Shift+Esc) o el Monitor de Actividad en Mac y simplemente mira. Cada línea es un programa usando un pedazo del cocinero y un pedazo del mesón. Ese es tu sistema operativo haciendo su trabajo.",
+      "Files, folders and your tools":"Archivos, carpetas y tus herramientas",
+      "Files, folders and extensions":"Archivos, carpetas y extensiones",
+      "→ what .html, .css, .js, .py mean, and why the bit after the dot decides how the computer reads a file":
+        "→ qué significan .html, .css, .js y .py, y por qué lo que va después del punto decide cómo lee la computadora un archivo",
+      "Where your things actually are":"Dónde están realmente tus cosas",
+      "→ paths, the difference between saving and saving-as, and finding a file without searching the whole machine":
+        "→ las rutas, la diferencia entre guardar y guardar como, y encontrar un archivo sin buscar en toda la máquina",
+      "→ install VS Code, it is free. Open a folder, not a file. That one habit confuses beginners for months.":
+        "→ instala VS Code, es gratis. Abre una carpeta, no un archivo. Ese solo hábito confunde a los principiantes durante meses.",
+      "The terminal, without fear":"La terminal, sin miedo",
+      "→ about six commands do almost everything: where am I, list, go into, go back, make a folder, run this":
+        "→ unos seis comandos hacen casi todo: dónde estoy, listar, entrar, volver, crear una carpeta, ejecutar esto",
+      "→ ten minutes a day for a month. If you look at the keys, everything you ever do takes twice as long.":
+        "→ diez minutos al día durante un mes. Si miras las teclas, todo lo que hagas te va a tomar el doble de tiempo.",
+      "somewhere you will not lose it. Open it in VS Code. Create a file called":
+        "en algún lugar donde no la pierdas. Ábrela en VS Code. Crea un archivo llamado",
+      ", type the word Hello, save it, and double-click it. Your first web page took ten seconds.":
+        ", escribe la palabra Hola, guárdalo, y haz doble clic. Tu primera página web te tomó diez segundos.",
+      "The internet and the web":"El internet y la web",
+      "→ the internet is the roads, the web is one thing that drives on them. Email and video calls use the roads too.":
+        "→ el internet son las carreteras, la web es una cosa que circula por ellas. El correo y las videollamadas también usan las carreteras.",
+      "What happens when you open a site":"Qué pasa cuando abres un sitio",
+      "→ DNS looks up the address, your browser asks, a server answers, your browser assembles the page. Like ordering a pizza.":
+        "→ el DNS busca la dirección, tu navegador pregunta, un servidor responde, y tu navegador arma la página. Como pedir una pizza.",
+      "→ a page is one page, a site you mostly read, an app you do things in. Gmail is an app, a blog is a site.":
+        "→ una página es una página, un sitio lo lees sobre todo, y en una app haces cosas. Gmail es una app, un blog es un sitio.",
+      "→ what you see, the engine you never see, and the always-on computer the engine runs on. The cloud is rented servers.":
+        "→ lo que ves, el motor que nunca ves, y la computadora siempre encendida donde corre el motor. La nube son servidores alquilados.",
+      "→ what HTTPS actually protects, why password reuse is the real danger, and why two-factor beats a clever password":
+        "→ qué protege realmente HTTPS, por qué reusar contraseñas es el peligro de verdad, y por qué el doble factor le gana a una contraseña ingeniosa",
+      "Press F12 on any website and click Network, then reload the page. You are watching every single request your browser makes. Most people never see this. You just did.":
+        "Aprieta F12 en cualquier sitio web, haz clic en Red, y recarga la página. Estás viendo cada petición que hace tu navegador. La mayoría de la gente nunca ve esto. Tú acabas de verlo.",
+      "Sequence: order is everything":"Secuencia: el orden lo es todo",
+      "→ the computer does exactly what you said, in exactly the order you said it, and nothing else":
+        "→ la computadora hace exactamente lo que dijiste, exactamente en el orden en que lo dijiste, y nada más",
+      "→ a labelled box, a fork in the road, and doing it again. Almost every program ever written is these three plus sequence.":
+        "→ una caja con etiqueta, una bifurcación en el camino, y hacerlo otra vez. Casi todo programa que se ha escrito son estos tres más la secuencia.",
+      "Functions: naming a group of steps":"Funciones: ponerle nombre a un grupo de pasos",
+      "→ spot a pattern that repeats, give it a name, use the name. This is the idea Logic Lab makes you discover yourself.":
+        "→ detecta un patrón que se repite, ponle un nombre, y usa el nombre. Esta es la idea que Logic Lab te hace descubrir por tu cuenta.",
+      "Algorithms and why speed differs":"Algoritmos y por qué cambia la velocidad",
+      "→ checking every name vs opening the phone book in the middle. One takes a million steps, the other takes twenty.":
+        "→ revisar cada nombre contra abrir la guía telefónica por la mitad. Uno toma un millón de pasos, el otro toma veinte.",
+      "→ \"build Instagram\" is impossible, \"show one photo\" is an afternoon. The most valuable skill in this whole academy.":
+        "→ \"construir Instagram\" es imposible, \"mostrar una foto\" es una tarde. La habilidad más valiosa de toda esta academia.",
+      "Abstraction: standing on other people's work":"Abstracción: pararse sobre el trabajo de otros",
+      "→ you drive without knowing the engine. You will code on top of seven layers you did not write, and that is allowed.":
+        "→ manejas sin conocer el motor. Vas a programar encima de siete capas que no escribiste, y eso está permitido.",
+      "in Practice and solve the first five levels. Level 5 is impossible unless you find the repeating pattern and turn it into a function. When that clicks, you have understood something most first-year students have not.":
+        "en Práctica y resuelve los primeros cinco niveles. El nivel 5 es imposible a menos que encuentres el patrón que se repite y lo conviertas en una función. Cuando eso te haga clic, habrás entendido algo que la mayoría de los estudiantes de primer año no entiende.",
+      "→ list, dictionary, stack, queue. Where you put things decides how fast you find them. Undo is a stack.":
+        "→ lista, diccionario, pila, cola. Dónde pones las cosas decide qué tan rápido las encuentras. Deshacer es una pila.",
+      "How work grows with data":"Cómo crece el trabajo con los datos",
+      "→ the idea behind Big O. Doubling the list doubles one approach and adds one step to another.":
+        "→ la idea detrás de Big O. Duplicar la lista duplica un enfoque y le agrega un paso al otro.",
+      "→ human-ish words that get translated into the computer's numbers. The logic is the same in all of them.":
+        "→ palabras parecidas a las humanas que se traducen a los números de la computadora. La lógica es la misma en todos.",
+      "Reading an error message":"Leer un mensaje de error",
+      "→ it names the file, the line and the problem. Beginners panic at red text, professionals read it. That is the whole difference.":
+        "→ te nombra el archivo, la línea y el problema. Los principiantes entran en pánico con el texto rojo, los profesionales lo leen. Esa es toda la diferencia.",
+      "Take one thing you did today, like making breakfast, and write it as numbered steps so exact that someone who has never done it could follow. Miss a step and they fail. That frustration is programming, and you just did it on paper.":
+        "Toma algo que hiciste hoy, como preparar el desayuno, y escríbelo como pasos numerados tan exactos que alguien que nunca lo ha hecho pueda seguirlos. Si te saltas un paso, fallan. Esa frustración es programar, y lo acabas de hacer en papel.",
+      "The tech field and where you fit":"El campo de la tecnología y dónde encajas",
+      "The jobs that actually exist":"Los trabajos que existen de verdad",
+      "→ frontend, backend, data, automation, security, AI, cloud, design, QA, IT support. Read what the days really look like.":
+        "→ frontend, backend, datos, automatización, seguridad, IA, nube, diseño, QA, soporte técnico. Lee cómo son los días de verdad.",
+      "Which ones need heavy maths, and which do not":"Cuáles necesitan matemáticas pesadas y cuáles no",
+      "→ AI and graphics do. Web and automation mostly do not. Choose knowing this, not fearing it.":
+        "→ la IA y los gráficos sí. La web y la automatización casi no. Elige sabiendo esto, no temiéndole.",
+      "Degree or no degree, honestly":"Con título o sin título, honestamente",
+      "→ a degree opens some doors and is not required for most. Without one you need proof, which means things you built.":
+        "→ un título abre algunas puertas y no es obligatorio para la mayoría. Sin él necesitas pruebas, es decir cosas que construiste.",
+      "Take the free path quiz":"Haz el test gratuito de orientación",
+      "→ six questions, and the academy suggests where to start based on how you actually answered":
+        "→ seis preguntas, y la academia te sugiere por dónde empezar según lo que de verdad respondiste",
+      "Pick the two jobs from the list that sound most like you, then find one real person doing each on LinkedIn or YouTube and watch a day in their life. Ten minutes each. It will teach you more than any careers talk.":
+        "Elige los dos trabajos de la lista que más se parezcan a ti, y luego busca en LinkedIn o YouTube a una persona real haciendo cada uno y mira un día de su vida. Diez minutos cada uno. Te va a enseñar más que cualquier charla vocacional.",
+      "Ready for what comes next":"Listo para lo que viene",
+      "The maths that actually shows up":"Las matemáticas que de verdad aparecen",
+      "→ logic and truth tables, basic algebra, percentages, a little probability. Add matrices and calculus only for AI or graphics.":
+        "→ lógica y tablas de verdad, álgebra básica, porcentajes, un poco de probabilidad. Agrega matrices y cálculo solo para IA o gráficos.",
+      "Enough English to read the answer":"Suficiente inglés para leer la respuesta",
+      "→ nearly every good document and error message is in English. Reading is enough to start, and it is a huge unfair advantage.":
+        "→ casi todo documento bueno y mensaje de error está en inglés. Con leer basta para empezar, y es una ventaja injusta enorme.",
+      "How to search and how to ask":"Cómo buscar y cómo preguntar",
+      "→ paste the exact error text, not a description of it. Ask a specific question with what you tried. This is a real skill.":
+        "→ pega el texto exacto del error, no una descripción. Haz una pregunta específica con lo que intentaste. Esta es una habilidad de verdad.",
+      "How to be stuck without quitting":"Cómo estar atascado sin abandonar",
+      "→ stuck is the normal state of the job, not a sign you are failing. Panicking about being stuck is what makes people leave.":
+        "→ estar atascado es el estado normal del trabajo, no una señal de que estás fracasando. Entrar en pánico por estar atascado es lo que hace que la gente se vaya.",
+      "Write one small program before you start":"Escribe un programa pequeño antes de empezar",
+      "→ literally anything. The students who struggle most are the ones for whom all of it is new at once.":
+        "→ literalmente lo que sea. Los estudiantes que más sufren son aquellos para quienes todo es nuevo al mismo tiempo.",
+      "in Practice and solve challenge 1. It takes about a minute. You will have written and run real code before your first day, which is more than most of the room can say.":
+        "en Práctica y resuelve el reto 1. Toma como un minuto. Habrás escrito y ejecutado código real antes de tu primer día, que es más de lo que puede decir casi todo el salón.",
+      "Then":"Después",
+      "Take the final exam on this course. Pass at 80% and you earn your first certificate.":
+        "Rinde el examen final de este curso. Apruébalo con 80% y ganas tu primer certificado.",
+      "Take the free quiz that suggests one →":"Haz el test gratuito que te sugiere uno →",
+      /* ===== Path quiz ===== */
+      "1. Which kind of work sounds most exciting?":"1. ¿Qué tipo de trabajo te suena más emocionante?",
+      "Building systems that run themselves":"Construir sistemas que funcionan solos",
+      "The engine behind apps: servers, APIs, databases":"El motor detrás de las apps: servidores, APIs, bases de datos",
+      "Getting AI to do real, useful work":"Lograr que la IA haga trabajo real y útil",
+      "Finding insights and telling stories with data":"Encontrar hallazgos y contar historias con datos",
+      "Keeping systems and data safe from attackers":"Mantener sistemas y datos a salvo de los atacantes",
+      "Running apps at scale in the cloud":"Operar apps a gran escala en la nube",
+      "2. Pick the win you'd be proudest of:":"2. Elige el logro del que estarías más orgulloso:",
+      "A workflow that saves a business 10 hours a week":"Un flujo que le ahorra 10 horas a la semana a un negocio",
+      "An app that thousands of people rely on":"Una app de la que dependen miles de personas",
+      "An AI assistant that answers customers on its own":"Un asistente de IA que responde a los clientes por su cuenta",
+      "A dashboard that changes how a company decides":"Un tablero que cambia cómo decide una empresa",
+      "Catching a security hole before criminals do":"Atrapar un agujero de seguridad antes que los criminales",
+      "Infrastructure that scales and never goes down":"Infraestructura que escala y nunca se cae",
+      "3. How do you like to work?":"3. ¿Cómo te gusta trabajar?",
+      "Wiring tools together for fast results":"Conectando herramientas para obtener resultados rápidos",
+      "Deep logic, structure, and clean code":"Lógica profunda, estructura y código limpio",
+      "Experimenting with the newest tech":"Experimentando con la tecnología más nueva",
+      "Spreadsheets, numbers, and patterns":"Hojas de cálculo, números y patrones",
+      "Thinking like an attacker and a defender":"Pensando como atacante y como defensor",
+      "Systems, reliability, and operations":"Sistemas, confiabilidad y operaciones",
+      "4. What's your main goal right now?":"4. ¿Cuál es tu meta principal ahora mismo?",
+      "Start earning fast, freelance or gigs":"Empezar a ganar rápido, como independiente o con trabajos sueltos",
+      "Land a solid, in-demand tech job":"Conseguir un trabajo sólido y demandado en tecnología",
+      "Get ahead of the AI curve":"Adelantarme a la curva de la IA",
+      "Move into business or analyst roles":"Pasarme a puestos de negocio o de analista",
+      "5. Which matters more to you?":"5. ¿Qué te importa más?",
+      "Money and business results":"El dinero y los resultados de negocio",
+      "Craft and correctness":"El oficio y la exactitud",
+      "Cutting-edge and creative":"Lo más avanzado y lo creativo",
+      "Evidence and decisions":"La evidencia y las decisiones",
+      "Trust and protection":"La confianza y la protección",
+      "Scale and stability":"La escala y la estabilidad",
+      "6. Where are you now with tech?":"6. ¿Dónde estás ahora con la tecnología?",
+      "Some coding or scripting":"Algo de programación o scripting",
+      /* ===== Courses, Practice, Web concepts, HTML tags, JS guide ===== */
+      "What a computer really is, how the web works, how computers think, the jobs that exist, and how to arrive ready. Do this one first.":
+        "Qué es realmente una computadora, cómo funciona la web, cómo piensan las computadoras, qué trabajos existen, y cómo llegar preparado. Haz este primero.",
+      "Ends at":"Termina en",
+      "Frontend or full-stack developer":"Desarrollador frontend o full-stack",
+      "Automation or AI engineer":"Ingeniero de automatización o de IA",
+      "For schools and parents":"Para colegios y padres",
+      "Copy this level as a code":"Copia este nivel como código",
+      "Semantic HTML and accessibility":"HTML semántico y accesibilidad",
+      "Version control with Git":"Control de versiones con Git",
+      "Hosting, domains and deploying":"Alojamiento, dominios y publicación",
+      "open any website you like, right-click, Inspect, and change a heading's text and color. You just edited a real website. That is the whole job in miniature.":
+        "abre cualquier sitio web que quieras, haz clic derecho, Inspeccionar, y cambia el texto y el color de un título. Acabas de editar un sitio web real. Ese es todo el trabajo en miniatura.",
+      "An even smaller heading. Rarely needed.":"Un título todavía más pequeño. Rara vez se necesita.",
+      "Important text. Shows bold, and screen readers stress it.":
+        "Texto importante. Se ve en negrita, y los lectores de pantalla lo enfatizan.",
+      "Text that was added, usually shown underlined.":"Texto que se agregó, normalmente se muestra subrayado.",
+      "Groups an image together with its caption.":"Agrupa una imagen junto con su pie de foto.",
+      "An audio or music player.":"Un reproductor de audio o de música.",
+      "Draws sharp shapes and icons that never blur, at any size.":
+        "Dibuja formas e íconos nítidos que nunca se ven borrosos, en cualquier tamaño.",
+      "Lets you style whole columns at once.":"Te deja dar estilo a columnas enteras de una vez.",
+      "Create and delete elements":"Crear y borrar elementos",
+      "Libraries: standing on other people's shoulders":"Librerías: pararse sobre los hombros de otros",
+      "Turns numbers into graphs. Chart.js is quick and easy, D3 gives you total control and is much harder.":
+        "Convierte números en gráficos. Chart.js es rápido y fácil, D3 te da control total y es mucho más difícil.",
+      "The DOM":"El DOM",
+      "build the to-do list with zero libraries. When it works, rebuild it with one library and feel the difference yourself. That comparison teaches you more than any tutorial.":
+        "construye la lista de tareas sin ninguna librería. Cuando funcione, vuelve a construirla con una librería y siente tú mismo la diferencia. Esa comparación te enseña más que cualquier tutorial.",
+      /* ===== Profile: stat sub-labels, chart rows, badges ===== */
+      "80% earns a certificate":"con 80% ganas un certificado",
+      "finish a course to earn one":"termina un curso para ganar uno",
+      "the number that actually predicts success":"el número que de verdad predice el éxito",
+      "Where your hours went":"Adónde se fueron tus horas",
+      "The last seven days":"Los últimos siete días",
+      "Lessons done":"Lecciones completadas",
+      "Logic levels solved":"Niveles de lógica resueltos",
+      "Code challenges solved":"Retos de código resueltos",
+      "Exams taken":"Exámenes rendidos",
+      "Best exam score":"Mejor nota de examen",
+      "Certificates earned":"Certificados ganados",
+      "Day streak":"Días seguidos",
+      "Days you showed up":"Días que apareciste",
+      "Reference pages read":"Páginas de referencia leídas",
+      "Badges unlocked":"Insignias desbloqueadas",
+      "course progress":"progreso del curso",
+      "Computers":"Computadoras","Web dev":"Desarrollo web","Automation":"Automatización",
+      "Security":"Seguridad","Cloud":"Nube","Data":"Datos","Databases":"Bases de datos",
+      "Badges":"Insignias","Beginner":"Principiante",
+      /* badge names */
+      "First step":"Primer paso","Getting serious":"Vas en serio","Halfway hero":"Héroe de la mitad",
+      "Exam taker":"Examinado","Perfect score":"Nota perfecta","Certified":"Certificado",
+      "On a roll":"En racha","Unstoppable":"Imparable","Explorer":"Explorador",
+      "Quest master":"Maestro de misiones","Thousand club":"Club de los mil","Marathon":"Maratón",
+      "Builder":"Constructor","Logician":"Lógico","Machine beater":"Vencemáquinas",
+      "Regular":"Constante","Helper":"Ayudante",
+      "Keep practising":"Sigue practicando","Settings and account":"Ajustes y cuenta",
+      "Everything you have done, in one place":"Todo lo que has hecho, en un solo lugar",
+      "These numbers are yours and they never reset. Show this page to a parent, a teacher, or one day an employer. It is proof that you did the work, and proof beats a promise.":
+        "Estos números son tuyos y nunca se reinician. Muestra esta página a un padre, a un profesor o algún día a un empleador. Es la prueba de que hiciste el trabajo, y una prueba vale más que una promesa.",
       /* ===== JavaScript guide ===== */
       "JavaScript, from the ground up":"JavaScript, desde cero",
       "Four blocks, in this order: the language, the DOM, events, libraries. Skip a block and everything after it feels like magic you cannot fix. Do them in order and it feels obvious.":
@@ -9254,6 +9697,26 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}],
       [/^Solved in (\d+) steps$/, function(m){
         return 'Resuelto en '+m[1]+' pasos';}]
+      ,[/^Level (\d+) ·$/, function(m){return 'Nivel '+m[1]+' ·';}]
+      ,[/^· ([\d,]+) XP total$/, function(m){return '· '+m[1]+' XP en total';}]
+      ,[/^out of ([\d,]+) in the academy$/, function(m){return 'de '+m[1]+' en la academia';}]
+      ,[/^(\d+) stars? · (\d+) random beaten$/, function(m){
+        return m[1]+(m[1]==='1'?' estrella':' estrellas')+' · '+m[2]+' aleatorios superados';}]
+      ,[/^you wrote real code (\d+) times?$/, function(m){
+        return 'escribiste código real '+m[1]+(m[1]==='1'?' vez':' veces');}]
+      ,[/^(\d+) passed at 80% or more$/, function(m){return m[1]+' aprobados con 80% o más';}]
+      ,[/^longest ever: (\d+) days?$/, function(m){
+        return 'la más larga: '+m[1]+(m[1]==='1'?' día':' días');}]
+      ,[/^longest (\d+)$/, function(m){return 'la más larga: '+m[1];}]
+      ,[/^out of (\d+) free guides$/, function(m){return 'de '+m[1]+' guías gratuitas';}]
+      ,[/^out of (\d+)$/, function(m){return 'de '+m[1];}]
+      ,[/^(\d+) of (\d+) lessons$/, function(m){return m[1]+' de '+m[2]+' lecciones';}]
+      ,[/^(\d+) of (\d+) certified, (\d+)%$/, function(m){
+        return m[1]+' de '+m[2]+' certificados, '+m[3]+'%';}]
+      ,[/^(\d+) \/ (\d+) skills done$/, function(m){return m[1]+' / '+m[2]+' habilidades hechas';}]
+      ,[/^(\d+) of (\d+) tags$/, function(m){return m[1]+' de '+m[2]+' etiquetas';}]
+      ,[/^(\d+) of (\d+) levels · (\d+) random beaten$/, function(m){
+        return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}]
     ];
     function trBase(key){var k=(key||'').trim();return ES[k]||ESAUTO[k]||null;}
     function tr(key){
@@ -9278,6 +9741,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       return any;
     }
     /* every string still needing a translation, units first */
+    window.__missing=function(){return missingKeys();};
+    window.__tr=function(k){return tr(k);};
+    window.__norm=function(s){return normKey(s);};
     function missingKeys(){
       var out=[],seen={},els=unitElements(),i,el,k;
       for(i=0;i<els.length;i++){

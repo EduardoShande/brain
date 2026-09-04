@@ -1269,10 +1269,6 @@
     border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer}
   .lkp-go:hover{border-color:var(--teal);color:var(--teal-ink)}
   @media(prefers-reduced-motion:reduce){.lkp{animation:none}}
-  .autobadge{flex-basis:100%;margin-top:7px;font-family:"JetBrains Mono",monospace;font-size:10px;
-    line-height:1.45;letter-spacing:.02em;color:rgba(255,255,255,.80)}
-  .autobadge.work{color:rgba(255,255,255,.92)}
-  .autobadge.warn{color:#FFD9A8}
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -1448,7 +1444,7 @@
         </ul>
         <div class="do">
           <div class="row"><span class="tag a">Do this</span><span>On a schedule, pull data from a public API (weather, exchange rates, a CRM sandbox), clean it, and store rows in Postgres.</span></div>
-          <div class="row"><span class="tag b">Go deep</span><span><b>Postman Learning Center</b> and <b>SQLBolt</b> (interactive SQL, free).</span></div>
+          <div class="row"><span class="tag b">Go deep</span><span class="i18nu"><b>Postman Learning Center</b> and <b>SQLBolt</b> (interactive SQL, free).</span></div>
         </div>
       </div>
 
@@ -2805,7 +2801,7 @@
             <li><label><input type="checkbox" data-id="bk1c"><span class="sk"><span class="skt">A backend language: Python</span><span class="sub">→ functions, packages, virtualenv, type hints (you have this)</span></span></label></li>
             <li><label><input type="checkbox" data-id="bk1d"><span class="sk"><span class="skt">Terminal &amp; Git</span><span class="sub">→ run a server, read logs, commit and push</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Open your running API's <code>/docs</code> and <code>/health</code>, then watch the request and response in the browser's Network tab.</span></div><div class="row"><span class="tag b">Go deep</span><span>MDN's HTTP overview, and roadmap.sh/backend for the full map.</span></div></div>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span class="i18nu">Open your running API's <code>/docs</code> and <code>/health</code>, then watch the request and response in the browser's Network tab.</span></div><div class="row"><span class="tag b">Go deep</span><span>MDN's HTTP overview, and roadmap.sh/backend for the full map.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
           <div class="sh"><span class="sn">2</span><span class="st">APIs &amp; REST</span><span class="lv">Beginner</span><span class="cnt" data-cnt>0/4</span></div>
@@ -4093,7 +4089,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
             <li><label><input type="checkbox" data-id="wd1e"><span class="sk"><span class="skt">Semantic layout</span><span class="sub">→ header, nav, main, section, article, aside, footer, and why the right tag matters</span></span></label></li>
             <li><label><input type="checkbox" data-id="wd1f"><span class="sk"><span class="skt">Forms</span><span class="sub">→ form, input types, label, textarea, select, button, required</span></span></label></li>
           </ul>
-          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a one-page profile about yourself: a photo, a big heading, two paragraphs, a list of three things you like, and a link to your Instagram. Open it in your browser. That is a real web page, and you made it.</span></div><div class="row"><span class="tag b">Go deep</span><span>The <b>100 HTML tags</b> reference linked above, plus freeCodeCamp Responsive Web Design.</span></div></div>
+          <div class="do"><div class="row"><span class="tag a">Do this</span><span>Build a one-page profile about yourself: a photo, a big heading, two paragraphs, a list of three things you like, and a link to your Instagram. Open it in your browser. That is a real web page, and you made it.</span></div><div class="row"><span class="tag b">Go deep</span><span class="i18nu">The <b>100 HTML tags</b> reference linked above, plus freeCodeCamp Responsive Web Design.</span></div></div>
         </div>
         <div class="stage" data-stage="2">
           <div class="sh"><span class="sn">2</span><span class="st">CSS &amp; responsive design</span><span class="lv">Beginner · ~3 weeks</span><span class="cnt" data-cnt>0/7</span></div>
@@ -4497,6 +4493,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       /* translate first, then build the rail from the translated headings */
       if(typeof applyLang==='function')applyLang();
       if(typeof buildRail==='function')buildRail(name);
+      /* the rail is built after applyLang, so its own labels need a pass */
+      if(LANG_READY)applyLang();
       if(typeof readProgress==='function')readProgress();
       if(typeof seePage==='function'&&!document.body.classList.contains('preview'))seePage(name);
     }
@@ -6999,6 +6997,923 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'Answer like you wish someone had answered you':'Responde como te hubiera gustado que te respondieran',
       /* --- profile --- */
       'Longest ever':'La más larga','longest':'la más larga',
+      /* ===== Ask a better question: whole-block versions ===== */
+      "It has a name: <b>rubber duck debugging</b>. Programmers keep a rubber duck on the desk and explain the problem to it out loud. Somewhere around sentence three they say \"oh\" and fix it themselves. Nothing about the duck helped. Being forced to say it in order did.":
+        "Tiene nombre: <b>depuración con patito de goma</b>. Los programadores tienen un patito de goma en el escritorio y le explican el problema en voz alta. En algún punto de la tercera frase dicen \"ah\" y lo arreglan solos. El patito no ayudó en nada. Lo que ayudó fue verse obligado a decirlo en orden.",
+      "\"My code doesn't work\"":"\"Mi código no funciona\"",
+      "unanswerable":"imposible de responder",
+      "<span class=\"label\">The five ingredients</span>Every answerable question has these: <b>what you are trying to do</b>, <b>what you expected</b>, <b>what happened instead</b>, <b>the exact error</b>, and <b>what you already tried</b>. Miss one and the person helping has to guess. Miss three and they move on to somebody else's question.":
+        "<span class=\"label\">Los cinco ingredientes</span>Toda pregunta que se puede responder tiene esto: <b>qué estás tratando de hacer</b>, <b>qué esperabas</b>, <b>qué pasó en su lugar</b>, <b>el error exacto</b>, y <b>qué ya intentaste</b>. Si te falta uno, quien te ayuda tiene que adivinar. Si te faltan tres, se van a la pregunta de otra persona.",
+      "Always say: <b>\"explain what is causing this before showing me any code.\"</b> That single sentence turns a vending machine into a tutor.":
+        "Di siempre: <b>\"explícame qué está causando esto antes de mostrarme código\".</b> Esa sola frase convierte una máquina expendedora en un tutor.",
+      "Say <b>\"show me only the lines that change.\"</b> You want a repair, not a replacement.":
+        "Di <b>\"muéstrame solo las líneas que cambian\".</b> Quieres una reparación, no un reemplazo.",
+      "Ask instead: <b>\"what does line 3 do, and why is it needed?\"</b> Keep asking until you could rewrite it from memory. That is the difference between a student who gets good in a year and one who is still stuck in three.":
+        "Pregunta mejor: <b>\"¿qué hace la línea 3, y por qué es necesaria?\"</b> Sigue preguntando hasta que pudieras reescribirla de memoria. Esa es la diferencia entre un estudiante que se vuelve bueno en un año y uno que sigue atascado en tres.",
+      /* ===== Ask a better question ===== */
+      "Write the question exactly as you were about to ask it. Badly is fine, that is the point.":
+        "Escribe la pregunta exactamente como estabas por hacerla. Que esté mal escrita está bien, de eso se trata.",
+      "It has a name:":"Tiene nombre:",
+      ". Programmers keep a rubber duck on the desk and explain the problem to it out loud. Somewhere around sentence three they say \"oh\" and fix it themselves. Nothing about the duck helped. Being forced to say it in order did.":
+        ". Los programadores tienen un patito de goma en el escritorio y le explican el problema en voz alta. En algún punto de la tercera frase dicen \"ah\" y lo arreglan solos. El patito no ayudó en nada. Lo que ayudó fue verse obligado a decirlo en orden.",
+      "Doesn't work how? Blank page, wrong number, red text, nothing at all when you click? Each of those is a different problem with a different cause. Nobody can pick.":
+        "¿No funciona cómo? ¿Página en blanco, número equivocado, texto rojo, nada en absoluto al hacer clic? Cada una de esas es un problema distinto con una causa distinta. Nadie puede adivinar cuál.",
+      "\"Why is my button broken?\"":"\"¿Por qué está roto mi botón?\"",
+      "Nobody can see your button. They cannot see your code, your screen, or your error. You have to bring all of that to them.":
+        "Nadie puede ver tu botón. No pueden ver tu código, ni tu pantalla, ni tu error. Tienes que llevarles todo eso.",
+      "\"I expected the list to show 3 items, it shows none, console says Cannot read properties of null\"":
+        "\"Esperaba que la lista mostrara 3 elementos, no muestra ninguno, y la consola dice Cannot read properties of null\"",
+      "answerable in one line":"se puede responder en una línea",
+      "Anybody who has written JavaScript knows this one instantly. It is the same problem as the first two. It is just askable now.":
+        "Cualquiera que haya escrito JavaScript reconoce esta al instante. Es el mismo problema que las dos primeras. Solo que ahora sí se puede preguntar.",
+      "The five ingredients":"Los cinco ingredientes",
+      "Every answerable question has these:":"Toda pregunta que se puede responder tiene esto:",
+      "what you are trying to do":"qué estás tratando de hacer",
+      "what you expected":"qué esperabas",
+      "what happened instead":"qué pasó en su lugar",
+      "the exact error":"el error exacto",
+      ", and":", y",
+      "what you already tried":"qué ya intentaste",
+      ". Miss one and the person helping has to guess. Miss three and they move on to somebody else's question.":
+        ". Si te falta uno, quien te ayuda tiene que adivinar. Si te faltan tres, se van a la pregunta de otra persona.",
+      "The default reply to \"fix my code\" is a wall of code. You paste it, it works, and you are no better than you were an hour ago. Then it breaks and you are stuck again with a file you no longer recognise.":
+        "La respuesta por defecto a \"arregla mi código\" es un muro de código. Lo pegas, funciona, y estás igual que hace una hora. Después se rompe y vuelves a estar atascado con un archivo que ya no reconoces.",
+      "\"explain what is causing this before showing me any code.\"":
+        "\"explícame qué está causando esto antes de mostrarme código\".",
+      "That single sentence turns a vending machine into a tutor.":
+        "Esa sola frase convierte una máquina expendedora en un tutor.",
+      "The five ingredients above work on AI too, for the same reason. \"It doesn't work\" gets a guess. Your goal, your code, your error and what you tried gets an actual diagnosis.":
+        "Los cinco ingredientes de arriba también funcionan con la IA, por la misma razón. \"No funciona\" recibe una adivinanza. Tu objetivo, tu código, tu error y lo que intentaste reciben un diagnóstico de verdad.",
+      "The prompt this page builds already has them arranged in that order, which is why it is worth copying rather than typing \"help\" and hoping.":
+        "El prompt que arma esta página ya los tiene ordenados así, y por eso vale la pena copiarlo en vez de escribir \"ayuda\" y cruzar los dedos.",
+      "Left alone, AI will happily rewrite your whole file in a style you did not choose, using things you have not learned. Now you cannot read your own project.":
+        "Si la dejas sola, la IA reescribe encantada tu archivo entero en un estilo que tú no elegiste, usando cosas que no has aprendido. Y ahora no puedes leer tu propio proyecto.",
+      "\"show me only the lines that change.\"":"\"muéstrame solo las líneas que cambian\".",
+      "You want a repair, not a replacement.":"Quieres una reparación, no un reemplazo.",
+      "This is the rule that matters most, so make it a hard one for yourself. If you cannot say out loud what a line does, you are not allowed to use it yet.":
+        "Esta es la regla que más importa, así que hazla estricta contigo mismo. Si no puedes decir en voz alta qué hace una línea, todavía no tienes permitido usarla.",
+      "\"what does line 3 do, and why is it needed?\"":"\"¿qué hace la línea 3, y por qué es necesaria?\"",
+      "Keep asking until you could rewrite it from memory. That is the difference between a student who gets good in a year and one who is still stuck in three.":
+        "Sigue preguntando hasta que pudieras reescribirla de memoria. Esa es la diferencia entre un estudiante que se vuelve bueno en un año y uno que sigue atascado en tres.",
+      "AI does not know when it is guessing. It will invent a function that does not exist, name an option that was removed years ago, and describe it all in the same calm, certain voice it uses when it is right.":
+        "La IA no sabe cuándo está adivinando. Va a inventar una función que no existe, nombrar una opción que se eliminó hace años, y describirlo todo con la misma voz calmada y segura que usa cuando tiene razón.",
+      "So verify: run it, and check anything unfamiliar against the real documentation. When it names something you have never heard of, that is exactly the moment to look it up rather than trust it.":
+        "Así que verifica: ejecútalo, y contrasta cualquier cosa desconocida con la documentación real. Cuando nombre algo de lo que nunca has oído hablar, ese es justo el momento de buscarlo en vez de confiar.",
+      "The most underused prompt there is:":"El prompt más desaprovechado que existe:",
+      "\"ask me three questions about this code to check whether I actually understood it.\"":
+        "\"hazme tres preguntas sobre este código para comprobar si de verdad lo entendí\".",
+      "You will find out in about a minute whether you learned the thing or just watched it happen. Uncomfortable, and worth far more than another answer.":
+        "En cosa de un minuto vas a descubrir si aprendiste algo o solo miraste cómo pasaba. Incómodo, y vale muchísimo más que otra respuesta.",
+      "Where AI does not belong":"Dónde no corresponde usar la IA",
+      "Do not paste anything personal into it: not your full name, not your school, not your address, not anyone else's. And when a task is meant to prove":
+        "No le pegues nada personal: ni tu nombre completo, ni tu colegio, ni tu dirección, ni los de nadie más. Y cuando una tarea existe para demostrar que",
+      "you":"tú",
+      "can do something, doing it with AI only proves the AI can. You will be the one in the interview.":
+        "puedes hacer algo, hacerla con IA solo demuestra que la IA puede. El que va a estar en la entrevista eres tú.",
+      "take the last thing you were stuck on, run it through the tool above, and notice how often you solve it before you finish typing.":
+        "toma lo último en lo que te atascaste, pásalo por la herramienta de arriba, y fíjate con qué frecuencia lo resuelves antes de terminar de escribir.",
+      /* ===== Quizzes ===== */
+      "Short knowledge checks per domain. Take one, get a score, and see your level. Your best score is saved.":
+        "Comprobaciones cortas de conocimiento por área. Haz una, obtén una nota, y mira tu nivel. Tu mejor nota se guarda.",
+      "Foundations: computers, CS and the tech field":
+        "Fundamentos: computadoras, ciencias de la computación y el campo de la tecnología",
+      "Not attempted yet":"Todavía sin intentar",
+      "On this page":"En esta página",
+      /* ===== The login gate, which sits outside the pages ===== */
+      "Don't have an account?":"¿No tienes cuenta?",
+      "Already have an account?":"¿Ya tienes cuenta?",
+      "Accounts are stored on this device for now. A secure server login arrives when the backend is deployed.":
+        "Por ahora las cuentas se guardan en este dispositivo. El inicio de sesión seguro en el servidor llega cuando se publique el backend.",
+      "Not sure what to study? Take the free quiz →":"¿No sabes qué estudiar? Haz el test gratuito →",
+      "New to tech? Read the free starter guide →":"¿Nuevo en la tecnología? Lee la guía gratuita para empezar →",
+      "<b>Postman Learning Center</b> and <b>SQLBolt</b> (interactive SQL, free).":
+        "<b>Postman Learning Center</b> y <b>SQLBolt</b> (SQL interactivo, gratis).",
+      "Open your running API's <code>/docs</code> and <code>/health</code>, then watch the request and response in the browser's Network tab.":
+        "Abre el <code>/docs</code> y el <code>/health</code> de tu API en ejecución, y luego observa la petición y la respuesta en la pestaña Red del navegador.",
+      "The <b>100 HTML tags</b> reference linked above, plus freeCodeCamp Responsive Web Design.":
+        "La referencia de las <b>100 etiquetas HTML</b> enlazada arriba, más freeCodeCamp Responsive Web Design.",
+      /* ===== Attribute text: tooltips, placeholders, aria-labels ===== */
+      "Switch to English":"Cambiar a inglés","Switch to Spanish":"Cambiar a español",
+      "Select any word to see what it means":"Selecciona cualquier palabra para ver qué significa",
+      "Search a tag or what it does...":"Busca una etiqueta o lo que hace...",
+      "Complete your first lesson":"Completa tu primera lección",
+      "Take your first exam":"Rinde tu primer examen",
+      "Score 100% on any exam":"Saca 100% en cualquier examen",
+      "Earn your first certificate":"Gana tu primer certificado",
+      "Learn 3 days in a row":"Aprende 3 días seguidos",
+      "Learn 7 days in a row":"Aprende 7 días seguidos",
+      "Learn 30 days in a row":"Aprende 30 días seguidos",
+      "Open all 7 free reference pages":"Abre las 7 páginas de referencia gratuitas",
+      "Finish all 3 daily quests in one day":"Termina las 3 misiones diarias en un solo día",
+      "Solve all 12 Code Lab challenges":"Resuelve los 12 retos de Code Lab",
+      "Solve all 10 Logic Lab levels":"Resuelve los 10 niveles de Logic Lab",
+      "Beat the daily challenge on 5 days":"Gana el reto diario en 5 días",
+      "Answer somebody else in the community":"Respóndele a alguien en la comunidad",
+      "What's on your mind? A business idea, a reflection, a note...":
+        "¿Qué tienes en mente? Una idea de negocio, una reflexión, una nota...",
+      "What did you learn?":"¿Qué aprendiste?",
+      "What can you now DO with this?":"¿Qué PUEDES hacer ahora con esto?",
+      "Topic or skill":"Tema o habilidad",
+      "Sections on this page":"Secciones de esta página",
+      /* ===== Account and profile form ===== */
+      "Log in":"Iniciar sesión","Sign up":"Crear cuenta","Your name":"Tu nombre",
+      "Point this at your backend. Local dev default is http://localhost:8000.":
+        "Apunta esto a tu backend. Por defecto, en desarrollo local es http://localhost:8000.",
+      /* ===== Free resources ===== */
+      "Pick ONE per topic":"Elige UNO por tema",
+      "HTML, CSS, JavaScript and React":"HTML, CSS, JavaScript y React",
+      "Free training that employers actually recognise":"Formación gratuita que los empleadores sí reconocen",
+      "How to use this":"Cómo usar esto",
+      "The two best on Earth, both free":"Los dos mejores del planeta, ambos gratis",
+      "The single best introduction to computer science ever made. Hard, famous, and completely free to watch. Start with lecture 0 even if you never finish.":
+        "La mejor introducción a las ciencias de la computación que se ha hecho. Difícil, famosa, y completamente gratis de ver. Empieza por la clase 0 aunque nunca la termines.",
+      "Thousands of hours of hands-on coding in the browser, with free certifications. A non-profit, no upsell, no credit card, ever.":
+        "Miles de horas de programación práctica en el navegador, con certificaciones gratuitas. Sin fines de lucro, sin ventas adicionales, sin tarjeta de crédito, nunca.",
+      "The gentlest possible on-ramp, built for total beginners and available in Spanish.":
+        "La entrada más suave posible, hecha para principiantes totales y disponible en español.",
+      "Official documentation, the industry standard":"Documentación oficial, el estándar de la industria",
+      "From Mozilla, the makers of Firefox. This is the reference every professional developer on Earth has open in a tab. Complete, free, no account.":
+        "De Mozilla, quienes hacen Firefox. Esta es la referencia que todo programador profesional del planeta tiene abierta en una pestaña. Completa, gratis, sin cuenta.",
+      "web.dev Learn, by Google":"web.dev Learn, de Google",
+      "Google's own free courses: Learn HTML, Learn CSS, Learn JavaScript, Learn Responsive Design, Learn Accessibility, Learn Performance. Written by the Chrome team.":
+        "Los cursos gratuitos del propio Google: Learn HTML, Learn CSS, Learn JavaScript, Learn Responsive Design, Learn Accessibility, Learn Performance. Escritos por el equipo de Chrome.",
+      "React, official Learn, by Meta":"React, Learn oficial, de Meta",
+      "React is made by Meta and their own tutorial is the best one that exists. Interactive, current, free.":
+        "React lo hace Meta y su propio tutorial es el mejor que existe. Interactivo, actualizado, gratis.",
+      "Chrome DevTools, by Google":"Chrome DevTools, de Google",
+      "Learn to use the X-ray glasses built into your browser. Most beginners never learn this and it slows them down for years.":
+        "Aprende a usar los lentes de rayos X que trae tu navegador. Casi ningún principiante aprende esto y los frena durante años.",
+      "Big-company certificates (audit them for free)":"Certificados de grandes empresas (audítalos gratis)",
+      "Nine courses built by Meta's own engineers: HTML, CSS, JavaScript, React, Figma, plus interview prep and access to their employer job board. Choose \"audit\" to watch it all for $0.":
+        "Nueve cursos hechos por los propios ingenieros de Meta: HTML, CSS, JavaScript, React, Figma, más preparación para entrevistas y acceso a su bolsa de empleo. Elige \"auditar\" para verlo todo por 0 dólares.",
+      "Why interfaces work, not just how to build them. The skill that makes a developer's work look professional instead of homemade.":
+        "Por qué funcionan las interfaces, no solo cómo construirlas. La habilidad que hace que el trabajo de un programador se vea profesional en vez de casero.",
+      "The best free courses not made by a company":"Los mejores cursos gratuitos que no hizo una empresa",
+      "The deepest free JavaScript course anywhere. If you only pick one JS resource in your life, pick this.":
+        "El curso gratuito de JavaScript más profundo que existe. Si eliges un solo recurso de JS en tu vida, elige este.",
+      "A complete project-based curriculum from zero to full-stack. Free, open source, and famously effective because you build constantly.":
+        "Un currículo completo basado en proyectos, de cero a full-stack. Gratis, de código abierto, y famosamente efectivo porque construyes todo el tiempo.",
+      "Thousands of free, hands-on learning paths with free badges, covering C#, Python, APIs, Azure and much more. One of the largest free training libraries on the internet.":
+        "Miles de rutas de aprendizaje prácticas y gratuitas con insignias gratis, que cubren C#, Python, APIs, Azure y mucho más. Una de las bibliotecas de formación gratuita más grandes de internet.",
+      "Python, Django, APIs, databases and version control, taught by Meta engineers. Auditable for free.":
+        "Python, Django, APIs, bases de datos y control de versiones, enseñados por ingenieros de Meta. Se puede auditar gratis.",
+      "Run JavaScript on a server, from the people who make Node. Free and official.":
+        "Ejecuta JavaScript en un servidor, de la gente que hace Node. Gratis y oficial.",
+      "The best-written documentation in Python. This is the framework this academy's own backend is built with.":
+        "La documentación mejor escrita de Python. Este es el framework con el que está construido el propio backend de esta academia.",
+      "Learn SQL by writing real queries in the browser, in about two hours. The fastest useful start there is.":
+        "Aprende SQL escribiendo consultas reales en el navegador, en unas dos horas. El comienzo útil más rápido que existe.",
+      "The world's most respected open-source database, explained by its own team.":
+        "La base de datos de código abierto más respetada del mundo, explicada por su propio equipo.",
+      "Free courses and free certification prep for the most popular NoSQL database.":
+        "Cursos gratuitos y preparación gratuita para la certificación de la base de datos NoSQL más popular.",
+      "Kaggle Learn, by Google":"Kaggle Learn, de Google",
+      "Short, practical micro-courses: Python, Pandas, data visualisation, intro to machine learning. Free GPUs included. Kaggle is owned by Google.":
+        "Microcursos cortos y prácticos: Python, Pandas, visualización de datos, introducción al aprendizaje automático. Con GPUs gratis incluidas. Kaggle es de Google.",
+      "The most recognised entry-level data credential in the world. Eight courses, auditable free.":
+        "La credencial de datos de nivel inicial más reconocida del mundo. Ocho cursos, auditables gratis.",
+      "The dashboard tool most companies actually use. Free paths straight from Microsoft.":
+        "La herramienta de tableros que realmente usan la mayoría de las empresas. Rutas gratuitas directamente de Microsoft.",
+      "Free structured programs in data science, AI, cybersecurity and cloud, with IBM digital credentials, built for students and job seekers.":
+        "Programas gratuitos y estructurados en ciencia de datos, IA, ciberseguridad y nube, con credenciales digitales de IBM, hechos para estudiantes y buscadores de empleo.",
+      "The big three, all free to learn":"Los tres grandes, todos gratis de aprender",
+      "600+ free courses from Amazon, including the full Cloud Practitioner Essentials path and free exam prep. AWS is the largest cloud on Earth, so this is the safest cloud bet.":
+        "Más de 600 cursos gratuitos de Amazon, incluida la ruta completa de Cloud Practitioner Essentials y preparación gratuita para el examen. AWS es la nube más grande del planeta, así que es la apuesta más segura.",
+      "Free skill badges earned in real, live Google Cloud environments with real credentials and real infrastructure. Hundreds of no-cost labs.":
+        "Insignias de habilidad gratuitas ganadas en entornos reales y en vivo de Google Cloud, con credenciales e infraestructura reales. Cientos de laboratorios sin costo.",
+      "Microsoft's free path that maps exactly to their entry-level cloud certification.":
+        "La ruta gratuita de Microsoft que corresponde exactamente a su certificación de nube de nivel inicial.",
+      "Machine Learning Crash Course, by Google":"Machine Learning Crash Course, de Google",
+      "Google's own free introduction to machine learning, with interactive exercises and real code. The classic starting point.":
+        "La introducción gratuita del propio Google al aprendizaje automático, con ejercicios interactivos y código real. El punto de partida clásico.",
+      "Elements of AI":"Elements of AI",
+      "Understand what AI actually is with zero maths and zero code. Free, from the University of Helsinki, available in Spanish.":
+        "Entiende qué es realmente la IA sin nada de matemáticas ni de código. Gratis, de la Universidad de Helsinki, disponible en español.",
+      "Build with GenAI and agents":"Construye con IA generativa y agentes",
+      "Generative AI for Beginners, by Microsoft":"Generative AI for Beginners, de Microsoft",
+      "21 free lessons taking you from \"what is a prompt\" to building real AI applications. Open source, no signup.":
+        "21 lecciones gratuitas que te llevan de \"qué es un prompt\" a construir aplicaciones de IA reales. De código abierto, sin registro.",
+      "AI Agents for Beginners, by Microsoft":"AI Agents for Beginners, de Microsoft",
+      "18 free lessons on building AI agents, the skill everyone is hiring for right now.":
+        "18 lecciones gratuitas sobre construir agentes de IA, la habilidad por la que todos están contratando ahora mismo.",
+      "Free, hands-on, beginner to expert, using smolagents, LlamaIndex and LangGraph. Finish the final project above 30% on the GAIA benchmark and you earn a real certificate.":
+        "Gratis, práctico, de principiante a experto, usando smolagents, LlamaIndex y LangGraph. Termina el proyecto final por encima del 30% en el benchmark GAIA y ganas un certificado real.",
+      "How large language models actually work, from the company that hosts most open AI models.":
+        "Cómo funcionan realmente los modelos de lenguaje grandes, de la empresa que aloja la mayoría de los modelos de IA abiertos.",
+      "Official free courses on prompt engineering, tool use and building with the Claude API, straight from Anthropic.":
+        "Cursos oficiales y gratuitos sobre ingeniería de prompts, uso de herramientas y construcción con la API de Claude, directamente de Anthropic.",
+      "Dozens of free one-hour courses built with OpenAI, Meta, Google and others. The fastest way to stay current.":
+        "Decenas de cursos gratuitos de una hora hechos con OpenAI, Meta, Google y otros. La forma más rápida de mantenerte al día.",
+      "Official and free":"Oficial y gratis",
+      "Free courses in cybersecurity, networking, Python and data science from Cisco, who make most of the internet's hardware. Over 20 million learners in 190 countries. Introduction to Cybersecurity and Networking Basics are the places to start.":
+        "Cursos gratuitos de ciberseguridad, redes, Python y ciencia de datos de Cisco, que fabrica la mayor parte del hardware de internet. Más de 20 millones de estudiantes en 190 países. Introduction to Cybersecurity y Networking Basics son los lugares por donde empezar.",
+      "Eight courses designed for people with no experience, aimed straight at an entry-level security job. Auditable free.":
+        "Ocho cursos diseñados para gente sin experiencia, apuntados directamente a un trabajo de seguridad de nivel inicial. Auditables gratis.",
+      "The ten ways web apps get hacked, updated by the global security community. Every developer should read this once a year. Free forever.":
+        "Las diez formas en que se hackean las apps web, actualizadas por la comunidad global de seguridad. Todo programador debería leer esto una vez al año. Gratis para siempre.",
+      "Learn security by actually breaking into safe practice machines in your browser. Generous free tier and genuinely fun.":
+        "Aprende seguridad entrando de verdad en máquinas de práctica seguras desde tu navegador. Capa gratuita generosa y genuinamente divertido.",
+      "Free tier · hands-on":"Capa gratuita · práctico",
+      "The entire book, free to read online. Files, spreadsheets, emails, PDFs, the web. The most practical programming book ever written for beginners.":
+        "El libro entero, gratis para leer en línea. Archivos, hojas de cálculo, correos, PDFs, la web. El libro de programación más práctico que se ha escrito para principiantes.",
+      "Free video and text courses for the open-source automation tool that connects apps and AI agents together.":
+        "Cursos gratuitos en video y texto de la herramienta de automatización de código abierto que conecta apps y agentes de IA.",
+      "Free training on the automation tool already installed at thousands of companies, which makes it very easy to sell.":
+        "Formación gratuita sobre la herramienta de automatización que ya está instalada en miles de empresas, lo que la hace muy fácil de vender.",
+      "Git and GitHub, non-negotiable":"Git y GitHub, no negociables",
+      "Free interactive courses that run inside GitHub itself, with instant automated feedback. The fastest way to stop being scared of Git.":
+        "Cursos interactivos gratuitos que corren dentro del propio GitHub, con retroalimentación automática al instante. La forma más rápida de dejar de tenerle miedo a Git.",
+      "Pro Git, the official book":"Pro Git, el libro oficial",
+      "The complete Git book, free online, translated into Spanish and dozens of other languages.":
+        "El libro completo de Git, gratis en línea, traducido al español y a decenas de otros idiomas.",
+      "close this page, open one link, and finish it. One. The list will still be here when you are done.":
+        "cierra esta página, abre un enlace, y termínalo. Uno. La lista va a seguir aquí cuando acabes.",
+      /* ===== Tools chains ===== */
+      "Chrome or Firefox":"Chrome o Firefox","Vercel or Netlify":"Vercel o Netlify",
+      "An AI assistant":"Un asistente de IA","Publishing it":"Publicarlo",
+      "Testing and checking":"Probar y revisar","Automation and AI":"Automatización e IA",
+      "<b>n8n</b> connect apps together visually, self-hostable and free.":
+        "<b>n8n</b> conecta apps entre sí de forma visual, autoalojable y gratis.",
+      "<b>Claude, ChatGPT, Gemini</b> tutor and pair, never an author you cannot check.":
+        "<b>Claude, ChatGPT, Gemini</b> tutor y compañero, nunca un autor que no puedas revisar.",
+      "Thinking and planning":"Pensar y planear",
+      "You lost work, or broke something and could not go back":
+        "Perdiste trabajo, o rompiste algo y no pudiste volver atrás",
+      "You changed something and broke something else":"Cambiaste algo y rompiste otra cosa",
+      "write it":"escríbelo","store it":"guárdalo","publish it":"publícalo",
+      "send to anyone":"mándalo a quien sea","the framework":"el framework",
+      "store the data":"guarda los datos","test it":"pruébalo","package it":"empaquétalo","run it":"ejecútalo",
+      "The problem":"El problema","watch them work":"míralos trabajar","the wiring":"el cableado",
+      "Their apps":"Sus apps","An AI step":"Un paso con IA","read and classify":"lee y clasifica",
+      "you invoice this":"esto es lo que facturas","The question":"La pregunta",
+      "make it specific":"hazla específica","fetch it":"tráelo","Sheets or pandas":"Sheets o pandas",
+      "clean it":"límpialo","show it":"muéstralo","Your app":"Tu app",
+      "where users are":"donde están los usuarios","Your backend":"Tu backend",
+      "holds the key":"guarda la llave","Claude or GPT":"Claude o GPT","the model":"el modelo",
+      "check the output":"revisa el resultado","that can be trusted":"en la que se puede confiar",
+      "ugly and fast":"feo y rápido","the real layout":"la maqueta de verdad","then looks":"y luego la apariencia",
+      "that survives a phone":"que sobrevive a un celular",
+      "do the first chain today. Write one HTML page, put it on GitHub, connect Vercel, and send the link to somebody. It takes about an hour and it makes every chain after it obvious.":
+        "haz hoy la primera cadena. Escribe una página HTML, súbela a GitHub, conecta Vercel, y mándale el enlace a alguien. Toma como una hora y hace que todas las cadenas siguientes se vuelvan obvias.",
+      /* ===== Cybersecurity ===== */
+      "02 · Six jobs, one word":"02 · Seis trabajos, una sola palabra",
+      "Break web apps and APIs before criminals do. $3K to $20K per engagement. <span class=\"fit mid\">High fit</span>":
+        "Rompe apps web y APIs antes que los criminales. De 3.000 a 20.000 dólares por trabajo. <span class=\"fit mid\">Encaja bien</span>",
+      "03 · Two lanes, one bet":"03 · Dos vías, una apuesta",
+      "4–8 wks to $1":"4 a 8 semanas hasta $1","6–12 wks to $1":"6 a 12 semanas hasta $1",
+      "Bug bounty as primary income":"Recompensas por errores como ingreso principal",
+      "Package it, do not describe it":"Empaquétalo, no lo describas",
+      "You can find holes in someone else's work":"Puedes encontrar agujeros en el trabajo de otros",
+      "<b>Cloud and identity security</b> at organisation scale":
+        "<b>Seguridad de nube e identidad</b> a escala de organización",
+      "<b>Secure design reviews</b> other engineers respect":
+        "<b>Revisiones de diseño seguro</b> que otros ingenieros respetan",
+      "Pick one lane. Doing both finishes neither.":"Elige una vía. Hacer las dos no termina ninguna.",
+      "The verdict, in one line":"El veredicto, en una línea",
+      "Security is a paid layer on top of your automation skills. Not a career change, not a fresh start.":
+        "La seguridad es una capa pagada encima de tus habilidades de automatización. No es un cambio de carrera ni empezar de nuevo.",
+      "Fastest-growing skill category, behind only AI.":
+        "La categoría de habilidades que más rápido crece, solo detrás de la IA.",
+      "Skills gap in AI and cloud security. The real shortage.":
+        "Brecha de habilidades en seguridad de IA y de nube. La escasez real.",
+      "Start here first":"Empieza por aquí primero",
+      "Go deeper on Automation Engineering →":"Profundiza en Ingeniería de Automatización →",
+      "Get fluent in frameworks, controls, and risk, enough to earn a founder's trust":
+        "Domina los marcos, los controles y el riesgo, lo suficiente para ganarte la confianza de un fundador",
+      "Sit the Security+ exam later, only if a client asks for it":
+        "Rinde el examen Security+ después, solo si un cliente lo pide",
+      "→ SY0-701 objectives, practice exams, only when it unlocks a deal":
+        "→ objetivos del SY0-701, exámenes de práctica, solo cuando desbloquee un trato",
+      "Finish the series and be able to explain SOC 2 vs ISO 27001 in plain words.":
+        "Termina la serie y sé capaz de explicar SOC 2 contra ISO 27001 con palabras simples.",
+      ", free, the complete video series.":", gratis, la serie de videos completa.",
+      "Pick your lane":"Elige tu vía",
+      "Choose ONE lane: compliance automation, or API / web pentesting":
+        "Elige UNA vía: automatización de cumplimiento, o pruebas de penetración de APIs y web",
+      "→ compliance = your strongest wedge; API / web = rides skills you already have":
+        "→ cumplimiento = tu cuña más fuerte; APIs y web = se monta sobre habilidades que ya tienes",
+      "Compliance: learn the real SOC 2 / ISO 27001 control lists":
+        "Cumplimiento: aprende las listas de controles reales de SOC 2 e ISO 27001",
+      "Compliance: rebuild what Vanta automates via cloud APIs":
+        "Cumplimiento: reconstruye lo que Vanta automatiza mediante APIs de nube",
+      "Build one script that checks a real control against a live cloud API. That script is the seed of the whole offer.":
+        "Construye un script que verifique un control real contra una API de nube en vivo. Ese script es la semilla de toda la oferta.",
+      "Vanta's automation playbook (Lane A) or APIsec University (Lane B).":
+        "El manual de automatización de Vanta (vía A) o APIsec University (vía B).",
+      "Run 2–3 free reviews for people in your network":
+        "Haz 2 o 3 revisiones gratuitas para gente de tu red",
+      "→ scope the review, run the checks, write a findings report, advise fixes":
+        "→ define el alcance de la revisión, corre las verificaciones, escribe un informe de hallazgos, y recomienda arreglos",
+      "Turn each into a written case study with before and after":
+        "Convierte cada una en un caso de estudio escrito con el antes y el después",
+      "→ problem, what you did, measurable result, a quote from the client":
+        "→ problema, qué hiciste, resultado medible, una cita del cliente",
+      "Convert the third and fourth into paid $2K–5K engagements":
+        "Convierte la tercera y la cuarta en trabajos pagados de 2.000 a 5.000 dólares",
+      "→ proposal, fixed price, then a monthly monitoring retainer":
+        "→ propuesta, precio fijo, y luego una iguala mensual de monitoreo",
+      "Quote three real prospects at these numbers before you build one more thing.":
+        "Cotiza a tres prospectos reales con estos números antes de construir una cosa más.",
+      "Security consulting sells on trust and referral. Your fastest first client is a warm intro.":
+        "La consultoría de seguridad se vende por confianza y recomendación. Tu primer cliente más rápido es una presentación de confianza.",
+      "The free, complete video series. The vocabulary of security. Add the exam only if a client asks.":
+        "La serie de videos completa y gratuita. El vocabulario de la seguridad. Agrega el examen solo si un cliente lo pide.",
+      "Lane A · Compliance automation (your strongest wedge)":
+        "Vía A · Automatización de cumplimiento (tu cuña más fuerte)",
+      "See exactly what you will automate, then undercut it. The market leader's playbook, free.":
+        "Mira exactamente qué vas a automatizar, y luego cobra menos. El manual del líder del mercado, gratis.",
+      "The actual control lists you turn into scripts. This is the checklist.":
+        "Las listas de controles reales que conviertes en scripts. Esta es la lista de verificación.",
+      "Hands-on AWS security labs. Where compliance evidence lives: IAM, MFA, S3, access.":
+        "Laboratorios prácticos de seguridad en AWS. Donde vive la evidencia de cumplimiento: IAM, MFA, S3, accesos.",
+      "Lane B · API & web security (rides skills you have)":
+        "Vía B · Seguridad de APIs y web (se monta sobre habilidades que ya tienes)",
+      "Free course and cert, built for your background. The best free on-ramp.":
+        "Curso y certificado gratuitos, hechos para tu perfil. La mejor entrada gratuita.",
+      "The gold standard for web AppSec, from the makers of Burp Suite. Free forever.":
+        "El estándar de oro en seguridad de aplicaciones web, de quienes hacen Burp Suite. Gratis para siempre.",
+      "Free · all levels":"Gratis · todos los niveles",
+      "Certs: eJPT, then OSCP":"Certificaciones: eJPT, y luego OSCP",
+      "eJPT (~$200) as a cheap proof point. OSCP (~$1,700) only once you know you will use it.":
+        "eJPT (~200 dólares) como prueba barata. OSCP (~1.700 dólares) solo cuando sepas que lo vas a usar.",
+      "pick the first lane, compliance automation, and build one script that pulls evidence from a cloud API (start with GitHub or AWS). That single script is the seed of the whole offer.":
+        "elige la primera vía, automatización de cumplimiento, y construye un script que traiga evidencia de una API de nube (empieza con GitHub o AWS). Ese solo script es la semilla de toda la oferta.",
+      /* ===== Data ===== */
+      "decide with data":"decidir con datos",
+      "Ice cream sales and drownings rise together. Ice cream does not drown anybody. Summer causes both.":
+        "Las ventas de helado y los ahogamientos suben juntos. El helado no ahoga a nadie. El verano causa ambos.",
+      "<b>SQL SELECT:</b> where, order by, group by":"<b>SELECT de SQL:</b> where, order by, group by",
+      "<b>SQL that earns money:</b> joins, subqueries, window functions, CTEs":
+        "<b>El SQL que da dinero:</b> joins, subconsultas, funciones de ventana, CTEs",
+      "<b>Pipelines:</b> Airflow or dbt, scheduled and monitored":
+        "<b>Pipelines:</b> Airflow o dbt, programados y monitoreados",
+      "<b>Experiments:</b> A/B tests that are actually valid":
+        "<b>Experimentos:</b> pruebas A/B que son realmente válidas",
+      "Worth it?":"¿Vale la pena?",
+      "Skip stages 1 to 3, you already have them. Spend your time on stage 4 (dashboards and storytelling) and stage 5 (stats and KPIs). Ignore the entry cert unless a client demands it.":
+        "Sáltate las etapas 1 a 3, ya las tienes. Invierte tu tiempo en la etapa 4 (tableros y narrativa) y la etapa 5 (estadística y KPIs). Ignora el certificado de entrada a menos que un cliente lo exija.",
+      "The one move":"El movimiento clave",
+      "Automation is still the engine →":"La automatización sigue siendo el motor →",
+      "Ask the right question":"Haz la pregunta correcta",
+      "→ define the metric, know what decision it drives":
+        "→ define la métrica y sabe qué decisión impulsa",
+      "Turn a messy Sycosmart export into one clean pivot table with a real insight.":
+        "Convierte una exportación desordenada de Sycosmart en una tabla dinámica limpia con un hallazgo real.",
+      "Google Data Analytics Certificate, courses 1 to 2.":
+        "Certificado de Google Data Analytics, cursos 1 y 2.",
+      "SQL for analysis":"SQL para análisis",
+      "→ SELECT, WHERE, ORDER BY, GROUP BY, HAVING":"→ SELECT, WHERE, ORDER BY, GROUP BY, HAVING",
+      "Answer three real business questions about Sycosmart in SQL.":
+        "Responde tres preguntas de negocio reales sobre Sycosmart en SQL.",
+      "SQLBolt, then the Mode SQL tutorial.":"SQLBolt, y luego el tutorial de SQL de Mode.",
+      "Python for data":"Python para datos",
+      "Load a dataset in Pandas, clean it, and chart one clear finding.":
+        "Carga un conjunto de datos en Pandas, límpialo, y grafica un hallazgo claro.",
+      "Kaggle Learn, Pandas and Data Cleaning micro-courses.":
+        "Kaggle Learn, microcursos de Pandas y de limpieza de datos.",
+      "→ Tableau or Power BI, connect data, build a dashboard":
+        "→ Tableau o Power BI, conecta los datos, construye un tablero",
+      "→ the one chart that makes the point, clear labels, no clutter":
+        "→ el único gráfico que deja claro el punto, etiquetas claras, sin desorden",
+      "Share it":"Compártelo",
+      "Build a Tableau or Power BI dashboard for one real Sycosmart metric and share the link.":
+        "Construye un tablero en Tableau o Power BI para una métrica real de Sycosmart y comparte el enlace.",
+      "Tableau Public, and the Google cert's Tableau course.":
+        "Tableau Public, y el curso de Tableau del certificado de Google.",
+      "→ define them, track them, act on them":"→ defínelos, mídelos, y actúa sobre ellos",
+      "Define three KPIs for a business and exactly how you would measure each.":
+        "Define tres KPIs para un negocio y exactamente cómo medirías cada uno.",
+      "→ the standard entry cert, ~180 hours, on Coursera":
+        "→ el certificado de entrada estándar, ~180 horas, en Coursera",
+      "Enroll (free trial) and finish course 1 this month.":
+        "Inscríbete (prueba gratuita) y termina el curso 1 este mes.",
+      "The core cert":"El certificado principal",
+      "Spreadsheets, SQL, Tableau, and R, from zero. The standard starting point.":
+        "Hojas de cálculo, SQL, Tableau y R, desde cero. El punto de partida estándar.",
+      "Interactive SQL in the browser.":"SQL interactivo en el navegador.",
+      "SQL for analysis, from basic to advanced, with a real warehouse feel.":
+        "SQL para análisis, de básico a avanzado, con sensación de almacén de datos real.",
+      "Short, hands-on Pandas, data cleaning, and visualization courses.":
+        "Cursos cortos y prácticos de Pandas, limpieza de datos y visualización.",
+      "Free Tableau, plus thousands of dashboards to learn from.":
+        "Tableau gratis, más miles de tableros de los que aprender.",
+      "answer one real Sycosmart question in SQL and turn it into a single clear chart. That is the whole job in one rep.":
+        "responde una pregunta real de Sycosmart en SQL y conviértela en un solo gráfico claro. Ese es todo el trabajo en una sola repetición.",
+      /* ===== Generative AI ===== */
+      "An LLM is autocomplete that read almost everything":
+        "Un LLM es un autocompletado que leyó casi todo",
+      "Training, fine-tuning and RAG, in one paragraph each":
+        "Entrenamiento, ajuste fino y RAG, en un párrafo cada uno",
+      "<b>Prompting that works:</b> role, context, task, format, examples":
+        "<b>Prompts que funcionan:</b> rol, contexto, tarea, formato, ejemplos",
+      "<b>Structured output:</b> forcing reliable JSON, and validating it":
+        "<b>Salida estructurada:</b> forzar JSON confiable, y validarlo",
+      "<b>Embeddings:</b> turning meaning into numbers you can search":
+        "<b>Embeddings:</b> convertir el significado en números que puedes buscar",
+      "<b>Vector search and RAG</b> over real documents":
+        "<b>Búsqueda vectorial y RAG</b> sobre documentos reales",
+      "<b>Cost and latency:</b> caching, smaller models, streaming":
+        "<b>Costo y latencia:</b> caché, modelos más pequeños, streaming",
+      "6 months and onward":"6 meses en adelante",
+      "What an LLM is, and its limits":"Qué es un LLM, y cuáles son sus límites",
+      "→ tokens, context window, temperature, why it hallucinates":
+        "→ tokens, ventana de contexto, temperatura, por qué alucina",
+      "Calling the API":"Llamar a la API",
+      "Call the Claude API and get clean, schema-valid JSON back from a real prompt.":
+        "Llama a la API de Claude y recibe de vuelta JSON limpio y válido según esquema, desde un prompt real.",
+      "Anthropic docs, and DeepLearning.AI's Prompt Engineering course.":
+        "La documentación de Anthropic, y el curso de ingeniería de prompts de DeepLearning.AI.",
+      "→ system prompt, few-shot examples, chain-of-thought":
+        "→ prompt de sistema, ejemplos few-shot, cadena de pensamiento",
+      "Build one prompt template that classifies or extracts, and test it on 10 real inputs.":
+        "Construye una plantilla de prompt que clasifique o extraiga, y pruébala con 10 entradas reales.",
+      "→ retrieve, ground the answer in your data, cite sources":
+        "→ recupera, ancla la respuesta en tus datos, cita las fuentes",
+      "Build a RAG bot over your own notes so it answers from your data, not guesses.":
+        "Construye un bot RAG sobre tus propias notas para que responda desde tus datos y no adivine.",
+      "AI agents in workflows":"Agentes de IA en los flujos de trabajo",
+      "→ let the model act across tools; the Thought-Action-Observation loop":
+        "→ deja que el modelo actúe con varias herramientas; el bucle Pensamiento-Acción-Observación",
+      "→ the AI Agent node, the premium upsell on an automation":
+        "→ el nodo de agente de IA, la venta premium sobre una automatización",
+      "Add an AI agent step to a real n8n automation. The full build lives on the Automation page.":
+        "Agrega un paso de agente de IA a una automatización real de n8n. La construcción completa está en la página de Automatización.",
+      "→ validates building with foundation models, RAG, vector DBs":
+        "→ valida construir con modelos fundacionales, RAG y bases vectoriales",
+      "→ pick one, schedule it, track progress":"→ elige uno, agéndalo, sigue el progreso",
+      "Pick one cert and put a date on it in the Certs tracker.":
+        "Elige una certificación y ponle una fecha en el tablero de Certificaciones.",
+      "Structured output, tool use, and the prompt engineering guide.":
+        "Salida estructurada, uso de herramientas, y la guía de ingeniería de prompts.",
+      "DeepLearning.AI, Prompt Engineering for Developers":"DeepLearning.AI, Prompt Engineering for Developers",
+      "The classic first course, taught by Andrew Ng.":"El primer curso clásico, dictado por Andrew Ng.",
+      "DeepLearning.AI, LangChain for LLM App Dev":"DeepLearning.AI, LangChain for LLM App Dev",
+      "Build real LLM apps with chains and memory.":
+        "Construye apps reales con LLMs, usando cadenas y memoria.",
+      "Embed, retrieve, and answer from your own documents.":
+        "Incrusta, recupera y responde desde tus propios documentos.",
+      "Fundamentals through frameworks, with free certificates.":
+        "Desde los fundamentos hasta los frameworks, con certificados gratuitos.",
+      "The official foundational GenAI certification.":
+        "La certificación oficial de fundamentos en IA generativa.",
+      "get one clean JSON response out of the Claude API today, then wire it into an existing n8n workflow. That is the whole premium upsell in miniature.":
+        "consigue hoy una respuesta JSON limpia de la API de Claude, y luego conéctala a un flujo de n8n que ya tengas. Esa es toda la venta premium en miniatura.",
+      /* ===== The Shift ===== */
+      "Who trust AI's accuracy":"Que confían en la exactitud de la IA",
+      "Frustrated by \"almost right\" code":"Frustrados por el código que está \"casi bien\"",
+      "skill into income":"habilidad en ingresos",
+      "Software, automation, or AI engineer?":"¿Ingeniero de software, de automatización o de IA?",
+      "Is it true?":"¿Es cierto?","The real shift":"El cambio real",
+      "What to focus on":"En qué enfocarte","Which engineer":"Qué ingeniero","What to do":"Qué hacer",
+      "U.S. software developer jobs, 2024 to 2034, \"much faster than average.\" (BLS)":
+        "Empleos de programador en Estados Unidos, de 2024 a 2034, \"mucho más rápido que el promedio\". (BLS)",
+      "Software & app developers, among the fastest-growing roles to 2030. (WEF)":
+        "Programadores de software y apps, entre los puestos que más rápido crecen hacia 2030. (WEF)",
+      "AI engineer job postings year over year, the #1 fastest-growing role. (LinkedIn)":
+        "Ofertas de ingeniero de IA año contra año, el puesto que más rápido crece. (LinkedIn)",
+      "The call":"La decisión",
+      "Aim to be the Software + Automation + AI engineer: fundamentals deep enough to be accountable, automation to ship, agents to command the premium.":
+        "Apunta a ser el ingeniero de Software + Automatización + IA: fundamentos lo bastante profundos para ser responsable, automatización para entregar, y agentes para cobrar el premium.",
+      "Build the agent roadmap on the Automation page →":
+        "Construye la ruta de agentes en la página de Automatización →",
+      "WEF, Future of Jobs Report 2025":"WEF, Future of Jobs Report 2025",
+      "Fastest-growing roles and the top-3 fastest-growing skills (AI, cybersecurity, tech literacy).":
+        "Los puestos que más rápido crecen y las 3 habilidades de mayor crecimiento (IA, ciberseguridad, alfabetización tecnológica).",
+      "+15.8% projected growth 2024–34, \"much faster than average.\"":
+        "+15,8% de crecimiento proyectado 2024-34, \"mucho más rápido que el promedio\".",
+      "U.S. BLS, AI, IT & employment 2024–34":"BLS de Estados Unidos, IA, TI y empleo 2024-34",
+      "Why AI grows design-focused roles and squeezes routine production.":
+        "Por qué la IA hace crecer los puestos enfocados en diseño y aprieta la producción rutinaria.",
+      "How the work is changing":"Cómo está cambiando el trabajo",
+      "84% use AI, trust at 29%, \"almost right\" and debugging as the top frustrations.":
+        "84% usa IA, la confianza está en 29%, y el código que está \"casi bien\" y la depuración son las mayores frustraciones.",
+      "LinkedIn 2026 Skills / Jobs on the Rise":"LinkedIn 2026, habilidades y empleos en ascenso",
+      "AI engineer the #1 fastest-growing role; AI engineering, prompting, and tuning the top skills.":
+        "Ingeniero de IA es el puesto que más rápido crece; ingeniería de IA, prompting y ajuste son las habilidades más buscadas.",
+      "pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.":
+        "elige la etapa 4 de la página de Automatización y construye un agente real este mes. Ese solo proyecto te pone justo en la curva a la que apuntan todas las fuentes de arriba.",
+      /* ===== Home, schools, web tools, personal pages ===== */
+      "Job funds the runway · company is the leverage":
+        "El trabajo financia la pista · la empresa es el apalancamiento",
+      "All roadmaps →":"Todas las rutas →",
+      ", the spine. Python, APIs, n8n, Docker, self-hosting.":
+        ", la columna vertebral. Python, APIs, n8n, Docker, autoalojamiento.",
+      ", the premium layer you upsell inside automations.":
+        ", la capa premium que vendes encima de las automatizaciones.",
+      "Secure the software you build":"Asegura el software que construyes",
+      ", secure coding and DevSecOps, not a cyber career.":
+        ", programación segura y DevSecOps, no una carrera en ciberseguridad.",
+      ", deploy at scale, and turn data into decisions clients pay for.":
+        ", despliega a escala, y convierte los datos en decisiones por las que los clientes pagan.",
+      "To learn":"Por aprender",
+      "Everything you add saves in this browser on this device.":
+        "Todo lo que agregues se guarda en este navegador, en este dispositivo.",
+      "All →":"Todo →",
+      "No thoughts yet. Add one on the Thoughts page.":
+        "Todavía no hay ideas. Agrega una en la página de Ideas.",
+      "Add a topic to your Wishlist and set it In progress.":
+        "Agrega un tema a tu lista de deseos y ponlo En progreso.",
+      "Pick one cert on the Certs page and give it a date.":
+        "Elige una certificación en la página de Certificaciones y ponle una fecha.",
+      "Check off your first roadmap step.":"Marca tu primer paso de la ruta.",
+      "Two things go wrong, and both happen before day one":
+        "Dos cosas salen mal, y las dos pasan antes del primer día",
+      "They choose blind":"Eligen a ciegas","They arrive unprepared":"Llegan sin preparación",
+      "Code they wrote themselves":"Código que escribieron ellos mismos",
+      "04 · Who is running it":"04 · Quién lo dirige",
+      "The problem":"El problema","What we do":"Qué hacemos","How it works":"Cómo funciona","Who I am":"Quién soy",
+      "1. The session at your school":"1. La sesión en tu colegio","In person":"Presencial",
+      "2. The platform they take home":"2. La plataforma que se llevan a casa",
+      "Free to start":"Gratis para empezar",
+      "If you run a school, teach a class, or you are a parent who wants this for your child, get in touch and we will find a date. The session is free for schools in Santa Cruz while the programme is starting.":
+        "Si diriges un colegio, das clases, o eres un padre que quiere esto para su hijo, escríbenos y buscamos una fecha. La sesión es gratuita para colegios de Santa Cruz mientras el programa está arrancando.",
+      "AI site builders &amp; no-code tools":"Constructores de sitios con IA y herramientas no-code",
+      "→ Code it":"→ Prográmalo",
+      "Logins, dashboards, calculations, anything unique. Builders will fight you.":
+        "Inicios de sesión, tableros, cálculos, cualquier cosa única. Los constructores visuales se te van a resistir.",
+      "Brick by brick":"Ladrillo por ladrillo","The prefab kit":"El kit prefabricado",
+      "The furnished apartment":"El departamento amoblado",
+      "The designer's middle ground":"El punto medio del diseñador",
+      "The specialist":"El especialista","The shortcut":"El atajo","The honest truth:":"La verdad honesta:",
+      "tools change every few years. WordPress, Wix and whatever comes next are all temporary. HTML, CSS, JavaScript and the concepts behind them have lasted 30 years and will outlive them all. Learn the fundamentals, use whatever tool fits the job.":
+        "las herramientas cambian cada pocos años. WordPress, Wix y lo que venga después son todos temporales. HTML, CSS, JavaScript y los conceptos detrás de ellos llevan 30 años y les van a sobrevivir a todos. Aprende los fundamentos, y usa la herramienta que le sirva al trabajo.",
+      "Log out":"Cerrar sesión","Your data":"Tus datos","Clear all":"Borrar todo",
+      "Prove it":"Demuéstralo","No certifications tracked yet.":"Todavía no hay certificaciones registradas.",
+      "No learnings logged yet.":"Todavía no hay aprendizajes registrados.",
+      "Business ideas, reflections, notes. Tagged by category and dated, searchable.":
+        "Ideas de negocio, reflexiones, notas. Etiquetadas por categoría y con fecha, con búsqueda.",
+      "No thoughts yet. Capture your first above.":"Todavía no hay ideas. Captura la primera arriba.",
+      "Things I Want to Learn":"Cosas que quiero aprender",
+      "A prioritized wishlist with status and resource links. Tap a status chip to move it forward.":
+        "Una lista de deseos priorizada con estado y enlaces a recursos. Toca una etiqueta de estado para avanzarla.",
+      "New topic to learn":"Nuevo tema por aprender","Add to wishlist":"Agregar a la lista",
+      "Nothing on the wishlist yet. Add a topic above.":
+        "Todavía no hay nada en la lista. Agrega un tema arriba.",
+      "SQL, Python, dashboards, and stats. Turn data into decisions.":
+        "SQL, Python, tableros y estadística. Convierte los datos en decisiones.",
+      "All":"Todas",
+      /* ===== Web development roadmap ===== */
+      "The 100 HTML tags →":"Las 100 etiquetas HTML →",
+      "Other ways to build sites →":"Otras formas de construir sitios →",
+      "Free courses from Google, Meta & AWS →":"Cursos gratis de Google, Meta y AWS →",
+      "What a program actually is":"Qué es realmente un programa",
+      "→ a list of instructions the computer follows exactly, in order, like a recipe. It is incredibly fast and completely stupid. It does nothing you did not tell it to do.":
+        "→ una lista de instrucciones que la computadora sigue exactamente, en orden, como una receta. Es increíblemente rápida y completamente tonta. No hace nada que no le hayas dicho.",
+      "Thinking in steps (the real skill)":"Pensar en pasos (la habilidad de verdad)",
+      "→ take a big problem and cut it into tiny steps in order. Say the steps out loud in your own language BEFORE you touch code. This is 80% of programming and it has nothing to do with typing.":
+        "→ toma un problema grande y córtalo en pasos diminutos en orden. Di los pasos en voz alta en tu propio idioma ANTES de tocar código. Esto es el 80% de programar y no tiene nada que ver con teclear.",
+      "The five words behind every language":"Las cinco palabras detrás de todo lenguaje",
+      "→ variable (a labeled box), condition (a decision), loop (do it again), function (a saved recipe), data (the stuff you work with). Learn these once and every language after is just new spelling.":
+        "→ variable (una caja con etiqueta), condición (una decisión), bucle (hacerlo otra vez), función (una receta guardada), datos (aquello con lo que trabajas). Aprende esto una vez y cada lenguaje siguiente es solo otra forma de escribirlo.",
+      "Your tools and where code lives":"Tus herramientas y dónde vive el código",
+      "→ VS Code (the editor), the browser, dev tools (F12), files and folders, and what \"open the folder, not the file\" means":
+        "→ VS Code (el editor), el navegador, las herramientas de desarrollo (F12), archivos y carpetas, y qué significa \"abre la carpeta, no el archivo\"",
+      "How to read an error":"Cómo leer un error",
+      "→ an error is not punishment, it is directions. Read the message, find the file and line number, copy the exact text and search it. Beginners panic at red text. Professionals read it.":
+        "→ un error no es un castigo, son indicaciones. Lee el mensaje, encuentra el archivo y el número de línea, copia el texto exacto y búscalo. Los principiantes entran en pánico con el texto rojo. Los profesionales lo leen.",
+      "On paper, write every step to make a cup of tea, so exact that someone who has never seen tea could follow it. Miss \"turn on the kettle\" and they will drink cold water. That frustration you feel is exactly what programming is. You just did it without a computer.":
+        "En papel, escribe cada paso para preparar una taza de té, tan exacto que alguien que nunca ha visto té pueda seguirlo. Sáltate \"enciende la pava\" y se van a tomar agua fría. Esa frustración que sientes es exactamente lo que es programar. Lo acabas de hacer sin computadora.",
+      "The free":"El",
+      "primer in this academy, then Harvard CS50's first lecture on YouTube.":
+        "gratuito de esta academia, y luego la primera clase de CS50 de Harvard en YouTube.",
+      "The web & HTML":"La web y HTML",
+      "How the web actually works":"Cómo funciona realmente la web",
+      "→ client & server, HTTP request and response, URLs, DNS. Like ordering a pizza by phone.":
+        "→ cliente y servidor, petición y respuesta HTTP, URLs, DNS. Como pedir una pizza por teléfono.",
+      "Your very first page":"Tu primerísima página",
+      "→ html / head / body, save a .html file, open it in the browser. That is already a website.":
+        "→ html / head / body, guarda un archivo .html, ábrelo en el navegador. Eso ya es un sitio web.",
+      "→ h1 to h6 headings, p paragraphs, ul / ol lists, br, hr, strong, em":
+        "→ títulos de h1 a h6, párrafos p, listas ul / ol, br, hr, strong, em",
+      "→ a href, img src and alt, file paths, opening a link in a new tab":
+        "→ a href, img src y alt, rutas de archivo, abrir un enlace en una pestaña nueva",
+      "→ header, nav, main, section, article, aside, footer, and why the right tag matters":
+        "→ header, nav, main, section, article, aside, footer, y por qué importa usar la etiqueta correcta",
+      "Build a one-page profile about yourself: a photo, a big heading, two paragraphs, a list of three things you like, and a link to your Instagram. Open it in your browser. That is a real web page, and you made it.":
+        "Construye un perfil de una página sobre ti: una foto, un título grande, dos párrafos, una lista de tres cosas que te gustan, y un enlace a tu Instagram. Ábrelo en tu navegador. Esa es una página web real, y la hiciste tú.",
+      "Selectors & the cascade":"Selectores y la cascada",
+      "→ element, class, id, specificity, inheritance. How CSS decides who wins.":
+        "→ elemento, clase, id, especificidad, herencia. Cómo decide el CSS quién gana.",
+      "The box model":"El modelo de cajas",
+      "→ content, padding, border, margin, box-sizing. Everything is a box, like a wrapped gift.":
+        "→ contenido, relleno, borde, margen, box-sizing. Todo es una caja, como un regalo envuelto.",
+      "→ hex and rgb, font-family, sizes, line-height, loading a Google Font":
+        "→ hex y rgb, font-family, tamaños, line-height, cargar una fuente de Google",
+      "→ rows and columns, justify-content, align-items, gap. Best for lining things up.":
+        "→ filas y columnas, justify-content, align-items, gap. Lo mejor para alinear cosas.",
+      "→ grid-template-columns, gaps, areas. Best for full page layouts.":
+        "→ grid-template-columns, gaps, areas. Lo mejor para maquetar páginas completas.",
+      "→ mobile-first, media queries, %, rem and vw, images that shrink":
+        "→ primero el móvil, media queries, %, rem y vw, imágenes que se achican",
+      "Make your profile page beautiful. Then slowly shrink the browser window until it is phone-sized. If nothing breaks and nothing scrolls sideways, you have understood responsive design.":
+        "Haz que tu página de perfil se vea bonita. Después achica poco a poco la ventana del navegador hasta el tamaño de un celular. Si nada se rompe y nada se desplaza de lado, entendiste el diseño responsivo.",
+      "freeCodeCamp Responsive Web Design (free certificate), MDN CSS, and the Flexbox Froggy game.":
+        "freeCodeCamp Responsive Web Design (certificado gratis), MDN CSS, y el juego Flexbox Froggy.",
+      "Four blocks, in this exact order:":"Cuatro bloques, en este orden exacto:",
+      "the language itself → the DOM → events → libraries. Most people jump straight to libraries and then cannot fix anything. Do not be most people.":
+        "el lenguaje en sí → el DOM → los eventos → las librerías. La mayoría salta directo a las librerías y después no puede arreglar nada. No seas la mayoría.",
+      "Read the full JavaScript guide →":"Lee la guía completa de JavaScript →",
+      "Block A · The language fundamentals":"Bloque A · Los fundamentos del lenguaje",
+      "→ let and const, strings, numbers, true/false, null and undefined. A variable is a labeled box you put a value in.":
+        "→ let y const, cadenas, números, true/false, null y undefined. Una variable es una caja con etiqueta donde pones un valor.",
+      "→ if / else, ===, && and ||, ternary, switch. Teaching the computer to choose.":
+        "→ if / else, ===, && y ||, ternario, switch. Enseñarle a la computadora a elegir.",
+      "→ for, while, for...of. Doing the same thing 1,000 times without writing it 1,000 times.":
+        "→ for, while, for...of. Hacer lo mismo 1.000 veces sin escribirlo 1.000 veces.",
+      "→ parameters, return, arrow functions, scope. A saved recipe you can run any time with different ingredients.":
+        "→ parámetros, return, funciones flecha, alcance. Una receta guardada que puedes ejecutar cuando quieras con distintos ingredientes.",
+      "→ arrays are a numbered list (a shopping list), objects are labeled pockets (a backpack). Nearly all data you touch is one of these two.":
+        "→ los arreglos son una lista numerada (una lista de compras), los objetos son bolsillos con etiqueta (una mochila). Casi todos los datos que toques son uno de estos dos.",
+      "Array methods you use daily":"Métodos de arreglo que usas a diario",
+      "→ map (change every item), filter (keep some), find (get one), reduce (squash into one value), sort, includes":
+        "→ map (cambia cada elemento), filter (te quedas con algunos), find (obtén uno), reduce (aplasta todo en un valor), sort, includes",
+      "Block B · The DOM, touching the page":"Bloque B · El DOM, tocar la página",
+      "What the DOM is":"Qué es el DOM",
+      "→ the browser turns your HTML into a live family tree in memory. JavaScript does not edit your file, it edits that tree, and the screen follows.":
+        "→ el navegador convierte tu HTML en un árbol genealógico vivo en memoria. JavaScript no edita tu archivo, edita ese árbol, y la pantalla lo sigue.",
+      "→ querySelector and querySelectorAll, textContent, classList.add/remove/toggle, style, createElement, append, remove":
+        "→ querySelector y querySelectorAll, textContent, classList.add/remove/toggle, style, createElement, append, remove",
+      "Block C · Events, making it react":"Bloque C · Eventos, hacer que reaccione",
+      "→ addEventListener, click, input, submit, keydown. The doorbell pattern: wait for something, then do something.":
+        "→ addEventListener, click, input, submit, keydown. El patrón del timbre: espera algo, y luego haz algo.",
+      "The event object & bubbling":"El objeto del evento y el burbujeo",
+      "→ e.target, e.preventDefault(), why a click on a button also fires on its parent, and event delegation (one listener for 100 items)":
+        "→ e.target, e.preventDefault(), por qué un clic en un botón también se dispara en su padre, y la delegación de eventos (un escuchador para 100 elementos)",
+      "Block D · Libraries, standing on other people's work":"Bloque D · Librerías, pararse sobre el trabajo de otros",
+      "What a library is and when to use one":"Qué es una librería y cuándo usar una",
+      "→ code someone already wrote and shared. You do not build a car engine to drive to school. Learn what problem each one solves, and when NOT to install anything.":
+        "→ código que alguien ya escribió y compartió. No construyes el motor de un auto para ir al colegio. Aprende qué problema resuelve cada una, y cuándo NO instalar nada.",
+      "→ import / export, package.json, node_modules, plus fetch, JSON, async / await, loading and error states":
+        "→ import / export, package.json, node_modules, más fetch, JSON, async / await, estados de carga y de error",
+      "Build a to-do list with zero libraries. Type a task, press add, it appears. Click it, it gets crossed out. Reload the page and it is still there. That tiny project uses every single thing above, which is exactly why every developer builds it.":
+        "Construye una lista de tareas sin ninguna librería. Escribes una tarea, aprietas agregar, y aparece. Le haces clic y se tacha. Recargas la página y sigue ahí. Ese proyecto diminuto usa absolutamente todo lo de arriba, que es justamente por lo que todo programador lo construye.",
+      "javascript.info (the best free JS course anywhere), MDN JavaScript guide, and the":
+        "javascript.info (el mejor curso gratuito de JS que existe), la guía de JavaScript de MDN, y la",
+      "page in this academy.":"página de esta academia.",
+      "Why frameworks exist":"Por qué existen los frameworks",
+      "→ copying the same HTML 50 times does not scale. React builds it from data instead.":
+        "→ copiar el mismo HTML 50 veces no escala. React lo construye a partir de datos.",
+      "→ reusable pieces, like a cookie cutter. Props are the ingredients you pass in.":
+        "→ piezas reutilizables, como un molde de galletas. Las props son los ingredientes que le pasas.",
+      "→ useState. Data that can change, and the screen redraws itself when it does.":
+        "→ useState. Datos que pueden cambiar, y la pantalla se redibuja sola cuando cambian.",
+      "→ map over data to draw many items, show or hide things based on a condition":
+        "→ recorre los datos con map para dibujar muchos elementos, y muestra u oculta cosas según una condición",
+      "→ useEffect, fetching from an API inside a component, loading states":
+        "→ useEffect, traer datos de una API dentro de un componente, estados de carga",
+      "→ controlled inputs, and multiple pages in one app":
+        "→ campos controlados, y varias páginas en una sola app",
+      "Rebuild your to-do list in React. Exactly the same app, but now each task is a component and the list is just data. The moment that clicks, you understand modern frontend.":
+        "Vuelve a construir tu lista de tareas en React. Exactamente la misma app, pero ahora cada tarea es un componente y la lista son solo datos. En el momento en que eso te haga clic, entiendes el frontend moderno.",
+      "The official React docs at react.dev, Learn section. It is genuinely excellent and free.":
+        "La documentación oficial de React en react.dev, sección Learn. Es genuinamente excelente y gratuita.",
+      "Hands-on HTML & CSS from zero, with a free certificate.":
+        "HTML y CSS con las manos desde cero, con certificado gratuito.",
+      "The reference the whole industry uses. Clear, complete, free.":
+        "La referencia que usa toda la industria. Clara, completa, gratis.",
+      "The Modern JavaScript Tutorial":"The Modern JavaScript Tutorial",
+      "The best free, deep JavaScript course.":"El mejor curso de JavaScript gratuito y profundo.",
+      "Learn React from its makers, interactive and current.":
+        "Aprende React de quienes lo hicieron, interactivo y actualizado.",
+      "The Odin Project":"The Odin Project",
+      "A free, project-based full-stack web dev curriculum, start to finish.":
+        "Un currículo gratuito de desarrollo web full-stack basado en proyectos, de principio a fin.",
+      "build one real page today in plain HTML and CSS, then make it responsive. You are a web developer the moment you ship your first page.":
+        "construye hoy una página real en HTML y CSS puros, y luego hazla responsiva. Eres desarrollador web en el momento en que publicas tu primera página.",
+      /* ===== Backend roadmap ===== */
+      "Learn backend by building one":"Aprende backend construyendo uno",
+      "You can build an API that works":"Puedes construir una API que funciona",
+      "<b>One framework:</b> FastAPI or Express, four endpoints":
+        "<b>Un framework:</b> FastAPI o Express, cuatro endpoints",
+      "You can build one people can safely use":"Puedes construir una que la gente pueda usar con seguridad",
+      "<b>Auth:</b> hashing, tokens, refresh, logout that actually logs out":
+        "<b>Autenticación:</b> hashing, tokens, refresco, y un cierre de sesión que de verdad cierra la sesión",
+      "<b>Relationships and migrations</b> that do not lose data":
+        "<b>Relaciones y migraciones</b> que no pierden datos",
+      "<b>Errors and logs</b> you can read at midnight":
+        "<b>Errores y registros</b> que puedas leer a medianoche",
+      "You can build one that stays up under pressure":
+        "Puedes construir una que se mantiene en pie bajo presión",
+      "<b>Security in depth:</b> OWASP Top 10, rate limits, secret rotation":
+        "<b>Seguridad en profundidad:</b> el Top 10 de OWASP, límites de peticiones, rotación de secretos",
+      "<b>Operating it:</b> monitoring, tracing, migrations with no downtime":
+        "<b>Operarla:</b> monitoreo, trazas, migraciones sin tiempo fuera de servicio",
+      "JSON, the data format of APIs":"JSON, el formato de datos de las APIs",
+      "→ functions, packages, virtualenv, type hints (you have this)":
+        "→ funciones, paquetes, virtualenv, anotaciones de tipo (esto ya lo tienes)",
+      "→ run a server, read logs, commit and push":
+        "→ ejecutar un servidor, leer registros, hacer commit y push",
+      "Open your running API's":"Abre el",
+      ", then watch the request and response in the browser's Network tab.":
+        " de tu API en ejecución, y luego observa la petición y la respuesta en la pestaña Red del navegador.",
+      "MDN's HTTP overview, and roadmap.sh/backend for the full map.":
+        "La introducción a HTTP de MDN, y roadmap.sh/backend para el mapa completo.",
+      "→ return the right code, consistent error shapes":
+        "→ devuelve el código correcto, con formas de error consistentes",
+      "→ typed request / response schemas with Pydantic":
+        "→ esquemas tipados de petición y respuesta con Pydantic",
+      "Add a real endpoint to your FastAPI app that returns JSON, and try it in the auto-generated":
+        "Agrega un endpoint real a tu app de FastAPI que devuelva JSON, y pruébalo en la",
+      "The FastAPI tutorial, it teaches by building.":"El tutorial de FastAPI, que enseña construyendo.",
+      "→ CRUD, joins, GROUP BY, indexes":"→ CRUD, joins, GROUP BY, índices",
+      "→ SQLAlchemy models and queries, sessions":"→ modelos y consultas de SQLAlchemy, sesiones",
+      "→ ACID, isolation, one atomic write":"→ ACID, aislamiento, una escritura atómica",
+      "Model the":"Modela la",
+      "table and wire it through SQLAlchemy. This is Phase 2 of the Brain build.":
+        "y conéctala con SQLAlchemy. Esta es la fase 2 de la construcción de Brain.",
+      "PostgreSQL Tutorial, and your own Databases roadmap.":
+        "El tutorial de PostgreSQL, y tu propia ruta de Bases de Datos.",
+      "→ JWT access + refresh, how tokens flow":"→ JWT de acceso y de refresco, cómo fluyen los tokens",
+      "→ protect routes, scope every query to the current user":
+        "→ protege las rutas y limita cada consulta al usuario actual",
+      "Build signup and login with hashed passwords, then protect one route with a JWT. This is Phase 2 to 3 of the build.":
+        "Construye el registro y el inicio de sesión con contraseñas hasheadas, y luego protege una ruta con un JWT. Esta es la fase 2 a 3 de la construcción.",
+      "FastAPI security docs, and the OWASP Top 10 (see your Security roadmap).":
+        "La documentación de seguridad de FastAPI, y el Top 10 de OWASP (mira tu ruta de Seguridad).",
+      "→ routers / services / models layering, config from env":
+        "→ capas de routers / servicios / modelos, configuración desde el entorno",
+      "→ 12-factor config, env vars, no secrets in code":
+        "→ configuración de 12 factores, variables de entorno, sin secretos en el código",
+      "Write your first pytest for the signup endpoint: it should reject a duplicate email.":
+        "Escribe tu primer pytest para el endpoint de registro: debe rechazar un correo duplicado.",
+      "Real Python and the FastAPI testing docs.":
+        "Real Python y la documentación de pruebas de FastAPI.",
+      "→ containerize the API and database (you do this already)":
+        "→ mete la API y la base de datos en contenedores (esto ya lo haces)",
+      "→ VPS or cloud, reverse proxy, HTTPS, a domain":
+        "→ VPS o nube, proxy inverso, HTTPS, un dominio",
+      "→ auto-build and deploy on push":"→ construcción y despliegue automáticos en cada push",
+      "Deploy the Brain backend to your VPS behind HTTPS. This is Phase 5 of the build.":
+        "Publica el backend de Brain en tu VPS detrás de HTTPS. Esta es la fase 5 de la construcción.",
+      "Docker docs, and your Cloud roadmap.":"La documentación de Docker, y tu ruta de Nube.",
+      "→ Redis, what to cache, invalidation":"→ Redis, qué cachear, invalidación",
+      "→ when to split into services, message queues":
+        "→ cuándo dividir en servicios, colas de mensajes",
+      "Add rate limiting and pagination once you have real users hitting the API. Not before.":
+        "Agrega límites de peticiones y paginación cuando tengas usuarios reales usando la API. No antes.",
+      "System design primers, once stages 1 to 6 are solid.":
+        "Introducciones al diseño de sistemas, una vez que las etapas 1 a 6 estén sólidas.",
+      "The map & the fundamentals":"El mapa y los fundamentos",
+      "The visual, ordered map of everything a backend developer learns.":
+        "El mapa visual y ordenado de todo lo que aprende un programador backend.",
+      "How the browser talks to a server. The mental model everything sits on.":
+        "Cómo le habla el navegador a un servidor. El modelo mental sobre el que se apoya todo.",
+      "Your stack: FastAPI & Postgres":"Tu stack: FastAPI y Postgres",
+      "Practical, example-driven Postgres from basics to advanced.":
+        "Postgres práctico y con ejemplos, de lo básico a lo avanzado.",
+      "Deep, reliable guides on FastAPI, SQLAlchemy, testing, and Docker.":
+        "Guías profundas y confiables sobre FastAPI, SQLAlchemy, pruebas y Docker.",
+      "A free, project-based full-stack curriculum if you want the guided route.":
+        "Un currículo full-stack gratuito y basado en proyectos, si quieres la ruta guiada.",
+      "The ten ways web apps get broken. Read before you ship auth.":
+        "Las diez formas en que se rompen las apps web. Léelo antes de publicar la autenticación.",
+      "you are already on stage 1 to 3 with the Brain backend running. Nail the":
+        "ya estás en las etapas 1 a 3 con el backend de Brain funcionando. Domina la",
+      "table and JWT login (Phase 2), and you will have learned the hardest 40% of backend by doing.":
+        "y el inicio de sesión con JWT (fase 2), y habrás aprendido el 40% más difícil del backend haciéndolo.",
+      /* ===== Databases roadmap ===== */
+      "If you remember nothing else":"Si no recuerdas nada más",
+      "<b>Read <code>EXPLAIN ANALYZE</code> before optimizing.</b> Most slowness is one missing index.":
+        "<b>Lee <code>EXPLAIN ANALYZE</code> antes de optimizar.</b> Casi toda la lentitud es un índice que falta.",
+      "<b>Tables, rows, columns, types</b> and why types matter":
+        "<b>Tablas, filas, columnas, tipos</b> y por qué importan los tipos",
+      "<b>SELECT:</b> where, order by, limit":"<b>SELECT:</b> where, order by, limit",
+      "<b>Aggregates:</b> count, sum, group by, having":"<b>Agregados:</b> count, sum, group by, having",
+      "<b>Joins:</b> inner and left, and drawing them before writing them":
+        "<b>Joins:</b> inner y left, y dibujarlos antes de escribirlos",
+      "You can design one that will not embarrass you":"Puedes diseñar una que no te deje mal",
+      "<b>Backups,</b> and having actually restored one":
+        "<b>Respaldos,</b> y haber restaurado uno de verdad",
+      "Performance, correctness under concurrency, and never losing anything.":
+        "Rendimiento, exactitud bajo concurrencia, y no perder nunca nada.",
+      "<b>Query plans:</b> reading EXPLAIN and acting on it":
+        "<b>Planes de consulta:</b> leer EXPLAIN y actuar en consecuencia",
+      "<b>Row-level security</b> and encryption at rest":
+        "<b>Seguridad a nivel de fila</b> y cifrado en reposo",
+      "Mostly free, and enough on their own. Work one per stage.":
+        "Casi todos gratis, y suficientes por sí solos. Trabaja uno por etapa.",
+      "The eight laws":"Las ocho leyes",
+      "Default to Postgres. Reach for anything else only when a real constraint forces you.":
+        "Por defecto, Postgres. Recurre a otra cosa solo cuando una restricción real te obligue.",
+      "Normalize until it hurts, then denormalize until it works.":
+        "Normaliza hasta que duela, y luego desnormaliza hasta que funcione.",
+      "Index what you filter, join, and sort by. Nothing else.":
+        "Indexa aquello por lo que filtras, unes y ordenas. Nada más.",
+      "If two facts must both be true or both false, they belong in one transaction.":
+        "Si dos hechos deben ser ambos verdaderos o ambos falsos, pertenecen a una misma transacción.",
+      "Every schema change is a migration in version control, run by a tool.":
+        "Cada cambio de esquema es una migración en control de versiones, ejecutada por una herramienta.",
+      "The database enforces who sees what. The frontend is a suggestion.":
+        "La base de datos hace cumplir quién ve qué. El frontend es una sugerencia.",
+      "Most scaling problems are a missing index wearing a costume.":
+        "Casi todos los problemas de escala son un índice faltante disfrazado.",
+      "You do not have backups until you have restored one and watched it work.":
+        "No tienes respaldos hasta que hayas restaurado uno y lo hayas visto funcionar.",
+      "SQL core: read and write data":"SQL esencial: leer y escribir datos",
+      "→ SELECT / INSERT / UPDATE / DELETE, WHERE, ORDER BY, LIMIT":
+        "→ SELECT / INSERT / UPDATE / DELETE, WHERE, ORDER BY, LIMIT",
+      "→ INNER / LEFT JOIN, GROUP BY, HAVING, subqueries, CTEs":
+        "→ INNER / LEFT JOIN, GROUP BY, HAVING, subconsultas, CTEs",
+      "→ data types, primary & foreign keys, NOT NULL / UNIQUE, defaults":
+        "→ tipos de datos, llaves primarias y foráneas, NOT NULL / UNIQUE, valores por defecto",
+      "→ 1NF / 2NF / 3NF, and when to denormalize on purpose":
+        "→ 1FN / 2FN / 3FN, y cuándo desnormalizar a propósito",
+      "Model Sycosmart's fiado schema with real foreign keys and constraints, not just loose tables.":
+        "Modela el esquema de fiado de Sycosmart con llaves foráneas y restricciones reales, no solo tablas sueltas.",
+      "SQLBolt (interactive), then the PostgreSQL Tutorial.":
+        "SQLBolt (interactivo), y luego el tutorial de PostgreSQL.",
+      "Indexes: the line between fast and dead":"Índices: la línea entre rápido y muerto",
+      "→ B-tree, composite, covering, selectivity, when NOT to index":
+        "→ B-tree, compuestos, de cobertura, selectividad, cuándo NO indexar",
+      "Read the query plan":"Lee el plan de consulta",
+      "→ fix N+1, select only needed columns, keyset pagination":
+        "→ arregla el N+1, selecciona solo las columnas necesarias, paginación por llave",
+      "on your three slowest Sycosmart queries and add one composite index.":
+        "en tus tres consultas más lentas de Sycosmart y agrega un índice compuesto.",
+      "Use The Index, Luke (the definitive free guide to indexing).":
+        "Use The Index, Luke (la guía gratuita definitiva sobre índices).",
+      "→ READ COMMITTED, SELECT ... FOR UPDATE, race conditions":
+        "→ READ COMMITTED, SELECT ... FOR UPDATE, condiciones de carrera",
+      "→ numeric vs float, integer cents, CHECK constraints as rules":
+        "→ numeric contra float, centavos enteros, restricciones CHECK como reglas",
+      "Wrap a payment insert and the balance update in one transaction, so a crash can never split them.":
+        "Envuelve la inserción de un pago y la actualización del saldo en una sola transacción, para que una caída nunca pueda separarlas.",
+      "PostgreSQL docs on transactions and MVCC.":
+        "La documentación de PostgreSQL sobre transacciones y MVCC.",
+      "Security on Supabase":"Seguridad en Supabase",
+      "→ roles & grants, anon vs service key, no secrets in the frontend":
+        "→ roles y permisos, llave anónima contra llave de servicio, sin secretos en el frontend",
+      "→ parameterized queries, input validation, TLS in transit":
+        "→ consultas parametrizadas, validación de entrada, TLS en tránsito",
+      "Enable RLS on every Sycosmart table, then confirm a logged-in user cannot read another user's rows.":
+        "Activa la seguridad a nivel de fila en cada tabla de Sycosmart, y luego confirma que un usuario con sesión iniciada no puede leer las filas de otro.",
+      "Supabase Row-Level Security docs, and the OWASP Top 10.":
+        "La documentación de seguridad a nivel de fila de Supabase, y el Top 10 de OWASP.",
+      "→ version-controlled, expand-then-contract, lock-aware ALTERs":
+        "→ bajo control de versiones, expandir y luego contraer, ALTERs conscientes de los bloqueos",
+      "Scaling in order":"Escalar en orden",
+      "→ point-in-time recovery, tested restores, disk & slow-query alerts":
+        "→ recuperación a un punto en el tiempo, restauraciones probadas, alertas de disco y de consultas lentas",
+      "Run a real restore into a scratch database and confirm the data comes back whole. Now you have backups.":
+        "Haz una restauración real en una base de datos de prueba y confirma que los datos vuelven completos. Ahora sí tienes respaldos.",
+      "Supabase backups, and the PostgreSQL high-availability docs.":
+        "Los respaldos de Supabase, y la documentación de alta disponibilidad de PostgreSQL.",
+      "Learn SQL in the browser, one short interactive exercise at a time.":
+        "Aprende SQL en el navegador, un ejercicio interactivo corto a la vez.",
+      "Use The Index, Luke":"Use The Index, Luke",
+      "The definitive free guide to database indexing and query performance.":
+        "La guía gratuita definitiva sobre índices y rendimiento de consultas.",
+      "The exact wall your app needs. Policies, auth.uid(), examples.":
+        "El muro exacto que tu app necesita. Políticas, auth.uid(), ejemplos.",
+      "The source of truth for transactions, indexing, and everything else.":
+        "La fuente de la verdad para transacciones, índices y todo lo demás.",
+      "on Sycosmart's three heaviest queries and turn on RLS. One hour, real payoff.":
+        "en las tres consultas más pesadas de Sycosmart y activa la seguridad a nivel de fila. Una hora, con beneficio real.",
+      /* ===== Cloud roadmap ===== */
+      "You can run something other people depend on":"Puedes operar algo de lo que otros dependen",
+      "<b>Managed databases,</b> backups, and actually restoring one":
+        "<b>Bases de datos administradas,</b> respaldos, y restaurar uno de verdad",
+      "Everything you rent, explained plainly":"Todo lo que alquilas, explicado con claridad",
+      "What cloud actually is":"Qué es realmente la nube",
+      "→ IaaS / PaaS / SaaS, on-demand, pay-as-you-go, shared responsibility model":
+        "→ IaaS / PaaS / SaaS, bajo demanda, pago por uso, modelo de responsabilidad compartida",
+      "The big three & how they're laid out":"Los tres grandes y cómo están organizados",
+      "Accounts & billing (do not skip)":"Cuentas y facturación (no te lo saltes)",
+      "→ free tier, budgets & alerts, the cost of leaving things running":
+        "→ capa gratuita, presupuestos y alertas, el costo de dejar cosas encendidas",
+      "Open an AWS free-tier account, set a billing alert, then launch and stop one server.":
+        "Abre una cuenta de capa gratuita de AWS, pon una alerta de facturación, y luego levanta y apaga un servidor.",
+      "Host a static site on S3 and put a small API on a Lambda function.":
+        "Aloja un sitio estático en S3 y pon una API pequeña en una función Lambda.",
+      "AWS Skill Builder, and freeCodeCamp's AWS course.":
+        "AWS Skill Builder, y el curso de AWS de freeCodeCamp.",
+      "Containers in the cloud":"Contenedores en la nube",
+      "→ push an image, run it on ECS / Cloud Run":
+        "→ sube una imagen y ejecútala en ECS / Cloud Run",
+      "→ build & deploy pipeline with GitHub Actions":
+        "→ pipeline de construcción y despliegue con GitHub Actions",
+      "→ CloudWatch, logs, alarms to your phone":"→ CloudWatch, registros, alarmas a tu teléfono",
+      "Deploy your n8n stack to a cloud VM or container service, with failure alerts.":
+        "Publica tu stack de n8n en una máquina virtual o un servicio de contenedores en la nube, con alertas de fallo.",
+      "→ security groups, encryption, least privilege, no public buckets":
+        "→ grupos de seguridad, cifrado, mínimo privilegio, sin buckets públicos",
+      "Put a load balancer and autoscaling in front of one app, and set a hard monthly budget.":
+        "Pon un balanceador de carga y autoescalado frente a una app, y fija un presupuesto mensual estricto.",
+      "→ foundational, about $100, start here":"→ fundamental, unos 100 dólares, empieza aquí",
+      "→ about $150, the resume-mover":"→ unos 150 dólares, el que mueve tu currículum",
+      "Log it in your Certs tracker":"Regístralo en tu tablero de Certificaciones",
+      "Book the Cloud Practitioner exam once you can explain stages 1 to 4 in plain words.":
+        "Agenda el examen de Cloud Practitioner cuando puedas explicar las etapas 1 a 4 con palabras simples.",
+      "The official free foundations course. Your on-ramp and cert prep.":
+        "El curso oficial y gratuito de fundamentos. Tu entrada y tu preparación para la certificación.",
+      "Official hands-on labs and learning plans for every service.":
+        "Laboratorios prácticos oficiales y planes de aprendizaje para cada servicio.",
+      "A visual, ordered map of what to learn on AWS.":
+        "Un mapa visual y ordenado de qué aprender en AWS.",
+      "Other providers":"Otros proveedores",
+      "Official Google Cloud labs and paths.":"Laboratorios y rutas oficiales de Google Cloud.",
+      "open a free-tier AWS account today, set a billing alert, and move one small project off your VPS. That single step is 60% of the Cloud Practitioner exam.":
+        "abre hoy una cuenta de capa gratuita de AWS, pon una alerta de facturación, y saca un proyecto pequeño de tu VPS. Ese solo paso es el 60% del examen de Cloud Practitioner.",
       /* ===== Automation: roadmap, builds, resources ===== */
       "← All pages":"← Todas las páginas","The role":"El rol","What you build":"Qué construyes",
       "Getting paid":"Cobrar","The trap":"La trampa","The verdict":"El veredicto","The offer":"La oferta",
@@ -9615,7 +10530,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     var LANG='en', LANG_READY=false;
     var INLINE_OK={B:1,STRONG:1,I:1,EM:1,CODE:1,SPAN:1,A:1,BR:1,SMALL:1,U:1,MARK:1,SUP:1,SUB:1};
     var SKIP_TAGS={SCRIPT:1,STYLE:1,PRE:1,CODE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,SVG:1};
-    var UNIT_SEL='p,h1,h2,h3,h4,h5,h6,li,summary,figcaption,td,th,dt,dd,blockquote,.mnote,.lead,.pd,.gwhy,.ltip,.rhint,.tk-d,.chain-d,.chain-n,.cr-d,.lvlout,.lvlbuild,.awhint,.cqnote,.lgoal,.chain-tag,.lvltime,.eyebrow,.pn,.tk-tag,.r .h,.r .m,.r .d,.st .c,.cmpuse,.sk .skt,.sk .sub';
+    var UNIT_SEL='.i18nu,p,h1,h2,h3,h4,h5,h6,li,summary,figcaption,td,th,dt,dd,blockquote,.mnote,.lead,.pd,.gwhy,.ltip,.rhint,.tk-d,.chain-d,.chain-n,.cr-d,.lvlout,.lvlbuild,.awhint,.cqnote,.lgoal,.chain-tag,.lvltime,.eyebrow,.pn,.tk-tag,.r .h,.r .m,.r .d,.st .c,.cmpuse,.sk .skt,.sk .sub';
     var ORIG=new WeakMap(), ORIGHTML=new WeakMap();
 
     function langLoad(){try{return localStorage.getItem('fm.lang')||'en';}catch(e){return 'en';}}
@@ -9666,9 +10581,30 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        on-device model and cached, so "Spanish" means all of it rather
        than most of it. If the browser has no model, a block stays fully
        English rather than half-and-half, and the sidebar says so. */
-    var ESAUTO={}, AUTO_STATE='idle', AUTO_LEFT=0, AUTO_TR=null;
-    function autoLoad(){try{ESAUTO=JSON.parse(localStorage.getItem('fm.es.auto')||'{}')||{};}catch(e){ESAUTO={};}}
-    function autoSave(){try{localStorage.setItem('fm.es.auto',JSON.stringify(ESAUTO));}catch(e){}}
+    /* ---- attributes ----
+       Tooltips, placeholders and aria-labels are read by people just like
+       body text is, so they follow the same rule: translated when we have
+       one, otherwise left in English rather than half-done. */
+    var ATTRS=['placeholder','title','aria-label','alt'];
+    var ATTR_ORIG=new WeakMap();
+    function applyAttrs(toEs){
+      var els=document.querySelectorAll('[placeholder],[title],[aria-label],[alt]'),i,j,el,a,orig,hit,store;
+      for(i=0;i<els.length;i++){
+        el=els[i];
+        store=ATTR_ORIG.get(el);
+        if(!store){store={};ATTR_ORIG.set(el,store);}
+        for(j=0;j<ATTRS.length;j++){
+          a=ATTRS[j];
+          if(!el.hasAttribute(a))continue;
+          if(!(a in store))store[a]=el.getAttribute(a);
+          orig=store[a];
+          if(!orig||!/[A-Za-z]{3}/.test(orig))continue;
+          hit=toEs?tr(orig.trim()):null;
+          if(hit&&hit!==el.getAttribute(a))el.setAttribute(a,hit);
+          else if(!hit&&el.getAttribute(a)!==orig)el.setAttribute(a,orig);
+        }
+      }
+    }
     /* Strings the app builds at runtime (a name, a level number, an XP total)
        can never be dictionary keys, so they get patterns instead. Each one
        rebuilds the sentence in Spanish and looks the variable parts back up,
@@ -9697,6 +10633,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}],
       [/^Solved in (\d+) steps$/, function(m){
         return 'Resuelto en '+m[1]+' pasos';}]
+      ,[/^of ([\d,]+) in the academy$/, function(m){return 'de '+m[1]+' en la academia';}]
       ,[/^Level (\d+) ·$/, function(m){return 'Nivel '+m[1]+' ·';}]
       ,[/^· ([\d,]+) XP total$/, function(m){return '· '+m[1]+' XP en total';}]
       ,[/^out of ([\d,]+) in the academy$/, function(m){return 'de '+m[1]+' en la academia';}]
@@ -9718,9 +10655,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       ,[/^(\d+) of (\d+) levels · (\d+) random beaten$/, function(m){
         return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}]
     ];
-    function trBase(key){var k=(key||'').trim();return ES[k]||ESAUTO[k]||null;}
+    function trBase(key){var k=(key||'').trim();return ES[k]||null;}
     function tr(key){
-      var k=(key||'').trim(), hit=ES[k]||ESAUTO[k];
+      var k=(key||'').trim(), hit=ES[k];
       if(hit)return hit;
       for(var i=0;i<DYN.length;i++){
         var m=k.match(DYN[i][0]);
@@ -9741,81 +10678,6 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       return any;
     }
     /* every string still needing a translation, units first */
-    window.__missing=function(){return missingKeys();};
-    window.__tr=function(k){return tr(k);};
-    window.__norm=function(s){return normKey(s);};
-    function missingKeys(){
-      var out=[],seen={},els=unitElements(),i,el,k;
-      for(i=0;i<els.length;i++){
-        el=els[i];
-        k=normKey(ORIGHTML.has(el)?ORIGHTML.get(el):el.innerHTML);
-        if(k&&!tr(k)&&!seen[k]&&k.length<1200&&/[A-Za-z]{3}/.test(k)){seen[k]=1;out.push(k);}
-      }
-      walkTextAll(document.body,function(n){
-        var t=(ORIG.has(n)?ORIG.get(n):n.nodeValue).trim();
-        if(t&&!tr(t)&&!seen[t]&&t.length<1200&&/[A-Za-z]{3}/.test(t)){seen[t]=1;out.push(t);}
-      });
-      return out;
-    }
-    function walkTextAll(root,fn){
-      var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
-        acceptNode:function(n){
-          if(!n.nodeValue||!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;
-          var p=n.parentElement;
-          while(p){
-            if(SKIP_TAGS[p.tagName])return NodeFilter.FILTER_REJECT;
-            if(p.hasAttribute&&p.hasAttribute('data-noi18n'))return NodeFilter.FILTER_REJECT;
-            p=p.parentElement;
-          }
-          return NodeFilter.FILTER_ACCEPT;
-        }});
-      var n;while((n=w.nextNode()))fn(n);
-    }
-    async function getAutoTranslator(){
-      if(AUTO_TR)return AUTO_TR;
-      if(!('Translator' in self))return null;
-      try{
-        AUTO_TR=await withTimeout(Translator.create({sourceLanguage:'en',targetLanguage:'es'}),8000);
-        return AUTO_TR;
-      }catch(e){return null;}
-    }
-    async function autoFill(){
-      if(LANG!=='es'||AUTO_STATE==='running'||AUTO_STATE==='unavailable')return;
-      var keys=missingKeys();
-      if(!keys.length){AUTO_STATE='done';AUTO_LEFT=0;renderAutoBadge();return;}
-      AUTO_STATE='running';AUTO_LEFT=keys.length;renderAutoBadge();
-      var t=await getAutoTranslator();
-      if(!t){AUTO_STATE='unavailable';renderAutoBadge();return;}
-      var i,done=0;
-      for(i=0;i<keys.length;i++){
-        var k=keys[i];
-        try{
-          var v=await withTimeout(t.translate(k),6000);
-          if(v&&v!==k)ESAUTO[k]=v;
-        }catch(e){AUTO_STATE='unavailable';renderAutoBadge();return;}
-        done++;AUTO_LEFT=keys.length-done;
-        if(done%25===0){autoSave();applyLang();renderAutoBadge();
-          await new Promise(function(r){setTimeout(r,0);});}
-      }
-      autoSave();AUTO_STATE='done';AUTO_LEFT=0;applyLang();renderAutoBadge();
-    }
-    function renderAutoBadge(){
-      var el=document.getElementById('autobadge');
-      if(!el){
-        var row=document.querySelector('.langrow');
-        if(!row)return;
-        el=document.createElement('div');el.id='autobadge';el.className='autobadge';
-        el.setAttribute('data-noi18n','1');
-        row.appendChild(el);
-      }
-      if(LANG!=='es'){el.hidden=true;return;}
-      el.hidden=false;
-      if(AUTO_STATE==='running'){el.className='autobadge work';el.textContent='Traduciendo el resto… '+AUTO_LEFT;}
-      else if(AUTO_STATE==='unavailable'){el.className='autobadge warn';
-        el.textContent='Tu navegador no puede traducir lo que falta. Esas partes se quedan en inglés.';}
-      else {el.hidden=true;}
-    }
-
     function applyLang(){
       /* this function is hoisted but its lookup tables are not; showPage runs
          before they are assigned, so do nothing until initLang has run */
@@ -9855,6 +10717,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
           if(n.nodeValue!==next)n.nodeValue=next;
         }else if(n.nodeValue!==en){n.nodeValue=en;}
       });
+      /* Attributes carry visible text too: tooltips on badges and levels,
+         placeholders in every form, the labels a screen reader reads out.
+         Same rule as everything else, translate it or leave it in English. */
+      applyAttrs(toEs);
       document.documentElement.lang=toEs?'es':'en';
     }
     function langCoverage(){
@@ -9868,23 +10734,20 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       applyLang();
       if(typeof buildRail==='function'&&CURPAGE)buildRail(CURPAGE);
       renderLangBtn();
-      renderAutoBadge();
-      if(LANG==='es')setTimeout(autoFill,60);
       if(announce&&LANG==='es'){
-        toast('Español activado. Lo que aún no está traducido se queda en inglés, y puedes seleccionar cualquier palabra para ver qué significa.',{timeout:7000});
+        toast('Español activado. Puedes seleccionar cualquier palabra para ver qué significa.',{timeout:5000});
       }
     }
     function renderLangBtn(){
       var b=document.getElementById('langbtn');if(!b)return;
       b.innerHTML='<span class="'+(LANG==='en'?'on':'')+'">EN</span><span class="'+(LANG==='es'?'on':'')+'">ES</span>';
-      b.setAttribute('aria-label',LANG==='en'?'Cambiar a español':'Switch to English');
+      b.setAttribute('aria-label',LANG==='en'?'Switch to Spanish':'Cambiar a inglés');
       var t=document.getElementById('lookuptoggle');
       if(t){t.setAttribute('aria-pressed',LOOKUP_ON?'true':'false');t.classList.toggle('on',LOOKUP_ON);}
     }
     function initLang(){
       LANG=langLoad();
       LANG_READY=true;
-      autoLoad();
       var host=document.querySelector('.sidefoot');
       if(host&&!document.getElementById('langbtn')){
         var wrap=document.createElement('div');
@@ -9904,8 +10767,6 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       }
       renderLangBtn();
       applyLang();
-      renderAutoBadge();
-      if(LANG==='es')setTimeout(autoFill,300);
     }
 
     function renderAll(){renderThoughts();renderLearnings();renderWishlist();renderCerts();renderDashboard();renderQuizzes();renderAccount();renderAcademy();renderPath();renderTags();renderProfile();renderCommunity();renderAskWell();updateAuthChip();}

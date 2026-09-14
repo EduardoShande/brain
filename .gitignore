@@ -28,3 +28,6 @@ venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# Paid course content lives in the database. The repo is public, so it never goes here.
+private-content/

@@ -49,17 +49,35 @@ Then:
 
 Postgres is exposed on `localhost:5432` (user/password/db default to `brain`).
 
+## Accounts, Pro access and QR payments (Supabase)
+
+The live academy signs students in and sells Pro access through a Supabase project
+(`supabase/`). The FastAPI backend above stays as a learning project.
+
+- `supabase/migrations/` holds the schema: profiles, plans, entitlements, orders,
+  payment events, and `course_content`. Row level security decides who reads what,
+  so paid lessons only reach an account with active access.
+- `supabase/functions/` holds four Edge Functions: `create-order` (makes a QR charge),
+  `check-order` (the checkout polls it), `payment-webhook` (the provider calls it),
+  and `mock-pay` (test mode only, admins only).
+- Payment providers sit behind one interface in `functions/_shared/payments.ts`.
+  An order is marked paid only after the provider itself confirms it. To go live,
+  write an adapter for the provider (CUCU, a bank API), set the `PAYMENT_PROVIDER`
+  secret, and set `payment_mode` to `live` in `public.app_settings`.
+- Paid course HTML is not in this repo. It lives in the `course_content` table; the
+  local copy in `private-content/` is gitignored.
+
 ## The frontend
 
-Open `frontend/index.html` in a browser. Today it stores data in the browser's
-`localStorage` (per device). As the backend comes online it will move to accounts
-so data syncs across devices.
+Open `frontend/index.html` in a browser, or serve the folder
+(`python -m http.server 8770 --directory frontend`). Accounts and access come from
+Supabase; notes, progress and XP still live in the browser's `localStorage`.
 
 ## Roadmap
 
 - [x] **Phase 1** — Backend skeleton: FastAPI app, Postgres, Docker, health checks.
 - [x] **Phase 2** — Auth: users table + migration, signup/login, bcrypt hashing, JWT, `/me` profile.
 - [ ] **Phase 3** — Data API: per-user CRUD for thoughts, learnings, wishlist, certs, progress.
-- [ ] **Phase 4** — Frontend wiring: login/signup UI, replace localStorage with the API.
+- [x] **Phase 4** — Frontend wiring: login/signup UI (Supabase Auth), Pro access, QR checkout.
 - [ ] **Phase 5** — Deploy: Docker on a VPS, HTTPS, domain, backups.
 - [ ] **Phase 6** — Harden: validation, rate limiting, CORS lockdown, security headers, tests.

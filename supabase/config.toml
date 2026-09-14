@@ -1,0 +1,18 @@
+# Supabase project: Brain Academy (pxmlcaqltdytmvdpkryc, sa-east-1)
+project_id = "pxmlcaqltdytmvdpkryc"
+
+# Every function authorizes in its own code (see _shared/payments.ts).
+# The platform's verify_jwt check does not understand the new publishable
+# and secret keys, and the payment webhook is called by the provider, which
+# has no Supabase session.
+[functions.create-order]
+verify_jwt = false
+
+[functions.check-order]
+verify_jwt = false
+
+[functions.payment-webhook]
+verify_jwt = false
+
+[functions.mock-pay]
+verify_jwt = false

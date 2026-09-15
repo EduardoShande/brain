@@ -770,6 +770,72 @@
   .ch-exam p{margin:6px 0 0;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
   .ch-exam .gbtn{width:auto;padding:13px 22px}
 
+  /* roadmap rows: a checkbox to mark done, the rest opens the lesson */
+  .rmt .skills li{display:flex;align-items:flex-start;gap:2px;border-radius:12px}
+  .rmt .skills li:hover{background:var(--surface)}
+  .rmt .skills label.rmt-chk{flex:none;display:grid;place-items:center;width:40px;min-height:44px;padding:0;border-radius:10px;cursor:pointer}
+  .rmt .skills label.rmt-chk:hover{background:none}
+  .rmt .skills .rmt-chk input{margin:0}
+  .rmt .skills .sk{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;text-align:left;background:none;border:0;
+    padding:8px 34px 8px 2px;font:inherit;color:inherit;cursor:pointer;position:relative;border-radius:10px}
+  .rmt .skills .sk::after{content:"\203A";position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:24px;line-height:1;
+    color:var(--ink-faint);transition:transform .15s,color .15s}
+  .rmt .skills .sk:hover::after{color:var(--tone);transform:translate(3px,-50%)}
+  .rmt .skills .sk:hover .skt{color:var(--tone)}
+  .rmt .skills .sk:focus-visible{outline:2px solid var(--tone);outline-offset:2px}
+  .rmt .skills li:has(input:checked) .skt{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--line-strong)}
+  @media (prefers-reduced-motion:reduce){.rmt .skills .sk::after{transition:none}}
+
+  /* ===== Lesson pages ===== */
+  .lz{max-width:800px;margin:0 auto;padding-top:clamp(20px,4vw,40px)}
+  .lz-back{background:none;border:0;padding:6px 0;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;min-height:40px}
+  .lz-back:hover{color:var(--teal-ink)}
+  .lz .t1{--tone:var(--rt1);--tone-w:var(--rt1-w)} .lz .t2{--tone:var(--rt2);--tone-w:var(--rt2-w)}
+  .lz .t3{--tone:var(--rt3);--tone-w:var(--rt3-w)} .lz .t4{--tone:var(--rt4);--tone-w:var(--rt4-w)}
+  .lz .t5{--tone:var(--rt5);--tone-w:var(--rt5-w)}
+  .lz-head{margin-top:12px;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--tone,var(--teal));border-radius:20px;padding:clamp(20px,4vw,30px)}
+  .lz-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+  .lz-stage{background:var(--tone);color:var(--on-rt);font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:8px}
+  .lz-stage-t{font-size:14px;font-weight:700;color:var(--ink-soft)}
+  .lz-head h2{margin:14px 0 0;font-size:clamp(28px,4.2vw,40px);font-weight:800;line-height:1.12;letter-spacing:-.02em;color:var(--ink)}
+  .lz-lead{margin:10px 0 0;font-size:17px;line-height:1.6;color:var(--ink-soft)}
+  .lz-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-faint)}
+  .lz-done{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:12px;
+    cursor:pointer;font-weight:800;font-size:14.5px;color:var(--ink);min-height:44px}
+  .lz-done input{width:19px;height:19px;accent-color:var(--good);margin:0}
+  .lz-done:has(input:checked){background:var(--good-wash);border-color:var(--good);color:var(--good-ink)}
+  .lz-sec{margin-top:32px}
+  .lz-sec h3{margin:0;font-size:22px;font-weight:800;color:var(--ink)}
+  .lz-sec p{margin:10px 0 0;font-size:16.5px;line-height:1.72;color:var(--ink-soft);max-width:68ch}
+  .lz-code{margin:14px 0 0;background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:16px 18px;overflow-x:auto;
+    font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;font-size:14px;line-height:1.6;white-space:pre}
+  .lz-why{background:var(--teal-wash);border-radius:18px;padding:20px 24px}
+  .lz-why h3{color:var(--teal-ink);font-size:18px}
+  .lz-why p{color:var(--ink)}
+  .lz-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+  @media(max-width:700px){.lz-pair{grid-template-columns:1fr}}
+  .lz-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .lz-card h3{margin:0 0 8px;font-size:17px;font-weight:800}
+  .lz-mis h3{color:var(--clay-ink)}
+  .lz-try{border-color:var(--good)}
+  .lz-try h3{color:var(--good-ink)}
+  .lz-mis ul{margin:0;padding-left:18px;display:grid;gap:8px}
+  .lz-mis li,.lz-try p{font-size:15px;line-height:1.6;color:var(--ink)}
+  .lz-try p{margin:0}
+  .lz-terms dl{margin:12px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+  .lz-terms dl>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  .lz-terms dt{font-weight:800;color:var(--ink);font-size:15.5px}
+  .lz-terms dd{margin:4px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+  .lz-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:36px 0 28px}
+  @media(max-width:560px){.lz-nav{grid-template-columns:1fr}}
+  .lz-prev,.lz-next{display:flex;flex-direction:column;gap:2px;background:var(--card);border:1px solid var(--line-strong);border-radius:14px;
+    padding:14px 16px;font:inherit;cursor:pointer;color:var(--ink);min-height:64px;text-align:left}
+  .lz-next{grid-column:2;text-align:right;align-items:flex-end}
+  @media(max-width:560px){.lz-next{grid-column:auto}}
+  .lz-prev:hover,.lz-next:hover{border-color:var(--teal)}
+  .lz-nl{font-size:12.5px;font-weight:800;color:var(--ink-faint)}
+  .lz-nt{font-size:15.5px;font-weight:800;color:var(--teal-ink)}
+
   /* ===== Start here guide ===== */
   .sg{max-width:1080px;padding-top:clamp(20px,4vw,40px)}
   .sg-back{background:none;border:0;padding:6px 0;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer}
@@ -2159,11 +2225,11 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">01</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">What a computer is</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/5</span></div>
 <p class="rmt-goal">Know the parts of a computer and what each one does, in plain words.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu1a"><span class="sk"><span class="skt">Hardware, the parts you can touch</span><span class="sub">The CPU is the cook, RAM is the counter, storage is the pantry. Screen, keyboard and mouse are hardware too.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu1b"><span class="sk"><span class="skt">Software, the instructions</span><span class="sub">The operating system runs everything else, and each app does one job. Hardware is the body, software is the thoughts.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu1c"><span class="sk"><span class="skt">Binary: everything is switches</span><span class="sub">1 and 0, on and off. Eight switches make a byte. The letter A is the number 65, and photos and songs are numbers too.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu1d"><span class="sk"><span class="skt">What running a program means</span><span class="sub">Fetch, decode, execute, repeat, billions of times a second. Every app is a pile of tiny steps like that.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu1e"><span class="sk"><span class="skt">The operating system's job</span><span class="sub">It shares the CPU between programs, manages memory, owns your files and talks to the hardware for the apps.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu1a" aria-labelledby="lt-fu1a"></label><button type="button" class="sk" data-lesson="fu1a"><span class="skt" id="lt-fu1a">Hardware, the parts you can touch</span><span class="sub">The CPU is the cook, RAM is the counter, storage is the pantry. Screen, keyboard and mouse are hardware too.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu1b" aria-labelledby="lt-fu1b"></label><button type="button" class="sk" data-lesson="fu1b"><span class="skt" id="lt-fu1b">Software, the instructions</span><span class="sub">The operating system runs everything else, and each app does one job. Hardware is the body, software is the thoughts.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu1c" aria-labelledby="lt-fu1c"></label><button type="button" class="sk" data-lesson="fu1c"><span class="skt" id="lt-fu1c">Binary: everything is switches</span><span class="sub">1 and 0, on and off. Eight switches make a byte. The letter A is the number 65, and photos and songs are numbers too.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu1d" aria-labelledby="lt-fu1d"></label><button type="button" class="sk" data-lesson="fu1d"><span class="skt" id="lt-fu1d">What running a program means</span><span class="sub">Fetch, decode, execute, repeat, billions of times a second. Every app is a pile of tiny steps like that.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu1e" aria-labelledby="lt-fu1e"></label><button type="button" class="sk" data-lesson="fu1e"><span class="skt" id="lt-fu1e">The operating system's job</span><span class="sub">It shares the CPU between programs, manages memory, owns your files and talks to the hardware for the apps.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Open Task Manager (Ctrl+Shift+Esc on Windows) or Activity Monitor on Mac. Find the three programs using the most memory and write what each one is.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -2177,12 +2243,12 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">02</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Files, folders and your tools</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/6</span></div>
 <p class="rmt-goal">Get comfortable with the tools every developer uses before any code appears.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu2a"><span class="sk"><span class="skt">Files, folders and extensions</span><span class="sub">What .html, .css, .js and .py mean, and why the part after the dot decides how a file is read.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu2b"><span class="sk"><span class="skt">Where your things actually are</span><span class="sub">Paths, saving versus saving as, and finding a file without searching the whole computer.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu2c"><span class="sk"><span class="skt">A code editor</span><span class="sub">Install VS Code, it is free. Open a folder, not a file. That one habit confuses beginners for months.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu2d"><span class="sk"><span class="skt">The terminal, without fear</span><span class="sub">About six commands do almost everything: where am I, list, go into, go back, make a folder, run this.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu2f"><span class="sk"><span class="skt">Saving versions with Git</span><span class="sub">Git keeps snapshots of your work like save points in a game, and GitHub keeps them online.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu2e"><span class="sk"><span class="skt">Touch typing</span><span class="sub">Ten minutes a day for a month. If you look at the keys, everything takes twice as long.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu2a" aria-labelledby="lt-fu2a"></label><button type="button" class="sk" data-lesson="fu2a"><span class="skt" id="lt-fu2a">Files, folders and extensions</span><span class="sub">What .html, .css, .js and .py mean, and why the part after the dot decides how a file is read.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu2b" aria-labelledby="lt-fu2b"></label><button type="button" class="sk" data-lesson="fu2b"><span class="skt" id="lt-fu2b">Where your things actually are</span><span class="sub">Paths, saving versus saving as, and finding a file without searching the whole computer.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu2c" aria-labelledby="lt-fu2c"></label><button type="button" class="sk" data-lesson="fu2c"><span class="skt" id="lt-fu2c">A code editor</span><span class="sub">Install VS Code, it is free. Open a folder, not a file. That one habit confuses beginners for months.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu2d" aria-labelledby="lt-fu2d"></label><button type="button" class="sk" data-lesson="fu2d"><span class="skt" id="lt-fu2d">The terminal, without fear</span><span class="sub">About six commands do almost everything: where am I, list, go into, go back, make a folder, run this.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu2f" aria-labelledby="lt-fu2f"></label><button type="button" class="sk" data-lesson="fu2f"><span class="skt" id="lt-fu2f">Saving versions with Git</span><span class="sub">Git keeps snapshots of your work like save points in a game, and GitHub keeps them online.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu2e" aria-labelledby="lt-fu2e"></label><button type="button" class="sk" data-lesson="fu2e"><span class="skt" id="lt-fu2e">Touch typing</span><span class="sub">Ten minutes a day for a month. If you look at the keys, everything takes twice as long.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Make a folder called code, open it in VS Code, create index.html with the word Hello, save it and open it in the browser. Then list the folder from the terminal.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -2196,11 +2262,11 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">03</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">The internet and the web</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/5</span></div>
 <p class="rmt-goal">Understand what really happens between your phone and a website, and how to stay safe.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu3a"><span class="sk"><span class="skt">Internet versus the web</span><span class="sub">The internet is the roads, the web is one thing that drives on them. Email and video calls use the roads too.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu3b"><span class="sk"><span class="skt">What happens when you open a site</span><span class="sub">DNS finds the address, your browser asks, a server answers, and the browser builds the page.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu3c"><span class="sk"><span class="skt">Page, website and web app</span><span class="sub">A page is one page, a site is mostly for reading, an app is for doing things. Gmail is an app, a blog is a site.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu3d"><span class="sk"><span class="skt">Frontend, backend and servers</span><span class="sub">What you see, the engine you never see, and the always-on computer it runs on. The cloud is rented servers.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu3e"><span class="sk"><span class="skt">Staying safe online</span><span class="sub">What HTTPS protects, why reusing passwords is the real danger, and why two-factor login beats a clever password.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu3a" aria-labelledby="lt-fu3a"></label><button type="button" class="sk" data-lesson="fu3a"><span class="skt" id="lt-fu3a">Internet versus the web</span><span class="sub">The internet is the roads, the web is one thing that drives on them. Email and video calls use the roads too.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu3b" aria-labelledby="lt-fu3b"></label><button type="button" class="sk" data-lesson="fu3b"><span class="skt" id="lt-fu3b">What happens when you open a site</span><span class="sub">DNS finds the address, your browser asks, a server answers, and the browser builds the page.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu3c" aria-labelledby="lt-fu3c"></label><button type="button" class="sk" data-lesson="fu3c"><span class="skt" id="lt-fu3c">Page, website and web app</span><span class="sub">A page is one page, a site is mostly for reading, an app is for doing things. Gmail is an app, a blog is a site.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu3d" aria-labelledby="lt-fu3d"></label><button type="button" class="sk" data-lesson="fu3d"><span class="skt" id="lt-fu3d">Frontend, backend and servers</span><span class="sub">What you see, the engine you never see, and the always-on computer it runs on. The cloud is rented servers.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu3e" aria-labelledby="lt-fu3e"></label><button type="button" class="sk" data-lesson="fu3e"><span class="skt" id="lt-fu3e">Staying safe online</span><span class="sub">What HTTPS protects, why reusing passwords is the real danger, and why two-factor login beats a clever password.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Press F12 on any website, open the Network tab and reload. Count the requests and find the biggest file the page downloaded.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -2214,12 +2280,12 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">04</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Thinking like a programmer</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~1 week</span></div></div><span class="cnt" data-cnt>0/6</span></div>
 <p class="rmt-goal">Learn the handful of ideas that every program in every language is built from.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu4a"><span class="sk"><span class="skt">Sequence: order is everything</span><span class="sub">The computer does exactly what you said, in exactly the order you said it, and nothing else.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu4b"><span class="sk"><span class="skt">Variables, conditions and loops</span><span class="sub">A labeled box, a fork in the road, and doing it again. Almost every program is these three plus sequence.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu4c"><span class="sk"><span class="skt">Functions: naming a group of steps</span><span class="sub">Spot a pattern that repeats, give it a name, and use the name. Logic Lab makes you discover this yourself.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu4d"><span class="sk"><span class="skt">Algorithms and why speed differs</span><span class="sub">Checking every name versus opening the phone book in the middle. One takes a million steps, the other about twenty.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu4e"><span class="sk"><span class="skt">Breaking a big problem into small ones</span><span class="sub">Build Instagram is impossible, show one photo is an afternoon. The most valuable skill in this academy.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu4f"><span class="sk"><span class="skt">Abstraction: standing on other people's work</span><span class="sub">You drive without knowing the engine. You will code on top of layers you did not write, and that is fine.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu4a" aria-labelledby="lt-fu4a"></label><button type="button" class="sk" data-lesson="fu4a"><span class="skt" id="lt-fu4a">Sequence: order is everything</span><span class="sub">The computer does exactly what you said, in exactly the order you said it, and nothing else.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu4b" aria-labelledby="lt-fu4b"></label><button type="button" class="sk" data-lesson="fu4b"><span class="skt" id="lt-fu4b">Variables, conditions and loops</span><span class="sub">A labeled box, a fork in the road, and doing it again. Almost every program is these three plus sequence.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu4c" aria-labelledby="lt-fu4c"></label><button type="button" class="sk" data-lesson="fu4c"><span class="skt" id="lt-fu4c">Functions: naming a group of steps</span><span class="sub">Spot a pattern that repeats, give it a name, and use the name. Logic Lab makes you discover this yourself.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu4d" aria-labelledby="lt-fu4d"></label><button type="button" class="sk" data-lesson="fu4d"><span class="skt" id="lt-fu4d">Algorithms and why speed differs</span><span class="sub">Checking every name versus opening the phone book in the middle. One takes a million steps, the other about twenty.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu4e" aria-labelledby="lt-fu4e"></label><button type="button" class="sk" data-lesson="fu4e"><span class="skt" id="lt-fu4e">Breaking a big problem into small ones</span><span class="sub">Build Instagram is impossible, show one photo is an afternoon. The most valuable skill in this academy.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu4f" aria-labelledby="lt-fu4f"></label><button type="button" class="sk" data-lesson="fu4f"><span class="skt" id="lt-fu4f">Abstraction: standing on other people's work</span><span class="sub">You drive without knowing the engine. You will code on top of layers you did not write, and that is fine.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Solve the first five levels of Logic Lab. Level five needs a function, so find the repeating pattern and give it a name.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -2233,11 +2299,11 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">05</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Computer science basics</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~1 week</span></div></div><span class="cnt" data-cnt>0/5</span></div>
 <p class="rmt-goal">Meet the ideas first-year computer science tests you on, explained without scary words.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu5a"><span class="sk"><span class="skt">Data structures</span><span class="sub">List, dictionary, stack and queue. Where you put things decides how fast you find them. Undo is a stack.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu5b"><span class="sk"><span class="skt">How work grows with data</span><span class="sub">The idea behind Big O. Doubling a list doubles one approach and adds a single step to another.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu5c"><span class="sk"><span class="skt">What a programming language is</span><span class="sub">Human-like words that get translated into the computer's numbers. The logic is the same in all of them.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu5d"><span class="sk"><span class="skt">Reading an error message</span><span class="sub">It names the file, the line and the problem. Beginners panic at red text, professionals read it.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu5e"><span class="sk"><span class="skt">How AI tools like ChatGPT work</span><span class="sub">They predict the next word from patterns in huge amounts of text. Useful for learning, and often confidently wrong.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu5a" aria-labelledby="lt-fu5a"></label><button type="button" class="sk" data-lesson="fu5a"><span class="skt" id="lt-fu5a">Data structures</span><span class="sub">List, dictionary, stack and queue. Where you put things decides how fast you find them. Undo is a stack.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu5b" aria-labelledby="lt-fu5b"></label><button type="button" class="sk" data-lesson="fu5b"><span class="skt" id="lt-fu5b">How work grows with data</span><span class="sub">The idea behind Big O. Doubling a list doubles one approach and adds a single step to another.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu5c" aria-labelledby="lt-fu5c"></label><button type="button" class="sk" data-lesson="fu5c"><span class="skt" id="lt-fu5c">What a programming language is</span><span class="sub">Human-like words that get translated into the computer's numbers. The logic is the same in all of them.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu5d" aria-labelledby="lt-fu5d"></label><button type="button" class="sk" data-lesson="fu5d"><span class="skt" id="lt-fu5d">Reading an error message</span><span class="sub">It names the file, the line and the problem. Beginners panic at red text, professionals read it.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu5e" aria-labelledby="lt-fu5e"></label><button type="button" class="sk" data-lesson="fu5e"><span class="skt" id="lt-fu5e">How AI tools like ChatGPT work</span><span class="sub">They predict the next word from patterns in huge amounts of text. Useful for learning, and often confidently wrong.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Write the exact steps to make breakfast so someone who never did it could follow them. Then ask an AI assistant to find a missing step and check if it is right.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -2251,11 +2317,11 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">06</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">The tech field and where you fit</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/5</span></div>
 <p class="rmt-goal">Know which jobs exist, what their days look like, and which one to try first.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu6a"><span class="sk"><span class="skt">The jobs that actually exist</span><span class="sub">Frontend, backend, data, automation, security, AI, cloud, design, QA and IT support, and what their days look like.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu6b"><span class="sk"><span class="skt">Which ones need heavy maths</span><span class="sub">AI and graphics do. Web and automation mostly do not. Choose knowing this, not fearing it.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu6c"><span class="sk"><span class="skt">Degree or no degree, honestly</span><span class="sub">A degree opens some doors and is not required for most jobs. Without one you need proof, which means things you built.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu6e"><span class="sk"><span class="skt">What AI changes about these jobs</span><span class="sub">AI writes more of the routine code. People who understand the basics and can check its work become more valuable, not less.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu6d"><span class="sk"><span class="skt">Take the free path quiz</span><span class="sub">Six questions, and the academy suggests where to start based on your answers.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu6a" aria-labelledby="lt-fu6a"></label><button type="button" class="sk" data-lesson="fu6a"><span class="skt" id="lt-fu6a">The jobs that actually exist</span><span class="sub">Frontend, backend, data, automation, security, AI, cloud, design, QA and IT support, and what their days look like.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu6b" aria-labelledby="lt-fu6b"></label><button type="button" class="sk" data-lesson="fu6b"><span class="skt" id="lt-fu6b">Which ones need heavy maths</span><span class="sub">AI and graphics do. Web and automation mostly do not. Choose knowing this, not fearing it.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu6c" aria-labelledby="lt-fu6c"></label><button type="button" class="sk" data-lesson="fu6c"><span class="skt" id="lt-fu6c">Degree or no degree, honestly</span><span class="sub">A degree opens some doors and is not required for most jobs. Without one you need proof, which means things you built.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu6e" aria-labelledby="lt-fu6e"></label><button type="button" class="sk" data-lesson="fu6e"><span class="skt" id="lt-fu6e">What AI changes about these jobs</span><span class="sub">AI writes more of the routine code. People who understand the basics and can check its work become more valuable, not less.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu6d" aria-labelledby="lt-fu6d"></label><button type="button" class="sk" data-lesson="fu6d"><span class="skt" id="lt-fu6d">Take the free path quiz</span><span class="sub">Six questions, and the academy suggests where to start based on your answers.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Pick the two jobs that sound most like you. Watch a day-in-the-life video of a real person doing each one and write one thing that surprised you.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -2268,12 +2334,12 @@
 <div class="rmt-head"><span class="rmt-num" aria-hidden="true">07</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Ready for what comes next</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~1 week</span></div></div><span class="cnt" data-cnt>0/6</span></div>
 <p class="rmt-goal">Build the habits that decide whether you finish a course or quit halfway.</p>
 <ul class="skills">
-<li><label><input type="checkbox" data-id="fu7a"><span class="sk"><span class="skt">The maths that actually shows up</span><span class="sub">Logic and truth tables, basic algebra, percentages and a little probability. Matrices and calculus only for AI or graphics.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu7b"><span class="sk"><span class="skt">Enough English to read the answer</span><span class="sub">Nearly every good document and error message is in English. Reading it is enough to start, and it is a big advantage.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu7c"><span class="sk"><span class="skt">How to search and how to ask</span><span class="sub">Paste the exact error text. Ask a specific question and say what you already tried.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu7f"><span class="sk"><span class="skt">Learning with AI without cheating yourself</span><span class="sub">Ask it to explain and quiz you, not to do the exercise. If you cannot explain the answer, you did not learn it.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu7d"><span class="sk"><span class="skt">How to be stuck without quitting</span><span class="sub">Stuck is the normal state of the job, not a sign you are failing. Panicking about it is what makes people quit.</span></span></label></li>
-<li><label><input type="checkbox" data-id="fu7e"><span class="sk"><span class="skt">Write one small program</span><span class="sub">Anything at all. The students who struggle most are the ones for whom everything is new at once.</span></span></label></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu7a" aria-labelledby="lt-fu7a"></label><button type="button" class="sk" data-lesson="fu7a"><span class="skt" id="lt-fu7a">The maths that actually shows up</span><span class="sub">Logic and truth tables, basic algebra, percentages and a little probability. Matrices and calculus only for AI or graphics.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu7b" aria-labelledby="lt-fu7b"></label><button type="button" class="sk" data-lesson="fu7b"><span class="skt" id="lt-fu7b">Enough English to read the answer</span><span class="sub">Nearly every good document and error message is in English. Reading it is enough to start, and it is a big advantage.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu7c" aria-labelledby="lt-fu7c"></label><button type="button" class="sk" data-lesson="fu7c"><span class="skt" id="lt-fu7c">How to search and how to ask</span><span class="sub">Paste the exact error text. Ask a specific question and say what you already tried.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu7f" aria-labelledby="lt-fu7f"></label><button type="button" class="sk" data-lesson="fu7f"><span class="skt" id="lt-fu7f">Learning with AI without cheating yourself</span><span class="sub">Ask it to explain and quiz you, not to do the exercise. If you cannot explain the answer, you did not learn it.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu7d" aria-labelledby="lt-fu7d"></label><button type="button" class="sk" data-lesson="fu7d"><span class="skt" id="lt-fu7d">How to be stuck without quitting</span><span class="sub">Stuck is the normal state of the job, not a sign you are failing. Panicking about it is what makes people quit.</span></button></li>
+<li><label class="rmt-chk"><input type="checkbox" data-id="fu7e" aria-labelledby="lt-fu7e"></label><button type="button" class="sk" data-lesson="fu7e"><span class="skt" id="lt-fu7e">Write one small program</span><span class="sub">Anything at all. The students who struggle most are the ones for whom everything is new at once.</span></button></li>
 </ul>
 <div class="rmt-do"><b>Build this</b><p>Solve challenge 1 in Code Lab. It takes about a minute, and you will have written and run real code.</p></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
@@ -3297,6 +3363,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     </div>
   </div>
 
+  <!-- ===================== LESSON ===================== -->
+  <div class="page" id="page-lesson"><div id="lesson-area"></div></div>
+
   <!-- ===================== FIND YOUR PATH ===================== -->
   <div class="page" id="page-path">
     <div class="phead">
@@ -3618,8 +3687,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     /* declared here because the first render, a deep link included, runs before the account code below */
     var ACCESS={until:null,loaded:false},PLANS=null;
     var PAID_ORIG={},PAID_LOADED={},PAID_BUSY={};
+    var LESSON_ID=null,LESSON_TICKET=0;
     var PAY={order:null,test:false,planId:null,poll:null,tick:null,checking:false,lastFocus:null};
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account','lesson'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -3637,12 +3707,13 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
     function showPage(name){
       if(pages.indexOf(name)<0)name='home';
+      if(name==='lesson'&&!LESSON_ID)name='academy';
       pages.forEach(function(p){
         var el=document.getElementById('page-'+p);
         if(el)el.classList.toggle('active',p===name);
       });
       var roadmapPages=['roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift'];
-      var navName=roadmapPages.indexOf(name)>=0?'roadmaps':name;
+      var navName=roadmapPages.indexOf(name)>=0?'roadmaps':(name==='lesson'?'academy':name);
       document.querySelectorAll('.side .sidenav button[data-goto], .side .sidefoot button[data-goto]').forEach(function(b){
         var active=b.getAttribute('data-goto')===navName;
         b.classList.toggle('on',active);
@@ -3673,6 +3744,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     function bindNav(root){
       root.querySelectorAll('[data-goto]').forEach(function(b){
         b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});
+      });
+      root.querySelectorAll('[data-lesson]').forEach(function(b){
+        b.addEventListener('click',function(){openLesson(b.getAttribute('data-lesson'));});
       });
       root.querySelectorAll('[data-exam]').forEach(function(b){
         b.addEventListener('click',function(){showPage('quizzes');startQuiz(b.getAttribute('data-exam'));});
@@ -3738,7 +3812,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
     /* initial route from hash */
     var start=(location.hash||'').replace('#','');
-    showPage(start);
+    if(/^lesson\/[a-z0-9]{2,12}$/.test(start)){
+      showPage('academy');
+      setTimeout(function(){openLesson(start.split('/')[1]);},0);
+    }else showPage(start);
 
     /* ---- roadmap progress (localStorage) ---- */
     var KEY='fieldmanual.progress.v1';
@@ -4192,6 +4269,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         delete PAID_LOADED[route];
       });
       PAID_ROUTES.forEach(function(r){var s=paidSlot(r);if(s)s.innerHTML='';});
+      var la=document.getElementById('lesson-area');if(la)la.innerHTML='';
+      LESSON_ID=null;
       refresh();
     }
     async function renderPaywall(route){
@@ -4218,6 +4297,80 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'<div class="pw-foot">Your access opens by itself as soon as the payment arrives.</div>'
         +'</section>';
       bindNav(slot);
+    }
+
+    /* ---- lesson pages ----
+       Every lesson in a roadmap opens its own explanation page, loaded from
+       public.lesson_content: free-course lessons for any signed-in student,
+       every other lesson with Pro. Marking it done here and ticking it in
+       the roadmap are the same thing. */
+    function lessonRoute(id){
+      var box=document.querySelector('.skills input[data-id="'+id+'"]');
+      var pg=box&&box.closest('.page');
+      return pg?pg.id.replace('page-',''):null;
+    }
+    function lessonTitle(id){var t=document.getElementById('lt-'+id);return t?t.textContent:'';}
+    function setLessonDone(id,on){
+      saved[id]=on;persist();
+      document.querySelectorAll('.skills input[data-id="'+id+'"],input[data-lesson-done="'+id+'"]').forEach(function(b){b.checked=on;});
+      refresh();
+      if(on)awardXP(10,'Lesson done','lessons');
+    }
+    function wireLessonDone(root){
+      root.querySelectorAll('input[data-lesson-done]').forEach(function(b){
+        var id=b.getAttribute('data-lesson-done');
+        b.checked=!!saved[id];
+        b.addEventListener('change',function(){setLessonDone(id,b.checked);});
+      });
+    }
+    function lessonShell(route,inner){
+      var c=courseForRoute(route);
+      return '<div class="lz"><div class="lz-top"><button type="button" class="lz-back" data-goto="'+esc(route||'academy')+'">← <span>'
+        +esc(c?c.title:'Courses')+'</span></button></div>'+inner+'</div>';
+    }
+    async function openLesson(id){
+      if(!id||!/^[a-z0-9]{2,12}$/.test(id))return;
+      var area=document.getElementById('lesson-area');if(!area)return;
+      var route=lessonRoute(id),ticket=++LESSON_TICKET;
+      LESSON_ID=id;
+      area.innerHTML=lessonShell(route,waitHtml('Loading the lesson...'));
+      bindNav(area);
+      showPage('lesson');
+      try{history.replaceState(null,'','#lesson/'+id);}catch(e){}
+      if(!isAuthed())return;
+      try{
+        if(!sb)throw new Error('offline');
+        var r=await sb.from('lesson_content').select('html,es').eq('lesson_id',id).maybeSingle();
+        if(ticket!==LESSON_TICKET)return;
+        if(r.error)throw r.error;
+        if(!r.data){
+          if(isPaidRoute(route)&&!ACCESS.loaded){try{await loadAccess();}catch(e){}}
+          if(ticket!==LESSON_TICKET)return;
+          var locked=isPaidRoute(route)&&!hasPro();
+          area.innerHTML=lessonShell(route,'<section class="pw"><div class="pw-lock"><span class="pw-ic">'+ILOCK+'</span><div>'
+            +'<h3>'+(locked?'This lesson is part of Brain Pro':'This lesson is being written')+'</h3>'
+            +'<div class="pw-meta">'+esc(lessonTitle(id))+'</div></div></div>'
+            +(locked?'<button type="button" class="gbtn pw-inline" data-getpro>Get Brain Pro</button>'
+                    :'<div class="pw-foot">The full explanation is coming soon. Meanwhile, the resources in the roadmap cover this topic.</div>')
+            +'</section>');
+          bindNav(area);
+          if(LANG_READY)applyLang();
+          return;
+        }
+        if(r.data.es&&typeof r.data.es==='object')Object.keys(r.data.es).forEach(function(k){if(!ES[k])ES[k]=r.data.es[k];});
+        area.innerHTML=r.data.html;
+        bindNav(area);
+        wireLessonDone(area);
+        if(LANG_READY)applyLang();
+        window.scrollTo(0,0);
+      }catch(e){
+        if(ticket!==LESSON_TICKET)return;
+        area.innerHTML=lessonShell(route,'<section class="pw pw-err"><h3>We could not open this lesson</h3>'
+          +'<div class="pw-meta">Check your internet connection and try again.</div>'
+          +'<button type="button" class="gbtn" data-lesson="'+esc(id)+'">Try again</button></section>');
+        bindNav(area);
+        if(LANG_READY)applyLang();
+      }
     }
 
     /* ---- one dialog for the QR checkout and for choosing a new password ---- */
@@ -6702,6 +6855,22 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* lesson pages */
+      "Stage":"Etapa",
+      "Mark as done":"Marcar como hecha",
+      "A real example":"Un ejemplo real",
+      "Common mistakes":"Errores comunes",
+      "Try it yourself":"Pruébalo tú",
+      "Key words":"Palabras clave",
+      "Previous lesson":"Lección anterior",
+      "Next lesson":"Siguiente lección",
+      "Back to the roadmap":"Volver a la ruta",
+      "Loading the lesson...":"Cargando la lección...",
+      "We could not open this lesson":"No pudimos abrir esta lección",
+      "This lesson is part of Brain Pro":"Esta lección es parte de Brain Pro",
+      "This lesson is being written":"Esta lección se está escribiendo",
+      "The full explanation is coming soon. Meanwhile, the resources in the roadmap cover this topic.":"La explicación completa llega pronto. Mientras tanto, los recursos de la ruta cubren este tema.",
+
       /* Foundations course roadmap */
       "Never touched code? Start here. Understand what a computer is, how the internet works and how programmers think, before you write a single line.":"¿Nunca tocaste código? Empieza aquí. Entiende qué es una computadora, cómo funciona internet y cómo piensa un programador, antes de escribir una sola línea.",
       "Every course in this academy stands on these ideas. People who skip them can copy code but cannot fix it. People who learn them pick up any new tool quickly.":"Todos los cursos de esta academia se apoyan en estas ideas. Quien se las salta puede copiar código pero no arreglarlo. Quien las aprende domina cualquier herramienta nueva rápido.",
@@ -11054,6 +11223,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       ,[/^(\d+) \/ (\d+) skills done$/, function(m){return m[1]+' / '+m[2]+' habilidades hechas';}]
       ,[/^(\d+) of (\d+) tags$/, function(m){return m[1]+' de '+m[2]+' etiquetas';}]
       ,[/^Bs ([\d.]+) a month$/, function(m){return 'Bs '+m[1]+' al mes';}]
+      ,[/^Lesson (\d+) of (\d+)$/, function(m){return 'Lección '+m[1]+' de '+m[2];}]
+      ,[/^~(\d+) min read$/, function(m){return '~'+m[1]+' min de lectura';}]
       ,[/^(\d+) of (\d+) days?$/, function(m){return m[1]+' de '+m[2]+(m[2]==='1'?' día':' días');}]
       ,[/^(\d+) of (\d+) levels · (\d+) random beaten$/, function(m){
         return m[1]+' de '+m[2]+' niveles · '+m[3]+' aleatorios superados';}]

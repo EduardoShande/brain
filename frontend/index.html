@@ -642,6 +642,83 @@
   .gnote{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:14px;line-height:1.5}
   .gmsg.ok{color:var(--good-ink)}
 
+  /* ===== Start here guide ===== */
+  .sg{max-width:1080px;padding-top:clamp(20px,4vw,40px)}
+  .sg-back{background:none;border:0;padding:6px 0;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer}
+  .sg-back:hover{color:var(--teal-ink)}
+  .sg-hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center;margin-top:18px}
+  @media(max-width:900px){.sg-hero{grid-template-columns:1fr}}
+  .sg-kicker{display:inline-block;background:var(--teal-wash);color:var(--teal-ink);font-size:13px;font-weight:800;padding:5px 12px;border-radius:99px}
+  .sg-hero h2{font-size:clamp(32px,4.6vw,50px);font-weight:800;line-height:1.08;letter-spacing:-.02em;color:var(--ink);margin:16px 0 0;max-width:16ch}
+  .sg-intro{margin:16px 0 0;font-size:17.5px;line-height:1.6;color:var(--ink-soft);max-width:48ch}
+  .sg-author{display:flex;align-items:center;gap:12px;margin-top:22px}
+  .sg-av{flex:none;width:44px;height:44px;border-radius:50%;background:var(--grad);color:var(--on-teal);display:grid;place-items:center;font-weight:800;font-size:15px}
+  .sg-author-t{display:flex;flex-direction:column;gap:2px;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
+  .sg-author-t b{font-size:14.5px;color:var(--ink)}
+  .sg-map{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shade-lg);display:flex;flex-direction:column;gap:4px}
+  .sg-map-h{font-size:13px;font-weight:800;color:var(--ink-faint);padding:0 10px 8px}
+  .sg-map-row{display:flex;align-items:center;gap:14px;padding:12px 10px;border-radius:14px;text-decoration:none;color:var(--ink)}
+  .sg-map-row:hover{background:var(--surface)}
+  .sg-map-row:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .sg-map-n{flex:none;width:32px;height:32px;border-radius:10px;background:var(--teal-wash);color:var(--teal-ink);display:grid;place-items:center;font-weight:800;font-size:14px}
+  .sg-map-t{flex:1;font-size:15.5px;font-weight:700;line-height:1.3}
+  .sg-map-row svg{flex:none;width:16px;height:16px;color:var(--ink-faint)}
+  .sg-map-row:hover svg{color:var(--teal-ink)}
+  .sg-sec{margin-top:clamp(48px,7vw,72px);scroll-margin-top:24px}
+  .sg-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:22px}
+  .sg-num{flex:none;width:42px;height:42px;border-radius:13px;background:var(--grad);color:var(--on-teal);display:grid;place-items:center;font-weight:800;font-size:18px;margin-top:2px}
+  .sg-head h3{font-size:clamp(24px,3vw,30px);font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:0;line-height:1.2}
+  .sg-sub{margin:6px 0 0;font-size:16.5px;line-height:1.55;color:var(--ink-soft);max-width:62ch}
+  /* four items each: always 2 by 2 or 4 across, never 3 plus an orphan */
+  .sg-myths,.sg-learn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  @media(max-width:640px){.sg-myths,.sg-learn{grid-template-columns:1fr}}
+  .sg-myth{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .sg-m-false{padding:16px 20px;background:var(--surface)}
+  .sg-m-true{padding:16px 20px 20px;flex:1}
+  .sg-myth p{margin:8px 0 0;font-size:15.5px;line-height:1.55}
+  .sg-m-false p{color:var(--ink-soft)}
+  .sg-m-true p{color:var(--ink)}
+  .sg-tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800}
+  .sg-tag svg{width:13px;height:13px}
+  .sg-tag.no{color:var(--clay-ink)}
+  .sg-tag.yes{color:var(--good-ink)}
+  .sg-note{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-top:16px;background:var(--teal-wash);border-radius:16px;padding:14px 20px}
+  .sg-note b{color:var(--teal-ink);font-size:14px;font-weight:800;white-space:nowrap}
+  .sg-note p{margin:0;flex:1 1 320px;color:var(--ink);font-size:15px;line-height:1.55}
+  .sg-weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  @media(max-width:1100px){.sg-weeks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:560px){.sg-weeks{grid-template-columns:1fr}}
+  .sg-week{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+  .sg-week::before{content:"";position:absolute;left:20px;right:20px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--grad)}
+  .sg-week-n{font-size:13px;font-weight:800;color:var(--teal-ink)}
+  .sg-week h4,.sg-card h4,.sg-trap h4{margin:6px 0 0;font-size:17px;font-weight:800;color:var(--ink);line-height:1.3}
+  .sg-week p,.sg-card>p{margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-soft)}
+  .sg-link{margin-top:auto;padding:14px 0 0;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:none;border:0;
+    font:inherit;font-size:14px;font-weight:800;color:var(--teal-ink);cursor:pointer}
+  .sg-link svg{width:14px;height:14px}
+  .sg-link:hover span{text-decoration:underline}
+  .sg-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+  /* pinned to the bottom so the "instead of" lines align across a row */
+  .sg-card>p{margin-bottom:16px}
+  .sg-instead{margin-top:auto;padding-top:14px;display:flex;gap:10px;align-items:baseline;border-top:1px solid var(--line)}
+  .sg-instead span{flex:none;font-size:12.5px;font-weight:800;color:var(--clay-ink)}
+  .sg-instead p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-faint)}
+  .sg-traps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  @media(max-width:640px){.sg-traps{grid-template-columns:1fr}}
+  .sg-trap{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .sg-trap-i{flex:none;width:34px;height:34px;border-radius:10px;background:var(--clay-wash);color:var(--clay-ink);display:grid;place-items:center}
+  .sg-trap-i svg{width:17px;height:17px}
+  .sg-trap h4{margin:0}
+  .sg-fix{display:flex;gap:8px;align-items:baseline;margin-top:6px}
+  .sg-fix span{flex:none;font-size:12.5px;font-weight:800;color:var(--good-ink)}
+  .sg-fix p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+  .sg-end{margin:clamp(48px,7vw,72px) 0 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;
+    background:var(--card);border:1px solid var(--teal);border-radius:22px;padding:clamp(22px,4vw,32px);box-shadow:0 0 0 4px var(--teal-wash)}
+  .sg-end h3{margin:0;font-size:clamp(22px,2.8vw,28px);font-weight:800;color:var(--ink)}
+  .sg-end p{margin:8px 0 0;font-size:16px;line-height:1.55;color:var(--ink-soft);max-width:54ch}
+  .sg-end-a{display:flex;flex-wrap:wrap;gap:10px}
+  .sg-end-a .gbtn{width:auto;padding:13px 22px}
+
   /* ===== Brain Pro: paywall, plans, QR checkout, plan card ===== */
   .pw{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,32px);
     box-shadow:0 14px 34px rgba(76,88,168,.10)}
@@ -2968,85 +3045,74 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
   <!-- ===================== START HERE ===================== -->
   <div class="page" id="page-start">
-    <div class="phead">
-      <button class="back" id="start-back">← Back</button>
-      <div class="pn">Start here · free</div>
-      <h2>Before you spend a dollar</h2>
-      <p class="pd">The honest starter guide I wish someone had handed me. Self-taught from Santa Cruz, Bolivia, now building automation and AI for clients in the US. Here is how tech really works, how to start, how to learn, and how to not waste a year.</p>
-      <div class="subnav">
-        <a href="#st-jobs" class="jump">How jobs really work</a>
-        <a href="#st-start" class="jump">How to start</a>
-        <a href="#st-learn" class="jump">How to learn</a>
-        <a href="#st-time" class="jump">Save time</a>
+    <div class="sg">
+    <button class="sg-back" id="start-back" type="button">← Back</button>
+    <header class="sg-hero">
+      <div class="sg-hero-text">
+        <span class="sg-kicker">Free starter guide</span>
+        <h2>How to start in tech without wasting a year</h2>
+        <p class="sg-intro">Four short lessons I wish someone had given me before I started. Read them in ten minutes, then take your first step.</p>
+        <div class="sg-author"><span class="sg-av" aria-hidden="true">ES</span><span class="sg-author-t"><b>Eduardo Shande</b><span>Self-taught in Santa Cruz. Builds automation and AI for clients in the United States.</span></span></div>
       </div>
+      <nav class="sg-map" aria-label="In this guide">
+        <span class="sg-map-h">In this guide</span>
+        <a class="jump sg-map-row" href="#sg-work"><span class="sg-map-n">1</span><span class="sg-map-t">What the work is really like</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="jump sg-map-row" href="#sg-month"><span class="sg-map-n">2</span><span class="sg-map-t">Your first month</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="jump sg-map-row" href="#sg-learn"><span class="sg-map-n">3</span><span class="sg-map-t">How to learn so it sticks</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="jump sg-map-row" href="#sg-traps"><span class="sg-map-n">4</span><span class="sg-map-t">Traps that eat a year</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </nav>
+    </header>
+
+    <section class="sg-sec" id="sg-work">
+      <header class="sg-head"><span class="sg-num" aria-hidden="true">1</span><div><h3>What the work is really like</h3><p class="sg-sub">Forget the movies. Most of the job is connecting things, fixing things, and explaining them clearly.</p></div></header>
+      <div class="sg-myths">
+        <div class="sg-myth"><div class="sg-m-false"><span class="sg-tag no"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Myth</span></span><p>You need a university degree.</p></div><div class="sg-m-true"><span class="sg-tag yes"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reality</span></span><p>Nobody has ever asked me for one. People ask what you can build and whether you finish it.</p></div></div>
+        <div class="sg-myth"><div class="sg-m-false"><span class="sg-tag no"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Myth</span></span><p>Programmers know everything by heart.</p></div><div class="sg-m-true"><span class="sg-tag yes"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reality</span></span><p>You look things up and use AI every day. You get paid to solve problems, not to memorize.</p></div></div>
+        <div class="sg-myth"><div class="sg-m-false"><span class="sg-tag no"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Myth</span></span><p>The job is writing genius algorithms.</p></div><div class="sg-m-true"><span class="sg-tag yes"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reality</span></span><p>Most of it is plumbing: moving data between systems, keeping things running, and talking to people.</p></div></div>
+        <div class="sg-myth"><div class="sg-m-false"><span class="sg-tag no"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Myth</span></span><p>You have to live abroad to earn well.</p></div><div class="sg-m-true"><span class="sg-tag yes"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reality</span></span><p>From Bolivia you can work for clients in other countries. Where you live is no longer your limit.</p></div></div>
+      </div>
+      <div class="sg-note"><b>Good to know</b><p>Everyone feels like an impostor, even people far ahead of you. You build anyway. That is the only difference.</p></div>
+    </section>
+
+    <section class="sg-sec" id="sg-month">
+      <header class="sg-head"><span class="sg-num" aria-hidden="true">2</span><div><h3>Your first month</h3><p class="sg-sub">One direction, one real project, one real person who sees it. Then repeat.</p></div></header>
+      <div class="sg-weeks">
+        <div class="sg-week"><span class="sg-week-n">Week 1</span><h4>Pick one path</h4><p>Do not try to learn everything. Take the path quiz and choose one direction.</p><button type="button" class="sg-link" data-goto="path"><span>Take the path quiz</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="sg-week"><span class="sg-week-n">Week 2</span><h4>Build something ugly</h4><p>Build it yourself instead of watching tutorials. A small script or a one page site is enough.</p><button type="button" class="sg-link" data-goto="lab"><span>Open Code Lab</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="sg-week"><span class="sg-week-n">Week 3</span><h4>Show it to someone</h4><p>A friend, a teacher, or a small business near you. Their feedback teaches you more than polish.</p></div>
+        <div class="sg-week"><span class="sg-week-n">Week 4</span><h4>Do it again, a bit bigger</h4><p>Repeat the loop with a harder project. Do not wait to feel ready. That feeling comes after you act.</p></div>
+      </div>
+      <div class="sg-note"><b>Where most people stop</b><p>Between "I should learn this" and actually starting. Start today, not on Monday.</p></div>
+    </section>
+
+    <section class="sg-sec" id="sg-learn">
+      <header class="sg-head"><span class="sg-num" aria-hidden="true">3</span><div><h3>How to learn so it sticks</h3><p class="sg-sub">Doing beats watching. Small and often beats long and rare.</p></div></header>
+      <div class="sg-learn">
+        <div class="sg-card"><h4>Build first, look it up second</h4><p>Try, get stuck, then learn exactly what you needed. It sticks because you needed it.</p><div class="sg-instead"><span>Instead of</span><p>Watching a whole course before you touch anything.</p></div></div>
+        <div class="sg-card"><h4>Learn only what the project needs</h4><p>Learn the small part the thing in front of you needs, then keep going.</p><div class="sg-instead"><span>Instead of</span><p>Learning a whole framework just in case.</p></div></div>
+        <div class="sg-card"><h4>Explain it to someone</h4><p>Write a short note or explain it to a friend. If you can explain it, you really know it.</p><div class="sg-instead"><span>Instead of</span><p>Rereading your notes.</p></div></div>
+        <div class="sg-card"><h4>Use AI, then check it</h4><p>AI makes you faster, but its answers are often almost right. Catching the mistake is the skill people pay for.</p><div class="sg-instead"><span>Instead of</span><p>Copying whatever it gives you.</p></div></div>
+      </div>
+      <div class="sg-note"><b>Small and often</b><p>One focused hour a day beats ten hours once a month. A project you can show beats a certificate.</p></div>
+    </section>
+
+    <section class="sg-sec" id="sg-traps">
+      <header class="sg-head"><span class="sg-num" aria-hidden="true">4</span><div><h3>Traps that eat a year</h3><p class="sg-sub">Most wasted time is not laziness. It is doing things that feel productive and are not.</p></div></header>
+      <div class="sg-traps">
+        <div class="sg-trap"><span class="sg-trap-i"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2l6.2 11H1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg></span><div><h4>Tutorial hell</h4><div class="sg-fix"><span>Fix</span><p>Build your own version without following along.</p></div></div></div>
+        <div class="sg-trap"><span class="sg-trap-i"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2l6.2 11H1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg></span><div><h4>Waiting until you know all the basics</h4><div class="sg-fix"><span>Fix</span><p>Learn enough to start and fill the gaps as you hit them.</p></div></div></div>
+        <div class="sg-trap"><span class="sg-trap-i"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2l6.2 11H1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg></span><div><h4>Chasing every new tool</h4><div class="sg-fix"><span>Fix</span><p>Go deep on one. Tools change, the basics do not.</p></div></div></div>
+        <div class="sg-trap"><span class="sg-trap-i"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2l6.2 11H1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg></span><div><h4>Perfectionism</h4><div class="sg-fix"><span>Fix</span><p>Finish the ugly version and show it. Done beats perfect.</p></div></div></div>
+        <div class="sg-trap"><span class="sg-trap-i"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2l6.2 11H1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg></span><div><h4>Studying alone in silence</h4><div class="sg-fix"><span>Fix</span><p>Share what you build. Feedback and proof matter more than polish.</p></div></div></div>
+        <div class="sg-trap"><span class="sg-trap-i"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.2l6.2 11H1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg></span><div><h4>Comparing yourself to others</h4><div class="sg-fix"><span>Fix</span><p>Compare yourself to who you were last month.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="sg-end">
+      <div><h3>Your next move</h3><p>Pick a direction and build something this week. Everything in this academy is here to save you the months I lost.</p></div>
+      <div class="sg-end-a"><button class="gbtn" type="button" data-goto="path">Find my path</button><button class="gbtn ghost" type="button" data-goto="academy">Browse the courses</button></div>
+    </section>
     </div>
-
-    <section class="sec" id="st-jobs">
-      <div class="eyebrow">01 · The truth</div>
-      <h3>How tech jobs really work</h3>
-      <p class="lead">Forget the movies. Ninety percent of the work is not genius algorithms. It is connecting things, fixing things, and explaining things clearly.</p>
-      <div class="rows">
-        <div class="r"><span class="h">You do not need a degree</span><span class="m">for real</span><span class="d">Nobody has ever asked me for one. They ask what you can build and whether you can be trusted to finish it.</span></div>
-        <div class="r"><span class="h">You get paid to solve problems, not to know everything</span><span class="m">the job</span><span class="d">You will Google and use AI every single day. That is the work, not cheating. Nobody memorizes it all.</span></div>
-        <div class="r"><span class="h">Most work is plumbing</span><span class="m">reality</span><span class="d">Moving data between systems, keeping things running, talking to the people who need it. The hard computer-science part is a small slice.</span></div>
-        <div class="r"><span class="h">Remote changes everything</span><span class="m">your edge</span><span class="d">From Bolivia I work with US clients at close to US rates. Your location is no longer your ceiling.</span></div>
-        <div class="r"><span class="h">A job and a business are different games</span><span class="m">choose on purpose</span><span class="d">A job is stable and caps your income. Your own services uncap it but are unstable. Start with income, build the business on the side.</span></div>
-      </div>
-      <div class="mnote"><span class="label">The part nobody says</span>Imposter syndrome never fully leaves. Everyone feels it, including people far ahead of you. You ship anyway. That is the only difference.</div>
-    </section>
-
-    <section class="sec" id="st-start">
-      <div class="eyebrow">02 · The start</div>
-      <h3>How to actually start</h3>
-      <p class="lead">Pick one direction, build one real thing, put it in front of one real person. Repeat. That is the whole loop.</p>
-      <div class="steps">
-        <div class="st"><span class="n">01</span><span class="c"><b>Pick ONE path.</b> Do not learn "everything." If you are unsure, take the free path quiz. Depth beats breadth every time.</span></div>
-        <div class="st"><span class="n">02</span><span class="c"><b>Learn by building, not watching.</b> Tutorials feel like progress and are not. Build the ugly version yourself.</span></div>
-        <div class="st"><span class="n">03</span><span class="c"><b>Ship something real in week one.</b> A script that automates a boring task, a tiny app, anything that works and that you can show.</span></div>
-        <div class="st"><span class="n">04</span><span class="c"><b>Put it in front of someone.</b> A friend, a small business, a forum. Feedback and proof matter more than polish.</span></div>
-        <div class="st"><span class="n">05</span><span class="c"><b>Earn while you learn.</b> A $50 automation or a landing page teaches you more than months of courses, and it pays.</span></div>
-        <div class="st"><span class="n">06</span><span class="c"><b>Do not wait to feel ready.</b> You never will. "Ready" is a feeling that follows action, it does not come before it.</span></div>
-      </div>
-      <div class="mnote"><span class="label">Where most people die</span>The gap between "I should learn this" and actually starting. Close it today, not Monday. Monday is a myth.</div>
-    </section>
-
-    <section class="sec" id="st-learn">
-      <div class="eyebrow">03 · The method</div>
-      <h3>How to learn so it sticks and gets you paid</h3>
-      <p class="lead">Active beats passive. Just-in-time beats just-in-case. Consistency beats intensity.</p>
-      <div class="rows">
-        <div class="r"><span class="h">Build first, look it up second</span><span class="m">active</span><span class="d">Try, get stuck, then learn the exact thing you needed. It sticks because you actually needed it.</span></div>
-        <div class="r"><span class="h">Learn just-in-time</span><span class="m">80 / 20</span><span class="d">Do not learn a whole framework "in case." Learn the 20% the thing in front of you needs, and move.</span></div>
-        <div class="r"><span class="h">Teach it back</span><span class="m">own it</span><span class="d">Write a note, record a short video, explain it to a friend. If you can explain it, you own it.</span></div>
-        <div class="r"><span class="h">Use AI, but verify it</span><span class="m">the paid skill</span><span class="d">AI makes you faster, but 66% of developers get burned by output that is "almost right." Being the one who catches it is what you get paid for.</span></div>
-        <div class="r"><span class="h">Consistency wins</span><span class="m">compound it</span><span class="d">One focused hour a day beats a 10-hour weekend once a month. Momentum compounds, cramming does not.</span></div>
-        <div class="r"><span class="h">Projects over certificates</span><span class="m">proof</span><span class="d">A cert says you studied. A project you can show says you can do it. The project gets the job.</span></div>
-      </div>
-    </section>
-
-    <section class="sec" id="st-time">
-      <div class="eyebrow">04 · The traps</div>
-      <h3>How to not waste a year</h3>
-      <p class="lead">Most wasted time is not laziness. It is doing the wrong things that look productive.</p>
-      <div class="rows">
-        <div class="r"><span class="h">Tutorial hell</span><span class="m">the fix</span><span class="d">Build your own version without following along. The struggle is the learning; copying is not.</span></div>
-        <div class="r"><span class="h">Learning "in order" forever</span><span class="m">the fix</span><span class="d">You do not need every fundamental before you build. Learn enough to start, fill the gaps as you hit them.</span></div>
-        <div class="r"><span class="h">Chasing every new tool</span><span class="m">the fix</span><span class="d">Tools change, fundamentals do not. Go deep on one, not shallow on ten.</span></div>
-        <div class="r"><span class="h">Perfectionism</span><span class="m">the fix</span><span class="d">Ship the ugly version. Done and seen beats perfect and hidden, every time.</span></div>
-        <div class="r"><span class="h">Skipping the business side</span><span class="m">the fix</span><span class="d">Scoping, pricing, and clear communication make more money than any framework. Learn them early.</span></div>
-        <div class="r"><span class="h">Comparing to others</span><span class="m">the fix</span><span class="d">Everyone's start looks different. The only comparison that matters is you versus you last month.</span></div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="eyebrow">05 · Now what</div>
-      <h3>Your next move</h3>
-      <p>Everything in this academy exists to save you the months I wasted. Pick a direction, and build something this week. That is it.</p>
-      <div class="pathcta" style="margin-top:18px">
-        <button class="btn" data-goto="path">Find my path →</button>
-        <button class="btn" data-goto="academy" style="background:none;color:var(--teal-ink);box-shadow:none;border:1px solid var(--line-strong)">Browse the courses →</button>
-      </div>
-    </section>
   </div>
 
   <!-- ===================== FIND YOUR PATH ===================== -->
@@ -6398,6 +6464,76 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* start here guide */
+      "Free starter guide":"Guía gratuita para empezar",
+      "How to start in tech without wasting a year":"Cómo empezar en tecnología sin perder un año",
+      "Four short lessons I wish someone had given me before I started. Read them in ten minutes, then take your first step.":"Cuatro lecciones cortas que me hubiera gustado recibir antes de empezar. Léelas en diez minutos y da tu primer paso.",
+      "Eduardo Shande":"Eduardo Shande",
+      "Self-taught in Santa Cruz. Builds automation and AI for clients in the United States.":"Autodidacta en Santa Cruz. Construye automatización e IA para clientes en Estados Unidos.",
+      "In this guide":"En esta guía",
+      "What the work is really like":"Cómo es el trabajo de verdad",
+      "Your first month":"Tu primer mes",
+      "How to learn so it sticks":"Cómo aprender para que se te quede",
+      "Traps that eat a year":"Trampas que te hacen perder un año",
+      "Forget the movies. Most of the job is connecting things, fixing things, and explaining them clearly.":"Olvida las películas. La mayor parte del trabajo es conectar cosas, arreglarlas y explicarlas con claridad.",
+      "Myth":"Mito",
+      "Reality":"Realidad",
+      "You need a university degree.":"Necesitas un título universitario.",
+      "Nobody has ever asked me for one. People ask what you can build and whether you finish it.":"Nadie me lo ha pedido nunca. Te preguntan qué sabes construir y si lo terminas.",
+      "Programmers know everything by heart.":"Los programadores se saben todo de memoria.",
+      "You look things up and use AI every day. You get paid to solve problems, not to memorize.":"Buscas cosas y usas IA todos los días. Te pagan por resolver problemas, no por memorizar.",
+      "The job is writing genius algorithms.":"El trabajo es escribir algoritmos geniales.",
+      "Most of it is plumbing: moving data between systems, keeping things running, and talking to people.":"Casi todo es fontanería: mover datos entre sistemas, mantener las cosas funcionando y hablar con la gente.",
+      "You have to live abroad to earn well.":"Tienes que vivir en el extranjero para ganar bien.",
+      "From Bolivia you can work for clients in other countries. Where you live is no longer your limit.":"Desde Bolivia puedes trabajar para clientes de otros países. Dónde vives ya no es tu límite.",
+      "Good to know":"Bueno saberlo",
+      "Everyone feels like an impostor, even people far ahead of you. You build anyway. That is the only difference.":"Todos se sienten impostores, incluso quienes van muy por delante de ti. Igual construyes. Esa es la única diferencia.",
+      "One direction, one real project, one real person who sees it. Then repeat.":"Una dirección, un proyecto real y una persona real que lo vea. Luego repites.",
+      "Week 1":"Semana 1",
+      "Week 2":"Semana 2",
+      "Week 3":"Semana 3",
+      "Week 4":"Semana 4",
+      "Pick one path":"Elige un solo camino",
+      "Do not try to learn everything. Take the path quiz and choose one direction.":"No intentes aprender todo. Haz el test de orientación y elige una dirección.",
+      "Build something ugly":"Construye algo feo",
+      "Build it yourself instead of watching tutorials. A small script or a one page site is enough.":"Constrúyelo tú en vez de mirar tutoriales. Basta con un script pequeño o una página web sencilla.",
+      "Open Code Lab":"Abrir Code Lab",
+      "Show it to someone":"Muéstraselo a alguien",
+      "A friend, a teacher, or a small business near you. Their feedback teaches you more than polish.":"Un amigo, un profesor o un negocio pequeño cerca de ti. Sus comentarios te enseñan más que pulirlo.",
+      "Do it again, a bit bigger":"Hazlo de nuevo, un poco más grande",
+      "Repeat the loop with a harder project. Do not wait to feel ready. That feeling comes after you act.":"Repite el ciclo con un proyecto más difícil. No esperes a sentirte listo. Esa sensación llega después de actuar.",
+      "Where most people stop":"Donde la mayoría se detiene",
+      "Between \"I should learn this\" and actually starting. Start today, not on Monday.":"Entre \"debería aprender esto\" y empezar de verdad. Empieza hoy, no el lunes.",
+      "Doing beats watching. Small and often beats long and rare.":"Hacer gana a mirar. Poco y seguido gana a mucho y de vez en cuando.",
+      "Try, get stuck, then learn exactly what you needed. It sticks because you needed it.":"Intenta, trábate y luego aprende justo lo que necesitabas. Se te queda porque lo necesitabas.",
+      "Watching a whole course before you touch anything.":"Mirar un curso entero antes de tocar nada.",
+      "Learn only what the project needs":"Aprende solo lo que el proyecto necesita",
+      "Learn the small part the thing in front of you needs, then keep going.":"Aprende la parte pequeña que necesita lo que tienes delante y sigue avanzando.",
+      "Learning a whole framework just in case.":"Aprender un framework entero por si acaso.",
+      "Explain it to someone":"Explícaselo a alguien",
+      "Write a short note or explain it to a friend. If you can explain it, you really know it.":"Escribe una nota corta o explícaselo a un amigo. Si puedes explicarlo, de verdad lo sabes.",
+      "Rereading your notes.":"Releer tus apuntes.",
+      "Use AI, then check it":"Usa IA y luego revísala",
+      "AI makes you faster, but its answers are often almost right. Catching the mistake is the skill people pay for.":"La IA te hace más rápido, pero sus respuestas muchas veces están casi bien. Detectar el error es la habilidad por la que pagan.",
+      "Copying whatever it gives you.":"Copiar lo que te dé sin revisar.",
+      "Instead of":"En vez de",
+      "Small and often":"Poco y seguido",
+      "One focused hour a day beats ten hours once a month. A project you can show beats a certificate.":"Una hora concentrada al día gana a diez horas una vez al mes. Un proyecto que puedes mostrar gana a un certificado.",
+      "Most wasted time is not laziness. It is doing things that feel productive and are not.":"La mayor parte del tiempo perdido no es flojera. Es hacer cosas que parecen productivas y no lo son.",
+      "Build your own version without following along.":"Construye tu propia versión sin ir copiando paso a paso.",
+      "Waiting until you know all the basics":"Esperar a saber todo lo básico",
+      "Learn enough to start and fill the gaps as you hit them.":"Aprende lo suficiente para empezar y llena los huecos a medida que aparecen.",
+      "Go deep on one. Tools change, the basics do not.":"Profundiza en una. Las herramientas cambian, lo básico no.",
+      "Finish the ugly version and show it. Done beats perfect.":"Termina la versión fea y muéstrala. Hecho gana a perfecto.",
+      "Studying alone in silence":"Estudiar solo y en silencio",
+      "Share what you build. Feedback and proof matter more than polish.":"Comparte lo que construyes. Los comentarios y las pruebas valen más que pulirlo.",
+      "Comparing yourself to others":"Compararte con los demás",
+      "Compare yourself to who you were last month.":"Compárate con quien eras el mes pasado.",
+      "Fix":"Solución",
+      "Pick a direction and build something this week. Everything in this academy is here to save you the months I lost.":"Elige una dirección y construye algo esta semana. Todo en esta academia existe para ahorrarte los meses que yo perdí.",
+      "Find my path":"Encontrar mi camino",
+      "Browse the courses":"Ver los cursos",
+
       /* study plan calendar */
       "Edit your study plan":"Edita tu plan de estudio",
       "Make your study plan":"Arma tu plan de estudio",

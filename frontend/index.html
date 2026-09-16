@@ -685,68 +685,127 @@
   .ch .progcard{margin-top:24px;border-radius:16px}
   .ch .progcard .pt{font-family:inherit;font-size:13px;font-weight:800;color:var(--ink-faint)}
 
-  .rmt{position:relative;margin-top:30px;padding:6px 0}
-  .rmt::before{content:"";position:absolute;top:0;bottom:0;left:23px;width:2px;margin-left:-1px;background:var(--line-strong);border-radius:2px}
-  .rmt .stage{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr);column-gap:14px;align-items:start;
-    margin:0;background:none;border:0;border-radius:0;overflow:visible}
-  .rmt .stage+.stage{margin-top:22px}
+  /* ===== icons ===== */
+  .gi{display:inline-block;flex:none;width:1em;height:1em;background:currentColor;-webkit-mask:var(--gi) center/contain no-repeat;mask:var(--gi) center/contain no-repeat}
+  .gi-book{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z'/%3E%3Cpath d='M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z'/%3E%3C/svg%3E")}
+  .gi-play{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='m10 8 6 4-6 4z'/%3E%3C/svg%3E")}
+  .gi-tool{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z'/%3E%3C/svg%3E")}
+  .gi-check{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+  .gi-alert{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E")}
+  .gi-flask{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.5a1 1 0 0 0 .9 1.5h12.8a1 1 0 0 0 .9-1.5l-5.1-10.1a2 2 0 0 1-.2-.9V2'/%3E%3Cpath d='M8.5 2h7'/%3E%3Cpath d='M7 16h10'/%3E%3C/svg%3E")}
+  .gi-bulb{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5'/%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3C/svg%3E")}
+  .gi-clock{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3C/svg%3E")}
+  .gi-ext{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M7 7h10v10'/%3E%3C/svg%3E")}
+  .gi-copy{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2'/%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3E%3C/svg%3E")}
+  .gi-left{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E")}
+  .gi-right{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E")}
+  .gi-chev{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E")}
+  .gi-list{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01'/%3E%3C/svg%3E")}
+  .gi-key{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4'/%3E%3Cpath d='m21 2-9.6 9.6'/%3E%3Ccircle cx='7.5' cy='15.5' r='5.5'/%3E%3C/svg%3E")}
+  .gi-info{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4'/%3E%3Cpath d='M12 8h.01'/%3E%3C/svg%3E")}
+  .gi-layers{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 2 10 5-10 5L2 7z'/%3E%3Cpath d='m2 17 10 5 10-5'/%3E%3Cpath d='m2 12 10 5 10-5'/%3E%3C/svg%3E")}
+  .gi-code{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 18 6-6-6-6'/%3E%3Cpath d='m8 6-6 6 6 6'/%3E%3C/svg%3E")}
+  .gi-map{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 3 3 6v15l6-3 6 3 6-3V3l-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E")}
+  .gi-compass{--gi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3z'/%3E%3C/svg%3E")}
+  .rmt{--chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E")}
+  /* ===== end icons ===== */
+  /* ===== Roadmap timeline ===== */
+  .rmt{position:relative;margin-top:34px;padding:6px 0;--node:48px}
+  .rmt::before{content:"";position:absolute;top:8px;bottom:8px;left:24px;width:2px;margin-left:-1px;border-radius:2px;
+    background:repeating-linear-gradient(to bottom,var(--line-strong) 0 7px,transparent 7px 13px)}
+  .rmt .stage{position:relative;display:grid;grid-template-columns:var(--node) minmax(0,1fr);column-gap:16px;align-items:start;
+    margin:0;background:none;border:0;border-radius:0;overflow:visible;box-shadow:none}
+  .rmt .stage+.stage{margin-top:24px}
   .rmt .t1{--tone:var(--rt1);--tone-w:var(--rt1-w)} .rmt .t2{--tone:var(--rt2);--tone-w:var(--rt2-w)}
   .rmt .t3{--tone:var(--rt3);--tone-w:var(--rt3-w)} .rmt .t4{--tone:var(--rt4);--tone-w:var(--rt4-w)}
   .rmt .t5{--tone:var(--rt5);--tone-w:var(--rt5-w)}
-  .rmt-node{grid-column:1;grid-row:1;justify-self:center;margin-top:24px;position:relative;z-index:1;width:46px;height:46px;border-radius:50%;
-    border:2.5px solid var(--tone);background:var(--bg);display:grid;place-items:center}
-  .rmt-node i{width:18px;height:18px;border-radius:50%;background:var(--tone)}
-  .rmt-node::after{content:"";position:absolute;top:50%;height:2.5px;margin-top:-1.25px;width:13px;background:var(--tone)}
-  .rmt-node::after{left:100%}
-  .rmt-card{grid-column:2;grid-row:1}
-  .rmt-card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--tone);border-radius:18px;padding:18px 20px 20px;min-width:0}
-  .rmt-head{display:flex;align-items:center;gap:14px}
-  .rmt-num{flex:none;font-size:40px;font-weight:800;line-height:1;color:var(--tone);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-  .rmt-titles{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
-  .rmt-bar{margin:0;background:var(--tone);color:var(--on-rt);font-size:15.5px;font-weight:800;line-height:1.3;padding:5px 12px;border-radius:8px}
-  .rmt-meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12.5px;font-weight:700;color:var(--ink-faint)}
-  .rmt-opt{color:var(--teal-ink)}
-  .rmt .stage .cnt{margin-left:auto;align-self:flex-start;font-size:13px;font-weight:800;color:var(--tone);font-variant-numeric:tabular-nums}
+  .rmt-node{grid-column:1;grid-row:1;justify-self:center;margin-top:18px;position:relative;z-index:1;width:var(--node);height:var(--node);
+    border-radius:50%;background:var(--card);border:2px solid var(--tone);color:var(--tone);display:grid;place-items:center;
+    box-shadow:0 0 0 6px var(--bg);transition:background .25s,color .25s}
+  .rmt-n{font-size:15px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+  .rmt-node .rmt-ok{display:none;width:22px;height:22px}
+  .rmt .stage.started .rmt-node{background:var(--tone-w)}
+  .rmt .stage.done .rmt-node{background:var(--tone);color:var(--on-rt)}
+  .rmt .stage.done .rmt-n{display:none}
+  .rmt .stage.done .rmt-ok{display:block}
+  .rmt-node::after{content:"";position:absolute;top:50%;left:100%;width:18px;height:2px;margin-top:-1px;background:var(--tone);opacity:.55}
+  .rmt-card{grid-column:2;grid-row:1;position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:20px 22px 18px;min-width:0;box-shadow:var(--shade);transition:box-shadow .2s,border-color .2s}
+  .rmt-card::before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:3px;border-radius:0 0 3px 3px;background:var(--tone)}
+  .rmt-card:hover{box-shadow:var(--shade-lg)}
+  .rmt .stage.done .rmt-card{border-color:var(--tone)}
+  .rmt-head{display:flex;align-items:flex-start;gap:14px}
+  .rmt-titles{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
+  .rmt-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--ink-soft)}
+  .rmt-meta>span{display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:2px 9px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
+  .rmt-meta .rmt-k{background:var(--tone-w);border-color:transparent;color:var(--tone);text-transform:uppercase;letter-spacing:.06em}
+  .rmt-meta .gi{width:13px;height:13px}
+  .rmt-meta .rmt-opt{color:var(--teal-ink)}
+  .rmt-bar{margin:0;background:none;color:var(--ink);font-size:clamp(18px,1.9vw,20px);font-weight:800;line-height:1.25;padding:0;letter-spacing:-.01em}
+  .rmt .stage .cnt{flex:none;margin-left:auto;font-size:13px;font-weight:800;color:var(--tone);font-variant-numeric:tabular-nums;
+    padding:4px 10px;border-radius:99px;background:var(--tone-w);font-family:inherit}
+  .rmt-prog{height:6px;border-radius:99px;background:var(--surface);margin:14px 0 0;overflow:hidden}
+  .rmt-prog i{display:block;height:100%;width:var(--pct,0%);background:var(--tone);border-radius:inherit;transition:width .4s ease}
   .rmt-goal{margin:12px 0 2px;font-size:15px;line-height:1.55;color:var(--ink-soft)}
-  .rmt .skills{padding:4px 0;margin:0 -10px}
-  .rmt .skills label{padding:8px 10px;border-radius:10px}
-  .rmt .skills label:hover{background:var(--surface)}
+  .rmt .skills{list-style:none;padding:0;margin:8px -8px 0}
+  .rmt .skills li{display:flex;align-items:stretch;border-radius:14px;position:relative;transition:background .15s}
+  .rmt .skills li+li::before{content:"";position:absolute;left:52px;right:12px;top:0;height:1px;background:var(--line)}
+  .rmt .skills li:hover{background:var(--surface)}
+  .rmt .skills li:hover::before,.rmt .skills li:hover+li::before{opacity:0}
+  .rmt .skills label.rmt-chk{flex:none;display:grid;place-items:center;width:48px;min-height:48px;padding:0;border-radius:14px;cursor:pointer}
+  .rmt .skills label.rmt-chk:hover{background:none}
+  .rmt .skills .rmt-chk input{margin:0;width:22px;height:22px;border-radius:50%;border-width:2px;background:var(--card)}
+  .rmt .skills .rmt-chk input:hover{border-color:var(--tone)}
   .rmt .skills input:checked{background:var(--tone);border-color:var(--tone)}
-  .rmt .skills input:checked::after{border-color:var(--on-rt)}
-  .rmt .skills .skt{font-size:15.5px;font-weight:700;color:var(--ink)}
-  .rmt .skills .sub{font-family:inherit;font-size:14px;line-height:1.5;color:var(--ink-soft)}
-  .rmt-do{margin-top:10px;background:var(--tone-w);border-radius:12px;padding:12px 14px}
-  .rmt-do b{font-size:12.5px;font-weight:800;color:var(--tone)}
-  .rmt-do p{margin:4px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink)}
-  .rmt-res{margin-top:12px}
-  .rmt-res b{display:block;font-size:12.5px;font-weight:800;color:var(--ink-faint)}
-  .rmt-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-  .rmt-links a{display:inline-flex;align-items:center;min-height:36px;padding:6px 12px;border:1px solid var(--line-strong);border-radius:99px;
-    font-size:13.5px;font-weight:700;color:var(--teal-ink);text-decoration:none;background:var(--card)}
-  .rmt-links a:hover{border-color:var(--teal)}
-  .rmt-links a::after{content:"\2197";margin-left:6px;font-size:12px;color:var(--ink-faint)}
-  .rmt:not(.two) .rmt-num{font-size:34px}
+  .rmt .skills input:checked::after{left:6.5px;top:3px;border-color:var(--on-rt)}
+  .rmt .skills .sk{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:left;background:none;border:0;
+    padding:12px 44px 12px 2px;font:inherit;color:inherit;cursor:pointer;position:relative;border-radius:14px}
+  .rmt .skills .sk::after{content:"";position:absolute;right:14px;top:50%;width:18px;height:18px;margin-top:-9px;background:var(--ink-faint);
+    -webkit-mask:var(--chev) center/contain no-repeat;mask:var(--chev) center/contain no-repeat;transition:transform .15s,background .15s}
+  .rmt .skills .sk:hover::after{background:var(--tone);transform:translateX(3px)}
+  .rmt .skills .sk:hover .skt{color:var(--tone)}
+  .rmt .skills .sk:focus-visible{outline:2px solid var(--tone);outline-offset:-2px}
+  .rmt .skills .skt{font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.35}
+  .rmt .skills .sub{font-family:inherit;font-size:13.5px;line-height:1.5;color:var(--ink-soft);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rmt .skills li:has(input:checked) .skt{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--line-strong)}
+  .rmt-do{display:flex;gap:12px;align-items:flex-start;margin-top:12px;background:var(--tone-w);border-radius:14px;padding:14px 16px}
+  .rmt-do-ic{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--card);color:var(--tone)}
+  .rmt-do-ic .gi{width:18px;height:18px}
+  .rmt-do b{display:block;font-size:12px;font-weight:800;color:var(--tone);text-transform:uppercase;letter-spacing:.06em}
+  .rmt-do p{margin:3px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink)}
+  .rmt-res{margin-top:14px}
+  .rmt-res b{display:block;font-size:12px;font-weight:800;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
+  .rmt-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .rmt-links a{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 13px 6px 10px;border:1px solid var(--line);border-radius:12px;
+    font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--surface);transition:border-color .15s,color .15s}
+  .rmt-links a .gi{width:16px;height:16px;color:var(--teal-ink)}
+  .rmt-links a.vid .gi{color:var(--clay-ink)}
+  .rmt-links a:hover{border-color:var(--tone);color:var(--tone)}
+  .rmt-links a:focus-visible{outline:2px solid var(--tone);outline-offset:2px}
   @media(max-width:520px){
-    .rmt::before{left:17px}
-    .rmt .stage{grid-template-columns:34px minmax(0,1fr);column-gap:10px}
-    .rmt-node{width:34px;height:34px;margin-top:18px}
-    .rmt-node i{width:13px;height:13px}
+    .rmt{--node:38px}
+    .rmt::before{left:19px}
+    .rmt .stage{column-gap:10px}
+    .rmt-node{margin-top:16px;box-shadow:0 0 0 4px var(--bg)}
+    .rmt-n{font-size:13px}
     .rmt-node::after{width:10px}
-    .rmt-card{padding:14px 14px 16px}
-    .rmt-head{gap:10px}
-    .rmt:not(.two) .rmt-num{font-size:26px}
-    .rmt-bar{font-size:14.5px;padding:4px 10px}
+    .rmt-card{padding:16px 14px 14px;border-radius:18px}
+    .rmt-card::before{left:16px;right:16px}
+    .rmt .skills{margin:8px -6px 0}
+    .rmt .skills li+li::before{left:48px}
   }
   /* zigzag: stages are placed by layoutRoadmap(); they overlap the other
      column, so only the node and card take clicks */
   .rmt.two{padding:0}
   .rmt.two::before{left:50%}
-  .rmt.two .stage{position:absolute;left:0;right:0;grid-template-columns:minmax(0,1fr) 72px minmax(0,1fr);column-gap:0;margin:0;pointer-events:none}
+  .rmt.two .stage{position:absolute;left:0;right:0;grid-template-columns:minmax(0,1fr) 80px minmax(0,1fr);column-gap:0;margin:0;pointer-events:none}
   .rmt.two .rmt-node,.rmt.two .rmt-card{pointer-events:auto}
   .rmt.two .rmt-node{grid-column:2}
   .rmt.two .r .rmt-card{grid-column:3}
   .rmt.two .l .rmt-card{grid-column:1}
   .rmt.two .l .rmt-node::after{left:auto;right:100%}
+  @media (prefers-reduced-motion:reduce){.rmt-prog i,.rmt .skills .sk::after,.rmt-node,.rmt-card{transition:none}}
   .ch-deep{margin-top:clamp(40px,6vw,64px)}
   .ch-deep-h h3{margin:0;font-size:clamp(22px,2.8vw,28px);font-weight:800;color:var(--ink)}
   .ch-deep-h p{margin:6px 0 0;font-size:15.5px;color:var(--ink-soft);max-width:60ch}
@@ -770,71 +829,148 @@
   .ch-exam p{margin:6px 0 0;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
   .ch-exam .gbtn{width:auto;padding:13px 22px}
 
-  /* roadmap rows: a checkbox to mark done, the rest opens the lesson */
-  .rmt .skills li{display:flex;align-items:flex-start;gap:2px;border-radius:12px}
-  .rmt .skills li:hover{background:var(--surface)}
-  .rmt .skills label.rmt-chk{flex:none;display:grid;place-items:center;width:40px;min-height:44px;padding:0;border-radius:10px;cursor:pointer}
-  .rmt .skills label.rmt-chk:hover{background:none}
-  .rmt .skills .rmt-chk input{margin:0}
-  .rmt .skills .sk{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;text-align:left;background:none;border:0;
-    padding:8px 34px 8px 2px;font:inherit;color:inherit;cursor:pointer;position:relative;border-radius:10px}
-  .rmt .skills .sk::after{content:"\203A";position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:24px;line-height:1;
-    color:var(--ink-faint);transition:transform .15s,color .15s}
-  .rmt .skills .sk:hover::after{color:var(--tone);transform:translate(3px,-50%)}
-  .rmt .skills .sk:hover .skt{color:var(--tone)}
-  .rmt .skills .sk:focus-visible{outline:2px solid var(--tone);outline-offset:2px}
-  .rmt .skills li:has(input:checked) .skt{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--line-strong)}
-  @media (prefers-reduced-motion:reduce){.rmt .skills .sk::after{transition:none}}
-
   /* ===== Lesson pages ===== */
-  .lz{max-width:800px;margin:0 auto;padding-top:clamp(20px,4vw,40px)}
-  .lz-back{background:none;border:0;padding:6px 0;font:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;min-height:40px}
+  .lz{max-width:1120px;margin:0 auto;padding-top:clamp(16px,3vw,32px)}
+  .lz-back{display:inline-flex;align-items:center;gap:8px;text-align:left;background:none;border:0;padding:6px 10px 6px 0;font:inherit;font-size:14px;font-weight:700;
+    color:var(--ink-soft);cursor:pointer;min-height:44px}
+  .lz-back .gi{width:16px;height:16px;transition:transform .15s}
   .lz-back:hover{color:var(--teal-ink)}
-  .lz .t1{--tone:var(--rt1);--tone-w:var(--rt1-w)} .lz .t2{--tone:var(--rt2);--tone-w:var(--rt2-w)}
-  .lz .t3{--tone:var(--rt3);--tone-w:var(--rt3-w)} .lz .t4{--tone:var(--rt4);--tone-w:var(--rt4-w)}
-  .lz .t5{--tone:var(--rt5);--tone-w:var(--rt5-w)}
-  .lz-head{margin-top:12px;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--tone,var(--teal));border-radius:20px;padding:clamp(20px,4vw,30px)}
-  .lz-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
-  .lz-stage{background:var(--tone);color:var(--on-rt);font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:8px}
+  .lz-back:hover .gi{transform:translateX(-3px)}
+  .lz.t1,.lz .t1{--tone:var(--rt1);--tone-w:var(--rt1-w)} .lz.t2,.lz .t2{--tone:var(--rt2);--tone-w:var(--rt2-w)}
+  .lz.t3,.lz .t3{--tone:var(--rt3);--tone-w:var(--rt3-w)} .lz.t4,.lz .t4{--tone:var(--rt4);--tone-w:var(--rt4-w)}
+  .lz.t5,.lz .t5{--tone:var(--rt5);--tone-w:var(--rt5-w)}
+  .lz-head{position:relative;margin-top:8px;padding:clamp(22px,4vw,40px);border-radius:24px;border:1px solid var(--line);
+    background:linear-gradient(135deg,var(--tone-w,var(--teal-wash)) 0%,var(--card) 72%)}
+  .lz-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+  .lz-stage{display:inline-flex;align-items:center;gap:4px;background:var(--tone,var(--teal));color:var(--on-rt);font-size:12px;font-weight:800;
+    padding:4px 11px;border-radius:99px;text-transform:uppercase;letter-spacing:.06em}
+  .lz-stage b{color:inherit;font-weight:800}
   .lz-stage-t{font-size:14px;font-weight:700;color:var(--ink-soft)}
-  .lz-head h2{margin:14px 0 0;font-size:clamp(28px,4.2vw,40px);font-weight:800;line-height:1.12;letter-spacing:-.02em;color:var(--ink)}
-  .lz-lead{margin:10px 0 0;font-size:17px;line-height:1.6;color:var(--ink-soft)}
-  .lz-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-faint)}
-  .lz-done{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:12px;
-    cursor:pointer;font-weight:800;font-size:14.5px;color:var(--ink);min-height:44px}
-  .lz-done input{width:19px;height:19px;accent-color:var(--good);margin:0}
-  .lz-done:has(input:checked){background:var(--good-wash);border-color:var(--good);color:var(--good-ink)}
-  .lz-sec{margin-top:32px}
-  .lz-sec h3{margin:0;font-size:22px;font-weight:800;color:var(--ink)}
-  .lz-sec p{margin:10px 0 0;font-size:16.5px;line-height:1.72;color:var(--ink-soft);max-width:68ch}
-  .lz-code{margin:14px 0 0;background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:16px 18px;overflow-x:auto;
-    font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;font-size:14px;line-height:1.6;white-space:pre}
-  .lz-why{background:var(--teal-wash);border-radius:18px;padding:20px 24px}
-  .lz-why h3{color:var(--teal-ink);font-size:18px}
-  .lz-why p{color:var(--ink)}
-  .lz-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+  .lz-head h2{margin:16px 0 0;font-size:clamp(30px,4.6vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.025em;color:var(--ink);max-width:30ch}
+  .lz-lead{margin:14px 0 0;font-size:clamp(16.5px,1.8vw,18.5px);line-height:1.6;color:var(--ink-soft);max-width:62ch}
+  .lz-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .lz-chip{display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:4px 12px;border-radius:99px;background:var(--card);
+    border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--ink-soft)}
+  .lz-chip .gi{width:15px;height:15px;color:var(--tone)}
+  .lz-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .lz-done{position:relative;display:inline-flex;align-items:center;gap:10px;padding:10px 18px 10px 12px;min-height:48px;border-radius:14px;cursor:pointer;
+    background:var(--tone);color:var(--on-rt);font-weight:800;font-size:15px;transition:background .2s,color .2s,box-shadow .2s;margin:0;border:0}
+  .lz-done input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+  .lz-done-box{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;border:2px solid currentColor}
+  .lz-done-box .gi{width:15px;height:15px;opacity:0;transform:scale(.6);transition:opacity .15s,transform .2s}
+  .lz-done-on{display:none}
+  .lz-done:has(input:checked){background:var(--good-wash);color:var(--good-ink);box-shadow:inset 0 0 0 1.5px var(--good)}
+  .lz-done:has(input:checked) .lz-done-box{background:var(--good);border-color:var(--good);color:var(--card)}
+  .lz-done:has(input:checked) .lz-done-box .gi{opacity:1;transform:none}
+  .lz-done:has(input:checked) .lz-done-off{display:none}
+  .lz-done:has(input:checked) .lz-done-on{display:inline}
+  .lz-done:has(input:focus-visible){outline:2px solid var(--tone);outline-offset:3px}
+  .lz-jumpbtn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:10px 16px;border-radius:14px;border:1px solid var(--line-strong);
+    background:var(--card);color:var(--ink);font:inherit;font-size:15px;font-weight:800;cursor:pointer;transition:border-color .15s}
+  .lz-jumpbtn .gi{width:17px;height:17px;color:var(--tone)}
+  .lz-jumpbtn:hover{border-color:var(--tone)}
+  .lz-jumpbtn:focus-visible,.lz-toc button:focus-visible,.lz-tr:focus-visible,.lz-copy:focus-visible,.lz-prev:focus-visible,.lz-next:focus-visible,.lz-back:focus-visible{outline:2px solid var(--tone,var(--teal));outline-offset:2px}
+
+  .lz-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;margin-top:4px}
+  .lz-body{min-width:0}
+  .lz-side{display:flex;flex-direction:column;gap:14px;min-width:0}
+  @media(min-width:1040px){
+    .lz-grid{grid-template-columns:minmax(0,1fr) 270px;gap:48px}
+    .lz-side{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding-top:40px}
+  }
+  @media(max-width:1039px){.lz-toc{display:none}}
+
+  .lz-sec{margin-top:40px;scroll-margin-top:24px}
+  .lz-sec h3,.lz-card h3{display:flex;align-items:center;gap:12px;margin:0;font-size:clamp(20px,2.2vw,24px);font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .lz-hic{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--card);color:var(--tone);box-shadow:inset 0 0 0 1px var(--line)}
+  .lz-hic .gi{width:20px;height:20px}
+  .lz-sec p{margin:14px 0 0;font-size:17px;line-height:1.75;color:var(--ink-soft);max-width:68ch}
+  .lz-codebox{margin:18px 0 0;border-radius:16px;overflow:hidden;background:var(--code-bg);border:1px solid var(--line)}
+  .lz-codebar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 8px 6px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .lz-lang-t{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;font-weight:700;color:#A7AED0}
+  .lz-lang-t .gi{width:14px;height:14px}
+  .lz-copy{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 12px;border-radius:10px;border:0;background:rgba(255,255,255,.07);
+    color:var(--code-ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .lz-copy:hover{background:rgba(255,255,255,.14)}
+  .lz-copy .gi{width:14px;height:14px}
+  .lz-code{margin:0;padding:16px 18px 18px;background:none;color:var(--code-ink);overflow-x:auto;
+    font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;font-size:14px;line-height:1.65;white-space:pre;border-radius:0}
+  .lz-why{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--tone);border-radius:20px;padding:24px 26px}
+  .lz-why .lz-hic,.lz-card .lz-hic{box-shadow:none}
+  .lz-why .lz-hic{background:var(--tone-w)}
+  .lz-why p{color:var(--ink);font-size:17.5px}
+  .lz-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:40px;scroll-margin-top:24px}
   @media(max-width:700px){.lz-pair{grid-template-columns:1fr}}
-  .lz-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
-  .lz-card h3{margin:0 0 8px;font-size:17px;font-weight:800}
-  .lz-mis h3{color:var(--clay-ink)}
+  .lz-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px}
+  .lz-card h3{font-size:18px}
+  .lz-mis .lz-hic{background:var(--clay-wash);color:var(--clay-ink)}
+  .lz-try .lz-hic{background:var(--good-wash);color:var(--good-ink)}
   .lz-try{border-color:var(--good)}
-  .lz-try h3{color:var(--good-ink)}
-  .lz-mis ul{margin:0;padding-left:18px;display:grid;gap:8px}
-  .lz-mis li,.lz-try p{font-size:15px;line-height:1.6;color:var(--ink)}
-  .lz-try p{margin:0}
-  .lz-terms dl{margin:12px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
-  .lz-terms dl>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  .lz-mis ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+  .lz-mis li{position:relative;padding-left:22px;font-size:15.5px;line-height:1.6;color:var(--ink)}
+  .lz-mis li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;border-radius:2px;background:var(--clay);transform:rotate(45deg)}
+  .lz-try p{margin:14px 0 0;font-size:15.5px;line-height:1.6;color:var(--ink)}
+  .lz-terms dl{margin:16px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+  .lz-terms dl>div{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--tone);border-radius:14px;padding:14px 16px}
   .lz-terms dt{font-weight:800;color:var(--ink);font-size:15.5px}
   .lz-terms dd{margin:4px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
-  .lz-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:36px 0 28px}
+
+  .lz-res{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,28px)}
+  .lz-res .lz-res-note{margin-top:8px;font-size:15.5px;line-height:1.6}
+  .lz-res-g{margin-top:20px}
+  .lz-res-h{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .lz-res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:10px}
+  .lz-rc{display:flex;align-items:center;gap:12px;min-height:66px;padding:12px 14px;border-radius:14px;background:var(--card);border:1px solid var(--line);
+    text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s,box-shadow .15s}
+  .lz-rc:hover{border-color:var(--tone);box-shadow:var(--shade-lg);transform:translateY(-1px)}
+  .lz-rc:focus-visible{outline:2px solid var(--tone);outline-offset:2px}
+  .lz-rc-ic{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--teal-wash);color:var(--teal-ink)}
+  .lz-rc.vid .lz-rc-ic{background:var(--clay-wash);color:var(--clay-ink)}
+  .lz-rc-ic .gi{width:20px;height:20px}
+  .lz-rc-b{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+  .lz-rc-t{font-size:15px;font-weight:800;line-height:1.3}
+  .lz-rc-s{display:flex;align-items:center;gap:8px;min-width:0;font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+  .lz-host,.lz-q{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .lz-lang{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:1px 6px;border-radius:6px;background:var(--surface);border:1px solid var(--line);color:var(--ink-soft)}
+  .lz-rc-x{width:16px;height:16px;color:var(--ink-faint)}
+  .lz-rc:hover .lz-rc-x{color:var(--tone)}
+
+  .lz-box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+  .lz-box-h{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .lz-box-h .gi{width:15px;height:15px;color:var(--tone)}
+  .lz-toc ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:2px}
+  .lz-toc button{display:block;width:100%;text-align:left;background:none;border:0;border-left:2px solid var(--line);padding:8px 12px;font:inherit;
+    font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;min-height:40px;border-radius:0 8px 8px 0;transition:color .15s,border-color .15s}
+  .lz-toc button:hover,.lz-toc button.on{color:var(--tone);border-left-color:var(--tone)}
+  .lz-toc button.on{background:var(--tone-w)}
+  .lz-track ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:2px}
+  .lz-tr{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;padding:8px;border-radius:10px;font:inherit;
+    font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;min-height:44px}
+  button.lz-tr:hover{background:var(--surface);color:var(--ink)}
+  .lz-track .cur .lz-tr{background:var(--tone-w);color:var(--ink);cursor:default}
+  .lz-tk{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid var(--line-strong);font-size:12px;font-weight:800;color:var(--ink-soft)}
+  .lz-tk i:not(.gi){font-style:normal;line-height:1}
+  .lz-tk .lz-tk-ok{display:none;width:14px;height:14px}
+  .lz-track .cur .lz-tk{border-color:var(--tone);color:var(--tone)}
+  .lz-track li.done .lz-tk{background:var(--tone);border-color:var(--tone);color:var(--on-rt)}
+  .lz-track li.done .lz-tk i:not(.gi){display:none}
+  .lz-track li.done .lz-tk-ok{display:block}
+  .lz-tt{min-width:0;line-height:1.35}
+
+  .lz-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:48px 0 32px}
   @media(max-width:560px){.lz-nav{grid-template-columns:1fr}}
-  .lz-prev,.lz-next{display:flex;flex-direction:column;gap:2px;background:var(--card);border:1px solid var(--line-strong);border-radius:14px;
-    padding:14px 16px;font:inherit;cursor:pointer;color:var(--ink);min-height:64px;text-align:left}
-  .lz-next{grid-column:2;text-align:right;align-items:flex-end}
+  .lz-prev,.lz-next{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;
+    font:inherit;cursor:pointer;color:var(--ink);min-height:76px;text-align:left;transition:border-color .15s,box-shadow .15s}
+  .lz-next{grid-column:2;justify-content:flex-end;text-align:right}
   @media(max-width:560px){.lz-next{grid-column:auto}}
-  .lz-prev:hover,.lz-next:hover{border-color:var(--teal)}
-  .lz-nl{font-size:12.5px;font-weight:800;color:var(--ink-faint)}
-  .lz-nt{font-size:15.5px;font-weight:800;color:var(--teal-ink)}
+  .lz-prev:hover,.lz-next:hover{border-color:var(--tone,var(--teal));box-shadow:var(--shade-lg)}
+  .lz-nb{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .lz-na{width:20px;height:20px;color:var(--tone,var(--teal));transition:transform .15s}
+  .lz-prev:hover .lz-na{transform:translateX(-3px)}
+  .lz-next:hover .lz-na{transform:translateX(3px)}
+  .lz-nl{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .lz-nt{font-size:16px;font-weight:800;color:var(--ink)}
+  @media (prefers-reduced-motion:reduce){.lz-rc,.lz-back .gi,.lz-na,.lz-done,.lz-done-box .gi,.lz-toc button{transition:none}.lz-rc:hover{transform:none}}
 
   /* ===== Start here guide ===== */
   .sg{max-width:1080px;padding-top:clamp(20px,4vw,40px)}
@@ -2220,9 +2356,10 @@
 <div class="progcard" data-scope="rm-fundamentals"><div class="pt"><span>Your progress</span><b><span class="ppct">0</span>%</b></div><div class="bar"><i class="pbar"></i></div></div>
 <div class="rmt" id="rm-fundamentals">
 <div class="stage rmt-st t1 r" data-stage="1">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">01</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">01</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">What a computer is</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 01</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~4 days</span></span></div><h3 class="rmt-bar"><span class="st">What a computer is</span></h3></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Know the parts of a computer and what each one does, in plain words.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu1a" aria-labelledby="lt-fu1a"></label><button type="button" class="sk" data-lesson="fu1a"><span class="skt" id="lt-fu1a">Hardware, the parts you can touch</span><span class="sub">The CPU is the cook, RAM is the counter, storage is the pantry. Screen, keyboard and mouse are hardware too.</span></button></li>
@@ -2231,16 +2368,17 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu1d" aria-labelledby="lt-fu1d"></label><button type="button" class="sk" data-lesson="fu1d"><span class="skt" id="lt-fu1d">What running a program means</span><span class="sub">Fetch, decode, execute, repeat, billions of times a second. Every app is a pile of tiny steps like that.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu1e" aria-labelledby="lt-fu1e"></label><button type="button" class="sk" data-lesson="fu1e"><span class="skt" id="lt-fu1e">The operating system's job</span><span class="sub">It shares the CPU between programs, manages memory, owns your files and talks to the hardware for the apps.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Open Task Manager (Ctrl+Shift+Esc on Windows) or Activity Monitor on Mac. Find the three programs using the most memory and write what each one is.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Open Task Manager (Ctrl+Shift+Esc on Windows) or Activity Monitor on Mac. Find the three programs using the most memory and write what each one is.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://www.khanacademy.org/computing/computers-and-internet" target="_blank" rel="noopener">Khan Academy: Computers and the Internet</a>
-<a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener">Crash Course Computer Science (videos)</a>
+<a href="https://www.khanacademy.org/computing/computers-and-internet" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Khan Academy: Computers and the Internet</span></a>
+<a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener" class="vid"><i class="gi gi-play ic" aria-hidden="true"></i><span>Crash Course Computer Science (videos)</span></a>
 </div></div>
 </div></div>
 <div class="stage rmt-st t2 l" data-stage="2">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">02</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">02</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Files, folders and your tools</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/6</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 02</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~4 days</span></span></div><h3 class="rmt-bar"><span class="st">Files, folders and your tools</span></h3></div><span class="cnt" data-cnt>0/6</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Get comfortable with the tools every developer uses before any code appears.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu2a" aria-labelledby="lt-fu2a"></label><button type="button" class="sk" data-lesson="fu2a"><span class="skt" id="lt-fu2a">Files, folders and extensions</span><span class="sub">What .html, .css, .js and .py mean, and why the part after the dot decides how a file is read.</span></button></li>
@@ -2250,16 +2388,17 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu2f" aria-labelledby="lt-fu2f"></label><button type="button" class="sk" data-lesson="fu2f"><span class="skt" id="lt-fu2f">Saving versions with Git</span><span class="sub">Git keeps snapshots of your work like save points in a game, and GitHub keeps them online.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu2e" aria-labelledby="lt-fu2e"></label><button type="button" class="sk" data-lesson="fu2e"><span class="skt" id="lt-fu2e">Touch typing</span><span class="sub">Ten minutes a day for a month. If you look at the keys, everything takes twice as long.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Make a folder called code, open it in VS Code, create index.html with the word Hello, save it and open it in the browser. Then list the folder from the terminal.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Make a folder called code, open it in VS Code, create index.html with the word Hello, save it and open it in the browser. Then list the folder from the terminal.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://code.visualstudio.com/docs/introvideos/basics" target="_blank" rel="noopener">VS Code: Getting started videos</a>
-<a href="https://www.typing.com/" target="_blank" rel="noopener">Typing.com (free typing lessons)</a>
+<a href="https://code.visualstudio.com/docs/introvideos/basics" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>VS Code: Getting started videos</span></a>
+<a href="https://www.typing.com/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Typing.com (free typing lessons)</span></a>
 </div></div>
 </div></div>
 <div class="stage rmt-st t3 r" data-stage="3">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">03</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">03</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">The internet and the web</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 03</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~4 days</span></span></div><h3 class="rmt-bar"><span class="st">The internet and the web</span></h3></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Understand what really happens between your phone and a website, and how to stay safe.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu3a" aria-labelledby="lt-fu3a"></label><button type="button" class="sk" data-lesson="fu3a"><span class="skt" id="lt-fu3a">Internet versus the web</span><span class="sub">The internet is the roads, the web is one thing that drives on them. Email and video calls use the roads too.</span></button></li>
@@ -2268,16 +2407,17 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu3d" aria-labelledby="lt-fu3d"></label><button type="button" class="sk" data-lesson="fu3d"><span class="skt" id="lt-fu3d">Frontend, backend and servers</span><span class="sub">What you see, the engine you never see, and the always-on computer it runs on. The cloud is rented servers.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu3e" aria-labelledby="lt-fu3e"></label><button type="button" class="sk" data-lesson="fu3e"><span class="skt" id="lt-fu3e">Staying safe online</span><span class="sub">What HTTPS protects, why reusing passwords is the real danger, and why two-factor login beats a clever password.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Press F12 on any website, open the Network tab and reload. Count the requests and find the biggest file the page downloaded.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Press F12 on any website, open the Network tab and reload. Count the requests and find the biggest file the page downloaded.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works" target="_blank" rel="noopener">MDN: How the web works</a>
-<a href="https://roadmap.sh/guides/what-is-internet" target="_blank" rel="noopener">roadmap.sh: How the internet works</a>
+<a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>MDN: How the web works</span></a>
+<a href="https://roadmap.sh/guides/what-is-internet" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>roadmap.sh: How the internet works</span></a>
 </div></div>
 </div></div>
 <div class="stage rmt-st t4 l" data-stage="4">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">04</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">04</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Thinking like a programmer</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~1 week</span></div></div><span class="cnt" data-cnt>0/6</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 04</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~1 week</span></span></div><h3 class="rmt-bar"><span class="st">Thinking like a programmer</span></h3></div><span class="cnt" data-cnt>0/6</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Learn the handful of ideas that every program in every language is built from.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu4a" aria-labelledby="lt-fu4a"></label><button type="button" class="sk" data-lesson="fu4a"><span class="skt" id="lt-fu4a">Sequence: order is everything</span><span class="sub">The computer does exactly what you said, in exactly the order you said it, and nothing else.</span></button></li>
@@ -2287,16 +2427,17 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu4e" aria-labelledby="lt-fu4e"></label><button type="button" class="sk" data-lesson="fu4e"><span class="skt" id="lt-fu4e">Breaking a big problem into small ones</span><span class="sub">Build Instagram is impossible, show one photo is an afternoon. The most valuable skill in this academy.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu4f" aria-labelledby="lt-fu4f"></label><button type="button" class="sk" data-lesson="fu4f"><span class="skt" id="lt-fu4f">Abstraction: standing on other people's work</span><span class="sub">You drive without knowing the engine. You will code on top of layers you did not write, and that is fine.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Solve the first five levels of Logic Lab. Level five needs a function, so find the repeating pattern and give it a name.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Solve the first five levels of Logic Lab. Level five needs a function, so find the repeating pattern and give it a name.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener">Harvard CS50 (free course)</a>
-<a href="https://scratch.mit.edu/" target="_blank" rel="noopener">Scratch: try logic with blocks</a>
+<a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Harvard CS50 (free course)</span></a>
+<a href="https://scratch.mit.edu/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Scratch: try logic with blocks</span></a>
 </div></div>
 </div></div>
 <div class="stage rmt-st t5 r" data-stage="5">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">05</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">05</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Computer science basics</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~1 week</span></div></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 05</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~1 week</span></span></div><h3 class="rmt-bar"><span class="st">Computer science basics</span></h3></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Meet the ideas first-year computer science tests you on, explained without scary words.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu5a" aria-labelledby="lt-fu5a"></label><button type="button" class="sk" data-lesson="fu5a"><span class="skt" id="lt-fu5a">Data structures</span><span class="sub">List, dictionary, stack and queue. Where you put things decides how fast you find them. Undo is a stack.</span></button></li>
@@ -2305,16 +2446,17 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu5d" aria-labelledby="lt-fu5d"></label><button type="button" class="sk" data-lesson="fu5d"><span class="skt" id="lt-fu5d">Reading an error message</span><span class="sub">It names the file, the line and the problem. Beginners panic at red text, professionals read it.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu5e" aria-labelledby="lt-fu5e"></label><button type="button" class="sk" data-lesson="fu5e"><span class="skt" id="lt-fu5e">How AI tools like ChatGPT work</span><span class="sub">They predict the next word from patterns in huge amounts of text. Useful for learning, and often confidently wrong.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Write the exact steps to make breakfast so someone who never did it could follow them. Then ask an AI assistant to find a missing step and check if it is right.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Write the exact steps to make breakfast so someone who never did it could follow them. Then ask an AI assistant to find a missing step and check if it is right.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://roadmap.sh/computer-science" target="_blank" rel="noopener">roadmap.sh: Computer Science roadmap</a>
-<a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a>
+<a href="https://roadmap.sh/computer-science" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>roadmap.sh: Computer Science roadmap</span></a>
+<a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Khan Academy: Algorithms</span></a>
 </div></div>
 </div></div>
 <div class="stage rmt-st t1 l" data-stage="6">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">06</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">06</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">The tech field and where you fit</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~4 days</span></div></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 06</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~4 days</span></span></div><h3 class="rmt-bar"><span class="st">The tech field and where you fit</span></h3></div><span class="cnt" data-cnt>0/5</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Know which jobs exist, what their days look like, and which one to try first.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu6a" aria-labelledby="lt-fu6a"></label><button type="button" class="sk" data-lesson="fu6a"><span class="skt" id="lt-fu6a">The jobs that actually exist</span><span class="sub">Frontend, backend, data, automation, security, AI, cloud, design, QA and IT support, and what their days look like.</span></button></li>
@@ -2323,15 +2465,16 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu6e" aria-labelledby="lt-fu6e"></label><button type="button" class="sk" data-lesson="fu6e"><span class="skt" id="lt-fu6e">What AI changes about these jobs</span><span class="sub">AI writes more of the routine code. People who understand the basics and can check its work become more valuable, not less.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu6d" aria-labelledby="lt-fu6d"></label><button type="button" class="sk" data-lesson="fu6d"><span class="skt" id="lt-fu6d">Take the free path quiz</span><span class="sub">Six questions, and the academy suggests where to start based on your answers.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Pick the two jobs that sound most like you. Watch a day-in-the-life video of a real person doing each one and write one thing that surprised you.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Pick the two jobs that sound most like you. Watch a day-in-the-life video of a real person doing each one and write one thing that surprised you.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://roadmap.sh/" target="_blank" rel="noopener">roadmap.sh: every career roadmap</a>
+<a href="https://roadmap.sh/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>roadmap.sh: every career roadmap</span></a>
 </div></div>
 </div></div>
 <div class="stage rmt-st t2 r" data-stage="7">
-<div class="rmt-node" aria-hidden="true"><i></i></div>
+<div class="rmt-node" aria-hidden="true"><span class="rmt-n">07</span><i class="gi gi-check rmt-ok" aria-hidden="true"></i></div>
 <div class="rmt-card">
-<div class="rmt-head"><span class="rmt-num" aria-hidden="true">07</span><div class="rmt-titles"><h3 class="rmt-bar"><span class="st">Ready for what comes next</span></h3><div class="rmt-meta"><span class="lv">Beginner</span><span>~1 week</span></div></div><span class="cnt" data-cnt>0/6</span></div>
+<div class="rmt-head"><div class="rmt-titles"><div class="rmt-meta"><span class="rmt-k"><span>Stage</span> 07</span><span class="lv">Beginner</span><span class="rmt-w"><i class="gi gi-clock ic" aria-hidden="true"></i><span>~1 week</span></span></div><h3 class="rmt-bar"><span class="st">Ready for what comes next</span></h3></div><span class="cnt" data-cnt>0/6</span></div>
+<div class="rmt-prog" aria-hidden="true"><i></i></div>
 <p class="rmt-goal">Build the habits that decide whether you finish a course or quit halfway.</p>
 <ul class="skills">
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu7a" aria-labelledby="lt-fu7a"></label><button type="button" class="sk" data-lesson="fu7a"><span class="skt" id="lt-fu7a">The maths that actually shows up</span><span class="sub">Logic and truth tables, basic algebra, percentages and a little probability. Matrices and calculus only for AI or graphics.</span></button></li>
@@ -2341,10 +2484,10 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu7d" aria-labelledby="lt-fu7d"></label><button type="button" class="sk" data-lesson="fu7d"><span class="skt" id="lt-fu7d">How to be stuck without quitting</span><span class="sub">Stuck is the normal state of the job, not a sign you are failing. Panicking about it is what makes people quit.</span></button></li>
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu7e" aria-labelledby="lt-fu7e"></label><button type="button" class="sk" data-lesson="fu7e"><span class="skt" id="lt-fu7e">Write one small program</span><span class="sub">Anything at all. The students who struggle most are the ones for whom everything is new at once.</span></button></li>
 </ul>
-<div class="rmt-do"><b>Build this</b><p>Solve challenge 1 in Code Lab. It takes about a minute, and you will have written and run real code.</p></div>
+<div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Solve challenge 1 in Code Lab. It takes about a minute, and you will have written and run real code.</p></div></div>
 <div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
-<a href="https://www.khanacademy.org/math/algebra-basics" target="_blank" rel="noopener">Khan Academy: Algebra basics</a>
-<a href="https://www.freecodecamp.org/news/how-to-ask-good-technical-questions/" target="_blank" rel="noopener">freeCodeCamp: How to ask good questions</a>
+<a href="https://www.khanacademy.org/math/algebra-basics" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Khan Academy: Algebra basics</span></a>
+<a href="https://www.freecodecamp.org/news/how-to-ask-good-technical-questions/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>freeCodeCamp: How to ask good questions</span></a>
 </div></div>
 </div></div>
 </div>
@@ -3828,6 +3971,11 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         var done=0;ins.forEach(function(i){if(i.checked)done++;});
         var cnt=st.querySelector('[data-cnt]');
         if(cnt)cnt.textContent=done+'/'+ins.length;
+        if(st.classList.contains('rmt-st')){
+          st.style.setProperty('--pct',(ins.length?Math.round(done/ins.length*100):0)+'%');
+          st.classList.toggle('done',ins.length>0&&done===ins.length);
+          st.classList.toggle('started',done>0&&done<ins.length);
+        }
       });
       document.querySelectorAll('.progcard').forEach(function(pc){
         var scope=document.getElementById(pc.getAttribute('data-scope'))||document;
@@ -4313,6 +4461,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     function setLessonDone(id,on){
       saved[id]=on;persist();
       document.querySelectorAll('.skills input[data-id="'+id+'"],input[data-lesson-done="'+id+'"]').forEach(function(b){b.checked=on;});
+      document.querySelectorAll('#lesson-area [data-track="'+id+'"]').forEach(function(li){li.classList.toggle('done',on);});
       refresh();
       if(on)awardXP(10,'Lesson done','lessons');
     }
@@ -4322,6 +4471,34 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         b.checked=!!saved[id];
         b.addEventListener('change',function(){setLessonDone(id,b.checked);});
       });
+      root.querySelectorAll('[data-track]').forEach(function(li){li.classList.toggle('done',!!saved[li.getAttribute('data-track')]);});
+      var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      root.querySelectorAll('[data-jump]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var t=document.getElementById(b.getAttribute('data-jump'));if(!t)return;
+          t.scrollIntoView({behavior:calm?'auto':'smooth',block:'start'});
+          if(!t.hasAttribute('tabindex'))t.setAttribute('tabindex','-1');
+          try{t.focus({preventScroll:true});}catch(e){}
+        });
+      });
+      root.querySelectorAll('[data-copy]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var pre=b.closest('.lz-codebox');pre=pre&&pre.querySelector('pre');if(!pre)return;
+          var lab=b.querySelector('span'),done=function(){if(!lab)return;lab.textContent='Copied';setTimeout(function(){lab.textContent='Copy';},1600);};
+          if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(pre.textContent).then(done,function(){});
+        });
+      });
+      var toc=root.querySelectorAll('.lz-toc [data-jump]');
+      if(toc.length&&'IntersectionObserver' in window){
+        var marks={};toc.forEach(function(b){marks[b.getAttribute('data-jump')]=b;});
+        var io=new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if(!en.isIntersecting)return;
+            toc.forEach(function(b){b.classList.toggle('on',b===marks[en.target.id]);});
+          });
+        },{rootMargin:'-20% 0px -70% 0px'});
+        Object.keys(marks).forEach(function(k){var el=document.getElementById(k);if(el)io.observe(el);});
+      }
     }
     function lessonShell(route,inner){
       var c=courseForRoute(route);
@@ -6855,6 +7032,19 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* roadmap and lesson redesign */
+      "Completed":"Completada",
+      "In this stage":"En esta etapa",
+      "Learn more":"Aprende más",
+      "Hand-picked documentation and videos to go deeper on this topic.":"Documentación y videos elegidos para profundizar en este tema.",
+      "Documentation":"Documentación",
+      "Videos":"Videos",
+      "Videos in Spanish":"Videos en español",
+      "Videos in English":"Videos en inglés",
+      "Resources":"Recursos",
+      "Copied":"Copiado",
+      "Mistakes and practice":"Errores y práctica",
+
       /* lesson pages */
       "Stage":"Etapa",
       "Mark as done":"Marcar como hecha",

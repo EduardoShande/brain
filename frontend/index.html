@@ -2785,7 +2785,7 @@
   <!-- ===================== FOR SCHOOLS ===================== -->
   <div class="page" id="page-ready">
     <div class="phead">
-      <button class="back" data-goto="academy">← Courses</button>
+      <button class="back" id="ready-back" type="button">← Courses</button>
       <div class="pn">Before university</div>
       <h2>Arrive at university knowing what you chose</h2>
       <p class="pd">Most people choose a degree at 17 from a job title and a salary someone mentioned. A few months later, a third change course or drop out. The answer is not to skip university, it is to arrive prepared: with the field already explored and the basics already in your hands.</p>
@@ -2841,6 +2841,7 @@
       <div class="eyebrow">04 · Start now</div>
       <h3>The best moment to prepare is before, not after</h3>
       <p class="lead">Every year of studying without a direction is a year of your life and of your family's money. A few weeks now change that.</p>
+      <div class="cc-actions" style="margin-top:16px"><button data-goto="path">Take the path quiz &rarr;</button><button data-goto="fundamentals">Open Foundations &rarr;</button></div>
       <div class="pfoot"><b>Where to start:</b> create an account, take the path quiz and open Foundations. Both cost nothing, in Spanish and English, on the phone or on a computer. If you want to bring Brain Academy to a group of students, write to us from the Community page.</div>
     </section>
   </div>
@@ -3858,8 +3859,13 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
     })();
 
+    /* pages a signed-out visitor may open from the landing page */
+    var PREVIEW_PAGES=['start','path','ready'];
     function showPage(name){
       if(pages.indexOf(name)<0)name='home';
+      /* while previewing, any link into the app asks for an account instead
+         of dropping a signed-out visitor into an empty dashboard */
+      if(document.body.classList.contains('preview')&&PREVIEW_PAGES.indexOf(name)<0){exitPreview();lpOpenAuth('register');return;}
       if(name==='lesson'&&!LESSON_ID)name='academy';
       pages.forEach(function(p){
         var el=document.getElementById('page-'+p);
@@ -5428,7 +5434,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
     function openPreview(name){document.body.classList.add('preview');showPage(name);window.scrollTo(0,0);}
     function openQuizPreview(){openPreview('path');}
-    function exitPreview(){document.body.classList.remove('preview');applyGate();window.scrollTo(0,0);}
+    /* leaving a preview also drops the page from the address bar, so the
+       URL matches the landing page the visitor is looking at */
+    function exitPreview(){document.body.classList.remove('preview');applyGate();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}window.scrollTo(0,0);}
 
     /* =========================================================
        HTML tag library: 100 tags, searchable
@@ -7042,6 +7050,14 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* courses page rows */
+      "Official courses and certificates":"Cursos oficiales y certificados",
+      "42 courses from Google, Meta, Amazon, Microsoft, IBM and Cisco, sorted by topic.":"42 cursos de Google, Meta, Amazon, Microsoft, IBM y Cisco, ordenados por tema.",
+
+      /* before university page CTAs */
+      "Take the path quiz →":"Haz el test de rumbo →",
+      "Open Foundations →":"Abre Fundamentos →",
+
       /* before university page and home copy */
       "Brain Academy":"Brain Academy",
       "Working engineers in Santa Cruz who build software and automation for clients in Bolivia and the United States.":"Ingenieros en ejercicio en Santa Cruz que construyen software y automatización para clientes en Bolivia y Estados Unidos.",
@@ -7632,7 +7648,6 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       "A stack of books":"Una pila de libros",
       "Core":"Esencial","Applied":"Aplicado",
       /* ===== Redesign: landing page ===== */
-      "Free for high school students in":"Gratis para estudiantes de colegio en",
       ", in Spanish and English.":", en español y en inglés.",
       "Site":"Sitio","Footer":"Pie de página","Course level":"Nivel del curso","Close":"Cerrar",
       "Home":"Inicio","About us":"Sobre nosotros",
@@ -7662,10 +7677,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       "Curious":"Curioso","Learner":"Aprendiz","Coder":"Programador","Developer":"Desarrollador",
       "Craftsman":"Artesano","Architect":"Arquitecto","Legend":"Leyenda",
       "Real practice":"Práctica real","Free for students":"Gratis para estudiantes","Spanish and English":"Español e inglés",
-      "Bring Brain Academy to <span class=\"lp-hl\">your school.</span>":"Lleva Brain Academy a <span class=\"lp-hl\">tu colegio.</span>",
       "A 60 to 90 minute session with a working engineer, and a platform every student keeps using afterwards.":
         "Una sesión de 60 a 90 minutos con un ingeniero en ejercicio, y una plataforma que cada estudiante sigue usando después.",
-      "See the workshop":"Ver el taller",
       /* ===== attribute text: menu, form fields, badge and quest labels ===== */
       "Open menu":"Abrir menú",
       "my code doesnt work":"mi codigo no funciona",
@@ -8837,7 +8850,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         "Ingeniero de IA es el puesto que más rápido crece; ingeniería de IA, prompting y ajuste son las habilidades más buscadas.",
       "pick stage 4 on the Automation page and build one real agent this month. That single project puts you on the exact curve every source above is pointing at.":
         "elige la etapa 4 de la página de Automatización y construye un agente real este mes. Ese solo proyecto te pone justo en la curva a la que apuntan todas las fuentes de arriba.",
-      /* ===== Home, schools, web tools, personal pages ===== */
+      /* ===== Home, web tools, personal pages ===== */
       "Job funds the runway · company is the leverage":
         "El trabajo financia la pista · la empresa es el apalancamiento",
       "All roadmaps →":"Todas las rutas →",
@@ -8865,13 +8878,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         "Dos cosas salen mal, y las dos pasan antes del primer día",
       "They choose blind":"Eligen a ciegas","They arrive unprepared":"Llegan sin preparación",
       "Code they wrote themselves":"Código que escribieron ellos mismos",
-      "04 · Who is running it":"04 · Quién lo dirige",
-      "The problem":"El problema","What we do":"Qué hacemos","How it works":"Cómo funciona","Who I am":"Quién soy",
-      "1. The session at your school":"1. La sesión en tu colegio","In person":"Presencial",
-      "2. The platform they take home":"2. La plataforma que se llevan a casa",
-      "Free to start":"Gratis para empezar",
-      "If you run a school, teach a class, or you are a parent who wants this for your child, get in touch and we will find a date. The session is free for schools in Santa Cruz while the programme is starting.":
-        "Si diriges un colegio, das clases, o eres un padre que quiere esto para su hijo, escríbenos y buscamos una fecha. La sesión es gratuita para colegios de Santa Cruz mientras el programa está arrancando.",
+      "The problem":"El problema","What we do":"Qué hacemos","How it works":"Cómo funciona",
       "AI site builders &amp; no-code tools":"Constructores de sitios con IA y herramientas no-code",
       "→ Code it":"→ Prográmalo",
       "Logins, dashboards, calculations, anything unique. Builders will fight you.":
@@ -11427,7 +11434,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       [/^You are level (\d+), (.+), with (\d+) lessons behind you\. Pick up where you stopped\.$/, function(m){
         return 'Vas en el nivel '+m[1]+', '+(trBase(m[2])||m[2])+', con '+m[3]+' lecciones ya hechas. Sigue donde lo dejaste.';}],
       [/^(\d+) XP total, (\d+) of 100 to level (\d+)(.*)$/, function(m){
-        return m[1]+' XP en total, '+m[2]+' de 100 para el nivel '+m[3]+(trBase(m[4].trim())||m[4]);}],
+        var tail=m[4].trim();
+        return m[1]+' XP en total, '+m[2]+' de 100 para el nivel '+m[3]+(tail?' '+(tr(tail)||tail):'');}],
       [/^(\d+) \/ 100 XP to level (\d+)$/, function(m){
         return m[1]+' / 100 XP para el nivel '+m[2];}],
       [/^level (\d+), (.+)$/, function(m){
@@ -11749,6 +11757,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     var _pb=document.getElementById('path-back');if(_pb)_pb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});
     var _gq=document.getElementById('gate-quiz');if(_gq)_gq.addEventListener('click',openQuizPreview);
     var _sb=document.getElementById('start-back');if(_sb)_sb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('home');});
+    var _rb=document.getElementById('ready-back');if(_rb)_rb.addEventListener('click',function(){if(document.body.classList.contains('preview'))exitPreview();else showPage('academy');});
     var _gs=document.getElementById('gate-start');if(_gs)_gs.addEventListener('click',function(){openPreview('start');});
   })();
 </script>

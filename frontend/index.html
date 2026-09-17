@@ -482,7 +482,7 @@
      Public landing page, after EduLe and The Planner: top strip,
      white nav, hero with an illustration and stat cards, a wave
      into the course catalogue with level tabs, icon badges, a
-     schools band, and the sign-in form in a dialog.
+     before-university band, and the sign-in form in a dialog.
   ========================================================= */
   #gate{position:fixed;inset:0;z-index:150;display:none;overflow:auto;background:var(--bg);scroll-behavior:smooth}
   body.locked #gate{display:block}
@@ -565,23 +565,10 @@
   .lp-hero{scroll-margin-top:74px}
   .lp-sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:24px}
   .lp-sec h2{margin-top:8px;font-size:clamp(26px,3.2vw,36px);font-weight:800;color:var(--ink);letter-spacing:-.015em;line-height:1.18}
-  .lp-search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:4px 4px 4px 14px;width:min(340px,100%)}
-  .lp-search input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:14.5px;color:var(--ink);outline:none;padding:8px 0}
-  .lp-search input::placeholder{color:var(--ink-faint)}
-  .lp-search span{flex:none;width:38px;height:38px;border-radius:9px;background:var(--teal-wash);color:var(--teal-ink);display:grid;place-items:center}
-  .lp-search span svg{width:17px;height:17px}
-  .lp-search:focus-within{border-color:var(--teal)}
-  .lp-tabs{display:flex;gap:10px;flex-wrap:wrap;background:var(--teal-wash);padding:16px;border-radius:16px;margin-bottom:26px}
-  .lp-tab{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);font:inherit;font-weight:700;font-size:14px;
-    padding:10px 20px;border-radius:10px;cursor:pointer}
-  .lp-tab:hover{color:var(--ink);border-color:var(--line-strong)}
-  .lp-tab[aria-selected="true"]{border-color:var(--teal);color:var(--teal-ink);box-shadow:inset 0 0 0 1px var(--teal)}
-
   .lp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
   @media(max-width:980px){.lp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:620px){.lp-grid{grid-template-columns:1fr}}
-  .lpcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;
+  .lpcard{display:flex;flex-direction:column;width:100%;text-align:left;font:inherit;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;
     transition:transform .15s,box-shadow .15s}
   .lpcard:hover{transform:translateY(-4px);box-shadow:var(--shade-lg)}
   .lpcard[hidden]{display:none}
@@ -596,19 +583,21 @@
   .lpc-by i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--grad);color:var(--on-teal);display:grid;place-items:center;
     font-style:normal;font-size:11px;font-weight:800}
   .lpc-lv{flex:none;font-size:12px;font-weight:700;color:var(--clay-ink);background:var(--clay-wash);padding:4px 10px;border-radius:7px}
-  .lpcard h3{margin:12px 4px 0;font-size:16.5px;font-weight:800;line-height:1.3;color:var(--ink)}
-  .lpcard p{margin:6px 4px 0;font-size:13.5px;line-height:1.55;color:var(--ink-soft)}
+  .lpc-t{display:block;margin:12px 4px 0;font-size:16.5px;font-weight:800;line-height:1.3;color:var(--ink)}
+  .lpc-d{display:block;margin:6px 4px 0;font-size:13.5px;line-height:1.55;color:var(--ink-soft)}
+  .lpcard:hover .lpc-t{color:var(--teal-ink)}
+  .lpcard:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
   .lpc-row{display:flex;justify-content:space-between;gap:10px;margin:14px 4px 14px;font-size:13px;font-weight:600;color:var(--ink-soft)}
   .lpc-row>span{display:inline-flex;align-items:center;gap:6px}
   .lpc-row svg{width:15px;height:15px;color:var(--teal-ink)}
   .lpc-foot{margin-top:auto;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;
     background:var(--teal-wash);border-radius:12px}
   .lpc-foot b{font-size:17px;font-weight:800;color:var(--teal-ink)}
-  .lpc-foot button{border:0;background:none;font:inherit;font-weight:700;font-size:13.5px;color:var(--ink);cursor:pointer;
+  .lpc-go{font:inherit;font-weight:700;font-size:13.5px;color:var(--ink);
     display:inline-flex;align-items:center;gap:4px;padding:0}
-  .lpc-foot button svg{width:14px;height:14px}
-  .lpc-foot button:hover{color:var(--teal-ink)}
-  .lp-empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--ink-soft)}
+  .lpc-go svg{width:14px;height:14px;transition:transform .15s}
+  .lpcard:hover .lpc-go{color:var(--teal-ink)}
+  .lpcard:hover .lpc-go svg{transform:translateX(3px)}
   .lp-more{display:flex;justify-content:center;margin-top:30px}
 
   .lp-why .lp-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
@@ -2393,7 +2382,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu1e" aria-labelledby="lt-fu1e"></label><button type="button" class="sk" data-lesson="fu1e"><span class="skt" id="lt-fu1e">The operating system's job</span><span class="sub">It shares the CPU between programs, manages memory, owns your files and talks to the hardware for the apps.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Open Task Manager (Ctrl+Shift+Esc on Windows) or Activity Monitor on Mac. Find the three programs using the most memory and write what each one is.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://www.khanacademy.org/computing/computers-and-internet" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Khan Academy: Computers and the Internet</span></a>
 <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener" class="vid"><i class="gi gi-play ic" aria-hidden="true"></i><span>Crash Course Computer Science (videos)</span></a>
 </div></div>
@@ -2413,7 +2402,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu2e" aria-labelledby="lt-fu2e"></label><button type="button" class="sk" data-lesson="fu2e"><span class="skt" id="lt-fu2e">Touch typing</span><span class="sub">Ten minutes a day for a month. If you look at the keys, everything takes twice as long.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Make a folder called code, open it in VS Code, create index.html with the word Hello, save it and open it in the browser. Then list the folder from the terminal.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://code.visualstudio.com/docs/introvideos/basics" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>VS Code: Getting started videos</span></a>
 <a href="https://www.typing.com/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Typing.com (free typing lessons)</span></a>
 </div></div>
@@ -2432,7 +2421,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu3e" aria-labelledby="lt-fu3e"></label><button type="button" class="sk" data-lesson="fu3e"><span class="skt" id="lt-fu3e">Staying safe online</span><span class="sub">What HTTPS protects, why reusing passwords is the real danger, and why two-factor login beats a clever password.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Press F12 on any website, open the Network tab and reload. Count the requests and find the biggest file the page downloaded.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>MDN: How the web works</span></a>
 <a href="https://roadmap.sh/guides/what-is-internet" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>roadmap.sh: How the internet works</span></a>
 </div></div>
@@ -2452,7 +2441,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu4f" aria-labelledby="lt-fu4f"></label><button type="button" class="sk" data-lesson="fu4f"><span class="skt" id="lt-fu4f">Abstraction: standing on other people's work</span><span class="sub">You drive without knowing the engine. You will code on top of layers you did not write, and that is fine.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Solve the first five levels of Logic Lab. Level five needs a function, so find the repeating pattern and give it a name.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Harvard CS50 (free course)</span></a>
 <a href="https://scratch.mit.edu/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Scratch: try logic with blocks</span></a>
 </div></div>
@@ -2471,7 +2460,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu5e" aria-labelledby="lt-fu5e"></label><button type="button" class="sk" data-lesson="fu5e"><span class="skt" id="lt-fu5e">How AI tools like ChatGPT work</span><span class="sub">They predict the next word from patterns in huge amounts of text. Useful for learning, and often confidently wrong.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Write the exact steps to make breakfast so someone who never did it could follow them. Then ask an AI assistant to find a missing step and check if it is right.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://roadmap.sh/computer-science" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>roadmap.sh: Computer Science roadmap</span></a>
 <a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Khan Academy: Algorithms</span></a>
 </div></div>
@@ -2490,7 +2479,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu6d" aria-labelledby="lt-fu6d"></label><button type="button" class="sk" data-lesson="fu6d"><span class="skt" id="lt-fu6d">Take the free path quiz</span><span class="sub">Six questions, and the academy suggests where to start based on your answers.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Pick the two jobs that sound most like you. Watch a day-in-the-life video of a real person doing each one and write one thing that surprised you.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://roadmap.sh/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>roadmap.sh: every career roadmap</span></a>
 </div></div>
 </div></div>
@@ -2509,7 +2498,7 @@
 <li><label class="rmt-chk"><input type="checkbox" data-id="fu7e" aria-labelledby="lt-fu7e"></label><button type="button" class="sk" data-lesson="fu7e"><span class="skt" id="lt-fu7e">Write one small program</span><span class="sub">Anything at all. The students who struggle most are the ones for whom everything is new at once.</span></button></li>
 </ul>
 <div class="rmt-do"><span class="rmt-do-ic"><i class="gi gi-tool ic" aria-hidden="true"></i></span><div><b>Build this</b><p>Solve challenge 1 in Code Lab. It takes about a minute, and you will have written and run real code.</p></div></div>
-<div class="rmt-res"><b>Learn it free</b><div class="rmt-links">
+<div class="rmt-res"><b>Resources</b><div class="rmt-links">
 <a href="https://www.khanacademy.org/math/algebra-basics" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>Khan Academy: Algebra basics</span></a>
 <a href="https://www.freecodecamp.org/news/how-to-ask-good-technical-questions/" target="_blank" rel="noopener" class="doc"><i class="gi gi-book ic" aria-hidden="true"></i><span>freeCodeCamp: How to ask good questions</span></a>
 </div></div>
@@ -2794,66 +2783,65 @@
 
   <!-- ===================== WEB DEVELOPMENT ===================== -->
   <!-- ===================== FOR SCHOOLS ===================== -->
-  <div class="page" id="page-schools">
+  <div class="page" id="page-ready">
     <div class="phead">
       <button class="back" data-goto="academy">← Courses</button>
-      <div class="pn">For schools, teachers and parents</div>
-      <h2>Most students choose a career they do not understand</h2>
-      <p class="pd">They pick at 17, based on a job title, a salary they read somewhere, and what a relative told them. Then a third of them change course or drop out, having lost a year and a lot of money. This is a fixable problem, and it is fixed before university, not during it.</p>
+      <div class="pn">Before university</div>
+      <h2>Arrive at university knowing what you chose</h2>
+      <p class="pd">Most people choose a degree at 17 from a job title and a salary someone mentioned. A few months later, a third change course or drop out. The answer is not to skip university, it is to arrive prepared: with the field already explored and the basics already in your hands.</p>
       <div class="subnav">
         <a href="#sc-problem" class="jump">The problem</a>
-        <a href="#sc-what" class="jump">What we do</a>
-        <a href="#sc-work" class="jump">How it works</a>
-        <a href="#sc-who" class="jump">Who I am</a>
+        <a href="#sc-what" class="jump">What you get here</a>
+        <a href="#sc-work" class="jump">How to use it</a>
+        <a href="#sc-go" class="jump">Start now</a>
       </div>
     </div>
 
     <section class="sec" id="sc-problem">
       <div class="eyebrow">01 · The problem</div>
-      <h3>Two things go wrong, and both happen before day one</h3>
+      <h3>Three things go wrong, and all of them happen before day one</h3>
       <div class="rows">
-        <div class="r"><span class="h">They choose blind</span><span class="m">problem 1</span><span class="d">A student picks "systems engineering" without knowing the difference between frontend, backend, data and security, or that design and IT support are careers too. They are choosing a word, not a life.</span></div>
-        <div class="r"><span class="h">They arrive unprepared</span><span class="m">problem 2</span><span class="d">First-year computing has one of the highest drop-out rates of any degree. Not because students are not clever, but because half the room already knew what a file path, a terminal and a variable were, and half met all of it in week one while also learning to live alone.</span></div>
-        <div class="r"><span class="h">The cost is real</span><span class="m">what it means</span><span class="d">A year of tuition, a year of their life, and a confidence hit that some of them never fully recover from. Meanwhile the ones who arrived prepared find the same degree genuinely enjoyable.</span></div>
+        <div class="r"><span class="h">You choose a word, not a career</span><span class="m">problem 1</span><span class="d">Systems, software, networks, data: at 17 they are only names. Nobody shows you the difference between frontend, backend, data, cloud and security, or what a normal working day looks like in each one.</span></div>
+        <div class="r"><span class="h">You start from zero while others do not</span><span class="m">problem 2</span><span class="d">The first year is hard because half the room already knows what a file path, a terminal and a variable are. The other half meets all of it in week one, while also learning to live on their own.</span></div>
+        <div class="r"><span class="h">Already studying, still unsure</span><span class="m">problem 3</span><span class="d">Plenty of students are two years in and still cannot say which area they want. That is not a lack of talent, it is a lack of a map.</span></div>
       </div>
-      <div class="mnote"><span class="label">The good news</span>Both problems are solved by the same thing: <b>a few weeks of honest foundations before they commit.</b> Not a coding bootcamp. Understanding what the field is, what the jobs are really like, and how computers actually think.</div>
+      <div class="mnote"><span class="label">The good news</span>The three are solved by the same thing: <b>a few weeks of honest foundations before your first semester, or alongside it.</b> The degree keeps its value. Arriving prepared is what makes those years pay off.</div>
     </section>
 
     <section class="sec" id="sc-what">
-      <div class="eyebrow">02 · What we do</div>
-      <h3>A workshop, and a platform they keep afterwards</h3>
-      <p class="lead">Two parts. The talk gets their attention. The platform is what actually changes the outcome, because it keeps working after I leave the building.</p>
+      <div class="eyebrow">02 · What you get here</div>
+      <h3>A complete path, from zero to a direction you can explain</h3>
+      <p class="lead">Two parts. The first one costs nothing and answers what the field is. The second one takes you deep into the area you pick.</p>
       <div class="cmp">
-        <div class="cmpitem"><div class="tt"><b>1. The session at your school</b><span class="chip mut">In person</span></div><p>A working engineer, not a recruiter, explaining the tech field honestly: what the jobs really are, which need heavy maths and which do not, what a normal day looks like, what it pays, and what nobody tells them. Then every student takes a short quiz that suggests a direction based on how they actually answered.</p><p class="cmpuse"><b>Students leave with:</b> a suggested direction, a free account, and the first course already open.</p></div>
-        <div class="cmpitem"><div class="tt"><b>2. The platform they take home</b><span class="chip mut">Free to start</span></div><p>The Foundations course: what a computer really is, how the internet works, how computers think, the jobs that exist, and how to arrive ready. Plus Logic Lab, which teaches programming logic as a puzzle with no code at all, and Code Lab, where they write real code in the browser and it checks their work automatically.</p><p class="cmpuse"><b>You get:</b> students who keep going after the assembly ends, which is the part most careers talks never achieve.</p></div>
+        <div class="cmpitem"><div class="tt"><b>1. Foundations</b><span class="chip mut">No cost</span></div><p>What a computer really is, how the internet works, how a program thinks, which jobs exist and what each one is like, and how much maths each one needs. It ends with a quiz that suggests a direction based on how you actually answered.</p><p class="cmpuse"><b>You finish with:</b> a direction, and the words to explain why you chose it.</p></div>
+        <div class="cmpitem"><div class="tt"><b>2. Nine roadmaps and real practice</b><span class="chip mut">Pro</span></div><p>Web development, backend, automation, artificial intelligence, databases, cloud, cybersecurity and data analytics. Every stage says what to learn, in what order and what to build, and every lesson explains the topic and links documentation and videos to go deeper. Plus Logic Lab, which teaches programming logic with no code, and Code Lab, where you write real code in the browser and it checks your work.</p><p class="cmpuse"><b>You finish with:</b> projects you built yourself and the basics of your degree already done.</p></div>
       </div>
-      <h4 class="subh">What a student can actually show you afterwards</h4>
+      <h4 class="subh">What you can show afterwards</h4>
       <div class="rows">
-        <div class="r"><span class="h">A profile with real numbers</span><span class="m">proof</span><span class="d">Lessons completed, logic levels solved, code challenges passed, exam scores, day streak. Not a certificate of attendance. Evidence of work, visible to a parent or a teacher at a glance.</span></div>
-        <div class="r"><span class="h">Code they wrote themselves</span><span class="m">proof</span><span class="d">The challenges are checked by running the student's code and measuring the result, not by ticking a box. If it says they built it, they built it.</span></div>
-        <div class="r"><span class="h">A direction, with a reason</span><span class="m">the point</span><span class="d">Not "I think I'll do systems." Rather "I want backend because I prefer logic to design, and I already built three things to check."</span></div>
+        <div class="r"><span class="h">A profile with real numbers</span><span class="m">proof</span><span class="d">Lessons completed, logic levels solved, code challenges passed, exam scores and your streak. Not a certificate of attendance, evidence of work anyone can see at a glance.</span></div>
+        <div class="r"><span class="h">Code you wrote yourself</span><span class="m">proof</span><span class="d">The challenges are checked by running your code and measuring the result, not by ticking a box. If it says you built it, you built it.</span></div>
+        <div class="r"><span class="h">A direction, with a reason</span><span class="m">the point</span><span class="d">Not "I think I will study systems", but "I want backend because I prefer logic to design, and I already built three things to check".</span></div>
       </div>
     </section>
 
     <section class="sec" id="sc-work">
-      <div class="eyebrow">03 · How it works</div>
-      <h3>Practical details</h3>
+      <div class="eyebrow">03 · How to use it</div>
+      <h3>Five steps, at your own pace</h3>
       <div class="steps">
-        <div class="st"><span class="n">01</span><span class="c"><b>One session, 60 to 90 minutes.</b> Works as an assembly, a class, or a careers day slot. Any year group from 15 upwards, though 16 to 18 is the sweet spot because the decision is close enough to feel real.</span></div>
-        <div class="st"><span class="n">02</span><span class="c"><b>All it needs is a projector.</b> Students can follow on phones if there is wifi, or on school computers, or on nothing at all and sign up later. Nothing to install, ever. It runs in a browser.</span></div>
-        <div class="st"><span class="n">03</span><span class="c"><b>Every student gets free access.</b> The Foundations course, the path quiz, Logic Lab, Code Lab and every reference guide cost nothing and stay free. There is no trial that expires on them.</span></div>
-        <div class="st"><span class="n">04</span><span class="c"><b>Teachers can see the group's progress.</b> Useful for a careers department that has to report on what actually happened after the talk.</span></div>
-        <div class="st"><span class="n">05</span><span class="c"><b>It is in Spanish and English.</b> Built in Santa Cruz, for students here first, by someone who learned all of it here.</span></div>
+        <div class="st"><span class="n">01</span><span class="c"><b>Take the path quiz.</b> Ten minutes. It asks how you like to think and work, and suggests which areas fit you, with the reason for each one.</span></div>
+        <div class="st"><span class="n">02</span><span class="c"><b>Do Foundations, which costs nothing.</b> Seven stages, around five weeks at a calm pace, and it answers the questions that make people choose blind.</span></div>
+        <div class="st"><span class="n">03</span><span class="c"><b>Pick one roadmap and follow the stages in order.</b> Each stage has a project to build. Building is what turns reading into knowing.</span></div>
+        <div class="st"><span class="n">04</span><span class="c"><b>Practise in the labs.</b> Logic Lab for thinking in steps, Code Lab for writing real code. Both run in the browser, nothing to install.</span></div>
+        <div class="st"><span class="n">05</span><span class="c"><b>Start your degree with the basics already done.</b> The first semesters become easy instead of overwhelming, and you already know which specialisation you are aiming at.</span></div>
       </div>
-      <div class="mnote"><span class="label">Why I am doing this</span>I taught myself all of this from Santa Cruz and now build software and automation for clients in the United States. Nobody told me any of it at 17, and I lost time I did not need to lose. The whole point is that the next student does not have to.</div>
+      <div class="mnote"><span class="label">Already at university?</span>Use it alongside your classes. It is the fastest way to decide a specialisation, fill the gaps nobody taught you, and reach your first job with real projects instead of only a transcript.</div>
     </section>
 
-    <section class="sec" id="sc-who">
-      <div class="eyebrow">04 · Who is running it</div>
-      <h3>A working engineer, not a careers advisor</h3>
-      <p class="lead">Eduardo Shande. Data and automation engineer, Santa Cruz, Bolivia. Three years building software, data pipelines and AI automation for clients in Bolivia and the United States.</p>
-      <p>Self-taught, no computer science degree. That matters here, because it means the advice students get is about what actually works rather than what a syllabus says should work. It also means the honest parts get said out loud: which jobs are oversold, which are quietly well paid, when a degree is worth it and when it is not.</p>
-      <div class="pfoot"><b>Interested?</b> If you run a school, teach a class, or you are a parent who wants this for your child, get in touch and we will find a date. The session is free for schools in Santa Cruz while the programme is starting.</div>
+    <section class="sec" id="sc-go">
+      <div class="eyebrow">04 · Start now</div>
+      <h3>The best moment to prepare is before, not after</h3>
+      <p class="lead">Every year of studying without a direction is a year of your life and of your family's money. A few weeks now change that.</p>
+      <div class="pfoot"><b>Where to start:</b> create an account, take the path quiz and open Foundations. Both cost nothing, in Spanish and English, on the phone or on a computer. If you want to bring Brain Academy to a group of students, write to us from the Community page.</div>
     </section>
   </div>
 
@@ -3707,7 +3695,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         <button type="button" data-lpscroll="lp-top">Home</button>
         <button type="button" data-lpscroll="lp-courses">Courses</button>
         <button type="button" data-lpscroll="lp-why">About us</button>
-        <button type="button" data-lppage="schools">For schools</button>
+        <button type="button" data-lppage="ready">Before university</button>
       </nav>
       <div class="lp-auth">
         <button type="button" class="lp-login" data-auth="login">Log in</button>
@@ -3741,9 +3729,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     <section class="lp-sec" id="lp-courses"><div class="lp-in">
       <div class="lp-sec-h">
         <div><span class="lp-eyebrow">Courses</span><h2>All courses of <span class="lp-hl">Brain Academy</span></h2></div>
-        <label class="lp-search"><input id="lp-q" type="search" placeholder="Search your course" autocomplete="off"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span></label>
       </div>
-      <div class="lp-tabs" id="lp-tabs" role="tablist" aria-label="Course level"></div>
       <div class="lp-grid" id="lp-grid"></div>
       <div class="lp-more"><button type="button" class="lp-btn ghost" data-auth="register">Create a free account to start</button></div>
     </div></section>
@@ -3752,8 +3738,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       <div>
         <span class="lp-eyebrow">About us</span>
         <h2>A better future starts with <span class="lp-hl">good foundations.</span></h2>
-        <p>Most students choose a career from a job title they half understand, then a third of them change course or drop out. Brain Academy fixes that before university: what the field really is, what the jobs are really like, and how computers actually think.</p>
-        <p>It was built in Santa Cruz by a working engineer who taught himself all of it, so the advice is about what works, not what a syllabus says should.</p>
+        <p>Most students pick a career without really knowing what it is, and others are already studying and still cannot say which area to specialise in or which path to take. A third end up changing course or dropping out. Brain Academy solves that before university: what each field really is, what the jobs are really like, how computers actually think, and the exact path to follow so you arrive ready and lose no time.</p>
+        <p>It is built in Santa Cruz by working engineers who went through the same doubts, so the advice is about what works in the real job, not about what a syllabus says should work. University is still worth it. Here you arrive at it knowing what you chose.</p>
       </div>
       <div class="lp-feats">
         <div class="lp-feat"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5"/></svg></i><b>Foundations first</b></div>
@@ -3766,11 +3752,11 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     <section class="lp-sec" style="padding-top:10px"><div class="lp-in">
       <div class="lp-band">
         <div>
-          <span class="lp-eyebrow">For schools and parents</span>
-          <h2>Bring Brain Academy to <span class="lp-hl">your school.</span></h2>
-          <p>A 60 to 90 minute session with a working engineer, and a platform every student keeps using afterwards.</p>
+          <span class="lp-eyebrow">Before university</span>
+          <h2>Arrive at university <span class="lp-hl">knowing what you chose.</span></h2>
+          <p>Explore every area, learn the foundations, and start your degree with a direction and a head start instead of doubts.</p>
         </div>
-        <button type="button" class="lp-btn light" data-lppage="schools">See the workshop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button type="button" class="lp-btn light" data-lppage="ready">See how to prepare <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div></section>
 
@@ -3778,7 +3764,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       <span>Brain Academy · Santa Cruz, Bolivia</span>
       <nav aria-label="Footer">
         <button type="button" data-lpscroll="lp-courses">Courses</button>
-        <button type="button" data-lppage="schools">For schools</button>
+        <button type="button" data-lppage="ready">Before university</button>
         <button type="button" data-auth="login">Log in</button>
       </nav>
     </div></footer>
@@ -3856,7 +3842,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     var PAID_ORIG={},PAID_LOADED={},PAID_BUSY={};
     var LESSON_ID=null,LESSON_TICKET=0;
     var PAY={order:null,test:false,planId:null,poll:null,tick:null,checking:false,lastFocus:null};
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','schools','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account','lesson'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','ready','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account','lesson'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -5027,9 +5013,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
       var extra='<section class="rstep"><h2 class="rlab"><span class="rnum">+</span>Free, and not a course</h2><div class="crows">'
         +'<button class="crow" data-goto="lab"><span class="cr-t">Practice</span><span class="cr-d">Logic Lab and Code Lab. Puzzles and a real editor. The fastest way to find out whether you actually enjoy this.</span><span class="cr-p"></span></button>'
-        +'<button class="crow" data-goto="resources"><span class="cr-t">Free resources</span><span class="cr-d">42 official free courses from Google, Meta, Amazon, Microsoft, IBM and Cisco, sorted by topic.</span><span class="cr-p"></span></button>'
+        +'<button class="crow" data-goto="resources"><span class="cr-t">Official courses and certificates</span><span class="cr-d">42 courses from Google, Meta, Amazon, Microsoft, IBM and Cisco, sorted by topic.</span><span class="cr-p"></span></button>'
         +'<button class="crow" data-goto="path"><span class="cr-t">Find your path</span><span class="cr-d">Six questions, and the academy suggests a track based on how you actually answered.</span><span class="cr-p"></span></button>'
-        +'<button class="crow" data-goto="schools"><span class="cr-t">For schools and parents</span><span class="cr-d">What the workshop is, what students walk away with, and how to book one.</span><span class="cr-p"></span></button>'
+        +'<button class="crow" data-goto="ready"><span class="cr-t">Before university</span><span class="cr-d">How to explore every area and arrive at your degree already prepared.</span><span class="cr-p"></span></button>'
         +'</div></section>';
 
       var earned=COURSES.filter(function(c){return data.courses[c.key];});
@@ -7056,6 +7042,67 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* before university page and home copy */
+      "02 · What you get here":"02 · Lo que encuentras aquí",
+      "03 · How to use it":"03 · Cómo usarlo",
+      "04 · Start now":"04 · Empieza ahora",
+      "problem 3":"problema 3",
+      "Arrive at university <span class=\"lp-hl\">knowing what you chose.</span>":"Llega a la universidad <span class=\"lp-hl\">sabiendo lo que elegiste.</span>",
+      "Explore every area, learn the foundations, and start your degree with a direction and a head start instead of doubts.":"Explora cada área, aprende las bases y empieza tu carrera con un rumbo y una ventaja, en vez de dudas.",
+      "See how to prepare":"Mira cómo prepararte",
+      "Most students pick a career without really knowing what it is, and others are already studying and still cannot say which area to specialise in or which path to take. A third end up changing course or dropping out. Brain Academy solves that before university: what each field really is, what the jobs are really like, how computers actually think, and the exact path to follow so you arrive ready and lose no time.":"La mayoría de los estudiantes elige una carrera sin saber realmente de qué se trata, y otros ya están estudiando pero todavía no saben en qué especializarse ni qué camino tomar. Un tercio termina cambiando de carrera o abandonando. Brain Academy resuelve eso antes de la universidad: qué es de verdad cada área, cómo son los trabajos en la práctica, cómo piensan realmente las computadoras y el camino exacto que debes seguir para llegar listo y no perder tiempo.",
+      "It is built in Santa Cruz by working engineers who went through the same doubts, so the advice is about what works in the real job, not about what a syllabus says should work. University is still worth it. Here you arrive at it knowing what you chose.":"La construimos en Santa Cruz un equipo de ingenieros en ejercicio que pasó por las mismas dudas, así que los consejos hablan de lo que funciona en el trabajo real, no de lo que un plan de estudios dice que debería funcionar. La universidad sigue valiendo la pena: aquí llegas a ella sabiendo lo que elegiste.",
+      "How to explore every area and arrive at your degree already prepared.":"Cómo explorar cada área y llegar a tu carrera ya preparado.",
+      "Arrive at university knowing what you chose":"Llega a la universidad sabiendo lo que elegiste",
+      "Most people choose a degree at 17 from a job title and a salary someone mentioned. A few months later, a third change course or drop out. The answer is not to skip university, it is to arrive prepared: with the field already explored and the basics already in your hands.":"La mayoría elige una carrera a los 17 por un título de trabajo y un sueldo que alguien mencionó. Unos meses después, un tercio cambia de carrera o abandona. La solución no es saltarse la universidad, es llegar preparado: con el área ya explorada y las bases ya en tus manos.",
+      "What you get here":"Lo que encuentras aquí",
+      "How to use it":"Cómo usarlo",
+      "Start now":"Empieza ahora",
+      "Three things go wrong, and all of them happen before day one":"Tres cosas salen mal, y todas pasan antes del primer día",
+      "You choose a word, not a career":"Eliges una palabra, no una carrera",
+      "Systems, software, networks, data: at 17 they are only names. Nobody shows you the difference between frontend, backend, data, cloud and security, or what a normal working day looks like in each one.":"Sistemas, software, redes, datos: a los 17 son solo nombres. Nadie te muestra la diferencia entre frontend, backend, datos, nube y seguridad, ni cómo es un día normal de trabajo en cada una.",
+      "You start from zero while others do not":"Empiezas de cero mientras otros no",
+      "The first year is hard because half the room already knows what a file path, a terminal and a variable are. The other half meets all of it in week one, while also learning to live on their own.":"El primer año es difícil porque la mitad del curso ya sabe qué es una ruta de archivo, una terminal y una variable. La otra mitad se encuentra con todo eso en la primera semana, mientras además aprende a vivir por su cuenta.",
+      "Already studying, still unsure":"Ya estás estudiando y sigues con dudas",
+      "Plenty of students are two years in and still cannot say which area they want. That is not a lack of talent, it is a lack of a map.":"Muchos estudiantes llevan dos años y todavía no pueden decir qué área quieren. Eso no es falta de talento, es falta de un mapa.",
+      "The good news":"La buena noticia",
+      "a few weeks of honest foundations before your first semester, or alongside it.":"unas semanas de bases honestas antes de tu primer semestre, o junto a él.",
+      "The degree keeps its value. Arriving prepared is what makes those years pay off.":"La carrera sigue valiendo. Llegar preparado es lo que hace que esos años rindan.",
+      "The three are solved by the same thing:":"Las tres se resuelven con lo mismo:",
+      "A complete path, from zero to a direction you can explain":"Un camino completo, de cero hasta un rumbo que puedes explicar",
+      "Two parts. The first one costs nothing and answers what the field is. The second one takes you deep into the area you pick.":"Dos partes. La primera no cuesta nada y responde qué es el área. La segunda te lleva a fondo en la que elijas.",
+      "1. Foundations":"1. Fundamentos",
+      "No cost":"Sin costo",
+      "What a computer really is, how the internet works, how a program thinks, which jobs exist and what each one is like, and how much maths each one needs. It ends with a quiz that suggests a direction based on how you actually answered.":"Qué es realmente una computadora, cómo funciona internet, cómo piensa un programa, qué trabajos existen y cómo es cada uno, y cuánta matemática necesita cada uno. Termina con un test que sugiere un rumbo según cómo respondiste.",
+      "You finish with:":"Terminas con:",
+      "a direction, and the words to explain why you chose it.":"un rumbo y las palabras para explicar por qué lo elegiste.",
+      "2. Nine roadmaps and real practice":"2. Nueve rutas y práctica real",
+      "Web development, backend, automation, artificial intelligence, databases, cloud, cybersecurity and data analytics. Every stage says what to learn, in what order and what to build, and every lesson explains the topic and links documentation and videos to go deeper. Plus Logic Lab, which teaches programming logic with no code, and Code Lab, where you write real code in the browser and it checks your work.":"Desarrollo web, backend, automatización, inteligencia artificial, bases de datos, nube, ciberseguridad y análisis de datos. Cada etapa dice qué aprender, en qué orden y qué construir, y cada lección explica el tema y enlaza documentación y videos para profundizar. Además Logic Lab, que enseña lógica de programación sin código, y Code Lab, donde escribes código real en el navegador y él revisa tu trabajo.",
+      "projects you built yourself and the basics of your degree already done.":"proyectos que construiste tú y las bases de tu carrera ya hechas.",
+      "What you can show afterwards":"Lo que puedes mostrar después",
+      "Lessons completed, logic levels solved, code challenges passed, exam scores and your streak. Not a certificate of attendance, evidence of work anyone can see at a glance.":"Lecciones completadas, niveles de lógica resueltos, retos de código aprobados, notas de exámenes y tu racha. No un certificado de asistencia, sino evidencia de trabajo que cualquiera ve de un vistazo.",
+      "Code you wrote yourself":"Código que escribiste tú",
+      "The challenges are checked by running your code and measuring the result, not by ticking a box. If it says you built it, you built it.":"Los retos se revisan ejecutando tu código y midiendo el resultado, no marcando una casilla. Si dice que lo construiste, lo construiste.",
+      "A direction, with a reason":"Un rumbo, con una razón",
+      "Not \"I think I will study systems\", but \"I want backend because I prefer logic to design, and I already built three things to check\".":"No \"creo que voy a estudiar sistemas\", sino \"quiero backend porque prefiero la lógica al diseño, y ya construí tres cosas para comprobarlo\".",
+      "Five steps, at your own pace":"Cinco pasos, a tu ritmo",
+      "Take the path quiz.":"Haz el test de rumbo.",
+      "Ten minutes. It asks how you like to think and work, and suggests which areas fit you, with the reason for each one.":"Diez minutos. Pregunta cómo te gusta pensar y trabajar, y sugiere qué áreas encajan contigo, con el motivo de cada una.",
+      "Do Foundations, which costs nothing.":"Haz Fundamentos, que no cuesta nada.",
+      "Seven stages, around five weeks at a calm pace, and it answers the questions that make people choose blind.":"Siete etapas, unas cinco semanas a ritmo tranquilo, y responde las preguntas que hacen que la gente elija a ciegas.",
+      "Pick one roadmap and follow the stages in order.":"Elige una ruta y sigue las etapas en orden.",
+      "Each stage has a project to build. Building is what turns reading into knowing.":"Cada etapa tiene un proyecto para construir. Construir es lo que convierte leer en saber.",
+      "Practise in the labs.":"Practica en los laboratorios.",
+      "Logic Lab for thinking in steps, Code Lab for writing real code. Both run in the browser, nothing to install.":"Logic Lab para pensar por pasos, Code Lab para escribir código real. Los dos funcionan en el navegador, sin instalar nada.",
+      "Start your degree with the basics already done.":"Empieza tu carrera con las bases ya hechas.",
+      "The first semesters become easy instead of overwhelming, and you already know which specialisation you are aiming at.":"Los primeros semestres se vuelven fáciles en lugar de abrumadores, y ya sabes a qué especialización apuntas.",
+      "Already at university?":"¿Ya estás en la universidad?",
+      "Use it alongside your classes. It is the fastest way to decide a specialisation, fill the gaps nobody taught you, and reach your first job with real projects instead of only a transcript.":"Úsalo junto a tus clases. Es la forma más rápida de decidir una especialización, llenar los vacíos que nadie te enseñó y llegar a tu primer trabajo con proyectos reales y no solo con notas.",
+      "The best moment to prepare is before, not after":"El mejor momento para prepararte es antes, no después",
+      "Every year of studying without a direction is a year of your life and of your family's money. A few weeks now change that.":"Cada año estudiando sin rumbo es un año de tu vida y del dinero de tu familia. Unas semanas ahora cambian eso.",
+      "Where to start:":"Por dónde empezar:",
+      "create an account, take the path quiz and open Foundations. Both cost nothing, in Spanish and English, on the phone or on a computer. If you want to bring Brain Academy to a group of students, write to us from the Community page.":"crea una cuenta, haz el test de rumbo y abre Fundamentos. Los dos no cuestan nada, en español e inglés, desde el celular o la computadora. Si quieres llevar Brain Academy a un grupo de estudiantes, escríbenos desde la página de Comunidad.",
+
       /* roadmap and lesson redesign */
       "Completed":"Completada",
       "In this stage":"En esta etapa",
@@ -11596,10 +11643,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
 
 
     /* =========================================================
-       Landing page: course catalogue with level tabs and search,
+       Landing page: the course catalogue,
        the sign-in dialog, and the language toggle for visitors.
     ========================================================= */
-    var LP_TAB='all';
     function lpIcon(p){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';}
     var LP_ICONS={
       fundamentals:lpIcon('<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>'),
@@ -11612,37 +11658,21 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       security:lpIcon('<path d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'),
       data:lpIcon('<path d="M3.5 20.5h17"/><rect x="5.5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="6.5" width="3" height="11.5" rx="1"/><rect x="15.5" y="13.5" width="3" height="4.5" rx="1"/>')
     };
-    function renderLpTabs(){
-      var el=document.getElementById('lp-tabs');if(!el)return;
-      var levels=['all'];COURSES.forEach(function(c){if(levels.indexOf(c.level)<0)levels.push(c.level);});
-      el.innerHTML=levels.map(function(l){
-        return '<button type="button" role="tab" class="lp-tab" data-tab="'+esc(l)+'" aria-selected="'+(l===LP_TAB)+'">'
-          +esc(l==='all'?'All courses':l)+'</button>';
-      }).join('');
-    }
+    /* the whole card opens the sign-up dialog, not only the last line */
     function renderLanding(){
       var grid=document.getElementById('lp-grid');if(!grid||!data)return;
       var tones=['blue','peri','pink'];
-      grid.innerHTML=COURSES.filter(function(c){return LP_TAB==='all'||c.level===LP_TAB;}).map(function(c){
+      grid.innerHTML=COURSES.map(function(c){
         var s=courseStats(c);
-        return '<article class="lpcard" data-title="'+esc(c.title)+'">'
-          +'<div class="lpc-art '+tones[COURSES.indexOf(c)%3]+'">'+(LP_ICONS[c.key]||'')+'</div>'
-          +'<div class="lpc-top"><span class="lpc-by"><i aria-hidden="true">ES</i><span>Eduardo Shande</span></span>'
-          +'<span class="lpc-lv">'+esc(c.level)+'</span></div>'
-          +'<h3>'+esc(c.title)+'</h3><p>'+esc(c.desc)+'</p>'
-          +'<div class="lpc-row"><span>'+IFILE+'<span>'+s.total+' lessons</span></span><span>'+ICAP+'<span>'+s.modules+' modules</span></span></div>'
-          +'<div class="lpc-foot">'+(isPaidRoute(c.route)?'<b class="pro">Pro</b>':'<b>Free</b>')+'<button type="button" data-auth="register">Start course'+ICHEVR+'</button></div>'
-          +'</article>';
-      }).join('')+'<p class="lp-empty" id="lp-empty" hidden>No course matches that search.</p>';
-      lpFilter();
-    }
-    function lpFilter(){
-      var q=document.getElementById('lp-q'),v=fold(q?q.value.trim():''),shown=0;
-      document.querySelectorAll('#lp-grid .lpcard').forEach(function(card){
-        var hit=!v||fold(card.getAttribute('data-title')+' '+card.textContent).indexOf(v)>=0;
-        card.hidden=!hit;if(hit)shown++;
-      });
-      var empty=document.getElementById('lp-empty');if(empty)empty.hidden=shown>0;
+        return '<button type="button" class="lpcard" data-auth="register">'
+          +'<span class="lpc-art '+tones[COURSES.indexOf(c)%3]+'">'+(LP_ICONS[c.key]||'')+'</span>'
+          +'<span class="lpc-top"><span class="lpc-by"><i aria-hidden="true">BA</i><span>Brain Academy</span></span>'
+          +'<span class="lpc-lv">'+esc(c.level)+'</span></span>'
+          +'<span class="lpc-t">'+esc(c.title)+'</span><span class="lpc-d">'+esc(c.desc)+'</span>'
+          +'<span class="lpc-row"><span>'+IFILE+'<span>'+s.total+' lessons</span></span><span>'+ICAP+'<span>'+s.modules+' modules</span></span></span>'
+          +'<span class="lpc-foot">'+(isPaidRoute(c.route)?'<b class="pro">Pro</b>':'<b>Free</b>')+'<span class="lpc-go">Start course'+ICHEVR+'</span></span>'
+          +'</button>';
+      }).join('');
     }
     function renderLpStats(){
       var lessons=document.querySelectorAll('.skills input[type=checkbox]').length;
@@ -11670,13 +11700,11 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
     function initLanding(){
       var gate=document.getElementById('gate');if(!gate)return;
-      renderLpTabs();renderLanding();renderLpStats();renderLpLang();
-      var q=document.getElementById('lp-q');if(q)q.addEventListener('input',lpFilter);
+      renderLanding();renderLpStats();renderLpLang();
       gate.addEventListener('click',function(e){
         var t=e.target;
         var a=t.closest('[data-auth]');if(a){lpOpenAuth(a.getAttribute('data-auth'));return;}
         if(t.closest('[data-close]')){lpCloseAuth();return;}
-        var tab=t.closest('[data-tab]');if(tab){LP_TAB=tab.getAttribute('data-tab');renderLpTabs();renderLanding();return;}
         var sc=t.closest('[data-lpscroll]');if(sc){var el=document.getElementById(sc.getAttribute('data-lpscroll'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;}
         var pg=t.closest('[data-lppage]');if(pg){lpCloseAuth();openPreview(pg.getAttribute('data-lppage'));}
       });

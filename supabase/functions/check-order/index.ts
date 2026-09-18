@@ -40,7 +40,8 @@ Deno.serve(async (req: Request) => {
     if (!order) throw new HttpError(404, "Order not found.");
 
     let current = order;
-    if ((order.status === "pending" || order.status === "expired") && order.provider_ref) {
+    // the manual provider cannot be asked; an admin approves those orders
+    if ((order.status === "pending" || order.status === "expired") && order.provider_ref && order.provider !== "manual") {
       const result = await confirmAndFulfill(admin, providerFor(admin, order.provider), order.provider_ref, "check");
       if (result.order) current = result.order;
     }

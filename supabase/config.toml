@@ -16,3 +16,9 @@ verify_jwt = false
 
 [functions.mock-pay]
 verify_jwt = false
+
+[functions.claim-order]
+verify_jwt = false
+
+[functions.admin-payments]
+verify_jwt = false

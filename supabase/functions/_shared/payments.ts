@@ -2,7 +2,9 @@
 //
 // Rule this module enforces: an order is only ever marked paid after the
 // payment provider itself confirms it. A webhook body or a client request
-// can say "paid", but access is granted on the provider's word alone.
+// can say "paid", but access is granted on the provider's word alone. The
+// one exception is the manual bank QR, where an admin who has seen the
+// money arrive is that word (see admin-payments).
 
 import { createClient, type SupabaseClient, type User } from "npm:@supabase/supabase-js@2.116.0";
 
@@ -80,7 +82,7 @@ export type OrderRow = {
   plan_id: string;
   amount_bob: number | string;
   days: number;
-  status: "pending" | "paid" | "expired" | "cancelled";
+  status: "pending" | "review" | "paid" | "expired" | "cancelled";
   provider: string;
   provider_ref: string | null;
   qr_text: string | null;
@@ -88,6 +90,12 @@ export type OrderRow = {
   expires_at: string;
   paid_at: string | null;
   created_at: string;
+  ref_code: string | null;
+  receipt_path: string | null;
+  claimed_at: string | null;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+  review_note: string | null;
 };
 
 // what the browser is allowed to see of an order
@@ -98,11 +106,28 @@ export function publicOrder(o: OrderRow) {
     amount_bob: Number(o.amount_bob),
     days: o.days,
     status: o.status,
+    method: o.provider === "manual" ? "manual" : "provider",
     qr_text: o.qr_text,
     qr_image: o.qr_image,
+    ref_code: o.ref_code,
+    has_receipt: !!o.receipt_path,
+    claimed_at: o.claimed_at,
+    review_note: o.review_note,
     expires_at: o.expires_at,
     paid_at: o.paid_at,
   };
+}
+
+export async function isAdmin(admin: SupabaseClient, userId: string): Promise<boolean> {
+  const { data, error } = await admin.from("admins").select("user_id").eq("user_id", userId).maybeSingle();
+  if (error) throw error;
+  return !!data;
+}
+
+export async function requireAdmin(req: Request, admin: SupabaseClient): Promise<User> {
+  const user = await requireUser(req, admin);
+  if (!(await isAdmin(admin, user.id))) throw new HttpError(403, "Only academy admins can do this.");
+  return user;
 }
 
 export async function accessUntil(admin: SupabaseClient, userId: string): Promise<string | null> {
@@ -168,17 +193,67 @@ export class MockProvider implements PaymentProvider {
   }
 }
 
+// The academy's own bank QR. A personal bank account has no API, so nothing
+// here can see a payment arrive: the student uploads the receipt and an
+// admin, who sees the money in the bank app, approves the order. getStatus
+// therefore never reports "paid"; approval runs fulfill_order directly.
+export const QR_BUCKET = "payment-qr";
+export const QR_PATH = "qr";
+export const RECEIPTS_BUCKET = "receipts";
+export const MANUAL_HOURS = 48;
+
+const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // no 0/O, 1/I/L
+export function newRefCode(): string {
+  const bytes = crypto.getRandomValues(new Uint8Array(5));
+  return "BA-" + Array.from(bytes, (b) => CODE_ALPHABET[b % CODE_ALPHABET.length]).join("");
+}
+
+export class ManualProvider implements PaymentProvider {
+  readonly name = "manual";
+  readonly isTest = false;
+
+  constructor(private readonly admin: SupabaseClient) {}
+
+  async createCharge(): Promise<Charge> {
+    const { data, error } = await this.admin.storage
+      .from(QR_BUCKET)
+      .createSignedUrl(QR_PATH, (MANUAL_HOURS + 1) * 3600);
+    if (error || !data?.signedUrl) {
+      throw new HttpError(503, "Payments open very soon. Please try again in a few hours.");
+    }
+    return { providerRef: newRefCode(), qrText: null, qrImage: data.signedUrl };
+  }
+
+  async getStatus(): Promise<ChargeStatus> {
+    return "pending";
+  }
+
+  referenceFromWebhook(): string | null {
+    return null;
+  }
+}
+
 // To add a real provider (CUCU, a bank API...): implement PaymentProvider
-// from its documentation, add a case below, set the PAYMENT_PROVIDER
-// secret, and set payment_mode to 'live' in public.app_settings.
+// from its documentation, add a case below, set payment_provider in
+// public.app_settings, and set payment_mode to 'live'.
 export function providerFor(admin: SupabaseClient, name?: string): PaymentProvider {
   const chosen = (name ?? Deno.env.get("PAYMENT_PROVIDER") ?? "mock").toLowerCase();
   switch (chosen) {
     case "mock":
       return new MockProvider(admin);
+    case "manual":
+      return new ManualProvider(admin);
     default:
       throw new HttpError(503, "Payments are not available yet. Please try again soon.");
   }
+}
+
+// the provider new orders use: app_settings.payment_provider, then the
+// PAYMENT_PROVIDER secret, then the test provider
+export async function activeProvider(admin: SupabaseClient): Promise<PaymentProvider> {
+  const { data, error } = await admin.from("app_settings").select("value").eq("key", "payment_provider").maybeSingle();
+  if (error) throw error;
+  return providerFor(admin, data?.value ?? undefined);
 }
 
 export async function paymentMode(admin: SupabaseClient): Promise<"test" | "live"> {

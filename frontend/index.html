@@ -1098,6 +1098,8 @@
   .lpc-foot b.pro{color:var(--teal-ink)}
   .pay-card{width:min(440px,100%)}
   .pay-card .pw-plans{grid-template-columns:1fr;gap:18px}
+  .pw-plans.one{grid-template-columns:minmax(0,340px)}
+  .plcard.life .pl-per{color:var(--ink-soft)}
   .pay-card .gsub b{color:var(--ink)}
   .pay-test{background:var(--teal-wash);color:var(--ink);border-radius:12px;padding:10px 12px;font-size:13.5px;text-align:center;margin-top:-10px}
   .pay-qr{margin:16px auto 10px;width:244px;height:244px;max-width:100%;padding:12px;background:#fff;border-radius:16px;
@@ -4368,19 +4370,23 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
     function planById(id){for(var i=0;PLANS&&i<PLANS.length;i++)if(PLANS[i].id===id)return PLANS[i];return null;}
     function planMonths(p){return Math.max(1,Math.round(p.days/30.4));}
+    /* the lifetime plan is stored as 100 years; anything past ten counts as for life */
+    function isLifetimePlan(p){return p&&p.days>=3650;}
+    function isLifetimeUntil(until){return !!until&&new Date(until).getTime()-Date.now()>3650*864e5;}
     function planCards(plans){
       var best=null;
-      plans.forEach(function(p){if(planMonths(p)>1&&(!best||p.price_bob/planMonths(p)<best.price_bob/planMonths(best)))best=p;});
+      if(plans.length>1)plans.forEach(function(p){if(planMonths(p)>1&&(!best||p.price_bob/planMonths(p)<best.price_bob/planMonths(best)))best=p;});
       return plans.map(function(p){
-        var price=Number(p.price_bob),months=planMonths(p);
-        return '<div class="plcard'+(p===best?' best':'')+'">'
+        var price=Number(p.price_bob),months=planMonths(p),life=isLifetimePlan(p);
+        return '<div class="plcard'+(p===best?' best':'')+(life?' life':'')+'">'
           +(p===best?'<span class="pl-tag">Best value</span>':'')
-          +'<span class="pl-name">'+esc(p.name)+'</span>'
+          +'<span class="pl-name">'+(life?'Lifetime access':esc(p.name))+'</span>'
           +'<span class="pl-price">Bs '+esc(price%1?price.toFixed(2):price.toFixed(0))+'</span>'
-          +'<span class="pl-per">'+(months>1?('Bs '+Math.round(price/months)+' a month'):'Try it for a month')+'</span>'
+          +'<span class="pl-per">'+(life?'One payment. Every course, for life.':months>1?('Bs '+Math.round(price/months)+' a month'):'Try it for a month')+'</span>'
           +'<button type="button" class="gbtn" data-buy="'+esc(p.id)+'">Pay with QR</button></div>';
       }).join('');
     }
+    function plansGrid(plans){return '<div class="pw-plans'+(plans.length===1?' one':'')+'">'+planCards(plans)+'</div>';}
 
     /* ---- paid course pages ----
        A paid page ships as an empty slot plus hidden lesson checkboxes. Its
@@ -4453,10 +4459,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'<ul class="pw-list">'
         +'<li>Every Pro course: web, backend, automation, AI, databases, cloud, security and data.</li>'
         +'<li>The final exam and certificate for each course.</li>'
-        +'<li>Pay once by QR from any Bolivian bank. No card and no automatic renewal.</li>'
+        +'<li>One payment by QR from any Bolivian bank, and the access is yours for life. No monthly fees and no card.</li>'
         +'</ul>'
         +(plans&&plans.length
-          ?'<div class="pw-plans">'+planCards(plans)+'</div>'
+          ?plansGrid(plans)
           :'<div class="pw-meta pw-gap">The plans could not load. Check your internet connection and try again.</div><button type="button" class="gbtn pw-inline" data-retry="'+esc(route)+'">Try again</button>')
         +'<div class="pw-foot">Your access opens by itself as soon as the payment arrives.</div>'
         +'</section>';
@@ -4613,8 +4619,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       setModal('<h2 id="acct-title">Get Brain Pro</h2>'+waitHtml('Loading plans...'));
       try{
         var plans=await loadPlans();
-        setModal('<h2 id="acct-title">Get Brain Pro</h2><div class="gsub">Choose how long you want every course open.</div>'
-          +'<div class="pw-plans">'+planCards(plans)+'</div>','[data-buy]');
+        setModal('<h2 id="acct-title">Get Brain Pro</h2><div class="gsub">'+(plans.length===1&&isLifetimePlan(plans[0])?'One payment opens every course, for life.':'Choose how long you want every course open.')+'</div>'
+          +plansGrid(plans),'[data-buy]');
       }catch(e){payError(e.msg,null);}
     }
     async function startOrder(planId){
@@ -4696,7 +4702,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       ACCESS={until:until,loaded:true};
       setModal('<div class="pay-done"><span class="pay-ok" aria-hidden="true">'+ICHECK+'</span>'
         +'<h2 id="acct-title">Payment received</h2>'
-        +'<div class="gsub"><span>Brain Pro is active until</span> <b>'+esc(fmtDate(until))+'</b></div>'
+        +'<div class="gsub">'+(isLifetimeUntil(until)?'<span>Brain Pro is yours for life.</span>':'<span>Brain Pro is active until</span> <b>'+esc(fmtDate(until))+'</b>')+'</div>'
         +'<button type="button" class="gbtn" data-modalclose>Start learning</button></div>');
       if(PAY.order)PAY.order.status='paid';
       toast('Brain Pro is active. Enjoy every course!');
@@ -4754,9 +4760,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
           +'<span class="plc-eyebrow">Your plan</span>'
           +'<b class="plc-name">'+(pro?'Brain Pro':'Free')+'</b>'
           +'<span class="plc-sub">'+(pro
-            ?'<span>Active until</span> <b>'+esc(fmtDate(ACCESS.until))+'</b>'
+            ?(isLifetimeUntil(ACCESS.until)?'<span>Lifetime access to every course.</span>':'<span>Active until</span> <b>'+esc(fmtDate(ACCESS.until))+'</b>')
             :(ACCESS.loaded?'<span>Foundations and the free guides. Pro opens every course.</span>':'<span>Checking your plan...</span>'))+'</span>'
-          +'</div><button type="button" class="gbtn plc-btn" data-getpro>'+(pro?'Add more time':'Get Brain Pro')+'</button></div>'
+          +'</div>'+(pro&&isLifetimeUntil(ACCESS.until)?'':'<button type="button" class="gbtn plc-btn" data-getpro>'+(pro?'Add more time':'Get Brain Pro')+'</button>')+'</div>'
           +'<form class="tform" id="profile-form"><span class="flabel">Your profile</span>'
           +'<div class="frow"><input class="finput" id="pf-email" value="'+esc(a.user.email)+'" disabled aria-label="Email"></div>'
           +'<div class="frow"><input class="finput" id="pf-name" placeholder="Full name" maxlength="120" autocomplete="name" value="'+esc(a.user.full_name||'')+'"></div>'
@@ -7050,6 +7056,14 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* single lifetime plan */
+      "Lifetime access":"Acceso de por vida",
+      "One payment. Every course, for life.":"Un solo pago. Todos los cursos, para siempre.",
+      "One payment by QR from any Bolivian bank, and the access is yours for life. No monthly fees and no card.":"Un solo pago con QR desde cualquier banco boliviano, y el acceso es tuyo para siempre. Sin mensualidades y sin tarjeta.",
+      "One payment opens every course, for life.":"Un solo pago abre todos los cursos, para siempre.",
+      "Brain Pro is yours for life.":"Brain Pro es tuyo para siempre.",
+      "Lifetime access to every course.":"Acceso de por vida a todos los cursos.",
+
       /* courses page rows */
       "Official courses and certificates":"Cursos oficiales y certificados",
       "42 courses from Google, Meta, Amazon, Microsoft, IBM and Cisco, sorted by topic.":"42 cursos de Google, Meta, Amazon, Microsoft, IBM y Cisco, ordenados por tema.",

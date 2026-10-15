@@ -459,6 +459,9 @@
   .certactions{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
   .certname-set{max-width:440px;margin:16px auto 0}
   @media print{
+    #page-profile .phead{display:block!important}
+    .prep-acts,.pbtns{display:none!important}
+    .pkpi,.pcard,.prep-note{break-inside:avoid}
     .side,.sidetoggle,.srail,#rprog,.phead,.certactions,.certname-set{display:none!important}
     .wrap{margin-left:0!important;padding:0!important}
     body{background:#fff!important}
@@ -1129,6 +1132,12 @@
   .pay-wait{width:64px;height:64px;border-radius:50%;background:var(--teal-wash);color:var(--teal-ink);display:grid;place-items:center;margin:4px auto 14px}
   .pay-wait svg{width:28px;height:28px}
   .pay-why{background:var(--warn-wash);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px;color:var(--ink)}
+  /* progress report */
+  .prep-note{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:14px;line-height:1.6}
+  .prep-note b{color:var(--ink)}
+  .prep-acts{margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .prep-acts .gbtn{width:auto;margin:0;padding:10px 20px;font-size:14px}
+  .prep-date{color:var(--ink-faint);font-size:13px;font-family:"JetBrains Mono",monospace}
   /* read the code: predict and fix drills */
   .drl-pre{margin:0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;
     font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.7;color:var(--ink);overflow:auto;white-space:pre}
@@ -2154,6 +2163,16 @@
   .rem-t em::first-letter{text-transform:uppercase}
   .rem.done .rem-i{background:var(--good-wash);color:var(--good-ink)}
   .rem.done b{text-decoration:line-through;text-decoration-color:var(--ink-faint)}
+
+  /* Printing a progress report: the dark theme is defined further up, so
+     these overrides have to come last to win. */
+  @media print{
+    :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
+      --bg:#fff;--surface:#fff;--card:#fff;--ink:#111;--ink-soft:#333;--ink-faint:#555;
+      --line:#d4d4d8;--line-strong:#a1a1aa;--teal-wash:#eef2ff;--good-wash:#eefaf1;
+      --clay-wash:#fdf1ee;--warn-wash:#fff6e8;--on-teal:#fff}
+    body,.wrap,.page{background:#fff!important;color:#111!important}
+  }
 </style>
 
 <!-- ===================== NAV ===================== -->
@@ -6407,7 +6426,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var lessons=0;boxesAll.forEach(function(b){if(b.checked)lessons++;});
       var quizKeys=Object.keys(data.quizzes||{}),exams=0,bestScore=0,passed=0;
       quizKeys.forEach(function(k){var q=data.quizzes[k];exams+=(q.attempts||0);if((q.best||0)>bestScore)bestScore=q.best||0;if((q.best||0)>=80)passed++;});
-      var lab=Object.keys(g.lab||{}).length;
+      var labKeys=Object.keys(g.lab||{}),lab=0,drills=0;
+      labKeys.forEach(function(k){if(k.indexOf('d_')===0)drills++;else lab++;});
+      var rc=(typeof rvCounts==='function')?rvCounts():{known:0,open:0},rdays=0,rtotal=0;
+      try{Object.keys(RV.days).forEach(function(k){rdays++;rtotal+=RV.days[k].n||0;});}catch(e){}
       var logic=Object.keys(g.logic||{}).length;
       var stars=0;Object.keys(g.logic||{}).forEach(function(k){stars+=g.logic[k].s||0;});
       var pages=Object.keys(g.seen||{}).length;
@@ -6419,12 +6441,18 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       }
       return {xp:g.xp||0,level:gameLevel(g.xp||0),title:levelTitle(gameLevel(g.xp||0)),
         lessons:lessons,totalLessons:boxesAll.length,exams:exams,bestScore:bestScore,passed:passed,
-        lab:lab,logic:logic,logicRnd:g.logicRnd||0,stars:stars,pages:pages,certs:certs,
+        lab:lab,drills:drills,drillsTotal:(typeof DRILLS!=='undefined'?DRILLS.length:0),
+        recall:rc.known,recallOpen:rc.open,reviewDays:rdays,reviews:rtotal,
+        logic:logic,logicRnd:g.logicRnd||0,stars:stars,pages:pages,certs:certs,
         badges:(g.badges||[]).length,streak:g.streak||0,longest:longest,days:days.length};
     }
     function kpiTile(n,label,sub,tone){
       return '<div class="pkpi'+(tone?' '+tone:'')+'"><div class="kn">'+n+'</div><div class="kl">'+esc(label)+'</div>'
         +(sub?'<div class="ks">'+esc(sub)+'</div>':'')+'</div>';
+    }
+    function wireProfilePrint(){
+      var b=document.getElementById('prof-print');
+      if(b)b.addEventListener('click',function(){window.print();});
     }
     function renderProfile(){
       var el=document.getElementById('profile-body');if(!el||!data)return;
@@ -6440,11 +6468,18 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'<div class="gamebarline" style="margin-top:9px"><i style="width:'+into+'%"></i></div>'
         +'<div class="pcmeta" style="margin-top:6px">'+into+' / 100 XP to level '+(s.level+1)+'</div></div>'
         +'<div class="pcring">'+svgRing(pct,104)+'<div class="pcringlab">course progress</div></div>'
-        +'</div></div>';
+        +'</div>'
+        +'<div class="prep-note"><b>What this page is.</b> Every number here comes from work this student actually did in the academy: lessons finished, questions answered from memory days later, code written and repaired, exams taken. Nothing counts attendance.</div>'
+        +'<div class="prep-acts"><button type="button" class="gbtn" id="prof-print">Print or save as PDF</button>'
+        +'<span class="prep-date" data-noi18n>'+esc(fmtDate(new Date().toISOString()))+'</span></div>'
+        +'</div>';
       var tiles='<div class="kpigrid">'
         +kpiTile(s.lessons,'Lessons completed','out of '+s.totalLessons+' in the academy','teal')
         +kpiTile(s.logic,'Logic levels solved',s.stars+' stars · '+s.logicRnd+' random beaten')
         +kpiTile(s.lab,'Code challenges solved','you wrote real code '+s.lab+' time'+(s.lab===1?'':'s'),'teal')
+        +kpiTile(s.recall,'Questions held in memory','answered from memory after days away','teal')
+        +kpiTile(s.reviews,'Recall answers given','across '+s.reviewDays+' day'+(s.reviewDays===1?'':'s')+' of review')
+        +kpiTile(s.drills,'Programs read and repaired','out of '+s.drillsTotal+' in Read the code')
         +kpiTile(s.exams,'Exams taken',s.passed+' passed at 80% or more')
         +kpiTile(s.bestScore+'%','Best exam score',s.bestScore>=80?'certificate standard':'80% earns a certificate')
         +kpiTile(s.certs,'Certificates earned',s.certs?'shown below':'finish a course to earn one','clay')
@@ -6480,6 +6515,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'<div class="lbtns" style="margin-top:20px"><button class="lbtn pri" data-goto="lab">Keep practising</button><button class="lbtn" data-goto="account">Settings and account</button></div>';
       el.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
       el.querySelectorAll('[data-cert]').forEach(function(b){b.addEventListener('click',function(){openCertificate(b.getAttribute('data-cert'));});});
+      wireProfilePrint();
     }
 
     /* =========================================================
@@ -7788,6 +7824,15 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* progress report */
+      "Questions held in memory":"Preguntas que ya recuerdas",
+      "answered from memory after days away":"respondidas de memoria días después",
+      "Recall answers given":"Respuestas de repaso",
+      "Programs read and repaired":"Programas leídos y reparados",
+      "What this page is.":"Qué es esta página.",
+      "Every number here comes from work this student actually did in the academy: lessons finished, questions answered from memory days later, code written and repaired, exams taken. Nothing counts attendance.":"Cada número de aquí viene de trabajo que el estudiante hizo de verdad en la academia: lecciones terminadas, preguntas respondidas de memoria días después, código escrito y reparado, exámenes rendidos. Nada mide asistencia.",
+      "Print or save as PDF":"Imprimir o guardar en PDF",
+
       /* read the code drills */
       "Read the code":"Lee el código",
       "Predict what it prints, then fix it":"Predice qué imprime, luego arréglalo",
@@ -12314,6 +12359,10 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         return 'nivel '+m[1]+', '+(trBase(m[2])||m[2]);}],
       [/^· (\d+) day streak$/, function(m){
         return '· racha de '+m[1]+(m[1]==='1'?' día':' días');}],
+      [/^across (\d+) days? of review$/, function(m){
+        return 'en '+m[1]+(m[1]==='1'?' día':' días')+' de repaso';}],
+      [/^out of (\d+) in Read the code$/, function(m){
+        return 'de '+m[1]+' en Lee el código';}],
       [/^Next up: (.+)$/, function(m){
         return 'Lo siguiente: '+(trBase(m[1])||m[1]);}],
       [/^(\d+) of (\d+) levels · (\d+) random beaten$/, function(m){

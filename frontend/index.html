@@ -1165,6 +1165,7 @@
   .rv-stat.hot b{color:var(--teal-ink)}
   .rv-go{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   .rv-go .gbtn{width:auto;padding:13px 26px;margin:0;font-size:15px}
+  .rv-locked{margin-top:14px;color:var(--ink-faint);font-size:13.5px}
   .rv-help{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
   .rv-help h3{margin:0 0 8px;font-size:16px}
   .rv-help ol{margin:0;padding-left:20px;color:var(--ink-soft);font-size:14px;line-height:1.6}
@@ -4146,6 +4147,46 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         if(lab)lab.textContent=pct;
       });
     }
+    /* ---- progress follows the account ----
+       The browser is still the fast path: everything is written locally
+       first and mirrored to the database, so a cleared browser or a
+       second device does not lose work. Signing in merges the two: a
+       lesson finished anywhere counts as finished. */
+    function lpPush(id,on){
+      if(!sb||!isAuthed())return;
+      var a=getAuth();if(!a||!a.user)return;
+      try{
+        if(on)sb.from('lesson_progress').upsert({user_id:a.user.id,lesson_id:id},{onConflict:'user_id,lesson_id'}).then(function(){},function(){});
+        else sb.from('lesson_progress').delete().eq('user_id',a.user.id).eq('lesson_id',id).then(function(){},function(){});
+      }catch(e){}
+    }
+    async function lpPull(){
+      if(!sb||!isAuthed())return;
+      try{
+        var r=await sb.from('lesson_progress').select('lesson_id');
+        if(r.error||!r.data)return;
+        var remote={},changed=false;
+        r.data.forEach(function(row){
+          remote[row.lesson_id]=1;
+          if(!saved[row.lesson_id]){saved[row.lesson_id]=true;changed=true;}
+        });
+        /* anything finished here but not there goes up, once */
+        var a=getAuth(),mine=Object.keys(saved).filter(function(k){return saved[k]&&!remote[k];});
+        if(mine.length&&a&&a.user){
+          try{sb.from('lesson_progress').upsert(mine.map(function(k){return {user_id:a.user.id,lesson_id:k};}),{onConflict:'user_id,lesson_id'}).then(function(){},function(){});}catch(e){}
+        }
+        if(changed){
+          persist();
+          document.querySelectorAll('.skills input[type=checkbox],input[data-lesson-done]').forEach(function(b){
+            var id=b.getAttribute('data-id')||b.getAttribute('data-lesson-done');
+            if(id&&saved[id])b.checked=true;
+          });
+          document.querySelectorAll('[data-track]').forEach(function(li){li.classList.toggle('done',!!saved[li.getAttribute('data-track')]);});
+          refresh();rvBadge();
+          if(typeof renderFor==='function'&&CURPAGE)renderFor(CURPAGE);
+        }
+      }catch(e){}
+    }
     /* A locked course keeps a hidden copy of its lesson checkboxes so
        progress and lesson counts stay right; only real lessons take clicks. */
     function bindBoxes(root){
@@ -4153,7 +4194,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         var id=b.getAttribute('data-id');
         b.checked=!!saved[id];
         if(b.closest('.rm-skel'))return;
-        b.addEventListener('change',function(){saved[id]=b.checked;persist();refresh();if(b.checked)awardXP(10,'Lesson done','lessons');});
+        b.addEventListener('change',function(){saved[id]=b.checked;persist();lpPush(id,b.checked);refresh();rvBadge();if(b.checked)awardXP(10,'Lesson done','lessons');});
       });
     }
     bindBoxes(document);
@@ -4470,7 +4511,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       if(CURPAGE==='payments')renderPayments();
     }
     async function refreshAccount(){
-      checkAdmin();rvPull();
+      checkAdmin();rvPull();lpPull();rvLoadCards();
       try{await Promise.all([loadProfile(),loadAccess()]);}catch(e){}
       if(!isAuthed())return;
       renderAll();
@@ -4488,7 +4529,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         if(event==='PASSWORD_RECOVERY')openPasswordReset();
       }else{
         memAuth=null;
-        if(prev){dropPaidContent();ACCESS={until:null,loaded:false};ADMIN=false;showAdminNav();closeModal();updateAuthChip();applyGate();}
+        if(prev){dropPaidContent();rvDropCards();ACCESS={until:null,loaded:false};ADMIN=false;showAdminNav();closeModal();updateAuthChip();applyGate();}
       }
     }
     if(sb){
@@ -4632,13 +4673,13 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     }
     function lessonTitle(id){var t=document.getElementById('lt-'+id);return t?t.textContent:'';}
     function setLessonDone(id,on){
-      saved[id]=on;persist();
+      saved[id]=on;persist();lpPush(id,on);
       document.querySelectorAll('.skills input[data-id="'+id+'"],input[data-lesson-done="'+id+'"]').forEach(function(b){b.checked=on;});
       document.querySelectorAll('#lesson-area [data-track="'+id+'"]').forEach(function(li){li.classList.toggle('done',on);});
       refresh();
       if(on){
         awardXP(10,'Lesson done','lessons');
-        var fresh=RCARDS.filter(function(c){return c.l===id&&!RV.cards[c.i];}).length;
+        var fresh=rvAll().filter(function(c){return c.l===id&&!RV.cards[c.i];}).length;
         if(fresh)toast(LANG==='es'?(fresh+' preguntas nuevas en tu repaso'):(fresh+' new questions in your review'));
       }
       rvBadge();
@@ -5083,7 +5124,22 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        each answer sets when that card comes back, and a card you
        cannot recall comes back in the same session.
     ========================================================= */
-    var RKEY='fm.review.v1';
+    var RKEY='fm.review.v1',RCKEY='fm.cards.v1',RMORE=[];
+    try{var _rc=JSON.parse(localStorage.getItem(RCKEY));if(_rc&&_rc.length)RMORE=_rc;}catch(e){}
+    function rvAll(){return RMORE.length?RCARDS.concat(RMORE):RCARDS;}
+    async function rvLoadCards(){
+      if(!sb||!isAuthed())return;
+      try{
+        var r=await sb.from('review_cards').select('id,lesson_id,q_en,a_en,q_es,a_es');
+        if(r.error)return;
+        RMORE=(r.data||[]).map(function(x){return {i:x.id,l:x.lesson_id,q:x.q_en,a:x.a_en,qs:x.q_es,as:x.a_es};});
+        try{localStorage.setItem(RCKEY,JSON.stringify(RMORE));}catch(e){}
+        rvBadge();
+        if(CURPAGE==='review'&&!RSES)renderReview();
+      }catch(e){}
+    }
+    /* signing out must not leave paid questions behind on the device */
+    function rvDropCards(){RMORE=[];try{localStorage.removeItem(RCKEY);}catch(e){}rvBadge();}
     var RV={cards:{},days:{}};
     try{var _rv=JSON.parse(localStorage.getItem(RKEY));if(_rv&&typeof _rv==='object'){RV.cards=_rv.cards||{};RV.days=_rv.days||{};}}catch(e){}
     function rvSave(){try{localStorage.setItem(RKEY,JSON.stringify(RV));}catch(e){}}
@@ -5091,14 +5147,14 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     function rvDayKey(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
     function rvPlus(n){var d=new Date();d.setDate(d.getDate()+n);return rvDayKey(d);}
     function rvText(c,f){return LANG==='es'?(f==='q'?c.qs:c.as):(f==='q'?c.q:c.a);}
-    function rvCardById(id){for(var i=0;i<RCARDS.length;i++)if(RCARDS[i].i===id)return RCARDS[i];return null;}
+    function rvCardById(id){var all=rvAll();for(var i=0;i<all.length;i++)if(all[i].i===id)return all[i];return null;}
     /* a card only exists once its lesson is done: you cannot recall what you never read */
-    function rvUnlocked(){return RCARDS.filter(function(c){return !!saved[c.l];});}
+    function rvUnlocked(){return rvAll().filter(function(c){return !!saved[c.l];});}
     function rvCounts(){
       var today=rvDayKey(),due=0,fresh=0,known=0,open=rvUnlocked();
       open.forEach(function(c){var st=RV.cards[c.i];
         if(!st)fresh++;else{if(st.d<=today)due++;if(st.r>0&&st.i>=3)known++;}});
-      return {due:Math.min(due,RDUE_PER_DAY),fresh:Math.min(fresh,RNEW_PER_DAY),known:known,open:open.length,locked:RCARDS.length-open.length};
+      return {due:Math.min(due,RDUE_PER_DAY),fresh:Math.min(fresh,RNEW_PER_DAY),known:known,open:open.length,locked:rvAll().length-open.length};
     }
     function rvQueue(){
       var today=rvDayKey(),due=[],fresh=[];
@@ -5174,6 +5230,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       else if(!c.open)html+='<div class="empty">Finish a lesson in Foundations and its questions appear here the same day.</div>'
         +'<div class="rv-go"><button type="button" class="gbtn" data-goto="fundamentals">Open Foundations</button></div>';
       else html+='<div class="empty">Nothing to review today. That is the point: come back tomorrow.</div>';
+      if(c.locked)html+='<div class="rv-locked" data-noi18n>'+(LANG==='es'
+        ?(c.locked+' preguntas más se abren a medida que terminas lecciones.')
+        :(c.locked+' more questions open as you finish lessons.'))+'</div>';
       html+='<div class="rv-help"><h3>Why this works</h3><ol>'
         +'<li>Answer from memory before you look. The effort of pulling it out is what fixes it.</li>'
         +'<li>Say it out loud or write it. Thinking "I know this" is how people fool themselves.</li>'
@@ -6453,6 +6512,38 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     function wireProfilePrint(){
       var b=document.getElementById('prof-print');
       if(b)b.addEventListener('click',function(){window.print();});
+      var c=document.getElementById('prof-copy');
+      if(c)c.addEventListener('click',function(){
+        var s=kpiStats(),es=LANG==='es';
+        var lines=es?[
+          'Brain Academy, mi progreso',
+          'Lecciones terminadas: '+s.lessons+' de '+s.totalLessons,
+          'Preguntas que recuerdo días después: '+s.recall,
+          'Programas leídos y reparados: '+s.drills+' de '+s.drillsTotal,
+          'Retos de código resueltos: '+s.lab,
+          'Exámenes rendidos: '+s.exams+' (mejor nota '+s.bestScore+'%)',
+          'Días que estudié: '+s.days+', racha más larga '+s.longest,
+          'academy.sycosmart.com'
+        ]:[
+          'Brain Academy, my progress',
+          'Lessons finished: '+s.lessons+' of '+s.totalLessons,
+          'Questions I still recall days later: '+s.recall,
+          'Programs read and repaired: '+s.drills+' of '+s.drillsTotal,
+          'Code challenges solved: '+s.lab,
+          'Exams taken: '+s.exams+' (best score '+s.bestScore+'%)',
+          'Days studied: '+s.days+', longest streak '+s.longest,
+          'academy.sycosmart.com'
+        ];
+        var txt=lines.join('\n');
+        function ok(){toast(es?'Resumen copiado. Pégalo donde quieras.':'Summary copied. Paste it anywhere.');}
+        try{navigator.clipboard.writeText(txt).then(ok,function(){fallback();});}catch(e){fallback();}
+        function fallback(){
+          var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+          document.body.appendChild(ta);ta.select();
+          try{document.execCommand('copy');ok();}catch(e){}
+          ta.remove();
+        }
+      });
     }
     function renderProfile(){
       var el=document.getElementById('profile-body');if(!el||!data)return;
@@ -6471,6 +6562,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
         +'</div>'
         +'<div class="prep-note"><b>What this page is.</b> Every number here comes from work this student actually did in the academy: lessons finished, questions answered from memory days later, code written and repaired, exams taken. Nothing counts attendance.</div>'
         +'<div class="prep-acts"><button type="button" class="gbtn" id="prof-print">Print or save as PDF</button>'
+        +'<button type="button" class="gbtn ghost" id="prof-copy">Copy a summary</button>'
         +'<span class="prep-date" data-noi18n>'+esc(fmtDate(new Date().toISOString()))+'</span></div>'
         +'</div>';
       var tiles='<div class="kpigrid">'
@@ -7838,6 +7930,9 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* progress summary */
+      "Copy a summary":"Copiar un resumen",
+
       /* drills on a page */
       "The page it runs on":"La página donde corre",
 

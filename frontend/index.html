@@ -1129,6 +1129,25 @@
   .pay-wait{width:64px;height:64px;border-radius:50%;background:var(--teal-wash);color:var(--teal-ink);display:grid;place-items:center;margin:4px auto 14px}
   .pay-wait svg{width:28px;height:28px}
   .pay-why{background:var(--warn-wash);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px;color:var(--ink)}
+  /* read the code: predict and fix drills */
+  .drl-pre{margin:0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;
+    font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.7;color:var(--ink);overflow:auto;white-space:pre}
+  .drl-code .edbar{border-radius:14px 14px 0 0}
+  .drl-in{min-height:96px}
+  .drl-want{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+  .drl-want b{font-size:13px;color:var(--ink-soft)}
+  .drl-want pre{margin:6px 0 0;font-family:"JetBrains Mono",monospace;font-size:13.5px;color:var(--ink);white-space:pre}
+  .drl-res{margin-top:16px;border-radius:16px;padding:16px 18px;border:1px solid var(--line);background:var(--card)}
+  .drl-res.ok{background:var(--good-wash);border-color:transparent}
+  .drl-res.no{background:var(--warn-wash);border-color:transparent}
+  .drl-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .drl-res b{font-size:13px;color:var(--ink-soft)}
+  .drl-res pre{margin:4px 0 0;font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.6;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+  .drl-why{margin:14px 0 0;font-size:14.5px;line-height:1.6;color:var(--ink)}
+  .drl-side{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .drl-side h4{margin:0 0 8px;font-size:15px}
+  .drl-side ol{margin:0;padding-left:20px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+  .drl-side-n{margin:14px 0 0;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);letter-spacing:.05em;text-transform:uppercase}
   /* spaced review */
   .rv-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
   .rv-stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
@@ -3193,7 +3212,7 @@
       <button class="back" data-goto="academy">← Courses</button>
       <div class="pn">Code Lab · free</div>
       <h2>Practice: think it, then build it</h2>
-      <p class="pd">Two labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all: sequencing, loops, functions and debugging, as a puzzle. It is the part everyone skips and then struggles with forever. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.</p>
+      <p class="pd">Three labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all: sequencing, loops, functions and debugging, as a puzzle. It is the part everyone skips and then struggles with forever. <b>Read the code</b> hands you small real programs to predict and repair, because reading code is what makes writing it possible. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.</p>
       <div class="mnote"><span class="label">Why this is the important page</span>Reading about code teaches you almost nothing. <b>You learn by trying it, breaking it, and fixing it.</b> Everything else in this academy exists to get you here. Logic Lab has 14 levels, a new challenge every day, endless generated levels, and an editor so you can build your own and send them to friends. Code Lab actually runs your code and measures the result, exactly like a real test at a real job.</div>
       <div class="modetabs" id="lab-modes"></div>
       <div class="labtabs" id="lab-tabs"></div>
@@ -7031,16 +7050,153 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       LGED.ok=true;drawEditor();
     }
 
+    var DRILLS=[
+      {i:"p1",k:"predict",lv:"JS",t:"A number and a number in quotes",ts:"Un número y un número entre comillas",code:"let a = 2;\nlet b = \"2\";\n\nconsole.log(a + b);\nconsole.log(a + Number(b));",why:"A plus between a number and text glues them together instead of adding. Number(b) turns the text into a real number first, so the second line adds.",whys:"Un más entre un número y un texto los pega en vez de sumarlos. Number(b) convierte el texto en número de verdad, así que la segunda línea sí suma."},
+      {i:"p2",k:"predict",lv:"JS",t:"Where a loop stops",ts:"Dónde se detiene un bucle",code:"let total = 0;\n\nfor (let i = 1; i <= 4; i++) {\n  total = total + i;\n}\n\nconsole.log(total);",why:"The loop runs with i as 1, 2, 3 and 4, because the condition is \"less than or equal to\". It adds 1+2+3+4.",whys:"El bucle corre con i en 1, 2, 3 y 4, porque la condición es \"menor o igual\". Suma 1+2+3+4."},
+      {i:"p3",k:"predict",lv:"JS",t:"A function with no return",ts:"Una función sin return",code:"function doble(n) {\n  n * 2;\n}\n\nconsole.log(doble(5));",why:"The function does the multiplication and throws the result away. A function that never returns anything gives back undefined.",whys:"La función hace la multiplicación y tira el resultado. Una función que nunca devuelve nada entrega undefined."},
+      {i:"p4",k:"predict",lv:"JS",t:"Counting from zero",ts:"Contar desde cero",code:"const nombres = [\"Ana\", \"Beto\", \"Carla\"];\n\nconsole.log(nombres[1]);\nconsole.log(nombres.length);\nconsole.log(nombres[3]);",why:"Positions start at 0, so nombres[1] is the second name. length counts them normally, and asking for a position that does not exist gives undefined, not an error.",whys:"Las posiciones empiezan en 0, así que nombres[1] es el segundo nombre. length los cuenta normal, y pedir una posición que no existe da undefined, no un error."},
+      {i:"p5",k:"predict",lv:"JS",t:"Two names, one array",ts:"Dos nombres, un solo arreglo",code:"const a = [1, 2];\nconst b = a;\n\nb.push(3);\n\nconsole.log(a.length);\nconsole.log(b.length);",why:"b is not a copy. Both names point at the same array in memory, so pushing through one is visible through the other.",whys:"b no es una copia. Los dos nombres apuntan al mismo arreglo en memoria, así que agregar por uno se ve por el otro."},
+      {i:"p6",k:"predict",lv:"JS",t:"Equal, and really equal",ts:"Igual, e igual de verdad",code:"console.log(1 == \"1\");\nconsole.log(1 === \"1\");",why:"Two equals signs convert before comparing, so a number and text can look equal. Three equals compares the value and the type, and that is the one to use.",whys:"Dos signos igual convierten antes de comparar, así que un número y un texto pueden parecer iguales. Tres signos comparan valor y tipo, y ese es el que se usa."},
+      {i:"p7",k:"predict",lv:"JS",t:"A string that refuses to change",ts:"Un texto que no se deja cambiar",code:"let s = \"hola\";\n\ns.toUpperCase();\n\nconsole.log(s);",why:"Text cannot be changed in place. toUpperCase returns a new string, and nobody kept it, so s is untouched. You needed s = s.toUpperCase().",whys:"El texto no se puede cambiar en su lugar. toUpperCase devuelve un texto nuevo y nadie lo guardó, así que s quedó igual. Faltaba s = s.toUpperCase()."},
+      {i:"f1",k:"fix",lv:"JS",t:"It stops one short",ts:"Se queda uno corto",b:"This should print 1, 2, 3, 4 and 5, one per line. It stops at 4.",bs:"Esto debería imprimir 1, 2, 3, 4 y 5, uno por línea. Se detiene en 4.",code:"for (let i = 1; i < 5; i++) {\n  console.log(i);\n}",why:"The condition decided when to stop. With \"less than 5\" the loop never runs with i as 5, so it needs \"less than or equal to 5\", or \"less than 6\".",whys:"La condición decidía cuándo parar. Con \"menor que 5\" el bucle nunca corre con i en 5, así que necesita \"menor o igual a 5\", o \"menor que 6\".",want:"1\n2\n3\n4\n5"},
+      {i:"f2",k:"fix",lv:"JS",t:"The answer never comes back",ts:"La respuesta nunca vuelve",b:"sumar(2, 3) should print 5. It prints undefined.",bs:"sumar(2, 3) debería imprimir 5. Imprime undefined.",code:"function sumar(a, b) {\n  a + b;\n}\n\nconsole.log(sumar(2, 3));",why:"The sum happened and was thrown away. A function hands a value back only when you write return.",whys:"La suma ocurrió y se tiró. Una función entrega un valor solo cuando escribes return.",want:"5"},
+      {i:"f3",k:"fix",lv:"JS",t:"Money that glues instead of adding",ts:"Dinero que se pega en vez de sumar",b:"The total should be 15. It prints 105.",bs:"El total debería ser 15. Imprime 105.",code:"const precio = \"10\";\nconst envio = 5;\n\nconst total = precio + envio;\n\nconsole.log(total);",why:"precio arrived as text, which is what happens with everything typed into a form. Turn it into a number before doing maths with it.",whys:"precio llegó como texto, que es lo que pasa con todo lo que se escribe en un formulario. Conviértelo en número antes de hacer cuentas con él.",want:"15"},
+      {i:"f4",k:"fix",lv:"JS",t:"One step past the end",ts:"Un paso más allá del final",b:"The three grades add up to 245. This prints NaN, which means \"not a number\".",bs:"Las tres notas suman 245. Esto imprime NaN, que significa \"no es un número\".",code:"const notas = [70, 85, 90];\nlet suma = 0;\n\nfor (let i = 0; i <= notas.length; i++) {\n  suma = suma + notas[i];\n}\n\nconsole.log(suma);",why:"length is 3 but the last position is 2. The loop asked for position 3, got undefined, and adding undefined poisons the total. The condition must be \"less than length\".",whys:"length es 3 pero la última posición es 2. El bucle pidió la posición 3, recibió undefined, y sumar undefined arruina el total. La condición debe ser \"menor que length\".",want:"245"},
+      {i:"f5",k:"fix",lv:"JS",t:"A pass that says fail",ts:"Un aprobado que dice reprobado",b:"In Bolivia 51 and above passes. aprobado(80) should print aprobado, and aprobado(30) should print reprobado.",bs:"En Bolivia se aprueba desde 51. aprobado(80) debería imprimir aprobado, y aprobado(30) debería imprimir reprobado.",code:"function aprobado(n) {\n  if (n < 51) {\n    return \"aprobado\";\n  }\n  return \"reprobado\";\n}\n\nconsole.log(aprobado(80));\nconsole.log(aprobado(30));",why:"The condition was backwards. Reading a condition out loud as a sentence, \"if the grade is under 51 it passed\", is the fastest way to catch this.",whys:"La condición estaba al revés. Leer la condición en voz alta como una frase, \"si la nota es menor a 51 aprobó\", es la forma más rápida de notarlo.",want:"aprobado\nreprobado"}
+    ];
+
+    /* =========================================================
+       Read the code: predict, run, investigate, fix
+       Reading and tracing code before writing it is what the
+       research on teaching programming (PRIMM) keeps finding, and
+       committing to a prediction before running is what turns
+       watching into learning.
+    ========================================================= */
+    var DRI=0,DRSHOW=false,DRRES=null,DRMSG='';
+    function drillText(d,f){
+      if(f==='t')return LANG==='es'?d.ts:d.t;
+      if(f==='b')return LANG==='es'?(d.bs||''):(d.b||'');
+      return LANG==='es'?d.whys:d.why;
+    }
+    function drillKey(d){return 'd_'+d.i;}
+    function drillCode(d){
+      var g=labState(),k=drillKey(d);
+      if(d.k==='fix'&&typeof g.labCode[k]==='string')return g.labCode[k];
+      return d.code;
+    }
+    /* the snippet runs in the lab's own frame, which is same origin,
+       so console.log can be collected and compared */
+    function drillRun(code,cb){
+      var fr=document.getElementById('drill-frame');if(!fr)return cb(['The runner is not ready.']);
+      if(unsafeLoop(code))return cb([LANG==='es'?'Error: ese bucle no pararía nunca, así que no se ejecutó.':'Error: that loop would never stop, so it was not run.']);
+      var harness='<!doctype html><meta charset="utf-8"><body><scr'+'ipt>window.__out=[];'
+        +'(function(){var l=console.log;console.log=function(){window.__out.push([].slice.call(arguments).map(function(x){'
+        +'try{return x===undefined?"undefined":(typeof x==="object"&&x!==null?JSON.stringify(x):String(x));}catch(e){return String(x);}'
+        +'}).join(" "));try{l.apply(console,arguments);}catch(e){}};})();</scr'+'ipt><scr'+'ipt>try{\n'
+        +code+'\n}catch(e){window.__out.push("Error: "+e.message);}</scr'+'ipt>';
+      var done=false;
+      function read(){
+        if(done)return;done=true;
+        var out=[];
+        try{out=(fr.contentWindow&&fr.contentWindow.__out)||[];}catch(e){out=['The output could not be read here.'];}
+        cb(out.slice(0,30));
+      }
+      fr.onload=function(){fr.onload=null;setTimeout(read,30);};
+      fr.srcdoc=harness;
+      setTimeout(read,900);
+    }
+    function sameOutput(a,b){
+      function norm(x){return String(x).replace(/\r/g,'').split('\n').map(function(l){return l.trim();})
+        .filter(function(l){return l.length;}).join('\n').toLowerCase();}
+      return norm(a)===norm(b);
+    }
+    function renderDrills(){
+      var tabs=document.getElementById('lab-tabs'),st=document.getElementById('lab-stage');
+      if(!tabs||!st||!data)return;
+      var g=labState();
+      tabs.innerHTML=DRILLS.map(function(d,k){
+        return '<button class="labchip'+(k===DRI?' on':'')+(g.lab[drillKey(d)]?' won':'')+'" data-drill="'+k+'" title="'+esc(drillText(d,'t'))+'">'+(k+1)+'</button>';
+      }).join('');
+      tabs.querySelectorAll('[data-drill]').forEach(function(b){
+        b.addEventListener('click',function(){DRI=parseInt(b.getAttribute('data-drill'),10);DRSHOW=false;DRRES=null;DRMSG='';renderLab();});
+      });
+      var d=DRILLS[DRI],solved=0;
+      DRILLS.forEach(function(x){if(g.lab[drillKey(x)])solved++;});
+      var predict=d.k==='predict';
+      var brief='<div class="labbrief"><div class="lb-top"><span class="chip mut">'+(predict?'Predict':'Fix the bug')+'</span><span class="chip">'+esc(d.lv)+'</span>'
+        +(g.lab[drillKey(d)]?'<span class="chip good">Done</span>':'')+'</div>'
+        +'<h3 data-noi18n>'+esc(drillText(d,'t'))+'</h3>'
+        +'<p>'+(predict?'Read it line by line and write what it prints, before running it. Guessing and checking is the point: the surprise is where you learn.':'<span data-noi18n>'+esc(drillText(d,'b'))+'</span>')+'</p></div>';
+      var right;
+      if(predict){
+        right='<div class="drl-code"><div class="edbar"><span>The program</span><span>read it, do not run it yet</span></div>'
+          +'<pre class="drl-pre" data-noi18n>'+esc(d.code)+'</pre></div>'
+          +'<div class="edbar"><span>What will it print?</span><span>one line per console.log</span></div>'
+          +'<textarea class="editor drl-in" id="drl-guess" spellcheck="false" placeholder="Your prediction"></textarea>'
+          +'<div class="labbtns"><button class="labbtn pri" id="drl-go">Run it and compare</button></div>';
+      }else{
+        right='<div class="edbar"><span>The broken program</span><span>expected output below</span></div>'
+          +'<textarea class="editor" id="lab-editor" spellcheck="false" autocomplete="off" autocapitalize="off">'+esc(drillCode(d))+'</textarea>'
+          +'<div class="drl-want"><b>It should print</b><pre data-noi18n>'+esc(d.want)+'</pre></div>'
+          +'<div class="labbtns"><button class="labbtn pri" id="drl-go">Run and check</button>'
+          +'<button class="labbtn" id="drl-reset">Start over</button></div>';
+      }
+      var res='';
+      if(DRRES){
+        res='<div class="drl-res '+(DRRES.ok?'ok':'no')+'">'
+          +(predict?'<div class="drl-cols"><div><b>You said</b><pre data-noi18n>'+esc(DRRES.guess||'(nothing)')+'</pre></div>'
+            +'<div><b>It printed</b><pre data-noi18n>'+esc(DRRES.got)+'</pre></div></div>'
+            :'<div><b>It printed</b><pre data-noi18n>'+esc(DRRES.got)+'</pre></div>')
+          +'<p class="drl-why" data-noi18n><b>'+(DRRES.ok?(LANG==='es'?'Correcto.':'Right.'):(LANG==='es'?'Todavía no.':'Not yet.'))+'</b> '+esc(drillText(d,'why'))+'</p>'
+          +(DRRES.ok&&DRI<DRILLS.length-1?'<div class="labbtns"><button class="labbtn pri" id="drl-next">Next one</button></div>':'')
+          +'</div>';
+      }
+      st.innerHTML='<div class="labwrap"><div class="labcol">'+brief+right+res+'</div>'
+        +'<div class="labcol"><div class="drl-side"><h4>How to read code you did not write</h4><ol>'
+        +'<li>Go line by line and say out loud what each one does.</li>'
+        +'<li>Keep a note of every value as it changes, like a table on paper.</li>'
+        +'<li>Decide what it prints before you run it. Commit to an answer.</li>'
+        +'<li>Run it. If you were wrong, find the exact line where your version and reality split.</li>'
+        +'</ol><p class="drl-side-n" data-noi18n>'+(LANG==='es'?('Resueltos '+solved+' de '+DRILLS.length):('Solved '+solved+' of '+DRILLS.length))+'</p></div></div></div>'
+        +'<iframe id="drill-frame" title="Code runner" hidden></iframe>';
+      var ed=document.getElementById('lab-editor');
+      if(ed)ed.addEventListener('input',function(){var g2=labState();g2.labCode[drillKey(d)]=ed.value;saveData();});
+      var go=document.getElementById('drl-go');if(go)go.addEventListener('click',drillGo);
+      var rs=document.getElementById('drl-reset');
+      if(rs)rs.addEventListener('click',function(){var g2=labState();delete g2.labCode[drillKey(d)];saveData();DRRES=null;renderLab();});
+      var nx=document.getElementById('drl-next');
+      if(nx)nx.addEventListener('click',function(){DRI++;DRSHOW=false;DRRES=null;renderLab();});
+      if(LANG_READY)applyLang();
+    }
+    function drillGo(){
+      var d=DRILLS[DRI],predict=d.k==='predict';
+      var guess=predict?(document.getElementById('drl-guess')||{}).value||'':'';
+      if(predict&&!guess.trim()){toast(LANG==='es'?'Escribe tu predicción primero, aunque no estés seguro.':'Write your prediction first, even if you are not sure.');return;}
+      var code=predict?d.code:(document.getElementById('lab-editor')||{}).value||'';
+      drillRun(code,function(out){
+        var got=out.join('\n');
+        var ok=predict?sameOutput(guess,got):sameOutput(got,d.want);
+        DRRES={guess:guess,got:got||'(it printed nothing)',ok:ok};
+        if(ok){
+          var g=labState(),fresh=!g.lab[drillKey(d)];
+          g.lab[drillKey(d)]=1;saveData();
+          if(fresh)awardXP(predict?10:15,predict?'Prediction right':'Bug fixed','code');
+        }
+        renderLab();
+      });
+    }
+
     var LABMODE='logic';
     function renderLab(){
       var m=document.getElementById('lab-modes');if(!m||!data)return;
-      m.innerHTML=[['logic','Logic Lab','Think in steps · no code at all'],['code','Code Lab','Write real HTML, CSS and JavaScript']].map(function(x){
+      m.innerHTML=[['logic','Logic Lab','Think in steps · no code at all'],['read','Read the code','Predict what it prints, then fix it'],['code','Code Lab','Write real HTML, CSS and JavaScript']].map(function(x){
         return '<button class="modetab'+(LABMODE===x[0]?' on':'')+'" data-mode="'+x[0]+'"><b>'+x[1]+'</b><span>'+x[2]+'</span></button>';
       }).join('');
       m.querySelectorAll('[data-mode]').forEach(function(b){
         b.addEventListener('click',function(){LABMODE=b.getAttribute('data-mode');LABMSG='';renderLab();});
       });
       if(LABMODE==='logic'){if(!LG)logicOpen(0);else drawLogic();}
+      else if(LABMODE==='read')renderDrills();
       else renderCodeLab();
     }
     function renderCodeLab(){
@@ -7632,6 +7788,37 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* read the code drills */
+      "Read the code":"Lee el código",
+      "Predict what it prints, then fix it":"Predice qué imprime, luego arréglalo",
+      "Predict":"Predice",
+      "Fix the bug":"Arregla el error",
+      "Done":"Hecho",
+      "Read it line by line and write what it prints, before running it. Guessing and checking is the point: the surprise is where you learn.":"Léelo línea por línea y escribe qué imprime, antes de ejecutarlo. Arriesgar y comprobar es justamente el punto: la sorpresa es donde se aprende.",
+      "The program":"El programa",
+      "read it, do not run it yet":"léelo, todavía no lo ejecutes",
+      "What will it print?":"¿Qué va a imprimir?",
+      "one line per console.log":"una línea por cada console.log",
+      "Your prediction":"Tu predicción",
+      "Run it and compare":"Ejecutar y comparar",
+      "The broken program":"El programa con el error",
+      "expected output below":"abajo está lo que debería imprimir",
+      "It should print":"Debería imprimir",
+      "Run and check":"Ejecutar y revisar",
+      "Start over":"Empezar de nuevo",
+      "You said":"Tú dijiste",
+      "It printed":"Imprimió",
+      "Right.":"Correcto.",
+      "Not yet.":"Todavía no.",
+      "Next one":"Siguiente",
+      "How to read code you did not write":"Cómo leer código que no escribiste",
+      "Go line by line and say out loud what each one does.":"Ve línea por línea y di en voz alta qué hace cada una.",
+      "Keep a note of every value as it changes, like a table on paper.":"Anota cada valor mientras cambia, como una tabla en papel.",
+      "Decide what it prints before you run it. Commit to an answer.":"Decide qué imprime antes de ejecutarlo. Comprométete con una respuesta.",
+      "Run it. If you were wrong, find the exact line where your version and reality split.":"Ejecútalo. Si te equivocaste, encuentra la línea exacta donde tu versión y la realidad se separan.",
+      "Prediction right":"Predicción correcta",
+      "Bug fixed":"Error arreglado",
+
       /* spaced review */
       "Review":"Repaso",
       "Today's review":"Repaso de hoy",
@@ -11621,8 +11808,8 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       'XP total':'XP en total','of 100 to level':'de 100 para el nivel',
       'random beaten':'aleatorios superados','levels':'niveles',
       /* --- element-level prose, keyed on the inner markup --- */
-      'Two labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all: sequencing, loops, functions and debugging, as a puzzle. It is the part everyone skips and then struggles with forever. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.':
-        'Dos laboratorios, en este orden. El <b>Laboratorio de Lógica</b> te enseña a pensar en pasos sin nada de código: secuencias, bucles, funciones y depuración, como un rompecabezas. Es la parte que todos se saltan y con la que luego sufren para siempre. Después el <b>Laboratorio de Código</b> te da un editor de verdad y una vista en vivo para escribir HTML, CSS y JavaScript reales.',
+      'Three labs, in this order. <b>Logic Lab</b> teaches you to think in steps with no code at all: sequencing, loops, functions and debugging, as a puzzle. It is the part everyone skips and then struggles with forever. <b>Read the code</b> hands you small real programs to predict and repair, because reading code is what makes writing it possible. <b>Code Lab</b> gives you a real editor and a live preview to write actual HTML, CSS and JavaScript.':
+        'Tres laboratorios, en este orden. El <b>Laboratorio de Lógica</b> te enseña a pensar en pasos sin nada de código: secuencias, bucles, funciones y depuración, como un rompecabezas. Es la parte que todos se saltan y con la que luego sufren para siempre. <b>Lee el código</b> te da programas reales y pequeños para predecir y reparar, porque leer código es lo que hace posible escribirlo. Después el <b>Laboratorio de Código</b> te da un editor de verdad y una vista en vivo para escribir HTML, CSS y JavaScript reales.',
       'Start with <b>Foundations</b>. It teaches you what a computer really is, how the internet works, how computers think, and which job in tech actually fits you, before you write a single line of code. Then pick a direction. Finish the lessons, pass the exam, earn the certificate.':
         'Empieza con <b>Fundamentos</b>. Te enseña qué es realmente una computadora, cómo funciona internet, cómo piensan las computadoras y qué trabajo en tecnología encaja contigo, antes de escribir una sola línea de código. Luego elige una dirección. Termina las lecciones, aprueba el examen y gana el certificado.',
       'A track is a set of courses that belong together, arranged so each one makes the next easier. Finish one before starting another. Half of three tracks is worth nothing to anybody.':

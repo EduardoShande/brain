@@ -1129,6 +1129,44 @@
   .pay-wait{width:64px;height:64px;border-radius:50%;background:var(--teal-wash);color:var(--teal-ink);display:grid;place-items:center;margin:4px auto 14px}
   .pay-wait svg{width:28px;height:28px}
   .pay-why{background:var(--warn-wash);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px;color:var(--ink)}
+  /* spaced review */
+  .rv-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .rv-stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .rv-stat b{display:block;font-size:30px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+  .rv-stat span{display:block;color:var(--ink-soft);font-size:13px;margin-top:2px}
+  .rv-stat.hot b{color:var(--teal-ink)}
+  .rv-go{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .rv-go .gbtn{width:auto;padding:13px 26px;margin:0;font-size:15px}
+  .rv-help{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .rv-help h3{margin:0 0 8px;font-size:16px}
+  .rv-help ol{margin:0;padding-left:20px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+  .rv-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;margin-top:22px;max-width:720px}
+  .rv-count{color:var(--ink-faint);font-size:12.5px;font-family:"JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+  .rv-bar{height:4px;border-radius:99px;background:var(--line);margin:10px 0 20px;overflow:hidden}
+  .rv-bar i{display:block;height:100%;background:var(--grad);transition:width .25s}
+  .rv-q{font-size:21px;line-height:1.45;font-weight:700;color:var(--ink)}
+  .rv-hint{color:var(--ink-faint);font-size:13.5px;margin-top:12px}
+  .rv-a{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line-strong);font-size:16.5px;line-height:1.6;color:var(--ink-soft)}
+  .rv-src{margin-top:14px}
+  .rv-src button{background:none;border:0;padding:0;font:inherit;font-size:13.5px;color:var(--teal-ink);cursor:pointer;text-decoration:underline}
+  .rv-acts{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .rv-acts .gbtn{width:auto;margin:0;padding:12px 22px}
+  .rv-grades{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+  .rv-grades button{font:inherit;font-weight:700;font-size:14px;cursor:pointer;border-radius:14px;padding:12px 10px;border:1px solid var(--line-strong);
+    background:var(--bg);color:var(--ink);display:grid;gap:2px;justify-items:center}
+  .rv-grades button span{font-weight:600;font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .rv-grades button:hover{border-color:var(--teal);color:var(--teal-ink)}
+  .rv-grades button.g0:hover{border-color:var(--warn);color:var(--ink)}
+  .rv-kbd{margin-top:14px;color:var(--ink-faint);font-size:12.5px}
+  .rv-done{text-align:center;padding:30px 20px}
+  .rv-done .pay-ok{margin-bottom:16px}
+  .rv-tile{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--teal-wash);
+    border:1px solid color-mix(in srgb,var(--teal) 35%,transparent);border-radius:18px;padding:16px 20px;margin-top:18px}
+  .rv-tile b{display:block;color:var(--ink);font-size:16px}
+  .rv-tile span{display:block;color:var(--ink-soft);font-size:13.5px;margin-top:2px}
+  .rv-tile button{font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;border-radius:99px;padding:11px 20px;background:var(--grad);color:var(--on-teal)}
+  .side .sidenav button[data-n]::after{content:attr(data-n);margin-left:auto;font-size:11.5px;font-weight:800;background:var(--grad);
+    color:var(--on-teal);border-radius:99px;padding:1px 8px;font-variant-numeric:tabular-nums}
   /* admin payments page */
   .side .sidenav button[hidden]{display:none}
   .adm-sec{margin-top:26px}
@@ -2116,6 +2154,7 @@
       <button data-goto="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v6l-5 9a2 2 0 001.7 3h12.6a2 2 0 001.7-3l-5-9V3"/><path d="M8 3h8"/></svg><span>Practice</span></button>
       <button data-goto="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1"/><circle cx="10" cy="7" r="3.2"/><path d="M21 20v-1a4 4 0 00-3-3.8"/></svg><span>Community</span></button>
       <button data-goto="path"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg><span>Find your path</span></button>
+      <button data-goto="review" id="nav-review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 015.5 4H10a2 2 0 012 2v13a1.6 1.6 0 00-1.6-1.6H3z"/><path d="M21 6.5A2.5 2.5 0 0018.5 4H14a2 2 0 00-2 2v13a1.6 1.6 0 011.6-1.6H21z"/></svg><span>Review</span></button>
       <button data-goto="payments" id="nav-payments" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-4M14 18v3"/></svg><span>Payments</span></button>
   </nav>
   <div class="sidehelp">
@@ -3607,6 +3646,16 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
   </div>
 
   <!-- ===================== ACCOUNT ===================== -->
+  <div class="page" id="page-review">
+    <div class="phead">
+      <button class="back" data-goto="academy">← Courses</button>
+      <div class="pn">Review</div>
+      <h2>Today's review</h2>
+      <p class="pd">Short questions from the lessons you already finished, brought back days apart. Pulling an answer out of your memory is what makes it stay; reading it again is not.</p>
+    </div>
+    <div id="review-area"></div>
+  </div>
+
   <div class="page" id="page-payments">
     <div class="phead">
       <div class="pn">Admin</div>
@@ -3899,7 +3948,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     var PAID_ORIG={},PAID_LOADED={},PAID_BUSY={};
     var LESSON_ID=null,LESSON_TICKET=0;
     var PAY={order:null,test:false,planId:null,poll:null,tick:null,checking:false,lastFocus:null};
-    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','ready','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account','payments','lesson'];
+    var pages=['home','start','fundamentals','webdev','htmltags','webconcepts','jsguide','webtools','resources','tools','lab','community','askwell','profile','ready','academy','path','certificate','roadmaps','automation','cybersecurity','databases','backend','cloud','genai','data','shift','thoughts','learnings','wishlist','certs','quizzes','account','review','payments','lesson'];
     var links=document.getElementById('links');
     var menuBtn=document.getElementById('menuBtn');
 
@@ -4383,7 +4432,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       if(CURPAGE==='payments')renderPayments();
     }
     async function refreshAccount(){
-      checkAdmin();
+      checkAdmin();rvPull();
       try{await Promise.all([loadProfile(),loadAccess()]);}catch(e){}
       if(!isAuthed())return;
       renderAll();
@@ -4549,7 +4598,12 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       document.querySelectorAll('.skills input[data-id="'+id+'"],input[data-lesson-done="'+id+'"]').forEach(function(b){b.checked=on;});
       document.querySelectorAll('#lesson-area [data-track="'+id+'"]').forEach(function(li){li.classList.toggle('done',on);});
       refresh();
-      if(on)awardXP(10,'Lesson done','lessons');
+      if(on){
+        awardXP(10,'Lesson done','lessons');
+        var fresh=RCARDS.filter(function(c){return c.l===id&&!RV.cards[c.i];}).length;
+        if(fresh)toast(LANG==='es'?(fresh+' preguntas nuevas en tu repaso'):(fresh+' new questions in your review'));
+      }
+      rvBadge();
     }
     function wireLessonDone(root){
       root.querySelectorAll('input[data-lesson-done]').forEach(function(b){
@@ -4922,6 +4976,261 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
     });
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modalOpen())closeModal();});
 
+    var RCARDS=[
+      {i:'fu1a-1',l:'fu1a',q:'Name the three parts a computer needs to do work, and what each one is for.',a:'The CPU does the work, RAM holds what it is working on right now, storage keeps things after the power goes off.',qs:'Nombra las tres partes que una computadora necesita para trabajar y para qué sirve cada una.',as:'El CPU hace el trabajo, la RAM guarda lo que está usando ahora mismo, el almacenamiento conserva las cosas cuando se corta la luz.'},
+      {i:'fu1a-2',l:'fu1a',q:'Why is RAM faster than storage but useless for saving your homework?',a:'RAM is wiped the moment the power goes off. Storage keeps data without power, but it is much slower.',qs:'¿Por qué la RAM es más rápida que el almacenamiento pero no sirve para guardar tu tarea?',as:'La RAM se borra apenas se corta la energía. El almacenamiento conserva los datos sin energía, pero es mucho más lento.'},
+      {i:'fu1b-1',l:'fu1b',q:'What is the difference between the operating system and an app?',a:'The operating system runs the machine and shares it between programs. An app is one program doing one job on top of it.',qs:'¿Cuál es la diferencia entre el sistema operativo y una aplicación?',as:'El sistema operativo maneja la máquina y la reparte entre los programas. Una aplicación es un programa que hace un solo trabajo encima de él.'},
+      {i:'fu1b-2',l:'fu1b',q:'What is software, in one sentence?',a:'A list of instructions the computer follows, sitting in files until something runs them.',qs:'¿Qué es el software, en una frase?',as:'Una lista de instrucciones que la computadora sigue, guardada en archivos hasta que algo las ejecuta.'},
+      {i:'fu1c-1',l:'fu1c',q:'Why does a computer use only 1 and 0?',a:'Because every part of it is a switch that is either on or off. Everything else is built from combinations of those.',qs:'¿Por qué la computadora usa solo 1 y 0?',as:'Porque cada parte de ella es un interruptor que está encendido o apagado. Todo lo demás se construye combinando eso.'},
+      {i:'fu1c-2',l:'fu1c',q:'How many switches are in a byte, and how many different values can it hold?',a:'Eight switches, which gives 256 different values.',qs:'¿Cuántos interruptores tiene un byte y cuántos valores distintos puede guardar?',as:'Ocho interruptores, que dan 256 valores distintos.'},
+      {i:'fu1d-1',l:'fu1d',q:'Say the CPU\'s cycle, in order.',a:'Fetch the instruction, decode it, execute it, repeat. Billions of times a second.',qs:'Di el ciclo del CPU, en orden.',as:'Busca la instrucción, la decodifica, la ejecuta y repite. Miles de millones de veces por segundo.'},
+      {i:'fu1d-2',l:'fu1d',q:'What does it actually mean that a program is running?',a:'Its instructions were loaded into RAM and the CPU is working through them one by one.',qs:'¿Qué significa en realidad que un programa se está ejecutando?',as:'Sus instrucciones se cargaron en la RAM y el CPU las va recorriendo una por una.'},
+      {i:'fu1e-1',l:'fu1e',q:'Name three jobs the operating system does for you.',a:'It shares the CPU between programs, hands out and protects memory, and owns the files and the devices.',qs:'Nombra tres trabajos que el sistema operativo hace por ti.',as:'Reparte el CPU entre los programas, asigna y protege la memoria, y maneja los archivos y los dispositivos.'},
+      {i:'fu1e-2',l:'fu1e',q:'Two programs want the CPU at the same time. Who decides?',a:'The operating system, which switches between them so fast that it looks simultaneous.',qs:'Dos programas quieren el CPU al mismo tiempo. ¿Quién decide?',as:'El sistema operativo, que cambia entre ellos tan rápido que parece simultáneo.'},
+      {i:'fu2a-1',l:'fu2a',q:'What does the part after the dot in a file name actually do?',a:'It says how the content should be read and which program opens it. It does not change the content itself.',qs:'¿Qué hace en realidad la parte después del punto en el nombre de un archivo?',as:'Dice cómo debe leerse el contenido y qué programa lo abre. No cambia el contenido en sí.'},
+      {i:'fu2a-2',l:'fu2a',q:'What are .html, .css and .js each for?',a:'HTML is the structure, CSS is the appearance, JavaScript is the behaviour.',qs:'¿Para qué sirve cada uno: .html, .css y .js?',as:'HTML es la estructura, CSS es la apariencia, JavaScript es el comportamiento.'},
+      {i:'fu2b-1',l:'fu2b',q:'What is a path?',a:'The address of a file: the folders you walk through, in order, to reach it.',qs:'¿Qué es una ruta (path)?',as:'La dirección de un archivo: las carpetas que recorres, en orden, hasta llegar a él.'},
+      {i:'fu2b-2',l:'fu2b',q:'Difference between Save and Save as?',a:'Save overwrites the same file. Save as writes a new file and leaves the original as it was.',qs:'¿Diferencia entre Guardar y Guardar como?',as:'Guardar sobrescribe el mismo archivo. Guardar como crea un archivo nuevo y deja el original como estaba.'},
+      {i:'fu2c-1',l:'fu2c',q:'In VS Code, why open a folder instead of a single file?',a:'The editor then sees the whole project, so search, the file tree, the terminal and its tools work across all of it.',qs:'En VS Code, ¿por qué abrir una carpeta y no un solo archivo?',as:'Así el editor ve todo el proyecto: la búsqueda, el árbol de archivos, la terminal y sus herramientas funcionan sobre todo.'},
+      {i:'fu2c-2',l:'fu2c',q:'What does a code editor do that a word processor cannot?',a:'It understands code: it colours it, completes it, points at mistakes and runs it.',qs:'¿Qué hace un editor de código que un procesador de texto no puede?',as:'Entiende el código: lo colorea, lo completa, señala errores y lo ejecuta.'},
+      {i:'fu2d-1',l:'fu2d',q:'Which commands answer \'where am I\', \'what is here\' and \'go into that folder\'?',a:'pwd, ls and cd. On Windows, cd, dir and cd.',qs:'¿Qué comandos responden \'dónde estoy\', \'qué hay aquí\' y \'entra a esa carpeta\'?',as:'pwd, ls y cd. En Windows, cd, dir y cd.'},
+      {i:'fu2d-2',l:'fu2d',q:'What does cd .. do?',a:'It moves one folder up, towards the root.',qs:'¿Qué hace cd ..?',as:'Sube una carpeta, hacia la raíz.'},
+      {i:'fu2f-1',l:'fu2f',q:'What is a commit?',a:'A save point: a snapshot of the project plus a message saying what changed.',qs:'¿Qué es un commit?',as:'Un punto de guardado: una foto del proyecto más un mensaje que dice qué cambió.'},
+      {i:'fu2f-2',l:'fu2f',q:'Difference between Git and GitHub?',a:'Git is the program that keeps the history on your machine. GitHub is a site that stores a copy and lets others see it.',qs:'¿Diferencia entre Git y GitHub?',as:'Git es el programa que guarda el historial en tu máquina. GitHub es un sitio que guarda una copia y deja que otros la vean.'},
+      {i:'fu2e-1',l:'fu2e',q:'Why does touch typing matter for programming?',a:'Looking at the keys splits your attention. When typing is automatic, your head stays on the problem.',qs:'¿Por qué importa escribir sin mirar el teclado al programar?',as:'Mirar las teclas divide tu atención. Cuando escribir es automático, tu cabeza se queda en el problema.'},
+      {i:'fu3a-1',l:'fu3a',q:'Internet or web: which is which?',a:'The internet is the network of connected computers. The web is one service running on it, made of pages and links.',qs:'Internet o web: ¿cuál es cuál?',as:'Internet es la red de computadoras conectadas. La web es un servicio que corre sobre ella, hecho de páginas y enlaces.'},
+      {i:'fu3a-2',l:'fu3a',q:'Name one thing that uses the internet but is not the web.',a:'Email, a video call, or an online game.',qs:'Nombra algo que usa internet pero no es la web.',as:'El correo, una videollamada o un juego en línea.'},
+      {i:'fu3b-1',l:'fu3b',q:'From typing an address to seeing the page: what happens, in order?',a:'DNS turns the name into an IP address, the browser asks that server, the server answers with HTML, CSS and JavaScript, and the browser assembles the page.',qs:'Desde que escribes una dirección hasta que ves la página: ¿qué pasa, en orden?',as:'El DNS convierte el nombre en una dirección IP, el navegador le pide al servidor, el servidor responde con HTML, CSS y JavaScript, y el navegador arma la página.'},
+      {i:'fu3b-2',l:'fu3b',q:'What is DNS for?',a:'It translates a name people can remember into the number address machines need.',qs:'¿Para qué sirve el DNS?',as:'Traduce un nombre que la gente puede recordar a la dirección numérica que las máquinas necesitan.'},
+      {i:'fu3c-1',l:'fu3c',q:'What makes something a web app rather than a website?',a:'You do things in it and it keeps your data, like Gmail. A site is mostly there to be read.',qs:'¿Qué hace que algo sea una aplicación web y no un sitio web?',as:'En ella haces cosas y guarda tus datos, como Gmail. Un sitio está sobre todo para leerse.'},
+      {i:'fu3d-1',l:'fu3d',q:'Frontend, backend and server: which is which?',a:'Frontend is what runs in the browser. Backend is the code on the other side that does the work and keeps the data. The server is the always-on computer the backend runs on.',qs:'Frontend, backend y servidor: ¿cuál es cuál?',as:'El frontend es lo que corre en el navegador. El backend es el código del otro lado que hace el trabajo y guarda los datos. El servidor es la computadora siempre encendida donde corre el backend.'},
+      {i:'fu3d-2',l:'fu3d',q:'You log in. Which side checks the password?',a:'The backend. The frontend only collects it and shows the result.',qs:'Inicias sesión. ¿Qué lado revisa la contraseña?',as:'El backend. El frontend solo la recoge y muestra el resultado.'},
+      {i:'fu3e-1',l:'fu3e',q:'What does HTTPS protect, and what does it not?',a:'It encrypts what travels between you and the site, so nobody in the middle can read or change it. It does not prove the site is honest.',qs:'¿Qué protege HTTPS y qué no?',as:'Cifra lo que viaja entre tú y el sitio, para que nadie en el camino lo lea ni lo cambie. No prueba que el sitio sea honesto.'},
+      {i:'fu3e-2',l:'fu3e',q:'Why is reusing one password dangerous?',a:'One leaked site hands attackers the same key to every other account you own.',qs:'¿Por qué es peligroso repetir una contraseña?',as:'Un solo sitio filtrado le da a los atacantes la misma llave de todas tus otras cuentas.'},
+      {i:'fu4a-1',l:'fu4a',q:'Why does the order of the steps matter so much in code?',a:'The computer does exactly what you wrote, in the order you wrote it, with no common sense about what you meant.',qs:'¿Por qué importa tanto el orden de los pasos en el código?',as:'La computadora hace exactamente lo que escribiste, en el orden en que lo escribiste, sin sentido común sobre lo que querías decir.'},
+      {i:'fu4b-1',l:'fu4b',q:'What are a variable, a condition and a loop, one line each?',a:'A variable is a labelled box holding a value. A condition picks between paths. A loop repeats steps while something stays true.',qs:'¿Qué son una variable, una condición y un bucle, en una línea cada uno?',as:'Una variable es una caja con etiqueta que guarda un valor. Una condición elige entre caminos. Un bucle repite pasos mientras algo siga siendo cierto.'},
+      {i:'fu4b-2',l:'fu4b',q:'When do you need a loop?',a:'Whenever the same work repeats: every product, every row, every file.',qs:'¿Cuándo necesitas un bucle?',as:'Cada vez que el mismo trabajo se repite: cada producto, cada fila, cada archivo.'},
+      {i:'fu4c-1',l:'fu4c',q:'When should a group of steps become a function?',a:'When it repeats, or when giving it a name makes the code read like the problem.',qs:'¿Cuándo un grupo de pasos debería ser una función?',as:'Cuando se repite, o cuando ponerle nombre hace que el código se lea como el problema.'},
+      {i:'fu4d-1',l:'fu4d',q:'Checking every name versus binary search: what is the difference in work?',a:'Checking every name grows with the size of the list. Binary search halves what is left each step, so a million names take about twenty steps.',qs:'Revisar cada nombre contra la búsqueda binaria: ¿cuál es la diferencia de trabajo?',as:'Revisar cada nombre crece con el tamaño de la lista. La búsqueda binaria parte a la mitad lo que queda en cada paso, así que un millón de nombres toma unos veinte pasos.'},
+      {i:'fu4d-2',l:'fu4d',q:'What does binary search need before it works at all?',a:'The list has to be sorted.',qs:'¿Qué necesita la búsqueda binaria antes de funcionar?',as:'Que la lista esté ordenada.'},
+      {i:'fu4e-1',l:'fu4e',q:'What do you do with a problem that feels too big?',a:'Cut it into the smallest piece that still does something real, build that, then add the next piece.',qs:'¿Qué haces con un problema que se siente demasiado grande?',as:'Pártelo en la pieza más pequeña que aún haga algo real, construye esa y luego agrega la siguiente.'},
+      {i:'fu4f-1',l:'fu4f',q:'What is abstraction?',a:'Using something by what it does without knowing how it does it, the way you drive without knowing the engine.',qs:'¿Qué es la abstracción?',as:'Usar algo por lo que hace sin saber cómo lo hace, igual que manejas sin conocer el motor.'},
+      {i:'fu5a-1',l:'fu5a',q:'List, dictionary, stack, queue: what is each one for?',a:'A list keeps order. A dictionary finds a value by its key. A stack gives back the last thing in, like undo. A queue gives back the first thing in, like a line.',qs:'Lista, diccionario, pila y cola: ¿para qué sirve cada una?',as:'La lista mantiene el orden. El diccionario encuentra un valor por su clave. La pila devuelve lo último que entró, como deshacer. La cola devuelve lo primero que entró, como una fila.'},
+      {i:'fu5a-2',l:'fu5a',q:'Undo behaves like which structure, and why?',a:'A stack: the last action you did is the first one undone.',qs:'¿Deshacer se comporta como qué estructura y por qué?',as:'Como una pila: la última acción que hiciste es la primera que se deshace.'},
+      {i:'fu5b-1',l:'fu5b',q:'What does Big O describe?',a:'How the work grows as the data grows, not how many seconds it takes on your machine.',qs:'¿Qué describe la notación Big O?',as:'Cómo crece el trabajo cuando crecen los datos, no cuántos segundos tarda en tu máquina.'},
+      {i:'fu5b-2',l:'fu5b',q:'You double the data. What happens to a linear scan versus a binary search?',a:'The linear scan does twice the work. Binary search needs just one extra step.',qs:'Duplicas los datos. ¿Qué pasa con un recorrido lineal y con una búsqueda binaria?',as:'El recorrido lineal hace el doble de trabajo. La búsqueda binaria necesita solo un paso más.'},
+      {i:'fu5c-1',l:'fu5c',q:'What is a programming language, and why are there so many?',a:'Human-readable instructions that get translated into what the machine runs. Different languages make different jobs easier.',qs:'¿Qué es un lenguaje de programación y por qué hay tantos?',as:'Instrucciones legibles para personas que se traducen a lo que la máquina ejecuta. Cada lenguaje facilita trabajos distintos.'},
+      {i:'fu5d-1',l:'fu5d',q:'An error appears in red. What are the first three things to read?',a:'The file, the line number and the message itself. Together they usually name the problem.',qs:'Aparece un error en rojo. ¿Qué tres cosas lees primero?',as:'El archivo, el número de línea y el mensaje. Juntos casi siempre nombran el problema.'},
+      {i:'fu5d-2',l:'fu5d',q:'What is the fastest move after reading an error?',a:'Search the exact text of the message.',qs:'¿Cuál es el movimiento más rápido después de leer un error?',as:'Buscar el texto exacto del mensaje.'},
+      {i:'fu5e-1',l:'fu5e',q:'How does a tool like ChatGPT produce an answer?',a:'It predicts the next piece of text from patterns in huge amounts of writing. It is not looking facts up.',qs:'¿Cómo produce una respuesta una herramienta como ChatGPT?',as:'Predice el siguiente pedazo de texto a partir de patrones en cantidades enormes de escritura. No está buscando datos.'},
+      {i:'fu5e-2',l:'fu5e',q:'Why can it state something false with total confidence?',a:'Because it is producing text that looks right, not checking whether it is true.',qs:'¿Por qué puede afirmar algo falso con total seguridad?',as:'Porque está produciendo texto que parece correcto, no comprobando si es cierto.'},
+      {i:'fu6a-1',l:'fu6a',q:'Name five jobs in tech and what each one does.',a:'Frontend builds what you see, backend builds the engine behind it, data turns numbers into decisions, automation makes repeated work run by itself, security attacks and defends systems.',qs:'Nombra cinco trabajos en tecnología y qué hace cada uno.',as:'Frontend construye lo que ves, backend construye el motor detrás, datos convierte números en decisiones, automatización hace que el trabajo repetido corra solo, seguridad ataca y defiende sistemas.'},
+      {i:'fu6b-1',l:'fu6b',q:'Which areas need heavy maths, and which do not?',a:'AI, graphics and data lean on maths. Web, automation and most app work need logic, basic algebra and percentages.',qs:'¿Qué áreas necesitan matemática pesada y cuáles no?',as:'IA, gráficos y datos se apoyan en matemática. La web, la automatización y la mayoría del trabajo de apps necesitan lógica, álgebra básica y porcentajes.'},
+      {i:'fu6c-1',l:'fu6c',q:'What does a degree really do for a tech career?',a:'It opens some doors, teaches theory and helps for jobs abroad. It is not required for most jobs, and without projects nobody hires you anyway.',qs:'¿Qué hace realmente un título para una carrera en tecnología?',as:'Abre algunas puertas, enseña teoría y ayuda para trabajos en el exterior. No es obligatorio para la mayoría de los trabajos, y sin proyectos igual nadie te contrata.'},
+      {i:'fu6e-1',l:'fu6e',q:'What does AI change about these jobs?',a:'It writes more of the routine code, so the value moves to people who can judge the result, join systems together and understand what the code does.',qs:'¿Qué cambia la IA en estos trabajos?',as:'Escribe más del código rutinario, así que el valor se mueve a quien puede juzgar el resultado, unir sistemas y entender qué hace el código.'},
+      {i:'fu6d-1',l:'fu6d',q:'How should you pick a direction?',a:'Try the basics of each area, then choose the one whose daily work you actually like, and be able to say why. Not from a job title or a salary.',qs:'¿Cómo deberías elegir un rumbo?',as:'Prueba las bases de cada área, elige aquella cuyo trabajo diario de verdad te gusta y sabe decir por qué. No por un título de trabajo ni por un sueldo.'},
+      {i:'fu7a-1',l:'fu7a',q:'Which maths really shows up in everyday programming?',a:'Logic and truth tables, basic algebra, percentages, and a little probability.',qs:'¿Qué matemática aparece de verdad en la programación diaria?',as:'Lógica y tablas de verdad, álgebra básica, porcentajes y un poco de probabilidad.'},
+      {i:'fu7b-1',l:'fu7b',q:'Why is reading English a programming skill?',a:'Nearly every error message, document and answer is written in English. Reading it is enough, you do not need to speak it.',qs:'¿Por qué leer inglés es una habilidad de programación?',as:'Casi todo mensaje de error, documento y respuesta está en inglés. Con leerlo basta, no necesitas hablarlo.'},
+      {i:'fu7c-1',l:'fu7c',q:'What makes a good question when you are stuck?',a:'The exact error text, what you expected, what happened instead, and what you already tried.',qs:'¿Qué hace buena a una pregunta cuando estás atascado?',as:'El texto exacto del error, qué esperabas, qué pasó en su lugar y qué ya intentaste.'},
+      {i:'fu7f-1',l:'fu7f',q:'How do you use AI without stopping your own learning?',a:'Ask it to explain and to quiz you, not to do the exercise. If you cannot explain the answer without it, you have not learned it yet.',qs:'¿Cómo usar la IA sin frenar tu propio aprendizaje?',as:'Pídele que explique y que te tome examen, no que haga el ejercicio. Si no puedes explicar la respuesta sin ella, todavía no lo aprendiste.'},
+      {i:'fu7d-1',l:'fu7d',q:'What does being stuck mean in this job?',a:'It is the normal state, not a sign you are failing. The skill is narrowing the problem until you find the piece that is wrong.',qs:'¿Qué significa estar atascado en este trabajo?',as:'Es el estado normal, no una señal de que estás fallando. La habilidad es ir achicando el problema hasta encontrar la pieza que falla.'},
+      {i:'fu7e-1',l:'fu7e',q:'Why write one small program as early as possible?',a:'Reading about code and making code work are different skills. Only the second one is the job.',qs:'¿Por qué escribir un programa pequeño lo antes posible?',as:'Leer sobre código y hacer que el código funcione son habilidades distintas. Solo la segunda es el trabajo.'}
+    ];
+
+    /* =========================================================
+       Spaced review
+       Of everything studied about how people learn, two things win:
+       testing yourself instead of rereading, and spreading those
+       tests out over days. Finishing a lesson unlocks its cards,
+       each answer sets when that card comes back, and a card you
+       cannot recall comes back in the same session.
+    ========================================================= */
+    var RKEY='fm.review.v1';
+    var RV={cards:{},days:{}};
+    try{var _rv=JSON.parse(localStorage.getItem(RKEY));if(_rv&&typeof _rv==='object'){RV.cards=_rv.cards||{};RV.days=_rv.days||{};}}catch(e){}
+    function rvSave(){try{localStorage.setItem(RKEY,JSON.stringify(RV));}catch(e){}}
+    var RNEW_PER_DAY=10,RDUE_PER_DAY=40,RSES=null;
+    function rvDayKey(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+    function rvPlus(n){var d=new Date();d.setDate(d.getDate()+n);return rvDayKey(d);}
+    function rvText(c,f){return LANG==='es'?(f==='q'?c.qs:c.as):(f==='q'?c.q:c.a);}
+    function rvCardById(id){for(var i=0;i<RCARDS.length;i++)if(RCARDS[i].i===id)return RCARDS[i];return null;}
+    /* a card only exists once its lesson is done: you cannot recall what you never read */
+    function rvUnlocked(){return RCARDS.filter(function(c){return !!saved[c.l];});}
+    function rvCounts(){
+      var today=rvDayKey(),due=0,fresh=0,known=0,open=rvUnlocked();
+      open.forEach(function(c){var st=RV.cards[c.i];
+        if(!st)fresh++;else{if(st.d<=today)due++;if(st.r>0&&st.i>=3)known++;}});
+      return {due:Math.min(due,RDUE_PER_DAY),fresh:Math.min(fresh,RNEW_PER_DAY),known:known,open:open.length,locked:RCARDS.length-open.length};
+    }
+    function rvQueue(){
+      var today=rvDayKey(),due=[],fresh=[];
+      rvUnlocked().forEach(function(c){var st=RV.cards[c.i];if(!st)fresh.push(c);else if(st.d<=today)due.push(c);});
+      due.sort(function(a,b){return RV.cards[a.i].d<RV.cards[b.i].d?-1:1;});
+      return due.slice(0,RDUE_PER_DAY).concat(fresh.slice(0,RNEW_PER_DAY));
+    }
+    /* SM-2 without the ceremony: four answers, a gap that widens while
+       you remember and collapses when you do not */
+    function rvNext(st,g){
+      st=st||{d:rvDayKey(),i:0,e:250,r:0,x:0};
+      var i=st.i||0,e=st.e||250;
+      if(g===0)return {i:0,e:Math.max(170,e-20)};
+      if(g===1)return {i:i?Math.max(1,Math.round(i*1.2)):1,e:Math.max(170,e-15)};
+      if(g===2)return {i:!i?1:(i===1?3:Math.round(i*e/100)),e:e};
+      return {i:!i?3:Math.round(i*e/100*1.25),e:Math.min(320,e+15)};
+    }
+    function rvGrade(card,g){
+      var st=RV.cards[card.i]||{d:rvDayKey(),i:0,e:250,r:0,x:0},nx=rvNext(st,g);
+      st.i=Math.min(180,nx.i);st.e=nx.e;
+      st.d=g===0?rvDayKey():rvPlus(st.i);
+      st.r=(st.r||0)+1;if(g===0)st.x=(st.x||0)+1;
+      st.g=g;st.t=Date.now();
+      RV.cards[card.i]=st;
+      var k=rvDayKey(),day=RV.days[k]||{n:0,k:0};day.n++;if(g>=2)day.k++;RV.days[k]=day;
+      rvSave();rvPush(card.i,st);rvBadge();
+    }
+    function rvBadge(){
+      var b=document.getElementById('nav-review');if(!b)return;
+      var c=rvCounts(),n=c.due+c.fresh;
+      if(n>0)b.setAttribute('data-n',n);else b.removeAttribute('data-n');
+    }
+    /* the schedule follows the account, so a phone and a laptop stay in step */
+    function rvPush(id,st){
+      if(!sb||!isAuthed())return;
+      var a=getAuth();if(!a||!a.user)return;
+      try{
+        sb.from('study_state').upsert({user_id:a.user.id,card_id:id,due_on:st.d,interval_days:st.i,ease:st.e,
+          reps:st.r,lapses:st.x||0,last_grade:st.g,updated_at:new Date().toISOString()},{onConflict:'user_id,card_id'})
+          .then(function(){},function(){});
+      }catch(e){}
+    }
+    function rvPushDay(){
+      if(!sb||!isAuthed())return;
+      var a=getAuth();if(!a||!a.user)return;
+      var k=rvDayKey(),d=RV.days[k];if(!d)return;
+      try{sb.from('study_days').upsert({user_id:a.user.id,day:k,reviewed:d.n,recalled:d.k},{onConflict:'user_id,day'}).then(function(){},function(){});}catch(e){}
+    }
+    async function rvPull(){
+      if(!sb||!isAuthed())return;
+      try{
+        var r=await sb.from('study_state').select('card_id,due_on,interval_days,ease,reps,lapses,last_grade,updated_at');
+        if(r.error||!r.data)return;
+        r.data.forEach(function(row){
+          var cur=RV.cards[row.card_id],t=new Date(row.updated_at).getTime();
+          if(!cur||!cur.t||cur.t<t)RV.cards[row.card_id]={d:row.due_on,i:row.interval_days,e:row.ease,r:row.reps,x:row.lapses,g:row.last_grade,t:t};
+        });
+        rvSave();rvBadge();
+        if(CURPAGE==='review'&&!RSES)renderReview();
+      }catch(e){}
+    }
+    function rvGap(n){return n<1?(LANG==='es'?'hoy':'today'):n===1?(LANG==='es'?'1 día':'1 day'):(n+(LANG==='es'?' días':' days'));}
+    function renderReview(){
+      var area=document.getElementById('review-area');if(!area)return;
+      if(RSES){rvDrawCard();return;}
+      var c=rvCounts(),ready=c.due+c.fresh;
+      var html='<div class="rv-top">'
+        +'<div class="rv-stat'+(c.due?' hot':'')+'"><b data-noi18n>'+c.due+'</b><span>Waiting for you</span></div>'
+        +'<div class="rv-stat"><b data-noi18n>'+c.fresh+'</b><span>New today</span></div>'
+        +'<div class="rv-stat"><b data-noi18n>'+c.known+'</b><span>Held in memory</span></div>'
+        +'</div>';
+      if(ready)html+='<div class="rv-go"><button type="button" class="gbtn" id="rv-start">Start review</button></div>';
+      else if(!c.open)html+='<div class="empty">Finish a lesson in Foundations and its questions appear here the same day.</div>'
+        +'<div class="rv-go"><button type="button" class="gbtn" data-goto="fundamentals">Open Foundations</button></div>';
+      else html+='<div class="empty">Nothing to review today. That is the point: come back tomorrow.</div>';
+      html+='<div class="rv-help"><h3>Why this works</h3><ol>'
+        +'<li>Answer from memory before you look. The effort of pulling it out is what fixes it.</li>'
+        +'<li>Say it out loud or write it. Thinking "I know this" is how people fool themselves.</li>'
+        +'<li>Each answer sets when the question returns: soon if it was hard, in weeks if it was easy.</li>'
+        +'<li>Ten minutes a day beats three hours the night before an exam.</li>'
+        +'</ol></div>';
+      area.innerHTML=html;
+      var go=document.getElementById('rv-start');if(go)go.addEventListener('click',rvStart);
+      area.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
+      if(LANG_READY)applyLang();
+    }
+    function rvStart(){
+      var q=rvQueue();if(!q.length)return;
+      RSES={queue:q,at:0,shown:false,done:0,ok:0,start:Date.now()};
+      rvDrawCard();
+    }
+    function rvDrawCard(){
+      var area=document.getElementById('review-area');if(!area||!RSES)return;
+      if(RSES.at>=RSES.queue.length){rvFinish();return;}
+      var card=RSES.queue[RSES.at],st=RV.cards[card.i];
+      var total=RSES.queue.length,pct=Math.round(RSES.at/total*100);
+      var html='<div class="rv-card">'
+        +'<div class="rv-count" data-noi18n>'+(RSES.at+1)+' / '+total+'</div>'
+        +'<div class="rv-bar"><i style="width:'+pct+'%"></i></div>'
+        +'<div class="rv-q" data-noi18n>'+esc(rvText(card,'q'))+'</div>';
+      if(!RSES.shown){
+        html+='<div class="rv-hint">Answer out loud or write it down, then check yourself.</div>'
+          +'<div class="rv-acts"><button type="button" class="gbtn" id="rv-show">Show answer</button>'
+          +'<button type="button" class="gbtn ghost" id="rv-stop">End session</button></div>'
+          +'<div class="rv-kbd">Space shows the answer.</div>';
+      }else{
+        html+='<div class="rv-a" data-noi18n>'+esc(rvText(card,'a'))+'</div>'
+          +'<div class="rv-src"><button type="button" data-lesson="'+esc(card.l)+'">Open the lesson</button></div>'
+          +'<div class="rv-grades">'
+          +'<button type="button" class="g0" data-g="0">Again<span data-noi18n>'+rvGap(0)+'</span></button>'
+          +'<button type="button" data-g="1">Hard<span data-noi18n>'+rvGap(rvNext(st,1).i)+'</span></button>'
+          +'<button type="button" data-g="2">Good<span data-noi18n>'+rvGap(rvNext(st,2).i)+'</span></button>'
+          +'<button type="button" data-g="3">Easy<span data-noi18n>'+rvGap(rvNext(st,3).i)+'</span></button>'
+          +'</div><div class="rv-kbd">Keys 1 to 4 answer. 3 is the usual one.</div>';
+      }
+      html+='</div>';
+      area.innerHTML=html;
+      var sh=document.getElementById('rv-show');if(sh)sh.addEventListener('click',rvReveal);
+      var sp=document.getElementById('rv-stop');if(sp)sp.addEventListener('click',rvFinish);
+      area.querySelectorAll('[data-g]').forEach(function(b){b.addEventListener('click',function(){rvAnswer(parseInt(b.getAttribute('data-g'),10));});});
+      area.querySelectorAll('[data-lesson]').forEach(function(b){b.addEventListener('click',function(){openLesson(b.getAttribute('data-lesson'));});});
+      if(LANG_READY)applyLang();
+    }
+    function rvReveal(){if(RSES&&!RSES.shown){RSES.shown=true;rvDrawCard();}}
+    function rvAnswer(g){
+      if(!RSES||!RSES.shown)return;
+      var card=RSES.queue[RSES.at];
+      rvGrade(card,g);
+      RSES.done++;if(g>=2)RSES.ok++;
+      /* a card you could not recall comes back before you leave */
+      if(g===0)RSES.queue.push(card);
+      RSES.at++;RSES.shown=false;
+      rvDrawCard();
+    }
+    function rvFinish(){
+      var area=document.getElementById('review-area');if(!area||!RSES)return;
+      var done=RSES.done,ok=RSES.ok;RSES=null;
+      rvPushDay();
+      var c=rvCounts(),left=c.due+c.fresh;
+      if(done){
+        area.innerHTML='<div class="rv-card rv-done"><span class="pay-ok" aria-hidden="true">'+ICHECK+'</span>'
+          +'<h3>Session done</h3>'
+          +'<p class="rv-hint" data-noi18n>'+(LANG==='es'?('Recordaste '+ok+' de '+done+'.'):('You recalled '+ok+' of '+done+'.'))+'</p>'
+          +'<div class="rv-acts" style="justify-content:center">'
+          +(left?'<button type="button" class="gbtn" id="rv-again">Keep going</button>':'')
+          +'<button type="button" class="gbtn ghost" data-goto="academy">Back to courses</button></div></div>';
+        var ag=document.getElementById('rv-again');if(ag)ag.addEventListener('click',rvStart);
+        area.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-goto'));});});
+        awardXP(Math.min(30,done*2),'Review session','review');
+        if(LANG_READY)applyLang();
+      }else renderReview();
+    }
+    document.addEventListener('keydown',function(e){
+      if(!RSES||CURPAGE!=='review')return;
+      var t=e.target;if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))return;
+      if(!RSES.shown&&(e.key===' '||e.key==='Enter')){e.preventDefault();rvReveal();return;}
+      if(RSES.shown&&e.key>='1'&&e.key<='4'){e.preventDefault();rvAnswer(parseInt(e.key,10)-1);}
+    });
+    rvBadge();
+    /* the card on the courses page: the daily habit, where they already look */
+    function rvTile(){
+      var c=rvCounts(),n=c.due+c.fresh;
+      if(!c.open)return '';
+      if(!n)return '<div class="rv-tile"><div><b>Review done for today</b><span>Your cards come back on their own. Nothing to do now.</span></div>'
+        +'<button type="button" data-goto="review">See review</button></div>';
+      return '<div class="rv-tile"><div><b>Review of the day</b><span data-noi18n>'
+        +(LANG==='es'?(n+' tarjetas te esperan, unos '+Math.max(1,Math.round(n*0.25))+' minutos.'):(n+' cards waiting, about '+Math.max(1,Math.round(n*0.25))+' minutes.'))
+        +'</span></div><button type="button" data-goto="review">Start review</button></div>';
+    }
+
     /* ---- payments page (admins only) ---- */
     var ADM=null,ADM_BUSY=false;
     function admDate(ts){try{return new Date(ts).toLocaleString(LANG==='es'?'es':'en',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
@@ -5174,6 +5483,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       else if(name==='quizzes')renderQuizzes();
       else if(name==='account')renderAccount();
       else if(name==='payments')renderPayments();
+      else if(name==='review')renderReview();
       else if(name==='academy')renderAcademy();
       else if(name==='path')renderPath();
       else if(name==='certificate')renderCertificate();
@@ -5305,7 +5615,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       var auth=getAuth(),who='';
       try{who=(auth&&auth.user&&auth.user.full_name)?auth.user.full_name.trim().split(' ')[0]:'';}catch(e){}
       area.innerHTML='<div class="dboard"><div class="dash-main">'
-        +dashTop()+dashWelcome(st,who)+dashClasses()+dashLessons()
+        +dashTop()+dashWelcome(st,who)+rvTile()+dashClasses()+dashLessons()
         +'<div id="game-panel"></div>'+step1+step2+step3+extra+certs
         +'</div>'+dashRail(st,auth)+'</div>';
       wireDash(area);
@@ -5850,6 +6160,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
       ['q_p1','Read a reference page','pages',1,20],
       ['q_p2','Read 2 reference pages','pages',2,45],
       ['q_e1','Take an exam','exams',1,40],
+      ['q_r1','Finish a review session','review',1,25],
       ['q_c1','Solve a Code Lab challenge','code',1,25],
       ['q_c3','Solve 3 Code Lab challenges','code',3,60]
     ];
@@ -7321,6 +7632,42 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
        Anything missing simply stays in English, so this can grow one
        line at a time without ever breaking the app. Add entries here. */
     var ES={
+      /* spaced review */
+      "Review":"Repaso",
+      "Today's review":"Repaso de hoy",
+      "Short questions from the lessons you already finished, brought back days apart. Pulling an answer out of your memory is what makes it stay; reading it again is not.":"Preguntas cortas de las lecciones que ya terminaste, que vuelven con días de diferencia. Sacar la respuesta de tu memoria es lo que la fija; volver a leerla no.",
+      "Waiting for you":"Te esperan",
+      "New today":"Nuevas hoy",
+      "Held in memory":"Ya en tu memoria",
+      "Start review":"Empezar repaso",
+      "Finish a lesson in Foundations and its questions appear here the same day.":"Termina una lección de Fundamentos y sus preguntas aparecen aquí el mismo día.",
+      "Open Foundations":"Abrir Fundamentos",
+      "Nothing to review today. That is the point: come back tomorrow.":"Nada que repasar hoy. De eso se trata: vuelve mañana.",
+      "Why this works":"Por qué funciona",
+      "Answer from memory before you look. The effort of pulling it out is what fixes it.":"Responde de memoria antes de mirar. El esfuerzo de sacarlo es lo que lo fija.",
+      "Say it out loud or write it. Thinking \"I know this\" is how people fool themselves.":"Dilo en voz alta o escríbelo. Pensar \"esto ya lo sé\" es como uno se engaña.",
+      "Each answer sets when the question returns: soon if it was hard, in weeks if it was easy.":"Cada respuesta decide cuándo vuelve la pregunta: pronto si costó, en semanas si fue fácil.",
+      "Ten minutes a day beats three hours the night before an exam.":"Diez minutos al día le ganan a tres horas la noche antes del examen.",
+      "Answer out loud or write it down, then check yourself.":"Responde en voz alta o escríbelo, y recién después comprueba.",
+      "Show answer":"Ver la respuesta",
+      "End session":"Terminar",
+      "Space shows the answer.":"La barra espaciadora muestra la respuesta.",
+      "Open the lesson":"Abrir la lección",
+      "Again":"Otra vez",
+      "Hard":"Difícil",
+      "Good":"Bien",
+      "Easy":"Fácil",
+      "Keys 1 to 4 answer. 3 is the usual one.":"Las teclas 1 a 4 responden. La 3 es la normal.",
+      "Session done":"Sesión terminada",
+      "Keep going":"Seguir repasando",
+      "Back to courses":"Volver a cursos",
+      "Review session":"Sesión de repaso",
+      "Finish a review session":"Termina una sesión de repaso",
+      "Review of the day":"Repaso del día",
+      "Review done for today":"Repaso del día hecho",
+      "Your cards come back on their own. Nothing to do now.":"Tus tarjetas vuelven solas. Ahora no hay nada que hacer.",
+      "See review":"Ver el repaso",
+
       /* manual QR payments */
       "Payments":"Pagos",
       "Admin":"Administración",

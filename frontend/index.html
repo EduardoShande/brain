@@ -4578,7 +4578,7 @@ btn.addEventListener(<span class="c">'click'</span>, () =&gt; {
           +'<span class="pl-name">'+(life?'Lifetime access':esc(p.name))+'</span>'
           +'<span class="pl-price">Bs '+esc(price%1?price.toFixed(2):price.toFixed(0))+'</span>'
           +'<span class="pl-per">'+(life?'One payment. Every course, for life.':months>1?('Bs '+Math.round(price/months)+' a month'):'Try it for a month')+'</span>'
-          +'<button type="button" class="gbtn" data-buy="'+esc(p.id)+'">Pay with QR</button></div>';
+          +'<button type="button" class="gbtn" data-buy="'+esc(p.id)+'">Pay on WhatsApp</button></div>';
       }).join('');
     }
     function plansGrid(plans){return '<div class="pw-plans'+(plans.length===1?' one':'')+'">'+planCards(plans)+'</div>';}

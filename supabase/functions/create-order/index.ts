@@ -1,7 +1,9 @@
-// POST { plan_id } -> creates a QR charge for the signed-in student.
+// POST { plan_id } -> opens a payment request for the signed-in student.
 //
-// Amount and days come from the plans table on the server, never from the
-// request, so a student cannot change what they pay or what they get.
+// Pro is paid over WhatsApp, so this does not charge anything. It records
+// the request, hands back a short code the student quotes in the chat, and
+// the number to write to. Amount and days still come from the plans table
+// on the server, never from the request.
 
 import {
   accessUntil,
@@ -14,6 +16,7 @@ import {
   HttpError,
   json,
   MANUAL_HOURS,
+  paymentContact,
   type OrderRow,
   publicOrder,
   readJson,
@@ -51,8 +54,8 @@ Deno.serve(async (req: Request) => {
     await assertProviderAllowed(admin, provider);
     const manual = provider.name === "manual";
 
-    // A receipt that is waiting for review is shown again instead of a new
-    // QR, so nobody pays twice while the first payment is being checked.
+    // A request already waiting on a reply is shown again instead of a new
+    // one, so nobody pays twice while the first is being checked.
     if (manual) {
       const { data: inReview, error: reviewError } = await admin
         .from("orders")
@@ -63,7 +66,7 @@ Deno.serve(async (req: Request) => {
         .limit(1)
         .maybeSingle<OrderRow>();
       if (reviewError) throw reviewError;
-      if (inReview) return json({ order: publicOrder(inReview), test_mode: false });
+      if (inReview) return json({ order: publicOrder(inReview), test_mode: false, contact: await paymentContact(admin) });
     }
 
     // A double click, or reopening the dialog, reuses a QR that still has
@@ -80,12 +83,14 @@ Deno.serve(async (req: Request) => {
       .limit(1)
       .maybeSingle<OrderRow>();
     if (openError) throw openError;
-    if (open?.provider_ref) return json({ order: publicOrder(open), test_mode: provider.isTest });
+    if (open?.provider_ref) {
+      return json({ order: publicOrder(open), test_mode: provider.isTest, contact: manual ? await paymentContact(admin) : "" });
+    }
 
     const expiresAt = new Date(Date.now() + (manual ? MANUAL_HOURS * 3_600_000 : QR_MINUTES * 60_000));
 
-    // the bank QR does not depend on the order, so check it exists before
-    // creating one; a missing QR then leaves no cancelled orders behind
+    // refuse early when no WhatsApp number is set, so a half-configured
+    // academy never leaves cancelled requests behind
     let charge: Charge | null = null;
     if (manual) {
       charge = await provider.createCharge({ orderId: "", amountBob: Number(plan.price_bob), description: "", expiresAt });
@@ -132,7 +137,7 @@ Deno.serve(async (req: Request) => {
       .single<OrderRow>();
     if (updateError) throw updateError;
 
-    return json({ order: publicOrder(ready), test_mode: provider.isTest });
+    return json({ order: publicOrder(ready), test_mode: provider.isTest, contact: manual ? await paymentContact(admin) : "" });
   } catch (e) {
     return errorResponse(e);
   }

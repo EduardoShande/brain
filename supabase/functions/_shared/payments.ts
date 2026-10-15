@@ -193,14 +193,21 @@ export class MockProvider implements PaymentProvider {
   }
 }
 
-// The academy's own bank QR. A personal bank account has no API, so nothing
-// here can see a payment arrive: the student uploads the receipt and an
-// admin, who sees the money in the bank app, approves the order. getStatus
-// therefore never reports "paid"; approval runs fulfill_order directly.
+// Pro is sold over WhatsApp: the student asks there, gets the QR, pays,
+// and an admin who has seen the money opens their access. Nothing here can
+// see a bank transfer, so getStatus never reports "paid" and an order is
+// only ever a request with a short code to match the conversation to the
+// account. Approval runs fulfill_order directly.
 export const QR_BUCKET = "payment-qr";
 export const QR_PATH = "qr";
 export const RECEIPTS_BUCKET = "receipts";
-export const MANUAL_HOURS = 48;
+export const MANUAL_HOURS = 24 * 14;
+
+export async function paymentContact(admin: SupabaseClient): Promise<string> {
+  const { data, error } = await admin.from("app_settings").select("value").eq("key", "whatsapp").maybeSingle();
+  if (error) throw error;
+  return (data?.value ?? "").trim();
+}
 
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // no 0/O, 1/I/L
 export function newRefCode(): string {
@@ -215,13 +222,11 @@ export class ManualProvider implements PaymentProvider {
   constructor(private readonly admin: SupabaseClient) {}
 
   async createCharge(): Promise<Charge> {
-    const { data, error } = await this.admin.storage
-      .from(QR_BUCKET)
-      .createSignedUrl(QR_PATH, (MANUAL_HOURS + 1) * 3600);
-    if (error || !data?.signedUrl) {
+    // the QR is sent by hand over WhatsApp, so there is nothing to draw here
+    if (!(await paymentContact(this.admin))) {
       throw new HttpError(503, "Payments open very soon. Please try again in a few hours.");
     }
-    return { providerRef: newRefCode(), qrText: null, qrImage: data.signedUrl };
+    return { providerRef: newRefCode(), qrText: null, qrImage: null };
   }
 
   async getStatus(): Promise<ChargeStatus> {

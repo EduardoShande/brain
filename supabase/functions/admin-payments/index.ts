@@ -1,9 +1,10 @@
 // POST { action, ... } -> the admin side of manual QR payments.
 //
-//   list                          orders to review, open QR orders, recent history, the current QR
-//   approve { order_id }          the money arrived: mark paid and open access
-//   reject  { order_id, note }    no matching payment: close the order with a reason
-//   set_qr  { image }             upload the bank QR students pay (data URL, png/jpeg/webp)
+//   list                            who is waiting, recent history, the WhatsApp number
+//   approve { order_id }            the money arrived: mark paid and open access
+//   reject  { order_id, note }      no payment came: close the request with a reason
+//   grant   { email }               open access for an account that never opened a request
+//   set_whatsapp { number }         the number students are sent to
 //
 // Every action checks public.admins by account id first.
 
@@ -15,16 +16,15 @@ import {
   isUuid,
   json,
   type OrderRow,
-  QR_BUCKET,
-  QR_PATH,
+  paymentContact,
   readJson,
   RECEIPTS_BUCKET,
   requireAdmin,
 } from "../_shared/payments.ts";
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.116.0";
 
-const MAX_QR_BYTES = 2 * 1024 * 1024;
 const LINK_SECONDS = 3600;
+const LIFETIME_DAYS = 36500;
 
 async function signed(admin: SupabaseClient, bucket: string, path: string | null): Promise<string | null> {
   if (!path) return null;
@@ -63,19 +63,18 @@ async function describe(admin: SupabaseClient, orders: OrderRow[]) {
 
 async function list(admin: SupabaseClient) {
   const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
-  const [review, open, recent, qr] = await Promise.all([
+  const [review, open, recent, contact] = await Promise.all([
     admin.from("orders").select("*").eq("provider", "manual").eq("status", "review")
       .order("claimed_at", { ascending: true }),
     admin.from("orders").select("*").eq("provider", "manual").in("status", ["pending", "expired"])
       .gt("created_at", weekAgo).order("created_at", { ascending: false }).limit(50),
     admin.from("orders").select("*").eq("provider", "manual").in("status", ["paid", "cancelled"])
       .not("reviewed_at", "is", null).order("reviewed_at", { ascending: false }).limit(20),
-    admin.storage.from(QR_BUCKET).list("", { search: QR_PATH, limit: 5 }),
+    paymentContact(admin),
   ]);
   for (const r of [review, open, recent]) if (r.error) throw r.error;
-  const hasQr = !!qr.data?.some((f) => f.name === QR_PATH);
   return {
-    qr_url: hasQr ? await signed(admin, QR_BUCKET, QR_PATH) : null,
+    contact,
     review: await describe(admin, (review.data ?? []) as OrderRow[]),
     open: await describe(admin, (open.data ?? []) as OrderRow[]),
     recent: await describe(admin, (recent.data ?? []) as OrderRow[]),
@@ -143,16 +142,41 @@ Deno.serve(async (req: Request) => {
         return json(await list(admin));
       }
 
-      case "set_qr": {
-        const m = typeof body.image === "string"
-          ? /^data:(image\/(?:png|jpeg|webp));base64,([A-Za-z0-9+/=]+)$/.exec(body.image)
-          : null;
-        if (!m) throw new HttpError(400, "Upload a PNG, JPG or WEBP image of your QR.");
-        const bytes = Uint8Array.from(atob(m[2]), (c) => c.charCodeAt(0));
-        if (bytes.length > MAX_QR_BYTES) throw new HttpError(400, "The image is too large. Use one under 2 MB.");
-        const { error: upError } = await admin.storage.from(QR_BUCKET)
-          .upload(QR_PATH, bytes, { contentType: m[1], upsert: true, cacheControl: "60" });
-        if (upError) throw upError;
+      // someone paid over WhatsApp without ever opening a request in the app
+      case "grant": {
+        const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+        if (!email || email.length > 200 || email.indexOf("@") < 1) throw new HttpError(400, "Enter the student's email.");
+
+        const { data: list1, error: findError } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
+        if (findError) throw findError;
+        const student = (list1?.users ?? []).find((u) => (u.email ?? "").toLowerCase() === email);
+        if (!student) throw new HttpError(404, "No account uses that email. Ask them to create their free account first.");
+
+        const { error: entError } = await admin.from("entitlements").upsert({
+          user_id: student.id,
+          access_until: new Date(Date.now() + LIFETIME_DAYS * 86_400_000).toISOString(),
+          updated_at: new Date().toISOString(),
+        }, { onConflict: "user_id" });
+        if (entError) throw entError;
+
+        const { error: evError } = await admin.from("payment_events").insert({
+          provider: "manual", provider_ref: null, order_id: null, kind: "granted:admin",
+          payload: { admin: user.id, student: student.id, email },
+        });
+        if (evError) console.error("could not record payment event", evError);
+
+        return json(await list(admin));
+      }
+
+      case "set_whatsapp": {
+        const raw = typeof body.number === "string" ? body.number.trim() : "";
+        const digits = raw.replace(/[^0-9]/g, "");
+        if (digits.length < 8 || digits.length > 15) {
+          throw new HttpError(400, "Write the number with the country code, like 591 7 123 4567.");
+        }
+        const { error: setError } = await admin.from("app_settings")
+          .upsert({ key: "whatsapp", value: digits, updated_at: new Date().toISOString() }, { onConflict: "key" });
+        if (setError) throw setError;
         return json(await list(admin));
       }
 

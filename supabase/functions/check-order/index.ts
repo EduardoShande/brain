@@ -1,8 +1,9 @@
 // POST { order_id } -> current status of the student's own order.
 //
-// The checkout screen polls this while the QR is on screen. While an order
-// is open it also asks the provider directly, so a lost webhook never
-// leaves a student who paid waiting.
+// The checkout screen polls this while the student is paying over
+// WhatsApp, so their access opens by itself the moment an admin grants
+// it. For a real provider it also asks that provider directly, so a lost
+// webhook never leaves a student who paid waiting.
 
 import {
   accessUntil,
@@ -14,6 +15,7 @@ import {
   isUuid,
   json,
   type OrderRow,
+  paymentContact,
   providerFor,
   publicOrder,
   readJson,
@@ -58,7 +60,11 @@ Deno.serve(async (req: Request) => {
       if (expired) current = expired;
     }
 
-    return json({ order: publicOrder(current), access_until: await accessUntil(admin, user.id) });
+    return json({
+      order: publicOrder(current),
+      access_until: await accessUntil(admin, user.id),
+      contact: current.provider === "manual" ? await paymentContact(admin) : "",
+    });
   } catch (e) {
     return errorResponse(e);
   }
